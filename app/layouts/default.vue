@@ -21,6 +21,7 @@
             </div>
           </div>
           <NuxtLink to="/tools/jwt-decoder" class="nav-item" active-class="nav-item--active">JWT Decoder</NuxtLink>
+          <NuxtLink to="/tools/json-diff" class="nav-item" active-class="nav-item--active">JSON Diff</NuxtLink>
         </nav>
         <div class="header-badge">Free · No signup · No tracking</div>
       </div>
