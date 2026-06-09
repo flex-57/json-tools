@@ -92,7 +92,7 @@
             <div v-for="(val, key) in result.payload.decoded" :key="key" class="claim-row">
               <span class="claim-key">{{ key }}<span v-if="knownClaims[key]" class="claim-hint">{{ knownClaims[key] }}</span></span>
               <span class="claim-val" :class="{ 'claim-val--date': isTimestamp(key) }">
-                {{ isTimestamp(key) ? formatTimestamp(val as number) : formatValue(val) }}
+                {{ isTimestamp(key) ? formatTimestamp(val) : formatValue(val) }}
               </span>
             </div>
           </template>
@@ -141,8 +141,8 @@ function formatValue(val: unknown): string {
   return String(val)
 }
 
-function formatTimestamp(ts: number): string {
-  return new Date(ts * 1000).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
+function formatTimestamp(ts: unknown): string {
+  return new Date((ts as number) * 1000).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
 }
 
 function formatDate(d: Date): string {
