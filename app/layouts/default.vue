@@ -10,7 +10,7 @@
           <NuxtLink to="/" class="nav-item" active-class="nav-item--active">Formatter</NuxtLink>
           <div class="nav-group">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isConverterActive }">
-              Tools
+              Converters
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="nav-dropdown">
@@ -18,6 +18,7 @@
               <NuxtLink to="/tools/csv-to-json" class="nav-dropdown-item">CSV ↔ JSON</NuxtLink>
               <NuxtLink to="/tools/xml-to-json" class="nav-dropdown-item">XML ↔ JSON</NuxtLink>
               <NuxtLink to="/tools/yaml-to-json" class="nav-dropdown-item">YAML ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel ↔ JSON</NuxtLink>
             </div>
           </div>
         </nav>
