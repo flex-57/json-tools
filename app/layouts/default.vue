@@ -19,6 +19,9 @@
               <NuxtLink to="/tools/xml-to-json" class="nav-dropdown-item">XML ↔ JSON</NuxtLink>
               <NuxtLink to="/tools/yaml-to-json" class="nav-dropdown-item">YAML ↔ JSON</NuxtLink>
               <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel ↔ JSON</NuxtLink>
+              <div class="nav-dropdown-divider" />
+              <div class="nav-dropdown-section">Tools</div>
+              <NuxtLink to="/tools/jwt-decoder" class="nav-dropdown-item">JWT Decoder</NuxtLink>
             </div>
           </div>
         </nav>
@@ -197,6 +200,12 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #3D4349;
+}
+
+.nav-dropdown-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 4px 5px;
 }
 
 .nav-dropdown-item.router-link-active {
