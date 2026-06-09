@@ -34,7 +34,8 @@
 
 <script setup>
 const route = useRoute()
-const isConverterActive = computed(() => route.path.startsWith('/tools/'))
+const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
+const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
 </script>
 
 <style>
