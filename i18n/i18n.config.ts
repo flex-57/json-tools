@@ -1,0 +1,34 @@
+export default defineI18nConfig(() => ({
+  legacy: false,
+  locale: 'en',
+  messages: {
+    en: {
+      nav: {
+        title: 'JSON Tools',
+        formatter: 'Formatter',
+      },
+      formatter: {
+        title: 'JSON Formatter & Validator',
+        description: 'Format, validate, and minify your JSON instantly — free, online, no data sent to servers.',
+        placeholder: 'Paste your JSON here...',
+        format: 'Format',
+        minify: 'Minify',
+        validate: 'Validate',
+        copy: 'Copy',
+        copied: 'Copied!',
+        clear: 'Clear',
+        valid: 'Valid JSON',
+        invalid: 'Invalid JSON',
+        empty: 'Nothing to process',
+        indent: 'Indent',
+        tabs: 'Tabs',
+        spaces2: '2 spaces',
+        spaces4: '4 spaces',
+      },
+      errors: {
+        parse: 'JSON parse error: {message}',
+        empty: 'Input is empty',
+      },
+    },
+  },
+}))
