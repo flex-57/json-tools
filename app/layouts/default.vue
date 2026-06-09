@@ -38,6 +38,7 @@
     <main class="app-main">
       <slot />
     </main>
+    <AppFooter />
   </div>
 </template>
 

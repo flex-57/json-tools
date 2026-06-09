@@ -78,6 +78,23 @@
         </div>
       </div>
     </div>
+
+    <section class="about">
+      <div class="about-grid">
+        <div class="about-card">
+          <h2 class="about-title">What is a JSON Formatter?</h2>
+          <p class="about-text">A JSON formatter takes raw, unindented or minified JSON and outputs it in a human-readable structure with consistent indentation. It makes deeply nested objects and arrays easy to read at a glance — especially useful when working with API responses or config files.</p>
+        </div>
+        <div class="about-card">
+          <h2 class="about-title">JSON Validation explained</h2>
+          <p class="about-text">Valid JSON must follow strict syntax rules: keys must be quoted strings, values can be strings, numbers, booleans, null, arrays or objects. A single missing comma or trailing comma breaks the whole document. The validator pinpoints the exact error so you can fix it immediately.</p>
+        </div>
+        <div class="about-card">
+          <h2 class="about-title">Minify JSON for production</h2>
+          <p class="about-text">Minifying removes all unnecessary whitespace, reducing payload size for API responses and config files. A 10 KB formatted JSON typically compresses to under 4 KB — a meaningful saving at scale. All processing happens in your browser; your data never leaves your machine.</p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -380,4 +397,12 @@ const indentValue = computed({
 /* Status transition */
 .status-enter-active, .status-leave-active { transition: all 0.2s ease; }
 .status-enter-from, .status-leave-to { opacity: 0; transform: scale(0.9); }
+
+/* SEO section */
+.about { margin-top: 8px; padding-bottom: 8px; }
+.about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.about-card { background: white; border: 1px solid #E8E5DF; border-radius: 14px; padding: 20px 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+.about-title { font-size: 14px; font-weight: 600; color: #1A1916; margin-bottom: 10px; }
+.about-text { font-size: 13px; color: #7A776E; line-height: 1.75; }
+@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
 </style>
