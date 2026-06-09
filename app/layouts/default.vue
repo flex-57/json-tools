@@ -20,8 +20,17 @@
               <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel ↔ JSON</NuxtLink>
             </div>
           </div>
-          <NuxtLink to="/tools/jwt-decoder" class="nav-item" active-class="nav-item--active">JWT Decoder</NuxtLink>
-          <NuxtLink to="/tools/json-diff" class="nav-item" active-class="nav-item--active">JSON Diff</NuxtLink>
+          <div class="nav-group">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isToolActive }">
+              Tools
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <NuxtLink to="/tools/jwt-decoder" class="nav-dropdown-item">JWT Decoder</NuxtLink>
+              <NuxtLink to="/tools/json-diff" class="nav-dropdown-item">JSON Diff</NuxtLink>
+              <NuxtLink to="/tools/base64" class="nav-dropdown-item">Base64</NuxtLink>
+            </div>
+          </div>
         </nav>
         <div class="header-badge">Free · No signup · No tracking</div>
       </div>
@@ -35,7 +44,9 @@
 <script setup>
 const route = useRoute()
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
+const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/base64']
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
+const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
 </script>
 
 <style>
