@@ -108,15 +108,27 @@
     <main class="app-main">
       <slot />
     </main>
+    <div class="ad-footer-wrap">
+      <AdSlot slot-id="XXXXXXXXXX" />
+    </div>
     <AppFooter />
+    <CookieBanner />
   </div>
 </template>
 
 <script setup>
+import { useConsent, trackPageView } from '~/composables/useConsent'
+
 const route = useRoute()
 const mobileOpen = ref(false)
+const { init } = useConsent()
 
-watch(() => route.path, () => { mobileOpen.value = false })
+onMounted(() => { init() })
+
+watch(() => route.path, (path) => {
+  mobileOpen.value = false
+  trackPageView(path)
+})
 
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
 const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts']
@@ -434,6 +446,17 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.ad-footer-wrap {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px 8px;
+}
+
+@media (max-width: 768px) {
+  .ad-footer-wrap { padding: 0 16px 8px; }
 }
 
 /* ── Responsive ─────────────────────────────────────────────────── */
