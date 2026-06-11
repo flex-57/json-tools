@@ -2,44 +2,109 @@
   <div class="app-shell">
     <header class="app-header">
       <div class="header-inner">
-        <NuxtLink to="/" class="brand">
+        <NuxtLink to="/" class="brand" @click="mobileOpen = false">
           <div class="brand-mark">{ }</div>
           <span class="brand-name">json<em>tools</em></span>
         </NuxtLink>
+
+        <!-- Desktop nav -->
         <nav class="header-nav">
-          <NuxtLink to="/" class="nav-item" active-class="nav-item--active">Formatter</NuxtLink>
+          <NuxtLink to="/" class="nav-item" :class="{ 'nav-item--active': route.path === '/' }">Formatter</NuxtLink>
+
+          <!-- Converters dropdown -->
           <div class="nav-group">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isConverterActive }">
               Converters
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="nav-dropdown">
-              <NuxtLink to="/tools/csv-to-json" class="nav-dropdown-item">CSV ↔ JSON</NuxtLink>
-              <NuxtLink to="/tools/xml-to-json" class="nav-dropdown-item">XML ↔ JSON</NuxtLink>
-              <NuxtLink to="/tools/yaml-to-json" class="nav-dropdown-item">YAML ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/xml-to-json"   class="nav-dropdown-item">XML ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/yaml-to-json"  class="nav-dropdown-item">YAML ↔ JSON</NuxtLink>
               <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel ↔ JSON</NuxtLink>
             </div>
           </div>
+
+          <!-- Tools mega-menu -->
           <div class="nav-group">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isToolActive }">
               Tools
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown">
-              <NuxtLink to="/tools/jwt-decoder" class="nav-dropdown-item">JWT Decoder</NuxtLink>
-              <NuxtLink to="/tools/json-diff" class="nav-dropdown-item">JSON Diff</NuxtLink>
-              <NuxtLink to="/tools/base64" class="nav-dropdown-item">Base64</NuxtLink>
-              <NuxtLink to="/tools/url-encode" class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
-              <NuxtLink to="/tools/unix-timestamp" class="nav-dropdown-item">Unix Timestamp</NuxtLink>
-              <NuxtLink to="/tools/regex-tester" class="nav-dropdown-item">Regex Tester</NuxtLink>
-              <NuxtLink to="/tools/cron-parser" class="nav-dropdown-item">Cron Parser</NuxtLink>
-              <NuxtLink to="/tools/json-to-ts" class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
+            <div class="nav-dropdown nav-dropdown--mega">
+              <div class="mega-col">
+                <div class="nav-dropdown-section">JSON</div>
+                <NuxtLink to="/tools/json-diff"  class="nav-dropdown-item">JSON Diff</NuxtLink>
+                <NuxtLink to="/tools/json-to-ts" class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
+                <div class="nav-dropdown-section mega-section-gap">Encode</div>
+                <NuxtLink to="/tools/base64"      class="nav-dropdown-item">Base64</NuxtLink>
+                <NuxtLink to="/tools/url-encode"  class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
+                <NuxtLink to="/tools/jwt-decoder" class="nav-dropdown-item">JWT Decoder</NuxtLink>
+              </div>
+              <div class="mega-divider" />
+              <div class="mega-col">
+                <div class="nav-dropdown-section">Developer</div>
+                <NuxtLink to="/tools/regex-tester"    class="nav-dropdown-item">Regex Tester</NuxtLink>
+                <NuxtLink to="/tools/cron-parser"     class="nav-dropdown-item">Cron Parser</NuxtLink>
+                <NuxtLink to="/tools/unix-timestamp"  class="nav-dropdown-item">Unix Timestamp</NuxtLink>
+              </div>
             </div>
           </div>
         </nav>
+
         <div class="header-badge">Free · No signup · No tracking</div>
+
+        <!-- Mobile hamburger -->
+        <button class="mobile-menu-btn" :class="{ 'is-open': mobileOpen }" @click="mobileOpen = !mobileOpen" aria-label="Toggle menu">
+          <span class="hb-line" />
+          <span class="hb-line" />
+          <span class="hb-line" />
+        </button>
       </div>
     </header>
+
+    <!-- Mobile nav drawer -->
+    <Transition name="mobile-drawer">
+      <nav v-if="mobileOpen" class="mobile-nav">
+        <div class="mobile-nav-inner">
+          <div class="mobile-section">
+            <NuxtLink to="/" class="mobile-nav-item mobile-nav-item--main" @click="mobileOpen = false">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7.5L7 2l6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9.5V12h8V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Formatter
+            </NuxtLink>
+          </div>
+
+          <div class="mobile-section">
+            <div class="mobile-section-label">Converters</div>
+            <NuxtLink to="/tools/csv-to-json"   class="mobile-nav-item" @click="mobileOpen = false">CSV ↔ JSON</NuxtLink>
+            <NuxtLink to="/tools/xml-to-json"   class="mobile-nav-item" @click="mobileOpen = false">XML ↔ JSON</NuxtLink>
+            <NuxtLink to="/tools/yaml-to-json"  class="mobile-nav-item" @click="mobileOpen = false">YAML ↔ JSON</NuxtLink>
+            <NuxtLink to="/tools/excel-to-json" class="mobile-nav-item" @click="mobileOpen = false">Excel ↔ JSON</NuxtLink>
+          </div>
+
+          <div class="mobile-section">
+            <div class="mobile-section-label">JSON</div>
+            <NuxtLink to="/tools/json-diff"  class="mobile-nav-item" @click="mobileOpen = false">JSON Diff</NuxtLink>
+            <NuxtLink to="/tools/json-to-ts" class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
+          </div>
+
+          <div class="mobile-section">
+            <div class="mobile-section-label">Encode</div>
+            <NuxtLink to="/tools/base64"      class="mobile-nav-item" @click="mobileOpen = false">Base64</NuxtLink>
+            <NuxtLink to="/tools/url-encode"  class="mobile-nav-item" @click="mobileOpen = false">URL Encode / Decode</NuxtLink>
+            <NuxtLink to="/tools/jwt-decoder" class="mobile-nav-item" @click="mobileOpen = false">JWT Decoder</NuxtLink>
+          </div>
+
+          <div class="mobile-section">
+            <div class="mobile-section-label">Developer</div>
+            <NuxtLink to="/tools/regex-tester"   class="mobile-nav-item" @click="mobileOpen = false">Regex Tester</NuxtLink>
+            <NuxtLink to="/tools/cron-parser"    class="mobile-nav-item" @click="mobileOpen = false">Cron Parser</NuxtLink>
+            <NuxtLink to="/tools/unix-timestamp" class="mobile-nav-item" @click="mobileOpen = false">Unix Timestamp</NuxtLink>
+          </div>
+        </div>
+      </nav>
+    </Transition>
+
     <main class="app-main">
       <slot />
     </main>
@@ -49,6 +114,10 @@
 
 <script setup>
 const route = useRoute()
+const mobileOpen = ref(false)
+
+watch(() => route.path, () => { mobileOpen.value = false })
+
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
 const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts']
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
@@ -78,12 +147,13 @@ body {
   background-size: 22px 22px;
 }
 
+/* ── Header ─────────────────────────────────────────────────────── */
 .app-header {
   background: #13181F;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
 }
 
 .header-inner {
@@ -96,6 +166,7 @@ body {
   gap: 28px;
 }
 
+/* ── Brand ──────────────────────────────────────────────────────── */
 .brand {
   display: flex;
   align-items: center;
@@ -125,7 +196,6 @@ body {
   font-weight: 600;
   color: #F1F0EE;
   letter-spacing: -0.3px;
-  font-style: normal;
 }
 
 .brand-name em {
@@ -133,6 +203,7 @@ body {
   color: #F97316;
 }
 
+/* ── Desktop nav ────────────────────────────────────────────────── */
 .header-nav {
   flex: 1;
   display: flex;
@@ -172,6 +243,7 @@ body {
   cursor: pointer;
 }
 
+/* ── Dropdown (shared) ──────────────────────────────────────────── */
 .nav-dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -180,16 +252,17 @@ body {
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 10px;
   padding: 5px;
-  min-width: 150px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  min-width: 160px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4px);
   transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
-  z-index: 200;
+  z-index: 300;
 }
 
-.nav-group:hover .nav-dropdown {
+.nav-group:hover .nav-dropdown,
+.nav-group:focus-within .nav-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -199,12 +272,11 @@ body {
   display: block;
   padding: 7px 12px;
   border-radius: 6px;
-  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
   font-weight: 500;
   color: #8B949E;
   text-decoration: none;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
   transition: background 0.1s, color 0.1s;
   white-space: nowrap;
 }
@@ -212,6 +284,11 @@ body {
 .nav-dropdown-item:hover {
   background: rgba(255,255,255,0.06);
   color: #E5E7EB;
+}
+
+.nav-dropdown-item.router-link-active {
+  background: rgba(249,115,22,0.12);
+  color: #FB923C;
 }
 
 .nav-dropdown-section {
@@ -223,12 +300,29 @@ body {
   color: #3D4349;
 }
 
+.mega-section-gap { margin-top: 6px; }
 
-.nav-dropdown-item.router-link-active {
-  background: rgba(249,115,22,0.12);
-  color: #FB923C;
+/* ── Mega-menu ──────────────────────────────────────────────────── */
+.nav-dropdown--mega {
+  display: flex;
+  gap: 0;
+  padding: 8px;
+  min-width: 360px;
 }
 
+.mega-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.mega-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 4px 8px;
+  flex-shrink: 0;
+}
+
+/* ── Badge ──────────────────────────────────────────────────────── */
 .header-badge {
   font-size: 11.5px;
   color: #3D4349;
@@ -236,14 +330,117 @@ body {
   letter-spacing: 0.01em;
 }
 
-@media (max-width: 768px) {
-  .header-inner { padding: 0 16px; gap: 16px; }
-  .header-badge { display: none; }
+/* ── Hamburger button ───────────────────────────────────────────── */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
+.hb-line {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: #8B949E;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.mobile-menu-btn.is-open .hb-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.mobile-menu-btn.is-open .hb-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.is-open .hb-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile nav drawer ──────────────────────────────────────────── */
+.mobile-nav {
+  position: fixed;
+  top: 52px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #13181F;
+  z-index: 150;
+  overflow-y: auto;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.mobile-nav-inner {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+}
+
+.mobile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3D4349;
+  padding: 8px 12px 4px;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: #8B949E;
+  text-decoration: none;
+  transition: background 0.1s, color 0.1s;
+}
+
+.mobile-nav-item--main {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #C9C8C5;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item:active { background: rgba(255,255,255,0.06); color: #E5E7EB; }
+
+.mobile-nav-item.router-link-active { background: rgba(249,115,22,0.12); color: #FB923C; }
+
+/* ── Drawer transition ──────────────────────────────────────────── */
+.mobile-drawer-enter-active,
+.mobile-drawer-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
+.mobile-drawer-enter-from,
+.mobile-drawer-leave-to { opacity: 0; transform: translateY(-8px); }
+
+/* ── Main ───────────────────────────────────────────────────────── */
 .app-main {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header-inner { padding: 0 16px; gap: 12px; }
+  .header-nav   { display: none; }
+  .header-badge { display: none; }
+  .mobile-menu-btn { display: flex; }
 }
 </style>
