@@ -112,6 +112,8 @@
         </p>
       </div>
     </div>
+
+    <SeoSection :cards="seoCards" />
   </div>
 </template>
 
@@ -124,6 +126,21 @@ useSeoMeta({
 })
 
 const { token, result, copiedHeader, copiedPayload, copyHeader, copyPayload, clear } = useJwtDecoder()
+
+const seoCards = [
+  {
+    title: 'What is a JWT and what does decoding reveal?',
+    text: 'A JSON Web Token (JWT) is a compact, URL-safe token with three Base64URL-encoded parts: a header (algorithm and type), a payload (claims about the user or session), and a signature. Decoding the header and payload requires no secret — it\'s public data. The signature proves integrity but can only be verified with the original key, which stays on your server.',
+  },
+  {
+    title: 'Claims, expiry, and common debugging scenarios',
+    text: 'The payload carries standard claims: sub (subject / user ID), iss (issuer), exp (expiration timestamp), iat (issued at), nbf (not before). The most common debugging need is checking whether a token is expired — the decoder shows exp as a human-readable date alongside the raw timestamp. Custom claims added by your auth service also appear in full.',
+  },
+  {
+    title: 'Security: what you can and cannot do here',
+    text: 'This tool decodes (base64-decodes) the header and payload — it does not verify the signature. Verification requires the secret or public key, which you should never paste into a third-party tool. Decoding is safe: there is no secret involved, and because all processing happens in your browser, the token never reaches any server. Use this tool to inspect claims, not to validate tokens in production.',
+  },
+]
 
 const knownClaims: Record<string, string> = {
   sub: 'subject', iss: 'issuer', aud: 'audience',
@@ -151,12 +168,6 @@ function formatDate(d: Date): string {
 </script>
 
 <style scoped>
-.page { max-width: 900px; margin: 0 auto; padding: 32px 24px 40px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 14px; }
-.page-header { margin-bottom: 4px; }
-.page-title { font-size: 24px; font-weight: 700; color: #1A1916; letter-spacing: -0.6px; }
-.title-amp { color: #F97316; font-weight: 400; }
-.page-subtitle { margin-top: 6px; font-size: 13.5px; color: #7A776E; }
-
 /* Token input card */
 .token-card {
   background: white;
@@ -172,7 +183,6 @@ function formatDate(d: Date): string {
   align-items: center;
   justify-content: space-between;
 }
-.editor-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #9A9690; }
 .btn-clear { font-size: 12px; color: #A09C94; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
 .btn-clear:hover { color: #DC2626; }
 
@@ -338,4 +348,7 @@ function formatDate(d: Date): string {
 
 .status-enter-active, .status-leave-active { transition: all 0.2s ease; }
 .status-enter-from, .status-leave-to { opacity: 0; transform: translateY(-4px); }
-</style>
+
+@media (max-width: 768px) {
+  .decoded-grid { grid-template-columns: 1fr; }
+}</style>

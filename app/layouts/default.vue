@@ -29,6 +29,11 @@
               <NuxtLink to="/tools/jwt-decoder" class="nav-dropdown-item">JWT Decoder</NuxtLink>
               <NuxtLink to="/tools/json-diff" class="nav-dropdown-item">JSON Diff</NuxtLink>
               <NuxtLink to="/tools/base64" class="nav-dropdown-item">Base64</NuxtLink>
+              <NuxtLink to="/tools/url-encode" class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
+              <NuxtLink to="/tools/unix-timestamp" class="nav-dropdown-item">Unix Timestamp</NuxtLink>
+              <NuxtLink to="/tools/regex-tester" class="nav-dropdown-item">Regex Tester</NuxtLink>
+              <NuxtLink to="/tools/cron-parser" class="nav-dropdown-item">Cron Parser</NuxtLink>
+              <NuxtLink to="/tools/json-to-ts" class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
             </div>
           </div>
         </nav>
@@ -45,9 +50,14 @@
 <script setup>
 const route = useRoute()
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
-const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/base64']
+const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts']
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
 const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
+
+const BASE_URL = 'https://json-tools-one.vercel.app'
+useHead(() => ({
+  link: [{ rel: 'canonical', href: `${BASE_URL}${route.path}` }],
+}))
 </script>
 
 <style>
@@ -224,6 +234,11 @@ body {
   color: #3D4349;
   flex-shrink: 0;
   letter-spacing: 0.01em;
+}
+
+@media (max-width: 768px) {
+  .header-inner { padding: 0 16px; gap: 16px; }
+  .header-badge { display: none; }
 }
 
 .app-main {

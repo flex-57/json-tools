@@ -2,8 +2,8 @@
   <div class="page">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Base64 <span class="title-amp">{{ mode === 'encode' ? 'Encoder' : 'Decoder' }}</span></h1>
-        <p class="page-subtitle">Encode text to Base64 or decode Base64 back to text — instantly, client-side.</p>
+        <h1 class="page-title">URL <span class="title-amp">{{ mode === 'encode' ? 'Encoder' : 'Decoder' }}</span></h1>
+        <p class="page-subtitle">Percent-encode or decode URL components — instantly, client-side.</p>
       </div>
       <div class="header-controls">
         <!-- Mode toggle — sliding pill -->
@@ -14,8 +14,16 @@
         </div>
         <!-- Variant toggle -->
         <div class="variant-toggle">
-          <button :class="['variant-btn', variant === 'standard' ? 'variant-btn--active' : '']" @click="variant = 'standard'" title="Standard Base64 (A-Z a-z 0-9 + /)">Standard</button>
-          <button :class="['variant-btn', variant === 'urlsafe' ? 'variant-btn--active' : '']" @click="variant = 'urlsafe'" title="URL-safe Base64 (- _ no padding) — used in JWT">URL-safe</button>
+          <button
+            :class="['variant-btn', variant === 'component' ? 'variant-btn--active' : '']"
+            @click="variant = 'component'"
+            title="encodeURIComponent — encodes ?, &, =, #, + and more. Use for query param values and path segments."
+          >Component</button>
+          <button
+            :class="['variant-btn', variant === 'full' ? 'variant-btn--active' : '']"
+            @click="variant = 'full'"
+            title="encodeURI — preserves URI structure characters like /, ?, #, &. Use for full URLs."
+          >Full URI</button>
         </div>
       </div>
     </div>
@@ -25,7 +33,7 @@
       <div class="panel-card" :class="{ 'panel-card--focused': inputFocused }">
         <div class="panel-card-glow" />
         <div class="panel-header">
-          <span class="editor-label">{{ mode === 'encode' ? 'Plain text' : 'Base64 input' }}</span>
+          <span class="editor-label">{{ mode === 'encode' ? 'Plain text' : 'Encoded URL' }}</span>
           <Transition name="fade-slot">
             <div v-if="input" class="panel-header-right">
               <span class="char-count">{{ input.length }} chars</span>
@@ -36,7 +44,7 @@
         <textarea
           v-model="input"
           class="panel-textarea"
-          :placeholder="mode === 'encode' ? 'Type or paste text to encode…' : 'Paste Base64 string to decode…'"
+          :placeholder="mode === 'encode' ? 'Type or paste text to encode…' : 'Paste percent-encoded string to decode…'"
           spellcheck="false"
           @focus="inputFocused = true"
           @blur="inputFocused = false"
@@ -55,7 +63,7 @@
       <!-- Output -->
       <div class="panel-card" :class="{ 'panel-card--error': !!error }">
         <div class="panel-header">
-          <span class="editor-label">{{ mode === 'encode' ? 'Base64 output' : 'Decoded text' }}</span>
+          <span class="editor-label">{{ mode === 'encode' ? 'URL-encoded' : 'Plain text' }}</span>
           <div class="panel-header-right">
             <Transition name="fade-slot">
               <span v-if="output && !error" class="char-count">{{ output.length }} chars</span>
@@ -81,7 +89,7 @@
           :value="output"
           class="panel-textarea panel-textarea--output"
           readonly
-          :placeholder="mode === 'encode' ? 'Base64 output will appear here…' : 'Decoded text will appear here…'"
+          :placeholder="mode === 'encode' ? 'URL-encoded output will appear here…' : 'Decoded text will appear here…'"
           spellcheck="false"
         />
       </div>
@@ -92,10 +100,7 @@
       <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm0 4v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="6" cy="3.8" r="0.6" fill="currentColor"/></svg>
       <span>No data sent to servers</span>
       <span class="info-sep">·</span>
-      <span>Unicode supported</span>
-      <Transition name="fade-slot">
-        <span v-if="variant === 'urlsafe'" class="info-jwt">· JWT-compatible</span>
-      </Transition>
+      <span>{{ variant === 'component' ? 'encodeURIComponent' : 'encodeURI' }}</span>
     </div>
 
     <SeoSection :cards="seoCards" />
@@ -103,14 +108,14 @@
 </template>
 
 <script setup lang="ts">
-import { useBase64 } from '~/composables/useBase64'
+import { useUrlEncode } from '~/composables/useUrlEncode'
 
 useSeoMeta({
-  title: 'Base64 Encoder / Decoder — Free Online Tool',
-  description: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
+  title: 'URL Encoder / Decoder — Free Online Tool',
+  description: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
 })
 
-const { mode, variant, input, output, error, copied, copy, clear, swap } = useBase64()
+const { mode, variant, input, output, error, copied, copy, clear, swap } = useUrlEncode()
 
 const inputFocused = ref(false)
 const swapping = ref(false)
@@ -124,16 +129,16 @@ function handleSwap() {
 
 const seoCards = [
   {
-    title: 'What Base64 encoding is and is not',
-    text: 'Base64 is an encoding scheme, not encryption. It converts binary data or text into a safe ASCII string using 64 printable characters. The output is about 33% larger than the input. It doesn\'t hide data — anyone can decode it instantly. Its purpose is transport safety: embedding binary in JSON, XML, or HTTP headers that only accept text.',
+    title: 'Component vs Full URI encoding',
+    text: 'encodeURIComponent encodes everything except letters, digits, and - _ . ! ~ * \' ( ) — including ?, &, =, #, and /. Use it for query parameter values and path segments. encodeURI preserves those characters plus : / ? # [ ] @ ! $ & \' ( ) * + , ; = because they have meaning in a full URL. Use it when encoding a complete URL to make it safe for a header or attribute without breaking its structure.',
   },
   {
-    title: 'Standard vs URL-safe (Base64url)',
-    text: 'Standard Base64 uses + and / characters, which are special in URLs and can break query strings. URL-safe Base64 (Base64url) replaces + with - and / with _, making the output safe for URLs, filenames, and HTTP headers. JWT tokens use Base64url for their header and payload sections — the "JWT-compatible" variant here matches that format exactly.',
+    title: 'When you need percent-encoding',
+    text: 'Spaces, non-ASCII characters, and reserved symbols must be encoded before being placed in a URL. A space becomes %20 (or + in form-encoded contexts), é becomes %C3%A9, and & in a query value must be %26 or it will be parsed as a parameter separator. OAuth signatures, redirect_uri parameters, and search queries all require proper encoding — a single unencoded character can break the entire request.',
   },
   {
-    title: 'Common uses: images, auth tokens, data URIs',
-    text: 'Developers encode images or PDFs to Base64 to embed them directly in HTML data URIs or JSON API responses, avoiding a separate file request. Auth tokens, API keys, and session cookies are often Base64-encoded before being placed in Authorization headers. Configuration systems encode secrets to prevent accidental whitespace or special-character corruption in environment variables.',
+    title: 'Reading percent-encoded sequences',
+    text: 'Each percent-encoded sequence is a % followed by two hexadecimal digits representing one byte of a UTF-8 encoded character. %20 is a space (byte 0x20), %2F is a slash (/), %3A is a colon (:). Multi-byte characters need multiple sequences: the euro sign € is %E2%82%AC (three bytes in UTF-8). The Decode mode here converts any valid percent-encoded string back to its original form.',
   },
 ]
 </script>
@@ -228,7 +233,6 @@ const seoCards = [
   border-color: #FDBA74;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(249,115,22,0.08), 0 0 0 3px rgba(249,115,22,0.08);
 }
-/* Gradient strip at top — fades in when focused */
 .panel-card-glow {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -343,7 +347,6 @@ const seoCards = [
   color: #C2BEB7;
 }
 .info-sep { color: #DDD9D2; }
-.info-jwt { color: #F97316; font-weight: 500; }
 
 /* ── Transitions ─────────────────────────────────────────────────── */
 .fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }

@@ -27,9 +27,7 @@
         <div class="editor-body" @focusin="leftFocus = true" @focusout="leftFocus = false">
           <ClientOnly>
             <JsonEditor v-model="left" />
-            <template #fallback>
-              <textarea v-model="left" class="editor-textarea" placeholder='{"name":"John","age":30}' spellcheck="false" />
-            </template>
+            <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
@@ -45,9 +43,7 @@
         <div class="editor-body" @focusin="rightFocus = true" @focusout="rightFocus = false">
           <ClientOnly>
             <JsonEditor v-model="right" />
-            <template #fallback>
-              <textarea v-model="right" class="editor-textarea" placeholder='{"name":"John","age":31}' spellcheck="false" />
-            </template>
+            <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
@@ -89,6 +85,8 @@
 
       </div>
     </Transition>
+
+    <SeoSection :cards="seoCards" />
   </div>
 </template>
 
@@ -101,38 +99,43 @@ useSeoMeta({
 })
 
 const { left, right, result, swap, clear } = useJsonDiff()
+
+const seoCards = [
+  {
+    title: 'Why compare JSON rather than raw text',
+    text: 'A plain text diff treats {"b":2,"a":1} and {"a":1,"b":2} as different — but they\'re the same JSON object. A JSON-aware diff normalises key order and data types before comparing, so you see only semantic differences: a field that changed value, a key that was added, an array element that was removed. This eliminates noise from formatting and key reordering.',
+  },
+  {
+    title: 'Reading the diff output',
+    text: 'Lines highlighted in red appear only in the left document (removed). Lines highlighted in green appear only in the right document (added). Unchanged lines are shown in neutral color. The counters in each panel header tell you at a glance how many additions and removals there are. Paste the two JSON documents, click Compare, and the diff updates immediately.',
+  },
+  {
+    title: 'Debugging and review use cases',
+    text: 'Developers compare API responses across environments to catch configuration drift between staging and production. QA engineers diff before/after snapshots of database records to verify a migration. Backend teams review the delta between two versions of a config file before deployment. Because both documents stay in your browser, you can paste sensitive payloads without concern.',
+  },
+]
 const leftFocus = ref(false)
 const rightFocus = ref(false)
 </script>
 
 <style scoped>
-.page { max-width: 1440px; margin: 0 auto; padding: 32px 24px 40px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 16px; }
-.page-header { display: flex; align-items: flex-end; justify-content: space-between; }
-.page-title { font-size: 24px; font-weight: 700; color: #1A1916; letter-spacing: -0.6px; }
-.title-amp { color: #F97316; font-weight: 400; }
-.page-subtitle { margin-top: 6px; font-size: 13.5px; color: #7A776E; }
 .header-actions { display: flex; gap: 6px; }
 
-.btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px; border-radius: 8px; font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
-.btn-ghost { background: transparent; color: #A09C94; border-color: #E8E5DF; background: white; }
-.btn-ghost:hover { background: #F3F1EC; color: #3A3830; }
+/* Bordered ghost override for page-header context */
+.btn-ghost { background: white; color: #A09C94; border-color: #E8E5DF; }
+.btn-ghost:hover { background: #F3F1EC; color: #3A3830; border-color: #C9C5BE; }
 
-/* Editors */
-.editors { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; min-height: 320px; }
-.editor-card { background: white; border: 1px solid #E8E5DF; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04); transition: border-color 0.2s, box-shadow 0.2s; }
+/* Editors — shorter min-height for the diff tool */
+.editors { min-height: 320px; }
 .editor-card--focus { border-color: #FDBA74; box-shadow: 0 0 0 3px rgba(249,115,22,0.08); }
-.editor-card-header { padding: 11px 16px; border-bottom: 1px solid #F0EDE7; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.editor-card-header { padding: 11px 16px; }
 .label-wrap { display: flex; align-items: center; gap: 8px; }
 .side-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .side-dot--left { background: #EF4444; }
 .side-dot--right { background: #22C55E; }
-.editor-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #9A9690; }
 .editor-stat { font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace; padding: 2px 8px; border-radius: 20px; }
 .editor-stat--removed { background: #FEE2E2; color: #DC2626; }
 .editor-stat--added { background: #DCFCE7; color: #16A34A; }
-.editor-body { flex: 1; overflow: hidden; display: flex; }
-.editor-textarea { flex: 1; width: 100%; border: none; outline: none; resize: none; padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; background: transparent; color: #1A1916; line-height: 1.65; }
-.editor-textarea::placeholder { color: #C2BEB7; }
 
 /* Diff section */
 .diff-section { display: flex; flex-direction: column; gap: 0; border-radius: 14px; overflow: hidden; border: 1px solid #E8E5DF; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04); }

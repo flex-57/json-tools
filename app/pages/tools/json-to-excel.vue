@@ -35,9 +35,7 @@
         <div class="editor-body">
           <ClientOnly>
             <JsonEditor v-model="input" />
-            <template #fallback>
-              <textarea v-model="input" placeholder='[{"name":"Alice","age":30},{"name":"Bob","age":25}]' class="editor-textarea" spellcheck="false" />
-            </template>
+            <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
@@ -68,6 +66,8 @@
         </div>
       </div>
     </div>
+
+    <SeoSection :cards="seoCards" />
   </div>
 </template>
 
@@ -80,6 +80,21 @@ useSeoMeta({
 })
 
 const { input, error, loading, download, clear } = useJsonToExcel()
+
+const seoCards = [
+  {
+    title: 'From JSON array to a real Excel file',
+    text: 'Sending a JSON array to a non-technical stakeholder means they need to run code to read it. Converting to Excel gives them a file they can open directly, filter with AutoFilter, and share without any setup. This tool generates a proper .xlsx binary — not a renamed CSV — with correct column headers and cell types.',
+  },
+  {
+    title: 'What the preview tells you',
+    text: 'Before downloading, the live preview shows the first five rows of the Excel sheet so you can confirm that keys became column headers and values landed in the right cells. If your JSON contains nested objects, flatten them first — nested values serialize as JSON strings in the cell, which is usually not what you want in a spreadsheet.',
+  },
+  {
+    title: 'Reporting and handoff use cases',
+    text: 'Backend developers export JSON API responses to Excel for product review meetings. Support teams convert JSON log data to spreadsheets for ticket analysis. Data analysts receive JSON from a data warehouse and convert it to Excel for pivot table work. The generated file downloads instantly — no server round-trip, no file size limit imposed by an upload endpoint.',
+  },
+]
 const isDragging = ref(false)
 
 const preview = computed(() => {
@@ -106,34 +121,7 @@ function onDrop(e: DragEvent) {
 </script>
 
 <style scoped>
-.page { max-width: 1440px; margin: 0 auto; padding: 32px 24px 24px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 16px; }
-.page-header { display: flex; align-items: flex-end; justify-content: space-between; }
-.page-title { font-size: 24px; font-weight: 700; color: #1A1916; letter-spacing: -0.6px; }
-.title-arrow { color: #F97316; font-weight: 300; margin: 0 4px; }
-.page-subtitle { margin-top: 6px; font-size: 13.5px; color: #7A776E; }
-.toolbar { background: #FFF; border: 1px solid #E8E5DF; border-radius: 14px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03); flex-wrap: wrap; }
-.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px; border-radius: 8px; font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; white-space: nowrap; line-height: 1; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn-primary { background: #F97316; color: white; border-color: #F97316; box-shadow: 0 1px 2px rgba(249,115,22,0.3); }
-.btn-primary:hover:not(:disabled) { background: #EA6C0A; transform: translateY(-0.5px); }
-.btn-ghost { background: transparent; color: #A09C94; border-color: transparent; }
-.btn-ghost:hover { background: #FFF1F0; color: #DC2626; border-color: #FECACA; }
-.status-pill { display: inline-flex; align-items: center; gap: 7px; padding: 4px 11px 4px 8px; border-radius: 20px; font-size: 12.5px; font-weight: 500; max-width: 280px; }
-.status-pill--invalid { background: #FFF1F0; border: 1px solid #FECACA; color: #DC2626; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: #DC2626; box-shadow: 0 0 0 2px #FECACA; }
-.status-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.editors { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; min-height: 500px; }
-.editor-card { background: #FFF; border: 1px solid #E8E5DF; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04); transition: border-color 0.2s; }
-.editor-card:focus-within { border-color: #FDBA74; box-shadow: 0 0 0 3px rgba(249,115,22,0.08); }
-.editor-card--drag { border-color: #F97316; border-style: dashed; background: #FFFBF6; }
 .preview-card { background: #FDFCFA; }
-.editor-card-header { padding: 12px 16px 10px; border-bottom: 1px solid #F0EDE7; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-.editor-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #9A9690; }
-.editor-hint { font-size: 11.5px; color: #C2BEB7; }
-.editor-body { flex: 1; overflow: hidden; display: flex; }
-.editor-textarea { flex: 1; width: 100%; border: none; outline: none; resize: none; padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; background: transparent; color: #1A1916; line-height: 1.65; }
-.editor-textarea::placeholder { color: #C2BEB7; }
 .preview-body { flex: 1; overflow: auto; }
 .preview-empty { height: 100%; display: flex; align-items: center; justify-content: center; color: #C2BEB7; font-size: 13px; }
 .table-wrap { overflow: auto; }
@@ -142,8 +130,4 @@ function onDrop(e: DragEvent) {
 .preview-table td { padding: 7px 14px; border-bottom: 1px solid #F7F5F2; color: #3A3830; white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
 .preview-table tr:last-child td { border-bottom: none; }
 .preview-table tr:hover td { background: #FFFBF6; }
-.spinner { animation: spin 0.8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.status-enter-active, .status-leave-active { transition: all 0.2s ease; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: scale(0.9); }
 </style>

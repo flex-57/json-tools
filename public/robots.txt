@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://json-tools-one.vercel.app/sitemap.xml

@@ -56,9 +56,7 @@
         <div class="editor-body">
           <ClientOnly>
             <JsonEditor v-model="input" />
-            <template #fallback>
-              <textarea v-model="input" placeholder="Paste your JSON here..." class="editor-fallback" />
-            </template>
+            <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
@@ -71,9 +69,7 @@
         <div class="editor-body">
           <ClientOnly>
             <JsonEditor v-model="output" :readonly="true" />
-            <template #fallback>
-              <textarea v-model="output" readonly class="editor-fallback" />
-            </template>
+            <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
@@ -115,193 +111,12 @@ const indentValue = computed({
 </script>
 
 <style scoped>
-.page {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 32px 24px 24px;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+/* Italic & on index only */
+.title-amp { font-style: italic; }
 
-.page-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #1A1916;
-  letter-spacing: -0.6px;
-  line-height: 1.2;
-}
-
-.title-amp {
-  color: #F97316;
-  font-style: italic;
-  font-weight: 400;
-}
-
-.page-subtitle {
-  margin-top: 6px;
-  font-size: 13.5px;
-  color: #7A776E;
-  font-weight: 400;
-}
-
-/* Toolbar */
-.toolbar {
-  background: #FFFFFF;
-  border: 1px solid #E8E5DF;
-  border-radius: 14px;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-  flex-wrap: wrap;
-}
-
-.toolbar-left, .toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.toolbar-sep {
-  width: 1px;
-  height: 20px;
-  background: #E8E5DF;
-  margin: 0 2px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 13px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.15s;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  line-height: 1;
-}
-
-.btn:focus-visible {
-  outline: 2px solid #F97316;
-  outline-offset: 2px;
-}
-
-.btn-primary {
-  background: #F97316;
-  color: white;
-  border-color: #F97316;
-  box-shadow: 0 1px 2px rgba(249,115,22,0.3);
-}
-
-.btn-primary:hover {
-  background: #EA6C0A;
-  border-color: #EA6C0A;
-  box-shadow: 0 2px 8px rgba(249,115,22,0.35);
-  transform: translateY(-0.5px);
-}
-
-.btn-primary:active { transform: translateY(0); }
-
-.btn-secondary {
-  background: #FAFAF8;
-  color: #3A3830;
-  border-color: #DDD9D2;
-}
-
-.btn-secondary:hover {
-  background: #F3F1EC;
-  border-color: #C9C5BE;
-  color: #1A1916;
-}
-
-.btn--success {
-  background: #F0FDF4;
-  color: #16A34A;
-  border-color: #BBF7D0;
-}
-
-.btn-ghost {
-  background: transparent;
-  color: #A09C94;
-  border-color: transparent;
-}
-
-.btn-ghost:hover {
-  background: #FFF1F0;
-  color: #DC2626;
-  border-color: #FECACA;
-}
-
-/* Status pill */
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 4px 11px 4px 8px;
-  border-radius: 20px;
-  font-size: 12.5px;
-  font-weight: 500;
-  max-width: 300px;
-  overflow: hidden;
-}
-
-.status-pill--valid {
-  background: #F0FDF4;
-  border: 1px solid #BBF7D0;
-  color: #16A34A;
-}
-
-.status-pill--invalid {
-  background: #FFF1F0;
-  border: 1px solid #FECACA;
-  color: #DC2626;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.status-pill--valid .status-dot { background: #16A34A; box-shadow: 0 0 0 2px #BBF7D0; }
-.status-pill--invalid .status-dot { background: #DC2626; box-shadow: 0 0 0 2px #FECACA; }
-
-.status-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Indent control */
-.indent-wrap {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.indent-label {
-  font-size: 12.5px;
-  color: #9A9690;
-  font-weight: 500;
-}
-
+/* Indent select (index-specific control) */
+.indent-wrap  { display: flex; align-items: center; gap: 7px; }
+.indent-label { font-size: 12.5px; color: #9A9690; font-weight: 500; }
 .indent-select {
   appearance: none;
   background: #FAFAF8 url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239A9690' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;
@@ -315,90 +130,12 @@ const indentValue = computed({
   cursor: pointer;
   transition: border-color 0.15s;
 }
+.indent-select:focus { outline: none; border-color: #F97316; }
 
-.indent-select:focus {
-  outline: none;
-  border-color: #F97316;
-}
+/* CodeMirror editor needs column direction */
+.editor-body { flex-direction: column; }
 
-/* Editors */
-.editors {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  min-height: 500px;
-}
-
-.editor-card {
-  background: #FFFFFF;
-  border: 1px solid #E8E5DF;
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
-  transition: box-shadow 0.2s, border-color 0.2s;
-}
-
-.editor-card:focus-within {
-  border-color: #FDBA74;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04), 0 0 0 3px rgba(249,115,22,0.08);
-}
-
-.editor-card--output {
-  background: #FDFCFA;
-}
-
-.editor-card-header {
-  padding: 12px 16px 10px;
-  border-bottom: 1px solid #F0EDE7;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-}
-
-.editor-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #9A9690;
-}
-
-.editor-hint {
-  font-size: 11.5px;
-  color: #C2BEB7;
-}
-
-.editor-body {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.editor-fallback {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-  padding: 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  background: transparent;
-  color: #1A1916;
-  line-height: 1.6;
-}
-
-/* Status transition */
-.status-enter-active, .status-leave-active { transition: all 0.2s ease; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: scale(0.9); }
-
-/* SEO section */
+/* About section (inline HTML, not SeoSection component) */
 .about { margin-top: 8px; padding-bottom: 8px; }
 .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .about-card { background: white; border: 1px solid #E8E5DF; border-radius: 14px; padding: 20px 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
