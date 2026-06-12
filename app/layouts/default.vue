@@ -48,6 +48,9 @@
                 <NuxtLink to="/tools/regex-tester"    class="nav-dropdown-item">Regex Tester</NuxtLink>
                 <NuxtLink to="/tools/cron-parser"     class="nav-dropdown-item">Cron Parser</NuxtLink>
                 <NuxtLink to="/tools/unix-timestamp"  class="nav-dropdown-item">Unix Timestamp</NuxtLink>
+                <div class="nav-dropdown-section mega-section-gap">Generate</div>
+                <NuxtLink to="/tools/hash"            class="nav-dropdown-item">Hash Generator</NuxtLink>
+                <NuxtLink to="/tools/uuid"            class="nav-dropdown-item">UUID Generator</NuxtLink>
               </div>
             </div>
           </div>
@@ -103,6 +106,12 @@
             <NuxtLink to="/tools/cron-parser"    class="mobile-nav-item" @click="mobileOpen = false">Cron Parser</NuxtLink>
             <NuxtLink to="/tools/unix-timestamp" class="mobile-nav-item" @click="mobileOpen = false">Unix Timestamp</NuxtLink>
           </div>
+
+          <div class="mobile-section">
+            <div class="mobile-section-label">Generate</div>
+            <NuxtLink to="/tools/hash" class="mobile-nav-item" @click="mobileOpen = false">Hash Generator</NuxtLink>
+            <NuxtLink to="/tools/uuid" class="mobile-nav-item" @click="mobileOpen = false">UUID Generator</NuxtLink>
+          </div>
         </div>
       </nav>
     </Transition>
@@ -133,7 +142,7 @@ watch(() => route.path, (path) => {
 })
 
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
-const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts']
+const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts', '/tools/hash', '/tools/uuid']
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
 const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
 
