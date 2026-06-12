@@ -112,18 +112,16 @@
       <AdSlot slot-id="XXXXXXXXXX" />
     </div>
     <AppFooter />
-    <CookieBanner />
   </div>
 </template>
 
 <script setup>
-import { useConsent, trackPageView } from '~/composables/useConsent'
+import { loadGA4, trackPageView } from '~/composables/useConsent'
 
 const route = useRoute()
 const mobileOpen = ref(false)
-const { init } = useConsent()
 
-onMounted(() => { init() })
+onMounted(() => { loadGA4() })
 
 watch(() => route.path, (path) => {
   mobileOpen.value = false
