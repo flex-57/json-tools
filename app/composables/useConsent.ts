@@ -1,5 +1,5 @@
 // ── Replace these with your actual IDs ──────────────────────────────
-export const GA4_ID      = 'G-XXXXXXXXXX'          // analytics.google.com → Admin → Data Streams
+export const GA4_ID      = 'G-GBM7BH0XZ7'          // analytics.google.com → Admin → Data Streams
 export const ADSENSE_ID  = 'ca-pub-XXXXXXXXXXXXXXXXX' // adsense.google.com → Account → Account info
 // ────────────────────────────────────────────────────────────────────
 
