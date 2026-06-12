@@ -3,8 +3,8 @@
     <Handle type="target" :position="Position.Left" class="gn-handle" />
 
     <div class="gn-header">
-      <span class="gn-label">{{ data.label === 'root' ? 'root' : `"${data.label}"` }}</span>
-      <span class="gn-badge">{{ data.nodeType === 'array' ? `[${data.size}]` : `{${data.size}}` }}</span>
+      <span class="gn-label">{{ data.label === 'root' ? 'root' : '"' + data.label + '"' }}</span>
+      <span class="gn-badge">{{ data.nodeType === 'array' ? '[' + data.size + ']' : '{' + data.size + '}' }}</span>
     </div>
 
     <div class="gn-body">
