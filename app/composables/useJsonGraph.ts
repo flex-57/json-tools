@@ -1,21 +1,22 @@
 import type { TreeNode, NodeType } from './useJsonTree'
 
-export const GRAPH_NODE_WIDTH = 240
-const HEADER_H = 36
-const ENTRY_H  = 21
-const FOOTER_H = 12
+export type GraphNodeType = 'body' | 'header' | 'leaf'
 
 export interface GraphEntry {
   key: string
   value: string
   type: NodeType
+  isContainer?: boolean
 }
 
 export interface GraphNodeData {
+  nodeType: GraphNodeType
   label: string
-  nodeType: 'object' | 'array'
   size: number
+  containerType?: 'object' | 'array'
   entries: GraphEntry[]
+  leafValue?: string
+  leafType?: NodeType
 }
 
 export interface VfNode {
@@ -23,93 +24,136 @@ export interface VfNode {
   type: 'jsonNode'
   position: { x: number; y: number }
   data: GraphNodeData
-  _height: number
+  _w: number
+  _h: number
 }
 
 export interface VfEdge {
   id: string
   source: string
   target: string
-  label: string
   type: string
   style: object
-  labelStyle: object
-  labelBgPadding: [number, number]
-  labelBgBorderRadius: number
-  labelBgStyle: object
 }
 
-function entryHeight(entries: GraphEntry[]) {
-  return HEADER_H + Math.max(entries.length, 1) * ENTRY_H + FOOTER_H
-}
+const BODY_W   = 230
+const HEADER_W = 190
+const LEAF_W   = 110
+const ENTRY_H  = 20
+const BODY_PAD = 20
 
-function formatLeafValue(child: TreeNode): string {
+let _seq = 0
+function uid() { return `g${_seq++}` }
+
+function bodyHeight(n: number) { return BODY_PAD + Math.max(n, 1) * ENTRY_H }
+
+function formatValue(child: TreeNode): string {
   if (child.type === 'null') return 'null'
   if (child.type === 'string') {
     const s = String(child.value)
-    return `"${s.length > 38 ? s.slice(0, 38) + '…' : s}"`
+    return s.length > 36 ? s.slice(0, 36) + '…' : s
   }
   return String(child.value)
 }
 
-function collect(node: TreeNode, nodes: VfNode[], edges: VfEdge[]) {
-  if (node.type !== 'object' && node.type !== 'array') return
-
-  const entries: GraphEntry[] = []
-  const childContainers: TreeNode[] = []
-
-  for (const child of node.children) {
-    if (child.type === 'object' || child.type === 'array') {
-      childContainers.push(child)
-    } else {
-      entries.push({ key: child.key, value: formatLeafValue(child), type: child.type })
-    }
+function edge(src: string, tgt: string): VfEdge {
+  return {
+    id: `e-${src}-${tgt}`,
+    source: src, target: tgt,
+    type: 'smoothstep',
+    style: { stroke: '#3D4349', strokeWidth: 1.5 },
   }
+}
 
+function processContainer(container: TreeNode, parentId: string, nodes: VfNode[], edges: VfEdge[]) {
+  const headerId = uid()
   nodes.push({
-    id: node.id,
-    type: 'jsonNode',
-    position: { x: 0, y: 0 },
-    data: { label: node.key || 'root', nodeType: node.type, size: node.size, entries },
-    _height: entryHeight(entries),
+    id: headerId, type: 'jsonNode', position: { x: 0, y: 0 },
+    data: { nodeType: 'header', label: container.key, size: container.size, containerType: container.type, entries: [] },
+    _w: HEADER_W, _h: 36,
   })
+  edges.push(edge(parentId, headerId))
 
-  for (const child of childContainers) {
-    edges.push({
-      id: `e-${node.id}-${child.id}`,
-      source: node.id,
-      target: child.id,
-      label: child.key,
-      type: 'smoothstep',
-      style: { stroke: '#3D4349', strokeWidth: 1.5 },
-      labelStyle: { fill: '#E06C75', fontSize: 11, fontFamily: 'JetBrains Mono, monospace' },
-      labelBgPadding: [4, 2],
-      labelBgBorderRadius: 3,
-      labelBgStyle: { fill: '#1C2330' },
-    })
-    collect(child, nodes, edges)
+  if (container.type === 'object') {
+    const entries: GraphEntry[] = []
+    const nested: TreeNode[] = []
+    for (const child of container.children) {
+      if (child.type === 'object' || child.type === 'array') {
+        entries.push({ key: child.key, value: child.type === 'array' ? '[' + child.size + ']' : '{' + child.size + '}', type: child.type, isContainer: true })
+        nested.push(child)
+      } else {
+        entries.push({ key: child.key, value: formatValue(child), type: child.type })
+      }
+    }
+    if (entries.length) {
+      const bodyId = uid()
+      nodes.push({ id: bodyId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: '', size: 0, entries }, _w: BODY_W, _h: bodyHeight(entries.length) })
+      edges.push(edge(headerId, bodyId))
+      for (const n of nested) processContainer(n, bodyId, nodes, edges)
+    }
+  } else {
+    // array
+    for (const item of container.children) {
+      if (item.type === 'object' || item.type === 'array') {
+        // Array item is a container — treat as anonymous body + recurse
+        const entries: GraphEntry[] = []
+        const nested: TreeNode[] = []
+        if (item.type === 'object') {
+          for (const child of item.children) {
+            if (child.type === 'object' || child.type === 'array') {
+              entries.push({ key: child.key, value: child.type === 'array' ? '[' + child.size + ']' : '{' + child.size + '}', type: child.type, isContainer: true })
+              nested.push(child)
+            } else {
+              entries.push({ key: child.key, value: formatValue(child), type: child.type })
+            }
+          }
+        }
+        const bodyId = uid()
+        nodes.push({ id: bodyId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: '', size: 0, entries }, _w: BODY_W, _h: bodyHeight(entries.length) })
+        edges.push(edge(headerId, bodyId))
+        for (const n of nested) processContainer(n, bodyId, nodes, edges)
+      } else {
+        // Primitive array item → leaf node
+        const leafId = uid()
+        nodes.push({ id: leafId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'leaf', label: '', size: 0, entries: [], leafValue: formatValue(item), leafType: item.type }, _w: LEAF_W, _h: 34 })
+        edges.push(edge(headerId, leafId))
+      }
+    }
   }
 }
 
 export async function buildGraph(root: TreeNode): Promise<{ nodes: VfNode[]; edges: VfEdge[] }> {
+  _seq = 0
   const nodes: VfNode[] = []
   const edges: VfEdge[] = []
-  collect(root, nodes, edges)
 
+  // Root node — body showing all key-value pairs
+  const rootEntries: GraphEntry[] = []
+  const rootContainers: TreeNode[] = []
+  for (const child of root.children) {
+    if (child.type === 'object' || child.type === 'array') {
+      rootEntries.push({ key: child.key, value: child.type === 'array' ? '[' + child.size + ']' : '{' + child.size + '}', type: child.type, isContainer: true })
+      rootContainers.push(child)
+    } else {
+      rootEntries.push({ key: child.key, value: formatValue(child), type: child.type })
+    }
+  }
+
+  const rootId = uid()
+  nodes.push({ id: rootId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: 'root', size: root.size, entries: rootEntries }, _w: BODY_W, _h: bodyHeight(rootEntries.length) })
+  for (const c of rootContainers) processContainer(c, rootId, nodes, edges)
+
+  // Dagre layout
   const dagre = (await import('@dagrejs/dagre')).default
   const g = new dagre.graphlib.Graph()
-  g.setGraph({ rankdir: 'LR', ranksep: 80, nodesep: 24, marginx: 40, marginy: 40 })
+  g.setGraph({ rankdir: 'LR', ranksep: 70, nodesep: 16, marginx: 32, marginy: 32 })
   g.setDefaultEdgeLabel(() => ({}))
-
-  nodes.forEach(n => g.setNode(n.id, { width: GRAPH_NODE_WIDTH, height: n._height }))
+  nodes.forEach(n => g.setNode(n.id, { width: n._w, height: n._h }))
   edges.forEach(e => g.setEdge(e.source, e.target))
   dagre.layout(g)
 
   return {
-    nodes: nodes.map(n => {
-      const { x, y } = g.node(n.id)
-      return { ...n, position: { x: x - GRAPH_NODE_WIDTH / 2, y: y - n._height / 2 } }
-    }),
+    nodes: nodes.map(n => { const { x, y } = g.node(n.id); return { ...n, position: { x: x - n._w / 2, y: y - n._h / 2 } } }),
     edges,
   }
 }

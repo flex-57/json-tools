@@ -1,103 +1,102 @@
 <template>
-  <div class="gn" :style="{ width: GRAPH_NODE_WIDTH + 'px' }">
+  <!-- Leaf node: single primitive value from array -->
+  <div v-if="data.nodeType === 'leaf'" class="gn-leaf">
     <Handle type="target" :position="Position.Left" class="gn-handle" />
+    <span :class="['gn-leaf-val', 'gn-leaf-val--' + data.leafType]">{{ data.leafValue }}</span>
+  </div>
 
-    <div class="gn-header">
-      <span class="gn-label">{{ data.label === 'root' ? 'root' : '"' + data.label + '"' }}</span>
-      <span class="gn-badge">{{ data.nodeType === 'array' ? '[' + data.size + ']' : '{' + data.size + '}' }}</span>
-    </div>
+  <!-- Header node: container key + badge + link icon -->
+  <div v-else-if="data.nodeType === 'header'" class="gn-header-node">
+    <Handle type="target" :position="Position.Left" class="gn-handle" />
+    <span class="gn-hkey">{{ data.label }}</span>
+    <span class="gn-hbadge">{{ data.containerType === 'array' ? '[' + data.size + ']' : '{' + data.size + '}' }}</span>
+    <svg class="gn-hicon" width="13" height="13" viewBox="0 0 13 13" fill="none">
+      <path d="M5 3H3a1.5 1.5 0 000 3h2M8 3h2a1.5 1.5 0 010 3H8M4 4.5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M5 9H3a1.5 1.5 0 000 3h2M8 9h2a1.5 1.5 0 010 3H8M4 10.5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </svg>
+    <Handle type="source" :position="Position.Right" class="gn-handle" />
+  </div>
 
-    <div class="gn-body">
+  <!-- Body node: key-value content -->
+  <div v-else class="gn-body-node">
+    <Handle type="target" :position="Position.Left" class="gn-handle" />
+    <div class="gn-entries">
       <div v-for="entry in data.entries" :key="entry.key" class="gn-entry">
-        <span class="gn-ekey">"{{ entry.key }}"</span>
-        <span class="gn-esep">:&nbsp;</span>
-        <span :class="['gn-eval', 'gn-eval--' + entry.type]">{{ entry.value }}</span>
+        <span class="gn-ekey">{{ entry.key }}:</span>
+        <span :class="['gn-eval', entry.isContainer ? 'gn-eval--container' : 'gn-eval--' + entry.type]">{{ entry.value }}</span>
       </div>
-      <div v-if="!data.entries.length" class="gn-empty">— empty —</div>
     </div>
-
     <Handle type="source" :position="Position.Right" class="gn-handle" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { Handle, Position } from '@vue-flow/core'
-import { GRAPH_NODE_WIDTH } from '~/composables/useJsonGraph'
 import type { GraphNodeData } from '~/composables/useJsonGraph'
 
 defineProps<{ data: GraphNodeData }>()
 </script>
 
 <style scoped>
-.gn {
+/* ── Shared ──────────────────────────────────────────────── */
+.gn-handle {
+  width: 7px !important; height: 7px !important;
+  background: #2E3540 !important;
+  border: 1px solid #4A5568 !important;
+  border-radius: 50% !important;
+}
+
+/* ── Leaf node ───────────────────────────────────────────── */
+.gn-leaf {
+  padding: 7px 14px;
   background: #1C2330;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  min-width: 60px;
+  text-align: center;
 }
+.gn-leaf-val--string  { color: #98C379; }
+.gn-leaf-val--number  { color: #61AFEF; }
+.gn-leaf-val--boolean { color: #E5C07B; }
+.gn-leaf-val--null    { color: #5C6470; font-style: italic; }
 
-.gn-header {
+/* ── Header node ─────────────────────────────────────────── */
+.gn-header-node {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 7px;
   padding: 8px 12px;
   background: #252D3B;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  gap: 8px;
-}
-
-.gn-label {
-  color: #E06C75;
-  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
-  min-width: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
+.gn-hkey   { color: #E06C75; font-weight: 600; }
+.gn-hbadge { color: #5C6470; font-size: 11px; background: rgba(255,255,255,0.05); border-radius: 3px; padding: 1px 5px; }
+.gn-hicon  { color: #4A5568; flex-shrink: 0; }
 
-.gn-badge {
-  font-size: 10px;
-  color: #5C6470;
-  background: rgba(255,255,255,0.06);
-  border-radius: 4px;
-  padding: 1px 6px;
-  white-space: nowrap;
-  flex-shrink: 0;
+/* ── Body node ───────────────────────────────────────────── */
+.gn-body-node {
+  background: #1C2330;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  min-width: 140px;
 }
-
-.gn-body {
-  padding: 6px 12px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.gn-entry {
-  display: flex;
-  align-items: baseline;
-  gap: 0;
-  overflow: hidden;
-  line-height: 1.6;
-}
-
-.gn-ekey  { color: #ABB2BF; white-space: nowrap; }
-.gn-esep  { color: #5C6470; }
-.gn-eval  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; flex: 1; }
-.gn-eval--string  { color: #98C379; }
-.gn-eval--number  { color: #61AFEF; }
-.gn-eval--boolean { color: #E5C07B; }
-.gn-eval--null    { color: #5C6470; font-style: italic; }
-
-.gn-empty { color: #3D4349; font-style: italic; padding: 4px 0; }
-
-.gn-handle {
-  width: 8px !important;
-  height: 8px !important;
-  background: #3D4349 !important;
-  border: 1px solid #5C6470 !important;
-}
+.gn-entries { padding: 9px 13px 10px; display: flex; flex-direction: column; gap: 1px; }
+.gn-entry   { display: flex; gap: 6px; line-height: 1.65; overflow: hidden; }
+.gn-ekey    { color: #ABB2BF; white-space: nowrap; flex-shrink: 0; }
+.gn-eval    { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.gn-eval--string    { color: #98C379; }
+.gn-eval--number    { color: #61AFEF; }
+.gn-eval--boolean   { color: #E5C07B; }
+.gn-eval--null      { color: #5C6470; font-style: italic; }
+.gn-eval--container { color: #5C6470; }
 </style>

@@ -84,6 +84,9 @@
               :edges="graphEdges"
               :node-types="nodeTypes"
               fit-view-on-init
+              :nodes-draggable="false"
+              :nodes-connectable="false"
+              :elements-selectable="false"
               :min-zoom="0.2"
               :max-zoom="2"
               class="vf-instance"
