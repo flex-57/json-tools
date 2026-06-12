@@ -17,6 +17,7 @@ export interface GraphNodeData {
   entries: GraphEntry[]
   leafValue?: string
   leafType?: NodeType
+  hasOutgoing: boolean
 }
 
 export interface VfNode {
@@ -69,7 +70,7 @@ function processContainer(container: TreeNode, parentId: string, nodes: VfNode[]
   const headerId = uid()
   nodes.push({
     id: headerId, type: 'jsonNode', position: { x: 0, y: 0 },
-    data: { nodeType: 'header', label: container.key, size: container.size, containerType: container.type, entries: [] },
+    data: { nodeType: 'header', label: container.key, size: container.size, containerType: container.type, entries: [], hasOutgoing: true },
     _w: HEADER_W, _h: 36,
   })
   edges.push(edge(parentId, headerId))
@@ -87,7 +88,7 @@ function processContainer(container: TreeNode, parentId: string, nodes: VfNode[]
     }
     if (entries.length) {
       const bodyId = uid()
-      nodes.push({ id: bodyId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: '', size: 0, entries }, _w: BODY_W, _h: bodyHeight(entries.length) })
+      nodes.push({ id: bodyId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: '', size: 0, entries, hasOutgoing: nested.length > 0 }, _w: BODY_W, _h: bodyHeight(entries.length) })
       edges.push(edge(headerId, bodyId))
       for (const n of [...nested].reverse()) processContainer(n, bodyId, nodes, edges)
     }
@@ -109,13 +110,13 @@ function processContainer(container: TreeNode, parentId: string, nodes: VfNode[]
           }
         }
         const bodyId = uid()
-        nodes.push({ id: bodyId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: '', size: 0, entries }, _w: BODY_W, _h: bodyHeight(entries.length) })
+        nodes.push({ id: bodyId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: '', size: 0, entries, hasOutgoing: nested.length > 0 }, _w: BODY_W, _h: bodyHeight(entries.length) })
         edges.push(edge(headerId, bodyId))
-        for (const n of nested) processContainer(n, bodyId, nodes, edges)
+        for (const n of [...nested].reverse()) processContainer(n, bodyId, nodes, edges)
       } else {
         // Primitive array item → leaf node
         const leafId = uid()
-        nodes.push({ id: leafId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'leaf', label: '', size: 0, entries: [], leafValue: formatValue(item), leafType: item.type }, _w: LEAF_W, _h: 34 })
+        nodes.push({ id: leafId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'leaf', label: '', size: 0, entries: [], leafValue: formatValue(item), leafType: item.type, hasOutgoing: false }, _w: LEAF_W, _h: 34 })
         edges.push(edge(headerId, leafId))
       }
     }
@@ -140,7 +141,7 @@ export async function buildGraph(root: TreeNode): Promise<{ nodes: VfNode[]; edg
   }
 
   const rootId = uid()
-  nodes.push({ id: rootId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: 'root', size: root.size, entries: rootEntries }, _w: BODY_W, _h: bodyHeight(rootEntries.length) })
+  nodes.push({ id: rootId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: 'root', size: root.size, entries: rootEntries, hasOutgoing: rootContainers.length > 0 }, _w: BODY_W, _h: bodyHeight(rootEntries.length) })
   for (const c of [...rootContainers].reverse()) processContainer(c, rootId, nodes, edges)
 
   // Dagre layout

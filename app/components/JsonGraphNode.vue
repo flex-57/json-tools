@@ -27,7 +27,7 @@
         <span v-if="!entry.isContainer" class="gn-etype">{{ entry.type }}</span>
       </div>
     </div>
-    <Handle type="source" :position="Position.Right" class="gn-handle" />
+    <Handle v-if="data.hasOutgoing" type="source" :position="Position.Right" class="gn-handle" />
   </div>
 </template>
 
@@ -100,5 +100,5 @@ defineProps<{ data: GraphNodeData }>()
 .gn-eval--boolean   { color: #E5C07B; }
 .gn-eval--null      { color: #5C6470; font-style: italic; }
 .gn-eval--container { color: #5C6470; }
-.gn-etype { font-size: 10px; color: #3D4349; margin-left: auto; flex-shrink: 0; padding-left: 6px; }
+.gn-etype { font-size: 10px; color: #5C6470; margin-left: auto; flex-shrink: 0; padding-left: 6px; }
 </style>

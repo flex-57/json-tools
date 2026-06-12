@@ -189,5 +189,5 @@ async function copy() {
   align-items: center;
 }
 .tn-copy:hover { color: #C9C8C5; }
-.tn-type { font-size: 10px; color: #3D4349; margin-left: 8px; flex-shrink: 0; }
+.tn-type { font-size: 10px; color: #5C6470; margin-left: 8px; flex-shrink: 0; }
 </style>
