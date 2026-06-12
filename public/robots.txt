@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
-Sitemap: https://json-tools-one.vercel.app/sitemap.xml
+
+User-agent: Mediapartners-Google
+Allow: /
+
+Sitemap: https://jsontools.space/sitemap.xml
