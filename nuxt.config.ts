@@ -1,13 +1,13 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  css: ['~/assets/css/tools.css'],
+  css: ['~/assets/css/tools.css', '@vue-flow/core/dist/style.css', '@vue-flow/core/dist/theme-default.css', '@vue-flow/controls/dist/style.css'],
   modules: [
     '@nuxtjs/tailwindcss',
   ],
   vite: {
     optimizeDeps: {
-      include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/theme-one-dark'],
+      include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/theme-one-dark', '@vue-flow/core', '@dagrejs/dagre'],
     },
   },
   app: {
