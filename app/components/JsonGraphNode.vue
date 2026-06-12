@@ -11,7 +11,7 @@
       <div v-for="entry in data.entries" :key="entry.key" class="gn-entry">
         <span class="gn-ekey">"{{ entry.key }}"</span>
         <span class="gn-esep">:&nbsp;</span>
-        <span :class="['gn-eval', `gn-eval--${entry.type}`]">{{ entry.value }}</span>
+        <span :class="['gn-eval', 'gn-eval--' + entry.type]">{{ entry.value }}</span>
       </div>
       <div v-if="!data.entries.length" class="gn-empty">— empty —</div>
     </div>
