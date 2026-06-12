@@ -3,6 +3,7 @@
   <div v-if="data.nodeType === 'leaf'" class="gn-leaf">
     <Handle type="target" :position="Position.Left" class="gn-handle" />
     <span :class="['gn-leaf-val', 'gn-leaf-val--' + data.leafType]">{{ data.leafValue }}</span>
+    <span class="gn-leaf-type">{{ data.leafType }}</span>
   </div>
 
   <!-- Header node: container key + badge + link icon -->
@@ -62,6 +63,7 @@ defineProps<{ data: GraphNodeData }>()
 .gn-leaf-val--number  { color: #61AFEF; }
 .gn-leaf-val--boolean { color: #E5C07B; }
 .gn-leaf-val--null    { color: #5C6470; font-style: italic; }
+.gn-leaf-type { font-size: 10px; color: #5C6470; margin-left: 8px; }
 
 /* ── Header node ─────────────────────────────────────────── */
 .gn-header-node {
