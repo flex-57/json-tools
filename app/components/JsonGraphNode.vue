@@ -24,7 +24,7 @@
       <div v-for="entry in data.entries" :key="entry.key" class="gn-entry">
         <span class="gn-ekey">{{ entry.key }}:</span>
         <span :class="['gn-eval', entry.isContainer ? 'gn-eval--container' : 'gn-eval--' + entry.type]">{{ entry.value }}</span>
-        <span v-if="!entry.isContainer" class="gn-etype">{{ entry.type }}</span>
+        <span class="gn-etype">{{ entry.type }}</span>
       </div>
     </div>
     <Handle v-if="data.hasOutgoing" type="source" :position="Position.Right" class="gn-handle" />
