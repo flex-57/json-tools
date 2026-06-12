@@ -1,6 +1,6 @@
 // ── Replace these with your actual IDs ──────────────────────────────
 export const GA4_ID      = 'G-2YDLBQ1QSH'          // analytics.google.com → Admin → Data Streams
-export const ADSENSE_ID  = 'ca-pub-4709844187083671' // adsense.google.com → Account → Account info
+export const ADSENSE_ID  = 'ca-pub-6010651564611690' // adsense.google.com → Account → Account info
 // ────────────────────────────────────────────────────────────────────
 
 export type ConsentState = 'accepted' | 'declined' | null

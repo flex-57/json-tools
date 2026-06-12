@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'en' },
       meta: [
         { name: 'robots', content: 'index, follow' },
-        { name: 'google-adsense-account', content: 'ca-pub-4709844187083671' },
+        { name: 'google-adsense-account', content: 'ca-pub-6010651564611690' },
         { name: 'theme-color', content: '#F97316' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'JSON Tools' },
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4709844187083671',
+          src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010651564611690',
           async: true,
           crossorigin: 'anonymous',
         },
