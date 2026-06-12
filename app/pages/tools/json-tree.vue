@@ -207,16 +207,16 @@ function clear()      { input.value = ''; search.value = '' }
 
 const seoCards = [
   {
-    title: 'Tree & Graph views',
-    body: 'Switch between a classic collapsible tree and an interactive node graph. The tree is great for quick navigation; the graph shows the full structure at a glance with zoom and pan.',
+    title: 'What is a JSON Tree Viewer?',
+    text: 'A JSON Tree Viewer transforms raw JSON text into a visual, navigable structure. Instead of scanning through hundreds of lines of nested braces and brackets, you can collapse and expand individual nodes to focus on the part of the data that matters. It is especially useful when working with API responses, configuration files, or any deeply nested payload — making it easy to understand the shape of the data at a glance without modifying it.',
   },
   {
-    title: 'Copy path in one click',
-    body: 'Hover any node in tree view to reveal the copy icon. Click to copy the full dot/bracket path (e.g. users[0].email) — ready to paste in your code.',
+    title: 'Tree view: navigate and search',
+    text: 'The tree view renders each key-value pair as an indented row with color-coded types: strings in green, numbers in blue, booleans in amber, and null in grey. Objects and arrays show a count of their children and can be collapsed to a single line. Hover any node to reveal a copy icon that captures the full dot/bracket path (e.g. features[0].name) — ready to paste directly into your code. Use the search box to instantly highlight matching keys and values across the entire tree.',
   },
   {
-    title: 'Search keys and values',
-    body: 'Type in the search box to instantly highlight matching keys and values. Non-matching nodes are dimmed while parent context stays visible.',
+    title: 'Graph view: visualise the full structure',
+    text: 'The graph view renders JSON as an interactive node diagram laid out left-to-right. The root object appears as a content node; each nested object or array becomes a header node connected by arrows to its children. Primitive values inside arrays appear as individual leaf nodes; objects inside arrays show their key-value content inline. Zoom and pan with the mouse or trackpad to explore large payloads. The layout is computed automatically using the Dagre algorithm, so the graph always reflects the actual JSON structure.',
   },
 ]
 </script>
