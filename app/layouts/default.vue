@@ -35,6 +35,7 @@
               <div class="mega-col">
                 <div class="nav-dropdown-section">JSON</div>
                 <NuxtLink to="/tools/json-diff"  class="nav-dropdown-item">JSON Diff</NuxtLink>
+                <NuxtLink to="/tools/json-tree"  class="nav-dropdown-item">JSON Tree</NuxtLink>
                 <NuxtLink to="/tools/json-to-ts" class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
                 <div class="nav-dropdown-section mega-section-gap">Encode</div>
                 <NuxtLink to="/tools/base64"      class="nav-dropdown-item">Base64</NuxtLink>
@@ -85,6 +86,7 @@
           <div class="mobile-section">
             <div class="mobile-section-label">JSON</div>
             <NuxtLink to="/tools/json-diff"  class="mobile-nav-item" @click="mobileOpen = false">JSON Diff</NuxtLink>
+            <NuxtLink to="/tools/json-tree"  class="mobile-nav-item" @click="mobileOpen = false">JSON Tree</NuxtLink>
             <NuxtLink to="/tools/json-to-ts" class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
           </div>
 
@@ -131,7 +133,7 @@ watch(() => route.path, (path) => {
 })
 
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
-const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts']
+const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts']
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
 const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
 
