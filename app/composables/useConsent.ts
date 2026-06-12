@@ -49,7 +49,8 @@ export function loadGA4() {
   document.head.appendChild(s)
 
   w.dataLayer = w.dataLayer || []
-  w.gtag = function (...args: any[]) { w.dataLayer.push(args) }
+  // Must use `arguments` (not rest params) — GA4 checks for Arguments object
+  w.gtag = function () { w.dataLayer.push(arguments) }
   w.gtag('js', new Date())
   w.gtag('config', GA4_ID)
 }
