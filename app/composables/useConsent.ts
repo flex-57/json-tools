@@ -51,7 +51,7 @@ export function loadGA4() {
   w.dataLayer = w.dataLayer || []
   w.gtag = function (...args: any[]) { w.dataLayer.push(args) }
   w.gtag('js', new Date())
-  w.gtag('config', GA4_ID, { send_page_view: false })
+  w.gtag('config', GA4_ID)
 }
 
 export function loadAdSense() {
