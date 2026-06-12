@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'en' },
       meta: [
         { name: 'robots', content: 'index, follow' },
-        { name: 'google-adsense-account', content: 'ca-pub-XXXXXXXXXXXXXXXXX' },
+        { name: 'google-adsense-account', content: 'ca-pub-4709844187083671' },
         { name: 'theme-color', content: '#F97316' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'JSON Tools' },
