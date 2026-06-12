@@ -89,11 +89,11 @@ function processContainer(container: TreeNode, parentId: string, nodes: VfNode[]
       const bodyId = uid()
       nodes.push({ id: bodyId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: '', size: 0, entries }, _w: BODY_W, _h: bodyHeight(entries.length) })
       edges.push(edge(headerId, bodyId))
-      for (const n of nested) processContainer(n, bodyId, nodes, edges)
+      for (const n of [...nested].reverse()) processContainer(n, bodyId, nodes, edges)
     }
   } else {
     // array
-    for (const item of container.children) {
+    for (const item of [...container.children].reverse()) {
       if (item.type === 'object' || item.type === 'array') {
         // Array item is a container — treat as anonymous body + recurse
         const entries: GraphEntry[] = []
@@ -141,7 +141,7 @@ export async function buildGraph(root: TreeNode): Promise<{ nodes: VfNode[]; edg
 
   const rootId = uid()
   nodes.push({ id: rootId, type: 'jsonNode', position: { x: 0, y: 0 }, data: { nodeType: 'body', label: 'root', size: root.size, entries: rootEntries }, _w: BODY_W, _h: bodyHeight(rootEntries.length) })
-  for (const c of rootContainers) processContainer(c, rootId, nodes, edges)
+  for (const c of [...rootContainers].reverse()) processContainer(c, rootId, nodes, edges)
 
   // Dagre layout
   const dagre = (await import('@dagrejs/dagre')).default

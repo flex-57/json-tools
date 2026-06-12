@@ -24,6 +24,7 @@
       <div v-for="entry in data.entries" :key="entry.key" class="gn-entry">
         <span class="gn-ekey">{{ entry.key }}:</span>
         <span :class="['gn-eval', entry.isContainer ? 'gn-eval--container' : 'gn-eval--' + entry.type]">{{ entry.value }}</span>
+        <span v-if="!entry.isContainer" class="gn-etype">{{ entry.type }}</span>
       </div>
     </div>
     <Handle type="source" :position="Position.Right" class="gn-handle" />
@@ -99,4 +100,5 @@ defineProps<{ data: GraphNodeData }>()
 .gn-eval--boolean   { color: #E5C07B; }
 .gn-eval--null      { color: #5C6470; font-style: italic; }
 .gn-eval--container { color: #5C6470; }
+.gn-etype { font-size: 10px; color: #3D4349; margin-left: auto; flex-shrink: 0; padding-left: 6px; }
 </style>

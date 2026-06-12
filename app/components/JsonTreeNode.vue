@@ -25,6 +25,7 @@
       </template>
 
       <span v-else :class="['tn-val', 'tn-val--' + node.type, { 'tn-val--match': valueMatch }]">{{ displayValue }}</span>
+      <span v-if="!hasChildren" class="tn-type">{{ node.type }}</span>
 
       <button v-if="node.path" class="tn-copy" @click.stop="copy" :title="`Copy path: ${node.path}`">
         <svg v-if="!copied" width="11" height="11" viewBox="0 0 12 12" fill="none">
@@ -188,4 +189,5 @@ async function copy() {
   align-items: center;
 }
 .tn-copy:hover { color: #C9C8C5; }
+.tn-type { font-size: 10px; color: #3D4349; margin-left: 8px; flex-shrink: 0; }
 </style>
