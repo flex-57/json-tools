@@ -21,11 +21,11 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#F97316' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'JSON Tools' },
-        { property: 'og:image', content: 'https://json-tools-one.vercel.app/og-image.png' },
+        { property: 'og:image', content: 'https://jsontools.space/og-image.png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:image', content: 'https://json-tools-one.vercel.app/og-image.png' },
+        { name: 'twitter:image', content: 'https://jsontools.space/og-image.png' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

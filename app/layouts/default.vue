@@ -135,7 +135,7 @@ const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/base64', '/
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
 const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
 
-const BASE_URL = 'https://json-tools-one.vercel.app'
+const BASE_URL = 'https://jsontools.space'
 useHead(() => ({
   link: [{ rel: 'canonical', href: `${BASE_URL}${route.path}` }],
 }))
