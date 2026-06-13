@@ -165,6 +165,7 @@ const seoCards = [
 }
 .draft-indicator--right { transform: translateX(calc(100% + 2px)); }
 .draft-btn {
+  flex: 1;
   position: relative; z-index: 1;
   border: none; background: transparent;
   font-size: 12px; font-weight: 600;

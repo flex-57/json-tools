@@ -153,7 +153,7 @@ const engineLabel = computed(() => {
 const indicatorTransform = computed(() => {
   const idx = MODES.findIndex(m => m.value === mode.value)
   if (idx === 0) return 'none'
-  return `translateX(calc(${idx * 100}% + ${idx * 2}px))`
+  return `translateX(${idx * 100}%)`
 })
 
 function fmtBytes(n: number): string {
@@ -194,7 +194,7 @@ const seoCards = [
 .mode-indicator {
   position: absolute;
   top: 3px; bottom: 3px; left: 3px;
-  width: calc(33.33% - 4px);
+  width: calc((100% - 6px) / 3);
   background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(249,115,22,0.4), 0 2px 10px rgba(249,115,22,0.15);

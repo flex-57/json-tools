@@ -145,6 +145,7 @@ const seoCards = [
 }
 
 .mode-btn {
+  flex: 1;
   position: relative;
   z-index: 1;
   border: none;
