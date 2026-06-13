@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="tn" :class="{ 'tn--dim': isDimmed }">
     <div class="tn-row" :class="{ 'tn-row--clickable': hasChildren }" @click="hasChildren ? toggle(node.id) : null">
       <span v-for="d in depth" :key="d" class="tn-indent"><span class="tn-guide" /></span>
@@ -188,6 +188,6 @@ async function copy() {
   display: inline-flex;
   align-items: center;
 }
-.tn-copy:hover { color: #C9C8C5; }
+.tn-copy:hover { color: var(--c-t2); }
 .tn-type { font-size: 10px; color: #5C6470; margin-left: 8px; flex-shrink: 0; }
 </style>

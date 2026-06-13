@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -109,7 +109,7 @@ const seoCards = [
   padding: 14px 16px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
-  color: #1A1916;
+  color: var(--c-t1);
   background: transparent;
   border: none;
   outline: none;
@@ -127,8 +127,8 @@ const seoCards = [
   display: flex;
   align-items: center;
   gap: 12px;
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 10px;
   padding: 12px 16px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.03);
@@ -152,7 +152,7 @@ const seoCards = [
 .hash-value {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  color: #3A3830;
+  color: var(--c-t2);
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -160,7 +160,7 @@ const seoCards = [
   white-space: nowrap;
   word-break: break-all;
 }
-.hash-value--empty { color: #C9C7C2; }
+.hash-value--empty { color: var(--c-t5); }
 
 .hash-copy {
   flex-shrink: 0;
@@ -170,13 +170,13 @@ const seoCards = [
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  border: 1px solid #E8E5DF;
-  background: #F7F5F2;
+  border: 1px solid var(--c-border);
+  background: var(--c-subtle);
   cursor: pointer;
-  color: #9A9690;
+  color: var(--c-t4);
   transition: background 0.1s, color 0.1s, border-color 0.1s;
 }
-.hash-copy:hover:not(:disabled) { background: #EDEAE4; color: #3A3830; }
+.hash-copy:hover:not(:disabled) { background: var(--c-subtle); color: var(--c-t2); }
 .hash-copy:disabled { opacity: 0.4; cursor: default; }
 .hash-copy--done { background: #ECFDF5; border-color: #6EE7B7; color: #059669; }
 

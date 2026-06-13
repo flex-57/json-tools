@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -146,8 +146,8 @@ const seoCards = [
 .mode-toggle {
   position: relative;
   display: flex;
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 3px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
@@ -175,19 +175,19 @@ const seoCards = [
   font-family: inherit;
   border: none;
   background: none;
-  color: #9A9690;
+  color: var(--c-t4);
   cursor: pointer;
   transition: color 0.2s;
   white-space: nowrap;
 }
 .mode-btn--active { color: white; }
-.mode-btn:not(.mode-btn--active):hover { color: #3A3830; }
+.mode-btn:not(.mode-btn--active):hover { color: var(--c-t2); }
 
 /* ── Variant toggle ──────────────────────────────────────────────── */
 .variant-toggle {
   display: flex;
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 3px;
   gap: 2px;
@@ -201,12 +201,12 @@ const seoCards = [
   font-family: inherit;
   border: none;
   background: none;
-  color: #9A9690;
+  color: var(--c-t4);
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
 }
-.variant-btn:hover { color: #3A3830; background: #F7F5F2; }
+.variant-btn:hover { color: var(--c-t2); background: var(--c-subtle); }
 .variant-btn--active { background: #1A1916; color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
 .variant-btn--active:hover { background: #2A2920; }
 
@@ -215,8 +215,8 @@ const seoCards = [
 
 .panel-card {
   position: relative;
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   display: flex;
@@ -244,7 +244,7 @@ const seoCards = [
 
 .panel-header {
   padding: 11px 16px;
-  border-bottom: 1px solid #F0EDE7;
+  border-bottom: 1px solid var(--c-border-s);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -252,7 +252,7 @@ const seoCards = [
   min-height: 42px;
 }
 .panel-header-right { display: flex; align-items: center; gap: 8px; }
-.char-count { font-size: 11.5px; color: #C2BEB7; font-family: 'JetBrains Mono', monospace; }
+.char-count { font-size: 11.5px; color: var(--c-t5); font-family: 'JetBrains Mono', monospace; }
 
 .panel-textarea {
   flex: 1;
@@ -264,14 +264,14 @@ const seoCards = [
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
   background: transparent;
-  color: #1A1916;
+  color: var(--c-t1);
   line-height: 1.7;
   display: block;
 }
-.panel-textarea::placeholder { color: #C2BEB7; }
+.panel-textarea::placeholder { color: var(--c-t5); }
 .panel-textarea--output {
-  background: linear-gradient(160deg, #FDFCFA 0%, #FAFAF8 100%);
-  color: #3A3830;
+  background: linear-gradient(160deg, var(--c-card-alt) 0%, var(--c-faint) 100%);
+  color: var(--c-t2);
 }
 
 .error-body {
@@ -290,9 +290,9 @@ const seoCards = [
 .swap-btn {
   width: 34px; height: 34px;
   border-radius: 50%;
-  border: 1px solid #E8E5DF;
-  background: white;
-  color: #9A9690;
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+  color: var(--c-t4);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -317,7 +317,7 @@ const seoCards = [
 
 /* ── Buttons ─────────────────────────────────────────────────────── */
 .btn-clear {
-  font-size: 12px; color: #A09C94; background: none; border: none;
+  font-size: 12px; color: var(--c-t4); background: none; border: none;
   cursor: pointer; font-family: inherit; padding: 2px 7px;
   border-radius: 5px; transition: all 0.15s;
 }
@@ -327,10 +327,10 @@ const seoCards = [
   display: flex; align-items: center; gap: 5px;
   font-size: 12px; font-family: inherit; font-weight: 500;
   padding: 3px 10px; border-radius: 6px;
-  border: 1px solid #DDD9D2; background: #FAFAF8; color: #6B6860;
+  border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t3);
   cursor: pointer; transition: all 0.15s;
 }
-.btn-copy:hover:not(:disabled) { background: #F3F1EC; border-color: #C9C5BE; }
+.btn-copy:hover:not(:disabled) { background: var(--c-subtle); border-color: var(--c-border); }
 .btn-copy--done { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
 .btn-copy:disabled { opacity: 0.4; cursor: not-allowed; }
 
@@ -340,9 +340,9 @@ const seoCards = [
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #C2BEB7;
+  color: var(--c-t5);
 }
-.info-sep { color: #DDD9D2; }
+.info-sep { color: var(--c-border-m); }
 .info-jwt { color: #F97316; font-weight: 500; }
 
 /* ── Transitions ─────────────────────────────────────────────────── */

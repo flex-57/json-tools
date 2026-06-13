@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -121,13 +121,13 @@ function onDrop(e: DragEvent) {
 </script>
 
 <style scoped>
-.preview-card { background: #FDFCFA; }
+.preview-card { background: var(--c-card-alt); }
 .preview-body { flex: 1; overflow: auto; }
-.preview-empty { height: 100%; display: flex; align-items: center; justify-content: center; color: #C2BEB7; font-size: 13px; }
+.preview-empty { height: 100%; display: flex; align-items: center; justify-content: center; color: var(--c-t5); font-size: 13px; }
 .table-wrap { overflow: auto; }
 .preview-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-.preview-table th { padding: 8px 14px; background: #F9F8F5; border-bottom: 1px solid #F0EDE7; text-align: left; font-weight: 600; color: #6B6860; white-space: nowrap; position: sticky; top: 0; }
-.preview-table td { padding: 7px 14px; border-bottom: 1px solid #F7F5F2; color: #3A3830; white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
+.preview-table th { padding: 8px 14px; background: var(--c-faint); border-bottom: 1px solid var(--c-border-s); text-align: left; font-weight: 600; color: var(--c-t3); white-space: nowrap; position: sticky; top: 0; }
+.preview-table td { padding: 7px 14px; border-bottom: 1px solid var(--c-border-s); color: var(--c-t2); white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
 .preview-table tr:last-child td { border-bottom: none; }
 .preview-table tr:hover td { background: #FFFBF6; }
 </style>

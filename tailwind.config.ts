@@ -4,6 +4,7 @@ export default {
   content: [
     './app/**/*.{vue,ts}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {

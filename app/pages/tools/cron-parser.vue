@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -168,8 +168,8 @@ const seoCards = [
 <style scoped>
 /* ── Cron input card ─────────────────────────────────────────────── */
 .cron-input-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   padding: 18px 20px 14px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -188,21 +188,21 @@ const seoCards = [
   font-family: 'JetBrains Mono', monospace;
   font-size: 22px;
   font-weight: 500;
-  color: #1A1916;
+  color: var(--c-t1);
   background: transparent;
   border: none;
   outline: none;
   letter-spacing: 0.12em;
   min-width: 0;
 }
-.cron-input::placeholder { color: #D0CBC2; font-size: 22px; letter-spacing: 0.12em; }
+.cron-input::placeholder { color: var(--c-t5); font-size: 22px; letter-spacing: 0.12em; }
 
 .btn-clear-inline {
   width: 24px; height: 24px;
   border-radius: 50%;
   border: none;
-  background: #F0EDE7;
-  color: #9A9690;
+  background: var(--c-subtle);
+  color: var(--c-t4);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -221,7 +221,7 @@ const seoCards = [
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #C2BEB7;
+  color: var(--c-t5);
   width: calc(100% / 5);
 }
 
@@ -240,21 +240,21 @@ const seoCards = [
   gap: 6px;
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid #F3F1EC;
+  border-top: 1px solid var(--c-border-s);
 }
 
 .cron-preset {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
-  color: #6B6760;
-  background: #F7F5F2;
-  border: 1px solid #E8E5DF;
+  color: var(--c-t3);
+  background: var(--c-subtle);
+  border: 1px solid var(--c-border);
   border-radius: 6px;
   padding: 4px 10px;
   cursor: pointer;
   transition: all 0.15s;
 }
-.cron-preset:hover { background: #F0EDE7; color: #3A3830; border-color: #D4D0C8; }
+.cron-preset:hover { background: var(--c-subtle); color: var(--c-t2); border-color: var(--c-border-m); }
 
 /* ── Description + schedule ──────────────────────────────────────── */
 .result-section {
@@ -292,8 +292,8 @@ const seoCards = [
 }
 
 .schedule-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -304,7 +304,7 @@ const seoCards = [
   align-items: center;
   gap: 10px;
   padding: 12px 18px;
-  border-bottom: 1px solid #F3F1EC;
+  border-bottom: 1px solid var(--c-border-s);
 }
 
 .schedule-title {
@@ -312,7 +312,7 @@ const seoCards = [
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #9A9690;
+  color: var(--c-t4);
 }
 
 .schedule-badge {
@@ -332,20 +332,20 @@ const seoCards = [
   align-items: center;
   gap: 14px;
   padding: 11px 18px;
-  border-bottom: 1px solid #F7F5F2;
+  border-bottom: 1px solid var(--c-border-s);
   transition: background 0.1s;
 }
 .schedule-item:last-child { border-bottom: none; }
-.schedule-item:hover { background: #FDFCFA; }
+.schedule-item:hover { background: var(--c-card-alt); }
 
 .schedule-num {
   width: 22px; height: 22px;
   border-radius: 50%;
-  background: #F7F5F2;
-  border: 1px solid #E8E5DF;
+  background: var(--c-subtle);
+  border: 1px solid var(--c-border);
   font-size: 11px;
   font-weight: 700;
-  color: #9A9690;
+  color: var(--c-t4);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
@@ -360,7 +360,7 @@ const seoCards = [
 .schedule-date {
   font-size: 13.5px;
   font-weight: 500;
-  color: #3A3830;
+  color: var(--c-t2);
 }
 
 .schedule-rel {
@@ -373,8 +373,8 @@ const seoCards = [
   margin-left: auto;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  color: #C2BEB7;
-  background: #F7F5F2;
+  color: var(--c-t5);
+  background: var(--c-subtle);
   border-radius: 4px;
   padding: 2px 6px;
   white-space: nowrap;
@@ -383,14 +383,14 @@ const seoCards = [
 .schedule-empty {
   padding: 20px 18px;
   font-size: 13px;
-  color: #9A9690;
+  color: var(--c-t4);
   text-align: center;
 }
 
 /* ── Reference card ──────────────────────────────────────────────── */
 .reference-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -402,8 +402,8 @@ const seoCards = [
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #9A9690;
-  border-bottom: 1px solid #F3F1EC;
+  color: var(--c-t4);
+  border-bottom: 1px solid var(--c-border-s);
 }
 
 .reference-grid {
@@ -417,9 +417,9 @@ const seoCards = [
   align-items: center;
   gap: 10px;
   padding: 8px 18px;
-  border-bottom: 1px solid #F7F5F2;
+  border-bottom: 1px solid var(--c-border-s);
 }
-.ref-item:nth-child(even) { border-left: 1px solid #F7F5F2; }
+.ref-item:nth-child(even) { border-left: 1px solid var(--c-border-s); }
 .ref-item:last-child, .ref-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
 
 .ref-expr {
@@ -435,7 +435,7 @@ const seoCards = [
 
 .ref-desc {
   font-size: 12.5px;
-  color: #6B6760;
+  color: var(--c-t3);
 }
 
 /* ── Transitions ─────────────────────────────────────────────────── */
@@ -451,7 +451,7 @@ const seoCards = [
   .cron-input::placeholder { font-size: 16px; }
   .reference-grid { grid-template-columns: 1fr; }
   .ref-item:nth-child(even) { border-left: none; }
-  .ref-item { border-bottom: 1px solid #F7F5F2; }
+  .ref-item { border-bottom: 1px solid var(--c-border-s); }
   .schedule-iso { display: none; }
 }
 </style>

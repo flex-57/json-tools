@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -122,8 +122,8 @@ const rightFocus = ref(false)
 .header-actions { display: flex; gap: 6px; }
 
 /* Bordered ghost override for page-header context */
-.btn-ghost { background: white; color: #A09C94; border-color: #E8E5DF; }
-.btn-ghost:hover { background: #F3F1EC; color: #3A3830; border-color: #C9C5BE; }
+.btn-ghost { background: var(--c-card); color: var(--c-t4); border-color: var(--c-border); }
+.btn-ghost:hover { background: var(--c-subtle); color: var(--c-t2); border-color: var(--c-border); }
 
 /* Editors — shorter min-height for the diff tool */
 .editors { min-height: 320px; }
@@ -138,30 +138,30 @@ const rightFocus = ref(false)
 .editor-stat--added { background: #DCFCE7; color: #16A34A; }
 
 /* Diff section */
-.diff-section { display: flex; flex-direction: column; gap: 0; border-radius: 14px; overflow: hidden; border: 1px solid #E8E5DF; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04); }
+.diff-section { display: flex; flex-direction: column; gap: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--c-border); box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04); }
 
 .status-bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-size: 13px; font-weight: 500; }
 .status-bar--same { background: #F0FDF4; color: #15803D; border-bottom: 1px solid #BBF7D0; }
 .status-bar--error { background: #FFF1F0; color: #DC2626; border-bottom: 1px solid #FECACA; }
-.status-bar--diff { background: #FDFCFA; color: #3A3830; border-bottom: 1px solid #F0EDE7; }
+.status-bar--diff { background: var(--c-card-alt); color: var(--c-t2); border-bottom: 1px solid var(--c-border-s); }
 
 .stat-chip { padding: 2px 9px; border-radius: 20px; font-size: 12.5px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
 .stat-chip--added { background: #DCFCE7; color: #16A34A; }
 .stat-chip--removed { background: #FEE2E2; color: #DC2626; }
 
 /* Diff view */
-.diff-view { background: white; overflow-x: auto; }
+.diff-view { background: var(--c-card); overflow-x: auto; }
 .diff-line { display: flex; align-items: baseline; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.7; min-height: 28px; border-bottom: 1px solid transparent; }
-.diff-line--unchanged { background: white; color: #6B6860; }
+.diff-line--unchanged { background: var(--c-card); color: var(--c-t3); }
 .diff-line--added { background: #F0FDF4; color: #15803D; border-bottom-color: #DCFCE7; }
 .diff-line--removed { background: #FFF1F0; color: #B91C1C; border-bottom-color: #FEE2E2; text-decoration-line: none; }
-.diff-gutter { width: 36px; min-width: 36px; padding: 4px 8px; text-align: right; font-size: 11px; color: #C2BEB7; user-select: none; border-right: 1px solid #F0EDE7; }
+.diff-gutter { width: 36px; min-width: 36px; padding: 4px 8px; text-align: right; font-size: 11px; color: var(--c-t5); user-select: none; border-right: 1px solid var(--c-border-s); }
 .diff-line--added .diff-gutter { color: #86EFAC; border-right-color: #BBF7D0; }
 .diff-line--removed .diff-gutter { color: #FCA5A5; border-right-color: #FEE2E2; }
 .diff-sign { width: 20px; min-width: 20px; text-align: center; font-weight: 700; user-select: none; padding: 4px 0; }
 .diff-line--added .diff-sign { color: #16A34A; }
 .diff-line--removed .diff-sign { color: #DC2626; }
-.diff-line--unchanged .diff-sign { color: #E2DFD8; }
+.diff-line--unchanged .diff-sign { color: var(--c-border-s); }
 .diff-content { flex: 1; padding: 4px 14px 4px 6px; white-space: pre; }
 
 .slide-enter-active, .slide-leave-active { transition: all 0.2s ease; }

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -147,7 +147,7 @@ const seoCards = [
 .control-label {
   font-size: 12px;
   font-weight: 600;
-  color: #6B6760;
+  color: var(--c-t3);
   white-space: nowrap;
 }
 
@@ -155,9 +155,9 @@ const seoCards = [
 .count-wrap { display: flex; align-items: center; gap: 0; }
 .count-btn {
   width: 28px; height: 28px;
-  border: 1px solid #E2DDD7;
-  background: #F3F1EC;
-  color: #6B6760;
+  border: 1px solid var(--c-border);
+  background: var(--c-subtle);
+  color: var(--c-t3);
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
@@ -166,16 +166,16 @@ const seoCards = [
 }
 .count-btn:first-child { border-radius: 6px 0 0 6px; }
 .count-btn:last-child  { border-radius: 0 6px 6px 0; }
-.count-btn:hover { background: #E8E5DF; }
+.count-btn:hover { background: var(--c-border); }
 .count-input {
   width: 52px; height: 28px;
   text-align: center;
-  border: 1px solid #E2DDD7;
+  border: 1px solid var(--c-border);
   border-left: none; border-right: none;
-  background: white;
+  background: var(--c-card);
   font-size: 13px;
   font-weight: 600;
-  color: #1A1916;
+  color: var(--c-t1);
   outline: none;
   -moz-appearance: textfield;
 }
@@ -186,8 +186,8 @@ const seoCards = [
 .format-toggle {
   position: relative;
   display: flex;
-  background: #F3F1EC;
-  border: 1px solid #E2DDD7;
+  background: var(--c-subtle);
+  border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 2px;
 }
@@ -207,7 +207,7 @@ const seoCards = [
   padding: 5px 12px;
   border-radius: 6px;
   cursor: pointer;
-  color: #9A9690;
+  color: var(--c-t4);
   transition: color 0.15s;
   white-space: nowrap;
 }
@@ -223,15 +223,15 @@ const seoCards = [
   align-items: center;
   gap: 12px;
   padding: 9px 16px;
-  border-bottom: 1px solid #F3F1EC;
+  border-bottom: 1px solid var(--c-border-s);
   transition: background 0.1s;
 }
 .uuid-row:last-child { border-bottom: none; }
-.uuid-row:hover { background: #FAFAF9; }
+.uuid-row:hover { background: var(--c-faint); }
 
 .uuid-index {
   font-size: 11px;
-  color: #C9C7C2;
+  color: var(--c-t5);
   font-family: 'JetBrains Mono', monospace;
   flex-shrink: 0;
   width: 20px;
@@ -240,7 +240,7 @@ const seoCards = [
 .uuid-value {
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
-  color: #3A3830;
+  color: var(--c-t2);
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -252,15 +252,15 @@ const seoCards = [
   display: flex; align-items: center; justify-content: center;
   width: 26px; height: 26px;
   border-radius: 5px;
-  border: 1px solid #E8E5DF;
+  border: 1px solid var(--c-border);
   background: transparent;
   cursor: pointer;
-  color: #C9C7C2;
+  color: var(--c-t5);
   transition: background 0.1s, color 0.1s, border-color 0.1s;
   opacity: 0;
 }
 .uuid-row:hover .uuid-copy { opacity: 1; }
-.uuid-copy:hover { background: #F3F1EC; color: #3A3830; }
+.uuid-copy:hover { background: var(--c-subtle); color: var(--c-t2); }
 .uuid-copy--done { opacity: 1 !important; background: #ECFDF5; border-color: #6EE7B7; color: #059669; }
 
 @media (max-width: 640px) {

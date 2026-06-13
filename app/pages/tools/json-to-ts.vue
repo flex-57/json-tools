@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -123,8 +123,8 @@ const seoCards = [
 .mode-toggle {
   position: relative;
   display: flex;
-  background: #F3F1EC;
-  border: 1px solid #E2DDD7;
+  background: var(--c-subtle);
+  border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 2px;
   gap: 0;
@@ -154,7 +154,7 @@ const seoCards = [
   padding: 5px 13px;
   border-radius: 6px;
   cursor: pointer;
-  color: #9A9690;
+  color: var(--c-t4);
   transition: color 0.15s;
   white-space: nowrap;
 }
@@ -170,16 +170,16 @@ const seoCards = [
 .root-input {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
-  color: #3A3830;
-  background: #F7F5F2;
-  border: 1px solid #E8E5DF;
+  color: var(--c-t2);
+  background: var(--c-subtle);
+  border: 1px solid var(--c-border);
   border-radius: 6px;
   padding: 5px 10px;
   outline: none;
   width: 90px;
   transition: border-color 0.15s;
 }
-.root-input:focus { border-color: #C8C4BB; background: white; }
+.root-input:focus { border-color: var(--c-t5); background: var(--c-card); }
 
 /* ── Status pills (from tools.css pattern) ───────────────────────── */
 .status-pill {

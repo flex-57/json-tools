@@ -58,6 +58,12 @@
 
         <div class="header-badge">Free · No signup · No tracking</div>
 
+        <!-- Dark mode toggle -->
+        <button class="theme-toggle" @click="toggle" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+          <svg v-if="isDark" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg v-else width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
         <!-- Mobile hamburger -->
         <button class="mobile-menu-btn" :class="{ 'is-open': mobileOpen }" @click="mobileOpen = !mobileOpen" aria-label="Toggle menu">
           <span class="hb-line" />
@@ -129,12 +135,17 @@
 
 <script setup>
 import { useConsent, trackPageView } from '~/composables/useConsent'
+import { useColorMode } from '~/composables/useColorMode'
 
 const route = useRoute()
 const mobileOpen = ref(false)
 const { init } = useConsent()
+const { isDark, init: initColorMode, toggle } = useColorMode()
 
-onMounted(() => { init() })
+onMounted(() => {
+  init()
+  initColorMode()
+})
 
 watch(() => route.path, (path) => {
   mobileOpen.value = false
@@ -165,9 +176,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #F4F2ED;
-  background-image: radial-gradient(circle, #CAC7BE 0.75px, transparent 0.75px);
+  background-color: var(--c-bg);
+  background-image: radial-gradient(circle, var(--c-dots) 0.75px, transparent 0.75px);
   background-size: 22px 22px;
+  transition: background-color 0.2s ease;
 }
 
 /* ── Header ─────────────────────────────────────────────────────── */
@@ -352,6 +364,23 @@ body {
   flex-shrink: 0;
   letter-spacing: 0.01em;
 }
+
+/* ── Theme toggle ───────────────────────────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  color: #5C6470;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.08); color: #C9C8C5; }
 
 /* ── Hamburger button ───────────────────────────────────────────── */
 .mobile-menu-btn {

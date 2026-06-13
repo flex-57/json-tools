@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -251,8 +251,8 @@ const seoCards = [
 .view-toggle {
   position: relative;
   display: flex;
-  background: #F3F1EC;
-  border: 1px solid #E2DDD7;
+  background: var(--c-subtle);
+  border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 2px;
   flex-shrink: 0;
@@ -275,7 +275,7 @@ const seoCards = [
   padding: 5px 12px;
   border-radius: 6px;
   cursor: pointer;
-  color: #9A9690;
+  color: var(--c-t4);
   transition: color 0.15s;
   white-space: nowrap;
 }
@@ -289,27 +289,27 @@ const seoCards = [
   position: relative; display: flex; align-items: center;
   flex: 1; min-width: 120px; max-width: 200px;
 }
-.tree-search-icon { position: absolute; left: 8px; color: #9A9690; pointer-events: none; }
+.tree-search-icon { position: absolute; left: 8px; color: var(--c-t4); pointer-events: none; }
 .tree-search {
   width: 100%; padding: 4px 26px 4px 26px;
-  background: #F7F5F2; border: 1px solid #E8E5DF; border-radius: 6px;
-  font-size: 12px; color: #3A3830; outline: none; transition: border-color 0.15s;
+  background: var(--c-subtle); border: 1px solid var(--c-border); border-radius: 6px;
+  font-size: 12px; color: var(--c-t2); outline: none; transition: border-color 0.15s;
 }
 .tree-search:focus { border-color: #F97316; }
 .tree-search-clear {
   position: absolute; right: 6px;
   background: none; border: none; cursor: pointer;
-  color: #9A9690; font-size: 14px; line-height: 1; padding: 0 2px;
+  color: var(--c-t4); font-size: 14px; line-height: 1; padding: 0 2px;
 }
-.tree-search-clear:hover { color: #3A3830; }
+.tree-search-clear:hover { color: var(--c-t2); }
 
 .btn-xs {
   font-size: 11px; font-weight: 500; padding: 3px 9px;
-  border-radius: 5px; border: 1px solid #E2DDD7;
-  background: #F3F1EC; color: #6B6760; cursor: pointer;
+  border-radius: 5px; border: 1px solid var(--c-border);
+  background: var(--c-subtle); color: var(--c-t3); cursor: pointer;
   white-space: nowrap; transition: background 0.1s, color 0.1s;
 }
-.btn-xs:hover { background: #E8E5DF; color: #3A3830; }
+.btn-xs:hover { background: var(--c-border); color: var(--c-t2); }
 
 /* Output body */
 .output-body {

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -170,20 +170,20 @@ function formatDate(d: Date): string {
 <style scoped>
 /* Token input card */
 .token-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
 }
 .token-card-header {
   padding: 12px 16px 10px;
-  border-bottom: 1px solid #F0EDE7;
+  border-bottom: 1px solid var(--c-border-s);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.btn-clear { font-size: 12px; color: #A09C94; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
+.btn-clear { font-size: 12px; color: var(--c-t4); background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
 .btn-clear:hover { color: #DC2626; }
 
 .token-input {
@@ -195,15 +195,15 @@ function formatDate(d: Date): string {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
   background: transparent;
-  color: #1A1916;
+  color: var(--c-t1);
   line-height: 1.6;
   display: block;
 }
-.token-input::placeholder { color: #C2BEB7; }
+.token-input::placeholder { color: var(--c-t5); }
 
 .token-parts {
   padding: 10px 16px 14px;
-  border-top: 1px solid #F7F5F2;
+  border-top: 1px solid var(--c-border-s);
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   line-height: 1.8;
@@ -213,7 +213,7 @@ function formatDate(d: Date): string {
 .token-part--header { background: #EFF6FF; color: #1D4ED8; }
 .token-part--payload { background: #F0FDF4; color: #15803D; }
 .token-part--signature { background: #FFF7ED; color: #C2410C; }
-.token-dot { color: #9A9690; margin: 0 1px; }
+.token-dot { color: var(--c-t4); margin: 0 1px; }
 
 /* Error bar */
 .error-bar {
@@ -257,15 +257,15 @@ function formatDate(d: Date): string {
 .decoded-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 14px; }
 
 .decoded-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
 }
 .decoded-card-header {
   padding: 11px 16px;
-  border-bottom: 1px solid #F0EDE7;
+  border-bottom: 1px solid var(--c-border-s);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -279,10 +279,10 @@ function formatDate(d: Date): string {
 .btn-copy {
   font-size: 12px; font-family: inherit; font-weight: 500;
   padding: 4px 10px; border-radius: 6px;
-  border: 1px solid #DDD9D2; background: #FAFAF8; color: #6B6860;
+  border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t3);
   cursor: pointer; transition: all 0.15s;
 }
-.btn-copy:hover { background: #F3F1EC; }
+.btn-copy:hover { background: var(--c-subtle); }
 .btn-copy--done { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
 
 .decoded-body { padding: 8px 0; }
@@ -294,22 +294,22 @@ function formatDate(d: Date): string {
   padding: 7px 16px;
   transition: background 0.1s;
 }
-.claim-row:hover { background: #FAFAF8; }
+.claim-row:hover { background: var(--c-faint); }
 .claim-key {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  color: #3A3830;
+  color: var(--c-t2);
   font-weight: 500;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 6px;
 }
-.claim-hint { font-family: inherit; font-size: 11px; color: #C2BEB7; font-weight: 400; }
+.claim-hint { font-family: inherit; font-size: 11px; color: var(--c-t5); font-weight: 400; }
 .claim-val {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  color: #6B6860;
+  color: var(--c-t3);
   text-align: right;
   word-break: break-all;
 }
@@ -318,8 +318,8 @@ function formatDate(d: Date): string {
 /* Signature */
 .sig-card {
   grid-column: 1 / -1;
-  background: #FDFCFA;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card-alt);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   padding: 14px 16px;
   display: flex;
@@ -341,7 +341,7 @@ function formatDate(d: Date): string {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #9A9690;
+  color: var(--c-t4);
   flex-shrink: 0;
   max-width: 280px;
 }

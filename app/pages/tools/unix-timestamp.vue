@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -104,8 +104,8 @@ const seoCards = [
 <style scoped>
 /* ── Input card ──────────────────────────────────────────────────── */
 .input-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   padding: 16px 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -121,20 +121,20 @@ const seoCards = [
   flex: 1;
   font-family: 'JetBrains Mono', monospace;
   font-size: 15px;
-  color: #1A1916;
+  color: var(--c-t1);
   background: transparent;
   border: none;
   outline: none;
   min-width: 0;
 }
-.ts-input::placeholder { color: #C2BEB7; font-size: 13px; }
+.ts-input::placeholder { color: var(--c-t5); font-size: 13px; }
 
 .btn-clear-inline {
   width: 24px; height: 24px;
   border-radius: 50%;
   border: none;
-  background: #F0EDE7;
-  color: #9A9690;
+  background: var(--c-subtle);
+  color: var(--c-t4);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -153,8 +153,8 @@ const seoCards = [
 
 /* ── Result card ──────────────────────────────────────────────────── */
 .result-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -165,18 +165,18 @@ const seoCards = [
   align-items: center;
   gap: 12px;
   padding: 11px 20px;
-  border-bottom: 1px solid #F7F5F2;
+  border-bottom: 1px solid var(--c-border-s);
   transition: background 0.1s;
 }
 .result-row:last-child { border-bottom: none; }
-.result-row:hover { background: #FDFCFA; }
+.result-row:hover { background: var(--c-card-alt); }
 
 .result-label {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #C2BEB7;
+  color: var(--c-t5);
   width: 90px;
   flex-shrink: 0;
 }
@@ -184,7 +184,7 @@ const seoCards = [
 .result-value {
   flex: 1;
   font-size: 13px;
-  color: #3A3830;
+  color: var(--c-t2);
   word-break: break-all;
   min-width: 0;
 }
@@ -207,15 +207,15 @@ const seoCards = [
 .btn-copy-row {
   width: 28px; height: 28px;
   border-radius: 6px;
-  border: 1px solid #E8E5DF;
-  background: #FAFAF8;
-  color: #9A9690;
+  border: 1px solid var(--c-border);
+  background: var(--c-faint);
+  color: var(--c-t4);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   transition: all 0.15s;
 }
-.btn-copy-row:hover { background: #F3F1EC; color: #3A3830; }
+.btn-copy-row:hover { background: var(--c-subtle); color: var(--c-t2); }
 .btn-copy-row--done { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
 
 /* ── Transitions ─────────────────────────────────────────────────── */

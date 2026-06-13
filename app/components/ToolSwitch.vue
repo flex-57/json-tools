@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="tool-switch">
     <NuxtLink :to="fromPath" class="switch-option" :class="{ 'switch-option--active': isFrom }">
       {{ fromLabel }}
@@ -36,8 +36,8 @@ function toggle() {
 .tool-switch {
   display: inline-flex;
   align-items: center;
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 10px;
   padding: 3px;
   gap: 2px;
@@ -50,15 +50,15 @@ function toggle() {
   font-size: 13px;
   font-weight: 500;
   font-family: 'JetBrains Mono', monospace;
-  color: #9A9690;
+  color: var(--c-t4);
   text-decoration: none;
   transition: all 0.15s;
   white-space: nowrap;
 }
 
 .switch-option:hover:not(.switch-option--active) {
-  background: #F4F2ED;
-  color: #3A3830;
+  background: var(--c-bg);
+  color: var(--c-t2);
 }
 
 .switch-option--active {
@@ -76,14 +76,14 @@ function toggle() {
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: #C2BEB7;
+  color: var(--c-t5);
   cursor: pointer;
   transition: all 0.15s;
   flex-shrink: 0;
 }
 
 .switch-arrow:hover {
-  background: #F4F2ED;
+  background: var(--c-bg);
   color: #F97316;
 }
 </style>

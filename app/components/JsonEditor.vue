@@ -4,8 +4,10 @@
 
 <script setup lang="ts">
 import { EditorView, basicSetup } from 'codemirror'
-import { EditorState } from '@codemirror/state'
+import { EditorState, Compartment } from '@codemirror/state'
 import { json } from '@codemirror/lang-json'
+import { oneDark } from '@codemirror/theme-one-dark'
+import { useColorMode } from '~/composables/useColorMode'
 
 const props = defineProps<{
   modelValue: string
@@ -16,8 +18,10 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
 }>()
 
+const { isDark } = useColorMode()
 const container = ref<HTMLElement | null>(null)
 let view: EditorView | null = null
+const themeConfig = new Compartment()
 
 const lightTheme = EditorView.theme({
   '&': {
@@ -73,13 +77,18 @@ const lightTheme = EditorView.theme({
   },
 })
 
+const darkOverride = EditorView.theme({
+  '&': { background: 'transparent' },
+  '.cm-gutters': { background: 'transparent', borderRight: '1px solid #2A2E42' },
+})
+
 onMounted(() => {
   if (!container.value) return
 
   const extensions = [
     basicSetup,
     json(),
-    lightTheme,
+    themeConfig.of(isDark.value ? [oneDark, darkOverride] : lightTheme),
   ]
 
   if (!props.readonly) {
@@ -98,6 +107,10 @@ onMounted(() => {
     state: EditorState.create({ doc: props.modelValue, extensions }),
     parent: container.value,
   })
+})
+
+watch(isDark, (dark) => {
+  view?.dispatch({ effects: themeConfig.reconfigure(dark ? [oneDark, darkOverride] : lightTheme) })
 })
 
 watch(() => props.modelValue, (val) => {

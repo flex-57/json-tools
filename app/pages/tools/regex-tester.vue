@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -152,8 +152,8 @@ const seoCards = [
 <style scoped>
 /* ── Pattern card ────────────────────────────────────────────────── */
 .pattern-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   padding: 14px 18px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -171,7 +171,7 @@ const seoCards = [
 .pattern-slash {
   font-family: 'JetBrains Mono', monospace;
   font-size: 20px;
-  color: #C2BEB7;
+  color: var(--c-t5);
   line-height: 1;
   user-select: none;
 }
@@ -181,40 +181,40 @@ const seoCards = [
   min-width: 160px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 15px;
-  color: #1A1916;
+  color: var(--c-t1);
   background: transparent;
   border: none;
   outline: none;
 }
-.pattern-input::placeholder { color: #C2BEB7; }
+.pattern-input::placeholder { color: var(--c-t5); }
 
 .flag-group { display: flex; gap: 3px; }
 
 .flag-btn {
   width: 28px; height: 28px;
   border-radius: 6px;
-  border: 1px solid #E8E5DF;
-  background: #FAFAF8;
+  border: 1px solid var(--c-border);
+  background: var(--c-faint);
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   font-weight: 600;
-  color: #9A9690;
+  color: var(--c-t4);
   cursor: pointer;
   transition: all 0.15s;
   display: flex; align-items: center; justify-content: center;
 }
-.flag-btn:hover { background: #F3F1EC; color: #3A3830; }
-.flag-btn--on { background: #1A1916; border-color: #1A1916; color: white; }
+.flag-btn:hover { background: var(--c-subtle); color: var(--c-t2); }
+.flag-btn--on { background: #1A1916; border-color: var(--c-t1); color: white; }
 
 .pattern-status { margin-left: auto; }
 .pattern-err-msg { font-size: 12px; color: #DC2626; max-width: 260px; }
 .match-badge { font-size: 12px; font-weight: 600; color: #16A34A; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 20px; padding: 2px 10px; }
-.no-match-badge { font-size: 12px; color: #A09C94; background: #F7F5F2; border: 1px solid #E8E5DF; border-radius: 20px; padding: 2px 10px; }
+.no-match-badge { font-size: 12px; color: var(--c-t4); background: var(--c-subtle); border: 1px solid var(--c-border); border-radius: 20px; padding: 2px 10px; }
 
 /* ── Highlight card ──────────────────────────────────────────────── */
 .highlight-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -224,7 +224,7 @@ const seoCards = [
   padding: 14px 16px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
-  color: #3A3830;
+  color: var(--c-t2);
   line-height: 1.8;
   white-space: pre-wrap;
   word-break: break-all;
@@ -242,8 +242,8 @@ const seoCards = [
 
 /* ── Match detail ────────────────────────────────────────────────── */
 .matches-card {
-  background: white;
-  border: 1px solid #E8E5DF;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
@@ -253,10 +253,10 @@ const seoCards = [
 
 .match-item {
   padding: 10px 16px;
-  border-bottom: 1px solid #F7F5F2;
+  border-bottom: 1px solid var(--c-border-s);
 }
 .match-item:last-child { border-bottom: none; }
-.match-item:hover { background: #FDFCFA; }
+.match-item:hover { background: var(--c-card-alt); }
 
 .match-header { display: flex; align-items: center; gap: 10px; }
 .match-index {
@@ -275,12 +275,12 @@ const seoCards = [
   border-radius: 4px;
   word-break: break-all;
 }
-.match-pos { font-size: 11px; color: #C2BEB7; margin-left: auto; }
+.match-pos { font-size: 11px; color: var(--c-t5); margin-left: auto; }
 
 .match-groups { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
 .match-group { display: flex; align-items: center; gap: 5px; }
 .group-label { font-size: 11px; font-weight: 700; color: #7C3AED; background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 4px; padding: 1px 5px; }
-.group-value { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #3A3830; background: #F7F5F2; border-radius: 4px; padding: 1px 5px; }
+.group-value { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--c-t2); background: var(--c-subtle); border-radius: 4px; padding: 1px 5px; }
 
 /* ── Transitions ─────────────────────────────────────────────────── */
 .slide-in-enter-active, .slide-in-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }

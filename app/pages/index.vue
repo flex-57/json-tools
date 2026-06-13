@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div class="page-title-wrap">
@@ -116,16 +116,16 @@ const indentValue = computed({
 
 /* Indent select (index-specific control) */
 .indent-wrap  { display: flex; align-items: center; gap: 7px; }
-.indent-label { font-size: 12.5px; color: #9A9690; font-weight: 500; }
+.indent-label { font-size: 12.5px; color: var(--c-t4); font-weight: 500; }
 .indent-select {
   appearance: none;
-  background: #FAFAF8 url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239A9690' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;
-  border: 1px solid #DDD9D2;
+  background: var(--c-faint) url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239A9690' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;
+  border: 1px solid var(--c-border-m);
   border-radius: 8px;
   padding: 5px 26px 5px 10px;
   font-size: 13px;
   font-family: inherit;
-  color: #3A3830;
+  color: var(--c-t2);
   font-weight: 500;
   cursor: pointer;
   transition: border-color 0.15s;
@@ -138,8 +138,8 @@ const indentValue = computed({
 /* About section (inline HTML, not SeoSection component) */
 .about { margin-top: 8px; padding-bottom: 8px; }
 .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.about-card { background: white; border: 1px solid #E8E5DF; border-radius: 14px; padding: 20px 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
-.about-title { font-size: 14px; font-weight: 600; color: #1A1916; margin-bottom: 10px; }
-.about-text { font-size: 13px; color: #7A776E; line-height: 1.75; }
+.about-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: 14px; padding: 20px 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+.about-title { font-size: 14px; font-weight: 600; color: var(--c-t1); margin-bottom: 10px; }
+.about-text { font-size: 13px; color: var(--c-t3); line-height: 1.75; }
 @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
 </style>

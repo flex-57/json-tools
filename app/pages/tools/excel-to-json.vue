@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -169,22 +169,23 @@ function formatSize(bytes: number) {
 .drop-zone:hover { border-color: #FDBA74; background: #FFFBF6; }
 .drop-zone--active { border-color: #F97316 !important; border-style: dashed; background: #FFFBF6 !important; }
 .drop-zone--loaded { cursor: default; }
-.drop-zone--loaded:hover { border-color: #E8E5DF; background: #FFF; }
+.drop-zone--loaded:hover { border-color: var(--c-border); background: var(--c-card); }
+.drop-icon svg rect, .drop-icon svg path, .drop-icon svg circle { stroke: var(--c-border); }
 
 .file-input { display: none; }
 
 .drop-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; height: 100%; padding: 40px; text-align: center; }
 .drop-icon { opacity: 0.7; }
-.drop-title { font-size: 15px; font-weight: 600; color: #3A3830; }
-.drop-hint { font-size: 13px; color: #9A9690; }
+.drop-title { font-size: 15px; font-weight: 600; color: var(--c-t2); }
+.drop-hint { font-size: 13px; color: var(--c-t4); }
 
 .file-loaded { display: flex; align-items: center; gap: 16px; padding: 28px; height: 100%; }
 .file-icon { flex-shrink: 0; }
 .file-info { flex: 1; }
-.file-name { font-size: 14px; font-weight: 600; color: #1A1916; word-break: break-all; }
-.file-size { font-size: 12px; color: #9A9690; margin-top: 3px; }
-.file-change { padding: 5px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 500; font-family: inherit; border: 1px solid #DDD9D2; background: #FAFAF8; color: #3A3830; cursor: pointer; flex-shrink: 0; transition: all 0.15s; }
-.file-change:hover { background: #F3F1EC; }
+.file-name { font-size: 14px; font-weight: 600; color: var(--c-t1); word-break: break-all; }
+.file-size { font-size: 12px; color: var(--c-t4); margin-top: 3px; }
+.file-change { padding: 5px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 500; font-family: inherit; border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t2); cursor: pointer; flex-shrink: 0; transition: all 0.15s; }
+.file-change:hover { background: var(--c-subtle); }
 
 .loading-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; }
 </style>

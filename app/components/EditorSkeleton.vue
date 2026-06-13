@@ -29,8 +29,8 @@ const LINES = ['62%', '85%', '47%', '78%', '91%', '54%', '70%', '38%', '65%', '8
 .skeleton-gutter {
   width: 44px;
   min-width: 44px;
-  background: #FAFAF8;
-  border-right: 1px solid #F0EDE7;
+  background: var(--c-faint);
+  border-right: 1px solid var(--c-border-s);
   padding: 16px 0;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ const LINES = ['62%', '85%', '47%', '78%', '91%', '54%', '70%', '38%', '65%', '8
   width: 18px;
   height: 10px;
   border-radius: 3px;
-  background: #E8E5DF;
+  background: var(--c-border);
 }
 
 .skeleton-body {
@@ -56,7 +56,7 @@ const LINES = ['62%', '85%', '47%', '78%', '91%', '54%', '70%', '38%', '65%', '8
 .skeleton-line {
   height: 13px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #F0EDE7 0%, #E4E1DB 50%, #F0EDE7 100%);
+  background: linear-gradient(90deg, var(--c-border-s) 0%, var(--c-border) 50%, var(--c-border-s) 100%);
   background-size: 200% 100%;
   animation: skeleton-shimmer 1.6s ease-in-out infinite;
 }

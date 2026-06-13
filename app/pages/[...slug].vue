@@ -37,7 +37,7 @@ useSeoMeta({
   font-family: 'JetBrains Mono', monospace;
   font-size: 52px;
   font-weight: 700;
-  color: #C2BEB7;
+  color: var(--c-t5);
   letter-spacing: -2px;
   line-height: 1;
 }
@@ -49,13 +49,13 @@ useSeoMeta({
 .error-title {
   font-size: 22px;
   font-weight: 700;
-  color: #1A1916;
+  color: var(--c-t1);
   letter-spacing: -0.4px;
 }
 
 .error-sub {
   font-size: 14px;
-  color: #7A776E;
+  color: var(--c-t3);
   max-width: 340px;
   line-height: 1.6;
 }
