@@ -34,9 +34,10 @@
             <div class="nav-dropdown nav-dropdown--mega">
               <div class="mega-col">
                 <div class="nav-dropdown-section">JSON</div>
-                <NuxtLink to="/tools/json-diff"  class="nav-dropdown-item">JSON Diff</NuxtLink>
-                <NuxtLink to="/tools/json-tree"  class="nav-dropdown-item">JSON Tree</NuxtLink>
-                <NuxtLink to="/tools/json-to-ts" class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
+                <NuxtLink to="/tools/json-diff"   class="nav-dropdown-item">JSON Diff</NuxtLink>
+                <NuxtLink to="/tools/json-tree"   class="nav-dropdown-item">JSON Tree</NuxtLink>
+                <NuxtLink to="/tools/json-to-ts"  class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
+                <NuxtLink to="/tools/json-schema" class="nav-dropdown-item">JSON → Schema</NuxtLink>
                 <div class="nav-dropdown-section mega-section-gap">Encode</div>
                 <NuxtLink to="/tools/base64"      class="nav-dropdown-item">Base64</NuxtLink>
                 <NuxtLink to="/tools/url-encode"  class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
@@ -94,9 +95,10 @@
 
           <div class="mobile-section">
             <div class="mobile-section-label">JSON</div>
-            <NuxtLink to="/tools/json-diff"  class="mobile-nav-item" @click="mobileOpen = false">JSON Diff</NuxtLink>
-            <NuxtLink to="/tools/json-tree"  class="mobile-nav-item" @click="mobileOpen = false">JSON Tree</NuxtLink>
-            <NuxtLink to="/tools/json-to-ts" class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
+            <NuxtLink to="/tools/json-diff"   class="mobile-nav-item" @click="mobileOpen = false">JSON Diff</NuxtLink>
+            <NuxtLink to="/tools/json-tree"   class="mobile-nav-item" @click="mobileOpen = false">JSON Tree</NuxtLink>
+            <NuxtLink to="/tools/json-to-ts"  class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
+            <NuxtLink to="/tools/json-schema" class="mobile-nav-item" @click="mobileOpen = false">JSON → Schema</NuxtLink>
           </div>
 
           <div class="mobile-section">
