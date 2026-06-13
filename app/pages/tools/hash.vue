@@ -58,13 +58,17 @@ useHead({
 const input   = ref('')
 const focused = ref(false)
 const copied  = ref<HashAlgorithm | null>(null)
-const hashes  = ref<Record<HashAlgorithm, string>>({ 'MD5': '', 'SHA-1': '', 'SHA-256': '', 'SHA-512': '' })
+const hashes  = ref<Record<HashAlgorithm, string>>({ 'MD5': '', 'SHA-1': '', 'SHA-256': '', 'SHA-384': '', 'SHA-512': '' })
 
 const byteCount = computed(() => new TextEncoder().encode(input.value).length)
 
-watchDebounced(input, async (val) => {
-  hashes.value = await computeHashes(val)
-}, { debounce: 120, immediate: true })
+let debounceTimer: ReturnType<typeof setTimeout> | null = null
+watch(input, async (val) => {
+  if (debounceTimer) clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(async () => {
+    hashes.value = await computeHashes(val)
+  }, 120)
+}, { immediate: true })
 
 async function copy(alg: HashAlgorithm) {
   if (!hashes.value[alg]) return

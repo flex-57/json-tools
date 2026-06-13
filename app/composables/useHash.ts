@@ -1,4 +1,4 @@
-export const HASH_ALGORITHMS = ['MD5', 'SHA-1', 'SHA-256', 'SHA-512'] as const
+export const HASH_ALGORITHMS = ['MD5', 'SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'] as const
 export type HashAlgorithm = typeof HASH_ALGORITHMS[number]
 
 // Compact MD5 — RFC 1321 (public domain)
@@ -50,11 +50,12 @@ async function sha(alg: string, input: string): Promise<string> {
 }
 
 export async function computeHashes(input: string): Promise<Record<HashAlgorithm, string>> {
-  if (!input) return { 'MD5': '', 'SHA-1': '', 'SHA-256': '', 'SHA-512': '' }
-  const [sha1, sha256, sha512] = await Promise.all([
+  if (!input) return { 'MD5': '', 'SHA-1': '', 'SHA-256': '', 'SHA-384': '', 'SHA-512': '' }
+  const [sha1, sha256, sha384, sha512] = await Promise.all([
     sha('SHA-1', input),
     sha('SHA-256', input),
+    sha('SHA-384', input),
     sha('SHA-512', input),
   ])
-  return { 'MD5': md5(input), 'SHA-1': sha1, 'SHA-256': sha256, 'SHA-512': sha512 }
+  return { 'MD5': md5(input), 'SHA-1': sha1, 'SHA-256': sha256, 'SHA-384': sha384, 'SHA-512': sha512 }
 }
