@@ -14,7 +14,7 @@ function parseField(expr: string, min: number, max: number): number[] | null {
     if (part === '*') {
       for (let i = min; i <= max; i++) result.add(i)
     } else if (part.includes('/')) {
-      const [r, s] = part.split('/')
+      const [r, s] = part.split('/') as [string, string]
       const step = parseInt(s, 10)
       if (isNaN(step) || step < 1) return null
       const base = r === '*'
@@ -36,7 +36,7 @@ function parseField(expr: string, min: number, max: number): number[] | null {
 }
 
 function parseRange(expr: string, min: number, max: number): number[] | null {
-  const [a, b] = expr.split('-').map(Number)
+  const [a, b] = expr.split('-').map(Number) as [number, number]
   if (isNaN(a) || isNaN(b) || a < min || b > max || a > b) return null
   return Array.from({ length: b - a + 1 }, (_, i) => a + i)
 }
@@ -44,7 +44,7 @@ function parseRange(expr: string, min: number, max: number): number[] | null {
 function pad2(n: number) { return String(n).padStart(2, '0') }
 
 function describeCron(expr: string): string {
-  const [min, hr, dom, mon, dow] = expr.split(/\s+/)
+  const [min, hr, dom, mon, dow] = expr.split(/\s+/) as [string, string, string, string, string]
 
   const timePart = (): string => {
     if (hr === '*' && min === '*') return 'every minute'
@@ -53,33 +53,33 @@ function describeCron(expr: string): string {
       return `at minute ${min} of every hour`
     }
     if (min === '*') return `every minute past ${hr.startsWith('*/') ? `every ${hr.slice(2)} hours` : `${hr}:xx`}`
-    const h = parseInt(hr.split(',')[0], 10)
-    const m = parseInt(min.split(',')[0], 10)
+    const h = parseInt(hr.split(',')[0] ?? '', 10)
+    const m = parseInt(min.split(',')[0] ?? '', 10)
     return `at ${pad2(h)}:${pad2(m)}`
   }
 
   const dowPart = (): string => {
     if (dow === '*') return ''
     if (dow.includes('-')) {
-      const [a, b] = dow.split('-').map(Number)
-      return `${DOW_NAMES[a]} through ${DOW_NAMES[b === 7 ? 0 : b]}`
+      const [a, b] = dow.split('-').map(Number) as [number, number]
+      return `${DOW_NAMES[a] ?? ''} through ${DOW_NAMES[b === 7 ? 0 : b] ?? ''}`
     }
-    return dow.split(',').map(d => DOW_NAMES[+d === 7 ? 0 : +d]).join(', ')
+    return dow.split(',').map(d => DOW_NAMES[+d === 7 ? 0 : +d] ?? '').join(', ')
   }
 
   const domPart = (): string => {
     if (dom === '*') return ''
-    if (dom.includes('-')) { const [a, b] = dom.split('-'); return `day ${a}–${b}` }
+    if (dom.includes('-')) { const [a, b] = dom.split('-') as [string, string]; return `day ${a}–${b}` }
     return `day ${dom.split(',').join(', ')}`
   }
 
   const monPart = (): string => {
     if (mon === '*') return ''
     if (mon.includes('-')) {
-      const [a, b] = mon.split('-').map(Number)
-      return `${MONTH_NAMES[a-1]} through ${MONTH_NAMES[b-1]}`
+      const [a, b] = mon.split('-').map(Number) as [number, number]
+      return `${MONTH_NAMES[a-1] ?? ''} through ${MONTH_NAMES[b-1] ?? ''}`
     }
-    return mon.split(',').map(m => MONTH_NAMES[+m - 1]).join(', ')
+    return mon.split(',').map(m => MONTH_NAMES[+m - 1] ?? '').join(', ')
   }
 
   const parts: string[] = [timePart()]
@@ -103,7 +103,7 @@ export function useCronParser() {
   const error = computed((): string | null => {
     const parts = normalised.value.split(/\s+/)
     if (parts.length !== 5) return 'Expected 5 fields: minute hour day-of-month month day-of-week'
-    const [min, hr, dom, mon, dow] = parts
+    const [min, hr, dom, mon, dow] = parts as [string, string, string, string, string]
     if (!parseField(min, 0, 59)) return 'Invalid minute field (0–59)'
     if (!parseField(hr, 0, 23))  return 'Invalid hour field (0–23)'
     if (!parseField(dom, 1, 31)) return 'Invalid day-of-month field (1–31)'
@@ -119,7 +119,7 @@ export function useCronParser() {
 
   const nextExecutions = computed((): Date[] => {
     if (error.value) return []
-    const [minE, hrE, domE, monE, dowE] = normalised.value.split(/\s+/)
+    const [minE, hrE, domE, monE, dowE] = normalised.value.split(/\s+/) as [string, string, string, string, string]
 
     const minuteSet = new Set(parseField(minE, 0, 59)!)
     const hourSet   = new Set(parseField(hrE, 0, 23)!)

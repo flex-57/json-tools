@@ -1,5 +1,5 @@
 type JsonVal = string | number | boolean | null | JsonVal[] | JsonObj
-type JsonObj = Record<string, JsonVal>
+interface JsonObj { [key: string]: JsonVal }
 
 function tsType(value: JsonVal, depth = 0): string {
   if (value === null) return 'null'

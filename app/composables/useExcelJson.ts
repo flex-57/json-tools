@@ -18,10 +18,10 @@ export async function excelToJson(file: File, sheetName?: string, hasHeader = tr
 
     const sheets: SheetInfo[] = wb.SheetNames.map(name => ({
       name,
-      rowCount: XLSX.utils.sheet_to_json(wb.Sheets[name]).length,
+      rowCount: XLSX.utils.sheet_to_json(wb.Sheets[name]!).length,
     }))
 
-    const target = sheetName ?? wb.SheetNames[0]
+    const target = sheetName ?? wb.SheetNames[0] ?? ''
     const ws = wb.Sheets[target]
     if (!ws) return { output: '', error: `Sheet "${target}" not found`, sheets, activeSheet: target }
 

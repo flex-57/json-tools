@@ -70,7 +70,7 @@ function processContainer(container: TreeNode, parentId: string, nodes: VfNode[]
   const headerId = uid()
   nodes.push({
     id: headerId, type: 'jsonNode', position: { x: 0, y: 0 },
-    data: { nodeType: 'header', label: container.key, size: container.size, containerType: container.type, entries: [], hasOutgoing: true },
+    data: { nodeType: 'header', label: container.key, size: container.size, containerType: container.type as 'object' | 'array', entries: [], hasOutgoing: true },
     _w: HEADER_W, _h: 36,
   })
   edges.push(edge(parentId, headerId))

@@ -143,8 +143,8 @@ const collapsed   = ref(new Set<string>())
 const root        = ref<TreeNode | null>(null)
 const error       = ref('')
 const viewMode    = ref<'tree' | 'graph'>('tree')
-const graphNodes  = ref<VfNode[]>([])
-const graphEdges  = ref<VfEdge[]>([])
+const graphNodes  = ref<any[]>([])
+const graphEdges  = ref<any[]>([])
 const graphLoading = ref(false)
 
 // Lazy-import Vue Flow components only on client
@@ -152,7 +152,7 @@ const VueFlow   = defineAsyncComponent(() => import('@vue-flow/core').then(m => 
 const Background = defineAsyncComponent(() => import('@vue-flow/background').then(m => m.Background))
 const Controls   = defineAsyncComponent(() => import('@vue-flow/controls').then(m => m.Controls))
 
-const nodeTypes = { jsonNode: resolveComponent('JsonGraphNode') }
+const nodeTypes: any = { jsonNode: resolveComponent('JsonGraphNode') }
 
 provide('tree:collapsed', collapsed)
 provide('tree:toggle', (id: string) => {

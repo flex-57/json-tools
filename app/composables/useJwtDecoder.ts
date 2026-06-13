@@ -54,7 +54,7 @@ export function decodeJwt(token: string): JwtResult {
     return { header: { raw: '', decoded: null, error: null }, payload: { raw: '', decoded: null, error: null }, signature: '', error: 'Invalid JWT — expected 3 parts separated by dots', isExpired: null, expiresAt: null, issuedAt: null, timeLeft: null }
   }
 
-  const [rawHeader, rawPayload, signature] = parts
+  const [rawHeader, rawPayload, signature] = parts as [string, string, string]
   const header = parsePart(rawHeader)
   const payload = parsePart(rawPayload)
 

@@ -28,9 +28,9 @@ function md5(input: string): string {
       else if (i < 32) { f = (d & b) | (~d & c); g = (5 * i + 1) % 16 }
       else if (i < 48) { f = b ^ c ^ d;           g = (3 * i + 5) % 16 }
       else             { f = c ^ (b | ~d);         g = (7 * i) % 16 }
-      const s = S[(i >> 4) * 4 + (i & 3)]
+      const s = S[(i >> 4) * 4 + (i & 3)]!
       const tmp = d; d = c; c = b
-      b = (b + rol((a + f + T[i] + M[g]) >>> 0, s)) >>> 0
+      b = (b + rol((a + f + T[i]! + M[g]!) >>> 0, s)) >>> 0
       a = tmp
     }
     a0 = (a0 + a) >>> 0; b0 = (b0 + b) >>> 0

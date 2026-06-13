@@ -20,7 +20,7 @@ export function csvToJson(input: string, delimiter: Delimiter = 'auto', hasHeade
   })
 
   if (result.errors.length > 0 && result.data.length === 0) {
-    return { output: '', error: result.errors[0].message, rowCount: 0 }
+    return { output: '', error: result.errors[0]!.message, rowCount: 0 }
   }
 
   return {
