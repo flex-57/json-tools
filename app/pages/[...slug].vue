@@ -13,6 +13,10 @@
 useSeoMeta({
   title: '404 — Page Not Found',
   description: 'This page does not exist.',
+  ogTitle: '404 — Page Not Found',
+  ogDescription: 'This page does not exist.',
+  twitterTitle: '404 — Page Not Found',
+  twitterDescription: 'This page does not exist.',
 })
 </script>
 

@@ -67,7 +67,14 @@
 
 <script setup lang="ts">
 import { useJsonToXml } from '~/composables/useXmlJson'
-useSeoMeta({ title: 'JSON to XML Converter — Free Online Tool', description: 'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.' })
+useSeoMeta({
+  title: 'JSON to XML Converter — Free Online Tool',
+  description: 'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
+  ogTitle: 'JSON to XML Converter — Free Online Tool',
+  ogDescription: 'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
+  twitterTitle: 'JSON to XML Converter — Free Online Tool',
+  twitterDescription: 'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
+})
 const { input, output, error, copied, convert, copy, download, clear } = useJsonToXml()
 
 const seoCards = [

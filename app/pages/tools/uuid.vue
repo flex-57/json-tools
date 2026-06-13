@@ -67,9 +67,13 @@
 </template>
 
 <script setup lang="ts">
-useHead({
+useSeoMeta({
   title: 'UUID Generator — Random UUID v4 | JSON Tools',
-  meta: [{ name: 'description', content: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.' }],
+  description: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
+  ogTitle: 'UUID Generator — Random UUID v4 | JSON Tools',
+  ogDescription: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
+  twitterTitle: 'UUID Generator — Random UUID v4 | JSON Tools',
+  twitterDescription: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
 })
 
 const FORMATS = [

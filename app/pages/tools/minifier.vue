@@ -124,6 +124,10 @@ import { useMinifier, type MinifyMode } from '~/composables/useMinifier'
 useSeoMeta({
   title: 'CSS / HTML / JS Minifier — Free Online Tool | JSON Tools',
   description: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
+  ogTitle: 'CSS / HTML / JS Minifier — Free Online Tool | JSON Tools',
+  ogDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
+  twitterTitle: 'CSS / HTML / JS Minifier — Free Online Tool | JSON Tools',
+  twitterDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
 })
 
 const MODES: { value: MinifyMode; label: string }[] = [

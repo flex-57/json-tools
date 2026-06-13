@@ -74,7 +74,14 @@
 
 <script setup lang="ts">
 import { useJsonToYaml } from '~/composables/useYamlJson'
-useSeoMeta({ title: 'JSON to YAML Converter — Free Online Tool', description: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.' })
+useSeoMeta({
+  title: 'JSON to YAML Converter — Free Online Tool',
+  description: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
+  ogTitle: 'JSON to YAML Converter — Free Online Tool',
+  ogDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
+  twitterTitle: 'JSON to YAML Converter — Free Online Tool',
+  twitterDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
+})
 const { input, output, error, indent, copied, convert, copy, download, clear } = useJsonToYaml()
 
 const seoCards = [

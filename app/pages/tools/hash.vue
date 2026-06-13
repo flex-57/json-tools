@@ -50,9 +50,13 @@
 import { computeHashes, HASH_ALGORITHMS } from '~/composables/useHash'
 import type { HashAlgorithm } from '~/composables/useHash'
 
-useHead({
+useSeoMeta({
   title: 'Hash Generator — MD5, SHA-1, SHA-256, SHA-512 | JSON Tools',
-  meta: [{ name: 'description', content: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.' }],
+  description: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
+  ogTitle: 'Hash Generator — MD5, SHA-1, SHA-256, SHA-512 | JSON Tools',
+  ogDescription: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
+  twitterTitle: 'Hash Generator — MD5, SHA-1, SHA-256, SHA-512 | JSON Tools',
+  twitterDescription: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
 })
 
 const input   = ref('')

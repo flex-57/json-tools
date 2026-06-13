@@ -94,6 +94,10 @@ import { useCsvToJson } from '~/composables/useCsvJson'
 useSeoMeta({
   title: 'CSV to JSON Converter — Free Online Tool',
   description: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
+  ogTitle: 'CSV to JSON Converter — Free Online Tool',
+  ogDescription: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
+  twitterTitle: 'CSV to JSON Converter — Free Online Tool',
+  twitterDescription: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
 })
 
 const seoCards = [

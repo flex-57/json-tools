@@ -97,9 +97,27 @@
 <script setup lang="ts">
 import { useJsonFormatter } from '~/composables/useJsonFormatter'
 
+useHead({
+  script: [{
+    key: 'schema-website',
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'JSON Tools',
+      url: 'https://jsontools.space',
+      description: 'Free online JSON, CSV, XML, YAML, and developer tools. No signup, no data sent to servers.',
+    }),
+  }],
+})
+
 useSeoMeta({
   title: 'JSON Formatter & Validator — Free Online Tool',
   description: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
+  ogTitle: 'JSON Formatter & Validator — Free Online Tool',
+  ogDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
+  twitterTitle: 'JSON Formatter & Validator — Free Online Tool',
+  twitterDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
 })
 
 const { input, output, error, isValid, indent, copied, format, minify, validate, copy, clear } = useJsonFormatter()

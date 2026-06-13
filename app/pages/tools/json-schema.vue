@@ -90,6 +90,10 @@ import { useJsonSchema } from '~/composables/useJsonSchema'
 useSeoMeta({
   title: 'JSON Schema Generator — Draft-07 & 2020-12 | JSON Tools',
   description: 'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
+  ogTitle: 'JSON Schema Generator — Draft-07 & 2020-12 | JSON Tools',
+  ogDescription: 'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
+  twitterTitle: 'JSON Schema Generator — Draft-07 & 2020-12 | JSON Tools',
+  twitterDescription: 'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
 })
 
 const { input, draft, required, output, error, copied, copy, clear } = useJsonSchema()

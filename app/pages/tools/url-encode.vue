@@ -113,6 +113,10 @@ import { useUrlEncode } from '~/composables/useUrlEncode'
 useSeoMeta({
   title: 'URL Encoder / Decoder — Free Online Tool',
   description: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
+  ogTitle: 'URL Encoder / Decoder — Free Online Tool',
+  ogDescription: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
+  twitterTitle: 'URL Encoder / Decoder — Free Online Tool',
+  twitterDescription: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
 })
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useUrlEncode()

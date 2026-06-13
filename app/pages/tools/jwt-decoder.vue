@@ -123,6 +123,10 @@ import { useJwtDecoder } from '~/composables/useJwtDecoder'
 useSeoMeta({
   title: 'JWT Decoder — Free Online Tool',
   description: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
+  ogTitle: 'JWT Decoder — Free Online Tool',
+  ogDescription: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
+  twitterTitle: 'JWT Decoder — Free Online Tool',
+  twitterDescription: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
 })
 
 const { token, result, copiedHeader, copiedPayload, copyHeader, copyPayload, clear } = useJwtDecoder()

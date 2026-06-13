@@ -76,6 +76,10 @@ import { useJsonToTs } from '~/composables/useJsonToTs'
 useSeoMeta({
   title: 'JSON to TypeScript / Zod Generator — Free Online Tool',
   description: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
+  ogTitle: 'JSON to TypeScript / Zod Generator — Free Online Tool',
+  ogDescription: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
+  twitterTitle: 'JSON to TypeScript / Zod Generator — Free Online Tool',
+  twitterDescription: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
 })
 
 const { input, mode, rootName, output, error, copied, copy, clear } = useJsonToTs()

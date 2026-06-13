@@ -116,6 +116,10 @@ import { useExcelToJson } from '~/composables/useExcelJson'
 useSeoMeta({
   title: 'Excel to JSON Converter — Free Online Tool',
   description: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
+  ogTitle: 'Excel to JSON Converter — Free Online Tool',
+  ogDescription: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
+  twitterTitle: 'Excel to JSON Converter — Free Online Tool',
+  twitterDescription: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
 })
 
 const { file, output, error, sheets, activeSheet, hasHeader, copied, loading, convert, switchSheet, copy, clear } = useExcelToJson()

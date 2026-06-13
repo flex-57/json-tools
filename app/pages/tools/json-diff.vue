@@ -96,6 +96,10 @@ import { useJsonDiff } from '~/composables/useJsonDiff'
 useSeoMeta({
   title: 'JSON Diff — Compare JSON Online',
   description: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
+  ogTitle: 'JSON Diff — Compare JSON Online',
+  ogDescription: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
+  twitterTitle: 'JSON Diff — Compare JSON Online',
+  twitterDescription: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
 })
 
 const { left, right, result, swap, clear } = useJsonDiff()

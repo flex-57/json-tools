@@ -108,6 +108,10 @@ import { useBase64 } from '~/composables/useBase64'
 useSeoMeta({
   title: 'Base64 Encoder / Decoder — Free Online Tool',
   description: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
+  ogTitle: 'Base64 Encoder / Decoder — Free Online Tool',
+  ogDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
+  twitterTitle: 'Base64 Encoder / Decoder — Free Online Tool',
+  twitterDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
 })
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useBase64()

@@ -112,11 +112,13 @@ import { buildGraph } from '~/composables/useJsonGraph'
 import type { TreeNode } from '~/composables/useJsonTree'
 import type { VfNode, VfEdge } from '~/composables/useJsonGraph'
 
-useHead({
+useSeoMeta({
   title: 'JSON Tree Viewer — Collapsible Tree & Graph | JSON Tools',
-  meta: [
-    { name: 'description', content: 'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.' },
-  ],
+  description: 'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
+  ogTitle: 'JSON Tree Viewer — Collapsible Tree & Graph | JSON Tools',
+  ogDescription: 'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
+  twitterTitle: 'JSON Tree Viewer — Collapsible Tree & Graph | JSON Tools',
+  twitterDescription: 'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
 })
 
 const SAMPLE = `{

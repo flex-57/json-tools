@@ -77,6 +77,10 @@ import { useJsonToExcel } from '~/composables/useExcelJson'
 useSeoMeta({
   title: 'JSON to Excel Converter — Free Online Tool',
   description: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
+  ogTitle: 'JSON to Excel Converter — Free Online Tool',
+  ogDescription: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
+  twitterTitle: 'JSON to Excel Converter — Free Online Tool',
+  twitterDescription: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
 })
 
 const { input, error, loading, download, clear } = useJsonToExcel()

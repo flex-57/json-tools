@@ -18,10 +18,15 @@
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="nav-dropdown">
-              <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV ↔ JSON</NuxtLink>
-              <NuxtLink to="/tools/xml-to-json"   class="nav-dropdown-item">XML ↔ JSON</NuxtLink>
-              <NuxtLink to="/tools/yaml-to-json"  class="nav-dropdown-item">YAML ↔ JSON</NuxtLink>
-              <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV → JSON</NuxtLink>
+              <NuxtLink to="/tools/xml-to-json"   class="nav-dropdown-item">XML → JSON</NuxtLink>
+              <NuxtLink to="/tools/yaml-to-json"  class="nav-dropdown-item">YAML → JSON</NuxtLink>
+              <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel → JSON</NuxtLink>
+              <div class="nav-dropdown-divider" />
+              <NuxtLink to="/tools/json-to-csv"   class="nav-dropdown-item">JSON → CSV</NuxtLink>
+              <NuxtLink to="/tools/json-to-xml"   class="nav-dropdown-item">JSON → XML</NuxtLink>
+              <NuxtLink to="/tools/json-to-yaml"  class="nav-dropdown-item">JSON → YAML</NuxtLink>
+              <NuxtLink to="/tools/json-to-excel" class="nav-dropdown-item">JSON → Excel</NuxtLink>
             </div>
           </div>
 
@@ -88,10 +93,14 @@
 
           <div class="mobile-section">
             <div class="mobile-section-label">Converters</div>
-            <NuxtLink to="/tools/csv-to-json"   class="mobile-nav-item" @click="mobileOpen = false">CSV ↔ JSON</NuxtLink>
-            <NuxtLink to="/tools/xml-to-json"   class="mobile-nav-item" @click="mobileOpen = false">XML ↔ JSON</NuxtLink>
-            <NuxtLink to="/tools/yaml-to-json"  class="mobile-nav-item" @click="mobileOpen = false">YAML ↔ JSON</NuxtLink>
-            <NuxtLink to="/tools/excel-to-json" class="mobile-nav-item" @click="mobileOpen = false">Excel ↔ JSON</NuxtLink>
+            <NuxtLink to="/tools/csv-to-json"   class="mobile-nav-item" @click="mobileOpen = false">CSV → JSON</NuxtLink>
+            <NuxtLink to="/tools/xml-to-json"   class="mobile-nav-item" @click="mobileOpen = false">XML → JSON</NuxtLink>
+            <NuxtLink to="/tools/yaml-to-json"  class="mobile-nav-item" @click="mobileOpen = false">YAML → JSON</NuxtLink>
+            <NuxtLink to="/tools/excel-to-json" class="mobile-nav-item" @click="mobileOpen = false">Excel → JSON</NuxtLink>
+            <NuxtLink to="/tools/json-to-csv"   class="mobile-nav-item" @click="mobileOpen = false">JSON → CSV</NuxtLink>
+            <NuxtLink to="/tools/json-to-xml"   class="mobile-nav-item" @click="mobileOpen = false">JSON → XML</NuxtLink>
+            <NuxtLink to="/tools/json-to-yaml"  class="mobile-nav-item" @click="mobileOpen = false">JSON → YAML</NuxtLink>
+            <NuxtLink to="/tools/json-to-excel" class="mobile-nav-item" @click="mobileOpen = false">JSON → Excel</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -165,6 +174,67 @@ const BASE_URL = 'https://jsontools.space'
 useHead(() => ({
   link: [{ rel: 'canonical', href: `${BASE_URL}${route.path}` }],
 }))
+
+const TOOL_NAMES = {
+  'base64': 'Base64 Encoder / Decoder',
+  'cron-parser': 'Cron Expression Parser',
+  'csv-to-json': 'CSV to JSON Converter',
+  'excel-to-json': 'Excel to JSON Converter',
+  'hash': 'Hash Generator',
+  'json-diff': 'JSON Diff',
+  'json-schema': 'JSON Schema Generator',
+  'json-to-csv': 'JSON to CSV Converter',
+  'json-to-excel': 'JSON to Excel Converter',
+  'json-to-ts': 'JSON to TypeScript / Zod Generator',
+  'json-to-xml': 'JSON to XML Converter',
+  'json-to-yaml': 'JSON to YAML Converter',
+  'json-tree': 'JSON Tree Viewer',
+  'jwt-decoder': 'JWT Decoder',
+  'minifier': 'CSS / HTML / JS Minifier',
+  'regex-tester': 'Regex Tester',
+  'unix-timestamp': 'Unix Timestamp Converter',
+  'url-encode': 'URL Encoder / Decoder',
+  'uuid': 'UUID Generator',
+  'xml-to-json': 'XML to JSON Converter',
+  'yaml-to-json': 'YAML to JSON Converter',
+}
+
+useHead(() => {
+  const path = route.path
+  if (!path.startsWith('/tools/')) return {}
+  const slug = path.replace('/tools/', '')
+  const name = TOOL_NAMES[slug] ?? slug
+  const url = `${BASE_URL}${path}`
+  return {
+    script: [
+      {
+        key: 'schema-webapp',
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name,
+          url,
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Any',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        }),
+      },
+      {
+        key: 'schema-breadcrumb',
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'JSON Tools', item: `${BASE_URL}/` },
+            { '@type': 'ListItem', position: 2, name, item: url },
+          ],
+        }),
+      },
+    ],
+  }
+})
 </script>
 
 <style>
@@ -340,6 +410,12 @@ body {
 }
 
 .mega-section-gap { margin-top: 6px; }
+
+.nav-dropdown-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 4px 8px;
+}
 
 /* ── Mega-menu ──────────────────────────────────────────────────── */
 .nav-dropdown--mega {

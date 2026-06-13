@@ -106,6 +106,10 @@ import { useRegexTester } from '~/composables/useRegexTester'
 useSeoMeta({
   title: 'Regex Tester — Free Online Regular Expression Tool',
   description: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
+  ogTitle: 'Regex Tester — Free Online Regular Expression Tool',
+  ogDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
+  twitterTitle: 'Regex Tester — Free Online Regular Expression Tool',
+  twitterDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
 })
 
 const { pattern, flags, input, regexError, matches, highlightedHtml, clear } = useRegexTester()
