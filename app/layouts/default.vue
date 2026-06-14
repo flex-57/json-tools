@@ -46,7 +46,8 @@
                 <div class="nav-dropdown-section mega-section-gap">Encode</div>
                 <NuxtLink to="/tools/base64"      class="nav-dropdown-item">Base64</NuxtLink>
                 <NuxtLink to="/tools/url-encode"  class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
-                <NuxtLink to="/tools/jwt-decoder" class="nav-dropdown-item">JWT Decoder</NuxtLink>
+                <NuxtLink to="/tools/jwt-decoder"    class="nav-dropdown-item">JWT Decoder</NuxtLink>
+                <NuxtLink to="/tools/jwt-generator" class="nav-dropdown-item">JWT Generator</NuxtLink>
               </div>
               <div class="mega-divider" />
               <div class="mega-col">
@@ -118,7 +119,8 @@
             <div class="mobile-section-label">Encode</div>
             <NuxtLink to="/tools/base64"      class="mobile-nav-item" @click="mobileOpen = false">Base64</NuxtLink>
             <NuxtLink to="/tools/url-encode"  class="mobile-nav-item" @click="mobileOpen = false">URL Encode / Decode</NuxtLink>
-            <NuxtLink to="/tools/jwt-decoder" class="mobile-nav-item" @click="mobileOpen = false">JWT Decoder</NuxtLink>
+            <NuxtLink to="/tools/jwt-decoder"    class="mobile-nav-item" @click="mobileOpen = false">JWT Decoder</NuxtLink>
+            <NuxtLink to="/tools/jwt-generator" class="mobile-nav-item" @click="mobileOpen = false">JWT Generator</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -172,7 +174,7 @@ watch(() => route.path, (path) => {
 })
 
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
-const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts', '/tools/hash', '/tools/uuid', '/tools/minifier', '/tools/json-schema', '/tools/sql-formatter', '/tools/text-case', '/tools/number-base']
+const toolPaths = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts', '/tools/hash', '/tools/uuid', '/tools/minifier', '/tools/json-schema', '/tools/sql-formatter', '/tools/text-case', '/tools/number-base']
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
 const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
 
@@ -200,6 +202,7 @@ const TOOL_NAMES = {
   'sql-formatter': 'SQL Formatter',
   'text-case': 'Text Case Converter',
   'number-base': 'Number Base Converter',
+  'jwt-generator': 'JWT Generator',
   'regex-tester': 'Regex Tester',
   'unix-timestamp': 'Unix Timestamp Converter',
   'url-encode': 'URL Encoder / Decoder',

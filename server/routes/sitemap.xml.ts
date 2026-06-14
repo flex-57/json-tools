@@ -27,6 +27,7 @@ export default defineEventHandler((event) => {
     { loc: '/tools/sql-formatter' },
     { loc: '/tools/text-case' },
     { loc: '/tools/number-base' },
+    { loc: '/tools/jwt-generator' },
   ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

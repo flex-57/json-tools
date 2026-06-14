@@ -40,7 +40,7 @@ const AUTO_RELATED: Record<string, RelatedTool[]> = {
   '/tools/json-schema':    [{ label: 'JSON → TypeScript', to: '/tools/json-to-ts' }, { label: 'JSON Formatter', to: '/' }, { label: 'JSON Diff', to: '/tools/json-diff' }],
   '/tools/base64':         [{ label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }],
   '/tools/url-encode':     [{ label: 'Base64', to: '/tools/base64' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }],
-  '/tools/jwt-decoder':    [{ label: 'Base64', to: '/tools/base64' }, { label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'JSON Formatter', to: '/' }],
+  '/tools/jwt-decoder':    [{ label: 'JWT Generator', to: '/tools/jwt-generator' }, { label: 'Base64', to: '/tools/base64' }, { label: 'URL Encode / Decode', to: '/tools/url-encode' }],
   '/tools/regex-tester':   [{ label: 'Cron Parser', to: '/tools/cron-parser' }, { label: 'URL Encode / Decode', to: '/tools/url-encode' }],
   '/tools/cron-parser':    [{ label: 'Unix Timestamp', to: '/tools/unix-timestamp' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
   '/tools/unix-timestamp': [{ label: 'Cron Parser', to: '/tools/cron-parser' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
@@ -50,6 +50,7 @@ const AUTO_RELATED: Record<string, RelatedTool[]> = {
   '/tools/sql-formatter':  [{ label: 'Minifier', to: '/tools/minifier' }, { label: 'JSON Formatter', to: '/' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
   '/tools/text-case':      [{ label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'Minifier', to: '/tools/minifier' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
   '/tools/number-base':    [{ label: 'Hash Generator', to: '/tools/hash' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'URL Encode / Decode', to: '/tools/url-encode' }],
+  '/tools/jwt-generator':  [{ label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'Base64', to: '/tools/base64' }, { label: 'Hash Generator', to: '/tools/hash' }],
 }
 
 const displayRelated = computed(() => props.related ?? AUTO_RELATED[route.path] ?? [])
