@@ -30,6 +30,7 @@ export default defineEventHandler((event) => {
     { loc: '/tools/number-base' },
     { loc: '/tools/jwt-generator' },
     { loc: '/tools/color' },
+    { loc: '/tools/password-generator' },
   ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

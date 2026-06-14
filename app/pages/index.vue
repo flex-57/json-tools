@@ -3,7 +3,7 @@
     <section class="hero">
       <p class="hero-tag">Free · No signup · 100% client-side</p>
       <h1 class="hero-title">Developer tools<br><em>that just work</em></h1>
-      <p class="hero-sub">27 tools for JSON, data conversion, text, security and more.<br>Everything runs in your browser — your data never leaves your machine.</p>
+      <p class="hero-sub">28 tools for JSON, data conversion, text, security and more.<br>Everything runs in your browser — your data never leaves your machine.</p>
     </section>
 
     <div class="cat-list">
@@ -86,6 +86,7 @@ const IC = {
   jwtGen:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="10" cy="8" r="4.5" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="8" r="1.2" fill="currentColor"/><path d="M4 8H1M2 6v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M5.5 8H4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   hash:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5.5 2v12M10.5 2v12M2 5.5h12M2 10.5h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   uuid:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 10.5c-1.4 0-2.5-1.1-2.5-2.5S6.6 5.5 8 5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M12 11v3M13.5 12.5h-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  pwdGen:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="6.5" r="3.5" stroke="currentColor" stroke-width="1.3"/><path d="M8.5 9L14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M4.5 6.5h3M6 5v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   regex:     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="3" cy="8" r="1" fill="currentColor"/><circle cx="8" cy="5" r="1" fill="currentColor"/><circle cx="13" cy="8" r="1" fill="currentColor"/><path d="M8 3v4M11 5l-3 3M5 5l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   cron:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 4.5V8l2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   unix:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l-2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13.5L1.5 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
@@ -141,7 +142,8 @@ const CATEGORIES = [
       { name: 'JWT Decoder', to: '/tools/jwt-decoder', icon: IC.jwtDec },
       { name: 'JWT Generator', to: '/tools/jwt-generator', icon: IC.jwtGen },
       { name: 'Hash Generator', to: '/tools/hash', icon: IC.hash },
-      { name: 'UUID Generator', to: '/tools/uuid', icon: IC.uuid },
+      { name: 'UUID Generator',      to: '/tools/uuid',               icon: IC.uuid },
+      { name: 'Password Generator',  to: '/tools/password-generator', icon: IC.pwdGen },
     ],
   },
   {

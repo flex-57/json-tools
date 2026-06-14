@@ -42,7 +42,8 @@
           <NuxtLink to="/tools/jwt-decoder"   class="footer-link">JWT Decoder</NuxtLink>
           <NuxtLink to="/tools/jwt-generator" class="footer-link">JWT Generator</NuxtLink>
           <NuxtLink to="/tools/hash"          class="footer-link">Hash Generator</NuxtLink>
-          <NuxtLink to="/tools/uuid"          class="footer-link">UUID Generator</NuxtLink>
+          <NuxtLink to="/tools/uuid"               class="footer-link">UUID Generator</NuxtLink>
+          <NuxtLink to="/tools/password-generator" class="footer-link">Password Generator</NuxtLink>
         </div>
         <div class="footer-col">
           <span class="footer-col-title">Dev Utils</span>

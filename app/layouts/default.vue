@@ -71,10 +71,11 @@
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="nav-dropdown">
-              <NuxtLink to="/tools/jwt-decoder"   class="nav-dropdown-item">JWT Decoder</NuxtLink>
-              <NuxtLink to="/tools/jwt-generator" class="nav-dropdown-item">JWT Generator</NuxtLink>
-              <NuxtLink to="/tools/hash"          class="nav-dropdown-item">Hash Generator</NuxtLink>
-              <NuxtLink to="/tools/uuid"          class="nav-dropdown-item">UUID Generator</NuxtLink>
+              <NuxtLink to="/tools/jwt-decoder"          class="nav-dropdown-item">JWT Decoder</NuxtLink>
+              <NuxtLink to="/tools/jwt-generator"         class="nav-dropdown-item">JWT Generator</NuxtLink>
+              <NuxtLink to="/tools/hash"                  class="nav-dropdown-item">Hash Generator</NuxtLink>
+              <NuxtLink to="/tools/uuid"                  class="nav-dropdown-item">UUID Generator</NuxtLink>
+              <NuxtLink to="/tools/password-generator"    class="nav-dropdown-item">Password Generator</NuxtLink>
             </div>
           </div>
 
@@ -157,7 +158,8 @@
             <NuxtLink to="/tools/jwt-decoder"   class="mobile-nav-item" @click="mobileOpen = false">JWT Decoder</NuxtLink>
             <NuxtLink to="/tools/jwt-generator" class="mobile-nav-item" @click="mobileOpen = false">JWT Generator</NuxtLink>
             <NuxtLink to="/tools/hash"          class="mobile-nav-item" @click="mobileOpen = false">Hash Generator</NuxtLink>
-            <NuxtLink to="/tools/uuid"          class="mobile-nav-item" @click="mobileOpen = false">UUID Generator</NuxtLink>
+            <NuxtLink to="/tools/uuid"               class="mobile-nav-item" @click="mobileOpen = false">UUID Generator</NuxtLink>
+            <NuxtLink to="/tools/password-generator" class="mobile-nav-item" @click="mobileOpen = false">Password Generator</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -205,7 +207,7 @@ watch(() => route.path, (path) => {
 const jsonPaths       = ['/tools/json-formatter', '/tools/json-diff', '/tools/json-tree', '/tools/json-to-ts', '/tools/json-schema']
 const converterPaths  = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
 const textCodePaths   = ['/tools/text-case', '/tools/minifier', '/tools/sql-formatter', '/tools/url-encode', '/tools/base64']
-const securityPaths   = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/hash', '/tools/uuid']
+const securityPaths   = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/hash', '/tools/uuid', '/tools/password-generator']
 const devUtilsPaths   = ['/tools/regex-tester', '/tools/cron-parser', '/tools/unix-timestamp', '/tools/number-base', '/tools/color']
 
 const isJsonActive      = computed(() => jsonPaths.some(p => route.path.startsWith(p)))
@@ -247,6 +249,7 @@ const TOOL_NAMES = {
   'xml-to-json': 'XML to JSON Converter',
   'yaml-to-json': 'YAML to JSON Converter',
   'color': 'Color Picker & Converter',
+  'password-generator': 'Password Generator',
 }
 
 useHead(() => {
