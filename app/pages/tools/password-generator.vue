@@ -20,8 +20,6 @@
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M13.5 8A5.5 5.5 0 112.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2.5 2v3.5H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <button class="copy-btn" :class="{ 'copy-btn--done': copied }" @click="doCopy" :disabled="!password">
-            <svg v-if="!copied" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             {{ copied ? 'Copied!' : 'Copy' }}
           </button>
         </div>
@@ -98,8 +96,6 @@
         <div v-for="(pw, i) in bulkPasswords" :key="i" class="bulk-item">
           <code class="bulk-pw">{{ pw }}</code>
           <button class="copy-btn" :class="{ 'copy-btn--done': copiedBulk === i }" @click="copyBulkItem(pw, i)">
-            <svg v-if="copiedBulk !== i" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             {{ copiedBulk === i ? 'Copied!' : 'Copy' }}
           </button>
         </div>

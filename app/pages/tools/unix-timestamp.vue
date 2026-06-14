@@ -46,13 +46,6 @@
             class="btn-copy-row"
             :class="{ 'btn-copy-row--done': copied === row.key }"
           >
-            <svg v-if="copied !== row.key" width="13" height="13" viewBox="0 0 14 14" fill="none">
-              <rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none">
-              <path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
             {{ copied === row.key ? 'Copied!' : 'Copy' }}
           </button>
         </div>

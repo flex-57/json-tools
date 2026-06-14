@@ -44,13 +44,7 @@
         <div v-for="r in PLACEHOLDER_ROWS" :key="r.label" class="result-row result-row--empty">
           <span class="base-badge">{{ r.label }}</span>
           <span class="result-value result-value--placeholder">{{ r.example }}</span>
-          <button class="btn-copy" disabled>
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-              <rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            Copy
-          </button>
+          <button class="btn-copy" disabled>Copy</button>
         </div>
       </div>
       <template v-else>
@@ -62,13 +56,6 @@
             class="btn-copy"
             :class="{ 'btn-copy--done': copiedKey === r.key }"
           >
-            <svg v-if="copiedKey !== r.key" width="12" height="12" viewBox="0 0 14 14" fill="none">
-              <rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <svg v-else width="12" height="12" viewBox="0 0 14 14" fill="none">
-              <path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
             {{ copiedKey === r.key ? 'Copied!' : 'Copy' }}
           </button>
         </div>

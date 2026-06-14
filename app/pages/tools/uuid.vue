@@ -54,9 +54,8 @@
         <div v-for="(uuid, i) in uuids" :key="i" class="uuid-row">
           <span class="uuid-index">{{ String(i + 1).padStart(2, '0') }}</span>
           <span class="uuid-value">{{ formatUuid(uuid) }}</span>
-          <button class="uuid-copy" :class="{ 'uuid-copy--done': copiedIndex === i }" @click="copyOne(uuid, i)" title="Copy">
-            <svg v-if="copiedIndex !== i" width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            <svg v-else width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button class="uuid-copy" :class="{ 'uuid-copy--done': copiedIndex === i }" @click="copyOne(uuid, i)">
+            {{ copiedIndex === i ? 'Copied!' : 'Copy' }}
           </button>
         </div>
       </div>
@@ -255,20 +254,23 @@ const seoCards = [
 }
 
 .uuid-copy {
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  padding: 3px 8px;
   border-radius: 5px;
   border: 1px solid var(--c-border);
   background: transparent;
+  color: var(--c-t4);
   cursor: pointer;
-  color: var(--c-t5);
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.1s, color 0.1s, border-color 0.1s;
-  opacity: 0;
 }
-.uuid-row:hover .uuid-copy { opacity: 1; }
 .uuid-copy:hover { background: var(--c-subtle); color: var(--c-t2); }
-.uuid-copy--done { opacity: 1 !important; background: #ECFDF5; border-color: #6EE7B7; color: #059669; }
+.uuid-copy--done { background: #ECFDF5; border-color: #6EE7B7; color: #059669; }
 
 @media (max-width: 640px) {
   .controls-body { gap: 16px; }

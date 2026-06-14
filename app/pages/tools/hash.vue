@@ -34,9 +34,8 @@
           <span class="hash-value" :class="{ 'hash-value--empty': !hashes[alg] }">
             {{ hashes[alg] || '—' }}
           </span>
-          <button class="hash-copy" :class="{ 'hash-copy--done': copied === alg }" :disabled="!hashes[alg]" @click="copy(alg)" :title="'Copy ' + alg">
-            <svg v-if="copied !== alg" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button class="hash-copy" :class="{ 'hash-copy--done': copied === alg }" :disabled="!hashes[alg]" @click="copy(alg)">
+            {{ copied === alg ? 'Copied!' : 'Copy' }}
           </button>
         </div>
       </div>
@@ -169,20 +168,22 @@ const seoCards = [
 .hash-value--empty { color: var(--c-t5); }
 
 .hash-copy {
-  flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  padding: 4px 10px;
   border-radius: 6px;
   border: 1px solid var(--c-border);
   background: var(--c-subtle);
+  color: var(--c-t3);
   cursor: pointer;
-  color: var(--c-t4);
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.1s, color 0.1s, border-color 0.1s;
 }
-.hash-copy:hover:not(:disabled) { background: var(--c-subtle); color: var(--c-t2); }
+.hash-copy:hover:not(:disabled) { background: var(--c-border); color: var(--c-t1); }
 .hash-copy:disabled { opacity: 0.4; cursor: default; }
 .hash-copy--done { background: #ECFDF5; border-color: #6EE7B7; color: #059669; }
 
