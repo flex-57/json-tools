@@ -51,6 +51,7 @@ const AUTO_RELATED: Record<string, RelatedTool[]> = {
   '/tools/sql-formatter':  [{ label: 'Minifier', to: '/tools/minifier' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
   '/tools/text-case':      [{ label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'Minifier', to: '/tools/minifier' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
   '/tools/number-base':    [{ label: 'Hash Generator', to: '/tools/hash' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'URL Encode / Decode', to: '/tools/url-encode' }],
+  '/tools/color':          [{ label: 'Number Base Converter', to: '/tools/number-base' }, { label: 'Hash Generator', to: '/tools/hash' }, { label: 'UUID Generator', to: '/tools/uuid' }],
   '/tools/jwt-generator':  [{ label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'Base64', to: '/tools/base64' }, { label: 'Hash Generator', to: '/tools/hash' }],
 }
 

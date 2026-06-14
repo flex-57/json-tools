@@ -3,7 +3,7 @@
     <section class="hero">
       <p class="hero-tag">Free · No signup · 100% client-side</p>
       <h1 class="hero-title">Developer tools<br><em>that just work</em></h1>
-      <p class="hero-sub">25+ tools for JSON, data conversion, text, security and more.<br>Everything runs in your browser — your data never leaves your machine.</p>
+      <p class="hero-sub">27 tools for JSON, data conversion, text, security and more.<br>Everything runs in your browser — your data never leaves your machine.</p>
     </section>
 
     <div class="cat-list">
@@ -90,6 +90,7 @@ const IC = {
   cron:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 4.5V8l2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   unix:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l-2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13.5L1.5 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   numBase:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L6 4M10 4l4 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.5 9h5M10.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  color:     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 2.5V6M8 10V13.5M2.5 8H6M10 8H13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
 }
 
 const CATEGORIES = [
@@ -152,6 +153,7 @@ const CATEGORIES = [
       { name: 'Cron Parser', to: '/tools/cron-parser', icon: IC.cron },
       { name: 'Unix Timestamp', to: '/tools/unix-timestamp', icon: IC.unix },
       { name: 'Number Base Converter', to: '/tools/number-base', icon: IC.numBase },
+      { name: 'Color Picker', to: '/tools/color', icon: IC.color },
     ],
   },
 ]

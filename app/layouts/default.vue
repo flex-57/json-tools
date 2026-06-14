@@ -89,6 +89,7 @@
               <NuxtLink to="/tools/cron-parser"    class="nav-dropdown-item">Cron Parser</NuxtLink>
               <NuxtLink to="/tools/unix-timestamp" class="nav-dropdown-item">Unix Timestamp</NuxtLink>
               <NuxtLink to="/tools/number-base"    class="nav-dropdown-item">Number Base Converter</NuxtLink>
+              <NuxtLink to="/tools/color"          class="nav-dropdown-item">Color Picker</NuxtLink>
             </div>
           </div>
         </nav>
@@ -165,6 +166,7 @@
             <NuxtLink to="/tools/cron-parser"    class="mobile-nav-item" @click="mobileOpen = false">Cron Parser</NuxtLink>
             <NuxtLink to="/tools/unix-timestamp" class="mobile-nav-item" @click="mobileOpen = false">Unix Timestamp</NuxtLink>
             <NuxtLink to="/tools/number-base"    class="mobile-nav-item" @click="mobileOpen = false">Number Base Converter</NuxtLink>
+            <NuxtLink to="/tools/color"          class="mobile-nav-item" @click="mobileOpen = false">Color Picker</NuxtLink>
           </div>
         </div>
       </nav>
@@ -204,7 +206,7 @@ const jsonPaths       = ['/tools/json-formatter', '/tools/json-diff', '/tools/js
 const converterPaths  = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
 const textCodePaths   = ['/tools/text-case', '/tools/minifier', '/tools/sql-formatter', '/tools/url-encode', '/tools/base64']
 const securityPaths   = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/hash', '/tools/uuid']
-const devUtilsPaths   = ['/tools/regex-tester', '/tools/cron-parser', '/tools/unix-timestamp', '/tools/number-base']
+const devUtilsPaths   = ['/tools/regex-tester', '/tools/cron-parser', '/tools/unix-timestamp', '/tools/number-base', '/tools/color']
 
 const isJsonActive      = computed(() => jsonPaths.some(p => route.path.startsWith(p)))
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
@@ -244,6 +246,7 @@ const TOOL_NAMES = {
   'uuid': 'UUID Generator',
   'xml-to-json': 'XML to JSON Converter',
   'yaml-to-json': 'YAML to JSON Converter',
+  'color': 'Color Picker & Converter',
 }
 
 useHead(() => {

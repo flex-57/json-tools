@@ -50,6 +50,7 @@
           <NuxtLink to="/tools/cron-parser"    class="footer-link">Cron Parser</NuxtLink>
           <NuxtLink to="/tools/unix-timestamp" class="footer-link">Unix Timestamp</NuxtLink>
           <NuxtLink to="/tools/number-base"    class="footer-link">Number Base Converter</NuxtLink>
+          <NuxtLink to="/tools/color"          class="footer-link">Color Picker</NuxtLink>
         </div>
       </nav>
     </div>

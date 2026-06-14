@@ -29,6 +29,7 @@ export default defineEventHandler((event) => {
     { loc: '/tools/text-case' },
     { loc: '/tools/number-base' },
     { loc: '/tools/jwt-generator' },
+    { loc: '/tools/color' },
   ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
