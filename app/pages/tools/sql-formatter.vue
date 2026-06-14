@@ -193,6 +193,7 @@ const seoCards = [
   border-radius: 8px;
   padding: 3px;
   gap: 0;
+  min-width: 450px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .mode-indicator {
@@ -210,7 +211,7 @@ const seoCards = [
   min-width: 0;
   position: relative;
   z-index: 1;
-  padding: 5px 14px;
+  padding: 5px 10px;
   border-radius: 6px;
   font-size: 12.5px;
   font-weight: 500;
