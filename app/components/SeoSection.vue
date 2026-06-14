@@ -49,6 +49,7 @@ const AUTO_RELATED: Record<string, RelatedTool[]> = {
   '/tools/minifier':       [{ label: 'JSON Formatter', to: '/' }, { label: 'Base64', to: '/tools/base64' }],
   '/tools/sql-formatter':  [{ label: 'Minifier', to: '/tools/minifier' }, { label: 'JSON Formatter', to: '/' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
   '/tools/text-case':      [{ label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'Minifier', to: '/tools/minifier' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
+  '/tools/number-base':    [{ label: 'Hash Generator', to: '/tools/hash' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'URL Encode / Decode', to: '/tools/url-encode' }],
 }
 
 const displayRelated = computed(() => props.related ?? AUTO_RELATED[route.path] ?? [])
