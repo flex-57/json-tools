@@ -3,7 +3,7 @@
     <header class="app-header">
       <div class="header-inner">
         <NuxtLink to="/" class="brand" @click="mobileOpen = false">
-          <img src="/logo-mark.svg" width="30" height="30" alt="" aria-hidden="true" class="brand-mark">
+          <LogoMark :size="30" class="brand-mark" />
           <span class="brand-name">json<em>tools</em></span>
         </NuxtLink>
 

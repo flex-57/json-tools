@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="/logo-mark.svg" width="34" height="34" alt="" aria-hidden="true">
+        <LogoMark :size="34" />
         <div>
           <div class="brand-name">json<em>tools</em></div>
           <p class="brand-tagline">Free JSON tools for developers.<br>No signup, no tracking, no nonsense.</p>
