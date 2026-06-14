@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="brand-mark">{ }</div>
+        <img src="/logo-mark.svg" width="34" height="34" alt="" aria-hidden="true">
         <div>
           <div class="brand-name">json<em>tools</em></div>
           <p class="brand-tagline">Free JSON tools for developers.<br>No signup, no tracking, no nonsense.</p>
@@ -85,19 +85,8 @@
 }
 
 .brand-mark {
-  width: 34px;
-  height: 34px;
-  background: #F97316;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: -1px;
   flex-shrink: 0;
+  display: block;
 }
 
 .brand-name {

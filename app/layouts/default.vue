@@ -3,7 +3,7 @@
     <header class="app-header">
       <div class="header-inner">
         <NuxtLink to="/" class="brand" @click="mobileOpen = false">
-          <div class="brand-mark">{ }</div>
+          <img src="/logo-mark.svg" width="30" height="30" alt="" aria-hidden="true" class="brand-mark">
           <span class="brand-name">json<em>tools</em></span>
         </NuxtLink>
 
@@ -285,19 +285,8 @@ body {
 }
 
 .brand-mark {
-  width: 30px;
-  height: 30px;
-  background: #F97316;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: -1px;
   flex-shrink: 0;
+  display: block;
 }
 
 .brand-name {
