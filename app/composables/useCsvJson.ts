@@ -2,7 +2,7 @@ import Papa from 'papaparse'
 
 export type Delimiter = ',' | ';' | '\t' | 'auto'
 
-export interface ConvertResult {
+interface ConvertResult {
   output: string
   error: string | null
   rowCount: number

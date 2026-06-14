@@ -1,6 +1,6 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 
-export interface ConvertResult {
+interface ConvertResult {
   output: string
   error: string | null
 }

@@ -1,6 +1,6 @@
 import yaml from 'js-yaml'
 
-export interface ConvertResult {
+interface ConvertResult {
   output: string
   error: string | null
 }

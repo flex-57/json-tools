@@ -46,7 +46,7 @@ export function validateJson(input: string): JsonResult {
   }
 }
 
-export function diffJson(left: string, right: string): { added: string[]; removed: string[]; same: boolean } {
+function diffJson(left: string, right: string): { added: string[]; removed: string[]; same: boolean } {
   try {
     const l = JSON.stringify(JSON.parse(left.trim()), null, 2).split('\n')
     const r = JSON.stringify(JSON.parse(right.trim()), null, 2).split('\n')
