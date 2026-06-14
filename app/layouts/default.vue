@@ -9,60 +9,86 @@
 
         <!-- Desktop nav -->
         <nav class="header-nav">
-          <NuxtLink to="/" class="nav-item" :class="{ 'nav-item--active': route.path === '/' }">Formatter</NuxtLink>
+          <!-- JSON dropdown -->
+          <div class="nav-group">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isJsonActive }">
+              JSON
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <NuxtLink to="/tools/json-formatter" class="nav-dropdown-item">JSON Formatter</NuxtLink>
+              <NuxtLink to="/tools/json-diff"      class="nav-dropdown-item">JSON Diff</NuxtLink>
+              <NuxtLink to="/tools/json-tree"      class="nav-dropdown-item">JSON Tree</NuxtLink>
+              <NuxtLink to="/tools/json-to-ts"     class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
+              <NuxtLink to="/tools/json-schema"    class="nav-dropdown-item">JSON → Schema</NuxtLink>
+            </div>
+          </div>
 
-          <!-- Converters dropdown -->
+          <!-- Converters 2-column dropdown -->
           <div class="nav-group">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isConverterActive }">
               Converters
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown">
-              <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV → JSON</NuxtLink>
-              <NuxtLink to="/tools/xml-to-json"   class="nav-dropdown-item">XML → JSON</NuxtLink>
-              <NuxtLink to="/tools/yaml-to-json"  class="nav-dropdown-item">YAML → JSON</NuxtLink>
-              <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel → JSON</NuxtLink>
-              <div class="nav-dropdown-divider" />
-              <NuxtLink to="/tools/json-to-csv"   class="nav-dropdown-item">JSON → CSV</NuxtLink>
-              <NuxtLink to="/tools/json-to-xml"   class="nav-dropdown-item">JSON → XML</NuxtLink>
-              <NuxtLink to="/tools/json-to-yaml"  class="nav-dropdown-item">JSON → YAML</NuxtLink>
-              <NuxtLink to="/tools/json-to-excel" class="nav-dropdown-item">JSON → Excel</NuxtLink>
+            <div class="nav-dropdown nav-dropdown--two-col">
+              <div class="conv-col">
+                <div class="nav-dropdown-section">→ JSON</div>
+                <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV → JSON</NuxtLink>
+                <NuxtLink to="/tools/xml-to-json"   class="nav-dropdown-item">XML → JSON</NuxtLink>
+                <NuxtLink to="/tools/yaml-to-json"  class="nav-dropdown-item">YAML → JSON</NuxtLink>
+                <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel → JSON</NuxtLink>
+              </div>
+              <div class="conv-divider" />
+              <div class="conv-col">
+                <div class="nav-dropdown-section">JSON →</div>
+                <NuxtLink to="/tools/json-to-csv"   class="nav-dropdown-item">JSON → CSV</NuxtLink>
+                <NuxtLink to="/tools/json-to-xml"   class="nav-dropdown-item">JSON → XML</NuxtLink>
+                <NuxtLink to="/tools/json-to-yaml"  class="nav-dropdown-item">JSON → YAML</NuxtLink>
+                <NuxtLink to="/tools/json-to-excel" class="nav-dropdown-item">JSON → Excel</NuxtLink>
+              </div>
             </div>
           </div>
 
-          <!-- Tools mega-menu -->
+          <!-- Text & Code dropdown -->
           <div class="nav-group">
-            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isToolActive }">
-              Tools
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isTextCodeActive }">
+              Text & Code
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown nav-dropdown--mega">
-              <div class="mega-col">
-                <div class="nav-dropdown-section">JSON</div>
-                <NuxtLink to="/tools/json-diff"   class="nav-dropdown-item">JSON Diff</NuxtLink>
-                <NuxtLink to="/tools/json-tree"   class="nav-dropdown-item">JSON Tree</NuxtLink>
-                <NuxtLink to="/tools/json-to-ts"  class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
-                <NuxtLink to="/tools/json-schema" class="nav-dropdown-item">JSON → Schema</NuxtLink>
-                <div class="nav-dropdown-section mega-section-gap">Encode</div>
-                <NuxtLink to="/tools/base64"      class="nav-dropdown-item">Base64</NuxtLink>
-                <NuxtLink to="/tools/url-encode"  class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
-                <NuxtLink to="/tools/jwt-decoder"    class="nav-dropdown-item">JWT Decoder</NuxtLink>
-                <NuxtLink to="/tools/jwt-generator" class="nav-dropdown-item">JWT Generator</NuxtLink>
-              </div>
-              <div class="mega-divider" />
-              <div class="mega-col">
-                <div class="nav-dropdown-section">Developer</div>
-                <NuxtLink to="/tools/regex-tester"    class="nav-dropdown-item">Regex Tester</NuxtLink>
-                <NuxtLink to="/tools/cron-parser"     class="nav-dropdown-item">Cron Parser</NuxtLink>
-                <NuxtLink to="/tools/unix-timestamp"  class="nav-dropdown-item">Unix Timestamp</NuxtLink>
-                <NuxtLink to="/tools/minifier"        class="nav-dropdown-item">Minifier</NuxtLink>
-                <NuxtLink to="/tools/sql-formatter"   class="nav-dropdown-item">SQL Formatter</NuxtLink>
-                <NuxtLink to="/tools/text-case"       class="nav-dropdown-item">Text Case Converter</NuxtLink>
-                <NuxtLink to="/tools/number-base"     class="nav-dropdown-item">Number Base Converter</NuxtLink>
-                <div class="nav-dropdown-section mega-section-gap">Generate</div>
-                <NuxtLink to="/tools/hash"            class="nav-dropdown-item">Hash Generator</NuxtLink>
-                <NuxtLink to="/tools/uuid"            class="nav-dropdown-item">UUID Generator</NuxtLink>
-              </div>
+            <div class="nav-dropdown">
+              <NuxtLink to="/tools/text-case"     class="nav-dropdown-item">Text Case Converter</NuxtLink>
+              <NuxtLink to="/tools/minifier"      class="nav-dropdown-item">CSS / HTML / JS Minifier</NuxtLink>
+              <NuxtLink to="/tools/sql-formatter" class="nav-dropdown-item">SQL Formatter</NuxtLink>
+              <NuxtLink to="/tools/url-encode"    class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
+              <NuxtLink to="/tools/base64"        class="nav-dropdown-item">Base64</NuxtLink>
+            </div>
+          </div>
+
+          <!-- Security dropdown -->
+          <div class="nav-group">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isSecurityActive }">
+              Security
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <NuxtLink to="/tools/jwt-decoder"   class="nav-dropdown-item">JWT Decoder</NuxtLink>
+              <NuxtLink to="/tools/jwt-generator" class="nav-dropdown-item">JWT Generator</NuxtLink>
+              <NuxtLink to="/tools/hash"          class="nav-dropdown-item">Hash Generator</NuxtLink>
+              <NuxtLink to="/tools/uuid"          class="nav-dropdown-item">UUID Generator</NuxtLink>
+            </div>
+          </div>
+
+          <!-- Dev Utils dropdown -->
+          <div class="nav-group">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isDevUtilsActive }">
+              Dev Utils
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <NuxtLink to="/tools/regex-tester"   class="nav-dropdown-item">Regex Tester</NuxtLink>
+              <NuxtLink to="/tools/cron-parser"    class="nav-dropdown-item">Cron Parser</NuxtLink>
+              <NuxtLink to="/tools/unix-timestamp" class="nav-dropdown-item">Unix Timestamp</NuxtLink>
+              <NuxtLink to="/tools/number-base"    class="nav-dropdown-item">Number Base Converter</NuxtLink>
             </div>
           </div>
         </nav>
@@ -91,8 +117,17 @@
           <div class="mobile-section">
             <NuxtLink to="/" class="mobile-nav-item mobile-nav-item--main" @click="mobileOpen = false">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7.5L7 2l6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9.5V12h8V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Formatter
+              Home
             </NuxtLink>
+          </div>
+
+          <div class="mobile-section">
+            <div class="mobile-section-label">JSON</div>
+            <NuxtLink to="/tools/json-formatter" class="mobile-nav-item" @click="mobileOpen = false">JSON Formatter</NuxtLink>
+            <NuxtLink to="/tools/json-diff"      class="mobile-nav-item" @click="mobileOpen = false">JSON Diff</NuxtLink>
+            <NuxtLink to="/tools/json-tree"      class="mobile-nav-item" @click="mobileOpen = false">JSON Tree</NuxtLink>
+            <NuxtLink to="/tools/json-to-ts"     class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
+            <NuxtLink to="/tools/json-schema"    class="mobile-nav-item" @click="mobileOpen = false">JSON → Schema</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -108,36 +143,28 @@
           </div>
 
           <div class="mobile-section">
-            <div class="mobile-section-label">JSON</div>
-            <NuxtLink to="/tools/json-diff"   class="mobile-nav-item" @click="mobileOpen = false">JSON Diff</NuxtLink>
-            <NuxtLink to="/tools/json-tree"   class="mobile-nav-item" @click="mobileOpen = false">JSON Tree</NuxtLink>
-            <NuxtLink to="/tools/json-to-ts"  class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
-            <NuxtLink to="/tools/json-schema" class="mobile-nav-item" @click="mobileOpen = false">JSON → Schema</NuxtLink>
+            <div class="mobile-section-label">Text & Code</div>
+            <NuxtLink to="/tools/text-case"     class="mobile-nav-item" @click="mobileOpen = false">Text Case Converter</NuxtLink>
+            <NuxtLink to="/tools/minifier"      class="mobile-nav-item" @click="mobileOpen = false">CSS / HTML / JS Minifier</NuxtLink>
+            <NuxtLink to="/tools/sql-formatter" class="mobile-nav-item" @click="mobileOpen = false">SQL Formatter</NuxtLink>
+            <NuxtLink to="/tools/url-encode"    class="mobile-nav-item" @click="mobileOpen = false">URL Encode / Decode</NuxtLink>
+            <NuxtLink to="/tools/base64"        class="mobile-nav-item" @click="mobileOpen = false">Base64</NuxtLink>
           </div>
 
           <div class="mobile-section">
-            <div class="mobile-section-label">Encode</div>
-            <NuxtLink to="/tools/base64"      class="mobile-nav-item" @click="mobileOpen = false">Base64</NuxtLink>
-            <NuxtLink to="/tools/url-encode"  class="mobile-nav-item" @click="mobileOpen = false">URL Encode / Decode</NuxtLink>
-            <NuxtLink to="/tools/jwt-decoder"    class="mobile-nav-item" @click="mobileOpen = false">JWT Decoder</NuxtLink>
+            <div class="mobile-section-label">Security</div>
+            <NuxtLink to="/tools/jwt-decoder"   class="mobile-nav-item" @click="mobileOpen = false">JWT Decoder</NuxtLink>
             <NuxtLink to="/tools/jwt-generator" class="mobile-nav-item" @click="mobileOpen = false">JWT Generator</NuxtLink>
+            <NuxtLink to="/tools/hash"          class="mobile-nav-item" @click="mobileOpen = false">Hash Generator</NuxtLink>
+            <NuxtLink to="/tools/uuid"          class="mobile-nav-item" @click="mobileOpen = false">UUID Generator</NuxtLink>
           </div>
 
           <div class="mobile-section">
-            <div class="mobile-section-label">Developer</div>
+            <div class="mobile-section-label">Dev Utils</div>
             <NuxtLink to="/tools/regex-tester"   class="mobile-nav-item" @click="mobileOpen = false">Regex Tester</NuxtLink>
             <NuxtLink to="/tools/cron-parser"    class="mobile-nav-item" @click="mobileOpen = false">Cron Parser</NuxtLink>
             <NuxtLink to="/tools/unix-timestamp" class="mobile-nav-item" @click="mobileOpen = false">Unix Timestamp</NuxtLink>
-            <NuxtLink to="/tools/minifier"       class="mobile-nav-item" @click="mobileOpen = false">Minifier</NuxtLink>
-            <NuxtLink to="/tools/sql-formatter"  class="mobile-nav-item" @click="mobileOpen = false">SQL Formatter</NuxtLink>
-            <NuxtLink to="/tools/text-case"       class="mobile-nav-item" @click="mobileOpen = false">Text Case Converter</NuxtLink>
-            <NuxtLink to="/tools/number-base"     class="mobile-nav-item" @click="mobileOpen = false">Number Base Converter</NuxtLink>
-          </div>
-
-          <div class="mobile-section">
-            <div class="mobile-section-label">Generate</div>
-            <NuxtLink to="/tools/hash" class="mobile-nav-item" @click="mobileOpen = false">Hash Generator</NuxtLink>
-            <NuxtLink to="/tools/uuid" class="mobile-nav-item" @click="mobileOpen = false">UUID Generator</NuxtLink>
+            <NuxtLink to="/tools/number-base"    class="mobile-nav-item" @click="mobileOpen = false">Number Base Converter</NuxtLink>
           </div>
         </div>
       </nav>
@@ -173,10 +200,17 @@ watch(() => route.path, (path) => {
   trackPageView(path)
 })
 
-const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
-const toolPaths = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts', '/tools/hash', '/tools/uuid', '/tools/minifier', '/tools/json-schema', '/tools/sql-formatter', '/tools/text-case', '/tools/number-base']
+const jsonPaths       = ['/tools/json-formatter', '/tools/json-diff', '/tools/json-tree', '/tools/json-to-ts', '/tools/json-schema']
+const converterPaths  = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
+const textCodePaths   = ['/tools/text-case', '/tools/minifier', '/tools/sql-formatter', '/tools/url-encode', '/tools/base64']
+const securityPaths   = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/hash', '/tools/uuid']
+const devUtilsPaths   = ['/tools/regex-tester', '/tools/cron-parser', '/tools/unix-timestamp', '/tools/number-base']
+
+const isJsonActive      = computed(() => jsonPaths.some(p => route.path.startsWith(p)))
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
-const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
+const isTextCodeActive  = computed(() => textCodePaths.some(p => route.path.startsWith(p)))
+const isSecurityActive  = computed(() => securityPaths.some(p => route.path.startsWith(p)))
+const isDevUtilsActive  = computed(() => devUtilsPaths.some(p => route.path.startsWith(p)))
 
 const BASE_URL = 'https://jsontools.space'
 useHead(() => ({
@@ -184,6 +218,7 @@ useHead(() => ({
 }))
 
 const TOOL_NAMES = {
+  'json-formatter': 'JSON Formatter & Validator',
   'base64': 'Base64 Encoder / Decoder',
   'cron-parser': 'Cron Expression Parser',
   'csv-to-json': 'CSV to JSON Converter',
@@ -418,20 +453,20 @@ body {
   margin: 4px 8px;
 }
 
-/* ── Mega-menu ──────────────────────────────────────────────────── */
-.nav-dropdown--mega {
+/* ── 2-column Converters dropdown ───────────────────────────────── */
+.nav-dropdown--two-col {
   display: flex;
   gap: 0;
   padding: 8px;
-  min-width: 360px;
+  min-width: 300px;
 }
 
-.mega-col {
+.conv-col {
   flex: 1;
   min-width: 0;
 }
 
-.mega-divider {
+.conv-divider {
   width: 1px;
   background: rgba(255,255,255,0.06);
   margin: 4px 8px;
@@ -581,10 +616,14 @@ body {
 }
 
 /* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .header-badge { display: none; }
+  .header-inner { gap: 16px; }
+}
+
 @media (max-width: 768px) {
   .header-inner { padding: 0 16px; gap: 12px; }
   .header-nav   { display: none; }
-  .header-badge { display: none; }
   .mobile-menu-btn { display: flex; }
 }
 </style>

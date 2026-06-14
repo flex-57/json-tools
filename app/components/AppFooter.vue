@@ -5,48 +5,51 @@
         <LogoMark :size="34" />
         <div>
           <div class="brand-name">json<em>tools</em></div>
-          <p class="brand-tagline">Free JSON tools for developers.<br>No signup, no tracking, no nonsense.</p>
+          <p class="brand-tagline">Free developer tools.<br>No signup, no tracking, no nonsense.</p>
         </div>
       </div>
 
       <nav class="footer-nav">
         <div class="footer-col">
-          <span class="footer-col-title">→ JSON</span>
-          <NuxtLink to="/tools/csv-to-json" class="footer-link">CSV to JSON</NuxtLink>
-          <NuxtLink to="/tools/xml-to-json" class="footer-link">XML to JSON</NuxtLink>
-          <NuxtLink to="/tools/yaml-to-json" class="footer-link">YAML to JSON</NuxtLink>
-          <NuxtLink to="/tools/excel-to-json" class="footer-link">Excel to JSON</NuxtLink>
+          <span class="footer-col-title">JSON</span>
+          <NuxtLink to="/tools/json-formatter" class="footer-link">JSON Formatter</NuxtLink>
+          <NuxtLink to="/tools/json-diff"      class="footer-link">JSON Diff</NuxtLink>
+          <NuxtLink to="/tools/json-tree"      class="footer-link">JSON Tree Viewer</NuxtLink>
+          <NuxtLink to="/tools/json-to-ts"     class="footer-link">JSON → TypeScript</NuxtLink>
+          <NuxtLink to="/tools/json-schema"    class="footer-link">JSON Schema</NuxtLink>
         </div>
         <div class="footer-col">
-          <span class="footer-col-title">JSON →</span>
-          <NuxtLink to="/tools/json-to-csv" class="footer-link">JSON to CSV</NuxtLink>
-          <NuxtLink to="/tools/json-to-xml" class="footer-link">JSON to XML</NuxtLink>
-          <NuxtLink to="/tools/json-to-yaml" class="footer-link">JSON to YAML</NuxtLink>
-          <NuxtLink to="/tools/json-to-excel" class="footer-link">JSON to Excel</NuxtLink>
+          <span class="footer-col-title">Converters</span>
+          <NuxtLink to="/tools/csv-to-json"   class="footer-link">CSV → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-csv"   class="footer-link">JSON → CSV</NuxtLink>
+          <NuxtLink to="/tools/xml-to-json"   class="footer-link">XML → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-xml"   class="footer-link">JSON → XML</NuxtLink>
+          <NuxtLink to="/tools/yaml-to-json"  class="footer-link">YAML → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-yaml"  class="footer-link">JSON → YAML</NuxtLink>
+          <NuxtLink to="/tools/excel-to-json" class="footer-link">Excel → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-excel" class="footer-link">JSON → Excel</NuxtLink>
         </div>
         <div class="footer-col">
-          <span class="footer-col-title">JSON Tools</span>
-          <NuxtLink to="/" class="footer-link">JSON Formatter</NuxtLink>
-          <NuxtLink to="/tools/json-diff" class="footer-link">JSON Diff</NuxtLink>
-          <NuxtLink to="/tools/json-tree" class="footer-link">JSON Tree Viewer</NuxtLink>
-          <NuxtLink to="/tools/json-schema" class="footer-link">JSON Schema Generator</NuxtLink>
-          <NuxtLink to="/tools/json-to-ts" class="footer-link">JSON → TypeScript / Zod</NuxtLink>
+          <span class="footer-col-title">Text & Code</span>
+          <NuxtLink to="/tools/text-case"     class="footer-link">Text Case Converter</NuxtLink>
+          <NuxtLink to="/tools/minifier"      class="footer-link">CSS / HTML / JS Minifier</NuxtLink>
+          <NuxtLink to="/tools/sql-formatter" class="footer-link">SQL Formatter</NuxtLink>
+          <NuxtLink to="/tools/url-encode"    class="footer-link">URL Encode / Decode</NuxtLink>
+          <NuxtLink to="/tools/base64"        class="footer-link">Base64 Encode / Decode</NuxtLink>
         </div>
         <div class="footer-col">
-          <span class="footer-col-title">Encode & Decode</span>
-          <NuxtLink to="/tools/base64" class="footer-link">Base64 Encode / Decode</NuxtLink>
-          <NuxtLink to="/tools/url-encode" class="footer-link">URL Encode / Decode</NuxtLink>
-          <NuxtLink to="/tools/jwt-decoder" class="footer-link">JWT Decoder</NuxtLink>
-          <NuxtLink to="/tools/hash" class="footer-link">Hash Generator</NuxtLink>
+          <span class="footer-col-title">Security</span>
+          <NuxtLink to="/tools/jwt-decoder"   class="footer-link">JWT Decoder</NuxtLink>
+          <NuxtLink to="/tools/jwt-generator" class="footer-link">JWT Generator</NuxtLink>
+          <NuxtLink to="/tools/hash"          class="footer-link">Hash Generator</NuxtLink>
+          <NuxtLink to="/tools/uuid"          class="footer-link">UUID Generator</NuxtLink>
         </div>
         <div class="footer-col">
           <span class="footer-col-title">Dev Utils</span>
-          <NuxtLink to="/tools/regex-tester" class="footer-link">Regex Tester</NuxtLink>
-          <NuxtLink to="/tools/cron-parser" class="footer-link">Cron Parser</NuxtLink>
+          <NuxtLink to="/tools/regex-tester"   class="footer-link">Regex Tester</NuxtLink>
+          <NuxtLink to="/tools/cron-parser"    class="footer-link">Cron Parser</NuxtLink>
           <NuxtLink to="/tools/unix-timestamp" class="footer-link">Unix Timestamp</NuxtLink>
-          <NuxtLink to="/tools/uuid" class="footer-link">UUID Generator</NuxtLink>
-          <NuxtLink to="/tools/minifier"       class="footer-link">CSS / HTML / JS Minifier</NuxtLink>
-          <NuxtLink to="/tools/sql-formatter"  class="footer-link">SQL Formatter</NuxtLink>
+          <NuxtLink to="/tools/number-base"    class="footer-link">Number Base Converter</NuxtLink>
         </div>
       </nav>
     </div>
@@ -81,8 +84,8 @@
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  flex: 1;
-  min-width: 220px;
+  flex: 0 0 auto;
+  min-width: 200px;
 }
 
 .brand-mark {
@@ -111,15 +114,16 @@
 
 .footer-nav {
   display: flex;
-  gap: 40px;
+  gap: 32px;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
   gap: 9px;
-  min-width: 140px;
+  min-width: 130px;
 }
 
 .footer-col-title {

@@ -2,7 +2,8 @@ export default defineEventHandler((event) => {
   const today = new Date().toISOString().split('T')[0]
 
   const urls = [
-    { loc: '/',                        priority: '1.0', changefreq: 'weekly' },
+    { loc: '/',                             priority: '1.0', changefreq: 'weekly' },
+    { loc: '/tools/json-formatter',         priority: '0.9', changefreq: 'monthly' },
     { loc: '/tools/csv-to-json' },
     { loc: '/tools/json-to-csv' },
     { loc: '/tools/xml-to-json' },
