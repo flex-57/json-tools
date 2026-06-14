@@ -45,7 +45,8 @@
           <NuxtLink to="/tools/cron-parser" class="footer-link">Cron Parser</NuxtLink>
           <NuxtLink to="/tools/unix-timestamp" class="footer-link">Unix Timestamp</NuxtLink>
           <NuxtLink to="/tools/uuid" class="footer-link">UUID Generator</NuxtLink>
-          <NuxtLink to="/tools/minifier" class="footer-link">CSS / HTML / JS Minifier</NuxtLink>
+          <NuxtLink to="/tools/minifier"       class="footer-link">CSS / HTML / JS Minifier</NuxtLink>
+          <NuxtLink to="/tools/sql-formatter"  class="footer-link">SQL Formatter</NuxtLink>
         </div>
       </nav>
     </div>

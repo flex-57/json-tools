@@ -28,6 +28,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [Unix Timestamp Converter](https://jsontools.space/tools/unix-timestamp): Convert between Unix timestamps and human-readable dates. Supports seconds and milliseconds.
 - [UUID Generator](https://jsontools.space/tools/uuid): Generate random UUID v4 identifiers. Bulk generation up to 100, multiple format options.
 - [CSS / HTML / JS Minifier](https://jsontools.space/tools/minifier): Minify CSS, HTML, or JavaScript to reduce file size. Client-side only.
+- [SQL Formatter](https://jsontools.space/tools/sql-formatter): Format and beautify SQL queries. Supports MySQL, PostgreSQL, SQLite, T-SQL, and standard SQL.
 
 ## Key Facts
 

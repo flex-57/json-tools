@@ -25,6 +25,7 @@ const TOOLS = [
   { slug: 'unix-timestamp',  tag: 'Dev Util',               title: 'Unix Timestamp\nConverter',      subtitle: 'Convert between Unix timestamps and human-readable dates.',                       size: 68 },
   { slug: 'uuid',            tag: 'Dev Util',               title: 'UUID Generator',                 subtitle: 'Generate random UUID v4 identifiers.\nBulk generation up to 100.',               size: 72 },
   { slug: 'minifier',        tag: 'Dev Util',               title: 'CSS / HTML / JS\nMinifier',      subtitle: 'Compress code to reduce file size instantly.',                                    size: 64 },
+  { slug: 'sql-formatter',  tag: 'Dev Util',               title: 'SQL Formatter',                  subtitle: 'Format and beautify SQL queries.\nMySQL, PostgreSQL, SQLite, T-SQL.',             size: 72 },
 ];
 
 const OUT_DIR = path.join(__dirname, '../public/og');
