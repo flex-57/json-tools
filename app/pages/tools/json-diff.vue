@@ -100,6 +100,8 @@ useSeoMeta({
   ogDescription: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
   twitterTitle: 'JSON Diff — Compare JSON Online',
   twitterDescription: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/json-diff.png',
+  twitterImage: 'https://jsontools.space/og/json-diff.png',
 })
 
 const { left, right, result, swap, clear } = useJsonDiff()

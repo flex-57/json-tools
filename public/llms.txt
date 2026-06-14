@@ -1,0 +1,37 @@
+# JSON Tools
+
+> Free online JSON, CSV, XML, YAML, and developer tools. No signup, no data sent to servers, 100% client-side.
+
+JSON Tools is a collection of free browser-based developer utilities for working with JSON and common data formats. All processing happens locally in the browser — no data is ever transmitted to any server.
+
+## Available Tools
+
+- [JSON Formatter & Validator](https://jsontools.space/): Format, validate, and minify JSON with syntax highlighting and error detection.
+- [CSV to JSON Converter](https://jsontools.space/tools/csv-to-json): Convert CSV and TSV files to JSON. Auto-detect delimiters, headers, and data types.
+- [JSON to CSV Converter](https://jsontools.space/tools/json-to-csv): Flatten JSON arrays to CSV. Handles nested objects and arrays.
+- [XML to JSON Converter](https://jsontools.space/tools/xml-to-json): Convert XML documents to clean JSON. Handles attributes and nested elements.
+- [JSON to XML Converter](https://jsontools.space/tools/json-to-xml): Convert JSON objects to valid XML with configurable root element and formatting.
+- [YAML to JSON Converter](https://jsontools.space/tools/yaml-to-json): Parse YAML files and convert them to JSON instantly.
+- [JSON to YAML Converter](https://jsontools.space/tools/json-to-yaml): Convert JSON to YAML with proper indentation and formatting.
+- [Excel to JSON Converter](https://jsontools.space/tools/excel-to-json): Upload .xlsx or .xls files and convert spreadsheet data to JSON.
+- [JSON to Excel Converter](https://jsontools.space/tools/json-to-excel): Export JSON arrays to downloadable Excel spreadsheets.
+- [JSON Diff](https://jsontools.space/tools/json-diff): Compare two JSON objects side-by-side. Highlights added, removed, and changed values.
+- [JSON Tree Viewer](https://jsontools.space/tools/json-tree): Visualize JSON as an interactive collapsible tree or node graph. Copy paths with one click.
+- [JSON Schema Generator](https://jsontools.space/tools/json-schema): Generate JSON Schema (Draft-07 or 2020-12) from any JSON sample.
+- [JSON to TypeScript / Zod](https://jsontools.space/tools/json-to-ts): Generate TypeScript interfaces or Zod schemas from JSON.
+- [Base64 Encode / Decode](https://jsontools.space/tools/base64): Encode text or files to Base64, decode Base64 strings. Supports URL-safe variant.
+- [URL Encode / Decode](https://jsontools.space/tools/url-encode): Encode special characters for URLs or decode percent-encoded strings.
+- [JWT Decoder](https://jsontools.space/tools/jwt-decoder): Decode and inspect JWT tokens. Displays header, payload, and signature without verification.
+- [Hash Generator](https://jsontools.space/tools/hash): Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text input.
+- [Regex Tester](https://jsontools.space/tools/regex-tester): Test regular expressions with live match highlighting. Supports flags and capture groups.
+- [Cron Parser](https://jsontools.space/tools/cron-parser): Parse and explain cron expressions in plain English. Shows next execution times.
+- [Unix Timestamp Converter](https://jsontools.space/tools/unix-timestamp): Convert between Unix timestamps and human-readable dates. Supports seconds and milliseconds.
+- [UUID Generator](https://jsontools.space/tools/uuid): Generate random UUID v4 identifiers. Bulk generation up to 100, multiple format options.
+- [CSS / HTML / JS Minifier](https://jsontools.space/tools/minifier): Minify CSS, HTML, or JavaScript to reduce file size. Client-side only.
+
+## Key Facts
+
+- All tools run entirely in the browser (no server processing)
+- No user accounts, no data storage, no cookies (except optional dark mode preference)
+- Free to use with no rate limits
+- Available at: https://jsontools.space

@@ -94,6 +94,8 @@ useSeoMeta({
   ogDescription: 'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
   twitterTitle: 'JSON Schema Generator — Draft-07 & 2020-12 | JSON Tools',
   twitterDescription: 'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/json-schema.png',
+  twitterImage: 'https://jsontools.space/og/json-schema.png',
 })
 
 const { input, draft, required, output, error, copied, copy, clear } = useJsonSchema()
@@ -167,7 +169,7 @@ const seoCards = [
   background: #1A1916; border-radius: 6px;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.draft-indicator--right { transform: translateX(calc(100% + 2px)); }
+.draft-indicator--right { transform: translateX(100%); }
 .draft-btn {
   flex: 1;
   position: relative; z-index: 1;

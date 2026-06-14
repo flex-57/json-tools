@@ -72,6 +72,8 @@ useSeoMeta({
   ogDescription: 'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds, ISO 8601, UTC, and local time. Free, no data sent to servers.',
   twitterTitle: 'Unix Timestamp Converter — Free Online Tool',
   twitterDescription: 'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds, ISO 8601, UTC, and local time. Free, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/unix-timestamp.png',
+  twitterImage: 'https://jsontools.space/og/unix-timestamp.png',
 })
 
 const { input, parsed, error, unix, unixMs, iso, utc, local, relative, copied, setNow, clear, refresh, copyValue } = useUnixTimestamp()

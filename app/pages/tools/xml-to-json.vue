@@ -70,6 +70,8 @@ useSeoMeta({
   ogDescription: 'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
   twitterTitle: 'XML to JSON Converter — Free Online Tool',
   twitterDescription: 'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/xml-to-json.png',
+  twitterImage: 'https://jsontools.space/og/xml-to-json.png',
 })
 const { input, output, error, copied, convert, copy, clear } = useXmlToJson()
 

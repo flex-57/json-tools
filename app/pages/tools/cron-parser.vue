@@ -105,6 +105,8 @@ useSeoMeta({
   ogDescription: 'Parse and validate cron expressions. See the schedule in plain English and preview the next 5 execution dates. Free, client-side, no data sent to servers.',
   twitterTitle: 'Cron Expression Parser — Free Online Tool',
   twitterDescription: 'Parse and validate cron expressions. See the schedule in plain English and preview the next 5 execution dates. Free, client-side, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/cron-parser.png',
+  twitterImage: 'https://jsontools.space/og/cron-parser.png',
 })
 
 const { expression, error, description, nextExecutions } = useCronParser()

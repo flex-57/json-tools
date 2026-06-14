@@ -5,6 +5,11 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
   ],
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml'],
+    },
+  },
   vite: {
     optimizeDeps: {
       include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/theme-one-dark', '@vue-flow/core', '@dagrejs/dagre'],
@@ -21,11 +26,11 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#F97316' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'JSON Tools' },
-        { property: 'og:image', content: 'https://jsontools.space/og-image.png' },
+        { property: 'og:image', content: 'https://jsontools.space/og/og-image.png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:image', content: 'https://jsontools.space/og-image.png' },
+        { name: 'twitter:image', content: 'https://jsontools.space/og/og-image.png' },
       ],
       script: [
         {

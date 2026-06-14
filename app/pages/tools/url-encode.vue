@@ -117,6 +117,8 @@ useSeoMeta({
   ogDescription: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
   twitterTitle: 'URL Encoder / Decoder — Free Online Tool',
   twitterDescription: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/url-encode.png',
+  twitterImage: 'https://jsontools.space/og/url-encode.png',
 })
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useUrlEncode()

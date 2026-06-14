@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px;
+  height: 630px;
+  background: #13181F;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 56px 72px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background bracket */
+.bg-deco {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 480px;
+  font-weight: 700;
+  color: rgba(249,115,22,0.035);
+  line-height: 1;
+  user-select: none;
+  letter-spacing: -40px;
+}
+
+/* Subtle grid lines */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Orange accent bar */
+.accent-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, #F97316 0%, #FB923C 100%);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: auto;
+}
+.logo-mark {
+  width: 44px;
+  height: 44px;
+  background: #F97316;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -2px;
+  flex-shrink: 0;
+}
+.logo-name {
+  font-size: 19px;
+  font-weight: 600;
+  color: rgba(241,240,238,0.45);
+  letter-spacing: -0.3px;
+}
+.logo-name em { font-style: normal; color: #F97316; }
+
+/* Main content */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  padding: 20px 0;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F97316;
+  margin-bottom: 22px;
+}
+.tag::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #F97316;
+  border-radius: 1px;
+}
+.title {
+  font-size: var(--title-size, 72px);
+  font-weight: 700;
+  color: #F1F0EE;
+  line-height: 1.08;
+  letter-spacing: -2.5px;
+  margin-bottom: 22px;
+  white-space: pre-line;
+}
+.subtitle {
+  font-size: 22px;
+  color: #4A5260;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 680px;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 22px;
+  position: relative;
+  z-index: 1;
+}
+.footer-badges {
+  display: flex;
+  gap: 10px;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: #2E3540;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 5px;
+  padding: 4px 10px;
+  letter-spacing: 0.04em;
+}
+.footer-url {
+  font-size: 15px;
+  color: #3A4049;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-deco">{ }</div>
+  <div class="accent-bar"></div>
+
+  <div class="header">
+    <div class="logo-mark">{ }</div>
+    <div class="logo-name">json<em>tools</em></div>
+  </div>
+
+  <div class="content">
+    <div class="tag" id="tag">JSON Tool</div>
+    <div class="title" id="title" style="--title-size: 72px">JSON Formatter</div>
+    <div class="subtitle" id="subtitle">Format, validate, and minify JSON instantly</div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-badges">
+      <span class="badge">Free</span>
+      <span class="badge">100% Client-Side</span>
+      <span class="badge">No Signup</span>
+    </div>
+    <div class="footer-url">jsontools.space</div>
+  </div>
+</body>
+</html>

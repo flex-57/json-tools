@@ -128,6 +128,8 @@ useSeoMeta({
   ogDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
   twitterTitle: 'CSS / HTML / JS Minifier — Free Online Tool | JSON Tools',
   twitterDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/minifier.png',
+  twitterImage: 'https://jsontools.space/og/minifier.png',
 })
 
 const MODES: { value: MinifyMode; label: string }[] = [
@@ -193,6 +195,8 @@ const seoCards = [
   border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 3px;
+  gap: 0;
+  min-width: 215px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .mode-indicator {
@@ -207,9 +211,10 @@ const seoCards = [
 }
 .mode-btn {
   flex: 1;
+  min-width: 0;
   position: relative;
   z-index: 1;
-  padding: 5px 18px;
+  padding: 5px 16px;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 500;

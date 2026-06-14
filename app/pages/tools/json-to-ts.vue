@@ -80,6 +80,8 @@ useSeoMeta({
   ogDescription: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
   twitterTitle: 'JSON to TypeScript / Zod Generator — Free Online Tool',
   twitterDescription: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
+  ogImage: 'https://jsontools.space/og/json-to-ts.png',
+  twitterImage: 'https://jsontools.space/og/json-to-ts.png',
 })
 
 const { input, mode, rootName, output, error, copied, copy, clear } = useJsonToTs()
@@ -132,6 +134,7 @@ const seoCards = [
   border-radius: 8px;
   padding: 2px;
   gap: 0;
+  min-width: 210px;
 }
 
 .mode-indicator {
@@ -145,11 +148,12 @@ const seoCards = [
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .mode-indicator--right {
-  transform: translateX(calc(100% + 2px));
+  transform: translateX(100%);
 }
 
 .mode-btn {
   flex: 1;
+  min-width: 0;
   position: relative;
   z-index: 1;
   border: none;

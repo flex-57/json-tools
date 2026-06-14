@@ -127,6 +127,8 @@ useSeoMeta({
   ogDescription: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
   twitterTitle: 'JWT Decoder — Free Online Tool',
   twitterDescription: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/jwt-decoder.png',
+  twitterImage: 'https://jsontools.space/og/jwt-decoder.png',
 })
 
 const { token, result, copiedHeader, copiedPayload, copyHeader, copyPayload, clear } = useJwtDecoder()

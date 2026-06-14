@@ -74,6 +74,8 @@ useSeoMeta({
   ogDescription: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
   twitterTitle: 'UUID Generator — Random UUID v4 | JSON Tools',
   twitterDescription: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
+  ogImage: 'https://jsontools.space/og/uuid.png',
+  twitterImage: 'https://jsontools.space/og/uuid.png',
 })
 
 const FORMATS = [
@@ -198,13 +200,14 @@ const seoCards = [
 .format-indicator {
   position: absolute;
   top: 2px; left: 2px;
-  width: calc(33.33% - 2px);
+  width: calc((100% - 4px) / 3);
   bottom: 2px;
   background: #1A1916;
   border-radius: 6px;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .format-btn {
+  flex: 1;
   position: relative; z-index: 1;
   border: none; background: transparent;
   font-size: 12px; font-weight: 600;

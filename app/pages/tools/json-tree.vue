@@ -119,6 +119,8 @@ useSeoMeta({
   ogDescription: 'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
   twitterTitle: 'JSON Tree Viewer — Collapsible Tree & Graph | JSON Tools',
   twitterDescription: 'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
+  ogImage: 'https://jsontools.space/og/json-tree.png',
+  twitterImage: 'https://jsontools.space/og/json-tree.png',
 })
 
 const SAMPLE = `{
@@ -268,10 +270,11 @@ const seoCards = [
   border-radius: 6px;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.view-indicator--right { transform: translateX(calc(100% + 2px)); }
+.view-indicator--right { transform: translateX(100%); }
 .view-btn {
+  flex: 1;
   position: relative; z-index: 1;
-  display: flex; align-items: center; gap: 5px;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
   border: none; background: transparent;
   font-size: 12px; font-weight: 600;
   padding: 5px 12px;

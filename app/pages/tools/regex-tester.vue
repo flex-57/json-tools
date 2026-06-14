@@ -110,6 +110,8 @@ useSeoMeta({
   ogDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
   twitterTitle: 'Regex Tester — Free Online Regular Expression Tool',
   twitterDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/regex-tester.png',
+  twitterImage: 'https://jsontools.space/og/regex-tester.png',
 })
 
 const { pattern, flags, input, regexError, matches, highlightedHtml, clear } = useRegexTester()

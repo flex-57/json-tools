@@ -98,6 +98,8 @@ useSeoMeta({
   ogDescription: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
   twitterTitle: 'CSV to JSON Converter — Free Online Tool',
   twitterDescription: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/csv-to-json.png',
+  twitterImage: 'https://jsontools.space/og/csv-to-json.png',
 })
 
 const seoCards = [

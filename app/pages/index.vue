@@ -118,6 +118,8 @@ useSeoMeta({
   ogDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
   twitterTitle: 'JSON Formatter & Validator — Free Online Tool',
   twitterDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
+  ogImage: 'https://jsontools.space/og/og-image.png',
+  twitterImage: 'https://jsontools.space/og/og-image.png',
 })
 
 const { input, output, error, isValid, indent, copied, format, minify, validate, copy, clear } = useJsonFormatter()

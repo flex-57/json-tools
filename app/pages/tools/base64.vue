@@ -112,6 +112,8 @@ useSeoMeta({
   ogDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
   twitterTitle: 'Base64 Encoder / Decoder — Free Online Tool',
   twitterDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/base64.png',
+  twitterImage: 'https://jsontools.space/og/base64.png',
 })
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useBase64()
@@ -159,14 +161,14 @@ const seoCards = [
 .mode-indicator {
   position: absolute;
   top: 3px; bottom: 3px; left: 3px;
-  width: calc(50% - 3.5px);
+  width: calc(50% - 3px);
   background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(249,115,22,0.4), 0 2px 10px rgba(249,115,22,0.15);
   transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
-.mode-indicator--right { transform: translateX(calc(100% + 2px)); }
+.mode-indicator--right { transform: translateX(100%); }
 
 .mode-btn {
   flex: 1;

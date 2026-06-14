@@ -91,6 +91,8 @@ useSeoMeta({
   ogDescription: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
   twitterTitle: 'JSON to CSV Converter — Free Online Tool',
   twitterDescription: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/json-to-csv.png',
+  twitterImage: 'https://jsontools.space/og/json-to-csv.png',
 })
 
 const { input, output, error, rowCount, delimiter, copied, convert, copy, downloadCsv, clear } = useJsonToCsv()

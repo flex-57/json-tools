@@ -120,6 +120,8 @@ useSeoMeta({
   ogDescription: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
   twitterTitle: 'Excel to JSON Converter — Free Online Tool',
   twitterDescription: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
+  ogImage: 'https://jsontools.space/og/excel-to-json.png',
+  twitterImage: 'https://jsontools.space/og/excel-to-json.png',
 })
 
 const { file, output, error, sheets, activeSheet, hasHeader, copied, loading, convert, switchSheet, copy, clear } = useExcelToJson()

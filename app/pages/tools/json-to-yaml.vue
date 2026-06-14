@@ -81,6 +81,8 @@ useSeoMeta({
   ogDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
   twitterTitle: 'JSON to YAML Converter — Free Online Tool',
   twitterDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
+  ogImage: 'https://jsontools.space/og/json-to-yaml.png',
+  twitterImage: 'https://jsontools.space/og/json-to-yaml.png',
 })
 const { input, output, error, indent, copied, convert, copy, download, clear } = useJsonToYaml()
 

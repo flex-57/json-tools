@@ -81,6 +81,8 @@ useSeoMeta({
   ogDescription: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
   twitterTitle: 'JSON to Excel Converter — Free Online Tool',
   twitterDescription: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
+  ogImage: 'https://jsontools.space/og/json-to-excel.png',
+  twitterImage: 'https://jsontools.space/og/json-to-excel.png',
 })
 
 const { input, error, loading, download, clear } = useJsonToExcel()

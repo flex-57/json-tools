@@ -57,6 +57,8 @@ useSeoMeta({
   ogDescription: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
   twitterTitle: 'Hash Generator — MD5, SHA-1, SHA-256, SHA-512 | JSON Tools',
   twitterDescription: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
+  ogImage: 'https://jsontools.space/og/hash.png',
+  twitterImage: 'https://jsontools.space/og/hash.png',
 })
 
 const input   = ref('')
