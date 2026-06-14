@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Color <span class="title-amp">Picker & Converter</span></h1>
-        <p class="page-subtitle">Pick a color visually and convert between HEX, RGB, HSL and HSB. Check WCAG contrast ratios.</p>
+        <p class="page-subtitle">Pick a color visually and convert between HEX, RGBA, HSLA and HSBA. Check WCAG contrast ratios.</p>
       </div>
     </div>
 
@@ -36,9 +36,23 @@
             <div class="hue-thumb" :style="hueThumbStyle" />
           </div>
 
+          <div
+            class="alpha-strip"
+            ref="alphaEl"
+            @pointerdown="onAlphaDown"
+            @pointermove="onAlphaMove"
+            @pointerup="onAlphaUp"
+            @pointercancel="onAlphaUp"
+          >
+            <div class="alpha-gradient" :style="{ background: alphaGradientBg }" />
+            <div class="alpha-thumb" :style="alphaThumbStyle" />
+          </div>
+
           <div class="preview-row">
-            <div class="color-preview" :style="{ background: currentHex }" />
-            <span class="preview-hex">{{ currentHex }}</span>
+            <div class="preview-checker">
+              <div class="preview-inner" :style="{ background: currentRgba }" />
+            </div>
+            <span class="preview-hex">{{ hexInput }}</span>
           </div>
         </div>
 
@@ -143,7 +157,7 @@
               <input v-model="contrastBg" class="c-hex-input" spellcheck="false" />
             </div>
           </div>
-          <button class="btn btn-ghost use-current-btn" @click="contrastBg = currentHex" title="Use current color as background">
+          <button class="btn btn-ghost use-current-btn" @click="contrastBg = currentHex" title="Use current color (opaque) as background">
             Use current
           </button>
         </div>
@@ -169,20 +183,20 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Color Picker & Converter — HEX RGB HSL HSB | JSON Tools',
-  description: 'Visual color picker with instant HEX ↔ RGB ↔ HSL ↔ HSB conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
-  ogTitle: 'Color Picker & Converter — HEX RGB HSL HSB | JSON Tools',
-  ogDescription: 'Visual color picker with instant HEX ↔ RGB ↔ HSL ↔ HSB conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
-  twitterTitle: 'Color Picker & Converter — HEX RGB HSL HSB | JSON Tools',
-  twitterDescription: 'Visual color picker with instant HEX ↔ RGB ↔ HSL ↔ HSB conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
+  title: 'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
+  description: 'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
+  ogTitle: 'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
+  ogDescription: 'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
+  twitterTitle: 'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
+  twitterDescription: 'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
   ogImage: 'https://jsontools.space/og/color.png',
   twitterImage: 'https://jsontools.space/og/color.png',
 })
 
 const {
-  h, s, b,
+  h, s, b, a,
   hexInput, rgbInput, hslInput, hsbInput,
-  currentHex, shades,
+  currentHex, currentRgba, alphaGradientBg, shades,
   applyHex, applyRgb, applyHsl, applyHsb,
   syncAllInputs,
 } = useColorPicker()
@@ -233,6 +247,28 @@ function updateFromHue(e: PointerEvent) {
   syncAllInputs()
 }
 
+/* ── Alpha drag ───────────────────────────────────────────── */
+const alphaEl = ref<HTMLElement | null>(null)
+let draggingAlpha = false
+
+function onAlphaDown(e: PointerEvent) {
+  draggingAlpha = true
+  alphaEl.value!.setPointerCapture(e.pointerId)
+  updateFromAlpha(e)
+}
+function onAlphaMove(e: PointerEvent) {
+  if (!draggingAlpha) return
+  updateFromAlpha(e)
+}
+function onAlphaUp() { draggingAlpha = false }
+
+function updateFromAlpha(e: PointerEvent) {
+  const rect = alphaEl.value!.getBoundingClientRect()
+  const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width))
+  a.value = Math.round((x / rect.width) * 100)
+  syncAllInputs()
+}
+
 /* ── Computed styles ──────────────────────────────────────── */
 const pickerBg = computed(() => ({
   background:
@@ -247,6 +283,10 @@ const cursorStyle = computed(() => ({
 
 const hueThumbStyle = computed(() => ({
   left: (h.value / 360 * 100) + '%',
+}))
+
+const alphaThumbStyle = computed(() => ({
+  left: a.value + '%',
 }))
 
 /* ── Copy ─────────────────────────────────────────────────── */
@@ -267,16 +307,16 @@ const contrastRatioVal = computed(() => calcContrastRatio(contrastFg.value, cont
 /* ── SEO cards ────────────────────────────────────────────── */
 const cards = [
   {
-    title: 'HEX, RGB, HSL, HSB — what is the difference?',
-    text: 'HEX is a 6-digit hexadecimal notation (#RRGGBB) widely used in HTML and CSS. RGB (Red, Green, Blue) expresses color as three 0–255 values — the native language of screens. HSL (Hue, Saturation, Lightness) and HSB/HSV (Hue, Saturation, Brightness) are cylindrical models that match human intuition: hue is the color "type" (0–360°), saturation is intensity, and lightness/brightness is how light or dark it appears. All four formats describe exactly the same set of colors — conversion between them is lossless and instantaneous.',
+    title: 'HEX, RGBA, HSLA, HSBA — what is the difference?',
+    text: 'HEX is a 6-digit hexadecimal notation (#RRGGBB) widely used in HTML and CSS — add two more digits for alpha (#RRGGBBAA). RGBA (Red, Green, Blue, Alpha) expresses color as three 0–255 values plus an alpha channel from 0 (transparent) to 1 (opaque). HSLA (Hue, Saturation, Lightness, Alpha) and HSBA (Hue, Saturation, Brightness, Alpha) are cylindrical models that match human intuition, extended with an alpha component. All four families describe exactly the same set of colors including transparency — conversion is lossless.',
   },
   {
     title: 'How does WCAG contrast work?',
-    text: 'The Web Content Accessibility Guidelines (WCAG 2.1) define contrast ratio as (L1+0.05)/(L2+0.05), where L1 and L2 are the relative luminances of the two colors (computed from gamma-corrected RGB). A ratio of 1:1 means identical colors; 21:1 is maximum (black on white). For normal-size text (below 18pt / 14pt bold), AA requires 4.5:1 and AAA requires 7:1. Large text has lower thresholds — 3:1 for AA and 4.5:1 for AAA. Aim for AAA on body text; AA is the legal minimum for most accessibility regulations.',
+    text: 'The Web Content Accessibility Guidelines (WCAG 2.1) define contrast ratio as (L1+0.05)/(L2+0.05), where L1 and L2 are the relative luminances of the two colors (computed from gamma-corrected RGB). A ratio of 1:1 means identical colors; 21:1 is maximum (black on white). For normal-size text (below 18pt / 14pt bold), AA requires 4.5:1 and AAA requires 7:1. Large text has lower thresholds — 3:1 for AA and 4.5:1 for AAA. Note: WCAG 2.1 defines contrast only for fully opaque colors. The contrast checker always uses the opaque version of your current color.',
   },
   {
     title: 'How to use the color picker',
-    text: 'Drag inside the square to adjust saturation (left–right) and brightness (top–bottom). Drag the rainbow strip below to change hue. The HEX, RGB, HSL, and HSB fields update instantly and are all editable — type a value and press Enter (or click away) to apply it. Click any shade swatch to jump to that tone. In the contrast checker, click "Use current" to load your picked color as the background, then set the foreground text color to check WCAG compliance.',
+    text: 'Drag inside the square to adjust saturation (left–right) and brightness (top–bottom). Drag the rainbow strip to change hue. Drag the checkerboard strip below it to set opacity — fully right is 100% opaque, fully left is fully transparent. All format fields (HEX, RGB, HSL, HSB) update instantly and are editable; type a value with or without an alpha component and press Enter to apply. Click any shade swatch to jump to that tone. In the contrast checker, "Use current" loads the opaque version of your color as background.',
   },
 ]
 </script>
@@ -339,6 +379,46 @@ const cards = [
   pointer-events: none;
 }
 
+/* ── Alpha strip ──────────────────────────────────────────── */
+.alpha-strip {
+  height: 14px;
+  border-radius: 7px;
+  position: relative;
+  margin-top: 8px;
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+  border: 1px solid rgba(0,0,0,0.08);
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #bbb 25%, transparent 25%),
+    linear-gradient(-45deg, #bbb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #bbb 75%),
+    linear-gradient(-45deg, transparent 75%, #bbb 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+}
+
+.alpha-gradient {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.alpha-thumb {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,0.15);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 /* ── Preview ──────────────────────────────────────────────── */
 .preview-row {
   display: flex;
@@ -347,12 +427,26 @@ const cards = [
   margin-top: 12px;
 }
 
-.color-preview {
+.preview-checker {
   width: 36px;
   height: 36px;
   border-radius: 6px;
   border: 1px solid var(--c-border);
   flex-shrink: 0;
+  overflow: hidden;
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #bbb 25%, transparent 25%),
+    linear-gradient(-45deg, #bbb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #bbb 75%),
+    linear-gradient(-45deg, transparent 75%, #bbb 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+}
+
+.preview-inner {
+  width: 100%;
+  height: 100%;
 }
 
 .preview-hex {
