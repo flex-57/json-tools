@@ -56,6 +56,7 @@
                 <NuxtLink to="/tools/unix-timestamp"  class="nav-dropdown-item">Unix Timestamp</NuxtLink>
                 <NuxtLink to="/tools/minifier"        class="nav-dropdown-item">Minifier</NuxtLink>
                 <NuxtLink to="/tools/sql-formatter"   class="nav-dropdown-item">SQL Formatter</NuxtLink>
+                <NuxtLink to="/tools/text-case"       class="nav-dropdown-item">Text Case Converter</NuxtLink>
                 <div class="nav-dropdown-section mega-section-gap">Generate</div>
                 <NuxtLink to="/tools/hash"            class="nav-dropdown-item">Hash Generator</NuxtLink>
                 <NuxtLink to="/tools/uuid"            class="nav-dropdown-item">UUID Generator</NuxtLink>
@@ -126,6 +127,7 @@
             <NuxtLink to="/tools/unix-timestamp" class="mobile-nav-item" @click="mobileOpen = false">Unix Timestamp</NuxtLink>
             <NuxtLink to="/tools/minifier"       class="mobile-nav-item" @click="mobileOpen = false">Minifier</NuxtLink>
             <NuxtLink to="/tools/sql-formatter"  class="mobile-nav-item" @click="mobileOpen = false">SQL Formatter</NuxtLink>
+            <NuxtLink to="/tools/text-case"       class="mobile-nav-item" @click="mobileOpen = false">Text Case Converter</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -168,7 +170,7 @@ watch(() => route.path, (path) => {
 })
 
 const converterPaths = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
-const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts', '/tools/hash', '/tools/uuid', '/tools/minifier', '/tools/json-schema', '/tools/sql-formatter']
+const toolPaths = ['/tools/jwt-decoder', '/tools/json-diff', '/tools/json-tree', '/tools/base64', '/tools/url-encode', '/tools/unix-timestamp', '/tools/regex-tester', '/tools/cron-parser', '/tools/json-to-ts', '/tools/hash', '/tools/uuid', '/tools/minifier', '/tools/json-schema', '/tools/sql-formatter', '/tools/text-case']
 const isConverterActive = computed(() => converterPaths.some(p => route.path.startsWith(p)))
 const isToolActive = computed(() => toolPaths.some(p => route.path.startsWith(p)))
 
@@ -194,6 +196,7 @@ const TOOL_NAMES = {
   'jwt-decoder': 'JWT Decoder',
   'minifier': 'CSS / HTML / JS Minifier',
   'sql-formatter': 'SQL Formatter',
+  'text-case': 'Text Case Converter',
   'regex-tester': 'Regex Tester',
   'unix-timestamp': 'Unix Timestamp Converter',
   'url-encode': 'URL Encoder / Decoder',

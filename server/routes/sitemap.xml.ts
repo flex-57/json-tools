@@ -25,6 +25,7 @@ export default defineEventHandler((event) => {
     { loc: '/tools/json-schema' },
     { loc: '/tools/minifier' },
     { loc: '/tools/sql-formatter' },
+    { loc: '/tools/text-case' },
   ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

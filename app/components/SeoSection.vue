@@ -48,6 +48,7 @@ const AUTO_RELATED: Record<string, RelatedTool[]> = {
   '/tools/uuid':           [{ label: 'Hash Generator', to: '/tools/hash' }],
   '/tools/minifier':       [{ label: 'JSON Formatter', to: '/' }, { label: 'Base64', to: '/tools/base64' }],
   '/tools/sql-formatter':  [{ label: 'Minifier', to: '/tools/minifier' }, { label: 'JSON Formatter', to: '/' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
+  '/tools/text-case':      [{ label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'Minifier', to: '/tools/minifier' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
 }
 
 const displayRelated = computed(() => props.related ?? AUTO_RELATED[route.path] ?? [])
