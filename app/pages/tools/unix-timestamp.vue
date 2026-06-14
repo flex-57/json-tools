@@ -53,6 +53,7 @@
             <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none">
               <path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+            {{ copied === row.key ? 'Copied!' : 'Copy' }}
           </button>
         </div>
       </div>
@@ -211,14 +212,12 @@ const seoCards = [
 }
 
 .btn-copy-row {
-  width: 28px; height: 28px;
-  border-radius: 6px;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-family: inherit; font-weight: 500;
+  padding: 4px 10px; border-radius: 6px;
   border: 1px solid var(--c-border);
-  background: var(--c-faint);
-  color: var(--c-t4);
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  background: var(--c-faint); color: var(--c-t3);
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
   transition: all 0.15s;
 }
 .btn-copy-row:hover { background: var(--c-subtle); color: var(--c-t2); }

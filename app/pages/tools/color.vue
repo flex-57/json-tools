@@ -70,6 +70,7 @@
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'hex' }" @click="doCopy(hexInput, 'hex')">
               <svg v-if="copied !== 'hex'" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {{ copied === 'hex' ? 'Copied!' : 'Copy' }}
             </button>
           </div>
 
@@ -85,6 +86,7 @@
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'rgb' }" @click="doCopy(rgbInput, 'rgb')">
               <svg v-if="copied !== 'rgb'" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {{ copied === 'rgb' ? 'Copied!' : 'Copy' }}
             </button>
           </div>
 
@@ -100,6 +102,7 @@
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'hsl' }" @click="doCopy(hslInput, 'hsl')">
               <svg v-if="copied !== 'hsl'" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {{ copied === 'hsl' ? 'Copied!' : 'Copy' }}
             </button>
           </div>
 
@@ -115,6 +118,7 @@
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'hsb' }" @click="doCopy(hsbInput, 'hsb')">
               <svg v-if="copied !== 'hsb'" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {{ copied === 'hsb' ? 'Copied!' : 'Copy' }}
             </button>
           </div>
 
@@ -496,16 +500,19 @@ const cards = [
 .copy-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 34px;
+  gap: 5px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  padding: 4px 10px;
   border: 1px solid var(--c-border);
   border-radius: 7px;
   background: var(--c-subtle);
-  color: var(--c-t4);
+  color: var(--c-t3);
   cursor: pointer;
-  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  white-space: nowrap;
   flex-shrink: 0;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
 }
 .copy-btn:hover { background: var(--c-border); color: var(--c-t1); }
 .copy-btn--done { background: #ECFDF5; border-color: #6EE7B7; color: #059669; }
