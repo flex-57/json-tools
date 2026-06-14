@@ -1,5 +1,29 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 
+const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
+<users>
+  <user id="1">
+    <name>Alice</name>
+    <email>alice@example.com</email>
+    <role>admin</role>
+  </user>
+  <user id="2">
+    <name>Bob</name>
+    <email>bob@example.com</email>
+    <role>editor</role>
+  </user>
+</users>`
+
+const SAMPLE_JSON = `{
+  "id": 1,
+  "name": "Alice Martin",
+  "email": "alice@example.com",
+  "role": "admin",
+  "active": true,
+  "tags": ["api", "auth"],
+  "created_at": "2024-01-15T09:00:00Z"
+}`
+
 interface ConvertResult {
   output: string
   error: string | null
@@ -30,7 +54,7 @@ export function jsonToXml(input: string): ConvertResult {
 }
 
 export function useXmlToJson() {
-  const input = ref('')
+  const input = ref(SAMPLE_XML)
   const output = ref('')
   const error = ref<string | null>(null)
   const copied = ref(false)
@@ -50,11 +74,13 @@ export function useXmlToJson() {
 
   function clear() { input.value = ''; output.value = ''; error.value = null }
 
+  onMounted(convert)
+
   return { input, output, error, copied, convert, copy, clear }
 }
 
 export function useJsonToXml() {
-  const input = ref('')
+  const input = ref(SAMPLE_JSON)
   const output = ref('')
   const error = ref<string | null>(null)
   const copied = ref(false)
@@ -82,6 +108,8 @@ export function useJsonToXml() {
   }
 
   function clear() { input.value = ''; output.value = ''; error.value = null }
+
+  onMounted(convert)
 
   return { input, output, error, copied, convert, copy, download, clear }
 }

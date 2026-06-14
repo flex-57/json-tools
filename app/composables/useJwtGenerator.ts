@@ -63,6 +63,8 @@ export function useJwtGenerator() {
     timer = setTimeout(generate, 150)
   })
 
+  onMounted(generate)
+
   function setIatNow() {
     try {
       const obj = JSON.parse(payload.value)

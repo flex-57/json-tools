@@ -33,7 +33,7 @@ const CASES: { key: CaseKey; label: string; example: string; convert: (ws: strin
 ]
 
 export function useTextCase() {
-  const input = ref('')
+  const input = ref('hello world example')
   const copiedKey = ref<CaseKey | null>(null)
 
   const results = computed<CaseResult[]>(() => {

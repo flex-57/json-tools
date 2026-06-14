@@ -1,7 +1,16 @@
 export type SqlDialect = 'sql' | 'mysql' | 'postgresql' | 'sqlite' | 'tsql'
 
+const SAMPLE_SQL = `select u.id, u.name, u.email, count(o.id) as order_count, sum(o.total) as total_spent
+from users u
+left join orders o on u.id = o.user_id
+where u.active = 1 and o.created_at >= '2024-01-01'
+group by u.id, u.name, u.email
+having total_spent > 100
+order by total_spent desc
+limit 20`
+
 export function useSqlFormatter() {
-  const input      = ref('')
+  const input      = ref(SAMPLE_SQL)
   const dialect    = ref<SqlDialect>('sql')
   const uppercase  = ref(true)
   const indentSize = ref(2)
@@ -38,6 +47,8 @@ export function useSqlFormatter() {
     if (timer) clearTimeout(timer)
     timer = setTimeout(run, 250)
   })
+
+  onMounted(run)
 
   async function copy() {
     if (!output.value) return

@@ -98,8 +98,18 @@ function zodObject(obj: JsonObj, depth: number): string {
   return `z.object({\n${fields.join('\n')}\n${closePad}})`
 }
 
+const SAMPLE_JSON = `{
+  "id": 1,
+  "name": "Alice Martin",
+  "email": "alice@example.com",
+  "role": "admin",
+  "active": true,
+  "tags": ["api", "auth"],
+  "created_at": "2024-01-15T09:00:00Z"
+}`
+
 export function useJsonToTs() {
-  const input = ref('')
+  const input = ref(SAMPLE_JSON)
   const mode = ref<'ts' | 'zod'>('ts')
   const rootName = ref('Root')
   const copied = ref(false)

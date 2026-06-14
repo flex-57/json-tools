@@ -22,7 +22,7 @@ export function decodeBase64(input: string, variant: Base64Variant = 'standard')
 export function useBase64() {
   const mode = ref<'encode' | 'decode'>('encode')
   const variant = ref<Base64Variant>('standard')
-  const input = ref('')
+  const input = ref('Hello, World! This is a Base64 encoding example.')
   const error = ref<string | null>(null)
   const copied = ref(false)
 

@@ -67,8 +67,24 @@ export async function minifyJS(input: string): Promise<MinifyResult> {
 
 const MINIFIERS = { css: minifyCSS, html: minifyHTML, js: minifyJS }
 
+const SAMPLE_CSS = `.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}`
+
 export function useMinifier() {
-  const input   = ref('')
+  const input   = ref(SAMPLE_CSS)
   const mode    = ref<MinifyMode>('css')
   const copied  = ref(false)
   const loading = ref(false)
@@ -88,6 +104,8 @@ export function useMinifier() {
     if (timer) clearTimeout(timer)
     timer = setTimeout(run, 280)
   })
+
+  onMounted(run)
 
   const output  = computed(() => result.value?.output ?? '')
   const error   = computed(() => result.value?.error ?? null)

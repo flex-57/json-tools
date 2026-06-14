@@ -70,9 +70,24 @@ export function diffJson(left: string, right: string): DiffResult {
   }
 }
 
+const SAMPLE_LEFT = `{
+  "id": 1,
+  "name": "Alice Martin",
+  "role": "admin",
+  "active": true
+}`
+
+const SAMPLE_RIGHT = `{
+  "id": 1,
+  "name": "Alice Martin",
+  "role": "editor",
+  "active": true,
+  "age": 30
+}`
+
 export function useJsonDiff() {
-  const left = ref('')
-  const right = ref('')
+  const left = ref(SAMPLE_LEFT)
+  const right = ref(SAMPLE_RIGHT)
 
   const result = computed<DiffResult | null>(() => {
     if (!left.value.trim() && !right.value.trim()) return null

@@ -80,8 +80,18 @@ export function buildSchema(val: unknown, opts: SchemaOptions): SchemaNode {
   return { $schema: DRAFTS[opts.draft], ...buildNode(val as JsonVal, opts) }
 }
 
+const SAMPLE_JSON = `{
+  "id": 1,
+  "name": "Alice Martin",
+  "email": "alice@example.com",
+  "role": "admin",
+  "active": true,
+  "tags": ["api", "auth"],
+  "created_at": "2024-01-15T09:00:00Z"
+}`
+
 export function useJsonSchema() {
-  const input   = ref('')
+  const input   = ref(SAMPLE_JSON)
   const draft   = ref<SchemaDraft>('draft-07')
   const required = ref(true)
   const copied  = ref(false)

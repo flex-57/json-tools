@@ -3,7 +3,7 @@ export type UrlVariant = 'component' | 'full'
 export function useUrlEncode() {
   const mode = ref<'encode' | 'decode'>('encode')
   const variant = ref<UrlVariant>('component')
-  const input = ref('')
+  const input = ref('name=John Doe&city=São Paulo&redirect=https://example.com/path?lang=fr')
   const error = ref<string | null>(null)
   const copied = ref(false)
 

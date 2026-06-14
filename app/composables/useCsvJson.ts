@@ -1,5 +1,16 @@
 import Papa from 'papaparse'
 
+const SAMPLE_CSV = `id,name,email,role,active
+1,Alice,alice@example.com,admin,true
+2,Bob,bob@example.com,editor,true
+3,Carol,carol@example.com,viewer,false`
+
+const SAMPLE_JSON_ARRAY = `[
+  { "id": 1, "name": "Alice", "email": "alice@example.com", "role": "admin" },
+  { "id": 2, "name": "Bob", "email": "bob@example.com", "role": "editor" },
+  { "id": 3, "name": "Carol", "email": "carol@example.com", "role": "viewer" }
+]`
+
 export type Delimiter = ',' | ';' | '\t' | 'auto'
 
 interface ConvertResult {
@@ -48,7 +59,7 @@ export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): Con
 }
 
 export function useCsvToJson() {
-  const input = ref('')
+  const input = ref(SAMPLE_CSV)
   const output = ref('')
   const error = ref<string | null>(null)
   const rowCount = ref(0)
@@ -88,11 +99,13 @@ export function useCsvToJson() {
     rowCount.value = 0
   }
 
+  onMounted(convert)
+
   return { input, output, error, rowCount, delimiter, hasHeader, copied, convert, copy, downloadJson, clear }
 }
 
 export function useJsonToCsv() {
-  const input = ref('')
+  const input = ref(SAMPLE_JSON_ARRAY)
   const output = ref('')
   const error = ref<string | null>(null)
   const rowCount = ref(0)
@@ -130,6 +143,8 @@ export function useJsonToCsv() {
     error.value = null
     rowCount.value = 0
   }
+
+  onMounted(convert)
 
   return { input, output, error, rowCount, delimiter, copied, convert, copy, downloadCsv, clear }
 }

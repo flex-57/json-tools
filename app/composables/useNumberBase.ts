@@ -39,7 +39,7 @@ function groupDec(s: string): string {
 }
 
 export function useNumberBase() {
-  const input = ref('')
+  const input = ref('255')
   const copiedKey = ref<BaseKey | null>(null)
 
   const parsed = computed(() => parseInput(input.value))

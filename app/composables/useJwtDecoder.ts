@@ -88,8 +88,10 @@ export function decodeJwt(token: string): JwtResult {
   }
 }
 
+const SAMPLE_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
 export function useJwtDecoder() {
-  const token = ref('')
+  const token = ref(SAMPLE_JWT)
   const result = computed(() => decodeJwt(token.value))
   const copiedHeader = ref(false)
   const copiedPayload = ref(false)

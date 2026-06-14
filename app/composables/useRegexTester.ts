@@ -14,9 +14,9 @@ export interface RegexMatch {
 }
 
 export function useRegexTester() {
-  const pattern = ref('')
+  const pattern = ref('[\\w.+-]+@[\\w-]+\\.[\\w.]+')
   const flags   = ref('g')
-  const input   = ref('')
+  const input   = ref('Contact: alice@example.com or bob@dev.org — billing@company.co.uk')
 
   const regexError = computed((): string | null => {
     if (!pattern.value) return null

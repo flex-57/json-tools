@@ -63,5 +63,7 @@ export function useUnixTimestamp() {
     setTimeout(() => { copied.value = null }, 2000)
   }
 
+  onMounted(setNow)
+
   return { input, parsed, error, unix, unixMs, iso, utc, local, relative, copied, setNow, clear, refresh, copyValue }
 }

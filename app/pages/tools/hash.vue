@@ -60,7 +60,7 @@ useSeoMeta({
   twitterImage: 'https://jsontools.space/og/hash.png',
 })
 
-const input   = ref('')
+const input   = ref('Hello, World!')
 const focused = ref(false)
 const copied  = ref<HashAlgorithm | null>(null)
 const hashes  = ref<Record<HashAlgorithm, string>>({ 'MD5': '', 'SHA-1': '', 'SHA-256': '', 'SHA-384': '', 'SHA-512': '' })

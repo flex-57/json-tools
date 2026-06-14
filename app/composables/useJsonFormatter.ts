@@ -60,8 +60,18 @@ function diffJson(left: string, right: string): { added: string[]; removed: stri
   }
 }
 
+const SAMPLE_JSON = `{
+  "id": 1,
+  "name": "Alice Martin",
+  "email": "alice@example.com",
+  "role": "admin",
+  "active": true,
+  "tags": ["api", "auth"],
+  "created_at": "2024-01-15T09:00:00Z"
+}`
+
 export function useJsonFormatter() {
-  const input = ref('')
+  const input = ref(SAMPLE_JSON)
   const output = ref('')
   const error = ref<string | null>(null)
   const isValid = ref<boolean | null>(null)
@@ -103,6 +113,8 @@ export function useJsonFormatter() {
     error.value = null
     isValid.value = null
   }
+
+  onMounted(format)
 
   return { input, output, error, isValid, indent, copied, format, minify, validate, copy, clear }
 }
