@@ -1,75 +1,75 @@
-# Nuxt Minimal Starter
+# JSON Tools
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+**28 free browser-based developer utilities — JSON, converters, JWT, regex, and more.**
 
-## Setup
+Live at **[jsontools.space](https://jsontools.space)**
 
-Make sure to install dependencies:
+All tools run entirely in your browser. No data is ever sent to a server, no signup required, no tracking.
+
+---
+
+## Tools
+
+**JSON**
+- JSON Formatter & Validator
+- JSON Diff
+- JSON Tree Viewer
+- JSON → TypeScript / Zod
+- JSON Schema Generator
+
+**Converters**
+- CSV ↔ JSON
+- XML ↔ JSON
+- YAML ↔ JSON
+- Excel ↔ JSON
+
+**Text & Code**
+- Text Case Converter
+- CSS / HTML / JS Minifier
+- SQL Formatter
+- URL Encode / Decode
+- Base64 Encode / Decode
+
+**Security**
+- JWT Decoder
+- JWT Generator
+- Hash Generator (MD5, SHA-1, SHA-256, SHA-512)
+- UUID Generator
+- Password Generator
+
+**Dev Utils**
+- Regex Tester
+- Cron Parser
+- Unix Timestamp Converter
+- Number Base Converter
+- Color Picker & Converter
+
+---
+
+## Stack
+
+- [Nuxt 4](https://nuxt.com) + [Vue 3](https://vuejs.org) + TypeScript
+- Static Site Generation (SSG) deployed on [Vercel](https://vercel.com)
+- No external UI library — custom CSS only
+
+---
+
+## Run locally
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
+Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+npm run build    # production build
+npm run preview  # preview production build locally
 ```
 
-Locally preview production build:
+---
 
-```bash
-# npm
-npm run preview
+## License
 
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+MIT — see [LICENSE](./LICENSE)
