@@ -75,11 +75,11 @@
 import { useJsonToExcel } from '~/composables/useExcelJson'
 
 useSeoMeta({
-  title: 'JSON to Excel Converter — Free Online Tool',
+  title: 'JSON to Excel Converter — Download .xlsx from JSON Free',
   description: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
-  ogTitle: 'JSON to Excel Converter — Free Online Tool',
+  ogTitle: 'JSON to Excel Converter — Download .xlsx from JSON Free',
   ogDescription: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
-  twitterTitle: 'JSON to Excel Converter — Free Online Tool',
+  twitterTitle: 'JSON to Excel Converter — Download .xlsx from JSON Free',
   twitterDescription: 'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
   ogImage: 'https://jsontools.space/og/json-to-excel.png',
   twitterImage: 'https://jsontools.space/og/json-to-excel.png',

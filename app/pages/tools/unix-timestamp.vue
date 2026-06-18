@@ -60,11 +60,11 @@
 import { useUnixTimestamp } from '~/composables/useUnixTimestamp'
 
 useSeoMeta({
-  title: 'Unix Timestamp Converter — Free Online Tool',
+  title: 'Unix Timestamp Converter — Epoch to Date & Date to Epoch',
   description: 'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds, ISO 8601, UTC, and local time. Free, no data sent to servers.',
-  ogTitle: 'Unix Timestamp Converter — Free Online Tool',
+  ogTitle: 'Unix Timestamp Converter — Epoch to Date & Date to Epoch',
   ogDescription: 'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds, ISO 8601, UTC, and local time. Free, no data sent to servers.',
-  twitterTitle: 'Unix Timestamp Converter — Free Online Tool',
+  twitterTitle: 'Unix Timestamp Converter — Epoch to Date & Date to Epoch',
   twitterDescription: 'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds, ISO 8601, UTC, and local time. Free, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/unix-timestamp.png',
   twitterImage: 'https://jsontools.space/og/unix-timestamp.png',

@@ -68,11 +68,11 @@
 <script setup lang="ts">
 import { useJsonToXml } from '~/composables/useXmlJson'
 useSeoMeta({
-  title: 'JSON to XML Converter — Free Online Tool',
+  title: 'JSON to XML Converter — Generate Valid XML from JSON Online',
   description: 'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
-  ogTitle: 'JSON to XML Converter — Free Online Tool',
+  ogTitle: 'JSON to XML Converter — Generate Valid XML from JSON Online',
   ogDescription: 'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
-  twitterTitle: 'JSON to XML Converter — Free Online Tool',
+  twitterTitle: 'JSON to XML Converter — Generate Valid XML from JSON Online',
   twitterDescription: 'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/json-to-xml.png',
   twitterImage: 'https://jsontools.space/og/json-to-xml.png',

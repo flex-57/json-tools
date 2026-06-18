@@ -114,11 +114,11 @@
 import { useExcelToJson } from '~/composables/useExcelJson'
 
 useSeoMeta({
-  title: 'Excel to JSON Converter — Free Online Tool',
+  title: 'Excel to JSON Converter — Upload .xlsx & Get JSON Free',
   description: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
-  ogTitle: 'Excel to JSON Converter — Free Online Tool',
+  ogTitle: 'Excel to JSON Converter — Upload .xlsx & Get JSON Free',
   ogDescription: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
-  twitterTitle: 'Excel to JSON Converter — Free Online Tool',
+  twitterTitle: 'Excel to JSON Converter — Upload .xlsx & Get JSON Free',
   twitterDescription: 'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
   ogImage: 'https://jsontools.space/og/excel-to-json.png',
   twitterImage: 'https://jsontools.space/og/excel-to-json.png',

@@ -115,11 +115,11 @@
 import { useMinifier, type MinifyMode } from '~/composables/useMinifier'
 
 useSeoMeta({
-  title: 'CSS / HTML / JS Minifier — Free Online Tool | JSON Tools',
+  title: 'CSS / HTML / JS Minifier — Compress Code Online Free',
   description: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
-  ogTitle: 'CSS / HTML / JS Minifier — Free Online Tool | JSON Tools',
+  ogTitle: 'CSS / HTML / JS Minifier — Compress Code Online Free',
   ogDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
-  twitterTitle: 'CSS / HTML / JS Minifier — Free Online Tool | JSON Tools',
+  twitterTitle: 'CSS / HTML / JS Minifier — Compress Code Online Free',
   twitterDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/minifier.png',
   twitterImage: 'https://jsontools.space/og/minifier.png',

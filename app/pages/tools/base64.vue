@@ -99,11 +99,11 @@
 import { useBase64 } from '~/composables/useBase64'
 
 useSeoMeta({
-  title: 'Base64 Encoder / Decoder — Free Online Tool',
+  title: 'Base64 Encode & Decode Online — Text & File Converter',
   description: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
-  ogTitle: 'Base64 Encoder / Decoder — Free Online Tool',
+  ogTitle: 'Base64 Encode & Decode Online — Text & File Converter',
   ogDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
-  twitterTitle: 'Base64 Encoder / Decoder — Free Online Tool',
+  twitterTitle: 'Base64 Encode & Decode Online — Text & File Converter',
   twitterDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/base64.png',
   twitterImage: 'https://jsontools.space/og/base64.png',

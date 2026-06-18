@@ -75,11 +75,11 @@
 <script setup lang="ts">
 import { useJsonToYaml } from '~/composables/useYamlJson'
 useSeoMeta({
-  title: 'JSON to YAML Converter — Free Online Tool',
+  title: 'JSON to YAML Converter — Export JSON as YAML Config Online',
   description: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
-  ogTitle: 'JSON to YAML Converter — Free Online Tool',
+  ogTitle: 'JSON to YAML Converter — Export JSON as YAML Config Online',
   ogDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
-  twitterTitle: 'JSON to YAML Converter — Free Online Tool',
+  twitterTitle: 'JSON to YAML Converter — Export JSON as YAML Config Online',
   twitterDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/json-to-yaml.png',
   twitterImage: 'https://jsontools.space/og/json-to-yaml.png',

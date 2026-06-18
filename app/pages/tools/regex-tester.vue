@@ -104,11 +104,11 @@
 import { useRegexTester } from '~/composables/useRegexTester'
 
 useSeoMeta({
-  title: 'Regex Tester — Free Online Regular Expression Tool',
+  title: 'Regex Tester Online — Test & Debug Regular Expressions',
   description: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
-  ogTitle: 'Regex Tester — Free Online Regular Expression Tool',
+  ogTitle: 'Regex Tester Online — Test & Debug Regular Expressions',
   ogDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
-  twitterTitle: 'Regex Tester — Free Online Regular Expression Tool',
+  twitterTitle: 'Regex Tester Online — Test & Debug Regular Expressions',
   twitterDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/regex-tester.png',
   twitterImage: 'https://jsontools.space/og/regex-tester.png',

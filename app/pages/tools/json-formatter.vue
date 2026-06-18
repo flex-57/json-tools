@@ -83,11 +83,11 @@
 import { useJsonFormatter } from '~/composables/useJsonFormatter'
 
 useSeoMeta({
-  title: 'JSON Formatter & Validator — Free Online Tool',
+  title: 'JSON Formatter & Validator — Beautify & Validate JSON Online',
   description: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
-  ogTitle: 'JSON Formatter & Validator — Free Online Tool',
+  ogTitle: 'JSON Formatter & Validator — Beautify & Validate JSON Online',
   ogDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
-  twitterTitle: 'JSON Formatter & Validator — Free Online Tool',
+  twitterTitle: 'JSON Formatter & Validator — Beautify & Validate JSON Online',
   twitterDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
   ogImage: 'https://jsontools.space/og/json-formatter.png',
   twitterImage: 'https://jsontools.space/og/json-formatter.png',

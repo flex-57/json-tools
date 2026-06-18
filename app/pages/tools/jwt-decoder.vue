@@ -121,11 +121,11 @@
 import { useJwtDecoder } from '~/composables/useJwtDecoder'
 
 useSeoMeta({
-  title: 'JWT Decoder — Free Online Tool',
+  title: 'JWT Decoder Online — Inspect & Decode JWT Tokens Free',
   description: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
-  ogTitle: 'JWT Decoder — Free Online Tool',
+  ogTitle: 'JWT Decoder Online — Inspect & Decode JWT Tokens Free',
   ogDescription: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
-  twitterTitle: 'JWT Decoder — Free Online Tool',
+  twitterTitle: 'JWT Decoder Online — Inspect & Decode JWT Tokens Free',
   twitterDescription: 'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/jwt-decoder.png',
   twitterImage: 'https://jsontools.space/og/jwt-decoder.png',

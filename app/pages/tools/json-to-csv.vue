@@ -85,11 +85,11 @@
 import { useJsonToCsv } from '~/composables/useCsvJson'
 
 useSeoMeta({
-  title: 'JSON to CSV Converter — Free Online Tool',
+  title: 'JSON to CSV Converter — Export JSON Arrays to CSV Free',
   description: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
-  ogTitle: 'JSON to CSV Converter — Free Online Tool',
+  ogTitle: 'JSON to CSV Converter — Export JSON Arrays to CSV Free',
   ogDescription: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
-  twitterTitle: 'JSON to CSV Converter — Free Online Tool',
+  twitterTitle: 'JSON to CSV Converter — Export JSON Arrays to CSV Free',
   twitterDescription: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
   ogImage: 'https://jsontools.space/og/json-to-csv.png',
   twitterImage: 'https://jsontools.space/og/json-to-csv.png',
