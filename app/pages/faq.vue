@@ -114,6 +114,8 @@ useSeoMeta({
   ogDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
   twitterTitle: 'FAQ — JSON Tools',
   twitterDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
+  ogImage: 'https://jsontools.space/og/faq.png',
+  twitterImage: 'https://jsontools.space/og/faq.png',
 })
 
 useHead({

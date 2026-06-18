@@ -27,6 +27,7 @@ const TOOLS = [
   { slug: 'minifier',        tag: 'Dev Util',               title: 'CSS / HTML / JS\nMinifier',      subtitle: 'Compress code to reduce file size instantly.',                                    size: 64 },
   { slug: 'sql-formatter',      tag: 'Dev Util',   title: 'SQL Formatter',       subtitle: 'Format and beautify SQL queries.\nMySQL, PostgreSQL, SQLite, T-SQL.',              size: 72 },
   { slug: 'password-generator', tag: 'Security',   title: 'Password Generator',  subtitle: 'Generate strong, random passwords.\nCustom length, symbols, bulk export.',         size: 64 },
+  { slug: 'faq',               tag: 'JSON Tools',  title: 'FAQ',                 subtitle: 'Answers about privacy, features, and how\nJSON Tools works.',                          size: 88 },
 ];
 
 const OUT_DIR = path.join(__dirname, '../public/og');
