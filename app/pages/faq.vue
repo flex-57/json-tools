@@ -99,6 +99,13 @@ const FAQS = [
       'Once the page is loaded, most tools work without an internet connection since all processing is done in your browser. However, the initial page load requires a network connection.',
     ],
   },
+  {
+    q: 'What keyboard shortcuts does JSON Tools support?',
+    a: [
+      'Most conversion and formatting tools support Ctrl+Enter (Cmd+Enter on Mac) to trigger the primary action — Format, Convert, Download, or Generate — without reaching for the mouse.',
+      'Supported tools: JSON Formatter, all converters (CSV, XML, YAML, Excel ↔ JSON), JSON → Excel (download), UUID Generator, and Password Generator (refresh). The shortcut hint is visible next to the primary button on each supported tool.',
+    ],
+  },
 ]
 
 const openIndex = ref<number | null>(0)

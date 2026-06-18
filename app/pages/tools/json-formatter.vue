@@ -11,7 +11,7 @@
       <div class="toolbar-left">
         <button @click="format" class="btn btn-primary">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3h10M2 7h6M2 11h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          Format
+          Format <span class="kb">Ctrl ↵</span>
         </button>
         <button @click="minify" class="btn btn-secondary">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M5 4l-3 3 3 3M9 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -94,6 +94,8 @@ useSeoMeta({
 })
 
 const { input, output, error, isValid, indent, copied, format, minify, validate, copy, clear } = useJsonFormatter()
+useToolShortcut(format)
+useUrlInput(input, format)
 
 const indentValue = computed({
   get: () => indent.value,

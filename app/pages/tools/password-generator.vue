@@ -167,6 +167,8 @@ watchEffect(() => {
 
 function regen() { regenKey.value++ }
 
+useToolShortcut(regen)
+
 /* ── Strength / entropy ─────────────────────────────────────── */
 const entropy = computed(() => {
   const cs = charset.value.length

@@ -110,6 +110,7 @@ useSeoMeta({
 })
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useBase64()
+useUrlInput(input)
 
 const inputFocused = ref(false)
 const swapping = ref(false)

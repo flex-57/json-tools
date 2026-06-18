@@ -132,6 +132,7 @@ useSeoMeta({
 })
 
 const { token, result, copiedHeader, copiedPayload, copyHeader, copyPayload, clear } = useJwtDecoder()
+useUrlInput(token)
 
 const seoCards = [
   {

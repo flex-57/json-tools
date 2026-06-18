@@ -201,15 +201,22 @@ const route = useRoute()
 const mobileOpen = ref(false)
 const { init } = useConsent()
 const { isDark, init: initColorMode, toggle } = useColorMode()
+const { addRecent } = useRecentTools()
 
 onMounted(() => {
   init()
   initColorMode()
+  if (route.path.startsWith('/tools/')) {
+    addRecent(route.path.replace('/tools/', ''))
+  }
 })
 
 watch(() => route.path, (path) => {
   mobileOpen.value = false
   trackPageView(path)
+  if (path.startsWith('/tools/')) {
+    addRecent(path.replace('/tools/', ''))
+  }
 })
 
 const jsonPaths       = ['/tools/json-formatter', '/tools/json-diff', '/tools/json-tree', '/tools/json-to-ts', '/tools/json-schema']

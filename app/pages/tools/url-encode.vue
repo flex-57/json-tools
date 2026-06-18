@@ -115,6 +115,7 @@ useSeoMeta({
 })
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useUrlEncode()
+useUrlInput(input)
 
 const inputFocused = ref(false)
 const swapping = ref(false)

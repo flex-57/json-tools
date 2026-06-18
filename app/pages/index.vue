@@ -27,6 +27,21 @@
       No tools found for "<strong>{{ searchQuery }}</strong>"
     </p>
 
+    <div v-if="recentTools.length && !searchQuery" class="recent-section">
+      <p class="recent-label">Recently used</p>
+      <div class="recent-row">
+        <NuxtLink
+          v-for="tool in recentTools"
+          :key="tool.to"
+          :to="tool.to"
+          class="tool-card recent-card"
+        >
+          <span class="tool-icon" v-html="tool.icon" />
+          <span class="tool-name">{{ tool.name }}</span>
+        </NuxtLink>
+      </div>
+    </div>
+
     <div class="cat-list">
       <section v-for="cat in filteredCategories" :key="cat.id" class="cat">
         <div class="cat-head">
@@ -149,6 +164,10 @@ const filteredCategories = computed(() => {
     .filter(cat => cat.tools.length > 0)
 })
 
+const { getRecent } = useRecentTools()
+const recentSlugs = ref<string[]>([])
+onMounted(() => { recentSlugs.value = getRecent() })
+
 const CATEGORIES = [
   {
     id: 'json',
@@ -214,6 +233,10 @@ const CATEGORIES = [
     ],
   },
 ]
+
+const ALL_TOOLS = CATEGORIES.flatMap(cat => cat.tools)
+const toolBySlug = Object.fromEntries(ALL_TOOLS.map(t => [t.to.replace('/tools/', ''), t]))
+const recentTools = computed(() => recentSlugs.value.map(s => toolBySlug[s]).filter(Boolean))
 </script>
 
 <style scoped>
@@ -334,6 +357,33 @@ const CATEGORIES = [
 }
 
 .search-empty strong { color: var(--c-t2); font-weight: 500; }
+
+/* ── Recently used ─────────────────────────────────── */
+.recent-section {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.recent-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-t5);
+  margin-bottom: 10px;
+}
+
+.recent-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.recent-card {
+  flex: 0 0 auto;
+  min-width: 0;
+}
 
 /* ── Category list ─────────────────────────────────── */
 .cat-list {

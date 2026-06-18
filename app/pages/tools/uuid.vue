@@ -33,7 +33,7 @@
         <div class="control-actions">
           <button @click="generate" class="btn btn-primary">
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 7a6 6 0 1 0 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 3v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Generate
+            Generate <span class="kb">Ctrl ↵</span>
           </button>
           <button @click="copyAll" class="btn btn-ghost" :class="{ 'btn--success': copiedAll }">
             <svg v-if="!copiedAll" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -91,6 +91,8 @@ const copiedIndex = ref<number | null>(null)
 const copiedAll   = ref(false)
 
 const formatIndex = computed(() => FORMATS.findIndex(f => f.id === format.value))
+
+useToolShortcut(generate)
 
 function generate() {
   uuids.value = Array.from({ length: count.value }, () => crypto.randomUUID())
