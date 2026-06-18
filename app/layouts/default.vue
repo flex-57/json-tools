@@ -174,6 +174,14 @@
       </nav>
     </Transition>
 
+    <div v-if="breadcrumbName" class="breadcrumb-bar">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <NuxtLink to="/" class="bc-home">JSON Tools</NuxtLink>
+        <span class="bc-sep" aria-hidden="true">›</span>
+        <span class="bc-current">{{ breadcrumbName }}</span>
+      </nav>
+    </div>
+
     <main class="app-main">
       <slot />
     </main>
@@ -215,6 +223,13 @@ const isConverterActive = computed(() => converterPaths.some(p => route.path.sta
 const isTextCodeActive  = computed(() => textCodePaths.some(p => route.path.startsWith(p)))
 const isSecurityActive  = computed(() => securityPaths.some(p => route.path.startsWith(p)))
 const isDevUtilsActive  = computed(() => devUtilsPaths.some(p => route.path.startsWith(p)))
+
+const breadcrumbName = computed(() => {
+  const path = route.path
+  if (!path.startsWith('/tools/')) return null
+  const slug = path.replace('/tools/', '')
+  return TOOL_NAMES[slug] ?? null
+})
 
 const BASE_URL = 'https://jsontools.space'
 useHead(() => ({
@@ -619,9 +634,49 @@ body {
 
 @media (max-width: 768px) {
   .ad-footer-wrap { padding: 0 16px 8px; }
+  .breadcrumb-bar { padding: 12px 16px 0; }
+  .bc-current { max-width: 200px; }
 }
 
 /* ── Responsive ─────────────────────────────────────────────────── */
+/* ── Breadcrumb ─────────────────────────────────────────────────────── */
+.breadcrumb-bar {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 14px 24px 0;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bc-home {
+  font-size: 12.5px;
+  color: var(--c-t4);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.bc-home:hover { color: #F97316; }
+
+.bc-sep {
+  font-size: 12px;
+  color: var(--c-t5);
+  line-height: 1;
+}
+
+.bc-current {
+  font-size: 12.5px;
+  color: var(--c-t3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
 @media (max-width: 1100px) {
   .header-badge { display: none; }
   .header-inner { gap: 16px; }
