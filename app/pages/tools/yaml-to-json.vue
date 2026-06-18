@@ -40,7 +40,10 @@
           <span class="editor-hint">or drop a .yaml / .yml file</span>
         </div>
         <div class="editor-body">
-          <textarea v-model="input" placeholder="name: Alice&#10;age: 30&#10;skills:&#10;  - PHP&#10;  - Vue" class="editor-textarea" spellcheck="false" />
+          <ClientOnly>
+            <JsonEditor v-model="input" lang="yaml" />
+            <template #fallback><EditorSkeleton /></template>
+          </ClientOnly>
         </div>
       </div>
       <div class="editor-card editor-card--output">

@@ -69,13 +69,10 @@
           <span class="editor-hint">{{ draft === 'draft-07' ? 'Draft-07' : 'Draft 2020-12' }}</span>
         </div>
         <div class="editor-body">
-          <textarea
-            :value="output"
-            readonly
-            class="editor-textarea"
-            spellcheck="false"
-            placeholder='{ "$schema": "http://json-schema.org/draft-07/schema#", "type": "object", ... }'
-          />
+          <ClientOnly>
+            <JsonEditor v-model="output" :readonly="true" />
+            <template #fallback><EditorSkeleton /></template>
+          </ClientOnly>
         </div>
       </div>
     </div>

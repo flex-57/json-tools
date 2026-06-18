@@ -4,14 +4,17 @@
 
 <script setup lang="ts">
 import { EditorView, basicSetup } from 'codemirror'
+import { syntaxHighlighting, defaultHighlightStyle } from '@codemirror/language'
 import { EditorState, Compartment } from '@codemirror/state'
-import { json } from '@codemirror/lang-json'
-import { oneDark } from '@codemirror/theme-one-dark'
+import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
+
+export type EditorLang = 'json' | 'typescript' | 'javascript' | 'xml' | 'yaml' | 'sql'
 
 const props = defineProps<{
   modelValue: string
   readonly?: boolean
+  lang?: EditorLang
 }>()
 
 const emit = defineEmits<{
@@ -22,6 +25,7 @@ const { isDark } = useColorMode()
 const container = ref<HTMLElement | null>(null)
 let view: EditorView | null = null
 const themeConfig = new Compartment()
+const highlightConfig = new Compartment()
 
 const lightTheme = EditorView.theme({
   '&': {
@@ -82,13 +86,45 @@ const darkOverride = EditorView.theme({
   '.cm-gutters': { background: 'transparent', borderRight: '1px solid #2A2E42' },
 })
 
-onMounted(() => {
+async function getLangExtension() {
+  switch (props.lang ?? 'json') {
+    case 'typescript': {
+      const { javascript } = await import('@codemirror/lang-javascript')
+      return javascript({ typescript: true })
+    }
+    case 'javascript': {
+      const { javascript } = await import('@codemirror/lang-javascript')
+      return javascript()
+    }
+    case 'xml': {
+      const { xml } = await import('@codemirror/lang-xml')
+      return xml()
+    }
+    case 'yaml': {
+      const { yaml } = await import('@codemirror/lang-yaml')
+      return yaml()
+    }
+    case 'sql': {
+      const { sql } = await import('@codemirror/lang-sql')
+      return sql()
+    }
+    default: {
+      const { json } = await import('@codemirror/lang-json')
+      return json()
+    }
+  }
+}
+
+onMounted(async () => {
   if (!container.value) return
+
+  const langExtension = await getLangExtension()
 
   const extensions = [
     basicSetup,
-    json(),
-    themeConfig.of(isDark.value ? [oneDark, darkOverride] : lightTheme),
+    langExtension,
+    highlightConfig.of(syntaxHighlighting(isDark.value ? oneDarkHighlightStyle : defaultHighlightStyle)),
+    themeConfig.of(isDark.value ? [oneDarkTheme, darkOverride] : lightTheme),
   ]
 
   if (!props.readonly) {
@@ -110,7 +146,12 @@ onMounted(() => {
 })
 
 watch(isDark, (dark) => {
-  view?.dispatch({ effects: themeConfig.reconfigure(dark ? [oneDark, darkOverride] : lightTheme) })
+  view?.dispatch({
+    effects: [
+      highlightConfig.reconfigure(syntaxHighlighting(dark ? oneDarkHighlightStyle : defaultHighlightStyle)),
+      themeConfig.reconfigure(dark ? [oneDarkTheme, darkOverride] : lightTheme),
+    ],
+  })
 })
 
 watch(() => props.modelValue, (val) => {

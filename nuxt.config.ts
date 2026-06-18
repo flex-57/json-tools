@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/theme-one-dark', '@vue-flow/core', '@dagrejs/dagre'],
+      include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/lang-javascript', '@codemirror/lang-xml', '@codemirror/lang-yaml', '@codemirror/lang-sql', '@codemirror/language', '@codemirror/theme-one-dark', '@vue-flow/core', '@dagrejs/dagre'],
     },
   },
   app: {

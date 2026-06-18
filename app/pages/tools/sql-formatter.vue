@@ -45,14 +45,12 @@
             </div>
           </Transition>
         </div>
-        <textarea
-          v-model="input"
-          class="panel-textarea"
-          placeholder="Paste SQL to format…"
-          spellcheck="false"
-          @focus="inputFocused = true"
-          @blur="inputFocused = false"
-        />
+        <div class="panel-editor-body" @focusin="inputFocused = true" @focusout="inputFocused = false">
+          <ClientOnly>
+            <JsonEditor v-model="input" lang="sql" />
+            <template #fallback><EditorSkeleton /></template>
+          </ClientOnly>
+        </div>
       </div>
 
       <!-- Middle -->
@@ -89,14 +87,12 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3M7 9.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           {{ error }}
         </div>
-        <textarea
-          v-else
-          :value="output"
-          class="panel-textarea panel-textarea--output"
-          readonly
-          placeholder="Formatted SQL will appear here…"
-          spellcheck="false"
-        />
+        <div v-else class="panel-editor-body">
+          <ClientOnly>
+            <JsonEditor v-model="output" :readonly="true" lang="sql" />
+            <template #fallback><EditorSkeleton /></template>
+          </ClientOnly>
+        </div>
       </div>
     </div>
 
@@ -294,24 +290,11 @@ const seoCards = [
 .panel-header-right { display: flex; align-items: center; gap: 8px; }
 .char-count { font-size: 11.5px; color: var(--c-t5); font-family: 'JetBrains Mono', monospace; }
 
-.panel-textarea {
+.panel-editor-body {
   flex: 1;
-  width: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-  padding: 14px 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px;
-  background: transparent;
-  color: var(--c-t1);
-  line-height: 1.7;
-  display: block;
-}
-.panel-textarea::placeholder { color: var(--c-t5); }
-.panel-textarea--output {
-  background: linear-gradient(160deg, var(--c-card-alt) 0%, var(--c-faint) 100%);
-  color: var(--c-t2);
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .error-body {

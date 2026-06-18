@@ -63,7 +63,10 @@
           <span class="editor-hint">Result</span>
         </div>
         <div class="editor-body">
-          <textarea v-model="output" readonly class="editor-textarea" spellcheck="false" />
+          <ClientOnly>
+            <JsonEditor v-model="output" :readonly="true" lang="yaml" />
+            <template #fallback><EditorSkeleton /></template>
+          </ClientOnly>
         </div>
       </div>
     </div>

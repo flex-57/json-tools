@@ -40,7 +40,10 @@
           <span class="editor-hint">or drop a .xml file</span>
         </div>
         <div class="editor-body">
-          <textarea v-model="input" placeholder="<root>&#10;  <name>Alice</name>&#10;  <age>30</age>&#10;</root>" class="editor-textarea" spellcheck="false" />
+          <ClientOnly>
+            <JsonEditor v-model="input" lang="xml" />
+            <template #fallback><EditorSkeleton /></template>
+          </ClientOnly>
         </div>
       </div>
       <div class="editor-card editor-card--output">

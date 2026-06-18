@@ -60,8 +60,10 @@
           <span class="editor-hint">Auto-generated</span>
         </div>
         <div class="editor-body">
-          <textarea v-model="output" readonly class="editor-textarea" spellcheck="false"
-            :placeholder="mode === 'ts' ? 'interface Root { ... }' : 'z.object({ ... })'" />
+          <ClientOnly>
+            <JsonEditor v-model="output" :readonly="true" lang="typescript" />
+            <template #fallback><EditorSkeleton /></template>
+          </ClientOnly>
         </div>
       </div>
     </div>

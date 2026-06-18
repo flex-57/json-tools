@@ -18,14 +18,23 @@ function stats(input: string, output: string): Pick<MinifyResult, 'originalSize'
   return { originalSize: orig, minifiedSize: min, savings: orig > 0 ? Math.round((1 - min / orig) * 100) : 0 }
 }
 
+function minifyCSSBrowser(css: string): string {
+  return css
+    .replace(/\/\*[\s\S]*?\*\//g, '')           // strip comments
+    .replace(/\s+/g, ' ')                        // collapse whitespace
+    .replace(/\s*([{}:;,>+~])\s*/g, '$1')       // no space around delimiters
+    .replace(/\(\s+/g, '(').replace(/\s+\)/g, ')')
+    .replace(/;}/g, '}')                         // drop last ; before }
+    .replace(/\b0(px|em|rem|%|vh|vw|pt|cm|mm|ex|in|pc)\b/gi, '0') // 0px → 0
+    .trim()
+}
+
 export async function minifyCSS(input: string): Promise<MinifyResult> {
   const trimmed = input.trim()
   if (!trimmed) return empty(input)
   try {
-    const { default: CleanCSS } = await import('clean-css')
-    const result = new CleanCSS({ level: 2 }).minify(trimmed)
-    if (result.errors.length) return { ...empty(input), error: result.errors.join(' | ') }
-    return { output: result.styles, error: null, ...stats(input, result.styles) }
+    const output = minifyCSSBrowser(trimmed)
+    return { output, error: null, ...stats(input, output) }
   } catch (e) {
     return { ...empty(input), error: (e as Error).message }
   }
@@ -57,7 +66,7 @@ export async function minifyJS(input: string): Promise<MinifyResult> {
   if (!trimmed) return empty(input)
   try {
     const { minify } = await import('terser')
-    const result = await minify(trimmed, { compress: true, mangle: true })
+    const result = await minify(trimmed, { compress: true, mangle: true, ecma: 2020 })
     const output = result.code ?? ''
     return { output, error: null, ...stats(input, output) }
   } catch (e) {

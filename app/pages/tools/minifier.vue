@@ -144,7 +144,7 @@ const placeholder = computed(() => {
 })
 
 const engineLabel = computed(() => {
-  if (mode.value === 'css')  return 'clean-css'
+  if (mode.value === 'css')  return 'regex minifier'
   if (mode.value === 'html') return 'html-minifier-terser'
   return 'terser'
 })
@@ -168,7 +168,7 @@ const seoCards = [
   },
   {
     title: 'CSS, HTML, and JS — how each is minified',
-    text: 'CSS minification (clean-css) collapses whitespace, removes comments, merges shorthand properties, removes redundant units (0px → 0), and applies Level 2 optimisations like merging duplicate selectors. HTML minification (html-minifier-terser) collapses inter-element whitespace, strips HTML comments, removes optional closing tags, and recursively minifies any embedded <style> and <script> blocks using the same CSS and JS engines. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, renames local variables to single letters, and removes unreachable branches — achieving the highest compression ratios of the three.',
+    text: 'CSS minification collapses whitespace, removes comments, strips redundant units (0px → 0), and removes spaces around delimiters — all client-side with no external library. HTML minification (html-minifier-terser) collapses inter-element whitespace, strips HTML comments, removes optional closing tags, and recursively minifies any embedded <style> and <script> blocks using the same CSS and JS engines. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, renames local variables to single letters, and removes unreachable branches — achieving the highest compression ratios of the three.',
   },
   {
     title: 'Before deploying minified code',
