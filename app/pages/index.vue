@@ -6,8 +6,29 @@
       <p class="hero-sub">28 tools for JSON, data conversion, text, security and more.<br>Everything runs in your browser — your data never leaves your machine.</p>
     </section>
 
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <input
+          v-model="searchQuery"
+          class="search-input"
+          type="search"
+          placeholder="Search tools…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button v-if="searchQuery" class="search-clear" @click="searchQuery = ''" aria-label="Clear">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <p v-if="searchQuery && filteredCategories.length === 0" class="search-empty">
+      No tools found for "<strong>{{ searchQuery }}</strong>"
+    </p>
+
     <div class="cat-list">
-      <section v-for="cat in CATEGORIES" :key="cat.id" class="cat">
+      <section v-for="cat in filteredCategories" :key="cat.id" class="cat">
         <div class="cat-head">
           <span class="cat-icon" v-html="cat.icon" />
           <h2 class="cat-name">{{ cat.name }}</h2>
@@ -26,6 +47,30 @@
         </div>
       </section>
     </div>
+
+    <section class="features">
+      <div class="feature">
+        <span class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10H2M18 10h-2M10 4V2M10 18v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <h3 class="feature-title">Instant, no friction</h3>
+        <p class="feature-body">Open any tool and start working. No account, no onboarding, no waiting — results appear as you type.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 5.5v5c0 4 3.1 7.4 7 8.5 3.9-1.1 7-4.5 7-8.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <h3 class="feature-title">Your data stays yours</h3>
+        <p class="feature-body">Everything runs directly in your browser. Nothing is sent to a server — not a single byte of your data leaves your machine.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M3 6h14M3 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <h3 class="feature-title">Free, all of it</h3>
+        <p class="feature-body">All 28 tools, forever free. No premium tier, no rate limits, no ads in the way. Just tools that work.</p>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -93,6 +138,16 @@ const IC = {
   numBase:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L6 4M10 4l4 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.5 9h5M10.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   color:     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 2.5V6M8 10V13.5M2.5 8H6M10 8H13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
 }
+
+const searchQuery = ref('')
+
+const filteredCategories = computed(() => {
+  const q = searchQuery.value.trim().toLowerCase()
+  if (!q) return CATEGORIES
+  return CATEGORIES
+    .map(cat => ({ ...cat, tools: cat.tools.filter(t => t.name.toLowerCase().includes(q)) }))
+    .filter(cat => cat.tools.length > 0)
+})
 
 const CATEGORIES = [
   {
@@ -210,22 +265,92 @@ const CATEGORIES = [
   margin: 0 auto;
 }
 
+/* ── Search ────────────────────────────────────────── */
+.search-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 14px;
+  height: 44px;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  transition: border-color 0.15s;
+}
+
+.search-box:focus-within {
+  border-color: rgba(249, 115, 22, 0.5);
+}
+
+.search-icon {
+  color: var(--c-t4);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--c-t1);
+  min-width: 0;
+}
+
+.search-input::placeholder { color: var(--c-t5); }
+
+.search-input::-webkit-search-cancel-button { display: none; }
+
+.search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--c-t4);
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.search-clear:hover { color: var(--c-t1); }
+
+.search-empty {
+  text-align: center;
+  font-size: 14px;
+  color: var(--c-t4);
+  padding: 48px 0;
+}
+
+.search-empty strong { color: var(--c-t2); font-weight: 500; }
+
 /* ── Category list ─────────────────────────────────── */
 .cat-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 0;
 }
 
 .cat {
   display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 0 32px;
+  grid-template-columns: 140px 1fr;
+  gap: 0 24px;
   align-items: start;
   padding: 28px 0;
   border-top: 1px solid var(--c-border);
 }
-
-.cat:last-child { border-bottom: 1px solid var(--c-border); }
 
 /* ── Category header ───────────────────────────────── */
 .cat-head {
@@ -263,8 +388,8 @@ const CATEGORIES = [
 /* ── Tool grid ─────────────────────────────────────── */
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 8px;
+  grid-template-columns: 1fr;
+  gap: 6px;
 }
 
 .tool-card {
@@ -307,11 +432,56 @@ const CATEGORIES = [
 
 .tool-card:hover .tool-name { color: var(--c-t1); }
 
+/* ── Features ──────────────────────────────────────── */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  border-radius: 10px;
+  color: #F97316;
+  flex-shrink: 0;
+}
+
+.feature-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-t1);
+  letter-spacing: -0.01em;
+}
+
+.feature-body {
+  font-size: 13px;
+  color: var(--c-t3);
+  line-height: 1.65;
+}
+
 /* ── Responsive ────────────────────────────────────── */
 @media (max-width: 768px) {
   .home { padding: 0 16px 40px; }
   .hero { padding: 36px 0 32px; }
   .hero-sub { font-size: 14px; }
+
+  .cat-list { grid-template-columns: 1fr; column-gap: 0; }
 
   .cat {
     grid-template-columns: 1fr;
@@ -329,7 +499,9 @@ const CATEGORIES = [
   .cat-icon { width: 32px; height: 32px; }
   .cat-count { display: none; }
 
-  .tool-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tool-name { font-size: 12px; }
+
+  .features { grid-template-columns: 1fr; }
 }
 </style>

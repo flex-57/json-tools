@@ -62,6 +62,8 @@
       <span>Free · No signup · No tracking</span>
       <span class="footer-sep">·</span>
       <span>100% client-side processing</span>
+      <span class="footer-sep">·</span>
+      <NuxtLink to="/faq" class="footer-bottom-link">FAQ</NuxtLink>
     </div>
   </footer>
 </template>
@@ -161,4 +163,11 @@
 }
 
 .footer-sep { color: #2A3039; }
+
+.footer-bottom-link {
+  color: #3A4049;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-bottom-link:hover { color: #F97316; }
 </style>

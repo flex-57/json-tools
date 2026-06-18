@@ -3,6 +3,7 @@ export default defineEventHandler((event) => {
 
   const urls = [
     { loc: '/',                             priority: '1.0', changefreq: 'weekly' },
+    { loc: '/faq',                          priority: '0.7', changefreq: 'monthly' },
     { loc: '/tools/json-formatter',         priority: '0.9', changefreq: 'monthly' },
     { loc: '/tools/csv-to-json' },
     { loc: '/tools/json-to-csv' },
