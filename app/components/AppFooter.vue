@@ -64,6 +64,10 @@
       <span>100% client-side processing</span>
       <span class="footer-sep">·</span>
       <NuxtLink to="/faq" class="footer-bottom-link">FAQ</NuxtLink>
+      <span class="footer-sep">·</span>
+      <NuxtLink to="/privacy" class="footer-bottom-link">Privacy</NuxtLink>
+      <span class="footer-sep">·</span>
+      <NuxtLink to="/terms" class="footer-bottom-link">Terms</NuxtLink>
     </div>
   </footer>
 </template>
