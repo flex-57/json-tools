@@ -82,8 +82,17 @@ const lightTheme = EditorView.theme({
 })
 
 const darkOverride = EditorView.theme({
-  '&': { background: 'transparent' },
-  '.cm-gutters': { background: 'transparent', borderRight: '1px solid #2A2E42' },
+  '&': { background: 'transparent', fontSize: '13px' },
+  '.cm-content': {
+    fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+    padding: '14px 16px',
+    caretColor: '#F97316',
+    lineHeight: '1.65',
+  },
+  '.cm-gutters': { background: 'transparent', borderRight: '1px solid #2A2E42', minWidth: '44px' },
+  '.cm-gutterElement': { padding: '0 8px 0 12px' },
+  '.cm-lineNumbers': { minWidth: '40px' },
+  '&.cm-focused .cm-cursor': { borderLeftColor: '#F97316', borderLeftWidth: '2px' },
 })
 
 async function getLangExtension() {
