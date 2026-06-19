@@ -81,6 +81,7 @@ import CronExpressionExamples from '~/components/guides/body/cron-expression-exa
 import JsonVsYaml             from '~/components/guides/body/json-vs-yaml.vue'
 import HowToValidateJson     from '~/components/guides/body/how-to-validate-json.vue'
 import WhatIsRegex           from '~/components/guides/body/what-is-regex.vue'
+import WhatIsJson            from '~/components/guides/body/what-is-json.vue'
 
 const bodyComponents: Record<string, Component> = {
   'what-is-jwt':              WhatIsJwt,
@@ -89,6 +90,7 @@ const bodyComponents: Record<string, Component> = {
   'json-vs-yaml':             JsonVsYaml,
   'how-to-validate-json':     HowToValidateJson,
   'what-is-regex':            WhatIsRegex,
+  'what-is-json':             WhatIsJson,
 }
 
 const route = useRoute()

@@ -189,6 +189,51 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
   },
 
+  'what-is-json': {
+    slug: 'what-is-json',
+    title: 'What is JSON?',
+    subtitle: 'JSON explained: data types, syntax rules, and why it became the universal data format for APIs and config files.',
+    readTime: '6 min read',
+    datePublished: '2026-06-19',
+    dateModified: '2026-06-19',
+    description: 'Learn what JSON is, its 6 data types, syntax rules, how it compares to XML, and why it became the standard format for REST APIs, configuration files, and databases.',
+    tools: [
+      { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it — errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: '{ }' },
+      { name: 'JSON Tree Viewer', desc: 'Visualize any JSON structure as an interactive, collapsible tree.', href: '/tools/json-tree', icon: '⌥' },
+      { name: 'JSON Diff', desc: 'Compare two JSON documents side by side and highlight exactly what changed.', href: '/tools/json-diff', icon: '⇄' },
+    ],
+    faqs: [
+      {
+        q: 'Is JSON part of JavaScript?',
+        a: [
+          'JSON (JavaScript Object Notation) was inspired by JavaScript object literal syntax, but it is an independent, language-agnostic format defined by RFC 8259.',
+          'Every major programming language has JSON support built in or available via a standard library: Python (json module), Java (Jackson, Gson), PHP (json_encode/json_decode), Go (encoding/json), Rust (serde_json), and so on.',
+        ],
+      },
+      {
+        q: 'What is the difference between JSON and a JavaScript object?',
+        a: [
+          'A JavaScript object is a runtime data structure. Keys can be unquoted, values can be functions, undefined, or Date objects, and you can use trailing commas.',
+          'JSON is a text format for data interchange. Keys must be quoted strings, values can only be the 6 JSON types (no functions, no undefined, no Date), and trailing commas are forbidden. You convert between them with JSON.stringify() and JSON.parse().',
+        ],
+      },
+      {
+        q: 'Can JSON have comments?',
+        a: [
+          'No. Comments (// or /* */) are not part of the JSON specification. A parser will reject any document that contains them.',
+          'If you need comments in a config file, consider JSONC (JSON with Comments, used by VS Code and TypeScript) or YAML, which supports # comments natively.',
+        ],
+      },
+      {
+        q: 'Is JSON always an object?',
+        a: [
+          'No. A JSON document can be any valid JSON value: an object {}, an array [], a string, a number, a boolean, or null. {"name":"Alice"} and [1,2,3] and "hello" are all valid JSON documents.',
+          'In practice, most APIs return an object or an array at the top level, but the spec allows any value.',
+        ],
+      },
+    ],
+  },
+
   'what-is-regex': {
     slug: 'what-is-regex',
     title: 'What is a Regular Expression?',

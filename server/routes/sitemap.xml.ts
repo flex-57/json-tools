@@ -4,6 +4,7 @@ export default defineEventHandler((event) => {
   const urls = [
     { loc: '/',                             priority: '1.0', changefreq: 'weekly' },
     { loc: '/faq',                          priority: '0.7', changefreq: 'monthly' },
+    { loc: '/guides/what-is-json',           priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides/what-is-jwt',           priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides/what-is-base64',             priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides/cron-expression-examples',   priority: '0.7', changefreq: 'monthly' },

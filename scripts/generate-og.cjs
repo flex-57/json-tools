@@ -30,6 +30,7 @@ const TOOLS = [
   { slug: 'faq',               tag: 'JSON Tools',  title: 'FAQ',                 subtitle: 'Answers about privacy, features, and how\nJSON Tools works.',                          size: 88 },
 
   // Guides
+  { slug: 'guide-what-is-json',             tag: 'Developer Guide', title: 'What is JSON?',              subtitle: 'Data types, syntax rules, and why JSON\nbecame the universal API format.',          size: 88 },
   { slug: 'guide-what-is-jwt',              tag: 'Developer Guide', title: 'What is a\nJWT Token?',          subtitle: 'Structure, algorithms, and security best practices.',                          size: 72 },
   { slug: 'guide-what-is-base64',           tag: 'Developer Guide', title: 'What is\nBase64?',               subtitle: 'How binary-to-text encoding works and when to use it.',                      size: 72 },
   { slug: 'guide-cron-expression-examples', tag: 'Developer Guide', title: 'Cron Expression\nExamples',      subtitle: 'Field breakdown, special characters, and common schedules.',                  size: 64 },
