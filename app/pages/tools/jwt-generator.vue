@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">JWT <span class="title-amp">Generator</span></h1>
         <p class="page-subtitle">Create signed JSON Web Tokens in your browser — secret never leaves your device.</p>
+        <NuxtLink to="/guides/what-is-jwt" class="guide-link">New to JWTs? Read our guide →</NuxtLink>
       </div>
       <div class="mode-toggle">
         <div class="mode-indicator" :style="{ transform: indicatorTransform }" />

@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Base64 <span class="title-amp">{{ mode === 'encode' ? 'Encoder' : 'Decoder' }}</span></h1>
         <p class="page-subtitle">Encode text to Base64 or decode Base64 back to text — instantly, client-side.</p>
+        <NuxtLink to="/guides/what-is-base64" class="guide-link">What is Base64? Read our guide →</NuxtLink>
       </div>
       <div class="header-controls">
         <!-- Mode toggle — sliding pill -->

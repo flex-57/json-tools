@@ -53,6 +53,11 @@
           <NuxtLink to="/tools/number-base"    class="footer-link">Number Base Converter</NuxtLink>
           <NuxtLink to="/tools/color"          class="footer-link">Color Picker</NuxtLink>
         </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Guides</span>
+          <NuxtLink to="/guides/what-is-jwt"    class="footer-link">What is a JWT Token?</NuxtLink>
+          <NuxtLink to="/guides/what-is-base64" class="footer-link">What is Base64?</NuxtLink>
+        </div>
       </nav>
     </div>
 

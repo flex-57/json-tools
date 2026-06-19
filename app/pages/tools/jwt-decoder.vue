@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">JWT <span class="title-amp">Decoder</span></h1>
         <p class="page-subtitle">Decode and inspect JSON Web Tokens instantly — no data sent to servers, never.</p>
+        <NuxtLink to="/guides/what-is-jwt" class="guide-link">New to JWTs? Read our guide →</NuxtLink>
       </div>
     </div>
 

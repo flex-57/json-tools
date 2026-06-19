@@ -79,6 +79,18 @@ html.dark {
   color: var(--c-t3);
 }
 
+.guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--c-t4);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.guide-link:hover { color: #F97316; }
+
 /* Toolbar */
 .toolbar {
   background: var(--c-card);
