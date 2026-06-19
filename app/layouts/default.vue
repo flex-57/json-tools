@@ -10,12 +10,12 @@
         <!-- Desktop nav -->
         <nav class="header-nav">
           <!-- JSON dropdown -->
-          <div class="nav-group">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'json' }" @mouseenter="activeGroup = 'json'" @mouseleave="activeGroup = null">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isJsonActive }">
               JSON
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown">
+            <div class="nav-dropdown" @click="activeGroup = null">
               <NuxtLink to="/tools/json-formatter" class="nav-dropdown-item">JSON Formatter</NuxtLink>
               <NuxtLink to="/tools/json-diff"      class="nav-dropdown-item">JSON Diff</NuxtLink>
               <NuxtLink to="/tools/json-tree"      class="nav-dropdown-item">JSON Tree</NuxtLink>
@@ -25,12 +25,12 @@
           </div>
 
           <!-- Converters 2-column dropdown -->
-          <div class="nav-group">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'converters' }" @mouseenter="activeGroup = 'converters'" @mouseleave="activeGroup = null">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isConverterActive }">
               Converters
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown nav-dropdown--two-col">
+            <div class="nav-dropdown nav-dropdown--two-col" @click="activeGroup = null">
               <div class="conv-col">
                 <div class="nav-dropdown-section">→ JSON</div>
                 <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV → JSON</NuxtLink>
@@ -50,12 +50,12 @@
           </div>
 
           <!-- Text & Code dropdown -->
-          <div class="nav-group">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'textcode' }" @mouseenter="activeGroup = 'textcode'" @mouseleave="activeGroup = null">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isTextCodeActive }">
               Text & Code
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown">
+            <div class="nav-dropdown" @click="activeGroup = null">
               <NuxtLink to="/tools/text-case"     class="nav-dropdown-item">Text Case Converter</NuxtLink>
               <NuxtLink to="/tools/minifier"      class="nav-dropdown-item">CSS / HTML / JS Minifier</NuxtLink>
               <NuxtLink to="/tools/sql-formatter" class="nav-dropdown-item">SQL Formatter</NuxtLink>
@@ -65,12 +65,12 @@
           </div>
 
           <!-- Security dropdown -->
-          <div class="nav-group">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'security' }" @mouseenter="activeGroup = 'security'" @mouseleave="activeGroup = null">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isSecurityActive }">
               Security
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown">
+            <div class="nav-dropdown" @click="activeGroup = null">
               <NuxtLink to="/tools/jwt-decoder"          class="nav-dropdown-item">JWT Decoder</NuxtLink>
               <NuxtLink to="/tools/jwt-generator"         class="nav-dropdown-item">JWT Generator</NuxtLink>
               <NuxtLink to="/tools/hash"                  class="nav-dropdown-item">Hash Generator</NuxtLink>
@@ -80,12 +80,12 @@
           </div>
 
           <!-- Dev Utils dropdown -->
-          <div class="nav-group">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'devutils' }" @mouseenter="activeGroup = 'devutils'" @mouseleave="activeGroup = null">
             <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isDevUtilsActive }">
               Dev Utils
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown">
+            <div class="nav-dropdown" @click="activeGroup = null">
               <NuxtLink to="/tools/regex-tester"   class="nav-dropdown-item">Regex Tester</NuxtLink>
               <NuxtLink to="/tools/cron-parser"    class="nav-dropdown-item">Cron Parser</NuxtLink>
               <NuxtLink to="/tools/unix-timestamp" class="nav-dropdown-item">Unix Timestamp</NuxtLink>
@@ -199,6 +199,7 @@ import { useColorMode } from '~/composables/useColorMode'
 
 const route = useRoute()
 const mobileOpen = ref(false)
+const activeGroup = ref(null)
 const { init } = useConsent()
 const { isDark, init: initColorMode, toggle } = useColorMode()
 const { addRecent } = useRecentTools()
@@ -213,6 +214,7 @@ onMounted(() => {
 
 watch(() => route.path, (path) => {
   mobileOpen.value = false
+  activeGroup.value = null
   trackPageView(path)
   if (path.startsWith('/tools/')) {
     addRecent(path.replace('/tools/', ''))
@@ -434,7 +436,7 @@ body {
   z-index: 300;
 }
 
-.nav-group:hover .nav-dropdown,
+.nav-group--open .nav-dropdown,
 .nav-group:focus-within .nav-dropdown {
   opacity: 1;
   visibility: visible;
