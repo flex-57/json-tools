@@ -38,7 +38,7 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: { lang: 'en' },
       meta: [
-        { name: 'google-site-verification', content: 'yucOpLA_lqoZhJ_wHePu4TrDwTM12ZJoT0LJdkjWD2I' },
+        { name: 'google-site-verification', content: '8DE8D4b24zhqlMDyZA48SH3D1xLDYIwN2_PXDoRMG3E' },
         { name: 'robots', content: 'index, follow' },
         { name: 'google-adsense-account', content: 'ca-pub-6010651564611690' },
         { name: 'theme-color', content: '#F97316' },
