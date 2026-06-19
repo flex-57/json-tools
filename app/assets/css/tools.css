@@ -341,3 +341,126 @@ html.dark {
   .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   .editors { grid-template-columns: 1fr; min-height: 300px; }
 }
+
+/* ── Guide article shared styles ─────────────────────────────────── */
+.guide-body {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.guide-section h2 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--c-t1);
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.guide-section h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-t2);
+  margin: 20px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.guide-section p {
+  font-size: 14.5px;
+  color: var(--c-t3);
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+
+.guide-section p:last-child { margin-bottom: 0; }
+
+.guide-section ul,
+.guide-section ol {
+  margin: 8px 0 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-section li {
+  font-size: 14.5px;
+  color: var(--c-t3);
+  line-height: 1.7;
+}
+
+.guide-section a { color: #F97316; text-decoration: none; }
+.guide-section a:hover { text-decoration: underline; }
+
+.guide-section code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(249, 115, 22, 0.08);
+  color: #F97316;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.guide-steps {
+  margin: 8px 0 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Code blocks */
+.code-block {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.code-block .code-header {
+  display: block;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-t5);
+  background: var(--c-subtle);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.code-block code {
+  display: block;
+  padding: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--c-t2);
+  line-height: 1.6;
+  word-break: break-all;
+  background: none;
+  border-radius: 0;
+}
+
+.code-dot { color: #F97316; font-weight: 700; }
+
+/* Callouts */
+.guide-callout {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin: 12px 0;
+  color: var(--c-t2);
+}
+
+.guide-callout--warn {
+  background: rgba(249, 115, 22, 0.07);
+  border-left: 3px solid #F97316;
+}
+
+.guide-callout--info {
+  background: rgba(99, 179, 237, 0.07);
+  border-left: 3px solid #63B3ED;
+}
