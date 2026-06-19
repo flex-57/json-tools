@@ -109,13 +109,18 @@ function formatDate(iso: string) {
 const BASE_URL = 'https://jsontools.space'
 const pageUrl  = `${BASE_URL}/guides/${slug}`
 
+const ogImage = `${BASE_URL}/og/guide-${slug}.png`
+
 useSeoMeta({
   title:              `${guide.title} — JSON Tools`,
   description:        guide.description,
   ogTitle:            `${guide.title} — JSON Tools`,
   ogDescription:      guide.description,
+  ogImage,
   twitterTitle:       guide.title,
   twitterDescription: guide.description,
+  twitterImage:       ogImage,
+  twitterCard:        'summary_large_image',
 })
 
 useHead({

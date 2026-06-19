@@ -28,6 +28,14 @@ const TOOLS = [
   { slug: 'sql-formatter',      tag: 'Dev Util',   title: 'SQL Formatter',       subtitle: 'Format and beautify SQL queries.\nMySQL, PostgreSQL, SQLite, T-SQL.',              size: 72 },
   { slug: 'password-generator', tag: 'Security',   title: 'Password Generator',  subtitle: 'Generate strong, random passwords.\nCustom length, symbols, bulk export.',         size: 64 },
   { slug: 'faq',               tag: 'JSON Tools',  title: 'FAQ',                 subtitle: 'Answers about privacy, features, and how\nJSON Tools works.',                          size: 88 },
+
+  // Guides
+  { slug: 'guide-what-is-jwt',              tag: 'Developer Guide', title: 'What is a\nJWT Token?',          subtitle: 'Structure, algorithms, and security best practices.',                          size: 72 },
+  { slug: 'guide-what-is-base64',           tag: 'Developer Guide', title: 'What is\nBase64?',               subtitle: 'How binary-to-text encoding works and when to use it.',                      size: 72 },
+  { slug: 'guide-cron-expression-examples', tag: 'Developer Guide', title: 'Cron Expression\nExamples',      subtitle: 'Field breakdown, special characters, and common schedules.',                  size: 64 },
+  { slug: 'guide-json-vs-yaml',             tag: 'Developer Guide', title: 'JSON vs YAML',                   subtitle: 'Side-by-side comparison: syntax, use cases,\nand when to choose each.',      size: 76 },
+  { slug: 'guide-how-to-validate-json',     tag: 'Developer Guide', title: 'How to Validate\nJSON',          subtitle: 'Common errors, syntax rules, and JSON Schema validation.',                    size: 68 },
+  { slug: 'guide-what-is-regex',            tag: 'Developer Guide', title: 'What is a\nRegular Expression?', subtitle: 'Character classes, quantifiers, anchors, and practical patterns.',            size: 60 },
 ];
 
 const OUT_DIR = path.join(__dirname, '../public/og');
