@@ -100,4 +100,47 @@ export const GUIDES: Record<string, GuideConfig> = {
       },
     ],
   },
+
+  'cron-expression-examples': {
+    slug: 'cron-expression-examples',
+    title: 'Cron Expression Examples',
+    subtitle: 'A practical reference for cron syntax: field breakdown, special characters, and ready-to-use schedules.',
+    readTime: '5 min read',
+    datePublished: '2026-06-19',
+    dateModified: '2026-06-19',
+    description: 'Learn cron expression syntax with practical examples: every minute, hourly, daily, weekly, monthly schedules, and special characters (* , - /).',
+    tools: [
+      { name: 'Cron Parser', desc: 'Paste any cron expression to get a plain-English description and preview the next scheduled run times.', href: '/tools/cron-parser', icon: '⏱' },
+    ],
+    faqs: [
+      {
+        q: 'Does cron support seconds?',
+        a: [
+          'Standard Unix cron uses 5 fields (minute, hour, day, month, weekday) and has no seconds field — the minimum resolution is 1 minute.',
+          'Extended cron implementations like Quartz (Java), AWS EventBridge, and GitHub Actions support a 6th field for seconds, placed at the beginning: "seconds minute hour day month weekday".',
+        ],
+      },
+      {
+        q: 'How do I run a job every X minutes?',
+        a: [
+          'Use the step operator: */X in the minute field. For example, */15 * * * * runs every 15 minutes, and */5 * * * * runs every 5 minutes.',
+          'Note that */15 means "at minutes 0, 15, 30, and 45" — it always starts from 0, not from when the cron daemon started.',
+        ],
+      },
+      {
+        q: 'What timezone does cron use?',
+        a: [
+          'Standard cron runs in the system timezone of the server it is installed on. If your server is UTC, all schedules are UTC.',
+          "Some modern schedulers (GitHub Actions, AWS EventBridge, Kubernetes CronJob) let you specify a timezone explicitly. Check your platform's documentation.",
+        ],
+      },
+      {
+        q: 'What is the difference between * and ? in cron?',
+        a: [
+          'In standard 5-field cron, * means "every value" and ? is not a valid character.',
+          'In extended cron (Quartz, Spring), ? means "no specific value" and is used to avoid conflicts when both day-of-month and day-of-week are specified. For example, "0 0 1 * ?" means "1st of every month, any weekday".',
+        ],
+      },
+    ],
+  },
 }

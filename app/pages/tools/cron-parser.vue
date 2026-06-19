@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Cron <span class="title-amp">Parser</span></h1>
         <p class="page-subtitle">Parse cron expressions, see them in plain English, and preview the next scheduled runs.</p>
+        <NuxtLink to="/guides/cron-expression-examples" class="guide-link">New to cron? See common examples →</NuxtLink>
       </div>
     </div>
 

@@ -75,12 +75,14 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
 import { GUIDES } from '~/data/guides'
-import WhatIsJwt    from '~/components/guides/body/what-is-jwt.vue'
-import WhatIsBase64 from '~/components/guides/body/what-is-base64.vue'
+import WhatIsJwt              from '~/components/guides/body/what-is-jwt.vue'
+import WhatIsBase64           from '~/components/guides/body/what-is-base64.vue'
+import CronExpressionExamples from '~/components/guides/body/cron-expression-examples.vue'
 
 const bodyComponents: Record<string, Component> = {
-  'what-is-jwt':    WhatIsJwt,
-  'what-is-base64': WhatIsBase64,
+  'what-is-jwt':              WhatIsJwt,
+  'what-is-base64':           WhatIsBase64,
+  'cron-expression-examples': CronExpressionExamples,
 }
 
 const route = useRoute()
