@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Regex <span class="title-amp">Tester</span></h1>
         <p class="page-subtitle">Test regular expressions with live match highlighting and capture group inspection.</p>
+        <NuxtLink to="/guides/what-is-regex" class="guide-link">New to regex? Read our guide →</NuxtLink>
       </div>
       <button @click="clear" class="btn btn-ghost">Clear</button>
     </div>

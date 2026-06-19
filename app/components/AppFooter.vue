@@ -60,6 +60,7 @@
           <NuxtLink to="/guides/cron-expression-examples" class="footer-link">Cron Expression Examples</NuxtLink>
           <NuxtLink to="/guides/json-vs-yaml"             class="footer-link">JSON vs YAML</NuxtLink>
           <NuxtLink to="/guides/how-to-validate-json"   class="footer-link">How to Validate JSON</NuxtLink>
+          <NuxtLink to="/guides/what-is-regex"           class="footer-link">What is a Regex?</NuxtLink>
         </div>
       </nav>
     </div>

@@ -80,6 +80,7 @@ import WhatIsBase64           from '~/components/guides/body/what-is-base64.vue'
 import CronExpressionExamples from '~/components/guides/body/cron-expression-examples.vue'
 import JsonVsYaml             from '~/components/guides/body/json-vs-yaml.vue'
 import HowToValidateJson     from '~/components/guides/body/how-to-validate-json.vue'
+import WhatIsRegex           from '~/components/guides/body/what-is-regex.vue'
 
 const bodyComponents: Record<string, Component> = {
   'what-is-jwt':              WhatIsJwt,
@@ -87,6 +88,7 @@ const bodyComponents: Record<string, Component> = {
   'cron-expression-examples': CronExpressionExamples,
   'json-vs-yaml':             JsonVsYaml,
   'how-to-validate-json':     HowToValidateJson,
+  'what-is-regex':            WhatIsRegex,
 }
 
 const route = useRoute()

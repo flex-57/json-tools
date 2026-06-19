@@ -189,6 +189,49 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
   },
 
+  'what-is-regex': {
+    slug: 'what-is-regex',
+    title: 'What is a Regular Expression?',
+    subtitle: 'Regex explained: character classes, quantifiers, anchors, groups, and practical patterns for everyday use.',
+    readTime: '7 min read',
+    datePublished: '2026-06-19',
+    dateModified: '2026-06-19',
+    description: 'Learn what regular expressions are, how to read regex syntax (character classes, quantifiers, anchors, groups), and practical patterns for emails, URLs, dates, and more.',
+    tools: [
+      { name: 'Regex Tester', desc: 'Test any regular expression against your own strings — live match highlighting and capture group inspection, 100% client-side.', href: '/tools/regex-tester', icon: '.*' },
+    ],
+    faqs: [
+      {
+        q: 'What does the dot (.) mean in regex?',
+        a: [
+          'The dot matches any single character except a newline. For example, a.c matches "abc", "aXc", and "a1c" — but not "ac" (there must be exactly one character in between).',
+          'To match a literal dot, escape it: \\.. For example, \\d+\\.\\d+ matches decimal numbers like "3.14" but not "314".',
+        ],
+      },
+      {
+        q: 'What is the difference between * and + in regex?',
+        a: [
+          '* means "zero or more" — it matches even if the preceding element is absent. colou*r matches both "color" and "colour".',
+          '+ means "one or more" — at least one occurrence is required. \\d+ matches "1", "42", "2024" but not an empty string. When in doubt, + is usually what you want.',
+        ],
+      },
+      {
+        q: 'What are capturing groups used for?',
+        a: [
+          'A capturing group (...) remembers the text it matched so you can refer to it later — in a replacement string ($1 or \\1) or in code (match[1] in JavaScript).',
+          'Use a non-capturing group (?:...) when you only need grouping for alternation or quantifiers but do not need to extract the matched text. It is slightly faster and keeps match indices clean.',
+        ],
+      },
+      {
+        q: 'When should I use regex instead of string methods?',
+        a: [
+          'Prefer simple string methods (includes, startsWith, split, replaceAll) when the pattern is fixed — they are more readable and avoid regex syntax errors.',
+          'Use regex when you need pattern matching: variable character classes, repetition, alternation (this or that), or extraction with groups. Any time you find yourself writing a chain of string conditions, a single regex is usually cleaner.',
+        ],
+      },
+    ],
+  },
+
   'cron-expression-examples': {
     slug: 'cron-expression-examples',
     title: 'Cron Expression Examples',
