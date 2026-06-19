@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> <span class="title-amp">Schema</span></h1>
         <p class="page-subtitle">Generate a JSON Schema (Draft-07 or 2020-12) from any JSON value — automatically, client-side.</p>
+        <NuxtLink to="/guides/how-to-validate-json" class="guide-link">Learn how JSON validation works →</NuxtLink>
       </div>
     </div>
 

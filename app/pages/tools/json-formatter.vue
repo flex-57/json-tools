@@ -4,6 +4,7 @@
       <div class="page-title-wrap">
         <h1 class="page-title">JSON Formatter <span class="title-amp">&amp;</span> Validator</h1>
         <p class="page-subtitle">Format, validate, and minify JSON instantly — free, no data sent to servers.</p>
+        <NuxtLink to="/guides/how-to-validate-json" class="guide-link">Common JSON errors and how to fix them →</NuxtLink>
       </div>
     </div>
 

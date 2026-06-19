@@ -101,6 +101,50 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
   },
 
+  'how-to-validate-json': {
+    slug: 'how-to-validate-json',
+    title: 'How to Validate JSON',
+    subtitle: 'Understand what makes JSON valid, spot the most common errors, and go further with JSON Schema.',
+    readTime: '5 min read',
+    datePublished: '2026-06-19',
+    dateModified: '2026-06-19',
+    description: 'Learn how to validate JSON: syntax rules, the most common errors (trailing commas, single quotes, unquoted keys), and how to validate structure with JSON Schema.',
+    tools: [
+      { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it — errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: '{ }' },
+      { name: 'JSON Schema Generator', desc: 'Generate a JSON Schema from any valid JSON value to start validating structure automatically.', href: '/tools/json-schema', icon: '⊞' },
+    ],
+    faqs: [
+      {
+        q: 'Can JSON have comments?',
+        a: [
+          'No. Comments are not part of the JSON specification (RFC 8259). A JSON parser will reject any file that contains // or /* */ comments.',
+          'If you need comments in a config file, consider JSONC (JSON with Comments, used by VS Code) or YAML, which supports # comments natively.',
+        ],
+      },
+      {
+        q: 'Is undefined a valid JSON value?',
+        a: [
+          'No. JSON only supports these value types: string, number, boolean (true/false), null, object, and array. undefined is a JavaScript concept that does not exist in JSON.',
+          'When you JSON.stringify() an object with undefined values in JavaScript, those keys are silently omitted from the output.',
+        ],
+      },
+      {
+        q: 'What is the difference between JSON validation and JSON Schema validation?',
+        a: [
+          'JSON validation checks syntax — is this text a well-formed JSON document? It verifies brackets, quotes, commas, and value types.',
+          'JSON Schema validation goes further — it checks structure and constraints: is "age" a number between 0 and 150? Is "email" present and a string? You define the rules in a schema document.',
+        ],
+      },
+      {
+        q: 'Are trailing commas allowed in JSON?',
+        a: [
+          'No. Trailing commas after the last item in an object or array are a syntax error in JSON. This is one of the most common mistakes, especially coming from JavaScript where trailing commas are allowed.',
+          'Example of invalid JSON: {"name": "Jane", "age": 30,} — the comma after 30 is illegal.',
+        ],
+      },
+    ],
+  },
+
   'json-vs-yaml': {
     slug: 'json-vs-yaml',
     title: 'JSON vs YAML: What\'s the Difference?',
