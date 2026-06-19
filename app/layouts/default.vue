@@ -10,8 +10,8 @@
         <!-- Desktop nav -->
         <nav class="header-nav">
           <!-- JSON dropdown -->
-          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'json' }" @mouseenter="activeGroup = 'json'" @mouseleave="activeGroup = null">
-            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isJsonActive }">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'json' }" @mouseenter="activeGroup = 'json'" @mouseleave="activeGroup = null" @focusout="closeIfFocusLeft">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isJsonActive }" @click="activeGroup = 'json'" @focus="activeGroup = 'json'">
               JSON
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -25,8 +25,8 @@
           </div>
 
           <!-- Converters 2-column dropdown -->
-          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'converters' }" @mouseenter="activeGroup = 'converters'" @mouseleave="activeGroup = null">
-            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isConverterActive }">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'converters' }" @mouseenter="activeGroup = 'converters'" @mouseleave="activeGroup = null" @focusout="closeIfFocusLeft">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isConverterActive }" @click="activeGroup = 'converters'" @focus="activeGroup = 'converters'">
               Converters
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -50,8 +50,8 @@
           </div>
 
           <!-- Text & Code dropdown -->
-          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'textcode' }" @mouseenter="activeGroup = 'textcode'" @mouseleave="activeGroup = null">
-            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isTextCodeActive }">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'textcode' }" @mouseenter="activeGroup = 'textcode'" @mouseleave="activeGroup = null" @focusout="closeIfFocusLeft">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isTextCodeActive }" @click="activeGroup = 'textcode'" @focus="activeGroup = 'textcode'">
               Text & Code
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -65,8 +65,8 @@
           </div>
 
           <!-- Security dropdown -->
-          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'security' }" @mouseenter="activeGroup = 'security'" @mouseleave="activeGroup = null">
-            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isSecurityActive }">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'security' }" @mouseenter="activeGroup = 'security'" @mouseleave="activeGroup = null" @focusout="closeIfFocusLeft">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isSecurityActive }" @click="activeGroup = 'security'" @focus="activeGroup = 'security'">
               Security
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -80,8 +80,8 @@
           </div>
 
           <!-- Dev Utils dropdown -->
-          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'devutils' }" @mouseenter="activeGroup = 'devutils'" @mouseleave="activeGroup = null">
-            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isDevUtilsActive }">
+          <div class="nav-group" :class="{ 'nav-group--open': activeGroup === 'devutils' }" @mouseenter="activeGroup = 'devutils'" @mouseleave="activeGroup = null" @focusout="closeIfFocusLeft">
+            <button class="nav-item nav-group-trigger" :class="{ 'nav-item--active': isDevUtilsActive }" @click="activeGroup = 'devutils'" @focus="activeGroup = 'devutils'">
               Dev Utils
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -200,6 +200,10 @@ import { useColorMode } from '~/composables/useColorMode'
 const route = useRoute()
 const mobileOpen = ref(false)
 const activeGroup = ref(null)
+
+function closeIfFocusLeft(e) {
+  if (!e.currentTarget.contains(e.relatedTarget)) activeGroup.value = null
+}
 const { init } = useConsent()
 const { isDark, init: initColorMode, toggle } = useColorMode()
 const { addRecent } = useRecentTools()
@@ -436,8 +440,7 @@ body {
   z-index: 300;
 }
 
-.nav-group--open .nav-dropdown,
-.nav-group:focus-within .nav-dropdown {
+.nav-group--open .nav-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
