@@ -1,3 +1,5 @@
+import { ICONS } from '~/utils/icons'
+
 export interface GuideFaq { q: string; a: string[] }
 export interface GuideToolCard { name: string; desc: string; href: string; icon: string }
 
@@ -23,8 +25,8 @@ export const GUIDES: Record<string, GuideConfig> = {
     dateModified: '2026-06-19',
     description: 'Learn what JSON Web Tokens (JWT) are, how they work, their three-part structure (header, payload, signature), signing algorithms, and security best practices.',
     tools: [
-      { name: 'JWT Decoder', desc: 'Paste any JWT to instantly inspect its header, payload, and expiration — no server, fully client-side.', href: '/tools/jwt-decoder', icon: '⟨/⟩' },
-      { name: 'JWT Generator', desc: 'Create signed JWTs with custom claims and algorithm (HS256, HS384, HS512) directly in your browser.', href: '/tools/jwt-generator', icon: '⊕' },
+      { name: 'JWT Decoder', desc: 'Paste any JWT to instantly inspect its header, payload, and expiration — no server, fully client-side.', href: '/tools/jwt-decoder', icon: ICONS.jwtDec },
+      { name: 'JWT Generator', desc: 'Create signed JWTs with custom claims and algorithm (HS256, HS384, HS512) directly in your browser.', href: '/tools/jwt-generator', icon: ICONS.jwtGen },
     ],
     faqs: [
       {
@@ -67,7 +69,7 @@ export const GUIDES: Record<string, GuideConfig> = {
     dateModified: '2026-06-19',
     description: 'Learn what Base64 encoding is, how it converts binary data to text using 64 printable characters, when to use it, and how it differs from Base64url used in JWTs.',
     tools: [
-      { name: 'Base64 Encoder / Decoder', desc: 'Encode text or binary data to Base64, or decode any Base64 string — instantly in your browser.', href: '/tools/base64', icon: '⊞' },
+      { name: 'Base64 Encoder / Decoder', desc: 'Encode text or binary data to Base64, or decode any Base64 string — instantly in your browser.', href: '/tools/base64', icon: ICONS.base64 },
     ],
     faqs: [
       {
@@ -110,8 +112,8 @@ export const GUIDES: Record<string, GuideConfig> = {
     dateModified: '2026-06-19',
     description: 'Learn how to validate JSON: syntax rules, the most common errors (trailing commas, single quotes, unquoted keys), and how to validate structure with JSON Schema.',
     tools: [
-      { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it — errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: '{ }' },
-      { name: 'JSON Schema Generator', desc: 'Generate a JSON Schema from any valid JSON value to start validating structure automatically.', href: '/tools/json-schema', icon: '⊞' },
+      { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it — errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: ICONS.formatter },
+      { name: 'JSON Schema Generator', desc: 'Generate a JSON Schema from any valid JSON value to start validating structure automatically.', href: '/tools/json-schema', icon: ICONS.schema },
     ],
     faqs: [
       {
@@ -154,8 +156,8 @@ export const GUIDES: Record<string, GuideConfig> = {
     dateModified: '2026-06-19',
     description: 'JSON vs YAML: compare syntax, readability, comments, data types, and performance. Learn when to use JSON and when to use YAML for config files, APIs, and data exchange.',
     tools: [
-      { name: 'YAML → JSON', desc: 'Convert any YAML file or snippet to JSON instantly — paste or drop a .yaml file.', href: '/tools/yaml-to-json', icon: '⇄' },
-      { name: 'JSON → YAML', desc: 'Convert JSON to clean, readable YAML — paste or drop a .json file.', href: '/tools/json-to-yaml', icon: '⇄' },
+      { name: 'YAML → JSON', desc: 'Convert any YAML file or snippet to JSON instantly — paste or drop a .yaml file.', href: '/tools/yaml-to-json', icon: ICONS.yamlIn },
+      { name: 'JSON → YAML', desc: 'Convert JSON to clean, readable YAML — paste or drop a .json file.', href: '/tools/json-to-yaml', icon: ICONS.yamlOut },
     ],
     faqs: [
       {
@@ -198,9 +200,9 @@ export const GUIDES: Record<string, GuideConfig> = {
     dateModified: '2026-06-19',
     description: 'Learn what JSON is, its 6 data types, syntax rules, how it compares to XML, and why it became the standard format for REST APIs, configuration files, and databases.',
     tools: [
-      { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it — errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: '{ }' },
-      { name: 'JSON Tree Viewer', desc: 'Visualize any JSON structure as an interactive, collapsible tree.', href: '/tools/json-tree', icon: '⌥' },
-      { name: 'JSON Diff', desc: 'Compare two JSON documents side by side and highlight exactly what changed.', href: '/tools/json-diff', icon: '⇄' },
+      { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it — errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: ICONS.formatter },
+      { name: 'JSON Tree Viewer', desc: 'Visualize any JSON structure as an interactive, collapsible tree.', href: '/tools/json-tree', icon: ICONS.tree },
+      { name: 'JSON Diff', desc: 'Compare two JSON documents side by side and highlight exactly what changed.', href: '/tools/json-diff', icon: ICONS.diff },
     ],
     faqs: [
       {
@@ -243,7 +245,7 @@ export const GUIDES: Record<string, GuideConfig> = {
     dateModified: '2026-06-19',
     description: 'Learn what regular expressions are, how to read regex syntax (character classes, quantifiers, anchors, groups), and practical patterns for emails, URLs, dates, and more.',
     tools: [
-      { name: 'Regex Tester', desc: 'Test any regular expression against your own strings — live match highlighting and capture group inspection, 100% client-side.', href: '/tools/regex-tester', icon: '.*' },
+      { name: 'Regex Tester', desc: 'Test any regular expression against your own strings — live match highlighting and capture group inspection, 100% client-side.', href: '/tools/regex-tester', icon: ICONS.regex },
     ],
     faqs: [
       {
@@ -286,7 +288,7 @@ export const GUIDES: Record<string, GuideConfig> = {
     dateModified: '2026-06-19',
     description: 'Learn cron expression syntax with practical examples: every minute, hourly, daily, weekly, monthly schedules, and special characters (* , - /).',
     tools: [
-      { name: 'Cron Parser', desc: 'Paste any cron expression to get a plain-English description and preview the next scheduled run times.', href: '/tools/cron-parser', icon: '⏱' },
+      { name: 'Cron Parser', desc: 'Paste any cron expression to get a plain-English description and preview the next scheduled run times.', href: '/tools/cron-parser', icon: ICONS.cron },
     ],
     faqs: [
       {

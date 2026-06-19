@@ -35,7 +35,7 @@
             :to="tool.href"
             class="tool-card"
           >
-            <div class="tool-card-icon">{{ tool.icon }}</div>
+            <div class="tool-card-icon" v-html="tool.icon" />
             <div>
               <div class="tool-card-name">{{ tool.name }}</div>
               <div class="tool-card-desc">{{ tool.desc }}</div>
@@ -265,11 +265,14 @@ useHead({
 }
 
 .tool-card-icon {
-  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
   color: #F97316;
-  font-family: 'JetBrains Mono', monospace;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 .tool-card-name {
