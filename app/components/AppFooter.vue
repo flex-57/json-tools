@@ -58,6 +58,7 @@
           <NuxtLink to="/guides/what-is-jwt"              class="footer-link">What is a JWT Token?</NuxtLink>
           <NuxtLink to="/guides/what-is-base64"           class="footer-link">What is Base64?</NuxtLink>
           <NuxtLink to="/guides/cron-expression-examples" class="footer-link">Cron Expression Examples</NuxtLink>
+          <NuxtLink to="/guides/json-vs-yaml"             class="footer-link">JSON vs YAML</NuxtLink>
         </div>
       </nav>
     </div>

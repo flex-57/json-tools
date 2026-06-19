@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">YAML <span class="title-arrow">→</span> JSON</h1>
         <p class="page-subtitle">Convert YAML to JSON — paste text or drop a .yaml / .yml file.</p>
+        <NuxtLink to="/guides/json-vs-yaml" class="guide-link">JSON vs YAML: what's the difference? →</NuxtLink>
       </div>
       <ToolSwitch from-path="/tools/yaml-to-json" to-path="/tools/json-to-yaml" from-label="YAML → JSON" to-label="JSON → YAML" />
     </div>

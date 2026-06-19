@@ -7,6 +7,7 @@ export default defineEventHandler((event) => {
     { loc: '/guides/what-is-jwt',           priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides/what-is-base64',             priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides/cron-expression-examples',   priority: '0.7', changefreq: 'monthly' },
+    { loc: '/guides/json-vs-yaml',               priority: '0.7', changefreq: 'monthly' },
     { loc: '/tools/json-formatter',         priority: '0.9', changefreq: 'monthly' },
     { loc: '/tools/csv-to-json' },
     { loc: '/tools/json-to-csv' },

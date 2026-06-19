@@ -101,6 +101,50 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
   },
 
+  'json-vs-yaml': {
+    slug: 'json-vs-yaml',
+    title: 'JSON vs YAML: What\'s the Difference?',
+    subtitle: 'A side-by-side comparison of JSON and YAML — syntax, use cases, and when to choose one over the other.',
+    readTime: '5 min read',
+    datePublished: '2026-06-19',
+    dateModified: '2026-06-19',
+    description: 'JSON vs YAML: compare syntax, readability, comments, data types, and performance. Learn when to use JSON and when to use YAML for config files, APIs, and data exchange.',
+    tools: [
+      { name: 'YAML → JSON', desc: 'Convert any YAML file or snippet to JSON instantly — paste or drop a .yaml file.', href: '/tools/yaml-to-json', icon: '⇄' },
+      { name: 'JSON → YAML', desc: 'Convert JSON to clean, readable YAML — paste or drop a .json file.', href: '/tools/json-to-yaml', icon: '⇄' },
+    ],
+    faqs: [
+      {
+        q: 'Is YAML a superset of JSON?',
+        a: [
+          'Yes — since YAML 1.2, every valid JSON document is also valid YAML. YAML parsers can read JSON directly.',
+          'The reverse is not true: YAML features like comments, anchors, and multi-line strings have no equivalent in JSON.',
+        ],
+      },
+      {
+        q: 'Can YAML have comments?',
+        a: [
+          'Yes. YAML supports single-line comments with #. This is one of the most practical advantages of YAML for configuration files.',
+          'JSON has no comment syntax. Some parsers accept // or /* */ comments as an extension (JSONC format), but standard JSON does not.',
+        ],
+      },
+      {
+        q: 'Which is faster to parse — JSON or YAML?',
+        a: [
+          'JSON is significantly faster to parse. Its grammar is simple and unambiguous, and native JSON parsers are built into every runtime (browsers, Node.js, Python, etc.).',
+          'YAML has a much more complex grammar with many edge cases (especially around implicit typing), which makes parsers slower and more prone to subtle bugs.',
+        ],
+      },
+      {
+        q: 'Which should I use for configuration files?',
+        a: [
+          'YAML is generally preferred for human-edited config files (Docker Compose, Kubernetes, GitHub Actions, Ansible) because of its readability and comment support.',
+          'JSON is better for machine-generated or machine-consumed data (APIs, package.json, tsconfig.json) where tooling support and parse speed matter more than readability.',
+        ],
+      },
+    ],
+  },
+
   'cron-expression-examples': {
     slug: 'cron-expression-examples',
     title: 'Cron Expression Examples',
