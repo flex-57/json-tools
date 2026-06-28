@@ -186,7 +186,7 @@
       <slot />
     </main>
     <div class="ad-footer-wrap">
-      <AdSlot slot-id="XXXXXXXXXX" />
+      <AdSlot slot-id="6882001481" />
     </div>
     <AppFooter />
     <CookieBanner />
