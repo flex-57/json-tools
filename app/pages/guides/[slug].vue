@@ -22,6 +22,18 @@
         </div>
       </header>
 
+      <!-- Table of Contents (client-only, only for long articles) -->
+      <ClientOnly>
+        <nav v-if="tocItems.length >= 3" class="guide-toc" aria-label="Table of contents">
+          <p class="toc-title">Contents</p>
+          <ol class="toc-list">
+            <li v-for="item in tocItems" :key="item.id">
+              <a :href="'#' + item.id" class="toc-link" @click.prevent="scrollTo(item.id)">{{ item.title }}</a>
+            </li>
+          </ol>
+        </nav>
+      </ClientOnly>
+
       <!-- Body (per-guide content component) -->
       <component :is="BodyComponent" />
 
@@ -46,7 +58,7 @@
       </div>
 
       <!-- FAQ -->
-      <section class="guide-faq">
+      <section class="guide-faq" id="faq">
         <h2 class="guide-faq-title">Frequently asked questions</h2>
         <div class="faq-list">
           <div
@@ -103,6 +115,29 @@ if (!guide) {
 
 const BodyComponent = bodyComponents[slug]
 const openFaq = ref<number | null>(null)
+
+const tocItems = ref<{ id: string; title: string }[]>([])
+
+onMounted(() => {
+  const bodyEl = document.querySelector('.guide-body')
+  if (!bodyEl) return
+  const headings = Array.from(bodyEl.querySelectorAll('h2'))
+  tocItems.value = headings.map(h => {
+    const title = h.textContent?.trim() || ''
+    const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+    h.id = id
+    return { id, title }
+  })
+  tocItems.value.push({ id: 'faq', title: 'FAQ' })
+})
+
+function scrollTo(id: string) {
+  const el = document.getElementById(id)
+  if (!el) return
+  const offset = 80
+  const top = el.getBoundingClientRect().top + window.scrollY - offset
+  window.scrollTo({ top, behavior: 'smooth' })
+}
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
@@ -224,6 +259,74 @@ useHead({
 .guide-meta { display: flex; align-items: center; gap: 8px; }
 .guide-meta-item { font-size: 12.5px; color: var(--c-t4); }
 .guide-meta-sep  { font-size: 12px; color: var(--c-t5); }
+
+/* ── Table of Contents (fixed sidebar on desktop) ───────── */
+.guide-toc {
+  display: none;
+}
+
+@media (min-width: 1300px) {
+  .guide-toc {
+    display: block;
+    position: fixed;
+    left: calc(50% - 604px);
+    top: 136px;
+    width: 204px;
+    background: var(--c-faint);
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    padding: 16px;
+    z-index: 10;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+}
+
+.toc-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--c-t4);
+  margin-bottom: 12px;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  counter-reset: toc-counter;
+}
+
+.toc-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  counter-increment: toc-counter;
+}
+
+.toc-list li::before {
+  content: counter(toc-counter);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c-t5);
+  min-width: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+.toc-link {
+  font-size: 13px;
+  color: var(--c-t2);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.15s;
+}
+
+.toc-link:hover { color: #F97316; }
 
 /* ── Tool CTA cards ─────────────────────────────────────── */
 .guide-tools {

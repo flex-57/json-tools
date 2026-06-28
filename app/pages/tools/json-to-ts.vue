@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -26,12 +26,32 @@
           </div>
         </Transition>
 
-        <!-- Mode toggle -->
-        <div class="mode-toggle">
-          <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'zod' }" />
-          <button :class="['mode-btn', mode === 'ts' ? 'mode-btn--active' : '']" @click="mode = 'ts'">TypeScript</button>
-          <button :class="['mode-btn', mode === 'zod' ? 'mode-btn--active' : '']" @click="mode = 'zod'">Zod</button>
-        </div>
+        <!-- TS power-user options -->
+        <template v-if="mode === 'ts'">
+          <div class="toolbar-sep" />
+          <label class="toggle-wrap">
+            <input type="checkbox" class="toggle-input" v-model="readonlyFields" />
+            <span class="toggle-track"><span class="toggle-thumb" /></span>
+            <span class="toggle-label">readonly</span>
+          </label>
+          <label class="toggle-wrap">
+            <input type="checkbox" class="toggle-input" v-model="useType" />
+            <span class="toggle-track"><span class="toggle-thumb" /></span>
+            <span class="toggle-label">type</span>
+          </label>
+        </template>
+
+        <!-- Zod power-user options -->
+        <template v-else>
+          <div class="toolbar-sep" />
+          <label class="toggle-wrap">
+            <input type="checkbox" class="toggle-input" v-model="zodStrict" />
+            <span class="toggle-track"><span class="toggle-thumb" /></span>
+            <span class="toggle-label">.strict()</span>
+          </label>
+        </template>
+
+        <div class="toolbar-sep" />
 
         <!-- Root name -->
         <div class="root-wrap">
@@ -56,8 +76,12 @@
       </div>
       <div class="editor-card editor-card--output">
         <div class="editor-card-header">
-          <span class="editor-label">{{ mode === 'ts' ? 'TypeScript Interface' : 'Zod Schema' }}</span>
-          <span class="editor-hint">Auto-generated</span>
+          <span class="editor-label">Output</span>
+          <div class="mode-toggle">
+            <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'zod' }" />
+            <button :class="['mode-btn', mode === 'ts' ? 'mode-btn--active' : '']" @click="mode = 'ts'">TypeScript</button>
+            <button :class="['mode-btn', mode === 'zod' ? 'mode-btn--active' : '']" @click="mode = 'zod'">Zod</button>
+          </div>
         </div>
         <div class="editor-body">
           <ClientOnly>
@@ -86,7 +110,7 @@ useSeoMeta({
   twitterImage: 'https://jsontools.space/og/json-to-ts.png',
 })
 
-const { input, mode, rootName, output, error, copied, copy, clear } = useJsonToTs()
+const { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict } = useJsonToTs()
 
 const seoCards = [
   {
@@ -127,7 +151,7 @@ const seoCards = [
   flex-wrap: wrap;
 }
 
-/* ── Mode toggle (sliding pill) ──────────────────────────────────── */
+/* ── Mode toggle (sliding pill) in output card header ────────────── */
 .mode-toggle {
   position: relative;
   display: flex;
@@ -162,7 +186,7 @@ const seoCards = [
   background: transparent;
   font-size: 12px;
   font-weight: 600;
-  padding: 5px 13px;
+  padding: 4px 12px;
   border-radius: 6px;
   cursor: pointer;
   color: var(--c-t4);
@@ -192,7 +216,7 @@ const seoCards = [
 }
 .root-input:focus { border-color: var(--c-t5); background: var(--c-card); }
 
-/* ── Status pills (from tools.css pattern) ───────────────────────── */
+/* ── Status pills ───────────────────────────────────────────────── */
 .status-pill {
   display: flex;
   align-items: center;
