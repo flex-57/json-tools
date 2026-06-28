@@ -175,19 +175,19 @@ async function copy() {
 .tn-val--match   { background: rgba(249,115,22,0.2); border-radius: 3px; padding: 0 2px; }
 
 .tn-copy {
-  opacity: 0;
+  opacity: 0.25;
   margin-left: 8px;
   background: none;
   border: none;
   cursor: pointer;
   color: #5C6470;
-  padding: 2px;
+  padding: 2px 4px;
   border-radius: 3px;
-  transition: opacity 0.1s, color 0.1s;
+  transition: opacity 0.1s, color 0.1s, background 0.1s;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
 }
-.tn-copy:hover { color: var(--c-t2); }
+.tn-copy:hover { color: var(--c-t2); background: rgba(255,255,255,0.08); }
 .tn-type { font-size: 10px; color: #5C6470; margin-left: 8px; flex-shrink: 0; }
 </style>

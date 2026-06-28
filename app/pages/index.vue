@@ -267,7 +267,7 @@ const recentTools = computed(() => recentSlugs.value.map(s => toolBySlug[s]).fil
   padding: 0 14px;
   height: 44px;
   background: var(--c-card);
-  border: 1px solid var(--c-border);
+  border: 1.5px solid var(--c-border-m);
   border-radius: 10px;
   transition: border-color 0.15s;
 }
