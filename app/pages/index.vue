@@ -199,7 +199,9 @@ const CATEGORIES = [
 
 const ALL_TOOLS = CATEGORIES.flatMap(cat => cat.tools)
 const toolBySlug = Object.fromEntries(ALL_TOOLS.map(t => [t.to.replace('/tools/', ''), t]))
-const recentTools = computed(() => recentSlugs.value.map(s => toolBySlug[s]).filter(Boolean))
+const recentTools = computed(() =>
+  recentSlugs.value.map(s => toolBySlug[s]).filter((t): t is NonNullable<typeof t> => !!t)
+)
 </script>
 
 <style scoped>
