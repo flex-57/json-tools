@@ -7,7 +7,8 @@ export default defineNuxtConfig({
   ],
   nitro: {
     prerender: {
-      routes: ['/sitemap.xml'],
+      crawlLinks: true,
+      routes: ['/', '/sitemap.xml'],
     },
     routeRules: {
       '/**': {
@@ -31,6 +32,9 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/lang-javascript', '@codemirror/lang-xml', '@codemirror/lang-yaml', '@codemirror/lang-sql', '@codemirror/language', '@codemirror/theme-one-dark', '@vue-flow/core', '@dagrejs/dagre'],
     },
+  },
+  router: {
+    options: { strict: true },
   },
   app: {
     head: {
