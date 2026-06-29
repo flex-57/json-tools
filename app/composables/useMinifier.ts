@@ -70,7 +70,12 @@ export async function minifyJS(input: string): Promise<MinifyResult> {
     const output = result.code ?? ''
     return { output, error: null, ...stats(input, output) }
   } catch (e) {
-    return { ...empty(input), error: (e as Error).message }
+    const raw = (e as Error).message
+    const looksLikeTS = /\binterface\s+\w|\btype\s+\w+\s*[=<]|\bas\s+\w|:\s*(string|number|boolean|void|any|never|unknown)\b/.test(trimmed)
+    const looksLikeJSX = /<[A-Z][a-zA-Z]*[\s/>]|<\/[A-Z]/.test(trimmed)
+    if (looksLikeTS) return { ...empty(input), error: 'TypeScript is not supported — remove type annotations and use plain JavaScript only.' }
+    if (looksLikeJSX) return { ...empty(input), error: 'JSX syntax is not supported — this minifier handles plain JavaScript only.' }
+    return { ...empty(input), error: raw }
   }
 }
 

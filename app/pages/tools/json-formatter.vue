@@ -29,6 +29,7 @@
           <svg v-else width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           {{ copied ? 'Copied!' : 'Copy' }}
         </button>
+        <button @click="clear" class="btn btn-ghost">Clear</button>
       </div>
       <div class="toolbar-right">
         <Transition name="status">
@@ -45,7 +46,6 @@
             <option value="	">Tabs</option>
           </select>
         </div>
-        <button @click="clear" class="btn btn-ghost">Clear</button>
       </div>
     </div>
 
