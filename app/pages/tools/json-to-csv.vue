@@ -28,7 +28,6 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Download
         </button>
-        <button @click="clear" class="btn btn-ghost">Clear</button>
       </div>
       <div class="toolbar-right">
         <Transition name="status">
@@ -56,7 +55,10 @@
       <div class="editor-card" :class="{ 'editor-card--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="editor-card-header">
           <span class="editor-label">JSON Input</span>
-          <span class="editor-hint">Array of objects · or drop a .json file</span>
+          <div class="card-actions">
+            <span class="editor-hint">Array of objects · or drop a .json file</span>
+            <button class="btn-xs" @click="clear">Clear</button>
+          </div>
         </div>
         <div class="editor-body">
           <ClientOnly>

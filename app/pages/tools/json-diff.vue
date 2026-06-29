@@ -10,19 +10,22 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 4h9M7 1l3 3-3 3M13 10H4M7 7l-3 3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Swap
         </button>
-        <button @click="clear" class="btn btn-ghost">Clear</button>
       </div>
     </div>
 
     <!-- Editors -->
     <div class="editors">
-      <div class="editor-card" :class="{ 'editor-card--focus': leftFocus }">
+      <div class="editor-card" :class="{ 'editor-card--focus': leftFocus, 'editor-card--drag': isDraggingLeft }" @dragover.prevent="isDraggingLeft = true" @dragleave="isDraggingLeft = false" @drop.prevent="onDropLeft">
         <div class="editor-card-header">
           <div class="label-wrap">
             <span class="side-dot side-dot--left" />
             <span class="editor-label">Original</span>
           </div>
-          <span v-if="result && !result.error" class="editor-stat editor-stat--removed">-{{ result.deletions }}</span>
+          <div class="card-actions">
+            <span v-if="result && !result.error" class="editor-stat editor-stat--removed">-{{ result.deletions }}</span>
+            <span class="editor-hint">drop a .json file</span>
+            <button class="btn-xs" @click="left = ''">Clear</button>
+          </div>
         </div>
         <div class="editor-body" @focusin="leftFocus = true" @focusout="leftFocus = false">
           <ClientOnly>
@@ -32,13 +35,17 @@
         </div>
       </div>
 
-      <div class="editor-card" :class="{ 'editor-card--focus': rightFocus }">
+      <div class="editor-card" :class="{ 'editor-card--focus': rightFocus, 'editor-card--drag': isDraggingRight }" @dragover.prevent="isDraggingRight = true" @dragleave="isDraggingRight = false" @drop.prevent="onDropRight">
         <div class="editor-card-header">
           <div class="label-wrap">
             <span class="side-dot side-dot--right" />
             <span class="editor-label">Modified</span>
           </div>
-          <span v-if="result && !result.error" class="editor-stat editor-stat--added">+{{ result.additions }}</span>
+          <div class="card-actions">
+            <span v-if="result && !result.error" class="editor-stat editor-stat--added">+{{ result.additions }}</span>
+            <span class="editor-hint">drop a .json file</span>
+            <button class="btn-xs" @click="right = ''">Clear</button>
+          </div>
         </div>
         <div class="editor-body" @focusin="rightFocus = true" @focusout="rightFocus = false">
           <ClientOnly>
@@ -104,7 +111,27 @@ useSeoMeta({
   twitterImage: 'https://jsontools.space/og/json-diff.png',
 })
 
-const { left, right, result, swap, clear } = useJsonDiff()
+const { left, right, result, swap } = useJsonDiff()
+
+const isDraggingLeft = ref(false)
+const isDraggingRight = ref(false)
+
+function onDropLeft(e: DragEvent) {
+  isDraggingLeft.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { left.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
+function onDropRight(e: DragEvent) {
+  isDraggingRight.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { right.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
 
 const seoCards = [
   {

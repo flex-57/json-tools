@@ -5,17 +5,17 @@
         <h1 class="page-title">JSON <span class="title-amp">Tree Viewer</span></h1>
         <p class="page-subtitle">Explore JSON structure as an interactive collapsible tree or graph. Click nodes to expand, hover to copy the full path.</p>
       </div>
-      <div class="header-actions">
-        <button @click="clear" class="btn btn-ghost">Clear</button>
-      </div>
     </div>
 
     <div class="tree-layout">
       <!-- Input panel -->
-      <div class="editor-card" :class="{ 'editor-card--focus': editorFocus }">
+      <div class="editor-card" :class="{ 'editor-card--focus': editorFocus, 'editor-card--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="editor-card-header">
           <span class="editor-label">JSON Input</span>
-          <span class="editor-hint">paste or type JSON</span>
+          <div class="card-actions">
+            <span class="editor-hint">paste or type · or drop a .json file</span>
+            <button class="btn-xs" @click="clear">Clear</button>
+          </div>
         </div>
         <div class="editor-body" @focusin="editorFocus = true" @focusout="editorFocus = false">
           <ClientOnly>
@@ -209,6 +209,16 @@ function expandAll()  { collapsed.value = new Set() }
 function collapseAll() { if (root.value) collapsed.value = new Set(collectAllExpandableIds(root.value)) }
 function clear()      { input.value = ''; search.value = '' }
 
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
+
 const seoCards = [
   {
     title: 'What is a JSON Tree Viewer?',
@@ -308,13 +318,6 @@ const seoCards = [
 }
 .tree-search-clear:hover { color: var(--c-t2); }
 
-.btn-xs {
-  font-size: 11px; font-weight: 500; padding: 3px 9px;
-  border-radius: 5px; border: 1px solid var(--c-border);
-  background: var(--c-subtle); color: var(--c-t3); cursor: pointer;
-  white-space: nowrap; transition: background 0.1s, color 0.1s;
-}
-.btn-xs:hover { background: var(--c-border); color: var(--c-t2); }
 
 /* Output body */
 .output-body {

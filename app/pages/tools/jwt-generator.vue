@@ -300,16 +300,6 @@ const seoCards = [
 }
 
 /* ── Copy button ─────────────────────────────────────────────────── */
-.btn-copy {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; font-family: inherit; font-weight: 500;
-  padding: 3px 10px; border-radius: 6px;
-  border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t3);
-  cursor: pointer; transition: all 0.15s;
-}
-.btn-copy:hover:not(:disabled) { background: var(--c-subtle); border-color: var(--c-border); }
-.btn-copy--done { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
-.btn-copy:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ── Info strip ──────────────────────────────────────────────────── */
 .info-strip {

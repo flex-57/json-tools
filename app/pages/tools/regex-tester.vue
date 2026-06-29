@@ -6,7 +6,6 @@
         <p class="page-subtitle">Test regular expressions with live match highlighting and capture group inspection.</p>
         <NuxtLink to="/guides/what-is-regex" class="guide-link">New to regex? Read our guide →</NuxtLink>
       </div>
-      <button @click="clear" class="btn btn-ghost">Clear</button>
     </div>
 
     <!-- Pattern input -->
@@ -44,7 +43,10 @@
     <div class="editor-card">
       <div class="editor-card-header">
         <span class="editor-label">Test string</span>
-        <span v-if="input" class="editor-hint">{{ input.length }} chars</span>
+        <div class="card-actions">
+          <span v-if="input" class="editor-hint">{{ input.length }} chars</span>
+          <button class="btn-xs" @click="clear">Clear</button>
+        </div>
       </div>
       <div class="editor-body">
         <textarea

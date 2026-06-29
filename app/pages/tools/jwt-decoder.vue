@@ -12,7 +12,7 @@
     <div class="token-card">
       <div class="token-card-header">
         <span class="editor-label">Token</span>
-        <button v-if="token" @click="clear" class="btn-clear">Clear</button>
+        <button v-if="token" @click="clear" class="btn-xs">Clear</button>
       </div>
       <textarea
         v-model="token"
@@ -191,8 +191,6 @@ function formatDate(d: Date): string {
   align-items: center;
   justify-content: space-between;
 }
-.btn-clear { font-size: 12px; color: var(--c-t4); background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
-.btn-clear:hover { color: #DC2626; }
 
 .token-input {
   width: 100%;
@@ -284,14 +282,6 @@ function formatDate(d: Date): string {
 .decoded-dot--payload { background: #16A34A; }
 .decoded-dot--signature { background: #F97316; }
 
-.btn-copy {
-  font-size: 12px; font-family: inherit; font-weight: 500;
-  padding: 4px 10px; border-radius: 6px;
-  border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t3);
-  cursor: pointer; transition: all 0.15s;
-}
-.btn-copy:hover { background: var(--c-subtle); }
-.btn-copy--done { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
 
 .decoded-body { padding: 8px 0; }
 .claim-row {

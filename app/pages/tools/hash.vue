@@ -5,9 +5,6 @@
         <h1 class="page-title">Hash <span class="title-amp">Generator</span></h1>
         <p class="page-subtitle">Compute MD5, SHA-1, SHA-256 and SHA-512 hashes instantly in your browser — nothing is sent to any server.</p>
       </div>
-      <div class="header-actions">
-        <button @click="clear" class="btn btn-ghost">Clear</button>
-      </div>
     </div>
 
     <div class="hash-layout">
@@ -15,7 +12,10 @@
       <div class="editor-card" :class="{ 'editor-card--focus': focused }">
         <div class="editor-card-header">
           <span class="editor-label">Input</span>
-          <span class="editor-hint">{{ byteCount }} bytes</span>
+          <div class="card-actions">
+            <span class="editor-hint">{{ byteCount }} bytes</span>
+            <button class="btn-xs" @click="clear">Clear</button>
+          </div>
         </div>
         <textarea
           v-model="input"

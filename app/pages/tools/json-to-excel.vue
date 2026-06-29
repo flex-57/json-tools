@@ -15,7 +15,6 @@
           <svg v-else class="spinner" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><path d="M7 2a5 5 0 015 5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
           {{ loading ? 'Generating...' : 'Download .xlsx' }}<span v-if="!loading" class="kb"> Ctrl ↵</span>
         </button>
-        <button @click="clear" class="btn btn-ghost">Clear</button>
       </div>
       <div class="toolbar-right">
         <Transition name="status">
@@ -30,7 +29,10 @@
       <div class="editor-card" :class="{ 'editor-card--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="editor-card-header">
           <span class="editor-label">JSON Input</span>
-          <span class="editor-hint">Array of objects · or drop a .json file</span>
+          <div class="card-actions">
+            <span class="editor-hint">Array of objects · or drop a .json file</span>
+            <button class="btn-xs" @click="clear">Clear</button>
+          </div>
         </div>
         <div class="editor-body">
           <ClientOnly>

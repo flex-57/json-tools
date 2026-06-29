@@ -37,7 +37,7 @@
           <Transition name="fade-slot">
             <div v-if="input" class="panel-header-right">
               <span class="char-count">{{ input.length }} chars</span>
-              <button @click="clear" class="btn-clear">Clear</button>
+              <button @click="clear" class="btn-xs">Clear</button>
             </div>
           </Transition>
         </div>
@@ -320,23 +320,6 @@ const seoCards = [
 }
 
 /* ── Buttons ─────────────────────────────────────────────────────── */
-.btn-clear {
-  font-size: 12px; color: var(--c-t4); background: none; border: none;
-  cursor: pointer; font-family: inherit; padding: 2px 7px;
-  border-radius: 5px; transition: all 0.15s;
-}
-.btn-clear:hover { color: #DC2626; background: #FFF1F0; }
-
-.btn-copy {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; font-family: inherit; font-weight: 500;
-  padding: 3px 10px; border-radius: 6px;
-  border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t3);
-  cursor: pointer; transition: all 0.15s;
-}
-.btn-copy:hover:not(:disabled) { background: var(--c-subtle); border-color: var(--c-border); }
-.btn-copy--done { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
-.btn-copy:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ── Info strip ──────────────────────────────────────────────────── */
 .info-strip {
