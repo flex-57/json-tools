@@ -91,11 +91,19 @@ import WhatIsJwt              from '~/components/guides/body/what-is-jwt.vue'
 import WhatIsBase64           from '~/components/guides/body/what-is-base64.vue'
 import CronExpressionExamples from '~/components/guides/body/cron-expression-examples.vue'
 import JsonVsYaml             from '~/components/guides/body/json-vs-yaml.vue'
-import HowToValidateJson     from '~/components/guides/body/how-to-validate-json.vue'
-import WhatIsRegex           from '~/components/guides/body/what-is-regex.vue'
-import WhatIsJson            from '~/components/guides/body/what-is-json.vue'
-import WhatIsMarkdown        from '~/components/guides/body/what-is-markdown.vue'
-import MarkdownCheatsheet    from '~/components/guides/body/markdown-cheatsheet.vue'
+import HowToValidateJson      from '~/components/guides/body/how-to-validate-json.vue'
+import WhatIsRegex            from '~/components/guides/body/what-is-regex.vue'
+import WhatIsJson             from '~/components/guides/body/what-is-json.vue'
+import WhatIsMarkdown         from '~/components/guides/body/what-is-markdown.vue'
+import MarkdownCheatsheet     from '~/components/guides/body/markdown-cheatsheet.vue'
+import WhatIsUrlEncoding      from '~/components/guides/body/what-is-url-encoding.vue'
+import WhatIsHash             from '~/components/guides/body/what-is-hash.vue'
+import WhatIsXml              from '~/components/guides/body/what-is-xml.vue'
+import WhatIsUuid             from '~/components/guides/body/what-is-uuid.vue'
+import WhatIsJsonSchema       from '~/components/guides/body/what-is-json-schema.vue'
+import WhatIsYaml             from '~/components/guides/body/what-is-yaml.vue'
+import RegexCheatsheet        from '~/components/guides/body/regex-cheatsheet.vue'
+import JsonBestPractices      from '~/components/guides/body/json-best-practices.vue'
 
 const bodyComponents: Record<string, Component> = {
   'what-is-jwt':              WhatIsJwt,
@@ -107,6 +115,14 @@ const bodyComponents: Record<string, Component> = {
   'what-is-json':             WhatIsJson,
   'what-is-markdown':         WhatIsMarkdown,
   'markdown-cheatsheet':      MarkdownCheatsheet,
+  'what-is-url-encoding':     WhatIsUrlEncoding,
+  'what-is-hash':             WhatIsHash,
+  'what-is-xml':              WhatIsXml,
+  'what-is-uuid':             WhatIsUuid,
+  'what-is-json-schema':      WhatIsJsonSchema,
+  'what-is-yaml':             WhatIsYaml,
+  'regex-cheatsheet':         RegexCheatsheet,
+  'json-best-practices':      JsonBestPractices,
 }
 
 const route = useRoute()

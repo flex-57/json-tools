@@ -69,6 +69,14 @@
         <NuxtLink to="/guides/what-is-regex"            class="footer-pill">What is Regex?</NuxtLink>
         <NuxtLink to="/guides/what-is-markdown"         class="footer-pill">What is Markdown?</NuxtLink>
         <NuxtLink to="/guides/markdown-cheatsheet"      class="footer-pill">Markdown Cheatsheet</NuxtLink>
+        <NuxtLink to="/guides/what-is-url-encoding"     class="footer-pill">URL Encoding</NuxtLink>
+        <NuxtLink to="/guides/what-is-hash"             class="footer-pill">Hash Functions</NuxtLink>
+        <NuxtLink to="/guides/what-is-xml"              class="footer-pill">What is XML?</NuxtLink>
+        <NuxtLink to="/guides/what-is-uuid"             class="footer-pill">What is UUID?</NuxtLink>
+        <NuxtLink to="/guides/what-is-json-schema"      class="footer-pill">JSON Schema</NuxtLink>
+        <NuxtLink to="/guides/what-is-yaml"             class="footer-pill">What is YAML?</NuxtLink>
+        <NuxtLink to="/guides/regex-cheatsheet"         class="footer-pill">Regex Cheatsheet</NuxtLink>
+        <NuxtLink to="/guides/json-best-practices"      class="footer-pill">JSON Best Practices</NuxtLink>
       </div>
     </div>
 
@@ -140,6 +148,14 @@
           <NuxtLink to="/guides/what-is-regex"            class="footer-pill">What is Regex?</NuxtLink>
           <NuxtLink to="/guides/what-is-markdown"         class="footer-pill">What is Markdown?</NuxtLink>
           <NuxtLink to="/guides/markdown-cheatsheet"      class="footer-pill">Markdown Cheatsheet</NuxtLink>
+          <NuxtLink to="/guides/what-is-url-encoding"     class="footer-pill">URL Encoding</NuxtLink>
+          <NuxtLink to="/guides/what-is-hash"             class="footer-pill">Hash Functions</NuxtLink>
+          <NuxtLink to="/guides/what-is-xml"              class="footer-pill">What is XML?</NuxtLink>
+          <NuxtLink to="/guides/what-is-uuid"             class="footer-pill">What is UUID?</NuxtLink>
+          <NuxtLink to="/guides/what-is-json-schema"      class="footer-pill">JSON Schema</NuxtLink>
+          <NuxtLink to="/guides/what-is-yaml"             class="footer-pill">What is YAML?</NuxtLink>
+          <NuxtLink to="/guides/regex-cheatsheet"         class="footer-pill">Regex Cheatsheet</NuxtLink>
+          <NuxtLink to="/guides/json-best-practices"      class="footer-pill">JSON Best Practices</NuxtLink>
         </div>
       </div>
     </nav>

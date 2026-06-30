@@ -376,6 +376,364 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
   },
 
+  'what-is-url-encoding': {
+    slug: 'what-is-url-encoding',
+    type: 'guide',
+    title: 'What is URL Encoding?',
+    subtitle: 'Percent-encoding explained: which characters must be encoded, how it works, and the difference between encodeURI and encodeURIComponent.',
+    readTime: '5 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Learn what URL encoding (percent-encoding) is, which characters are reserved, how %XX encoding works, and when to use encodeURI vs encodeURIComponent in JavaScript.',
+    tools: [
+      { name: 'URL Encode / Decode', desc: 'Encode special characters for URLs or decode any percent-encoded string — instantly, client-side.', href: '/tools/url-encode', icon: ICONS.url },
+      { name: 'Base64 Encode / Decode', desc: 'An alternative encoding scheme for binary data — often confused with URL encoding.', href: '/tools/base64', icon: ICONS.base64 },
+    ],
+    faqs: [
+      {
+        q: 'What is the difference between %20 and + for encoding spaces?',
+        a: [
+          'Both represent a space, but in different contexts. %20 (percent-encoding) is used in URL paths and is defined by RFC 3986.',
+          '+ is used only in form data (application/x-www-form-urlencoded) — the format browsers send when you submit an HTML form. When in doubt, use %20; it works everywhere. Never mix the two in the same URL.',
+        ],
+      },
+      {
+        q: 'Do I need to encode all special characters?',
+        a: [
+          'Not all — only characters that are not safe in a URL context. Unreserved characters (letters A–Z, digits 0–9, and - _ . ~) never need encoding.',
+          'Reserved characters like / ? # & = ; : @ have special meaning in URL structure and must be encoded if they appear in a value rather than as URL delimiters.',
+        ],
+      },
+      {
+        q: 'What is the difference between encodeURI and encodeURIComponent?',
+        a: [
+          'encodeURI encodes a complete URL — it leaves structural characters like / ? # & = intact because they are part of the URL structure.',
+          'encodeURIComponent encodes a value to be embedded inside a URL component. It encodes everything except letters, digits, and - _ . ! ~ * \' ( ). Use encodeURIComponent for query parameter values; use encodeURI for full URLs.',
+        ],
+      },
+      {
+        q: 'Is URL encoding the same as Base64?',
+        a: [
+          'No. They solve different problems. URL encoding represents a character as a % followed by its hexadecimal byte value. It is specifically designed to make arbitrary text safe in URLs.',
+          'Base64 encodes binary data as printable ASCII text using 64 characters. It increases data size by ~33% and is used for embedding files in text contexts (HTML data URIs, email attachments). The two schemes are not interchangeable.',
+        ],
+      },
+    ],
+  },
+
+  'what-is-hash': {
+    slug: 'what-is-hash',
+    type: 'guide',
+    title: 'What is a Hash Function?',
+    subtitle: 'Hash functions explained: one-way digests, MD5 vs SHA-256, use cases, and why you should never hash passwords with SHA.',
+    readTime: '6 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Learn what cryptographic hash functions are, how MD5, SHA-1, SHA-256, and SHA-512 compare, their use cases (checksums, deduplication, digital signatures), and why bcrypt/Argon2 are required for passwords.',
+    tools: [
+      { name: 'Hash Generator', desc: 'Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text — live, client-side.', href: '/tools/hash', icon: ICONS.hash },
+    ],
+    faqs: [
+      {
+        q: 'What is the difference between MD5 and SHA-256?',
+        a: [
+          'MD5 produces a 128-bit (32-character hex) digest and is fast to compute. It is considered cryptographically broken — collisions can be generated in seconds on commodity hardware — so it should never be used for security purposes.',
+          'SHA-256 produces a 256-bit (64-character hex) digest and is significantly more secure. It is the standard choice for integrity verification, digital signatures, and other security-sensitive uses. Use SHA-256 or SHA-512 for new applications.',
+        ],
+      },
+      {
+        q: 'Can a hash be reversed?',
+        a: [
+          'No — that is the defining property of a one-way function. A hash function maps input of any size to a fixed-size digest, and the computation is designed to be infeasible to reverse.',
+          'However, attackers can use precomputed rainbow tables (hash → input mappings) for common inputs like short passwords. This is why passwords need both a strong hash algorithm (bcrypt, Argon2) and a unique random salt per entry.',
+        ],
+      },
+      {
+        q: 'Why should I not use SHA-256 to hash passwords?',
+        a: [
+          'SHA-256 is designed to be fast — which is exactly what you do not want for password storage. An attacker with a GPU can compute billions of SHA-256 hashes per second, making brute-force attacks trivial.',
+          'Password hashing algorithms like bcrypt, Argon2, and scrypt are deliberately slow and configurable. They include a work factor that lets you increase computation time as hardware gets faster. Always use one of these for passwords, never raw SHA.',
+        ],
+      },
+      {
+        q: 'What is a hash collision?',
+        a: [
+          'A collision occurs when two different inputs produce the same hash output. Since hash functions map arbitrary-length input to a fixed-size output, collisions are mathematically inevitable — but a good hash function makes finding one computationally infeasible.',
+          'MD5 and SHA-1 have known practical collision attacks. SHA-256 has no known collisions. Collisions matter for security (digital signatures, certificates) but not for non-security uses like checksums for accidental corruption.',
+        ],
+      },
+    ],
+  },
+
+  'what-is-xml': {
+    slug: 'what-is-xml',
+    type: 'guide',
+    title: 'What is XML?',
+    subtitle: 'XML explained: element structure, attributes, well-formed vs valid, XML vs JSON, and where XML is still used today.',
+    readTime: '5 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Learn what XML (eXtensible Markup Language) is, how it structures data with tags and attributes, the difference between well-formed and valid XML, and where it is still used (SOAP, RSS, SVG, Android, Office).',
+    tools: [
+      { name: 'XML → JSON', desc: 'Convert XML documents to clean JSON — handles attributes, nested elements, and namespaces.', href: '/tools/xml-to-json', icon: ICONS.xmlIn },
+      { name: 'JSON → XML', desc: 'Convert JSON objects to valid XML with a configurable root element.', href: '/tools/json-to-xml', icon: ICONS.xmlOut },
+    ],
+    faqs: [
+      {
+        q: 'Is HTML the same as XML?',
+        a: [
+          'No. HTML and XML share tag-based syntax but serve different purposes. HTML has a fixed set of tags (div, p, a, img…) defined by the HTML standard. XML lets you define your own tags.',
+          'XHTML is a stricter version of HTML that follows XML syntax rules: all tags must be closed, attributes must be quoted, and there must be exactly one root element. Modern HTML5 does not require this strictness.',
+        ],
+      },
+      {
+        q: 'What is the difference between a DTD and an XSD?',
+        a: [
+          'Both define a schema (the allowed structure) for an XML document. DTD (Document Type Definition) is the older format, with limited type support and a non-XML syntax.',
+          'XSD (XML Schema Definition) is the modern alternative, written in XML itself. It supports data types (string, integer, date…), namespaces, and more complex constraints. XSD is preferred for enterprise XML like SOAP/WSDL.',
+        ],
+      },
+      {
+        q: 'What is XPath?',
+        a: [
+          'XPath is a query language for selecting nodes in an XML document, similar to how CSS selectors work for HTML. An expression like /users/user[@id="42"]/email selects the email element of the user whose id attribute is "42".',
+          'XPath is used in XSLT (XML transformation), XML validators, and tools like Selenium for browser automation (selecting HTML elements).',
+        ],
+      },
+      {
+        q: 'Is XML still relevant in 2026?',
+        a: [
+          'Yes, in specific domains. XML is the foundation of SOAP web services (still dominant in banking and ERP), RSS/Atom feeds, SVG graphics, Android UI layouts, Maven build files, and Microsoft Office documents (.docx, .xlsx).',
+          'For new REST APIs and data interchange, JSON has largely replaced XML due to its compactness and native JavaScript support. But XML is not going away — it remains deeply embedded in enterprise and standards-based systems.',
+        ],
+      },
+    ],
+  },
+
+  'what-is-uuid': {
+    slug: 'what-is-uuid',
+    type: 'guide',
+    title: 'What is a UUID?',
+    subtitle: 'UUIDs explained: the 5-part structure, v1 vs v4 vs v7, uniqueness guarantees, and when to choose UUID over auto-increment.',
+    readTime: '5 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Learn what UUIDs are, how their 128-bit structure works, the differences between UUID v1, v4, v5, and v7, and when to choose UUIDs vs auto-increment integer IDs for database primary keys.',
+    tools: [
+      { name: 'UUID Generator', desc: 'Generate random UUID v4 identifiers — single or bulk, multiple format options.', href: '/tools/uuid', icon: ICONS.uuid },
+    ],
+    faqs: [
+      {
+        q: 'Is UUID v4 truly unique?',
+        a: [
+          'In practice, yes. UUID v4 has 122 bits of randomness, giving approximately 5.3 × 10³⁶ possible values. The probability of generating a duplicate when producing 1 billion UUIDs per second for 100 years is negligible — far smaller than the probability of a hardware failure in the same period.',
+          'UUID collisions happen in theory (the birthday problem applies), but the expected number of UUIDs you must generate before seeing a collision exceeds 2.7 × 10¹⁸. In practice, UUID v4 collisions do not happen.',
+        ],
+      },
+      {
+        q: 'What is the difference between UUID and ULID?',
+        a: [
+          'UUID (v4) generates a random 128-bit identifier with no inherent order. ULID (Universally Unique Lexicographically Sortable Identifier) encodes a 48-bit millisecond timestamp followed by 80 random bits, in a 26-character Crockford Base32 string.',
+          'ULID sorts chronologically, is URL-safe (no hyphens), and is human-readable compared to UUID. UUID v7 achieves similar time-ordered sorting within the RFC 9562 standard, making ULIDs less necessary for new projects.',
+        ],
+      },
+      {
+        q: 'Should I use UUID or auto-increment as a database primary key?',
+        a: [
+          'It depends on your requirements. Auto-increment integers are smaller (4–8 bytes vs 16 bytes), sequential (good for B-tree indexes), and human-friendly. They expose record counts and are not globally unique across tables or databases.',
+          'UUID v4 is globally unique, merge-safe across databases, and does not expose row counts. The tradeoff is B-tree fragmentation from random values. UUID v7 solves this by being time-ordered, combining global uniqueness with sequential-insert performance.',
+        ],
+      },
+      {
+        q: 'What format should I store UUIDs in a database?',
+        a: [
+          'Store as a 16-byte binary column (BINARY(16) in MySQL, uuid type in PostgreSQL) for maximum efficiency — both space and index performance. This is 36% smaller than storing the canonical string form.',
+          'If you must store as a string (e.g. for readability or cross-system compatibility), store the full hyphenated form (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx). Avoid stripping hyphens — it makes debugging harder with no real benefit.',
+        ],
+      },
+    ],
+  },
+
+  'what-is-json-schema': {
+    slug: 'what-is-json-schema',
+    type: 'guide',
+    title: 'What is JSON Schema?',
+    subtitle: 'JSON Schema explained: core keywords, composition, Draft-07 vs 2020-12, and practical validation use cases.',
+    readTime: '6 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Learn what JSON Schema is, its core keywords (type, properties, required, enum, pattern), composition with anyOf/oneOf/allOf, the difference between Draft-07 and 2020-12, and where it is used in APIs and tooling.',
+    tools: [
+      { name: 'JSON Schema Generator', desc: 'Generate a JSON Schema automatically from any JSON sample — Draft-07 or 2020-12.', href: '/tools/json-schema', icon: ICONS.schema },
+      { name: 'JSON Formatter & Validator', desc: 'Validate and format your JSON documents before writing a schema for them.', href: '/tools/json-formatter', icon: ICONS.formatter },
+    ],
+    faqs: [
+      {
+        q: 'Is JSON Schema the same as TypeScript types?',
+        a: [
+          'No, they serve different purposes. TypeScript types exist at compile time — they are erased by the compiler and have no effect at runtime. JSON Schema validates data at runtime against a declarative schema document.',
+          'Tools like zod-to-json-schema and json-schema-to-typescript bridge the two worlds: you can generate a JSON Schema from a Zod schema for runtime validation, or generate TypeScript types from a JSON Schema for static typing.',
+        ],
+      },
+      {
+        q: 'Which JSON Schema draft should I use?',
+        a: [
+          'For new projects, use Draft 2020-12 if your validator supports it — it has cleaner semantics, better anchor support, and modular vocabulary. For maximum ecosystem compatibility (OpenAPI 3.0, many existing validators), use Draft-07.',
+          'Always declare the draft explicitly with the $schema keyword at the top of your schema so validators know which rules to apply.',
+        ],
+      },
+      {
+        q: 'Which validators implement JSON Schema?',
+        a: [
+          'JavaScript/Node.js: Ajv (most popular), jsonschema, @cfworker/json-schema. Python: jsonschema, fastjsonschema. Java: networknt/json-schema-validator. Go: gojsonschema. Rust: jsonschema.',
+          'Ajv is the de facto standard in the JavaScript ecosystem and is used internally by many frameworks and tools (including webpack). It supports Draft-07, 2019-09, and 2020-12.',
+        ],
+      },
+      {
+        q: 'Can JSON Schema validate formats like email or date-time?',
+        a: [
+          'Yes, with the "format" keyword: "format": "email", "format": "date-time", "format": "uri", etc. However, format validation is optional in the spec — validators are not required to enforce it unless explicitly configured.',
+          'In Ajv, enable format validation by installing ajv-formats and adding the formats option. Without explicit configuration, format keywords are collected but not validated, which can lead to false confidence.',
+        ],
+      },
+    ],
+  },
+
+  'what-is-yaml': {
+    slug: 'what-is-yaml',
+    type: 'guide',
+    title: 'What is YAML?',
+    subtitle: 'YAML explained: indentation-based syntax, scalars, sequences, anchors, and common gotchas like the Norway problem.',
+    readTime: '6 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Learn what YAML is, how its indentation-based syntax compares to JSON, block and flow styles, anchors and aliases, and the common pitfalls that trip up developers (Norway problem, tab prohibition, implicit type coercion).',
+    tools: [
+      { name: 'YAML → JSON', desc: 'Convert any YAML file or snippet to JSON instantly — paste or drop a .yaml file.', href: '/tools/yaml-to-json', icon: ICONS.yamlIn },
+      { name: 'JSON → YAML', desc: 'Convert JSON to clean, readable YAML with proper indentation.', href: '/tools/json-to-yaml', icon: ICONS.yamlOut },
+    ],
+    faqs: [
+      {
+        q: 'Is YAML a superset of JSON?',
+        a: [
+          'Yes, since YAML 1.2 (2009). Every valid JSON document is also valid YAML, and a YAML 1.2 parser can read JSON directly.',
+          'The reverse is not true: YAML supports features JSON does not — comments (#), multi-line strings (| and >), anchors (&) and aliases (*), and implicit type coercion. A JSON parser cannot read YAML.',
+        ],
+      },
+      {
+        q: 'Why does YAML forbid tabs?',
+        a: [
+          'YAML uses indentation to convey structure, and the width of a tab character is ambiguous — different editors display it as 2, 4, or 8 spaces. If tab width affects meaning, documents would parse differently depending on the editor.',
+          'The YAML spec simply forbids tabs in indentation to eliminate this ambiguity. Most modern editors can be configured to insert spaces when you press Tab in YAML files (often called "expand tabs").',
+        ],
+      },
+      {
+        q: 'What is the Norway problem?',
+        a: [
+          'In YAML 1.1, unquoted values that look like booleans are parsed as booleans. The list included: true/false, yes/no, on/off, and their capitalized variants. Norway\'s ISO country code "NO" was silently parsed as false.',
+          'YAML 1.2 fixed this by limiting boolean literals to only "true" and "false". However, many parsers (Go\'s gopkg.in/yaml.v2, Python\'s PyYAML) still implement YAML 1.1 semantics. Always quote country codes and other ambiguous string values.',
+        ],
+      },
+      {
+        q: 'When should I choose YAML over JSON?',
+        a: [
+          'Choose YAML for configuration files that humans write and maintain — Docker Compose, Kubernetes manifests, GitHub Actions, Ansible, Helm charts. The comment support and readability make hand-editing much easier.',
+          'Choose JSON for API responses, machine-generated data, package.json, tsconfig.json, and anywhere that tools or code generate and consume the data. JSON is simpler, faster to parse, and natively supported in every language runtime.',
+        ],
+      },
+    ],
+  },
+
+  'regex-cheatsheet': {
+    slug: 'regex-cheatsheet',
+    type: 'reference',
+    title: 'Regex Cheatsheet',
+    subtitle: 'A quick reference for regular expression syntax: character classes, quantifiers, anchors, lookarounds, flags, and common patterns.',
+    readTime: '4 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Regex syntax cheatsheet: character classes (\\d \\w \\s), quantifiers (greedy and lazy), anchors (^ $ \\b), groups, lookaheads, lookbehinds, flags, common real-world patterns, and language differences.',
+    tools: [
+      { name: 'Regex Tester', desc: 'Test any pattern from this cheatsheet against your own strings — live match highlighting and group inspection.', href: '/tools/regex-tester', icon: ICONS.regex },
+      { name: 'What is a Regular Expression?', desc: 'New to regex? Start with the conceptual introduction before using this reference.', href: '/guides/what-is-regex', icon: ICONS.regex },
+    ],
+    faqs: [
+      {
+        q: 'What is the difference between a greedy and a lazy quantifier?',
+        a: [
+          'Greedy quantifiers (*, +, ?) match as much as possible. With the pattern <.*> applied to "<b>bold</b>", a greedy .* matches everything from the first < to the last >, consuming the entire string.',
+          'Lazy quantifiers (*?, +?, ??) match as little as possible. The pattern <.*?> on the same input matches each tag individually: <b>, then </b>. Add a ? after any quantifier to make it lazy.',
+        ],
+      },
+      {
+        q: 'Why doesn\'t my regex match across multiple lines?',
+        a: [
+          'By default, the dot (.) does not match newline characters, and ^ / $ match the start and end of the entire string. This means a pattern that assumes a single line will not match a multi-line input.',
+          'To fix this: use the s (dot-all) flag to make . match newlines, and the m (multiline) flag to make ^ / $ match the start and end of each line. In JavaScript: /pattern/sm.',
+        ],
+      },
+      {
+        q: 'How do I match a literal dot or special character?',
+        a: [
+          'Escape it with a backslash: \\. matches a literal dot, \\* matches a literal asterisk. The special characters that need escaping are: . * + ? ^ $ { } [ ] ( ) | \\',
+          'Inside a character class [...], most special characters lose their special meaning: [.] matches a literal dot. The exceptions inside a class are ], \\, ^, and -.',
+        ],
+      },
+      {
+        q: 'What are the performance implications of lookaheads?',
+        a: [
+          'Lookaheads and lookbehinds are zero-width — they do not consume characters. For most patterns, the performance impact is negligible.',
+          'Performance problems arise from catastrophic backtracking, not lookaheads per se. Patterns like (a+)+ applied to a long non-matching string cause exponential backtracking. Use atomic groups or possessive quantifiers (not available in JavaScript) to prevent this, or restructure the pattern to avoid nested quantifiers.',
+        ],
+      },
+    ],
+  },
+
+  'json-best-practices': {
+    slug: 'json-best-practices',
+    type: 'reference',
+    title: 'JSON Best Practices',
+    subtitle: 'Naming conventions, dates, null vs omit, large numbers, pagination, error responses, and nesting — the conventions that save debugging time.',
+    readTime: '7 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'JSON API design best practices: camelCase naming, ISO 8601 dates, null vs omitting fields, handling large integers and money, boolean values, cursor pagination, consistent error responses, and avoiding deep nesting.',
+    tools: [
+      { name: 'JSON Formatter & Validator', desc: 'Validate and format your JSON to check it against the conventions in this guide.', href: '/tools/json-formatter', icon: ICONS.formatter },
+      { name: 'JSON Schema Generator', desc: 'Generate a JSON Schema from your JSON to enforce structure and naming conventions automatically.', href: '/tools/json-schema', icon: ICONS.schema },
+    ],
+    faqs: [
+      {
+        q: 'Should I use camelCase or snake_case for JSON keys?',
+        a: [
+          'camelCase is the dominant convention for JSON APIs. It matches JavaScript\'s native style and most JSON serializers in other languages (Jackson, Newtonsoft.Json, encoding/json with struct tags) default to it.',
+          'snake_case is preferred when your primary consumers are Python or PostgreSQL, where snake_case is idiomatic. What matters most is consistency — pick one convention and apply it uniformly across the entire API.',
+        ],
+      },
+      {
+        q: 'How should I represent dates and times in JSON?',
+        a: [
+          'Always use ISO 8601: "2026-06-30" for dates, "2026-06-30T14:30:00Z" for UTC timestamps. Never use locale-dependent formats like "06/30/2026" or custom strings like "June 30, 2026" — they are ambiguous and non-parseable by standard libraries.',
+          'Use UTC timestamps in API responses. Consumers can convert to local time. Store epoch milliseconds as integers only for high-volume event logs where compactness matters most.',
+        ],
+      },
+      {
+        q: 'Is null the same as omitting a field in JSON?',
+        a: [
+          'No, they have distinct semantics. {"middleName": null} communicates "this field exists and its value is explicitly empty." Omitting the field communicates "this field is not part of this response."',
+          'Never mix the two conventions in the same API. Choose one and document it. An API that sometimes returns null and sometimes omits a field for the same concept forces consumers to handle both cases defensively.',
+        ],
+      },
+      {
+        q: 'How do I handle large numbers in JSON?',
+        a: [
+          'JSON parsers in most languages use IEEE 754 double-precision floats, which can represent integers exactly only up to 2⁵³ (9007199254740992). Numbers beyond this lose precision silently in JavaScript.',
+          'For IDs larger than 2⁵³ (Twitter/X snowflake IDs, for example), send them as strings: "id": "1234567890123456789". For money values, use integer cents ("amountCents": 1099) or fixed-decimal strings ("amount": "10.99") — never floats.',
+        ],
+      },
+    ],
+  },
+
   'cron-expression-examples': {
     slug: 'cron-expression-examples',
     type: 'reference',

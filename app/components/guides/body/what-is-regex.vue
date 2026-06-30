@@ -142,6 +142,14 @@
       </div>
     </section>
 
+    <section class="guide-section">
+      <p>
+        Ready to look up a specific token? The
+        <NuxtLink to="/guides/regex-cheatsheet" class="guide-inline-link">Regex Cheatsheet</NuxtLink>
+        has every character class, quantifier, anchor, lookaround, flag, and a set of common real-world patterns (email, URL, UUID, hex color, semver) in one place.
+      </p>
+    </section>
+
   </div>
 </template>
 
@@ -428,6 +436,10 @@ const PATTERNS = [
   line-height: 1.7;
   margin: 0;
 }
+
+/* ── Inline links ──────────────────────────────────── */
+.guide-inline-link { color: #F97316; text-decoration: none; border-bottom: 1px solid rgba(249,115,22,0.3); }
+.guide-inline-link:hover { border-bottom-color: #F97316; }
 
 /* ── Responsive ────────────────────────────────────── */
 @media (max-width: 600px) {
