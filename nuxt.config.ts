@@ -29,11 +29,6 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    define: {
-      'process.env': '{}',
-      'process.nextTick': '((fn, ...args) => setTimeout(() => fn(...args), 0))',
-      'process.cwd': '(() => "/")',
-    },
     optimizeDeps: {
       include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/lang-javascript', '@codemirror/lang-xml', '@codemirror/lang-yaml', '@codemirror/lang-sql', '@codemirror/lang-css', '@codemirror/lang-html', '@codemirror/language', '@codemirror/theme-one-dark', '@vue-flow/core', '@dagrejs/dagre'],
       exclude: ['lightningcss-wasm'],
