@@ -84,6 +84,9 @@
               <NuxtLink to="/tools/color"          class="nav-dropdown-item">Color Picker</NuxtLink>
             </div>
           </div>
+
+          <!-- Guides — lien direct -->
+          <NuxtLink to="/guides" class="nav-item" :class="{ 'nav-item--active': isGuidesActive }">Guides</NuxtLink>
         </nav>
 
         <div class="header-badge">Free · No signup · No tracking</div>
@@ -162,6 +165,11 @@
             <NuxtLink to="/tools/number-base"    class="mobile-nav-item" @click="mobileOpen = false">Number Base Converter</NuxtLink>
             <NuxtLink to="/tools/color"          class="mobile-nav-item" @click="mobileOpen = false">Color Picker</NuxtLink>
           </div>
+
+          <div class="mobile-section">
+            <div class="mobile-section-label">Guides</div>
+            <NuxtLink to="/guides" class="mobile-nav-item" @click="mobileOpen = false">All Guides</NuxtLink>
+          </div>
         </div>
       </nav>
     </Transition>
@@ -228,6 +236,7 @@ const isConverterActive = computed(() => converterPaths.some(p => route.path.sta
 const isTextCodeActive  = computed(() => textCodePaths.some(p => route.path.startsWith(p)))
 const isSecurityActive  = computed(() => securityPaths.some(p => route.path.startsWith(p)))
 const isDevUtilsActive  = computed(() => devUtilsPaths.some(p => route.path.startsWith(p)))
+const isGuidesActive    = computed(() => route.path.startsWith('/guides'))
 
 const breadcrumbName = computed(() => {
   const path = route.path

@@ -6,7 +6,7 @@
       <nav class="guide-breadcrumb" aria-label="Breadcrumb">
         <NuxtLink to="/" class="bc-link">JSON Tools</NuxtLink>
         <span class="bc-sep" aria-hidden="true">›</span>
-        <span class="bc-link">Guides</span>
+        <NuxtLink to="/guides" class="bc-link">Guides</NuxtLink>
         <span class="bc-sep" aria-hidden="true">›</span>
         <span class="bc-current">{{ guide.title }}</span>
       </nav>
