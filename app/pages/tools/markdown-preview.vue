@@ -52,7 +52,7 @@
           >{{ copied ? 'Copied HTML!' : 'Copy HTML' }}</button>
         </div>
         <div v-if="!html && !input.trim()" class="panel-empty">Rendered preview will appear here…</div>
-        <div v-else class="markdown-body" v-html="html" />
+        <div v-else ref="previewRef" class="markdown-body" v-html="html" />
       </div>
     </div>
 
@@ -66,6 +66,11 @@
 </template>
 
 <script setup lang="ts">
+import { EditorView } from 'codemirror'
+import { syntaxHighlighting, defaultHighlightStyle } from '@codemirror/language'
+import { EditorState } from '@codemirror/state'
+import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
+import { useColorMode } from '~/composables/useColorMode'
 import { useMarkdown } from '~/composables/useMarkdown'
 
 useSeoMeta({
@@ -80,9 +85,88 @@ useSeoMeta({
 })
 
 const { input, html, copied, copy, clear } = useMarkdown()
+const { isDark } = useColorMode()
 
 const inputFocused = ref(false)
 const isDragging   = ref(false)
+const previewRef   = ref<HTMLElement | null>(null)
+const codeViews: EditorView[] = []
+
+async function getLangExt(lang: string) {
+  if (lang === 'js' || lang === 'javascript') {
+    const { javascript } = await import('@codemirror/lang-javascript')
+    return javascript()
+  }
+  if (lang === 'ts' || lang === 'typescript') {
+    const { javascript } = await import('@codemirror/lang-javascript')
+    return javascript({ typescript: true })
+  }
+  if (lang === 'json') {
+    const { json } = await import('@codemirror/lang-json')
+    return json()
+  }
+  if (lang === 'yaml' || lang === 'yml') {
+    const { yaml } = await import('@codemirror/lang-yaml')
+    return yaml()
+  }
+  if (lang === 'xml' || lang === 'html') {
+    const { xml } = await import('@codemirror/lang-xml')
+    return xml()
+  }
+  if (lang === 'sql') {
+    const { sql } = await import('@codemirror/lang-sql')
+    return sql()
+  }
+  return []
+}
+
+async function highlightCodeBlocks() {
+  await nextTick()
+  if (!previewRef.value) return
+  codeViews.forEach(v => v.destroy())
+  codeViews.length = 0
+
+  const pres = previewRef.value.querySelectorAll('pre')
+  for (const pre of pres) {
+    const code = pre.querySelector('code')
+    if (!code) continue
+    const text = code.textContent ?? ''
+    const langClass = Array.from(code.classList).find(c => c.startsWith('language-'))
+    const lang = langClass ? langClass.replace('language-', '') : ''
+    const langExt = await getLangExt(lang)
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'md-code-block'
+    pre.replaceWith(wrapper)
+
+    const dark = isDark.value
+    const view = new EditorView({
+      state: EditorState.create({
+        doc: text,
+        extensions: [
+          ...(Array.isArray(langExt) ? langExt : [langExt]),
+          syntaxHighlighting(dark ? oneDarkHighlightStyle : defaultHighlightStyle),
+          ...(dark ? [oneDarkTheme] : []),
+          EditorView.editable.of(false),
+          EditorState.readOnly.of(true),
+          EditorView.theme({
+            '&': { fontSize: '12.5px', background: 'transparent', borderRadius: '8px', overflow: 'hidden' },
+            '.cm-content': { fontFamily: "'JetBrains Mono', monospace", padding: '12px 16px', lineHeight: '1.65' },
+            '.cm-gutters': { display: 'none' },
+            '.cm-scroller': { overflow: 'auto' },
+            '.cm-focused': { outline: 'none !important' },
+            '.cm-line': { padding: '0' },
+          }),
+        ],
+      }),
+      parent: wrapper,
+    })
+    codeViews.push(view)
+  }
+}
+
+watch(html, highlightCodeBlocks)
+onUnmounted(() => { codeViews.forEach(v => v.destroy()) })
 
 function onDrop(e: DragEvent) {
   isDragging.value = false
@@ -253,21 +337,12 @@ const seoCards = [
   border-radius: 4px;
   color: #F97316;
 }
-.markdown-body pre {
-  background: var(--c-card-alt);
+.markdown-body .md-code-block {
   border: 1px solid var(--c-border);
   border-radius: 8px;
-  padding: 14px 16px;
-  overflow-x: auto;
+  overflow: hidden;
   margin: 0.8em 0;
-}
-.markdown-body pre code {
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--c-t2);
-  font-size: 12.5px;
-  line-height: 1.6;
+  background: var(--c-card-alt);
 }
 
 .markdown-body table {
