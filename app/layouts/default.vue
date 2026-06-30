@@ -19,8 +19,6 @@
               <NuxtLink to="/tools/json-formatter" class="nav-dropdown-item">JSON Formatter</NuxtLink>
               <NuxtLink to="/tools/json-diff"      class="nav-dropdown-item">JSON Diff</NuxtLink>
               <NuxtLink to="/tools/json-tree"      class="nav-dropdown-item">JSON Tree</NuxtLink>
-              <NuxtLink to="/tools/json-to-ts"     class="nav-dropdown-item">JSON → TypeScript</NuxtLink>
-              <NuxtLink to="/tools/json-schema"    class="nav-dropdown-item">JSON → Schema</NuxtLink>
             </div>
           </div>
 
@@ -30,22 +28,14 @@
               Converters
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown nav-dropdown--two-col" @click="activeGroup = null">
-              <div class="conv-col">
-                <div class="nav-dropdown-section">→ JSON</div>
-                <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV → JSON</NuxtLink>
-                <NuxtLink to="/tools/xml-to-json"   class="nav-dropdown-item">XML → JSON</NuxtLink>
-                <NuxtLink to="/tools/yaml-to-json"  class="nav-dropdown-item">YAML → JSON</NuxtLink>
-                <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel → JSON</NuxtLink>
-              </div>
-              <div class="conv-divider" />
-              <div class="conv-col">
-                <div class="nav-dropdown-section">JSON →</div>
-                <NuxtLink to="/tools/json-to-csv"   class="nav-dropdown-item">JSON → CSV</NuxtLink>
-                <NuxtLink to="/tools/json-to-xml"   class="nav-dropdown-item">JSON → XML</NuxtLink>
-                <NuxtLink to="/tools/json-to-yaml"  class="nav-dropdown-item">JSON → YAML</NuxtLink>
-                <NuxtLink to="/tools/json-to-excel" class="nav-dropdown-item">JSON → Excel</NuxtLink>
-              </div>
+            <div class="nav-dropdown" @click="activeGroup = null">
+              <NuxtLink to="/tools/csv-to-json"   class="nav-dropdown-item">CSV ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/xml-to-json"   class="nav-dropdown-item">XML ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/yaml-to-json"  class="nav-dropdown-item">YAML ↔ JSON</NuxtLink>
+              <NuxtLink to="/tools/excel-to-json" class="nav-dropdown-item">Excel ↔ JSON</NuxtLink>
+              <div class="nav-dropdown-divider" />
+              <NuxtLink to="/tools/json-to-ts"    class="nav-dropdown-item">JSON → TypeScript / Zod</NuxtLink>
+              <NuxtLink to="/tools/json-schema"   class="nav-dropdown-item">JSON → Schema</NuxtLink>
             </div>
           </div>
 
@@ -129,8 +119,6 @@
             <NuxtLink to="/tools/json-formatter" class="mobile-nav-item" @click="mobileOpen = false">JSON Formatter</NuxtLink>
             <NuxtLink to="/tools/json-diff"      class="mobile-nav-item" @click="mobileOpen = false">JSON Diff</NuxtLink>
             <NuxtLink to="/tools/json-tree"      class="mobile-nav-item" @click="mobileOpen = false">JSON Tree</NuxtLink>
-            <NuxtLink to="/tools/json-to-ts"     class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
-            <NuxtLink to="/tools/json-schema"    class="mobile-nav-item" @click="mobileOpen = false">JSON → Schema</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -143,6 +131,8 @@
             <NuxtLink to="/tools/json-to-xml"   class="mobile-nav-item" @click="mobileOpen = false">JSON → XML</NuxtLink>
             <NuxtLink to="/tools/json-to-yaml"  class="mobile-nav-item" @click="mobileOpen = false">JSON → YAML</NuxtLink>
             <NuxtLink to="/tools/json-to-excel" class="mobile-nav-item" @click="mobileOpen = false">JSON → Excel</NuxtLink>
+            <NuxtLink to="/tools/json-to-ts"    class="mobile-nav-item" @click="mobileOpen = false">JSON → TypeScript</NuxtLink>
+            <NuxtLink to="/tools/json-schema"   class="mobile-nav-item" @click="mobileOpen = false">JSON → Schema</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -227,8 +217,8 @@ watch(() => route.path, (path) => {
   }
 })
 
-const jsonPaths       = ['/tools/json-formatter', '/tools/json-diff', '/tools/json-tree', '/tools/json-to-ts', '/tools/json-schema']
-const converterPaths  = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
+const jsonPaths       = ['/tools/json-formatter', '/tools/json-diff', '/tools/json-tree']
+const converterPaths  = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel', '/tools/json-to-ts', '/tools/json-schema']
 const textCodePaths   = ['/tools/text-case', '/tools/minifier', '/tools/sql-formatter', '/tools/url-encode', '/tools/base64', '/tools/markdown-preview']
 const securityPaths   = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/hash', '/tools/uuid', '/tools/password-generator']
 const devUtilsPaths   = ['/tools/regex-tester', '/tools/cron-parser', '/tools/unix-timestamp', '/tools/number-base', '/tools/color']
@@ -489,13 +479,6 @@ body {
   margin: 4px 8px;
 }
 
-/* ── 2-column Converters dropdown ───────────────────────────────── */
-.nav-dropdown--two-col {
-  display: flex;
-  gap: 0;
-  padding: 8px;
-  min-width: 300px;
-}
 
 .conv-col {
   flex: 1;

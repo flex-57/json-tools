@@ -1,6 +1,8 @@
 <template>
   <footer class="footer">
-    <div class="footer-inner">
+
+    <!-- Brand — toujours inline -->
+    <div class="footer-brand-row">
       <div class="footer-brand">
         <LogoMark :size="34" />
         <div>
@@ -8,80 +10,155 @@
           <p class="brand-tagline">Free developer tools.<br>No signup, no tracking, no nonsense.</p>
         </div>
       </div>
-
-      <nav class="footer-nav">
-        <div class="footer-col">
-          <span class="footer-col-title">JSON</span>
-          <NuxtLink to="/tools/json-formatter" class="footer-link">JSON Formatter</NuxtLink>
-          <NuxtLink to="/tools/json-diff"      class="footer-link">JSON Diff</NuxtLink>
-          <NuxtLink to="/tools/json-tree"      class="footer-link">JSON Tree Viewer</NuxtLink>
-          <NuxtLink to="/tools/json-to-ts"     class="footer-link">JSON → TypeScript</NuxtLink>
-          <NuxtLink to="/tools/json-schema"    class="footer-link">JSON Schema</NuxtLink>
-        </div>
-        <div class="footer-col">
-          <span class="footer-col-title">Converters</span>
-          <NuxtLink to="/tools/csv-to-json"   class="footer-link">CSV → JSON</NuxtLink>
-          <NuxtLink to="/tools/json-to-csv"   class="footer-link">JSON → CSV</NuxtLink>
-          <NuxtLink to="/tools/xml-to-json"   class="footer-link">XML → JSON</NuxtLink>
-          <NuxtLink to="/tools/json-to-xml"   class="footer-link">JSON → XML</NuxtLink>
-          <NuxtLink to="/tools/yaml-to-json"  class="footer-link">YAML → JSON</NuxtLink>
-          <NuxtLink to="/tools/json-to-yaml"  class="footer-link">JSON → YAML</NuxtLink>
-          <NuxtLink to="/tools/excel-to-json" class="footer-link">Excel → JSON</NuxtLink>
-          <NuxtLink to="/tools/json-to-excel" class="footer-link">JSON → Excel</NuxtLink>
-        </div>
-        <div class="footer-col">
-          <span class="footer-col-title">Text & Code</span>
-          <NuxtLink to="/tools/text-case"     class="footer-link">Text Case Converter</NuxtLink>
-          <NuxtLink to="/tools/minifier"      class="footer-link">CSS / HTML / JS Minifier</NuxtLink>
-          <NuxtLink to="/tools/sql-formatter" class="footer-link">SQL Formatter</NuxtLink>
-          <NuxtLink to="/tools/url-encode"    class="footer-link">URL Encode / Decode</NuxtLink>
-          <NuxtLink to="/tools/base64"            class="footer-link">Base64 Encode / Decode</NuxtLink>
-          <NuxtLink to="/tools/markdown-preview" class="footer-link">Markdown Preview</NuxtLink>
-        </div>
-        <div class="footer-col">
-          <span class="footer-col-title">Security</span>
-          <NuxtLink to="/tools/jwt-decoder"   class="footer-link">JWT Decoder</NuxtLink>
-          <NuxtLink to="/tools/jwt-generator" class="footer-link">JWT Generator</NuxtLink>
-          <NuxtLink to="/tools/hash"          class="footer-link">Hash Generator</NuxtLink>
-          <NuxtLink to="/tools/uuid"               class="footer-link">UUID Generator</NuxtLink>
-          <NuxtLink to="/tools/password-generator" class="footer-link">Password Generator</NuxtLink>
-        </div>
-        <div class="footer-col">
-          <span class="footer-col-title">Dev Utils</span>
-          <NuxtLink to="/tools/regex-tester"   class="footer-link">Regex Tester</NuxtLink>
-          <NuxtLink to="/tools/cron-parser"    class="footer-link">Cron Parser</NuxtLink>
-          <NuxtLink to="/tools/unix-timestamp" class="footer-link">Unix Timestamp</NuxtLink>
-          <NuxtLink to="/tools/number-base"    class="footer-link">Number Base Converter</NuxtLink>
-          <NuxtLink to="/tools/color"          class="footer-link">Color Picker</NuxtLink>
-        </div>
-        <div class="footer-col">
-          <span class="footer-col-title">Guides</span>
-          <NuxtLink to="/guides/what-is-json"             class="footer-link">What is JSON?</NuxtLink>
-          <NuxtLink to="/guides/what-is-jwt"              class="footer-link">What is a JWT Token?</NuxtLink>
-          <NuxtLink to="/guides/what-is-base64"           class="footer-link">What is Base64?</NuxtLink>
-          <NuxtLink to="/guides/cron-expression-examples" class="footer-link">Cron Expression Examples</NuxtLink>
-          <NuxtLink to="/guides/json-vs-yaml"             class="footer-link">JSON vs YAML</NuxtLink>
-          <NuxtLink to="/guides/how-to-validate-json"   class="footer-link">How to Validate JSON</NuxtLink>
-          <NuxtLink to="/guides/what-is-regex"           class="footer-link">What is a Regex?</NuxtLink>
-          <NuxtLink to="/guides/what-is-markdown"        class="footer-link">What is Markdown?</NuxtLink>
-          <NuxtLink to="/guides/markdown-cheatsheet"     class="footer-link">Markdown Cheatsheet</NuxtLink>
-        </div>
-      </nav>
     </div>
 
+    <!-- Desktop : grille 5 colonnes -->
+    <nav class="footer-nav-desktop" aria-label="Site navigation">
+      <div class="footer-col">
+        <span class="footer-col-title">JSON</span>
+        <NuxtLink to="/tools/json-formatter" class="footer-link">JSON Formatter</NuxtLink>
+        <NuxtLink to="/tools/json-diff"      class="footer-link">JSON Diff</NuxtLink>
+        <NuxtLink to="/tools/json-tree"      class="footer-link">JSON Tree Viewer</NuxtLink>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Converters</span>
+        <NuxtLink to="/tools/csv-to-json"   class="footer-link">CSV ↔ JSON</NuxtLink>
+        <NuxtLink to="/tools/xml-to-json"   class="footer-link">XML ↔ JSON</NuxtLink>
+        <NuxtLink to="/tools/yaml-to-json"  class="footer-link">YAML ↔ JSON</NuxtLink>
+        <NuxtLink to="/tools/excel-to-json" class="footer-link">Excel ↔ JSON</NuxtLink>
+        <NuxtLink to="/tools/json-to-ts"    class="footer-link">JSON → TypeScript</NuxtLink>
+        <NuxtLink to="/tools/json-schema"   class="footer-link">JSON → Schema</NuxtLink>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Text & Code</span>
+        <NuxtLink to="/tools/text-case"        class="footer-link">Text Case</NuxtLink>
+        <NuxtLink to="/tools/minifier"         class="footer-link">Minifier</NuxtLink>
+        <NuxtLink to="/tools/sql-formatter"    class="footer-link">SQL Formatter</NuxtLink>
+        <NuxtLink to="/tools/url-encode"       class="footer-link">URL Encode / Decode</NuxtLink>
+        <NuxtLink to="/tools/base64"           class="footer-link">Base64</NuxtLink>
+        <NuxtLink to="/tools/markdown-preview" class="footer-link">Markdown Preview</NuxtLink>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Security</span>
+        <NuxtLink to="/tools/jwt-decoder"        class="footer-link">JWT Decoder</NuxtLink>
+        <NuxtLink to="/tools/jwt-generator"      class="footer-link">JWT Generator</NuxtLink>
+        <NuxtLink to="/tools/hash"               class="footer-link">Hash Generator</NuxtLink>
+        <NuxtLink to="/tools/uuid"               class="footer-link">UUID Generator</NuxtLink>
+        <NuxtLink to="/tools/password-generator" class="footer-link">Password Generator</NuxtLink>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Dev Utils</span>
+        <NuxtLink to="/tools/regex-tester"   class="footer-link">Regex Tester</NuxtLink>
+        <NuxtLink to="/tools/cron-parser"    class="footer-link">Cron Parser</NuxtLink>
+        <NuxtLink to="/tools/unix-timestamp" class="footer-link">Unix Timestamp</NuxtLink>
+        <NuxtLink to="/tools/number-base"    class="footer-link">Number Base</NuxtLink>
+        <NuxtLink to="/tools/color"          class="footer-link">Color Picker</NuxtLink>
+      </div>
+    </nav>
+
+    <!-- Guides — bande basse desktop -->
+    <div class="footer-guides-desktop">
+      <span class="footer-guides-label">Guides</span>
+      <div class="footer-guides-pills">
+        <NuxtLink to="/guides/what-is-json"             class="footer-pill">What is JSON?</NuxtLink>
+        <NuxtLink to="/guides/what-is-jwt"              class="footer-pill">What is a JWT?</NuxtLink>
+        <NuxtLink to="/guides/what-is-base64"           class="footer-pill">What is Base64?</NuxtLink>
+        <NuxtLink to="/guides/cron-expression-examples" class="footer-pill">Cron Examples</NuxtLink>
+        <NuxtLink to="/guides/json-vs-yaml"             class="footer-pill">JSON vs YAML</NuxtLink>
+        <NuxtLink to="/guides/how-to-validate-json"     class="footer-pill">Validate JSON</NuxtLink>
+        <NuxtLink to="/guides/what-is-regex"            class="footer-pill">What is Regex?</NuxtLink>
+        <NuxtLink to="/guides/what-is-markdown"         class="footer-pill">What is Markdown?</NuxtLink>
+        <NuxtLink to="/guides/markdown-cheatsheet"      class="footer-pill">Markdown Cheatsheet</NuxtLink>
+      </div>
+    </div>
+
+    <!-- Mobile : rows + pills -->
+    <nav class="footer-nav-mobile" aria-label="Site navigation">
+      <div class="footer-mobile-row">
+        <span class="footer-mobile-cat">JSON</span>
+        <div class="footer-mobile-pills">
+          <NuxtLink to="/tools/json-formatter" class="footer-pill">Formatter</NuxtLink>
+          <NuxtLink to="/tools/json-diff"      class="footer-pill">Diff</NuxtLink>
+          <NuxtLink to="/tools/json-tree"      class="footer-pill">Tree Viewer</NuxtLink>
+        </div>
+      </div>
+      <div class="footer-mobile-row">
+        <span class="footer-mobile-cat">Converters</span>
+        <div class="footer-mobile-pills">
+          <NuxtLink to="/tools/csv-to-json"   class="footer-pill">CSV → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-csv"   class="footer-pill">JSON → CSV</NuxtLink>
+          <NuxtLink to="/tools/xml-to-json"   class="footer-pill">XML → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-xml"   class="footer-pill">JSON → XML</NuxtLink>
+          <NuxtLink to="/tools/yaml-to-json"  class="footer-pill">YAML → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-yaml"  class="footer-pill">JSON → YAML</NuxtLink>
+          <NuxtLink to="/tools/excel-to-json" class="footer-pill">Excel → JSON</NuxtLink>
+          <NuxtLink to="/tools/json-to-excel" class="footer-pill">JSON → Excel</NuxtLink>
+          <NuxtLink to="/tools/json-to-ts"    class="footer-pill">JSON → TypeScript</NuxtLink>
+          <NuxtLink to="/tools/json-schema"   class="footer-pill">JSON → Schema</NuxtLink>
+        </div>
+      </div>
+      <div class="footer-mobile-row">
+        <span class="footer-mobile-cat">Text & Code</span>
+        <div class="footer-mobile-pills">
+          <NuxtLink to="/tools/text-case"        class="footer-pill">Text Case</NuxtLink>
+          <NuxtLink to="/tools/minifier"         class="footer-pill">Minifier</NuxtLink>
+          <NuxtLink to="/tools/sql-formatter"    class="footer-pill">SQL Formatter</NuxtLink>
+          <NuxtLink to="/tools/url-encode"       class="footer-pill">URL Encode</NuxtLink>
+          <NuxtLink to="/tools/base64"           class="footer-pill">Base64</NuxtLink>
+          <NuxtLink to="/tools/markdown-preview" class="footer-pill">Markdown Preview</NuxtLink>
+        </div>
+      </div>
+      <div class="footer-mobile-row">
+        <span class="footer-mobile-cat">Security</span>
+        <div class="footer-mobile-pills">
+          <NuxtLink to="/tools/jwt-decoder"        class="footer-pill">JWT Decoder</NuxtLink>
+          <NuxtLink to="/tools/jwt-generator"      class="footer-pill">JWT Generator</NuxtLink>
+          <NuxtLink to="/tools/hash"               class="footer-pill">Hash</NuxtLink>
+          <NuxtLink to="/tools/uuid"               class="footer-pill">UUID</NuxtLink>
+          <NuxtLink to="/tools/password-generator" class="footer-pill">Password</NuxtLink>
+        </div>
+      </div>
+      <div class="footer-mobile-row">
+        <span class="footer-mobile-cat">Dev Utils</span>
+        <div class="footer-mobile-pills">
+          <NuxtLink to="/tools/regex-tester"   class="footer-pill">Regex</NuxtLink>
+          <NuxtLink to="/tools/cron-parser"    class="footer-pill">Cron</NuxtLink>
+          <NuxtLink to="/tools/unix-timestamp" class="footer-pill">Timestamp</NuxtLink>
+          <NuxtLink to="/tools/number-base"    class="footer-pill">Number Base</NuxtLink>
+          <NuxtLink to="/tools/color"          class="footer-pill">Color Picker</NuxtLink>
+        </div>
+      </div>
+      <div class="footer-mobile-row">
+        <span class="footer-mobile-cat">Guides</span>
+        <div class="footer-mobile-pills">
+          <NuxtLink to="/guides/what-is-json"             class="footer-pill">What is JSON?</NuxtLink>
+          <NuxtLink to="/guides/what-is-jwt"              class="footer-pill">What is JWT?</NuxtLink>
+          <NuxtLink to="/guides/what-is-base64"           class="footer-pill">What is Base64?</NuxtLink>
+          <NuxtLink to="/guides/cron-expression-examples" class="footer-pill">Cron Examples</NuxtLink>
+          <NuxtLink to="/guides/json-vs-yaml"             class="footer-pill">JSON vs YAML</NuxtLink>
+          <NuxtLink to="/guides/how-to-validate-json"     class="footer-pill">Validate JSON</NuxtLink>
+          <NuxtLink to="/guides/what-is-regex"            class="footer-pill">What is Regex?</NuxtLink>
+          <NuxtLink to="/guides/what-is-markdown"         class="footer-pill">What is Markdown?</NuxtLink>
+          <NuxtLink to="/guides/markdown-cheatsheet"      class="footer-pill">Markdown Cheatsheet</NuxtLink>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Bottom bar -->
     <div class="footer-bottom">
       <span>© {{ new Date().getFullYear() }} JSON Tools</span>
       <span class="footer-sep">·</span>
       <span>Free · No signup · No tracking</span>
       <span class="footer-sep">·</span>
-      <span>100% client-side processing</span>
+      <span>100% client-side</span>
       <span class="footer-sep">·</span>
-      <NuxtLink to="/faq" class="footer-bottom-link">FAQ</NuxtLink>
+      <NuxtLink to="/faq"     class="footer-bottom-link">FAQ</NuxtLink>
       <span class="footer-sep">·</span>
       <NuxtLink to="/privacy" class="footer-bottom-link">Privacy</NuxtLink>
       <span class="footer-sep">·</span>
-      <NuxtLink to="/terms" class="footer-bottom-link">Terms</NuxtLink>
+      <NuxtLink to="/terms"   class="footer-bottom-link">Terms</NuxtLink>
     </div>
+
   </footer>
 </template>
 
@@ -92,26 +169,18 @@
   margin-top: auto;
 }
 
-.footer-inner {
+/* ── Brand ───────────────────────────────────────────────── */
+.footer-brand-row {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 40px 24px 28px;
-  display: flex;
-  gap: 48px;
-  flex-wrap: wrap;
+  padding: 36px 24px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .footer-brand {
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  flex: 0 0 auto;
-  min-width: 200px;
-}
-
-.brand-mark {
-  flex-shrink: 0;
-  display: block;
 }
 
 .brand-name {
@@ -119,13 +188,9 @@
   font-weight: 600;
   color: #F1F0EE;
   letter-spacing: -0.3px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
-
-.brand-name em {
-  font-style: normal;
-  color: #F97316;
-}
+.brand-name em { font-style: normal; color: #F97316; }
 
 .brand-tagline {
   font-size: 12.5px;
@@ -133,18 +198,20 @@
   line-height: 1.7;
 }
 
-.footer-nav {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-  flex: 1;
+/* ── Desktop nav — grille 5 colonnes ─────────────────────── */
+.footer-nav-desktop {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px 32px;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
   gap: 9px;
-  min-width: 130px;
 }
 
 .footer-col-title {
@@ -163,9 +230,74 @@
   font-family: 'JetBrains Mono', monospace;
   transition: color 0.15s;
 }
-
 .footer-link:hover { color: #F97316; }
 
+/* ── Guides bande basse (desktop) ────────────────────────── */
+.footer-guides-desktop {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 24px 32px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-guides-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3D4349;
+  flex-shrink: 0;
+}
+
+.footer-guides-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ── Pills (shared) ──────────────────────────────────────── */
+.footer-pill {
+  font-size: 12px;
+  color: #5C6470;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 3px 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.02);
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.footer-pill:hover { color: #F97316; border-color: rgba(249,115,22,0.3); }
+
+/* ── Mobile nav — rows + pills ───────────────────────────── */
+.footer-nav-mobile { display: none; }
+
+.footer-mobile-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-mobile-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3D4349;
+}
+
+.footer-mobile-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ── Bottom bar ──────────────────────────────────────────── */
 .footer-bottom {
   max-width: 1440px;
   margin: 0 auto;
@@ -187,4 +319,18 @@
   transition: color 0.15s;
 }
 .footer-bottom-link:hover { color: #F97316; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer-nav-desktop    { display: none; }
+  .footer-guides-desktop { display: none; }
+  .footer-nav-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 20px 28px;
+  }
+}
 </style>
