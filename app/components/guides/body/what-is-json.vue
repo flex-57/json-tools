@@ -39,7 +39,6 @@
       <div class="rules-list">
         <div v-for="r in RULES" :key="r.rule" class="rule-row">
           <div class="rule-head">
-            <span class="rule-icon">{{ r.ok ? '✅' : '❌' }}</span>
             <strong class="rule-label">{{ r.rule }}</strong>
           </div>
           <div class="rule-split">

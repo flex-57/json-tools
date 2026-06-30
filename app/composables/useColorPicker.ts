@@ -125,11 +125,12 @@ export function useColorPicker() {
   function applyRgb(val: string) {
     const p = val.split(',').map(x => x.trim())
     if (p.length !== 3 && p.length !== 4) return
-    const r = parseInt(p[0]), g = parseInt(p[1]), bl = parseInt(p[2])
+    const [p0, p1, p2, p3] = p as [string, string, string, string?]
+    const r = parseInt(p0), g = parseInt(p1), bl = parseInt(p2)
     if ([r, g, bl].some(isNaN) || r < 0 || r > 255 || g < 0 || g > 255 || bl < 0 || bl > 255) return
     ;[h.value, s.value, b.value] = rgbToHsb(r, g, bl)
     if (p.length === 4) {
-      const alphaVal = parseFloat(p[3])
+      const alphaVal = parseFloat(p3 as string)
       if (isNaN(alphaVal)) return
       // RGB alpha is 0–1 decimal
       a.value = Math.min(100, Math.max(0, Math.round(alphaVal * 100)))
@@ -142,11 +143,11 @@ export function useColorPicker() {
   function applyHsl(val: string) {
     const p = val.replace(/%/g, '').split(',').map(x => parseFloat(x.trim()))
     if ((p.length !== 3 && p.length !== 4) || p.slice(0, 3).some(isNaN)) return
-    const [hh, ss, ll] = p
+    const [hh, ss, ll] = p as [number, number, number]
     if (hh < 0 || hh > 360 || ss < 0 || ss > 100 || ll < 0 || ll > 100) return
     ;[h.value, s.value, b.value] = rgbToHsb(...hslToRgb(hh, ss, ll))
     if (p.length === 4) {
-      const alphaVal = p[3]
+      const alphaVal = p[3] as number
       if (isNaN(alphaVal) || alphaVal < 0 || alphaVal > 100) return
       // HSL alpha is % (% already stripped)
       a.value = Math.round(alphaVal)
@@ -159,13 +160,13 @@ export function useColorPicker() {
   function applyHsb(val: string) {
     const p = val.replace(/%/g, '').split(',').map(x => parseFloat(x.trim()))
     if ((p.length !== 3 && p.length !== 4) || p.slice(0, 3).some(isNaN)) return
-    const [hh, ss, bb] = p
+    const [hh, ss, bb] = p as [number, number, number]
     if (hh < 0 || hh > 360 || ss < 0 || ss > 100 || bb < 0 || bb > 100) return
     h.value = Math.round(hh)
     s.value = Math.round(ss)
     b.value = Math.round(bb)
     if (p.length === 4) {
-      const alphaVal = p[3]
+      const alphaVal = p[3] as number
       if (isNaN(alphaVal) || alphaVal < 0 || alphaVal > 100) return
       a.value = Math.round(alphaVal)
     } else {
