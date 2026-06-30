@@ -34,13 +34,14 @@
 
     <div class="panels">
       <!-- Input -->
-      <div class="panel-card" :class="{ 'panel-card--focused': inputFocused }">
+      <div class="panel-card" :class="{ 'panel-card--focused': inputFocused, 'editor-card--drag': isDragging }"
+        @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="panel-card-glow" />
         <div class="panel-header">
           <span class="editor-label">Raw SQL</span>
           <Transition name="fade-slot">
             <div v-if="input" class="panel-header-right">
-              <span class="char-count">{{ lineCount }} lines</span>
+              <span class="editor-hint">paste or type · or drop a .sql file</span>
               <button @click="clear" class="btn-xs">Clear</button>
             </div>
           </Transition>
@@ -131,13 +132,20 @@ const DIALECTS: { value: SqlDialect; label: string }[] = [
 const { input, dialect, uppercase, indentSize, output, error, loading, copied, copy, clear } = useSqlFormatter()
 
 const inputFocused = ref(false)
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
 
 const indentSizeNum = computed({
   get: () => indentSize.value,
   set: (v: number) => { indentSize.value = v },
 })
-
-const lineCount = computed(() => input.value.split('\n').length)
 
 const dialectLabel = computed(() => DIALECTS.find(d => d.value === dialect.value)?.label ?? 'SQL')
 

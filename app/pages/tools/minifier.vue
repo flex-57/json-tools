@@ -18,25 +18,19 @@
 
     <div class="panels">
       <!-- Input -->
-      <div class="panel-card" :class="{ 'panel-card--focused': inputFocused }">
+      <div class="panel-card" :class="{ 'editor-card--drag': isDragging }"
+        @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="panel-card-glow" />
         <div class="panel-header">
           <span class="editor-label">Source Code</span>
           <Transition name="fade-slot">
             <div v-if="input" class="panel-header-right">
-              <span class="char-count">{{ fmtBytes(input.length) }}</span>
+              <span class="editor-hint">paste or type · or drop a .{{ mode }} file</span>
               <button @click="clear" class="btn-xs">Clear</button>
             </div>
           </Transition>
         </div>
-        <textarea
-          v-model="input"
-          class="panel-textarea"
-          :placeholder="placeholder"
-          spellcheck="false"
-          @focus="inputFocused = true"
-          @blur="inputFocused = false"
-        />
+        <JsonEditor v-model="input" :lang="editorLang" :key="mode" />
       </div>
 
       <!-- Middle loader -->
@@ -73,14 +67,7 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3M7 9.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           {{ error }}
         </div>
-        <textarea
-          v-else
-          :value="output"
-          class="panel-textarea panel-textarea--output"
-          readonly
-          :placeholder="'Minified ' + modeLabel.toLowerCase() + ' will appear here…'"
-          spellcheck="false"
-        />
+        <JsonEditor v-else :model-value="output" :lang="editorLang" :readonly="true" :key="mode + '-out'" />
       </div>
     </div>
 
@@ -113,6 +100,7 @@
 
 <script setup lang="ts">
 import { useMinifier, type MinifyMode } from '~/composables/useMinifier'
+import type { EditorLang } from '~/components/JsonEditor.vue'
 
 useSeoMeta({
   title: 'CSS / HTML / JS Minifier — Compress Code Online Free',
@@ -133,9 +121,23 @@ const MODES: { value: MinifyMode; label: string }[] = [
 
 const { input, mode, output, error, loading, copied, result, copy, clear } = useMinifier()
 
-const inputFocused = ref(false)
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
 
 const modeLabel = computed(() => MODES.find(m => m.value === mode.value)?.label ?? 'CSS')
+
+const editorLang = computed<EditorLang>(() => {
+  if (mode.value === 'css')  return 'css'
+  if (mode.value === 'html') return 'html'
+  return 'javascript'
+})
 
 const placeholder = computed(() => {
   if (mode.value === 'css')  return 'Paste CSS to minify…'
@@ -144,7 +146,7 @@ const placeholder = computed(() => {
 })
 
 const engineLabel = computed(() => {
-  if (mode.value === 'css')  return 'regex minifier'
+  if (mode.value === 'css')  return 'lightningcss'
   if (mode.value === 'html') return 'html-minifier-terser'
   return 'terser'
 })
@@ -168,7 +170,7 @@ const seoCards = [
   },
   {
     title: 'CSS, HTML, and JS — how each is minified',
-    text: 'CSS minification collapses whitespace, removes comments, strips redundant units (0px → 0), and removes spaces around delimiters — all client-side with no external library. HTML minification (html-minifier-terser) collapses inter-element whitespace, strips HTML comments, removes optional closing tags, and recursively minifies any embedded <style> and <script> blocks using the same CSS and JS engines. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, renames local variables to single letters, and removes unreachable branches — achieving the highest compression ratios of the three.',
+    text: 'CSS minification is powered by lightningcss, a Rust-based parser compiled to WebAssembly — it runs entirely in your browser and produces correct, spec-compliant output including nested selectors, custom properties, and modern syntax. HTML minification (html-minifier-terser) collapses inter-element whitespace, strips HTML comments, removes optional closing tags, and recursively minifies any embedded <style> and <script> blocks using the same CSS and JS engines. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, renames local variables to single letters, and removes unreachable branches — achieving the highest compression ratios of the three.',
   },
   {
     title: 'Before deploying minified code',
@@ -236,7 +238,7 @@ const seoCards = [
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
   transition: border-color 0.2s, box-shadow 0.25s;
 }
-.panel-card--focused {
+.panel-card:has(.cm-focused) {
   border-color: #FDBA74;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(249,115,22,0.08), 0 0 0 3px rgba(249,115,22,0.08);
 }
@@ -250,7 +252,7 @@ const seoCards = [
   z-index: 1;
   pointer-events: none;
 }
-.panel-card--focused .panel-card-glow { opacity: 1; }
+.panel-card:has(.cm-focused) .panel-card-glow { opacity: 1; }
 .panel-card--error { border-color: #FECACA; }
 
 .panel-header {
@@ -265,25 +267,6 @@ const seoCards = [
 .panel-header-right { display: flex; align-items: center; gap: 8px; }
 .char-count { font-size: 11.5px; color: var(--c-t5); font-family: 'JetBrains Mono', monospace; }
 
-.panel-textarea {
-  flex: 1;
-  width: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-  padding: 14px 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px;
-  background: transparent;
-  color: var(--c-t1);
-  line-height: 1.7;
-  display: block;
-}
-.panel-textarea::placeholder { color: var(--c-t5); }
-.panel-textarea--output {
-  background: linear-gradient(160deg, var(--c-card-alt) 0%, var(--c-faint) 100%);
-  color: var(--c-t2);
-}
 
 .error-body {
   flex: 1;

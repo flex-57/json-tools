@@ -9,7 +9,7 @@ import { EditorState, Compartment } from '@codemirror/state'
 import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
 
-export type EditorLang = 'json' | 'typescript' | 'javascript' | 'xml' | 'yaml' | 'sql'
+export type EditorLang = 'json' | 'typescript' | 'javascript' | 'xml' | 'yaml' | 'sql' | 'css' | 'html'
 
 const props = defineProps<{
   modelValue: string
@@ -26,6 +26,7 @@ const container = ref<HTMLElement | null>(null)
 let view: EditorView | null = null
 const themeConfig = new Compartment()
 const highlightConfig = new Compartment()
+const langConfig = new Compartment()
 
 const lightTheme = EditorView.theme({
   '&': {
@@ -117,6 +118,14 @@ async function getLangExtension() {
       const { sql } = await import('@codemirror/lang-sql')
       return sql()
     }
+    case 'css': {
+      const { css } = await import('@codemirror/lang-css')
+      return css()
+    }
+    case 'html': {
+      const { html } = await import('@codemirror/lang-html')
+      return html()
+    }
     default: {
       const { json } = await import('@codemirror/lang-json')
       return json()
@@ -131,7 +140,7 @@ onMounted(async () => {
 
   const extensions = [
     basicSetup,
-    langExtension,
+    langConfig.of(langExtension),
     highlightConfig.of(syntaxHighlighting(isDark.value ? oneDarkHighlightStyle : defaultHighlightStyle)),
     themeConfig.of(isDark.value ? [oneDarkTheme, darkOverride] : lightTheme),
   ]
@@ -161,6 +170,11 @@ watch(isDark, (dark) => {
       themeConfig.reconfigure(dark ? [oneDarkTheme, darkOverride] : lightTheme),
     ],
   })
+})
+
+watch(() => props.lang, async () => {
+  const ext = await getLangExtension()
+  view?.dispatch({ effects: langConfig.reconfigure(ext) })
 })
 
 watch(() => props.modelValue, (val) => {
