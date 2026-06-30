@@ -39,6 +39,7 @@ export default defineEventHandler((event) => {
     { loc: '/tools/jwt-generator' },
     { loc: '/tools/color' },
     { loc: '/tools/password-generator' },
+    { loc: '/tools/markdown-preview' },
   ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
