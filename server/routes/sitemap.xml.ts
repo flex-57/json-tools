@@ -11,6 +11,8 @@ export default defineEventHandler((event) => {
     { loc: '/guides/json-vs-yaml',               priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides/how-to-validate-json',       priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides/what-is-regex',              priority: '0.7', changefreq: 'monthly' },
+    { loc: '/guides/what-is-markdown',           priority: '0.7', changefreq: 'monthly' },
+    { loc: '/guides/markdown-cheatsheet',        priority: '0.7', changefreq: 'monthly' },
     { loc: '/tools/json-formatter',         priority: '0.9', changefreq: 'monthly' },
     { loc: '/tools/csv-to-json' },
     { loc: '/tools/json-to-csv' },

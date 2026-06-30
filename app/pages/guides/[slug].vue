@@ -94,6 +94,8 @@ import JsonVsYaml             from '~/components/guides/body/json-vs-yaml.vue'
 import HowToValidateJson     from '~/components/guides/body/how-to-validate-json.vue'
 import WhatIsRegex           from '~/components/guides/body/what-is-regex.vue'
 import WhatIsJson            from '~/components/guides/body/what-is-json.vue'
+import WhatIsMarkdown        from '~/components/guides/body/what-is-markdown.vue'
+import MarkdownCheatsheet    from '~/components/guides/body/markdown-cheatsheet.vue'
 
 const bodyComponents: Record<string, Component> = {
   'what-is-jwt':              WhatIsJwt,
@@ -103,6 +105,8 @@ const bodyComponents: Record<string, Component> = {
   'how-to-validate-json':     HowToValidateJson,
   'what-is-regex':            WhatIsRegex,
   'what-is-json':             WhatIsJson,
+  'what-is-markdown':         WhatIsMarkdown,
+  'markdown-cheatsheet':      MarkdownCheatsheet,
 }
 
 const route = useRoute()

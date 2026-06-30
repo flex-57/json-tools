@@ -63,6 +63,8 @@
           <NuxtLink to="/guides/json-vs-yaml"             class="footer-link">JSON vs YAML</NuxtLink>
           <NuxtLink to="/guides/how-to-validate-json"   class="footer-link">How to Validate JSON</NuxtLink>
           <NuxtLink to="/guides/what-is-regex"           class="footer-link">What is a Regex?</NuxtLink>
+          <NuxtLink to="/guides/what-is-markdown"        class="footer-link">What is Markdown?</NuxtLink>
+          <NuxtLink to="/guides/markdown-cheatsheet"     class="footer-link">Markdown Cheatsheet</NuxtLink>
         </div>
       </nav>
     </div>

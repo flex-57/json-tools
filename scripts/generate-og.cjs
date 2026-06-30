@@ -38,6 +38,8 @@ const TOOLS = [
   { slug: 'guide-json-vs-yaml',             tag: 'Developer Guide', title: 'JSON vs YAML',                   subtitle: 'Side-by-side comparison: syntax, use cases,\nand when to choose each.',      size: 76 },
   { slug: 'guide-how-to-validate-json',     tag: 'Developer Guide', title: 'How to Validate\nJSON',          subtitle: 'Common errors, syntax rules, and JSON Schema validation.',                    size: 68 },
   { slug: 'guide-what-is-regex',            tag: 'Developer Guide', title: 'What is a\nRegular Expression?', subtitle: 'Character classes, quantifiers, anchors, and practical patterns.',            size: 60 },
+  { slug: 'guide-what-is-markdown',        tag: 'Developer Guide', title: 'What is\nMarkdown?',             subtitle: 'How plain text becomes HTML — syntax, flavors, and where it is used.',         size: 72 },
+  { slug: 'guide-markdown-cheatsheet',     tag: 'Developer Guide', title: 'Markdown\nCheatsheet',           subtitle: 'Headings, code blocks, links, tables, task lists — all the syntax in one place.', size: 68 },
 ];
 
 const OUT_DIR = path.join(__dirname, '../public/og');

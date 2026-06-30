@@ -279,6 +279,94 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
   },
 
+  'what-is-markdown': {
+    slug: 'what-is-markdown',
+    title: 'What is Markdown?',
+    subtitle: 'Markdown explained: why it was created, how plain text becomes HTML, the core syntax, and where it is used today.',
+    readTime: '5 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Learn what Markdown is, how it converts plain text to HTML, the most common syntax elements, and where it is used — from GitHub READMEs to note-taking apps and documentation sites.',
+    tools: [
+      { name: 'Markdown Preview', desc: 'Write or paste Markdown and see the rendered HTML output instantly — live, client-side.', href: '/tools/markdown-preview', icon: ICONS.markdown },
+      { name: 'Markdown Cheatsheet', desc: 'Quick reference for all Markdown syntax: headings, code blocks, tables, task lists, and more.', href: '/guides/markdown-cheatsheet', icon: ICONS.markdown },
+    ],
+    faqs: [
+      {
+        q: 'Is Markdown the same as HTML?',
+        a: [
+          'No. Markdown is a plain-text shorthand that converts to HTML, not HTML itself. You write # Heading and a processor turns it into <h1>Heading</h1>. The key difference is readability: raw Markdown is comfortable to read as-is, raw HTML is not.',
+          'You can mix HTML directly into a Markdown document and most parsers will pass it through unchanged — but the reverse is not true: HTML files do not understand Markdown syntax.',
+        ],
+      },
+      {
+        q: 'What is CommonMark?',
+        a: [
+          'CommonMark is a formal specification of Markdown syntax, published in 2014 to resolve ambiguities in the original spec. Before CommonMark, different Markdown parsers often disagreed on edge cases.',
+          'Today, CommonMark is the de facto standard: GitHub, GitLab, Discourse, Reddit, and most modern tools implement it (often as a base with their own extensions). The Markdown Preview tool on this site uses the marked library, which follows CommonMark by default.',
+        ],
+      },
+      {
+        q: 'What file extension does Markdown use?',
+        a: [
+          'The most common extension is .md. You may also see .markdown (the original) and occasionally .mdown, .mkd, or .mdx (the latter for Markdown with JSX, used in Next.js and Astro).',
+          'GitHub, VS Code, and nearly all tools recognise .md automatically. For compatibility, stick with .md unless your framework requires otherwise.',
+        ],
+      },
+      {
+        q: 'Can I write HTML inside Markdown?',
+        a: [
+          'Yes, most Markdown parsers allow inline HTML. If you need something Markdown cannot express — a coloured span, a custom div, an embedded form — you can write raw HTML and the parser will pass it through.',
+          'There are two caveats: if the Markdown is sanitised before display (as in this tool, which uses DOMPurify), some HTML may be stripped for security. And some processors only support a subset of HTML inline.',
+        ],
+      },
+    ],
+  },
+
+  'markdown-cheatsheet': {
+    slug: 'markdown-cheatsheet',
+    title: 'Markdown Cheatsheet',
+    subtitle: 'A quick reference for all Markdown syntax — headings, emphasis, links, code blocks, tables, task lists, and more.',
+    readTime: '4 min read',
+    datePublished: '2026-06-30',
+    dateModified: '2026-06-30',
+    description: 'Markdown syntax cheatsheet: headings, bold, italic, inline code, fenced code blocks, links, images, ordered and unordered lists, task lists, tables, blockquotes, and horizontal rules.',
+    tools: [
+      { name: 'Markdown Preview', desc: 'Paste any Markdown and instantly see the rendered output — try every syntax element from this cheatsheet.', href: '/tools/markdown-preview', icon: ICONS.markdown },
+      { name: 'What is Markdown?', desc: 'Not yet familiar with Markdown? Start with the introductory guide to understand the basics.', href: '/guides/what-is-markdown', icon: ICONS.markdown },
+    ],
+    faqs: [
+      {
+        q: 'How do I add a line break in Markdown?',
+        a: [
+          'In CommonMark, a paragraph break requires a blank line between two blocks of text. A single newline within a paragraph is treated as a space.',
+          'To force a line break within a paragraph without starting a new one, end the line with two or more spaces, then press Enter. Alternatively, use a backslash \\ at the end of the line (supported by most modern parsers).',
+        ],
+      },
+      {
+        q: 'How do I escape a special Markdown character?',
+        a: [
+          'Prefix the character with a backslash (\\). For example, \\* renders as a literal asterisk instead of starting bold or italic, and \\# renders as a hash instead of a heading.',
+          'Characters that can be escaped include: \\ ` * _ { } [ ] ( ) # + - . !',
+        ],
+      },
+      {
+        q: 'What is the difference between _ and * for emphasis?',
+        a: [
+          'Functionally they are identical: *word* and _word_ both produce italic, **word** and __word__ both produce bold.',
+          'The convention in most style guides is to use * for emphasis and ** for strong, reserving _ for cases where you need to avoid ambiguity inside words. Using _ inside a word (like un_der_score) is treated as a literal underscore by CommonMark.',
+        ],
+      },
+      {
+        q: 'Does Markdown support nested lists?',
+        a: [
+          'Yes. Indent nested items by two or four spaces (CommonMark accepts both). You can mix ordered and unordered lists at different nesting levels.',
+          'Example: a top-level unordered list item followed by an indented ordered sub-list creates a mixed-level structure.',
+        ],
+      },
+    ],
+  },
+
   'cron-expression-examples': {
     slug: 'cron-expression-examples',
     title: 'Cron Expression Examples',
