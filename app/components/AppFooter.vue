@@ -35,7 +35,8 @@
           <NuxtLink to="/tools/minifier"      class="footer-link">CSS / HTML / JS Minifier</NuxtLink>
           <NuxtLink to="/tools/sql-formatter" class="footer-link">SQL Formatter</NuxtLink>
           <NuxtLink to="/tools/url-encode"    class="footer-link">URL Encode / Decode</NuxtLink>
-          <NuxtLink to="/tools/base64"        class="footer-link">Base64 Encode / Decode</NuxtLink>
+          <NuxtLink to="/tools/base64"            class="footer-link">Base64 Encode / Decode</NuxtLink>
+          <NuxtLink to="/tools/markdown-preview" class="footer-link">Markdown Preview</NuxtLink>
         </div>
         <div class="footer-col">
           <span class="footer-col-title">Security</span>

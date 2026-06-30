@@ -60,7 +60,8 @@
               <NuxtLink to="/tools/minifier"      class="nav-dropdown-item">CSS / HTML / JS Minifier</NuxtLink>
               <NuxtLink to="/tools/sql-formatter" class="nav-dropdown-item">SQL Formatter</NuxtLink>
               <NuxtLink to="/tools/url-encode"    class="nav-dropdown-item">URL Encode / Decode</NuxtLink>
-              <NuxtLink to="/tools/base64"        class="nav-dropdown-item">Base64</NuxtLink>
+              <NuxtLink to="/tools/base64"            class="nav-dropdown-item">Base64</NuxtLink>
+              <NuxtLink to="/tools/markdown-preview" class="nav-dropdown-item">Markdown Preview</NuxtLink>
             </div>
           </div>
 
@@ -150,7 +151,8 @@
             <NuxtLink to="/tools/minifier"      class="mobile-nav-item" @click="mobileOpen = false">CSS / HTML / JS Minifier</NuxtLink>
             <NuxtLink to="/tools/sql-formatter" class="mobile-nav-item" @click="mobileOpen = false">SQL Formatter</NuxtLink>
             <NuxtLink to="/tools/url-encode"    class="mobile-nav-item" @click="mobileOpen = false">URL Encode / Decode</NuxtLink>
-            <NuxtLink to="/tools/base64"        class="mobile-nav-item" @click="mobileOpen = false">Base64</NuxtLink>
+            <NuxtLink to="/tools/base64"            class="mobile-nav-item" @click="mobileOpen = false">Base64</NuxtLink>
+            <NuxtLink to="/tools/markdown-preview" class="mobile-nav-item" @click="mobileOpen = false">Markdown Preview</NuxtLink>
           </div>
 
           <div class="mobile-section">
@@ -227,7 +229,7 @@ watch(() => route.path, (path) => {
 
 const jsonPaths       = ['/tools/json-formatter', '/tools/json-diff', '/tools/json-tree', '/tools/json-to-ts', '/tools/json-schema']
 const converterPaths  = ['/tools/csv-to-json', '/tools/json-to-csv', '/tools/xml-to-json', '/tools/json-to-xml', '/tools/yaml-to-json', '/tools/json-to-yaml', '/tools/excel-to-json', '/tools/json-to-excel']
-const textCodePaths   = ['/tools/text-case', '/tools/minifier', '/tools/sql-formatter', '/tools/url-encode', '/tools/base64']
+const textCodePaths   = ['/tools/text-case', '/tools/minifier', '/tools/sql-formatter', '/tools/url-encode', '/tools/base64', '/tools/markdown-preview']
 const securityPaths   = ['/tools/jwt-decoder', '/tools/jwt-generator', '/tools/hash', '/tools/uuid', '/tools/password-generator']
 const devUtilsPaths   = ['/tools/regex-tester', '/tools/cron-parser', '/tools/unix-timestamp', '/tools/number-base', '/tools/color']
 
@@ -277,6 +279,7 @@ const TOOL_NAMES = {
   'xml-to-json': 'XML to JSON Converter',
   'yaml-to-json': 'YAML to JSON Converter',
   'color': 'Color Picker & Converter',
+  'markdown-preview': 'Markdown Preview',
   'password-generator': 'Password Generator',
 }
 

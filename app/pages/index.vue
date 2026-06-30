@@ -169,6 +169,7 @@ const CATEGORIES = [
       { name: 'SQL Formatter', to: '/tools/sql-formatter', icon: IC.sql },
       { name: 'URL Encode / Decode', to: '/tools/url-encode', icon: IC.url },
       { name: 'Base64 Encode / Decode', to: '/tools/base64', icon: IC.base64 },
+      { name: 'Markdown Preview', to: '/tools/markdown-preview', icon: IC.markdown },
     ],
   },
   {
