@@ -15,6 +15,7 @@ const props = defineProps<{
   modelValue: string
   readonly?: boolean
   lang?: EditorLang
+  lineWrap?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -143,6 +144,7 @@ onMounted(async () => {
     langConfig.of(langExtension),
     highlightConfig.of(syntaxHighlighting(isDark.value ? oneDarkHighlightStyle : defaultHighlightStyle)),
     themeConfig.of(isDark.value ? [oneDarkTheme, darkOverride] : lightTheme),
+    ...(props.lineWrap ? [EditorView.lineWrapping] : []),
   ]
 
   if (!props.readonly) {

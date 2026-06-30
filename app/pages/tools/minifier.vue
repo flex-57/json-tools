@@ -67,7 +67,7 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3M7 9.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           {{ error }}
         </div>
-        <JsonEditor v-else :model-value="output" :lang="editorLang" :readonly="true" :key="mode + '-out'" />
+        <JsonEditor v-else :model-value="output" :lang="editorLang" :readonly="true" :line-wrap="true" :key="mode + '-out'" />
       </div>
     </div>
 
