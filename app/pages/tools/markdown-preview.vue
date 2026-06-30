@@ -21,14 +21,7 @@
             </div>
           </Transition>
         </div>
-        <textarea
-          v-model="input"
-          class="panel-textarea"
-          placeholder="Paste Markdown here…"
-          spellcheck="false"
-          @focus="inputFocused = true"
-          @blur="inputFocused = false"
-        />
+        <div ref="inputRef" class="input-editor" />
       </div>
 
       <!-- Middle divider -->
@@ -67,8 +60,9 @@
 
 <script setup lang="ts">
 import { EditorView } from 'codemirror'
+import { placeholder } from '@codemirror/view'
 import { syntaxHighlighting, defaultHighlightStyle } from '@codemirror/language'
-import { EditorState } from '@codemirror/state'
+import { EditorState, Compartment } from '@codemirror/state'
 import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
 import { useMarkdown } from '~/composables/useMarkdown'
@@ -90,7 +84,64 @@ const { isDark } = useColorMode()
 const inputFocused = ref(false)
 const isDragging   = ref(false)
 const previewRef   = ref<HTMLElement | null>(null)
+const inputRef     = ref<HTMLElement | null>(null)
 const codeViews: EditorView[] = []
+let inputView: EditorView | null = null
+
+const inputThemeCompartment = new Compartment()
+
+function getEditorThemeExts(dark: boolean) {
+  return [
+    syntaxHighlighting(dark ? oneDarkHighlightStyle : defaultHighlightStyle),
+    ...(dark ? [oneDarkTheme] : []),
+  ]
+}
+
+async function createInputEditor() {
+  if (!inputRef.value || !import.meta.client) return
+  const { markdown } = await import('@codemirror/lang-markdown')
+  inputView = new EditorView({
+    state: EditorState.create({
+      doc: input.value,
+      extensions: [
+        markdown(),
+        EditorView.lineWrapping,
+        placeholder('Paste Markdown here…'),
+        inputThemeCompartment.of(getEditorThemeExts(isDark.value)),
+        EditorView.updateListener.of(update => {
+          if (update.docChanged) input.value = update.state.doc.toString()
+        }),
+        EditorView.domEventHandlers({
+          focus: () => { inputFocused.value = true },
+          blur:  () => { inputFocused.value = false },
+        }),
+        EditorView.theme({
+          '&': { height: '100%', fontSize: '12.5px', background: 'transparent' },
+          '.cm-scroller': { overflow: 'auto', fontFamily: "'JetBrains Mono', monospace", lineHeight: '1.7' },
+          '.cm-content': { padding: '14px 16px', caretColor: 'var(--c-t1)' },
+          '.cm-line': { padding: '0' },
+          '.cm-cursor': { borderLeftColor: '#F97316' },
+          '.cm-placeholder': { color: 'var(--c-t5)' },
+          '.cm-gutters': { display: 'none' },
+          '.cm-focused': { outline: 'none !important' },
+        }),
+      ],
+    }),
+    parent: inputRef.value,
+  })
+}
+
+watch(isDark, (dark) => {
+  inputView?.dispatch({ effects: inputThemeCompartment.reconfigure(getEditorThemeExts(dark)) })
+  highlightCodeBlocks()
+})
+
+watch(input, (newVal) => {
+  if (!inputView) return
+  const current = inputView.state.doc.toString()
+  if (current === newVal) return
+  inputView.dispatch({ changes: { from: 0, to: current.length, insert: newVal } })
+})
 
 async function getLangExt(lang: string) {
   if (lang === 'js' || lang === 'javascript') {
@@ -109,13 +160,25 @@ async function getLangExt(lang: string) {
     const { yaml } = await import('@codemirror/lang-yaml')
     return yaml()
   }
-  if (lang === 'xml' || lang === 'html') {
+  if (lang === 'html') {
+    const { html } = await import('@codemirror/lang-html')
+    return html()
+  }
+  if (lang === 'css') {
+    const { css } = await import('@codemirror/lang-css')
+    return css()
+  }
+  if (lang === 'xml') {
     const { xml } = await import('@codemirror/lang-xml')
     return xml()
   }
   if (lang === 'sql') {
     const { sql } = await import('@codemirror/lang-sql')
     return sql()
+  }
+  if (lang === 'php') {
+    const { php } = await import('@codemirror/lang-php')
+    return php()
   }
   return []
 }
@@ -166,7 +229,11 @@ async function highlightCodeBlocks() {
 }
 
 watch(html, highlightCodeBlocks)
-onUnmounted(() => { codeViews.forEach(v => v.destroy()) })
+onMounted(createInputEditor)
+onUnmounted(() => {
+  codeViews.forEach(v => v.destroy())
+  inputView?.destroy()
+})
 
 function onDrop(e: DragEvent) {
   isDragging.value = false
@@ -237,21 +304,11 @@ const seoCards = [
 }
 .panel-header-right { display: flex; align-items: center; gap: 8px; }
 
-.panel-textarea {
+.input-editor {
   flex: 1;
-  width: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-  padding: 14px 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px;
-  background: transparent;
-  color: var(--c-t1);
-  line-height: 1.7;
-  display: block;
+  min-height: 0;
+  overflow: hidden;
 }
-.panel-textarea::placeholder { color: var(--c-t5); }
 
 .panel-empty {
   flex: 1;
