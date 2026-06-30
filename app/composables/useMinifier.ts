@@ -71,7 +71,7 @@ export async function minifyHTML(input: string): Promise<MinifyResult> {
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
       useShortDoctype: true,
-      minifyCSS: true,
+      minifyCSS: false,
       minifyJS: { compress: true, mangle: true },
     })
     return { output, error: null, ...stats(input, output) }
