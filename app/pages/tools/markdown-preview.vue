@@ -144,41 +144,99 @@ watch(input, (newVal) => {
 })
 
 async function getLangExt(lang: string) {
-  if (lang === 'js' || lang === 'javascript') {
+  const l = lang.toLowerCase()
+
+  if (l === 'js' || l === 'javascript' || l === 'jsx') {
     const { javascript } = await import('@codemirror/lang-javascript')
-    return javascript()
+    return javascript({ jsx: l === 'jsx' })
   }
-  if (lang === 'ts' || lang === 'typescript') {
+  if (l === 'ts' || l === 'typescript' || l === 'tsx') {
     const { javascript } = await import('@codemirror/lang-javascript')
-    return javascript({ typescript: true })
+    return javascript({ typescript: true, jsx: l === 'tsx' })
   }
-  if (lang === 'json') {
+  if (l === 'json') {
     const { json } = await import('@codemirror/lang-json')
     return json()
   }
-  if (lang === 'yaml' || lang === 'yml') {
+  if (l === 'yaml' || l === 'yml') {
     const { yaml } = await import('@codemirror/lang-yaml')
     return yaml()
   }
-  if (lang === 'html') {
+  if (l === 'html') {
     const { html } = await import('@codemirror/lang-html')
     return html()
   }
-  if (lang === 'css') {
+  if (l === 'css' || l === 'scss' || l === 'less') {
     const { css } = await import('@codemirror/lang-css')
     return css()
   }
-  if (lang === 'xml') {
+  if (l === 'xml') {
     const { xml } = await import('@codemirror/lang-xml')
     return xml()
   }
-  if (lang === 'sql') {
+  if (l === 'sql') {
     const { sql } = await import('@codemirror/lang-sql')
     return sql()
   }
-  if (lang === 'php') {
+  if (l === 'php') {
     const { php } = await import('@codemirror/lang-php')
     return php()
+  }
+  if (l === 'python' || l === 'py') {
+    const { python } = await import('@codemirror/lang-python')
+    return python()
+  }
+  if (l === 'rust' || l === 'rs') {
+    const { rust } = await import('@codemirror/lang-rust')
+    return rust()
+  }
+  if (l === 'c' || l === 'cpp' || l === 'c++' || l === 'cc' || l === 'cxx') {
+    const { cpp } = await import('@codemirror/lang-cpp')
+    return cpp()
+  }
+  if (l === 'java') {
+    const { java } = await import('@codemirror/lang-java')
+    return java()
+  }
+  if (l === 'bash' || l === 'sh' || l === 'shell' || l === 'zsh') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { shell } = await import('@codemirror/legacy-modes/mode/shell')
+    return StreamLanguage.define(shell)
+  }
+  if (l === 'go') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { go } = await import('@codemirror/legacy-modes/mode/go')
+    return StreamLanguage.define(go)
+  }
+  if (l === 'ruby' || l === 'rb') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { ruby } = await import('@codemirror/legacy-modes/mode/ruby')
+    return StreamLanguage.define(ruby)
+  }
+  if (l === 'csharp' || l === 'cs' || l === 'c#') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { csharp } = await import('@codemirror/legacy-modes/mode/clike')
+    return StreamLanguage.define(csharp)
+  }
+  if (l === 'kotlin' || l === 'kt') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { kotlin } = await import('@codemirror/legacy-modes/mode/clike')
+    return StreamLanguage.define(kotlin)
+  }
+  if (l === 'swift') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { swift } = await import('@codemirror/legacy-modes/mode/swift')
+    return StreamLanguage.define(swift)
+  }
+  if (l === 'lua') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { lua } = await import('@codemirror/legacy-modes/mode/lua')
+    return StreamLanguage.define(lua)
+  }
+  if (l === 'r') {
+    const { StreamLanguage } = await import('@codemirror/language')
+    const { r } = await import('@codemirror/legacy-modes/mode/r')
+    return StreamLanguage.define(r)
   }
   return []
 }
