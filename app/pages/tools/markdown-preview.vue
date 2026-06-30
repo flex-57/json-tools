@@ -296,28 +296,28 @@ const seoCards = [
   overflow-y: auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-.markdown-body > :first-child { margin-top: 0; }
-.markdown-body > :last-child  { margin-bottom: 0; }
+.markdown-body :deep(> :first-child) { margin-top: 0; }
+.markdown-body :deep(> :last-child)  { margin-bottom: 0; }
 
-.markdown-body h1, .markdown-body h2, .markdown-body h3,
-.markdown-body h4, .markdown-body h5, .markdown-body h6 {
+.markdown-body :deep(h1), .markdown-body :deep(h2), .markdown-body :deep(h3),
+.markdown-body :deep(h4), .markdown-body :deep(h5), .markdown-body :deep(h6) {
   font-weight: 700;
   margin: 1.2em 0 0.4em;
   line-height: 1.3;
   color: var(--c-t1);
 }
-.markdown-body h1 { font-size: 1.55em; border-bottom: 1px solid var(--c-border); padding-bottom: 0.3em; }
-.markdown-body h2 { font-size: 1.25em; border-bottom: 1px solid var(--c-border-s); padding-bottom: 0.2em; }
-.markdown-body h3 { font-size: 1.1em; }
-.markdown-body h4, .markdown-body h5, .markdown-body h6 { font-size: 1em; }
+.markdown-body :deep(h1) { font-size: 1.55em; border-bottom: 1px solid var(--c-border); padding-bottom: 0.3em; }
+.markdown-body :deep(h2) { font-size: 1.25em; border-bottom: 1px solid var(--c-border-s); padding-bottom: 0.2em; }
+.markdown-body :deep(h3) { font-size: 1.1em; }
+.markdown-body :deep(h4), .markdown-body :deep(h5), .markdown-body :deep(h6) { font-size: 1em; }
 
-.markdown-body p { margin: 0.6em 0; }
+.markdown-body :deep(p) { margin: 0.6em 0; }
 
-.markdown-body ul, .markdown-body ol { margin: 0.5em 0; padding-left: 1.8em; }
-.markdown-body li { margin: 0.25em 0; }
-.markdown-body li > ul, .markdown-body li > ol { margin: 0.15em 0; }
+.markdown-body :deep(ul), .markdown-body :deep(ol) { margin: 0.5em 0; padding-left: 1.8em; }
+.markdown-body :deep(li) { margin: 0.25em 0; }
+.markdown-body :deep(li > ul), .markdown-body :deep(li > ol) { margin: 0.15em 0; }
 
-.markdown-body blockquote {
+.markdown-body :deep(blockquote) {
   border-left: 3px solid #F97316;
   margin: 0.8em 0;
   padding: 0.5em 1em;
@@ -325,10 +325,10 @@ const seoCards = [
   background: var(--c-faint);
   border-radius: 0 6px 6px 0;
 }
-.markdown-body blockquote > :first-child { margin-top: 0; }
-.markdown-body blockquote > :last-child  { margin-bottom: 0; }
+.markdown-body :deep(blockquote > :first-child) { margin-top: 0; }
+.markdown-body :deep(blockquote > :last-child)  { margin-bottom: 0; }
 
-.markdown-body code {
+.markdown-body :deep(code) {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.875em;
   padding: 0.15em 0.4em;
@@ -337,7 +337,7 @@ const seoCards = [
   border-radius: 4px;
   color: #F97316;
 }
-.markdown-body .md-code-block {
+.markdown-body :deep(.md-code-block) {
   border: 1px solid var(--c-border);
   border-radius: 8px;
   overflow: hidden;
@@ -345,36 +345,36 @@ const seoCards = [
   background: var(--c-card-alt);
 }
 
-.markdown-body table {
+.markdown-body :deep(table) {
   border-collapse: collapse;
   width: 100%;
   margin: 0.8em 0;
   font-size: 13px;
 }
-.markdown-body th, .markdown-body td {
+.markdown-body :deep(th), .markdown-body :deep(td) {
   border: 1px solid var(--c-border);
   padding: 6px 12px;
   text-align: left;
 }
-.markdown-body th {
+.markdown-body :deep(th) {
   background: var(--c-card-alt);
   font-weight: 600;
   color: var(--c-t2);
 }
-.markdown-body tr:nth-child(even) td { background: var(--c-faint); }
+.markdown-body :deep(tr:nth-child(even) td) { background: var(--c-faint); }
 
-.markdown-body a { color: #F97316; text-decoration: none; }
-.markdown-body a:hover { text-decoration: underline; }
+.markdown-body :deep(a) { color: #F97316; text-decoration: none; }
+.markdown-body :deep(a:hover) { text-decoration: underline; }
 
-.markdown-body hr {
+.markdown-body :deep(hr) {
   border: none;
   border-top: 1px solid var(--c-border);
   margin: 1.2em 0;
 }
 
-.markdown-body strong { font-weight: 700; }
-.markdown-body em { font-style: italic; color: var(--c-t2); }
-.markdown-body img { max-width: 100%; border-radius: 6px; }
+.markdown-body :deep(strong) { font-weight: 700; }
+.markdown-body :deep(em) { font-style: italic; color: var(--c-t2); }
+.markdown-body :deep(img) { max-width: 100%; border-radius: 6px; }
 
 /* ── Transitions ─────────────────────────────────────────────────── */
 .fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
