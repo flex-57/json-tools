@@ -63,6 +63,15 @@ export async function minifyHTML(input: string): Promise<MinifyResult> {
   const trimmed = input.trim()
   if (!trimmed) return empty(input)
   try {
+    // clean-css (html-minifier-terser dep) references process at module load time.
+    // Polyfill before the dynamic import so the chunk finds it when evaluated.
+    if (typeof globalThis.process === 'undefined') {
+      (globalThis as any).process = {
+        env: {},
+        nextTick: (fn: (...a: unknown[]) => void, ...args: unknown[]) => setTimeout(() => fn(...args), 0),
+        cwd: () => '/',
+      }
+    }
     const { minify } = await import('html-minifier-terser')
     const output = await minify(trimmed, {
       collapseWhitespace: true,
@@ -71,7 +80,7 @@ export async function minifyHTML(input: string): Promise<MinifyResult> {
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
       useShortDoctype: true,
-      minifyCSS: false,
+      minifyCSS: true,
       minifyJS: { compress: true, mangle: true },
     })
     return { output, error: null, ...stats(input, output) }
