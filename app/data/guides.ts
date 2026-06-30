@@ -5,6 +5,7 @@ export interface GuideToolCard { name: string; desc: string; href: string; icon:
 
 export interface GuideConfig {
   slug: string
+  type: 'guide' | 'reference'
   title: string
   subtitle: string
   readTime: string
@@ -18,6 +19,7 @@ export interface GuideConfig {
 export const GUIDES: Record<string, GuideConfig> = {
   'what-is-jwt': {
     slug: 'what-is-jwt',
+    type: 'guide',
     title: 'What is a JWT Token?',
     subtitle: 'JSON Web Tokens explained: structure, how they work, common algorithms, and security best practices.',
     readTime: '6 min read',
@@ -62,6 +64,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'what-is-base64': {
     slug: 'what-is-base64',
+    type: 'guide',
     title: 'What is Base64 Encoding?',
     subtitle: 'Base64 explained: how it works, why it exists, common use cases, and the difference with Base64url.',
     readTime: '5 min read',
@@ -105,6 +108,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'how-to-validate-json': {
     slug: 'how-to-validate-json',
+    type: 'guide',
     title: 'How to Validate JSON',
     subtitle: 'Understand what makes JSON valid, spot the most common errors, and go further with JSON Schema.',
     readTime: '5 min read',
@@ -149,6 +153,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'json-vs-yaml': {
     slug: 'json-vs-yaml',
+    type: 'reference',
     title: 'JSON vs YAML: What\'s the Difference?',
     subtitle: 'A side-by-side comparison of JSON and YAML — syntax, use cases, and when to choose one over the other.',
     readTime: '5 min read',
@@ -193,6 +198,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'what-is-json': {
     slug: 'what-is-json',
+    type: 'guide',
     title: 'What is JSON?',
     subtitle: 'JSON explained: data types, syntax rules, and why it became the universal data format for APIs and config files.',
     readTime: '6 min read',
@@ -238,6 +244,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'what-is-regex': {
     slug: 'what-is-regex',
+    type: 'guide',
     title: 'What is a Regular Expression?',
     subtitle: 'Regex explained: character classes, quantifiers, anchors, groups, and practical patterns for everyday use.',
     readTime: '7 min read',
@@ -281,6 +288,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'what-is-markdown': {
     slug: 'what-is-markdown',
+    type: 'guide',
     title: 'What is Markdown?',
     subtitle: 'Markdown explained: why it was created, how plain text becomes HTML, the core syntax, and where it is used today.',
     readTime: '5 min read',
@@ -325,6 +333,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'markdown-cheatsheet': {
     slug: 'markdown-cheatsheet',
+    type: 'reference',
     title: 'Markdown Cheatsheet',
     subtitle: 'A quick reference for all Markdown syntax — headings, emphasis, links, code blocks, tables, task lists, and more.',
     readTime: '4 min read',
@@ -369,6 +378,7 @@ export const GUIDES: Record<string, GuideConfig> = {
 
   'cron-expression-examples': {
     slug: 'cron-expression-examples',
+    type: 'reference',
     title: 'Cron Expression Examples',
     subtitle: 'A practical reference for cron syntax: field breakdown, special characters, and ready-to-use schedules.',
     readTime: '5 min read',

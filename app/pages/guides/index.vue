@@ -11,27 +11,58 @@
     <!-- Hero -->
     <header class="guides-hero">
       <h1 class="guides-title">Developer Guides</h1>
-      <p class="guides-subtitle">In-depth explanations of JSON, encoding, security, and developer tools — from fundamentals to practical patterns.</p>
+      <p class="guides-subtitle">In-depth explanations and quick references for JSON, encoding, security, and developer tools.</p>
     </header>
 
-    <!-- Grid -->
-    <div class="guides-grid">
-      <NuxtLink
-        v-for="guide in guides"
-        :key="guide.slug"
-        :to="`/guides/${guide.slug}`"
-        class="guide-card"
-      >
-        <div class="guide-card-body">
-          <h2 class="guide-card-title">{{ guide.title }}</h2>
-          <p class="guide-card-subtitle">{{ guide.subtitle }}</p>
-        </div>
-        <div class="guide-card-footer">
-          <span class="guide-card-time">{{ guide.readTime }}</span>
-          <span class="guide-card-arrow">→</span>
-        </div>
-      </NuxtLink>
-    </div>
+    <!-- Guides section -->
+    <section class="guides-section">
+      <div class="section-header">
+        <h2 class="section-title">Guides</h2>
+        <p class="section-desc">Concept articles — understand how it works.</p>
+      </div>
+      <div class="guides-grid">
+        <NuxtLink
+          v-for="guide in guidesList"
+          :key="guide.slug"
+          :to="`/guides/${guide.slug}`"
+          class="guide-card"
+        >
+          <div class="guide-card-body">
+            <h3 class="guide-card-title">{{ guide.title }}</h3>
+            <p class="guide-card-subtitle">{{ guide.subtitle }}</p>
+          </div>
+          <div class="guide-card-footer">
+            <span class="guide-card-time">{{ guide.readTime }}</span>
+            <span class="guide-card-arrow">→</span>
+          </div>
+        </NuxtLink>
+      </div>
+    </section>
+
+    <!-- Reference section -->
+    <section class="guides-section">
+      <div class="section-header">
+        <h2 class="section-title">Reference</h2>
+        <p class="section-desc">Cheatsheets, examples, and comparisons — look it up while you code.</p>
+      </div>
+      <div class="guides-grid">
+        <NuxtLink
+          v-for="guide in referenceList"
+          :key="guide.slug"
+          :to="`/guides/${guide.slug}`"
+          class="guide-card"
+        >
+          <div class="guide-card-body">
+            <h3 class="guide-card-title">{{ guide.title }}</h3>
+            <p class="guide-card-subtitle">{{ guide.subtitle }}</p>
+          </div>
+          <div class="guide-card-footer">
+            <span class="guide-card-time">{{ guide.readTime }}</span>
+            <span class="guide-card-arrow">→</span>
+          </div>
+        </NuxtLink>
+      </div>
+    </section>
 
   </div>
 </template>
@@ -39,15 +70,17 @@
 <script setup lang="ts">
 import { GUIDES } from '~/data/guides'
 
-const guides = Object.values(GUIDES)
+const allGuides   = Object.values(GUIDES)
+const guidesList  = allGuides.filter(g => g.type === 'guide')
+const referenceList = allGuides.filter(g => g.type === 'reference')
 
 const BASE_URL = 'https://jsontools.space'
 
 useSeoMeta({
-  title:           'Developer Guides — JSON Tools',
-  description:     'In-depth guides on JSON, JWT, Base64, regex, cron expressions, YAML, and Markdown — practical explanations for developers.',
-  ogTitle:         'Developer Guides — JSON Tools',
-  ogDescription:   'In-depth guides on JSON, JWT, Base64, regex, cron expressions, YAML, and Markdown.',
+  title:           'Developer Guides & References — JSON Tools',
+  description:     'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
+  ogTitle:         'Developer Guides & References — JSON Tools',
+  ogDescription:   'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
   ogImage:         `${BASE_URL}/og/og-image.png`,
   twitterCard:     'summary_large_image',
   twitterImage:    `${BASE_URL}/og/og-image.png`,
@@ -71,12 +104,12 @@ useHead({
       key: 'schema-collection',
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
-        '@context':   'https://schema.org',
-        '@type':      'CollectionPage',
-        name:         'Developer Guides',
-        description:  'In-depth explanations of JSON, JWT, Base64, regex, cron, and Markdown for developers.',
-        url:          `${BASE_URL}/guides`,
-        hasPart: guides.map(g => ({
+        '@context':  'https://schema.org',
+        '@type':     'CollectionPage',
+        name:        'Developer Guides & References',
+        description: 'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
+        url:         `${BASE_URL}/guides`,
+        hasPart: allGuides.map(g => ({
           '@type': 'Article',
           name:    g.title,
           url:     `${BASE_URL}/guides/${g.slug}`,
@@ -114,7 +147,7 @@ useHead({
 
 /* ── Hero ───────────────────────────────────────────────── */
 .guides-hero {
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
 
 .guides-title {
@@ -130,14 +163,41 @@ useHead({
   font-size: 15.5px;
   color: var(--c-t3);
   line-height: 1.65;
-  max-width: 620px;
+  max-width: 580px;
+}
+
+/* ── Section ────────────────────────────────────────────── */
+.guides-section {
+  margin-bottom: 56px;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--c-t3);
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--c-t5);
 }
 
 /* ── Grid ───────────────────────────────────────────────── */
 .guides-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 /* ── Card ───────────────────────────────────────────────── */
@@ -146,13 +206,13 @@ useHead({
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-  padding: 24px;
+  padding: 22px;
   background: var(--c-card);
   border: 1px solid var(--c-border);
   border-radius: 12px;
   text-decoration: none;
   transition: border-color 0.15s, box-shadow 0.15s;
-  min-height: 160px;
+  min-height: 150px;
 }
 
 .guide-card:hover {
@@ -161,16 +221,16 @@ useHead({
 }
 
 .guide-card-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--c-t1);
   letter-spacing: -0.02em;
   line-height: 1.3;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .guide-card-subtitle {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--c-t4);
   line-height: 1.65;
 }
@@ -188,7 +248,7 @@ useHead({
 }
 
 .guide-card-arrow {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--c-t5);
   transition: color 0.15s, transform 0.15s;
 }
@@ -199,12 +259,13 @@ useHead({
 
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .guides-grid { grid-template-columns: repeat(2, 1fr); }
+  .guides-grid       { grid-template-columns: repeat(2, 1fr); }
+  .section-header    { flex-direction: column; gap: 4px; }
 }
 
 @media (max-width: 560px) {
   .guides-page  { padding: 24px 16px 64px; }
   .guides-grid  { grid-template-columns: 1fr; }
-  .guides-hero  { margin-bottom: 32px; }
+  .guides-hero  { margin-bottom: 36px; }
 }
 </style>
