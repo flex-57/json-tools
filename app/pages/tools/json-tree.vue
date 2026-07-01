@@ -208,27 +208,29 @@ function expandAll()  { collapsed.value = new Set() }
 function collapseAll() { if (root.value) collapsed.value = new Set(collectAllExpandableIds(root.value)) }
 function clear()      { input.value = ''; search.value = '' }
 
+async function captureToPdf(el: HTMLElement, bg: string, filename: string) {
+  const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
+  // scrollHeight gives full content height even inside an overflow:auto parent
+  const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: bg })
+  const img = new Image()
+  img.src = dataUrl
+  await new Promise<void>(r => { img.onload = () => r() })
+  const PX_TO_MM = 25.4 / 96
+  const wMm = (img.naturalWidth / 2) * PX_TO_MM
+  const hMm = (img.naturalHeight / 2) * PX_TO_MM
+  const pdf = new jsPDF({ unit: 'mm', orientation: wMm > hMm ? 'l' : 'p', format: [wMm, hMm] })
+  pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
+  pdf.save(filename)
+}
+
 async function exportAsPdf() {
   const saved = new Set(collapsed.value)
   expandAll()
   await nextTick()
-
   const treeWrap = document.querySelector('.tree-wrap') as HTMLElement
   if (!treeWrap) { collapsed.value = saved; return }
-
   try {
-    const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
-    // treeWrap.scrollHeight = full tree height even inside an overflow:auto parent
-    const dataUrl = await toPng(treeWrap, { pixelRatio: 2, backgroundColor: '#1A1B1E' })
-    const img = new Image()
-    img.src = dataUrl
-    await new Promise<void>(r => { img.onload = () => r() })
-    const PX_TO_MM = 25.4 / 96
-    const wMm = (img.naturalWidth / 2) * PX_TO_MM
-    const hMm = (img.naturalHeight / 2) * PX_TO_MM
-    const pdf = new jsPDF({ unit: 'mm', orientation: wMm > hMm ? 'l' : 'p', format: [wMm, hMm] })
-    pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
-    pdf.save('json-tree.pdf')
+    await captureToPdf(treeWrap, '#1A1B1E', 'json-tree.pdf')
   } finally {
     collapsed.value = saved
   }
@@ -239,19 +241,8 @@ async function exportGraphAsPdf() {
   if (!el) return
   const controls = el.querySelector('.vue-flow__controls') as HTMLElement | null
   if (controls) controls.style.visibility = 'hidden'
-
   try {
-    const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
-    const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: '#000000' })
-    const img = new Image()
-    img.src = dataUrl
-    await new Promise<void>(r => { img.onload = () => r() })
-    const PX_TO_MM = 25.4 / 96
-    const wMm = (img.naturalWidth / 2) * PX_TO_MM
-    const hMm = (img.naturalHeight / 2) * PX_TO_MM
-    const pdf = new jsPDF({ unit: 'mm', orientation: wMm > hMm ? 'l' : 'p', format: [wMm, hMm] })
-    pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
-    pdf.save('json-graph.pdf')
+    await captureToPdf(el, '#000000', 'json-graph.pdf')
   } finally {
     if (controls) controls.style.visibility = ''
   }
