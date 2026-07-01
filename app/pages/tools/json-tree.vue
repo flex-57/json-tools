@@ -216,25 +216,20 @@ async function exportAsPdf() {
   const treeWrap = document.querySelector('.tree-wrap') as HTMLElement
   if (!treeWrap) { collapsed.value = saved; return }
 
-  // Clone into a detached container so overflow from .output-body doesn't clip
-  const container = document.createElement('div')
-  container.style.cssText = `position:fixed;top:-9999px;left:-9999px;background:#1A1B1E;padding:12px;width:${treeWrap.offsetWidth + 24}px;`
-  container.appendChild(treeWrap.cloneNode(true))
-  document.body.appendChild(container)
-
   try {
     const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
-    const dataUrl = await toPng(container, { pixelRatio: 2, backgroundColor: '#1A1B1E' })
+    // treeWrap.scrollHeight = full tree height even inside an overflow:auto parent
+    const dataUrl = await toPng(treeWrap, { pixelRatio: 2, backgroundColor: '#1A1B1E' })
     const img = new Image()
     img.src = dataUrl
     await new Promise<void>(r => { img.onload = () => r() })
-    const w = img.naturalWidth / 2
-    const h = img.naturalHeight / 2
-    const pdf = new jsPDF({ unit: 'px', format: [w, h] })
-    pdf.addImage(dataUrl, 'PNG', 0, 0, w, h)
+    const PX_TO_MM = 25.4 / 96
+    const wMm = (img.naturalWidth / 2) * PX_TO_MM
+    const hMm = (img.naturalHeight / 2) * PX_TO_MM
+    const pdf = new jsPDF({ unit: 'mm', format: [wMm, hMm] })
+    pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
     pdf.save('json-tree.pdf')
   } finally {
-    document.body.removeChild(container)
     collapsed.value = saved
   }
 }
@@ -250,10 +245,11 @@ async function exportGraphAsPdf() {
     const img = new Image()
     img.src = dataUrl
     await new Promise<void>(r => { img.onload = () => r() })
-    const w = img.naturalWidth / 2
-    const h = img.naturalHeight / 2
-    const pdf = new jsPDF({ unit: 'px', format: [w, h] })
-    pdf.addImage(dataUrl, 'PNG', 0, 0, w, h)
+    const PX_TO_MM = 25.4 / 96
+    const wMm = (img.naturalWidth / 2) * PX_TO_MM
+    const hMm = (img.naturalHeight / 2) * PX_TO_MM
+    const pdf = new jsPDF({ unit: 'mm', format: [wMm, hMm] })
+    pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
     pdf.save('json-graph.pdf')
   } finally {
     if (controls) controls.style.visibility = ''
