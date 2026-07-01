@@ -106,6 +106,16 @@
       </div>
     </div>
 
+    <!-- Security notes -->
+    <div class="info-strip">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm0 4v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="6" cy="3.8" r="0.6" fill="currentColor"/></svg>
+      <span>Parsed in an isolated Web Worker — no file is uploaded to servers</span>
+    </div>
+    <div class="info-strip info-strip--warn">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1.5L1 10h10L6 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6 5v2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="6" cy="9" r="0.5" fill="currentColor"/></svg>
+      <span>SheetJS has known CVEs (prototype pollution, ReDoS) — the Worker sandbox limits exposure but does not fix them</span>
+    </div>
+
     <SeoSection :cards="seoCards" />
   </div>
 </template>

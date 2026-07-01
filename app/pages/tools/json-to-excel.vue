@@ -69,6 +69,12 @@
       </div>
     </div>
 
+    <!-- Security note -->
+    <div class="info-strip">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm0 4v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="6" cy="3.8" r="0.6" fill="currentColor"/></svg>
+      <span>Generated in an isolated Web Worker — no data is uploaded to servers</span>
+    </div>
+
     <SeoSection :cards="seoCards" />
   </div>
 </template>

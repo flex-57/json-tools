@@ -522,6 +522,8 @@ html.dark {
   font-size: 12px;
   color: var(--c-t5);
 }
+.info-strip--warn { color: #92400E; }
+.dark .info-strip--warn { color: #FCD34D; }
 
 /* ── Guide cheat table (shared) ──────────────────────────────────── */
 .cheat-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
