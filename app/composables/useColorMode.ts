@@ -7,14 +7,18 @@ export function useColorMode() {
   }
 
   function init() {
-    const stored = localStorage.getItem('color-mode')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    apply(stored ? stored === 'dark' : prefersDark)
+    try {
+      const stored = localStorage.getItem('color-mode')
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      apply(stored ? stored === 'dark' : prefersDark)
+    } catch {
+      apply(false)
+    }
   }
 
   function toggle() {
     const next = !isDark.value
-    localStorage.setItem('color-mode', next ? 'dark' : 'light')
+    try { localStorage.setItem('color-mode', next ? 'dark' : 'light') } catch { /* ignore */ }
     apply(next)
   }
 

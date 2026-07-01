@@ -13,8 +13,10 @@ export function useRecentTools() {
 
   function addRecent(slug: string): void {
     if (!import.meta.client) return
-    const items = getRecent().filter(s => s !== slug)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([slug, ...items].slice(0, MAX)))
+    try {
+      const items = getRecent().filter(s => s !== slug)
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([slug, ...items].slice(0, MAX)))
+    } catch { /* private browsing or storage quota exceeded */ }
   }
 
   return { getRecent, addRecent }
