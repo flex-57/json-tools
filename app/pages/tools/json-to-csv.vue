@@ -19,11 +19,6 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Convert <span class="kb">Ctrl ↵</span>
         </button>
-        <button @click="copy" class="btn btn-secondary" :class="{ 'btn--success': copied }">
-          <svg v-if="!copied" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <svg v-else width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          {{ copied ? 'Copied!' : 'Copy CSV' }}
-        </button>
         <button @click="downloadCsv" class="btn btn-secondary" :disabled="!output">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Download
@@ -71,7 +66,9 @@
       <div class="editor-card editor-card--output">
         <div class="editor-card-header">
           <span class="editor-label">CSV Output</span>
-          <span class="editor-hint">Result</span>
+          <div class="card-actions">
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+          </div>
         </div>
         <div class="editor-body">
           <textarea v-model="output" readonly class="editor-textarea editor-textarea--readonly" spellcheck="false" />
