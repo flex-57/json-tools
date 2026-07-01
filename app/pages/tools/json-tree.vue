@@ -58,7 +58,9 @@
               <button class="btn-xs" @click="expandAll">Expand all</button>
               <button class="btn-xs" @click="collapseAll">Collapse all</button>
             </div>
+            <button class="btn-xs" @click="exportAsPdf">PDF</button>
           </template>
+          <button v-else-if="viewMode === 'graph' && graphNodes.length" class="btn-xs" @click="exportGraphAsPng">PNG</button>
         </div>
 
         <!-- Tree view -->
@@ -206,6 +208,25 @@ function expandAll()  { collapsed.value = new Set() }
 function collapseAll() { if (root.value) collapsed.value = new Set(collectAllExpandableIds(root.value)) }
 function clear()      { input.value = ''; search.value = '' }
 
+async function exportAsPdf() {
+  const saved = new Set(collapsed.value)
+  expandAll()
+  await nextTick()
+  window.addEventListener('afterprint', () => { collapsed.value = saved }, { once: true })
+  window.print()
+}
+
+async function exportGraphAsPng() {
+  const el = document.querySelector('.vf-instance') as HTMLElement
+  if (!el) return
+  const { toPng } = await import('html-to-image')
+  const dataUrl = await toPng(el, { pixelRatio: 2 })
+  const a = document.createElement('a')
+  a.href = dataUrl
+  a.download = 'json-graph.png'
+  a.click()
+}
+
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
   isDragging.value = false
@@ -233,6 +254,32 @@ const seoCards = [
 </script>
 
 <style>
+/* ── Print styles — tree PDF export ──────────────────────────────── */
+@media print {
+  header, footer, nav,
+  .page-header, .toolbar, .seo-section { display: none !important; }
+  .tree-layout { display: block !important; }
+  .tree-layout > .editor-card:first-child { display: none !important; }
+  .output-header { display: none !important; }
+  body { background: white !important; }
+  .output-card { border: none !important; box-shadow: none !important; min-height: auto !important; }
+  .output-body {
+    background: white !important;
+    height: auto !important;
+    overflow: visible !important;
+    max-height: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .tree-wrap { overflow: visible !important; }
+  :root {
+    --c-bg: #ffffff !important; --c-card: #ffffff !important;
+    --c-subtle: #f5f4f0 !important; --c-border: #E8E5DF !important;
+    --c-t1: #1A1916 !important; --c-t2: #3D3833 !important;
+    --c-t3: #6B6560 !important; --c-t4: #9E9892 !important;
+  }
+}
+
 /* Vue Flow global overrides — must be unscoped */
 .vue-flow__controls { background: #1C2330 !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 8px !important; overflow: hidden; }
 .vue-flow__controls-button { background: #1C2330 !important; border-color: rgba(255,255,255,0.08) !important; color: #8B949E !important; }
