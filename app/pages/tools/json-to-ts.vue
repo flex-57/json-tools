@@ -239,47 +239,7 @@ const seoCards = [
 .status-enter-active, .status-leave-active { transition: opacity 0.15s, transform 0.15s; }
 .status-enter-from, .status-leave-to { opacity: 0; transform: translateX(4px); }
 
-/* ── Toggle checkboxes (readonly / type / .strict) ──────────────── */
-.toggle-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.toggle-input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-track {
-  position: relative;
-  width: 28px;
-  height: 16px;
-  border-radius: 8px;
-  background: var(--c-border-m);
-  transition: background 0.18s;
-  flex-shrink: 0;
-}
-
-.toggle-input:checked + .toggle-track { background: var(--c-brand); }
-
-.toggle-thumb {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #fff;
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.toggle-input:checked + .toggle-track .toggle-thumb { transform: translateX(12px); }
-
+/* labels monospace pour les options code (readonly / type / .strict) */
 .toggle-label {
   font-size: 12px;
   font-weight: 500;

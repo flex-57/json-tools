@@ -49,11 +49,10 @@
         <div class="editor-card-header">
           <span class="editor-label">JSON Schema</span>
           <div class="card-actions">
-            <label class="toggle-row">
-              <span class="option-label">Required</span>
-              <button class="toggle-switch" :class="{ 'toggle-switch--on': required }" @click="required = !required" :aria-pressed="required" aria-label="Include required fields">
-                <span class="toggle-thumb" />
-              </button>
+            <label class="toggle-wrap">
+              <input type="checkbox" class="toggle-input" v-model="required" />
+              <span class="toggle-track"><span class="toggle-thumb" /></span>
+              <span class="toggle-label">Required</span>
             </label>
             <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
@@ -131,23 +130,6 @@ const seoCards = [
 .status-pill--invalid .status-dot { background: #EF4444; }
 .status-enter-active, .status-leave-active { transition: opacity 0.15s, transform 0.15s; }
 .status-enter-from, .status-leave-to { opacity: 0; transform: translateX(4px); }
-
-/* Toggle switch */
-.toggle-row { display: flex; align-items: center; gap: 7px; cursor: pointer; }
-.toggle-switch {
-  position: relative; width: 32px; height: 18px;
-  border-radius: 9px; border: none; cursor: pointer;
-  background: var(--c-border-m); transition: background 0.18s;
-  flex-shrink: 0;
-}
-.toggle-switch--on { background: var(--c-brand); }
-.toggle-thumb {
-  position: absolute; top: 3px; left: 3px;
-  width: 12px; height: 12px; border-radius: 50%;
-  background: #fff;
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.toggle-switch--on .toggle-thumb { transform: translateX(14px); }
 
 /* Draft toggle */
 .draft-toggle {
