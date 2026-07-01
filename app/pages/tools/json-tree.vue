@@ -226,7 +226,7 @@ async function exportAsPdf() {
     const PX_TO_MM = 25.4 / 96
     const wMm = (img.naturalWidth / 2) * PX_TO_MM
     const hMm = (img.naturalHeight / 2) * PX_TO_MM
-    const pdf = new jsPDF({ unit: 'mm', format: [wMm, hMm] })
+    const pdf = new jsPDF({ unit: 'mm', orientation: wMm > hMm ? 'l' : 'p', format: [wMm, hMm] })
     pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
     pdf.save('json-tree.pdf')
   } finally {
@@ -248,7 +248,7 @@ async function exportGraphAsPdf() {
     const PX_TO_MM = 25.4 / 96
     const wMm = (img.naturalWidth / 2) * PX_TO_MM
     const hMm = (img.naturalHeight / 2) * PX_TO_MM
-    const pdf = new jsPDF({ unit: 'mm', format: [wMm, hMm] })
+    const pdf = new jsPDF({ unit: 'mm', orientation: wMm > hMm ? 'l' : 'p', format: [wMm, hMm] })
     pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
     pdf.save('json-graph.pdf')
   } finally {
