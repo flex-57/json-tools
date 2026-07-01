@@ -1,4 +1,5 @@
 import { useClipboard } from './useClipboard'
+import { triggerDownload } from '../utils/download'
 
 export type SqlDialect = 'sql' | 'mysql' | 'postgresql' | 'sqlite' | 'tsql'
 
@@ -55,5 +56,10 @@ export function useSqlFormatter() {
 
   function clear() { input.value = ''; output.value = ''; error.value = null }
 
-  return { input, dialect, uppercase, indentSize, output, error, loading, copied, copy, clear }
+  function download() {
+    if (!output.value) return
+    triggerDownload(new Blob([output.value], { type: 'text/plain' }), 'formatted.sql')
+  }
+
+  return { input, dialect, uppercase, indentSize, output, error, loading, copied, copy, download, clear }
 }

@@ -19,10 +19,6 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Convert <span class="kb">Ctrl ↵</span>
         </button>
-        <button @click="downloadCsv" class="btn btn-secondary" :disabled="!output">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download
-        </button>
       </div>
       <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
@@ -67,6 +63,7 @@
         <div class="editor-card-header">
           <span class="editor-label">CSV Output</span>
           <div class="card-actions">
+            <button class="btn-xs" @click="downloadCsv" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>

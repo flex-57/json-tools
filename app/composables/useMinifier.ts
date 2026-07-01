@@ -1,4 +1,5 @@
 import { useClipboard } from './useClipboard'
+import { triggerDownload } from '../utils/download'
 
 export type MinifyMode = 'css' | 'html' | 'js'
 
@@ -208,5 +209,12 @@ export function useMinifier() {
 
   function clear() { input.value = ''; result.value = null }
 
-  return { input, mode, output, error, loading, copied, result, copy, clear }
+  function download() {
+    if (!output.value) return
+    const ext = mode.value
+    const mime = ext === 'js' ? 'application/javascript' : ext === 'css' ? 'text/css' : 'text/html'
+    triggerDownload(new Blob([output.value], { type: mime }), `minified.${ext}`)
+  }
+
+  return { input, mode, output, error, loading, copied, result, copy, download, clear }
 }

@@ -74,6 +74,7 @@
             <Transition name="fade-slot">
               <span v-if="output && !error" class="dialect-badge">{{ dialectLabel }}</span>
             </Transition>
+            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button
               @click="copy"
               class="btn-copy"
@@ -123,7 +124,7 @@ const DIALECTS: { value: SqlDialect; label: string }[] = [
   { value: 'tsql',       label: 'T-SQL'      },
 ]
 
-const { input, dialect, uppercase, indentSize, output, error, loading, copied, copy, clear } = useSqlFormatter()
+const { input, dialect, uppercase, indentSize, output, error, loading, copied, copy, download, clear } = useSqlFormatter()
 
 const inputFocused = ref(false)
 const isDragging = ref(false)

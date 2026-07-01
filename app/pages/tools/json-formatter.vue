@@ -63,6 +63,7 @@
         <div class="editor-card-header">
           <span class="editor-label">Output</span>
           <div class="card-actions">
+            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
@@ -87,7 +88,7 @@ useToolSeo(
   'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
 )
 
-const { input, output, error, isValid, indent, copied, format, minify, validate, copy, clear } = useJsonFormatter()
+const { input, output, error, isValid, indent, copied, format, minify, validate, copy, download, clear } = useJsonFormatter()
 useToolShortcut(format)
 useUrlInput(input, format)
 

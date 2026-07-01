@@ -61,11 +61,16 @@ export function useYamlToJson() {
 
   const { copied, copy } = useClipboard(() => output.value)
 
+  function download() {
+    if (!output.value) return
+    triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
+  }
+
   function clear() { input.value = ''; output.value = ''; error.value = null }
 
   onMounted(convert)
 
-  return { input, output, error, copied, convert, copy, clear }
+  return { input, output, error, copied, convert, copy, download, clear }
 }
 
 export function useJsonToYaml() {

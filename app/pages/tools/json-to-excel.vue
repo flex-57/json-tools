@@ -10,11 +10,6 @@
 
     <div class="toolbar">
       <div class="toolbar-left">
-        <button @click="download" class="btn btn-primary" :disabled="!input || loading">
-          <svg v-if="!loading" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg v-else class="spinner" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><path d="M7 2a5 5 0 015 5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-          {{ loading ? 'Generating...' : 'Download .xlsx' }}<span v-if="!loading" class="kb"> Ctrl ↵</span>
-        </button>
       </div>
       <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
@@ -45,7 +40,13 @@
       <div class="editor-card preview-card">
         <div class="editor-card-header">
           <span class="editor-label">Preview</span>
-          <span class="editor-hint">First 5 rows</span>
+          <div class="card-actions">
+            <span class="editor-hint">First 5 rows</span>
+            <button class="btn-xs" @click="download" :disabled="!input || loading">
+              <svg v-if="loading" class="spinner" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/><path d="M6 2a4 4 0 014 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {{ loading ? 'Generating…' : 'Download .xlsx' }}<span v-if="!loading" class="kb"> Ctrl ↵</span>
+            </button>
+          </div>
         </div>
         <div class="preview-body">
           <template v-if="preview.length > 0">

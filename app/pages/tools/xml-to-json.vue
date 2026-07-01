@@ -47,6 +47,7 @@
         <div class="editor-card-header">
           <span class="editor-label">JSON Output</span>
           <div class="card-actions">
+            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
@@ -69,7 +70,7 @@ useToolSeo(
   'XML to JSON Converter Online — Parse & Transform XML Free',
   'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
 )
-const { input, output, error, copied, convert, copy, clear } = useXmlToJson()
+const { input, output, error, copied, convert, copy, download, clear } = useXmlToJson()
 useToolShortcut(convert)
 useUrlInput(input, convert)
 

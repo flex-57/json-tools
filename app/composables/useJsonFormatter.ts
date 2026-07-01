@@ -1,5 +1,6 @@
 import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
+import { triggerDownload } from '../utils/download'
 
 export type IndentStyle = 2 | 4 | '\t'
 
@@ -97,7 +98,12 @@ export function useJsonFormatter() {
     isValid.value = null
   }
 
+  function download() {
+    if (!output.value) return
+    triggerDownload(new Blob([output.value], { type: 'application/json' }), 'formatted.json')
+  }
+
   onMounted(format)
 
-  return { input, output, error, isValid, indent, copied, format, minify, validate, copy, clear }
+  return { input, output, error, isValid, indent, copied, format, minify, validate, copy, download, clear }
 }

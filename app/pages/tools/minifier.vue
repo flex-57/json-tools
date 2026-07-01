@@ -53,6 +53,7 @@
             <Transition name="fade-slot">
               <span v-if="result && !error" class="savings-badge">-{{ result.savings }}%</span>
             </Transition>
+            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button
               @click="copy"
               class="btn-copy"
@@ -113,7 +114,7 @@ const MODES: { value: MinifyMode; label: string }[] = [
   { value: 'js',   label: 'JS'   },
 ]
 
-const { input, mode, output, error, loading, copied, result, copy, clear } = useMinifier()
+const { input, mode, output, error, loading, copied, result, copy, download, clear } = useMinifier()
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
