@@ -50,7 +50,8 @@ function callWorker<T>(payload: Record<string, unknown>, transfer: Transferable[
     port1.onmessage = (e: MessageEvent) => {
       clearTimeout(timer)
       port1.close()
-      resolve(e.data as T)
+      // e.data is undefined only if the worker called port.postMessage() with no args — guard defensively
+      resolve((e.data ?? { error: 'Worker returned empty response' }) as T)
     }
 
     port1.onmessageerror = () => {
@@ -59,7 +60,15 @@ function callWorker<T>(payload: Record<string, unknown>, transfer: Transferable[
       resolve({ error: 'Worker message error' } as unknown as T)
     }
 
-    worker.postMessage({ ...payload, port: port2 }, [port2, ...transfer])
+    try {
+      worker.postMessage({ ...payload, port: port2 }, [port2, ...transfer])
+    }
+    catch (postErr) {
+      clearTimeout(timer)
+      port1.close()
+      const msg = postErr instanceof Error ? postErr.message : String(postErr)
+      resolve({ error: `Worker postMessage failed: ${msg}` } as unknown as T)
+    }
   })
 }
 

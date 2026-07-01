@@ -40,13 +40,19 @@ addEventListener('message', async (e: MessageEvent) => {
       const ws = XLSX.utils.json_to_sheet(arr)
       const wb = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(wb, ws, sheetName)
-      const raw: Uint8Array = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
-      // Slice to own the exact range (avoids byteOffset issues on some SheetJS versions)
-      const buf = raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength)
-      port.postMessage({ blobBuffer: buf, error: null }, [buf])
+
+      // XLSX.write type:'array' → Uint8Array.
+      // new Uint8Array(src) creates a full copy with offset=0 and its own ArrayBuffer,
+      // avoiding any byteOffset surprises before transfer.
+      const out = new Uint8Array(XLSX.write(wb, { bookType: 'xlsx', type: 'array' }) as Uint8Array)
+      port.postMessage({ blobBuffer: out.buffer, error: null }, [out.buffer])
     }
   }
   catch (err) {
-    port.postMessage({ error: (err as Error).message })
+    // Guard: some environments throw non-Error values; convert to string defensively.
+    const message = err instanceof Error ? err.message : String(err)
+    // eslint-disable-next-line no-console
+    console.error('[excel.worker]', message, err)
+    port.postMessage({ error: message })
   }
 })
