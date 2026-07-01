@@ -60,7 +60,7 @@
             </div>
             <button class="btn-xs" @click="exportAsPdf">PDF</button>
           </template>
-          <button v-else-if="viewMode === 'graph' && graphNodes.length" class="btn-xs" @click="exportGraphAsPng">PNG</button>
+          <button v-else-if="viewMode === 'graph' && graphNodes.length" class="btn-xs" @click="exportGraphAsPdf">PDF</button>
         </div>
 
         <!-- Tree view -->
@@ -212,22 +212,49 @@ async function exportAsPdf() {
   const saved = new Set(collapsed.value)
   expandAll()
   await nextTick()
-  window.addEventListener('afterprint', () => { collapsed.value = saved }, { once: true })
-  window.print()
+
+  const treeWrap = document.querySelector('.tree-wrap') as HTMLElement
+  if (!treeWrap) { collapsed.value = saved; return }
+
+  // Clone into a detached container so overflow from .output-body doesn't clip
+  const container = document.createElement('div')
+  container.style.cssText = `position:fixed;top:-9999px;left:-9999px;background:#1A1B1E;padding:12px;width:${treeWrap.offsetWidth + 24}px;`
+  container.appendChild(treeWrap.cloneNode(true))
+  document.body.appendChild(container)
+
+  try {
+    const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
+    const dataUrl = await toPng(container, { pixelRatio: 2, backgroundColor: '#1A1B1E' })
+    const img = new Image()
+    img.src = dataUrl
+    await new Promise<void>(r => { img.onload = () => r() })
+    const w = img.naturalWidth / 2
+    const h = img.naturalHeight / 2
+    const pdf = new jsPDF({ unit: 'px', format: [w, h] })
+    pdf.addImage(dataUrl, 'PNG', 0, 0, w, h)
+    pdf.save('json-tree.pdf')
+  } finally {
+    document.body.removeChild(container)
+    collapsed.value = saved
+  }
 }
 
-async function exportGraphAsPng() {
+async function exportGraphAsPdf() {
   const el = document.querySelector('.vf-instance') as HTMLElement
   if (!el) return
   const controls = el.querySelector('.vue-flow__controls') as HTMLElement | null
   if (controls) controls.style.visibility = 'hidden'
   try {
-    const { toPng } = await import('html-to-image')
+    const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
     const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: '#1A1B1E' })
-    const a = document.createElement('a')
-    a.href = dataUrl
-    a.download = 'json-graph.png'
-    a.click()
+    const img = new Image()
+    img.src = dataUrl
+    await new Promise<void>(r => { img.onload = () => r() })
+    const w = img.naturalWidth / 2
+    const h = img.naturalHeight / 2
+    const pdf = new jsPDF({ unit: 'px', format: [w, h] })
+    pdf.addImage(dataUrl, 'PNG', 0, 0, w, h)
+    pdf.save('json-graph.pdf')
   } finally {
     if (controls) controls.style.visibility = ''
   }
@@ -260,32 +287,6 @@ const seoCards = [
 </script>
 
 <style>
-/* ── Print styles — tree PDF export ──────────────────────────────── */
-@media print {
-  header, footer, nav,
-  .page-header, .toolbar, .about { display: none !important; }
-  .tree-layout { display: block !important; }
-  .tree-layout > .editor-card:first-child { display: none !important; }
-  .output-header { display: none !important; }
-  body { background: white !important; }
-  .output-card { border: none !important; box-shadow: none !important; min-height: auto !important; }
-  .output-body {
-    background: white !important;
-    height: auto !important;
-    overflow: visible !important;
-    max-height: none !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  .tree-wrap { overflow: visible !important; }
-  :root {
-    --c-bg: #ffffff !important; --c-card: #ffffff !important;
-    --c-subtle: #f5f4f0 !important; --c-border: #E8E5DF !important;
-    --c-t1: #1A1916 !important; --c-t2: #3D3833 !important;
-    --c-t3: #6B6560 !important; --c-t4: #9E9892 !important;
-  }
-}
-
 /* Vue Flow global overrides — must be unscoped */
 .vue-flow__controls { background: #1C2330 !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 8px !important; overflow: hidden; }
 .vue-flow__controls-button { background: #1C2330 !important; border-color: rgba(255,255,255,0.08) !important; color: #8B949E !important; }

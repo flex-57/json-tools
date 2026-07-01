@@ -35,6 +35,7 @@ export interface VfEdge {
   target: string
   type: string
   style: object
+  markerEnd?: object
 }
 
 const BODY_W   = 230
@@ -63,6 +64,7 @@ function edge(src: string, tgt: string): VfEdge {
     source: src, target: tgt,
     type: 'smoothstep',
     style: { stroke: '#3D4349', strokeWidth: 1.5 },
+    markerEnd: { type: 'arrowclosed', color: '#3D4349', width: 18, height: 18 },
   }
 }
 
