@@ -257,7 +257,8 @@ async function exportGraphAsPdf() {
 
   try {
     const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
-    const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: '#1A1B1E' })
+    const filter = (node: Node) => (node as Element).tagName?.toLowerCase() !== 'defs'
+    const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: '#1A1B1E', filter })
     const img = new Image()
     img.src = dataUrl
     await new Promise<void>(r => { img.onload = () => r() })
