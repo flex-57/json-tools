@@ -8,22 +8,17 @@
       <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" />
     </div>
 
-    <div class="toolbar">
-      <div class="toolbar-right" aria-live="polite">
-        <Transition name="status">
-          <div v-if="error && error !== 'empty'" class="status-pill status-pill--invalid">
-            <span class="status-dot" /><span class="status-text">{{ error }}</span>
-          </div>
-        </Transition>
-      </div>
-    </div>
-
     <div class="editors">
       <div class="editor-card" :class="{ 'editor-card--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="editor-card-header">
           <span class="editor-label">JSON Input</span>
-          <div class="card-actions">
-            <span class="editor-hint">Array of objects · or drop a .json file</span>
+          <div class="card-actions" aria-live="polite">
+            <Transition name="status">
+              <div v-if="error && error !== 'empty'" class="status-pill status-pill--invalid">
+                <span class="status-dot" /><span class="status-text">{{ error }}</span>
+              </div>
+              <span v-else class="editor-hint">Array of objects · or drop a .json file</span>
+            </Transition>
             <button class="btn-xs" @click="clear">Clear</button>
           </div>
         </div>
