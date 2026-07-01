@@ -30,7 +30,7 @@
           {{ copied ? 'Copied!' : 'Copy' }}
         </button>
       </div>
-      <div class="toolbar-right">
+      <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
           <div v-if="isValid !== null" :class="['status-pill', isValid ? 'status-pill--valid' : 'status-pill--invalid']">
             <span class="status-dot" />

@@ -29,7 +29,7 @@
           Download
         </button>
       </div>
-      <div class="toolbar-right">
+      <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
           <div v-if="rowCount > 0" class="status-pill status-pill--valid">
             <span class="status-dot" />

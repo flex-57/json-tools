@@ -20,7 +20,7 @@
           {{ copied ? 'Copied!' : 'Copy JSON' }}
         </button>
       </div>
-      <div class="toolbar-right">
+      <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
           <div v-if="error && error !== 'empty'" class="status-pill status-pill--invalid">
             <span class="status-dot" /><span class="status-text">{{ error }}</span>
