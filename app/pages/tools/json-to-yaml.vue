@@ -80,16 +80,10 @@
 
 <script setup lang="ts">
 import { useJsonToYaml } from '~/composables/useYamlJson'
-useSeoMeta({
-  title: 'JSON to YAML Converter — Export JSON as YAML Config Online',
-  description: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
-  ogTitle: 'JSON to YAML Converter — Export JSON as YAML Config Online',
-  ogDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
-  twitterTitle: 'JSON to YAML Converter — Export JSON as YAML Config Online',
-  twitterDescription: 'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/json-to-yaml.png',
-  twitterImage: 'https://jsontools.space/og/json-to-yaml.png',
-})
+useToolSeo(
+  'JSON to YAML Converter — Export JSON as YAML Config Online',
+  'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
+)
 const { input, output, error, indent, copied, convert, copy, download, clear } = useJsonToYaml()
 useToolShortcut(convert)
 useUrlInput(input, convert)

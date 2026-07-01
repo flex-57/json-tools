@@ -86,16 +86,10 @@
 <script setup lang="ts">
 import { useJsonFormatter } from '~/composables/useJsonFormatter'
 
-useSeoMeta({
-  title: 'JSON Formatter & Validator — Beautify & Validate JSON Online',
-  description: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
-  ogTitle: 'JSON Formatter & Validator — Beautify & Validate JSON Online',
-  ogDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
-  twitterTitle: 'JSON Formatter & Validator — Beautify & Validate JSON Online',
-  twitterDescription: 'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
-  ogImage: 'https://jsontools.space/og/json-formatter.png',
-  twitterImage: 'https://jsontools.space/og/json-formatter.png',
-})
+useToolSeo(
+  'JSON Formatter & Validator — Beautify & Validate JSON Online',
+  'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
+)
 
 const { input, output, error, isValid, indent, copied, format, minify, validate, copy, clear } = useJsonFormatter()
 useToolShortcut(format)

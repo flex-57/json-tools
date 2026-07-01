@@ -93,16 +93,10 @@
 <script setup lang="ts">
 import { useCsvToJson } from '~/composables/useCsvJson'
 
-useSeoMeta({
-  title: 'CSV to JSON Converter Online — Instant, No Upload Required',
-  description: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
-  ogTitle: 'CSV to JSON Converter Online — Instant, No Upload Required',
-  ogDescription: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
-  twitterTitle: 'CSV to JSON Converter Online — Instant, No Upload Required',
-  twitterDescription: 'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/csv-to-json.png',
-  twitterImage: 'https://jsontools.space/og/csv-to-json.png',
-})
+useToolSeo(
+  'CSV to JSON Converter Online — Instant, No Upload Required',
+  'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
+)
 
 const seoCards = [
   {

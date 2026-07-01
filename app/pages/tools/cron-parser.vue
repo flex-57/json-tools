@@ -99,16 +99,10 @@
 <script setup lang="ts">
 import { useCronParser } from '~/composables/useCronParser'
 
-useSeoMeta({
-  title: 'Cron Expression Parser — Explain Cron Jobs in Plain English',
-  description: 'Parse and validate cron expressions. See the schedule in plain English and preview the next 5 execution dates. Free, client-side, no data sent to servers.',
-  ogTitle: 'Cron Expression Parser — Explain Cron Jobs in Plain English',
-  ogDescription: 'Parse and validate cron expressions. See the schedule in plain English and preview the next 5 execution dates. Free, client-side, no data sent to servers.',
-  twitterTitle: 'Cron Expression Parser — Explain Cron Jobs in Plain English',
-  twitterDescription: 'Parse and validate cron expressions. See the schedule in plain English and preview the next 5 execution dates. Free, client-side, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/cron-parser.png',
-  twitterImage: 'https://jsontools.space/og/cron-parser.png',
-})
+useToolSeo(
+  'Cron Expression Parser — Explain Cron Jobs in Plain English',
+  'Parse and validate cron expressions. See the schedule in plain English and preview the next 5 execution dates. Free, client-side, no data sent to servers.',
+)
 
 const { expression, error, description, nextExecutions } = useCronParser()
 

@@ -110,16 +110,10 @@
 <script setup lang="ts">
 import { useClipboard } from '../../composables/useClipboard'
 
-useSeoMeta({
-  title: 'Password Generator — Secure & Random | JSON Tools',
-  description: 'Generate strong, random passwords with custom length, uppercase, lowercase, numbers and symbols. Uses crypto.getRandomValues — 100% client-side, nothing sent to servers.',
-  ogTitle: 'Password Generator — Secure & Random | JSON Tools',
-  ogDescription: 'Generate strong, random passwords with custom length, uppercase, lowercase, numbers and symbols. Uses crypto.getRandomValues — 100% client-side, nothing sent to servers.',
-  twitterTitle: 'Password Generator — Secure & Random | JSON Tools',
-  twitterDescription: 'Generate strong, random passwords with custom length, uppercase, lowercase, numbers and symbols. Uses crypto.getRandomValues — 100% client-side, nothing sent to servers.',
-  ogImage: 'https://jsontools.space/og/password-generator.png',
-  twitterImage: 'https://jsontools.space/og/password-generator.png',
-})
+useToolSeo(
+  'Password Generator — Secure & Random | JSON Tools',
+  'Generate strong, random passwords with custom length, uppercase, lowercase, numbers and symbols. Uses crypto.getRandomValues — 100% client-side, nothing sent to servers.',
+)
 
 /* ── Options ────────────────────────────────────────────────── */
 const length       = ref(16)

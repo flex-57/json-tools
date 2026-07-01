@@ -106,16 +106,10 @@
 <script setup lang="ts">
 import { useRegexTester } from '~/composables/useRegexTester'
 
-useSeoMeta({
-  title: 'Regex Tester Online — Test & Debug Regular Expressions',
-  description: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
-  ogTitle: 'Regex Tester Online — Test & Debug Regular Expressions',
-  ogDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
-  twitterTitle: 'Regex Tester Online — Test & Debug Regular Expressions',
-  twitterDescription: 'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/regex-tester.png',
-  twitterImage: 'https://jsontools.space/og/regex-tester.png',
-})
+useToolSeo(
+  'Regex Tester Online — Test & Debug Regular Expressions',
+  'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
+)
 
 const { pattern, flags, input, regexError, matches, highlightedHtml, clear } = useRegexTester()
 

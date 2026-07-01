@@ -68,16 +68,10 @@
 
 <script setup lang="ts">
 import { useXmlToJson } from '~/composables/useXmlJson'
-useSeoMeta({
-  title: 'XML to JSON Converter Online — Parse & Transform XML Free',
-  description: 'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
-  ogTitle: 'XML to JSON Converter Online — Parse & Transform XML Free',
-  ogDescription: 'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
-  twitterTitle: 'XML to JSON Converter Online — Parse & Transform XML Free',
-  twitterDescription: 'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/xml-to-json.png',
-  twitterImage: 'https://jsontools.space/og/xml-to-json.png',
-})
+useToolSeo(
+  'XML to JSON Converter Online — Parse & Transform XML Free',
+  'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
+)
 const { input, output, error, copied, convert, copy, clear } = useXmlToJson()
 useToolShortcut(convert)
 useUrlInput(input, convert)

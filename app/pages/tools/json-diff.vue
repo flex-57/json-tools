@@ -100,16 +100,10 @@
 <script setup lang="ts">
 import { useJsonDiff } from '~/composables/useJsonDiff'
 
-useSeoMeta({
-  title: 'JSON Diff Tool — Compare & Highlight JSON Differences Online',
-  description: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
-  ogTitle: 'JSON Diff Tool — Compare & Highlight JSON Differences Online',
-  ogDescription: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
-  twitterTitle: 'JSON Diff Tool — Compare & Highlight JSON Differences Online',
-  twitterDescription: 'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/json-diff.png',
-  twitterImage: 'https://jsontools.space/og/json-diff.png',
-})
+useToolSeo(
+  'JSON Diff Tool — Compare & Highlight JSON Differences Online',
+  'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
+)
 
 const { left, right, result, swap } = useJsonDiff()
 

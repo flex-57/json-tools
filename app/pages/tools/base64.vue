@@ -99,16 +99,10 @@
 <script setup lang="ts">
 import { useBase64 } from '~/composables/useBase64'
 
-useSeoMeta({
-  title: 'Base64 Encode & Decode Online — Text & File Converter',
-  description: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
-  ogTitle: 'Base64 Encode & Decode Online — Text & File Converter',
-  ogDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
-  twitterTitle: 'Base64 Encode & Decode Online — Text & File Converter',
-  twitterDescription: 'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/base64.png',
-  twitterImage: 'https://jsontools.space/og/base64.png',
-})
+useToolSeo(
+  'Base64 Encode & Decode Online — Text & File Converter',
+  'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
+)
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useBase64()
 useUrlInput(input)

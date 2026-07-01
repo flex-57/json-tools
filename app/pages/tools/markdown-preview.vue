@@ -69,16 +69,10 @@ import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
 import { useMarkdown } from '~/composables/useMarkdown'
 
-useSeoMeta({
-  title: 'Markdown Preview — Render & Preview Markdown Online Free',
-  description: 'Write or paste Markdown and see the rendered HTML preview instantly. Supports CommonMark — headings, code blocks, tables, and more. Free, client-side, no signup.',
-  ogTitle: 'Markdown Preview — Render & Preview Markdown Online Free',
-  ogDescription: 'Write or paste Markdown and see the rendered HTML preview instantly. Supports CommonMark — headings, code blocks, tables, and more. Free, client-side, no signup.',
-  twitterTitle: 'Markdown Preview — Render & Preview Markdown Online Free',
-  twitterDescription: 'Write or paste Markdown and see the rendered HTML preview instantly. Supports CommonMark — headings, code blocks, tables, and more. Free, client-side, no signup.',
-  ogImage: 'https://jsontools.space/og/markdown-preview.png',
-  twitterImage: 'https://jsontools.space/og/markdown-preview.png',
-})
+useToolSeo(
+  'Markdown Preview — Render & Preview Markdown Online Free',
+  'Write or paste Markdown and see the rendered HTML preview instantly. Supports CommonMark — headings, code blocks, tables, and more. Free, client-side, no signup.',
+)
 
 const { input, html, copied, copy, clear } = useMarkdown()
 const { isDark } = useColorMode()

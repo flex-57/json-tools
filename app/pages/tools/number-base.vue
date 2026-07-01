@@ -76,16 +76,10 @@
 <script setup lang="ts">
 import { useNumberBase } from '~/composables/useNumberBase'
 
-useSeoMeta({
-  title: 'Number Base Converter — Binary, Octal, Decimal, Hex',
-  description: 'Convert numbers between binary (base 2), octal (base 8), decimal (base 10) and hexadecimal (base 16) instantly. Supports 0x, 0b, 0o prefixes and negative numbers. Free, no data sent to servers.',
-  ogTitle: 'Number Base Converter — Binary, Octal, Decimal, Hex',
-  ogDescription: 'Convert numbers between binary (base 2), octal (base 8), decimal (base 10) and hexadecimal (base 16) instantly. Supports 0x, 0b, 0o prefixes and negative numbers. Free, no data sent to servers.',
-  twitterTitle: 'Number Base Converter — Binary, Octal, Decimal, Hex',
-  twitterDescription: 'Convert numbers between binary (base 2), octal (base 8), decimal (base 10) and hexadecimal (base 16) instantly. Supports 0x, 0b, 0o prefixes and negative numbers. Free, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/number-base.png',
-  twitterImage: 'https://jsontools.space/og/number-base.png',
-})
+useToolSeo(
+  'Number Base Converter — Binary, Octal, Decimal, Hex',
+  'Convert numbers between binary (base 2), octal (base 8), decimal (base 10) and hexadecimal (base 16) instantly. Supports 0x, 0b, 0o prefixes and negative numbers. Free, no data sent to servers.',
+)
 
 const { input, results, error, detectedBase, bitInfo, copiedKey, copy, clear } = useNumberBase()
 

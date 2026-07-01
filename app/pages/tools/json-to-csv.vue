@@ -86,16 +86,10 @@
 <script setup lang="ts">
 import { useJsonToCsv } from '~/composables/useCsvJson'
 
-useSeoMeta({
-  title: 'JSON to CSV Converter — Export JSON Arrays to CSV Free',
-  description: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
-  ogTitle: 'JSON to CSV Converter — Export JSON Arrays to CSV Free',
-  ogDescription: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
-  twitterTitle: 'JSON to CSV Converter — Export JSON Arrays to CSV Free',
-  twitterDescription: 'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/json-to-csv.png',
-  twitterImage: 'https://jsontools.space/og/json-to-csv.png',
-})
+useToolSeo(
+  'JSON to CSV Converter — Export JSON Arrays to CSV Free',
+  'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
+)
 
 const { input, output, error, rowCount, delimiter, copied, convert, copy, downloadCsv, clear } = useJsonToCsv()
 useToolShortcut(convert)

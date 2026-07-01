@@ -98,16 +98,10 @@
 <script setup lang="ts">
 import { useJwtGenerator } from '~/composables/useJwtGenerator'
 
-useSeoMeta({
-  title: 'JWT Generator — Create Signed JSON Web Tokens Online',
-  description: 'Generate signed JSON Web Tokens (JWT) in your browser. Supports HS256, HS384 and HS512. Set custom payload claims, secret key and expiry. Free, secret never sent to servers.',
-  ogTitle: 'JWT Generator — Create Signed JSON Web Tokens Online',
-  ogDescription: 'Generate signed JSON Web Tokens (JWT) in your browser. Supports HS256, HS384 and HS512. Set custom payload claims, secret key and expiry. Free, secret never sent to servers.',
-  twitterTitle: 'JWT Generator — Create Signed JSON Web Tokens Online',
-  twitterDescription: 'Generate signed JSON Web Tokens (JWT) in your browser. Supports HS256, HS384 and HS512. Set custom payload claims, secret key and expiry. Free, secret never sent to servers.',
-  ogImage: 'https://jsontools.space/og/jwt-generator.png',
-  twitterImage: 'https://jsontools.space/og/jwt-generator.png',
-})
+useToolSeo(
+  'JWT Generator — Create Signed JSON Web Tokens Online',
+  'Generate signed JSON Web Tokens (JWT) in your browser. Supports HS256, HS384 and HS512. Set custom payload claims, secret key and expiry. Free, secret never sent to servers.',
+)
 
 const { algorithm, payload, secret, token, parts, error, copied, payloadValid, copy, clear, setIatNow, addExp } = useJwtGenerator()
 

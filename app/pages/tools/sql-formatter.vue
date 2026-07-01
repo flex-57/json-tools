@@ -110,16 +110,10 @@
 <script setup lang="ts">
 import { useSqlFormatter, type SqlDialect } from '~/composables/useSqlFormatter'
 
-useSeoMeta({
-  title: 'SQL Formatter — Free Online SQL Beautifier | JSON Tools',
-  description: 'Format and beautify SQL queries instantly in your browser. Supports MySQL, PostgreSQL, SQLite, T-SQL (SQL Server), and standard SQL. Choose indent size and keyword case. Free, no data sent to servers.',
-  ogTitle: 'SQL Formatter — Free Online SQL Beautifier | JSON Tools',
-  ogDescription: 'Format and beautify SQL queries instantly in your browser. Supports MySQL, PostgreSQL, SQLite, T-SQL (SQL Server), and standard SQL. Choose indent size and keyword case. Free, no data sent to servers.',
-  twitterTitle: 'SQL Formatter — Free Online SQL Beautifier | JSON Tools',
-  twitterDescription: 'Format and beautify SQL queries instantly in your browser. Supports MySQL, PostgreSQL, SQLite, T-SQL (SQL Server), and standard SQL. Choose indent size and keyword case. Free, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/sql-formatter.png',
-  twitterImage: 'https://jsontools.space/og/sql-formatter.png',
-})
+useToolSeo(
+  'SQL Formatter — Free Online SQL Beautifier | JSON Tools',
+  'Format and beautify SQL queries instantly in your browser. Supports MySQL, PostgreSQL, SQLite, T-SQL (SQL Server), and standard SQL. Choose indent size and keyword case. Free, no data sent to servers.',
+)
 
 const DIALECTS: { value: SqlDialect; label: string }[] = [
   { value: 'sql',        label: 'SQL'        },

@@ -103,16 +103,10 @@
 <script setup lang="ts">
 import { useUrlEncode } from '~/composables/useUrlEncode'
 
-useSeoMeta({
-  title: 'URL Encode & Decode Online — Percent-Encoding Tool',
-  description: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
-  ogTitle: 'URL Encode & Decode Online — Percent-Encoding Tool',
-  ogDescription: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
-  twitterTitle: 'URL Encode & Decode Online — Percent-Encoding Tool',
-  twitterDescription: 'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/url-encode.png',
-  twitterImage: 'https://jsontools.space/og/url-encode.png',
-})
+useToolSeo(
+  'URL Encode & Decode Online — Percent-Encoding Tool',
+  'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
+)
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useUrlEncode()
 useUrlInput(input)

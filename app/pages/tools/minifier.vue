@@ -102,16 +102,10 @@
 import { useMinifier, type MinifyMode } from '~/composables/useMinifier'
 import type { EditorLang } from '~/components/JsonEditor.vue'
 
-useSeoMeta({
-  title: 'CSS / HTML / JS Minifier — Compress Code Online Free',
-  description: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
-  ogTitle: 'CSS / HTML / JS Minifier — Compress Code Online Free',
-  ogDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
-  twitterTitle: 'CSS / HTML / JS Minifier — Compress Code Online Free',
-  twitterDescription: 'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/minifier.png',
-  twitterImage: 'https://jsontools.space/og/minifier.png',
-})
+useToolSeo(
+  'CSS / HTML / JS Minifier — Compress Code Online Free',
+  'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
+)
 
 const MODES: { value: MinifyMode; label: string }[] = [
   { value: 'css',  label: 'CSS'  },

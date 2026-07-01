@@ -180,16 +180,10 @@
 <script setup lang="ts">
 import { useClipboard } from '../../composables/useClipboard'
 
-useSeoMeta({
-  title: 'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
-  description: 'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
-  ogTitle: 'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
-  ogDescription: 'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
-  twitterTitle: 'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
-  twitterDescription: 'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
-  ogImage: 'https://jsontools.space/og/color.png',
-  twitterImage: 'https://jsontools.space/og/color.png',
-})
+useToolSeo(
+  'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
+  'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
+)
 
 const {
   h, s, b, a,

@@ -68,16 +68,10 @@
 <script setup lang="ts">
 import { useClipboard } from '../../composables/useClipboard'
 
-useSeoMeta({
-  title: 'UUID Generator — Random UUID v4 | JSON Tools',
-  description: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
-  ogTitle: 'UUID Generator — Random UUID v4 | JSON Tools',
-  ogDescription: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
-  twitterTitle: 'UUID Generator — Random UUID v4 | JSON Tools',
-  twitterDescription: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
-  ogImage: 'https://jsontools.space/og/uuid.png',
-  twitterImage: 'https://jsontools.space/og/uuid.png',
-})
+useToolSeo(
+  'UUID Generator — Random UUID v4 | JSON Tools',
+  'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
+)
 
 const FORMATS = [
   { id: 'standard', label: 'Standard' },

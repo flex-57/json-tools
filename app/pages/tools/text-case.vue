@@ -64,16 +64,10 @@
 <script setup lang="ts">
 import { useTextCase } from '~/composables/useTextCase'
 
-useSeoMeta({
-  title: 'Text Case Converter — camelCase, snake_case, kebab-case & more',
-  description: 'Convert text between camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, Title Case and more. Auto-detects input format. Free, instant, no data sent to servers.',
-  ogTitle: 'Text Case Converter — camelCase, snake_case, kebab-case & more',
-  ogDescription: 'Convert text between camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, Title Case and more. Auto-detects input format. Free, instant, no data sent to servers.',
-  twitterTitle: 'Text Case Converter — camelCase, snake_case, kebab-case & more',
-  twitterDescription: 'Convert text between camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, Title Case and more. Auto-detects input format. Free, instant, no data sent to servers.',
-  ogImage: 'https://jsontools.space/og/text-case.png',
-  twitterImage: 'https://jsontools.space/og/text-case.png',
-})
+useToolSeo(
+  'Text Case Converter — camelCase, snake_case, kebab-case & more',
+  'Convert text between camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, Title Case and more. Auto-detects input format. Free, instant, no data sent to servers.',
+)
 
 const { input, results, wordCount, copiedKey, copy, clear } = useTextCase()
 

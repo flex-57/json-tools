@@ -101,16 +101,10 @@
 <script setup lang="ts">
 import { useJsonToTs } from '~/composables/useJsonToTs'
 
-useSeoMeta({
-  title: 'JSON to TypeScript Generator — Interfaces & Zod Schemas Online',
-  description: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
-  ogTitle: 'JSON to TypeScript Generator — Interfaces & Zod Schemas Online',
-  ogDescription: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
-  twitterTitle: 'JSON to TypeScript Generator — Interfaces & Zod Schemas Online',
-  twitterDescription: 'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
-  ogImage: 'https://jsontools.space/og/json-to-ts.png',
-  twitterImage: 'https://jsontools.space/og/json-to-ts.png',
-})
+useToolSeo(
+  'JSON to TypeScript Generator — Interfaces & Zod Schemas Online',
+  'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
+)
 
 const { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict } = useJsonToTs()
 
