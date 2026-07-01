@@ -157,7 +157,7 @@ const seoCards = [
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 10px 16px;
+  padding: 11px 20px;
   border-bottom: 1px solid var(--c-border-s);
   transition: background 0.12s;
 }

@@ -202,9 +202,9 @@ const seoCards = [
   min-width: 0;
   position: relative;
   z-index: 1;
-  padding: 5px 10px;
+  padding: 5px 16px;
   border-radius: 6px;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
   font-family: inherit;
   border: none;

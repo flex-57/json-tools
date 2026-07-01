@@ -161,23 +161,24 @@ const seoCards = [
 .mode-toggle {
   position: relative;
   display: flex;
-  background: var(--c-subtle);
+  background: var(--c-card);
   border: 1px solid var(--c-border);
   border-radius: 8px;
-  padding: 2px;
+  padding: 3px;
   gap: 0;
   min-width: 210px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .mode-indicator {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: calc(50% - 2px);
-  bottom: 2px;
-  background: #1A1916;
+  top: 3px; bottom: 3px; left: 3px;
+  width: calc(50% - 3px);
+  background: linear-gradient(135deg, var(--c-brand) 0%, #FB923C 100%);
   border-radius: 6px;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 1px 4px rgb(var(--c-brand-rgb) / 0.4), 0 2px 10px rgb(var(--c-brand-rgb) / 0.15);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 .mode-indicator--right {
   transform: translateX(100%);
@@ -189,14 +190,15 @@ const seoCards = [
   position: relative;
   z-index: 1;
   border: none;
-  background: transparent;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 5px 16px;
   border-radius: 6px;
   cursor: pointer;
   color: var(--c-t4);
-  transition: color 0.15s;
+  transition: color 0.2s;
   white-space: nowrap;
 }
 .mode-btn--active { color: white; }

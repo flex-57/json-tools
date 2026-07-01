@@ -157,13 +157,13 @@ const seoCards = [
 .result-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   padding: 11px 20px;
   border-bottom: 1px solid var(--c-border-s);
-  transition: background 0.1s;
+  transition: background 0.12s;
 }
 .result-row:last-child { border-bottom: none; }
-.result-row:hover { background: var(--c-card-alt); }
+.result-row:not(.result-row--empty):hover { background: var(--c-faint); }
 
 .result-label {
   font-size: 11px;

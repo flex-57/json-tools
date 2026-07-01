@@ -413,12 +413,12 @@ const recentTools = computed(() =>
   border: 1px solid var(--c-border);
   border-radius: 10px;
   text-decoration: none;
-  transition: background 0.15s, border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .tool-card:hover {
-  background: rgb(var(--c-brand-rgb) / 0.05);
-  border-color: rgb(var(--c-brand-rgb) / 0.3);
+  border-color: var(--c-brand);
+  box-shadow: 0 0 0 3px rgb(var(--c-brand-rgb) / 0.08);
 }
 
 .tool-icon {

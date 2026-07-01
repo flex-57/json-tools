@@ -149,6 +149,7 @@ const seoCards = [
   border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 3px;
+  gap: 0;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .mode-indicator {
@@ -165,6 +166,7 @@ const seoCards = [
 
 .mode-btn {
   flex: 1;
+  min-width: 0;
   position: relative;
   z-index: 1;
   padding: 5px 16px;

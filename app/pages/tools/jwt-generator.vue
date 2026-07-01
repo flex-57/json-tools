@@ -142,7 +142,6 @@ const seoCards = [
   gap: 0;
   min-width: 210px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  margin-top: 4px;
 }
 .mode-indicator {
   position: absolute;
@@ -159,11 +158,11 @@ const seoCards = [
   min-width: 0;
   position: relative;
   z-index: 1;
-  padding: 5px 14px;
+  padding: 5px 16px;
   border-radius: 6px;
-  font-size: 12.5px;
-  font-weight: 600;
-  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
   border: none;
   background: none;
   color: var(--c-t4);

@@ -88,8 +88,8 @@ production:
     <section class="guide-section">
       <h2>When to use each</h2>
       <div class="use-cards">
-        <div class="use-card use-card--json">
-          <div class="use-card-head">Choose JSON when…</div>
+        <div class="comparison-card comparison-card--json">
+          <div class="comparison-card-head">Choose JSON when…</div>
           <ul>
             <li>Building or consuming an <strong>API</strong> — JSON is the standard</li>
             <li>The data is <strong>machine-generated</strong> and machine-consumed</li>
@@ -98,8 +98,8 @@ production:
             <li>Examples: <code>package.json</code>, <code>tsconfig.json</code>, REST API responses</li>
           </ul>
         </div>
-        <div class="use-card use-card--yaml">
-          <div class="use-card-head">Choose YAML when…</div>
+        <div class="comparison-card comparison-card--yaml">
+          <div class="comparison-card-head">Choose YAML when…</div>
           <ul>
             <li>Humans will <strong>read and edit</strong> the file regularly</li>
             <li>You need <strong>comments</strong> to document the config</li>
@@ -221,24 +221,24 @@ const DIFF_ROWS = [
   margin: 12px 0;
 }
 
-.use-card {
+.comparison-card {
   border: 1px solid var(--c-border);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   font-size: 13.5px;
 }
 
-.use-card-head {
+.comparison-card-head {
   padding: 10px 16px;
   font-size: 12px;
   font-weight: 700;
   border-bottom: 1px solid var(--c-border);
 }
 
-.use-card--json .use-card-head { background: rgba(99, 179, 237, 0.08); color: #63B3ED; }
-.use-card--yaml .use-card-head { background: rgba(104, 211, 145, 0.08); color: #68D391; }
+.comparison-card--json .comparison-card-head { background: rgba(99, 179, 237, 0.08); color: #63B3ED; }
+.comparison-card--yaml .comparison-card-head { background: rgba(104, 211, 145, 0.08); color: #68D391; }
 
-.use-card ul {
+.comparison-card ul {
   margin: 0;
   padding: 12px 16px 12px 28px;
   display: flex;
@@ -246,9 +246,9 @@ const DIFF_ROWS = [
   gap: 8px;
 }
 
-.use-card li { color: var(--c-t3); line-height: 1.6; font-size: 13px; }
+.comparison-card li { color: var(--c-t3); line-height: 1.6; font-size: 13px; }
 
-.use-card code {
+.comparison-card code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
   background: rgb(var(--c-brand-rgb) / 0.08);
