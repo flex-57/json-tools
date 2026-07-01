@@ -240,25 +240,9 @@ async function exportGraphAsPdf() {
   const controls = el.querySelector('.vue-flow__controls') as HTMLElement | null
   if (controls) controls.style.visibility = 'hidden'
 
-  // Force marker colors via both SVG attribute and inline style — html-to-image
-  // doesn't reliably inherit computed styles for elements inside <defs>
-  const markerShapes = Array.from(
-    el.querySelectorAll('defs marker polyline, defs marker path')
-  ) as SVGElement[]
-  const savedMarkers = markerShapes.map(s => ({
-    fill: s.getAttribute('fill'), stroke: s.getAttribute('stroke')
-  }))
-  markerShapes.forEach(s => {
-    s.setAttribute('fill', '#3D4349')
-    s.setAttribute('stroke', '#3D4349')
-    s.style.fill = '#3D4349'
-    s.style.stroke = '#3D4349'
-  })
-
   try {
     const [{ toPng }, { default: jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
-    const filter = (node: Node) => (node as Element).tagName?.toLowerCase() !== 'defs'
-    const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: '#1A1B1E', filter })
+    const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: '#000000' })
     const img = new Image()
     img.src = dataUrl
     await new Promise<void>(r => { img.onload = () => r() })
@@ -269,13 +253,6 @@ async function exportGraphAsPdf() {
     pdf.addImage(dataUrl, 'PNG', 0, 0, wMm, hMm)
     pdf.save('json-graph.pdf')
   } finally {
-    markerShapes.forEach((s, i) => {
-      const sv = savedMarkers[i]
-      sv.fill !== null ? s.setAttribute('fill', sv.fill!) : s.removeAttribute('fill')
-      sv.stroke !== null ? s.setAttribute('stroke', sv.stroke!) : s.removeAttribute('stroke')
-      s.style.fill = ''
-      s.style.stroke = ''
-    })
     if (controls) controls.style.visibility = ''
   }
 }
