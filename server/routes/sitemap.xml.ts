@@ -1,27 +1,31 @@
+import { GUIDES } from '~/data/guides'
+
+interface SitemapUrl {
+  loc: string
+  priority?: string
+  changefreq?: string
+  lastmod?: string
+}
+
 export default defineEventHandler((event) => {
   const today = new Date().toISOString().split('T')[0]
 
-  const urls = [
+  // Guide URLs are derived from app/data/guides.ts so a new guide can never
+  // be forgotten here, and lastmod reflects each guide's real dateModified.
+  const guideUrls: SitemapUrl[] = Object.values(GUIDES).map(guide => ({
+    loc: `/guides/${guide.slug}`,
+    priority: '0.7',
+    changefreq: 'monthly',
+    lastmod: guide.dateModified,
+  }))
+
+  const urls: SitemapUrl[] = [
     { loc: '/',                             priority: '1.0', changefreq: 'weekly' },
     { loc: '/faq',                          priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides',                       priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-json',           priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-jwt',           priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-base64',             priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/cron-expression-examples',   priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/json-vs-yaml',               priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/how-to-validate-json',       priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-regex',              priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-markdown',           priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/markdown-cheatsheet',        priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-url-encoding',       priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-hash',               priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-xml',                priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-uuid',               priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-json-schema',        priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/what-is-yaml',               priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/regex-cheatsheet',           priority: '0.7', changefreq: 'monthly' },
-    { loc: '/guides/json-best-practices',        priority: '0.7', changefreq: 'monthly' },
+    ...guideUrls,
+    { loc: '/terms',                        priority: '0.3', changefreq: 'yearly' },
+    { loc: '/privacy',                      priority: '0.3', changefreq: 'yearly' },
     { loc: '/tools/json-formatter',         priority: '0.9', changefreq: 'monthly' },
     { loc: '/tools/csv-to-json' },
     { loc: '/tools/json-to-csv' },
@@ -55,9 +59,9 @@ export default defineEventHandler((event) => {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(({ loc, priority = '0.8', changefreq = 'monthly' }) => `  <url>
+${urls.map(({ loc, priority = '0.8', changefreq = 'monthly', lastmod = today }) => `  <url>
     <loc>https://jsontools.space${loc}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`).join('\n')}

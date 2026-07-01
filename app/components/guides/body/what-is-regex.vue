@@ -415,32 +415,6 @@ const PATTERNS = [
   border-radius: 5px;
 }
 
-/* ── Greedy steps ──────────────────────────────────── */
-.step {
-  padding: 16px 18px;
-  background: var(--c-subtle);
-  border: 1px solid var(--c-border);
-  border-radius: 10px;
-}
-
-.step-head {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--c-t1);
-  margin-bottom: 8px;
-}
-
-.step p {
-  font-size: 13px;
-  color: var(--c-t3);
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* ── Inline links ──────────────────────────────────── */
-.guide-inline-link { color: #F97316; text-decoration: none; border-bottom: 1px solid rgba(249,115,22,0.3); }
-.guide-inline-link:hover { border-bottom-color: #F97316; }
-
 /* ── Responsive ────────────────────────────────────── */
 @media (max-width: 600px) {
   .regex-display { font-size: 20px; }

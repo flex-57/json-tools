@@ -1,3 +1,4 @@
+import { useClipboard } from './useClipboard'
 import yaml from 'js-yaml'
 
 const SAMPLE_YAML = `name: Alice Martin
@@ -50,7 +51,6 @@ export function useYamlToJson() {
   const input = ref(SAMPLE_YAML)
   const output = ref('')
   const error = ref<string | null>(null)
-  const copied = ref(false)
 
   function convert() {
     const r = yamlToJson(input.value)
@@ -58,12 +58,7 @@ export function useYamlToJson() {
     error.value = r.error
   }
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() { input.value = ''; output.value = ''; error.value = null }
 
@@ -77,7 +72,6 @@ export function useJsonToYaml() {
   const output = ref('')
   const error = ref<string | null>(null)
   const indent = ref(2)
-  const copied = ref(false)
 
   function convert() {
     const r = jsonToYaml(input.value, indent.value)
@@ -85,12 +79,7 @@ export function useJsonToYaml() {
     error.value = r.error
   }
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   async function download() {
     if (!output.value) return

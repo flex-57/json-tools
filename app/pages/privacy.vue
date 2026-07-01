@@ -81,26 +81,6 @@ useSeoMeta({
   margin-bottom: 40px;
 }
 
-.legal-section {
-  margin-bottom: 32px;
-}
-
-.legal-section h2 {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--c-t1);
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--c-border);
-}
-
-.legal-section p {
-  font-size: 14px;
-  color: var(--c-t3);
-  line-height: 1.75;
-  margin-bottom: 10px;
-}
-
 .legal-section ul {
   margin: 10px 0 10px 20px;
   display: flex;
@@ -113,13 +93,6 @@ useSeoMeta({
   color: var(--c-t3);
   line-height: 1.7;
 }
-
-.legal-section a {
-  color: #F97316;
-  text-decoration: none;
-}
-
-.legal-section a:hover { text-decoration: underline; }
 
 .legal-section code {
   font-family: 'JetBrains Mono', monospace;

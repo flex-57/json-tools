@@ -1,6 +1,7 @@
+import { useClipboard } from './useClipboard'
+
 export function useUnixTimestamp() {
   const input = ref('')
-  const copied = ref<string | null>(null)
   const _tick = ref(Date.now())
 
   const parsed = computed((): Date | null => {
@@ -48,9 +49,12 @@ export function useUnixTimestamp() {
     input.value = String(Math.floor(Date.now() / 1000))
   }
 
+  const { isCopied, copy: copyKeyed } = useClipboard()
+  const lastCopiedKey = ref<string | null>(null)
+  const copied = computed<string | null>(() => lastCopiedKey.value && isCopied(lastCopiedKey.value) ? lastCopiedKey.value : null)
+
   function clear() {
     input.value = ''
-    copied.value = null
   }
 
   function refresh() {
@@ -58,9 +62,8 @@ export function useUnixTimestamp() {
   }
 
   async function copyValue(value: string, key: string) {
-    await navigator.clipboard.writeText(value)
-    copied.value = key
-    setTimeout(() => { copied.value = null }, 2000)
+    lastCopiedKey.value = key
+    await copyKeyed(key, value)
   }
 
   onMounted(setNow)

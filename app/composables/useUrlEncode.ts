@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type UrlVariant = 'component' | 'full'
 
 export function useUrlEncode() {
@@ -5,7 +7,6 @@ export function useUrlEncode() {
   const variant = ref<UrlVariant>('component')
   const input = ref('name=John Doe&city=São Paulo&redirect=https://example.com/path?lang=fr')
   const error = ref<string | null>(null)
-  const copied = ref(false)
 
   const output = computed(() => {
     if (!input.value) return ''
@@ -28,12 +29,7 @@ export function useUrlEncode() {
     }
   })
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() {
     input.value = ''

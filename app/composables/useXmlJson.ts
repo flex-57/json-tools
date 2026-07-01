@@ -1,3 +1,4 @@
+import { useClipboard } from './useClipboard'
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 
 const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
@@ -57,7 +58,6 @@ export function useXmlToJson() {
   const input = ref(SAMPLE_XML)
   const output = ref('')
   const error = ref<string | null>(null)
-  const copied = ref(false)
 
   function convert() {
     const r = xmlToJson(input.value)
@@ -65,12 +65,7 @@ export function useXmlToJson() {
     error.value = r.error
   }
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() { input.value = ''; output.value = ''; error.value = null }
 
@@ -83,7 +78,6 @@ export function useJsonToXml() {
   const input = ref(SAMPLE_JSON)
   const output = ref('')
   const error = ref<string | null>(null)
-  const copied = ref(false)
 
   function convert() {
     const r = jsonToXml(input.value)
@@ -91,12 +85,7 @@ export function useJsonToXml() {
     error.value = r.error
   }
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   async function download() {
     if (!output.value) return

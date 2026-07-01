@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type MinifyMode = 'css' | 'html' | 'js'
 
 export interface MinifyResult {
@@ -175,7 +177,6 @@ console.log(result);`,
 export function useMinifier() {
   const input   = ref(SAMPLES.css)
   const mode    = ref<MinifyMode>('css')
-  const copied  = ref(false)
   const loading = ref(false)
   const result  = ref<MinifyResult | null>(null)
 
@@ -203,12 +204,7 @@ export function useMinifier() {
   const output  = computed(() => result.value?.output ?? '')
   const error   = computed(() => result.value?.error ?? null)
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() { input.value = ''; result.value = null }
 

@@ -124,7 +124,8 @@ describe('useRegexTester — highlightedHtml', () => {
   })
 
   it('returns empty string when input is empty', () => {
-    const { highlightedHtml } = useRegexTester()
+    const { input, highlightedHtml } = useRegexTester()
+    input.value = ''
     expect(highlightedHtml.value).toBe('')
   })
 

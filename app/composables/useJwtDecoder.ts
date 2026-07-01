@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export interface JwtPart {
   raw: string
   decoded: Record<string, unknown> | null
@@ -93,21 +95,19 @@ const SAMPLE_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODk
 export function useJwtDecoder() {
   const token = ref(SAMPLE_JWT)
   const result = computed(() => decodeJwt(token.value))
-  const copiedHeader = ref(false)
-  const copiedPayload = ref(false)
+
+  const { isCopied, copy } = useClipboard()
+  const copiedHeader = computed(() => isCopied('header'))
+  const copiedPayload = computed(() => isCopied('payload'))
 
   async function copyHeader() {
     if (!result.value.header.decoded) return
-    await navigator.clipboard.writeText(JSON.stringify(result.value.header.decoded, null, 2))
-    copiedHeader.value = true
-    setTimeout(() => { copiedHeader.value = false }, 2000)
+    await copy('header', JSON.stringify(result.value.header.decoded, null, 2))
   }
 
   async function copyPayload() {
     if (!result.value.payload.decoded) return
-    await navigator.clipboard.writeText(JSON.stringify(result.value.payload.decoded, null, 2))
-    copiedPayload.value = true
-    setTimeout(() => { copiedPayload.value = false }, 2000)
+    await copy('payload', JSON.stringify(result.value.payload.decoded, null, 2))
   }
 
   function clear() { token.value = '' }

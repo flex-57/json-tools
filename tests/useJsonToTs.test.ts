@@ -131,7 +131,8 @@ describe('useJsonToTs — Zod mode', () => {
 
 describe('useJsonToTs — error handling', () => {
   it('returns empty output for empty input', () => {
-    const { output } = useJsonToTs()
+    const { input, output } = useJsonToTs()
+    input.value = ''
     expect(output.value).toBe('')
   })
 

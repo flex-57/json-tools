@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 type JsonVal = string | number | boolean | null | JsonVal[] | JsonObj
 interface JsonObj { [key: string]: JsonVal }
 
@@ -94,7 +96,6 @@ export function useJsonSchema() {
   const input   = ref(SAMPLE_JSON)
   const draft   = ref<SchemaDraft>('draft-07')
   const required = ref(true)
-  const copied  = ref(false)
 
   const result = computed((): { output: string; error: string | null } => {
     if (!input.value.trim()) return { output: '', error: null }
@@ -109,12 +110,7 @@ export function useJsonSchema() {
   const output = computed(() => result.value.output)
   const error  = computed(() => result.value.error)
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() { input.value = '' }
 

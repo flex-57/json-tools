@@ -1,3 +1,4 @@
+import { useClipboard } from './useClipboard'
 import { marked } from 'marked'
 
 const SAMPLE = `# Markdown Preview
@@ -32,7 +33,6 @@ let purify: typeof import('dompurify')['default'] | null = null
 export function useMarkdown() {
   const input  = ref(SAMPLE)
   const html   = ref('')
-  const copied = ref(false)
 
   async function render() {
     if (!import.meta.client) return
@@ -56,12 +56,7 @@ export function useMarkdown() {
 
   onMounted(render)
 
-  async function copy() {
-    if (!html.value) return
-    await navigator.clipboard.writeText(html.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => html.value)
 
   function clear() { input.value = ''; html.value = '' }
 

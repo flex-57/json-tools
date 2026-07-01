@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export interface SheetInfo {
   name: string
   rowCount: number
@@ -61,7 +63,6 @@ export function useExcelToJson() {
   const sheets = ref<SheetInfo[]>([])
   const activeSheet = ref('')
   const hasHeader = ref(true)
-  const copied = ref(false)
   const loading = ref(false)
 
   async function convert(f?: File) {
@@ -82,12 +83,7 @@ export function useExcelToJson() {
     if (file.value) await convert()
   }
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() {
     file.value = null; output.value = ''; error.value = null

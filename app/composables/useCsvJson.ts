@@ -1,3 +1,4 @@
+import { useClipboard } from './useClipboard'
 import Papa from 'papaparse'
 
 const SAMPLE_CSV = `id,name,email,role,active
@@ -65,7 +66,6 @@ export function useCsvToJson() {
   const rowCount = ref(0)
   const delimiter = ref<Delimiter>('auto')
   const hasHeader = ref(true)
-  const copied = ref(false)
 
   function convert() {
     const result = csvToJson(input.value, delimiter.value, hasHeader.value)
@@ -74,12 +74,7 @@ export function useCsvToJson() {
     rowCount.value = result.rowCount
   }
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   async function downloadJson() {
     if (!output.value) return
@@ -110,7 +105,6 @@ export function useJsonToCsv() {
   const error = ref<string | null>(null)
   const rowCount = ref(0)
   const delimiter = ref<',' | ';' | '\t'>(',')
-  const copied = ref(false)
 
   function convert() {
     const result = jsonToCsv(input.value, delimiter.value)
@@ -119,12 +113,7 @@ export function useJsonToCsv() {
     rowCount.value = result.rowCount
   }
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   async function downloadCsv() {
     if (!output.value) return

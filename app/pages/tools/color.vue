@@ -178,6 +178,8 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from '../../composables/useClipboard'
+
 useSeoMeta({
   title: 'Color Picker & Converter — HEX RGBA HSL Alpha | JSON Tools',
   description: 'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
@@ -286,12 +288,13 @@ const alphaThumbStyle = computed(() => ({
 }))
 
 /* ── Copy ─────────────────────────────────────────────────── */
-const copied = ref<string | null>(null)
+const { isCopied, copy: copyKeyed } = useClipboard()
+const copied = computed<string | null>(() =>
+  (['hex', 'rgb', 'hsl', 'hsb'] as const).find(k => isCopied(k)) ?? null
+)
 
-async function doCopy(text: string, key: string) {
-  await navigator.clipboard.writeText(text)
-  copied.value = key
-  setTimeout(() => { copied.value = null }, 1500)
+function doCopy(text: string, key: string) {
+  copyKeyed(key, text)
 }
 
 /* ── Contrast checker ─────────────────────────────────────── */
@@ -542,8 +545,6 @@ const cards = [
 }
 
 /* ── Contrast checker ─────────────────────────────────────── */
-.contrast-card { }
-
 .contrast-body {
   padding: 16px;
   display: flex;

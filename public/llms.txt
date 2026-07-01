@@ -34,6 +34,14 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [Color Picker & Converter](https://jsontools.space/tools/color): Pick colors and convert between HEX, RGB, HSL, and HSV. Generates CSS-ready values.
 - [JWT Generator](https://jsontools.space/tools/jwt-generator): Generate signed JWT tokens with custom headers, payloads, and algorithms (HS256, HS384, HS512).
 - [Markdown Preview](https://jsontools.space/tools/markdown-preview): Write or paste Markdown and see the rendered HTML instantly. Supports headings, code blocks, tables, and blockquotes.
+- [Password Generator](https://jsontools.space/tools/password-generator): Generate cryptographically secure random passwords. Configurable length and character sets, bulk generation.
+- [What is JSON?](https://jsontools.space/guides/what-is-json): JSON explained — data types, syntax rules, and why it became the universal format for APIs and config files.
+- [What is a JWT Token?](https://jsontools.space/guides/what-is-jwt): JSON Web Tokens explained — structure, how they work, common algorithms, and security best practices.
+- [What is Base64 Encoding?](https://jsontools.space/guides/what-is-base64): Base64 explained — how it works, why it exists, common use cases, and the difference with Base64url.
+- [How to Validate JSON](https://jsontools.space/guides/how-to-validate-json): What makes JSON valid, the most common errors, and how to go further with JSON Schema.
+- [JSON vs YAML](https://jsontools.space/guides/json-vs-yaml): Side-by-side comparison of JSON and YAML — syntax, use cases, and when to choose one over the other.
+- [What is a Regular Expression?](https://jsontools.space/guides/what-is-regex): Regex explained — character classes, quantifiers, anchors, groups, and practical patterns for everyday use.
+- [Cron Expression Examples](https://jsontools.space/guides/cron-expression-examples): Practical reference for cron syntax — field breakdown, special characters, and ready-to-use schedules.
 - [What is Markdown?](https://jsontools.space/guides/what-is-markdown): Markdown explained — how it works, core syntax, flavors (CommonMark, GFM), and where it is used.
 - [Markdown Cheatsheet](https://jsontools.space/guides/markdown-cheatsheet): Quick reference for all Markdown syntax: headings, bold, italic, code blocks, links, lists, tables, blockquotes, and more.
 - [What is URL Encoding?](https://jsontools.space/guides/what-is-url-encoding): Percent-encoding explained — which characters must be encoded, how %XX works, and the difference between encodeURI and encodeURIComponent.

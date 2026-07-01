@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type CaseKey = 'camel' | 'pascal' | 'snake' | 'screaming' | 'kebab' | 'title' | 'upper' | 'lower' | 'dot'
 
 interface CaseResult {
@@ -34,7 +36,6 @@ const CASES: { key: CaseKey; label: string; example: string; convert: (ws: strin
 
 export function useTextCase() {
   const input = ref('hello world example')
-  const copiedKey = ref<CaseKey | null>(null)
 
   const results = computed<CaseResult[]>(() => {
     const words = toWords(input.value)
@@ -48,12 +49,9 @@ export function useTextCase() {
 
   const wordCount = computed(() => toWords(input.value).length)
 
-  async function copy(key: CaseKey, value: string) {
-    if (!value) return
-    await navigator.clipboard.writeText(value)
-    copiedKey.value = key
-    setTimeout(() => { copiedKey.value = null }, 2000)
-  }
+  const CASE_KEYS: CaseKey[] = ['camel', 'pascal', 'snake', 'screaming', 'kebab', 'title', 'upper', 'lower', 'dot']
+  const { isCopied, copy } = useClipboard()
+  const copiedKey = computed<CaseKey | null>(() => CASE_KEYS.find(k => isCopied(k)) ?? null)
 
   function clear() { input.value = '' }
 

@@ -66,6 +66,8 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from '../../composables/useClipboard'
+
 useSeoMeta({
   title: 'UUID Generator — Random UUID v4 | JSON Tools',
   description: 'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
@@ -87,8 +89,12 @@ type Format = typeof FORMATS[number]['id']
 const count       = ref(10)
 const format      = ref<Format>('standard')
 const uuids       = ref<string[]>([])
-const copiedIndex = ref<number | null>(null)
-const copiedAll   = ref(false)
+const { isCopied, copy: copyKeyed } = useClipboard()
+const copiedIndex = computed<number | null>(() => {
+  const idx = uuids.value.findIndex((_, i) => isCopied('uuid-' + i))
+  return idx === -1 ? null : idx
+})
+const copiedAll   = computed(() => isCopied('all'))
 
 const formatIndex = computed(() => FORMATS.findIndex(f => f.id === format.value))
 
@@ -104,16 +110,12 @@ function formatUuid(uuid: string): string {
   return uuid
 }
 
-async function copyOne(uuid: string, index: number) {
-  await navigator.clipboard.writeText(formatUuid(uuid))
-  copiedIndex.value = index
-  setTimeout(() => { copiedIndex.value = null }, 1500)
+function copyOne(uuid: string, index: number) {
+  copyKeyed('uuid-' + index, formatUuid(uuid))
 }
 
-async function copyAll() {
-  await navigator.clipboard.writeText(uuids.value.map(formatUuid).join('\n'))
-  copiedAll.value = true
-  setTimeout(() => { copiedAll.value = false }, 1500)
+function copyAll() {
+  copyKeyed('all', uuids.value.map(formatUuid).join('\n'))
 }
 
 onMounted(generate)
@@ -184,10 +186,11 @@ const seoCards = [
   font-weight: 600;
   color: var(--c-t1);
   outline: none;
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 .count-input::-webkit-outer-spin-button,
-.count-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.count-input::-webkit-inner-spin-button { appearance: none; -webkit-appearance: none; }
 
 /* Format toggle */
 .format-toggle {

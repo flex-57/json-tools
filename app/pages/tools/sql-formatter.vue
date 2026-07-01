@@ -331,7 +331,6 @@ const seoCards = [
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 .mid-icon--spinning svg { animation: spin 0.9s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── Dialect badge ───────────────────────────────────────────────── */
 .dialect-badge {
@@ -343,15 +342,6 @@ const seoCards = [
 }
 
 /* ── Buttons ─────────────────────────────────────────────────────── */
-
-/* ── Info strip ──────────────────────────────────────────────────── */
-.info-strip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--c-t5);
-}
 
 /* ── Transitions ─────────────────────────────────────────────────── */
 .fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }

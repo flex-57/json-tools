@@ -90,7 +90,8 @@ describe('useUrlEncode — round-trip', () => {
 
 describe('useUrlEncode — empty input', () => {
   it('returns empty output for empty input', () => {
-    const { output } = useUrlEncode()
+    const { input, output } = useUrlEncode()
+    input.value = ''
     expect(output.value).toBe('')
   })
 

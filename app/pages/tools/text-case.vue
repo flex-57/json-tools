@@ -216,14 +216,6 @@ const seoCards = [
 .btn-copy--done { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
 .btn-copy:disabled { opacity: 0.35; cursor: not-allowed; }
 
-/* ── Info strip ──────────────────────────────────────────────────── */
-.info-strip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--c-t5);
-}
 
 /* ── Transitions ─────────────────────────────────────────────────── */
 .fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }

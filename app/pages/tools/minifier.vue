@@ -18,7 +18,7 @@
 
     <div class="panels">
       <!-- Input -->
-      <div class="panel-card" :class="{ 'editor-card--drag': isDragging }"
+      <div class="editor-card" :class="{ 'editor-card--drag': isDragging }"
         @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="panel-card-glow" />
         <div class="panel-header">
@@ -46,7 +46,7 @@
       </div>
 
       <!-- Output -->
-      <div class="panel-card" :class="{ 'panel-card--error': !!error }">
+      <div class="editor-card" :class="{ 'panel-card--error': !!error }">
         <div class="panel-header">
           <span class="editor-label">Minified</span>
           <div class="panel-header-right">
@@ -227,18 +227,7 @@ const seoCards = [
 /* ── Panels ──────────────────────────────────────────────────────── */
 .panels { display: grid; grid-template-columns: 1fr 44px 1fr; gap: 0; align-items: stretch; min-height: 380px; }
 
-.panel-card {
-  position: relative;
-  background: var(--c-card);
-  border: 1px solid var(--c-border);
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
-  transition: border-color 0.2s, box-shadow 0.25s;
-}
-.panel-card:has(.cm-focused) {
+.editor-card:has(.cm-focused) {
   border-color: #FDBA74;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(249,115,22,0.08), 0 0 0 3px rgba(249,115,22,0.08);
 }
@@ -252,7 +241,7 @@ const seoCards = [
   z-index: 1;
   pointer-events: none;
 }
-.panel-card:has(.cm-focused) .panel-card-glow { opacity: 1; }
+.editor-card:has(.cm-focused) .panel-card-glow { opacity: 1; }
 .panel-card--error { border-color: #FECACA; }
 
 .panel-header {
@@ -294,7 +283,6 @@ const seoCards = [
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 .mid-icon--spinning svg { animation: spin 0.9s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── Stats strip ─────────────────────────────────────────────────── */
 .stats-strip {
@@ -324,13 +312,6 @@ const seoCards = [
 /* ── Buttons ─────────────────────────────────────────────────────── */
 
 /* ── Info strip ──────────────────────────────────────────────────── */
-.info-strip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--c-t5);
-}
 .info-sep { color: var(--c-border-m); }
 
 /* ── Transitions ─────────────────────────────────────────────────── */

@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 type JsonVal = string | number | boolean | null | JsonVal[] | JsonObj
 interface JsonObj { [key: string]: JsonVal }
 interface TsOpts { readonly: boolean; useType: boolean }
@@ -115,7 +117,6 @@ export function useJsonToTs() {
   const input = ref(SAMPLE_JSON)
   const mode = ref<'ts' | 'zod'>('ts')
   const rootName = ref('Root')
-  const copied = ref(false)
 
   const readonlyFields = ref(false)
   const useType = ref(false)
@@ -161,12 +162,7 @@ export function useJsonToTs() {
     }
   })
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() { input.value = '' }
 

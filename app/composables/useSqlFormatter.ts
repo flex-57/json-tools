@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type SqlDialect = 'sql' | 'mysql' | 'postgresql' | 'sqlite' | 'tsql'
 
 const SAMPLE_SQL = `select u.id, u.name, u.email, count(o.id) as order_count, sum(o.total) as total_spent
@@ -17,7 +19,6 @@ export function useSqlFormatter() {
   const output     = ref('')
   const error      = ref<string | null>(null)
   const loading    = ref(false)
-  const copied     = ref(false)
 
   let timer: ReturnType<typeof setTimeout> | null = null
 
@@ -50,12 +51,7 @@ export function useSqlFormatter() {
 
   onMounted(run)
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() { input.value = ''; output.value = ''; error.value = null }
 

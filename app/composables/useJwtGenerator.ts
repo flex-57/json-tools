@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type JwtAlgorithm = 'HS256' | 'HS384' | 'HS512'
 
 const DEFAULT_PAYLOAD = `{
@@ -33,7 +35,6 @@ export function useJwtGenerator() {
   const secret    = ref('your-256-bit-secret')
   const token     = ref('')
   const error     = ref<string | null>(null)
-  const copied    = ref(false)
 
   let timer: ReturnType<typeof setTimeout> | null = null
 
@@ -83,12 +84,7 @@ export function useJwtGenerator() {
     } catch { /* ignore */ }
   }
 
-  async function copy() {
-    if (!token.value) return
-    await navigator.clipboard.writeText(token.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => token.value)
 
   function clear() { payload.value = DEFAULT_PAYLOAD; secret.value = 'your-256-bit-secret'; token.value = ''; error.value = null }
 

@@ -301,15 +301,6 @@ const seoCards = [
 
 /* ── Copy button ─────────────────────────────────────────────────── */
 
-/* ── Info strip ──────────────────────────────────────────────────── */
-.info-strip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--c-t5);
-}
-
 /* ── Transitions ─────────────────────────────────────────────────── */
 .fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
 .fade-slot-enter-from, .fade-slot-leave-to { opacity: 0; transform: translateY(-3px); }

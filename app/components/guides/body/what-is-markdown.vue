@@ -417,27 +417,6 @@ const FLAVORS = [
 /* ── Steps ─────────────────────────────────────────────────── */
 .guide-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
 
-.step {
-  padding: 16px 18px;
-  background: var(--c-subtle);
-  border: 1px solid var(--c-border);
-  border-radius: 10px;
-}
-
-.step-head {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--c-t1);
-  margin-bottom: 8px;
-}
-
-.step p {
-  font-size: 13px;
-  color: var(--c-t3);
-  line-height: 1.7;
-  margin: 0;
-}
-
 /* ── Inline link ───────────────────────────────────────────── */
 .inline-link { color: #F97316; text-decoration: none; font-weight: 500; }
 .inline-link:hover { text-decoration: underline; }

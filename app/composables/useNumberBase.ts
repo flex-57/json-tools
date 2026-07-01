@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type BaseKey = 'bin' | 'oct' | 'dec' | 'hex'
 
 interface BaseResult {
@@ -40,7 +42,6 @@ function groupDec(s: string): string {
 
 export function useNumberBase() {
   const input = ref('255')
-  const copiedKey = ref<BaseKey | null>(null)
 
   const parsed = computed(() => parseInput(input.value))
 
@@ -108,12 +109,10 @@ export function useNumberBase() {
     return bits + ' bit' + (bits !== 1 ? 's' : '') + ' · ' + bytes + ' byte' + (bytes !== 1 ? 's' : '')
   })
 
-  async function copy(key: BaseKey, raw: string) {
-    if (!raw) return
-    await navigator.clipboard.writeText(raw)
-    copiedKey.value = key
-    setTimeout(() => { copiedKey.value = null }, 2000)
-  }
+  const { isCopied, copy } = useClipboard()
+  const copiedKey = computed<BaseKey | null>(() =>
+    (['bin', 'oct', 'dec', 'hex'] as BaseKey[]).find(k => isCopied(k)) ?? null
+  )
 
   function clear() { input.value = '' }
 

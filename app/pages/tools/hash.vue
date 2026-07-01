@@ -46,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from '../../composables/useClipboard'
 import { computeHashes, HASH_ALGORITHMS } from '~/composables/useHash'
 import type { HashAlgorithm } from '~/composables/useHash'
 
@@ -62,7 +63,6 @@ useSeoMeta({
 
 const input   = ref('Hello, World!')
 const focused = ref(false)
-const copied  = ref<HashAlgorithm | null>(null)
 const hashes  = ref<Record<HashAlgorithm, string>>({ 'MD5': '', 'SHA-1': '', 'SHA-256': '', 'SHA-384': '', 'SHA-512': '' })
 
 const byteCount = computed(() => new TextEncoder().encode(input.value).length)
@@ -75,11 +75,14 @@ watch(input, async (val) => {
   }, 120)
 }, { immediate: true })
 
-async function copy(alg: HashAlgorithm) {
+const { isCopied, copy: copyKeyed } = useClipboard()
+const copied = computed<HashAlgorithm | null>(() =>
+  (Object.keys(hashes.value) as HashAlgorithm[]).find(alg => isCopied(alg)) ?? null
+)
+
+function copy(alg: HashAlgorithm) {
   if (!hashes.value[alg]) return
-  await navigator.clipboard.writeText(hashes.value[alg])
-  copied.value = alg
-  setTimeout(() => { copied.value = null }, 1500)
+  copyKeyed(alg, hashes.value[alg])
 }
 
 function clear() { input.value = '' }

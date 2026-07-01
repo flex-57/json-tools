@@ -291,44 +291,10 @@ const seoCards = [
 
 /* ── Swap ────────────────────────────────────────────────────────── */
 .swap-col { display: flex; align-items: center; justify-content: center; }
-.swap-btn {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--c-border);
-  background: var(--c-card);
-  color: var(--c-t4);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-}
-.swap-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #F97316, #FB923C);
-  border-color: #F97316;
-  color: white;
-  box-shadow: 0 2px 10px rgba(249,115,22,0.4);
-  transform: scale(1.1);
-}
-.swap-btn--spinning svg { animation: swap-rotate 0.35s cubic-bezier(0.4, 0, 0.2, 1) both; }
-.swap-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-@keyframes swap-rotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(180deg); }
-}
 
 /* ── Buttons ─────────────────────────────────────────────────────── */
 
 /* ── Info strip ──────────────────────────────────────────────────── */
-.info-strip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--c-t5);
-}
 .info-sep { color: var(--c-border-m); }
 
 /* ── Transitions ─────────────────────────────────────────────────── */

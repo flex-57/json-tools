@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type IndentStyle = 2 | 4 | '\t'
 
 export interface JsonResult {
@@ -46,7 +48,7 @@ export function validateJson(input: string): JsonResult {
   }
 }
 
-function diffJson(left: string, right: string): { added: string[]; removed: string[]; same: boolean } {
+export function diffJsonLines(left: string, right: string): { added: string[]; removed: string[]; same: boolean } {
   try {
     const l = JSON.stringify(JSON.parse(left.trim()), null, 2).split('\n')
     const r = JSON.stringify(JSON.parse(right.trim()), null, 2).split('\n')
@@ -76,7 +78,6 @@ export function useJsonFormatter() {
   const error = ref<string | null>(null)
   const isValid = ref<boolean | null>(null)
   const indent = ref<IndentStyle>(2)
-  const copied = ref(false)
 
   function format() {
     const result = formatJson(input.value, indent.value)
@@ -99,13 +100,7 @@ export function useJsonFormatter() {
     isValid.value = result.valid
   }
 
-  async function copy() {
-    const text = output.value || input.value
-    if (!text) return
-    await navigator.clipboard.writeText(text)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value || input.value)
 
   function clear() {
     input.value = ''

@@ -56,6 +56,7 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from '../composables/useClipboard'
 import { nodeHasMatch } from '~/composables/useJsonTree'
 import type { TreeNode } from '~/composables/useJsonTree'
 
@@ -94,12 +95,7 @@ const displayValue = computed(() => {
   return String(v)
 })
 
-const copied = ref(false)
-async function copy() {
-  await navigator.clipboard.writeText(props.node.path)
-  copied.value = true
-  setTimeout(() => { copied.value = false }, 1500)
-}
+const { copied, copy } = useClipboard(() => props.node.path)
 </script>
 
 <style scoped>

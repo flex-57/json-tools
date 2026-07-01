@@ -3,7 +3,7 @@
     <section class="hero">
       <p class="hero-tag">Free · No signup · 100% client-side</p>
       <h1 class="hero-title">Developer tools<br><em>that just work</em></h1>
-      <p class="hero-sub">28 tools for JSON, data conversion, text, security and more.<br>Everything runs in your browser — your data never leaves your machine.</p>
+      <p class="hero-sub">29 tools for JSON, data conversion, text, security and more.<br>Everything runs in your browser — your data never leaves your machine.</p>
     </section>
 
     <div class="search-wrap">
@@ -83,7 +83,7 @@
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M3 6h14M3 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </span>
         <h3 class="feature-title">Free, all of it</h3>
-        <p class="feature-body">All 28 tools, forever free. No premium tier, no rate limits, no ads in the way. Just tools that work.</p>
+        <p class="feature-body">All 29 tools, forever free. No premium tier, no rate limits, no ads in the way. Just tools that work.</p>
       </div>
     </section>
   </div>

@@ -1,3 +1,5 @@
+import { useClipboard } from './useClipboard'
+
 export type Base64Variant = 'standard' | 'urlsafe'
 
 function toUrlSafe(b64: string): string {
@@ -24,7 +26,6 @@ export function useBase64() {
   const variant = ref<Base64Variant>('standard')
   const input = ref('Hello, World! This is a Base64 encoding example.')
   const error = ref<string | null>(null)
-  const copied = ref(false)
 
   const output = computed(() => {
     if (!input.value) return ''
@@ -39,12 +40,7 @@ export function useBase64() {
     }
   })
 
-  async function copy() {
-    if (!output.value) return
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
   function clear() {
     input.value = ''

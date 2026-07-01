@@ -405,27 +405,6 @@ const LISTS = [
 /* ── Steps ─────────────────────────────────────────────────── */
 .guide-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
 
-.step {
-  padding: 16px 18px;
-  background: var(--c-subtle);
-  border: 1px solid var(--c-border);
-  border-radius: 10px;
-}
-
-.step-head {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--c-t1);
-  margin-bottom: 8px;
-}
-
-.step p {
-  font-size: 13px;
-  color: var(--c-t3);
-  line-height: 1.7;
-  margin: 0;
-}
-
 .step code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;

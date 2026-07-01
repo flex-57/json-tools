@@ -108,6 +108,8 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from '../../composables/useClipboard'
+
 useSeoMeta({
   title: 'Password Generator — Secure & Random | JSON Tools',
   description: 'Generate strong, random passwords with custom length, uppercase, lowercase, numbers and symbols. Uses crypto.getRandomValues — 100% client-side, nothing sent to servers.',
@@ -185,19 +187,21 @@ const strength = computed(() => {
 })
 
 /* ── Copy (single) ──────────────────────────────────────────── */
-const copied = ref(false)
+const { isCopied, copy: copyKeyed } = useClipboard()
+const copied = computed(() => isCopied('single'))
 
-async function doCopy() {
+function doCopy() {
   if (!password.value) return
-  await navigator.clipboard.writeText(password.value)
-  copied.value = true
-  setTimeout(() => { copied.value = false }, 1500)
+  copyKeyed('single', password.value)
 }
 
 /* ── Bulk ───────────────────────────────────────────────────── */
 const bulkCount     = ref(5)
 const bulkPasswords = ref<string[]>([])
-const copiedBulk    = ref<number | null>(null)
+const copiedBulk    = computed<number | null>(() => {
+  const idx = bulkPasswords.value.findIndex((_, i) => isCopied('bulk-' + i))
+  return idx === -1 ? null : idx
+})
 
 function generateBulk() {
   if (!charset.value) return
@@ -207,10 +211,8 @@ function generateBulk() {
   )
 }
 
-async function copyBulkItem(pw: string, i: number) {
-  await navigator.clipboard.writeText(pw)
-  copiedBulk.value = i
-  setTimeout(() => { copiedBulk.value = null }, 1500)
+function copyBulkItem(pw: string, i: number) {
+  copyKeyed('bulk-' + i, pw)
 }
 
 /* ── SEO cards ──────────────────────────────────────────────── */

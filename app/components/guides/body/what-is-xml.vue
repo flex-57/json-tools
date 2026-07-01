@@ -119,10 +119,4 @@
 <style scoped>
 .code-block { background: var(--c-faint); border: 1px solid var(--c-border); border-radius: 8px; padding: 16px 18px; overflow-x: auto; margin: 16px 0; }
 .code-block code { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--c-t2); line-height: 1.7; white-space: pre; }
-.cheat-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
-.cheat-table th { text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-t4); padding: 0 12px 10px 0; border-bottom: 1px solid var(--c-border); }
-.cheat-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--c-border); color: var(--c-t2); vertical-align: top; line-height: 1.55; }
-.cheat-table tr:last-child td { border-bottom: none; }
-.guide-inline-link { color: #F97316; text-decoration: none; border-bottom: 1px solid rgba(249,115,22,0.3); }
-.guide-inline-link:hover { border-bottom-color: #F97316; }
 </style>

@@ -168,7 +168,5 @@ zip: "01234"       # string, not integer (leading zero stripped otherwise)</code
 .code-block code { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--c-t2); line-height: 1.7; white-space: pre; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
 .col-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--c-t4); margin-bottom: 6px; }
-.guide-inline-link { color: #F97316; text-decoration: none; border-bottom: 1px solid rgba(249,115,22,0.3); }
-.guide-inline-link:hover { border-bottom-color: #F97316; }
 @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
 </style>

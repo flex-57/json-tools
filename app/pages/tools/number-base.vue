@@ -243,13 +243,6 @@ const seoCards = [
 .btn-copy { flex-shrink: 0; }
 
 /* ── Info strip ──────────────────────────────────────────────────── */
-.info-strip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--c-t5);
-}
 .info-strip code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;

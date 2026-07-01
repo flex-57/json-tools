@@ -188,13 +188,7 @@ const LANGS = [
 </script>
 
 <style scoped>
-.cheat-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
-.cheat-table th { text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-t4); padding: 0 12px 10px 0; border-bottom: 1px solid var(--c-border); }
-.cheat-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--c-border); color: var(--c-t2); vertical-align: top; line-height: 1.55; }
-.cheat-table tr:last-child td { border-bottom: none; }
 .ct-note { color: var(--c-t4); font-size: 12px; }
 .cheat-table--patterns td:nth-child(2) { min-width: 280px; }
 .pat { font-size: 11px; word-break: break-all; }
-.guide-inline-link { color: #F97316; text-decoration: none; border-bottom: 1px solid rgba(249,115,22,0.3); }
-.guide-inline-link:hover { border-bottom-color: #F97316; }
 </style>
