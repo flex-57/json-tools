@@ -1,3 +1,5 @@
+import { safeJsonParse } from '../utils/json'
+import { triggerDownload } from '../utils/download'
 import { useClipboard } from './useClipboard'
 import Papa from 'papaparse'
 
@@ -46,17 +48,12 @@ export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): Con
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', rowCount: 0 }
 
-  try {
-    const parsed = JSON.parse(trimmed)
-    const arr = Array.isArray(parsed) ? parsed : [parsed]
-
-    if (arr.length === 0) return { output: '', error: 'Array is empty', rowCount: 0 }
-
-    const csv = Papa.unparse(arr, { delimiter })
-    return { output: csv, error: null, rowCount: arr.length }
-  } catch (e) {
-    return { output: '', error: (e as Error).message, rowCount: 0 }
-  }
+  const { data: parsed, error } = safeJsonParse(trimmed)
+  if (error) return { output: '', error, rowCount: 0 }
+  const arr = Array.isArray(parsed) ? parsed : [parsed]
+  if (arr.length === 0) return { output: '', error: 'Array is empty', rowCount: 0 }
+  const csv = Papa.unparse(arr as object[], { delimiter })
+  return { output: csv, error: null, rowCount: arr.length }
 }
 
 export function useCsvToJson() {
@@ -76,15 +73,9 @@ export function useCsvToJson() {
 
   const { copied, copy } = useClipboard(() => output.value)
 
-  async function downloadJson() {
+  function downloadJson() {
     if (!output.value) return
-    const blob = new Blob([output.value], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'converted.json'
-    a.click()
-    URL.revokeObjectURL(url)
+    triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
   function clear() {
@@ -115,15 +106,9 @@ export function useJsonToCsv() {
 
   const { copied, copy } = useClipboard(() => output.value)
 
-  async function downloadCsv() {
+  function downloadCsv() {
     if (!output.value) return
-    const blob = new Blob([output.value], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'converted.csv'
-    a.click()
-    URL.revokeObjectURL(url)
+    triggerDownload(new Blob([output.value], { type: 'text/csv' }), 'converted.csv')
   }
 
   function clear() {

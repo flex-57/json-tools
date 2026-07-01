@@ -1,3 +1,4 @@
+import { triggerDownload } from '../utils/download'
 import { useClipboard } from './useClipboard'
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 
@@ -87,13 +88,9 @@ export function useJsonToXml() {
 
   const { copied, copy } = useClipboard(() => output.value)
 
-  async function download() {
+  function download() {
     if (!output.value) return
-    const blob = new Blob([output.value], { type: 'application/xml' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url; a.download = 'converted.xml'; a.click()
-    URL.revokeObjectURL(url)
+    triggerDownload(new Blob([output.value], { type: 'application/xml' }), 'converted.xml')
   }
 
   function clear() { input.value = ''; output.value = ''; error.value = null }

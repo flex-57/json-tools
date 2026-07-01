@@ -1,3 +1,4 @@
+import { triggerDownload } from '../utils/download'
 import { useClipboard } from './useClipboard'
 import yaml from 'js-yaml'
 
@@ -81,13 +82,9 @@ export function useJsonToYaml() {
 
   const { copied, copy } = useClipboard(() => output.value)
 
-  async function download() {
+  function download() {
     if (!output.value) return
-    const blob = new Blob([output.value], { type: 'text/yaml' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url; a.download = 'converted.yaml'; a.click()
-    URL.revokeObjectURL(url)
+    triggerDownload(new Blob([output.value], { type: 'text/yaml' }), 'converted.yaml')
   }
 
   function clear() { input.value = ''; output.value = ''; error.value = null }

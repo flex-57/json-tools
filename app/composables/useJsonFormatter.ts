@@ -1,3 +1,4 @@
+import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
 
 export type IndentStyle = 2 | 4 | '\t'
@@ -12,40 +13,27 @@ export function formatJson(input: string, indent: IndentStyle = 2): JsonResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', valid: false }
 
-  try {
-    const parsed = JSON.parse(trimmed)
-    return {
-      output: JSON.stringify(parsed, null, indent),
-      error: null,
-      valid: true,
-    }
-  } catch (e) {
-    return { output: trimmed, error: (e as Error).message, valid: false }
-  }
+  const { data, error } = safeJsonParse(trimmed)
+  if (error) return { output: trimmed, error, valid: false }
+  return { output: JSON.stringify(data, null, indent), error: null, valid: true }
 }
 
 export function minifyJson(input: string): JsonResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', valid: false }
 
-  try {
-    const parsed = JSON.parse(trimmed)
-    return { output: JSON.stringify(parsed), error: null, valid: true }
-  } catch (e) {
-    return { output: trimmed, error: (e as Error).message, valid: false }
-  }
+  const { data, error } = safeJsonParse(trimmed)
+  if (error) return { output: trimmed, error, valid: false }
+  return { output: JSON.stringify(data), error: null, valid: true }
 }
 
 export function validateJson(input: string): JsonResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', valid: false }
 
-  try {
-    JSON.parse(trimmed)
-    return { output: trimmed, error: null, valid: true }
-  } catch (e) {
-    return { output: trimmed, error: (e as Error).message, valid: false }
-  }
+  const { error } = safeJsonParse(trimmed)
+  if (error) return { output: trimmed, error, valid: false }
+  return { output: trimmed, error: null, valid: true }
 }
 
 export function diffJsonLines(left: string, right: string): { added: string[]; removed: string[]; same: boolean } {

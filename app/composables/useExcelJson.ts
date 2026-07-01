@@ -1,3 +1,4 @@
+import { triggerDownload } from '../utils/download'
 import { useClipboard } from './useClipboard'
 
 export interface SheetInfo {
@@ -160,10 +161,7 @@ export function useJsonToExcel() {
     loading.value = false
     if (err) { error.value = err; return }
     if (!blob) return
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url; a.download = 'converted.xlsx'; a.click()
-    URL.revokeObjectURL(url)
+    triggerDownload(blob, 'converted.xlsx')
     error.value = null
   }
 
