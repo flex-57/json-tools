@@ -147,7 +147,12 @@ export function useExcelToJson() {
     sheets.value = []; activeSheet.value = ''
   }
 
-  return { file, output, error, sheets, activeSheet, hasHeader, copied, loading, convert, switchSheet, copy, clear }
+  function download() {
+    if (!output.value) return
+    triggerDownload(new Blob([output.value], { type: 'application/json' }), 'output.json')
+  }
+
+  return { file, output, error, sheets, activeSheet, hasHeader, copied, loading, convert, switchSheet, copy, clear, download }
 }
 
 export function useJsonToExcel() {

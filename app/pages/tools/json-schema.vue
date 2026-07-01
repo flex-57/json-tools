@@ -10,6 +10,11 @@
 
     <div class="toolbar">
       <div class="toolbar-left">
+        <div class="draft-toggle">
+          <div class="draft-indicator" :class="{ 'draft-indicator--right': draft === '2020-12' }" />
+          <button :class="['draft-btn', draft === 'draft-07' ? 'draft-btn--active' : '']" @click="draft = 'draft-07'">Draft-07</button>
+          <button :class="['draft-btn', draft === '2020-12' ? 'draft-btn--active' : '']" @click="draft = '2020-12'">2020-12</button>
+        </div>
       </div>
       <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
@@ -20,21 +25,6 @@
             <span class="status-dot" /><span>Ready</span>
           </div>
         </Transition>
-
-        <!-- Required toggle -->
-        <label class="toggle-row">
-          <span class="option-label">Required</span>
-          <button
-            class="toggle-switch"
-            :class="{ 'toggle-switch--on': required }"
-            @click="required = !required"
-            :aria-pressed="required"
-            aria-label="Include required fields"
-          >
-            <span class="toggle-thumb" />
-          </button>
-        </label>
-
       </div>
     </div>
 
@@ -59,11 +49,13 @@
         <div class="editor-card-header">
           <span class="editor-label">JSON Schema</span>
           <div class="card-actions">
-            <div class="draft-toggle">
-              <div class="draft-indicator" :class="{ 'draft-indicator--right': draft === '2020-12' }" />
-              <button :class="['draft-btn', draft === 'draft-07' ? 'draft-btn--active' : '']" @click="draft = 'draft-07'">Draft-07</button>
-              <button :class="['draft-btn', draft === '2020-12' ? 'draft-btn--active' : '']" @click="draft = '2020-12'">2020-12</button>
-            </div>
+            <label class="toggle-row">
+              <span class="option-label">Required</span>
+              <button class="toggle-switch" :class="{ 'toggle-switch--on': required }" @click="required = !required" :aria-pressed="required" aria-label="Include required fields">
+                <span class="toggle-thumb" />
+              </button>
+            </label>
+            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
@@ -88,7 +80,7 @@ useToolSeo(
   'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
 )
 
-const { input, draft, required, output, error, copied, copy, clear } = useJsonSchema()
+const { input, draft, required, output, error, copied, copy, clear, download } = useJsonSchema()
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

@@ -91,6 +91,7 @@
         <div class="editor-card-header">
           <span class="editor-label">JSON Output</span>
           <div class="card-actions">
+            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
@@ -125,7 +126,7 @@ useToolSeo(
   'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
 )
 
-const { file, output, error, sheets, activeSheet, hasHeader, copied, loading, convert, switchSheet, copy, clear } = useExcelToJson()
+const { file, output, error, sheets, activeSheet, hasHeader, copied, loading, convert, switchSheet, copy, clear, download } = useExcelToJson()
 
 const seoCards = [
   {

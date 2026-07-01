@@ -1,3 +1,4 @@
+import { triggerDownload } from '../utils/download'
 import { useClipboard } from './useClipboard'
 
 type JsonVal = string | number | boolean | null | JsonVal[] | JsonObj
@@ -114,5 +115,10 @@ export function useJsonSchema() {
 
   function clear() { input.value = '' }
 
-  return { input, draft, required, output, error, copied, copy, clear }
+  function download() {
+    if (!output.value) return
+    triggerDownload(new Blob([output.value], { type: 'application/json' }), 'schema.json')
+  }
+
+  return { input, draft, required, output, error, copied, copy, clear, download }
 }

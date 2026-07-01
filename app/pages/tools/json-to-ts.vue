@@ -9,6 +9,11 @@
 
     <div class="toolbar">
       <div class="toolbar-left">
+        <div class="mode-toggle">
+          <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'zod' }" />
+          <button :class="['mode-btn', mode === 'ts' ? 'mode-btn--active' : '']" @click="mode = 'ts'">TypeScript</button>
+          <button :class="['mode-btn', mode === 'zod' ? 'mode-btn--active' : '']" @click="mode = 'zod'">Zod</button>
+        </div>
       </div>
       <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
@@ -19,31 +24,6 @@
             <span class="status-dot" /><span>Ready</span>
           </div>
         </Transition>
-
-        <!-- TS power-user options -->
-        <template v-if="mode === 'ts'">
-          <div class="toolbar-sep" />
-          <label class="toggle-wrap">
-            <input type="checkbox" class="toggle-input" v-model="readonlyFields" />
-            <span class="toggle-track"><span class="toggle-thumb" /></span>
-            <span class="toggle-label">readonly</span>
-          </label>
-          <label class="toggle-wrap">
-            <input type="checkbox" class="toggle-input" v-model="useType" />
-            <span class="toggle-track"><span class="toggle-thumb" /></span>
-            <span class="toggle-label">type</span>
-          </label>
-        </template>
-
-        <!-- Zod power-user options -->
-        <template v-else>
-          <div class="toolbar-sep" />
-          <label class="toggle-wrap">
-            <input type="checkbox" class="toggle-input" v-model="zodStrict" />
-            <span class="toggle-track"><span class="toggle-thumb" /></span>
-            <span class="toggle-label">.strict()</span>
-          </label>
-        </template>
 
         <div class="toolbar-sep" />
 
@@ -75,11 +55,26 @@
         <div class="editor-card-header">
           <span class="editor-label">Output</span>
           <div class="card-actions">
-            <div class="mode-toggle">
-              <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'zod' }" />
-              <button :class="['mode-btn', mode === 'ts' ? 'mode-btn--active' : '']" @click="mode = 'ts'">TypeScript</button>
-              <button :class="['mode-btn', mode === 'zod' ? 'mode-btn--active' : '']" @click="mode = 'zod'">Zod</button>
-            </div>
+            <template v-if="mode === 'ts'">
+              <label class="toggle-wrap">
+                <input type="checkbox" class="toggle-input" v-model="readonlyFields" />
+                <span class="toggle-track"><span class="toggle-thumb" /></span>
+                <span class="toggle-label">readonly</span>
+              </label>
+              <label class="toggle-wrap">
+                <input type="checkbox" class="toggle-input" v-model="useType" />
+                <span class="toggle-track"><span class="toggle-thumb" /></span>
+                <span class="toggle-label">type</span>
+              </label>
+            </template>
+            <template v-else>
+              <label class="toggle-wrap">
+                <input type="checkbox" class="toggle-input" v-model="zodStrict" />
+                <span class="toggle-track"><span class="toggle-thumb" /></span>
+                <span class="toggle-label">.strict()</span>
+              </label>
+            </template>
+            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
@@ -104,7 +99,7 @@ useToolSeo(
   'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
 )
 
-const { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict } = useJsonToTs()
+const { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict, download } = useJsonToTs()
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

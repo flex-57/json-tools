@@ -7,6 +7,22 @@
       </div>
     </div>
 
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="view-toggle">
+          <div class="view-indicator" :class="{ 'view-indicator--right': viewMode === 'graph' }" />
+          <button :class="['view-btn', viewMode === 'tree' ? 'view-btn--active' : '']" @click="viewMode = 'tree'">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 2h2M1 6h2M1 10h2M4 2h7M4 6h5M4 10h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Tree
+          </button>
+          <button :class="['view-btn', viewMode === 'graph' ? 'view-btn--active' : '']" @click="switchToGraph">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="2" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="2" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 6l5-3.5M3.5 6l5 3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+            Graph
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="tree-layout">
       <!-- Input panel -->
       <div class="editor-card" :class="{ 'editor-card--focus': editorFocus, 'editor-card--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
@@ -28,19 +44,6 @@
       <!-- Output panel -->
       <div class="editor-card output-card">
         <div class="editor-card-header output-header">
-          <!-- Mode toggle -->
-          <div class="view-toggle">
-            <div class="view-indicator" :class="{ 'view-indicator--right': viewMode === 'graph' }" />
-            <button :class="['view-btn', viewMode === 'tree' ? 'view-btn--active' : '']" @click="viewMode = 'tree'">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 2h2M1 6h2M1 10h2M4 2h7M4 6h5M4 10h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-              Tree
-            </button>
-            <button :class="['view-btn', viewMode === 'graph' ? 'view-btn--active' : '']" @click="switchToGraph">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="2" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="2" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="10" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 6l5-3.5M3.5 6l5 3.5" stroke="currentColor" stroke-width="1.2"/></svg>
-              Graph
-            </button>
-          </div>
-
           <!-- Tree controls -->
           <template v-if="viewMode === 'tree' && root">
             <div class="tree-controls">

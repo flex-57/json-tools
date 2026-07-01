@@ -1,3 +1,4 @@
+import { triggerDownload } from '../utils/download'
 import { useClipboard } from './useClipboard'
 
 type JsonVal = string | number | boolean | null | JsonVal[] | JsonObj
@@ -166,5 +167,10 @@ export function useJsonToTs() {
 
   function clear() { input.value = '' }
 
-  return { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict }
+  function download() {
+    if (!output.value) return
+    triggerDownload(new Blob([output.value], { type: 'text/plain' }), 'types.ts')
+  }
+
+  return { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict, download }
 }
