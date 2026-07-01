@@ -219,12 +219,18 @@ async function exportAsPdf() {
 async function exportGraphAsPng() {
   const el = document.querySelector('.vf-instance') as HTMLElement
   if (!el) return
-  const { toPng } = await import('html-to-image')
-  const dataUrl = await toPng(el, { pixelRatio: 2 })
-  const a = document.createElement('a')
-  a.href = dataUrl
-  a.download = 'json-graph.png'
-  a.click()
+  const controls = el.querySelector('.vue-flow__controls') as HTMLElement | null
+  if (controls) controls.style.visibility = 'hidden'
+  try {
+    const { toPng } = await import('html-to-image')
+    const dataUrl = await toPng(el, { pixelRatio: 2, backgroundColor: '#1A1B1E' })
+    const a = document.createElement('a')
+    a.href = dataUrl
+    a.download = 'json-graph.png'
+    a.click()
+  } finally {
+    if (controls) controls.style.visibility = ''
+  }
 }
 
 const isDragging = ref(false)
@@ -257,7 +263,7 @@ const seoCards = [
 /* ── Print styles — tree PDF export ──────────────────────────────── */
 @media print {
   header, footer, nav,
-  .page-header, .toolbar, .seo-section { display: none !important; }
+  .page-header, .toolbar, .about { display: none !important; }
   .tree-layout { display: block !important; }
   .tree-layout > .editor-card:first-child { display: none !important; }
   .output-header { display: none !important; }
