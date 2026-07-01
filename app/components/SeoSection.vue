@@ -115,9 +115,9 @@ useHead(() => ({
 }
 
 .related-link:hover {
-  color: #F97316;
-  border-color: rgba(249, 115, 22, 0.35);
-  background: rgba(249, 115, 22, 0.05);
+  color: var(--c-brand);
+  border-color: rgb(var(--c-brand-rgb) / 0.35);
+  background: rgb(var(--c-brand-rgb) / 0.05);
 }
 
 @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }

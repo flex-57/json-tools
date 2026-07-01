@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -160,7 +160,7 @@ const rightFocus = ref(false)
 
 /* Editors — shorter min-height for the diff tool */
 .editors { min-height: 320px; }
-.editor-card--focus { border-color: #FDBA74; box-shadow: 0 0 0 3px rgba(249,115,22,0.08); }
+.editor-card--focus { border-color: #FDBA74; box-shadow: 0 0 0 3px rgb(var(--c-brand-rgb) / 0.08); }
 .editor-card-header { padding: 11px 16px; }
 .label-wrap { display: flex; align-items: center; gap: 8px; }
 .side-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }

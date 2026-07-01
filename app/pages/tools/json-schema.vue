@@ -158,7 +158,7 @@ const seoCards = [
   background: var(--c-border-m); transition: background 0.18s;
   flex-shrink: 0;
 }
-.toggle-switch--on { background: #F97316; }
+.toggle-switch--on { background: var(--c-brand); }
 .toggle-thumb {
   position: absolute; top: 3px; left: 3px;
   width: 12px; height: 12px; border-radius: 50%;

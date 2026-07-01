@@ -146,11 +146,11 @@ const SYNTAX = [
   ['*italic*',          '<em>italic</em>',                                                   '<em>'],
   ['~~strike~~',        '<del>strike</del>',                                                '<del>'],
   ['`code`',            '<code style="background:var(--c-card-alt);padding:1px 4px;border-radius:3px;font-size:.88em">code</code>', '<code>'],
-  ['[text](url)',       '<span style="color:#F97316">text</span>',                          '<a href="url">'],
+  ['[text](url)',       '<span style="color:var(--c-brand)">text</span>',                          '<a href="url">'],
   ['![alt](img.png)',   '<em style="color:var(--c-t4)">image</em>',                        '<img alt="alt">'],
   ['- item',            '• item',                                                            '<ul><li>'],
   ['1. item',           '1. item',                                                           '<ol><li>'],
-  ['> quote',           '<span style="border-left:3px solid #F97316;padding-left:8px;color:var(--c-t3)">quote</span>', '<blockquote>'],
+  ['> quote',           '<span style="border-left:3px solid var(--c-brand);padding-left:8px;color:var(--c-t3)">quote</span>', '<blockquote>'],
   ['---',               '<hr style="border-top:1px solid var(--c-border);margin:4px 0">',   '<hr>'],
 ]
 
@@ -276,7 +276,7 @@ const FLAVORS = [
   border: 1px solid var(--c-border-s);
   border-radius: 4px;
   padding: 1px 5px;
-  color: #F97316;
+  color: var(--c-brand);
 }
 
 .mdr-list {
@@ -286,7 +286,7 @@ const FLAVORS = [
 }
 
 .mdr-blockquote {
-  border-left: 3px solid #F97316;
+  border-left: 3px solid var(--c-brand);
   padding: 6px 12px;
   background: var(--c-faint);
   border-radius: 0 6px 6px 0;
@@ -361,7 +361,7 @@ const FLAVORS = [
 }
 
 .usage-icon {
-  color: #F97316;
+  color: var(--c-brand);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -418,7 +418,7 @@ const FLAVORS = [
 .guide-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
 
 /* ── Inline link ───────────────────────────────────────────── */
-.inline-link { color: #F97316; text-decoration: none; font-weight: 500; }
+.inline-link { color: var(--c-brand); text-decoration: none; font-weight: 500; }
 .inline-link:hover { text-decoration: underline; }
 
 /* ── Responsive ────────────────────────────────────────────── */

@@ -327,7 +327,7 @@ const cards = [
 }
 .strength-fill.s0 { background: var(--c-border); }
 .strength-fill.s1 { background: #ef4444; }
-.strength-fill.s2 { background: #f97316; }
+.strength-fill.s2 { background: var(--c-brand); }
 .strength-fill.s3 { background: #eab308; }
 .strength-fill.s4 { background: #22c55e; }
 
@@ -338,7 +338,7 @@ const cards = [
 }
 .strength-label.s0 { color: var(--c-t4); }
 .strength-label.s1 { color: #ef4444; }
-.strength-label.s2 { color: #f97316; }
+.strength-label.s2 { color: var(--c-brand); }
 .strength-label.s3 { color: #ca8a04; }
 .strength-label.s4 { color: #16a34a; }
 

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -196,7 +196,7 @@ const seoCards = [
 .result-badge {
   font-size: 12px;
   font-weight: 500;
-  color: #F97316;
+  color: var(--c-brand);
   background: #FFF7ED;
   border: 1px solid #FED7AA;
   border-radius: 20px;

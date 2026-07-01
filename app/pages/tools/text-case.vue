@@ -108,13 +108,13 @@ const seoCards = [
 }
 .input-card--focused {
   border-color: #FDBA74;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(249,115,22,0.08), 0 0 0 3px rgba(249,115,22,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgb(var(--c-brand-rgb) / 0.08), 0 0 0 3px rgb(var(--c-brand-rgb) / 0.08);
 }
 .input-glow {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #F97316 0%, #FDBA74 60%, transparent 100%);
+  background: linear-gradient(90deg, var(--c-brand) 0%, #FDBA74 60%, transparent 100%);
   opacity: 0;
   transition: opacity 0.25s;
   z-index: 1;
@@ -174,9 +174,9 @@ const seoCards = [
   font-size: 10.5px;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  color: #F97316;
-  background: rgba(249,115,22,0.08);
-  border: 1px solid rgba(249,115,22,0.2);
+  color: var(--c-brand);
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  border: 1px solid rgb(var(--c-brand-rgb) / 0.2);
   border-radius: 4px;
   padding: 2px 7px;
   white-space: nowrap;

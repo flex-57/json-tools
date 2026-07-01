@@ -225,7 +225,7 @@ const PATTERNS = [
     name: 'Hex color',
     pattern: '^#([0-9a-f]{3}|[0-9a-f]{6})$',
     flags: 'i',
-    ok: ['#fff', '#F97316', '#000000'],
+    ok: ['#fff', 'var(--c-brand)', '#000000'],
     no: ['#gg0000', 'F97316', '#12345'],
   },
   {
@@ -258,7 +258,7 @@ const PATTERNS = [
 
 .rp { padding: 2px 1px; border-radius: 3px; }
 .rp--delim   { color: #6B7280; }
-.rp--anchor  { color: #F97316; }
+.rp--anchor  { color: var(--c-brand); }
 .rp--class   { color: #60A5FA; }
 .rp--quant   { color: #4ADE80; }
 .rp--literal { color: #F1F0EE; }
@@ -278,7 +278,7 @@ const PATTERNS = [
   border-radius: 20px;
 }
 .rl--delim   { color: #6B7280; background: rgba(107,114,128,0.1); border: 1px solid rgba(107,114,128,0.2); }
-.rl--anchor  { color: #F97316; background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); }
+.rl--anchor  { color: var(--c-brand); background: rgb(var(--c-brand-rgb) / 0.08); border: 1px solid rgb(var(--c-brand-rgb) / 0.2); }
 .rl--class   { color: #60A5FA; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2); }
 .rl--quant   { color: #4ADE80; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); }
 .rl--literal { color: #F1F0EE; background: rgba(241,240,238,0.06); border: 1px solid rgba(241,240,238,0.12); }

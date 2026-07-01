@@ -251,8 +251,8 @@ const DIFF_ROWS = [
 .use-card code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
-  background: rgba(249, 115, 22, 0.08);
-  color: #F97316;
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  color: var(--c-brand);
   padding: 1px 5px;
   border-radius: 4px;
 }

@@ -220,9 +220,9 @@ const recentTools = computed(() =>
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #F97316;
-  background: rgba(249, 115, 22, 0.1);
-  border: 1px solid rgba(249, 115, 22, 0.2);
+  color: var(--c-brand);
+  background: rgb(var(--c-brand-rgb) / 0.1);
+  border: 1px solid rgb(var(--c-brand-rgb) / 0.2);
   border-radius: 20px;
   padding: 4px 14px;
   margin-bottom: 20px;
@@ -239,7 +239,7 @@ const recentTools = computed(() =>
 
 .hero-title em {
   font-style: normal;
-  color: #F97316;
+  color: var(--c-brand);
 }
 
 .hero-sub {
@@ -272,7 +272,7 @@ const recentTools = computed(() =>
 }
 
 .search-box:focus-within {
-  border-color: rgba(249, 115, 22, 0.5);
+  border-color: rgb(var(--c-brand-rgb) / 0.5);
 }
 
 .search-icon {
@@ -378,10 +378,10 @@ const recentTools = computed(() =>
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(249, 115, 22, 0.08);
-  border: 1px solid rgba(249, 115, 22, 0.15);
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  border: 1px solid rgb(var(--c-brand-rgb) / 0.15);
   border-radius: 10px;
-  color: #F97316;
+  color: var(--c-brand);
   flex-shrink: 0;
 }
 
@@ -417,8 +417,8 @@ const recentTools = computed(() =>
 }
 
 .tool-card:hover {
-  background: rgba(249, 115, 22, 0.05);
-  border-color: rgba(249, 115, 22, 0.3);
+  background: rgb(var(--c-brand-rgb) / 0.05);
+  border-color: rgb(var(--c-brand-rgb) / 0.3);
 }
 
 .tool-icon {
@@ -429,7 +429,7 @@ const recentTools = computed(() =>
   transition: color 0.15s;
 }
 
-.tool-card:hover .tool-icon { color: #F97316; }
+.tool-card:hover .tool-icon { color: var(--c-brand); }
 
 .tool-name {
   font-size: 12.5px;
@@ -467,10 +467,10 @@ const recentTools = computed(() =>
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(249, 115, 22, 0.08);
-  border: 1px solid rgba(249, 115, 22, 0.15);
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  border: 1px solid rgb(var(--c-brand-rgb) / 0.15);
   border-radius: 10px;
-  color: #F97316;
+  color: var(--c-brand);
   flex-shrink: 0;
 }
 

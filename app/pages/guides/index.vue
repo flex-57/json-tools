@@ -141,7 +141,7 @@ useHead({
   text-decoration: none;
   transition: color 0.15s;
 }
-.bc-link:hover { color: #F97316; }
+.bc-link:hover { color: var(--c-brand); }
 .bc-sep     { font-size: 12px; color: var(--c-t5); }
 .bc-current { font-size: 12.5px; color: var(--c-t3); }
 
@@ -216,8 +216,8 @@ useHead({
 }
 
 .guide-card:hover {
-  border-color: #F97316;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+  border-color: var(--c-brand);
+  box-shadow: 0 0 0 3px rgb(var(--c-brand-rgb) / 0.08);
 }
 
 .guide-card-title {
@@ -253,7 +253,7 @@ useHead({
   transition: color 0.15s, transform 0.15s;
 }
 .guide-card:hover .guide-card-arrow {
-  color: #F97316;
+  color: var(--c-brand);
   transform: translateX(4px);
 }
 

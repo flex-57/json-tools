@@ -122,7 +122,7 @@ async function createInputEditor() {
           '.cm-scroller': { overflow: 'auto', fontFamily: "'JetBrains Mono', monospace", lineHeight: '1.7' },
           '.cm-content': { padding: '14px 16px', caretColor: 'var(--c-t1)' },
           '.cm-line': { padding: '0' },
-          '.cm-cursor': { borderLeftColor: '#F97316' },
+          '.cm-cursor': { borderLeftColor: 'var(--c-brand)' },
           '.cm-placeholder': { color: 'var(--c-t5)' },
           '.cm-gutters': { display: 'none' },
           '.cm-focused': { outline: 'none !important' },
@@ -328,13 +328,13 @@ const seoCards = [
 
 .panel-card--focused {
   border-color: #FDBA74;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(249,115,22,0.08), 0 0 0 3px rgba(249,115,22,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgb(var(--c-brand-rgb) / 0.08), 0 0 0 3px rgb(var(--c-brand-rgb) / 0.08);
 }
 .panel-card-glow {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #F97316 0%, #FDBA74 60%, transparent 100%);
+  background: linear-gradient(90deg, var(--c-brand) 0%, #FDBA74 60%, transparent 100%);
   opacity: 0;
   transition: opacity 0.25s;
   z-index: 1;
@@ -415,7 +415,7 @@ const seoCards = [
 .markdown-body :deep(li > ul), .markdown-body :deep(li > ol) { margin: 0.15em 0; }
 
 .markdown-body :deep(blockquote) {
-  border-left: 3px solid #F97316;
+  border-left: 3px solid var(--c-brand);
   margin: 0.8em 0;
   padding: 0.5em 1em;
   color: var(--c-t3);
@@ -432,7 +432,7 @@ const seoCards = [
   background: var(--c-card-alt);
   border: 1px solid var(--c-border-s);
   border-radius: 4px;
-  color: #F97316;
+  color: var(--c-brand);
 }
 .markdown-body :deep(.md-code-block) {
   border: 1px solid var(--c-border);
@@ -460,7 +460,7 @@ const seoCards = [
 }
 .markdown-body :deep(tr:nth-child(even) td) { background: var(--c-faint); }
 
-.markdown-body :deep(a) { color: #F97316; text-decoration: none; }
+.markdown-body :deep(a) { color: var(--c-brand); text-decoration: none; }
 .markdown-body :deep(a:hover) { text-decoration: underline; }
 
 .markdown-body :deep(hr) {

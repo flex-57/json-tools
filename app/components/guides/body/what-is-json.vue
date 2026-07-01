@@ -144,7 +144,7 @@ const TYPES = [
   },
   {
     name: 'array',
-    color: '#F97316', bg: 'rgba(249,115,22,0.08)', border: 'rgba(249,115,22,0.25)',
+    color: 'var(--c-brand)', bg: 'rgb(var(--c-brand-rgb) / 0.08)', border: 'rgb(var(--c-brand-rgb) / 0.25)',
     examples: ['[1, 2, 3]', '["a", "b"]', '[]'],
     note: 'Ordered list of any JSON values. Can be mixed types.',
   },
@@ -445,8 +445,8 @@ const USES = [
   display: block;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
-  color: #F97316;
-  background: rgba(249,115,22,0.06);
+  color: var(--c-brand);
+  background: rgb(var(--c-brand-rgb) / 0.06);
   padding: 4px 8px;
   border-radius: 5px;
   word-break: break-all;

@@ -169,8 +169,8 @@
 }
 
 .b64-compare-head--alt {
-  background: rgba(249, 115, 22, 0.06);
-  color: #F97316;
+  background: rgb(var(--c-brand-rgb) / 0.06);
+  color: var(--c-brand);
 }
 
 .b64-compare-row {
@@ -195,8 +195,8 @@
 .b64-compare-row code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
-  background: rgba(249, 115, 22, 0.08);
-  color: #F97316;
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  color: var(--c-brand);
   padding: 1px 5px;
   border-radius: 4px;
 }

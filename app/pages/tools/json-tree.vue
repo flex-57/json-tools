@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -310,7 +310,7 @@ const seoCards = [
   background: var(--c-subtle); border: 1px solid var(--c-border); border-radius: 6px;
   font-size: 12px; color: var(--c-t2); outline: none; transition: border-color 0.15s;
 }
-.tree-search:focus { border-color: #F97316; }
+.tree-search:focus { border-color: var(--c-brand); }
 .tree-search-clear {
   position: absolute; right: 6px;
   background: none; border: none; cursor: pointer;

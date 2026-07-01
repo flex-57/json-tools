@@ -206,7 +206,7 @@
   letter-spacing: -0.3px;
   margin-bottom: 6px;
 }
-.brand-name em { font-style: normal; color: #F97316; }
+.brand-name em { font-style: normal; color: var(--c-brand); }
 
 .brand-tagline {
   font-size: 12.5px;
@@ -246,7 +246,7 @@
   font-family: 'JetBrains Mono', monospace;
   transition: color 0.15s;
 }
-.footer-link:hover { color: #F97316; }
+.footer-link:hover { color: var(--c-brand); }
 
 /* ── Guides bande basse (desktop) ────────────────────────── */
 .footer-guides-desktop {
@@ -288,7 +288,7 @@
   white-space: nowrap;
   transition: color 0.15s, border-color 0.15s;
 }
-.footer-pill:hover { color: #F97316; border-color: rgba(249,115,22,0.3); }
+.footer-pill:hover { color: var(--c-brand); border-color: rgb(var(--c-brand-rgb) / 0.3); }
 
 /* ── Mobile nav — rows + pills ───────────────────────────── */
 .footer-nav-mobile { display: none; }
@@ -334,7 +334,7 @@
   text-decoration: none;
   transition: color 0.15s;
 }
-.footer-bottom-link:hover { color: #F97316; }
+.footer-bottom-link:hover { color: var(--c-brand); }
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {

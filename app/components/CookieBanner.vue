@@ -88,8 +88,8 @@ const { consent, accept, decline } = useConsent()
 .cookie-btn--decline:hover { border-color: rgba(255,255,255,0.2); color: #8B949E; }
 
 .cookie-btn--accept {
-  background: #F97316;
-  border: 1px solid #F97316;
+  background: var(--c-brand);
+  border: 1px solid var(--c-brand);
   color: white;
 }
 .cookie-btn--accept:hover { background: #EA6C0A; }

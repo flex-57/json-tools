@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -157,9 +157,9 @@ const seoCards = [
   position: absolute;
   top: 3px; bottom: 3px; left: 3px;
   width: calc(50% - 3px);
-  background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+  background: linear-gradient(135deg, var(--c-brand) 0%, #FB923C 100%);
   border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(249,115,22,0.4), 0 2px 10px rgba(249,115,22,0.15);
+  box-shadow: 0 1px 4px rgb(var(--c-brand-rgb) / 0.4), 0 2px 10px rgb(var(--c-brand-rgb) / 0.15);
   transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
@@ -216,14 +216,14 @@ const seoCards = [
 
 .panel-card--focused {
   border-color: #FDBA74;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(249,115,22,0.08), 0 0 0 3px rgba(249,115,22,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgb(var(--c-brand-rgb) / 0.08), 0 0 0 3px rgb(var(--c-brand-rgb) / 0.08);
 }
 /* Gradient strip at top — fades in when focused */
 .panel-card-glow {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #F97316 0%, #FDBA74 60%, transparent 100%);
+  background: linear-gradient(90deg, var(--c-brand) 0%, #FDBA74 60%, transparent 100%);
   opacity: 0;
   transition: opacity 0.25s;
   z-index: 1;
@@ -282,7 +282,7 @@ const seoCards = [
 
 /* ── Info strip ──────────────────────────────────────────────────── */
 .info-sep { color: var(--c-border-m); }
-.info-jwt { color: #F97316; font-weight: 500; }
+.info-jwt { color: var(--c-brand); font-weight: 500; }
 
 /* ── Transitions ─────────────────────────────────────────────────── */
 .fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }

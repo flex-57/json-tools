@@ -97,8 +97,8 @@ useSeoMeta({
 .legal-section code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
-  background: rgba(249, 115, 22, 0.08);
-  color: #F97316;
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  color: var(--c-brand);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -116,7 +116,7 @@ useSeoMeta({
   transition: color 0.15s;
 }
 
-.legal-back-link:hover { color: #F97316; }
+.legal-back-link:hover { color: var(--c-brand); }
 
 @media (max-width: 768px) {
   .legal-page { padding: 32px 16px 64px; }

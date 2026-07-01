@@ -253,7 +253,7 @@ useHead({
   text-decoration: none;
   transition: color 0.15s;
 }
-.bc-link:hover { color: #F97316; }
+.bc-link:hover { color: var(--c-brand); }
 .bc-sep     { font-size: 12px; color: var(--c-t5); }
 .bc-current { font-size: 12.5px; color: var(--c-t3); }
 
@@ -346,7 +346,7 @@ useHead({
   transition: color 0.15s;
 }
 
-.toc-link:hover { color: #F97316; }
+.toc-link:hover { color: var(--c-brand); }
 
 /* ── Tool CTA cards ─────────────────────────────────────── */
 .guide-tools {
@@ -383,8 +383,8 @@ useHead({
 }
 
 .tool-card:hover {
-  border-color: #F97316;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+  border-color: var(--c-brand);
+  box-shadow: 0 0 0 3px rgb(var(--c-brand-rgb) / 0.08);
 }
 
 .tool-card-icon {
@@ -393,7 +393,7 @@ useHead({
   justify-content: center;
   width: 16px;
   height: 16px;
-  color: #F97316;
+  color: var(--c-brand);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -419,7 +419,7 @@ useHead({
   align-self: center;
   transition: color 0.15s, transform 0.15s;
 }
-.tool-card:hover .tool-card-arrow { color: #F97316; transform: translateX(3px); }
+.tool-card:hover .tool-card-arrow { color: var(--c-brand); transform: translateX(3px); }
 
 /* ── FAQ ────────────────────────────────────────────────── */
 .guide-faq {
@@ -461,8 +461,8 @@ useHead({
   color: var(--c-t1);
   transition: background 0.15s;
 }
-.faq-q:hover { background: rgba(249, 115, 22, 0.04); }
-.faq-item--open .faq-q { color: #F97316; }
+.faq-q:hover { background: rgb(var(--c-brand-rgb) / 0.04); }
+.faq-item--open .faq-q { color: var(--c-brand); }
 
 .faq-chevron {
   flex-shrink: 0;

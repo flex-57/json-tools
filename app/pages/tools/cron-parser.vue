@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -283,7 +283,7 @@ const seoCards = [
 .desc-icon {
   width: 32px;
   height: 32px;
-  background: #F97316;
+  background: var(--c-brand);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -372,7 +372,7 @@ const seoCards = [
 
 .schedule-rel {
   font-size: 11px;
-  color: #F97316;
+  color: var(--c-brand);
   font-weight: 500;
 }
 
@@ -432,7 +432,7 @@ const seoCards = [
 .ref-expr {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  color: #F97316;
+  color: var(--c-brand);
   background: #FFF7ED;
   border-radius: 4px;
   padding: 2px 6px;

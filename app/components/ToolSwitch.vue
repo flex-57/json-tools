@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="tool-switch">
     <NuxtLink :to="fromPath" class="switch-option" :class="{ 'switch-option--active': isFrom }">
       {{ fromLabel }}
@@ -62,9 +62,9 @@ function toggle() {
 }
 
 .switch-option--active {
-  background: #F97316;
+  background: var(--c-brand);
   color: white;
-  box-shadow: 0 1px 4px rgba(249,115,22,0.35);
+  box-shadow: 0 1px 4px rgb(var(--c-brand-rgb) / 0.35);
 }
 
 .switch-arrow {
@@ -84,6 +84,6 @@ function toggle() {
 
 .switch-arrow:hover {
   background: var(--c-bg);
-  color: #F97316;
+  color: var(--c-brand);
 }
 </style>

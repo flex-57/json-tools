@@ -381,7 +381,7 @@ body {
 
 .brand-name em {
   font-style: normal;
-  color: #F97316;
+  color: var(--c-brand);
 }
 
 /* ── Desktop nav ────────────────────────────────────────────────── */
@@ -407,7 +407,7 @@ body {
 }
 
 .nav-item--active {
-  background: rgba(249, 115, 22, 0.12) !important;
+  background: rgb(var(--c-brand-rgb) / 0.12) !important;
   color: #FB923C !important;
 }
 
@@ -467,7 +467,7 @@ body {
 }
 
 .nav-dropdown-item.router-link-active {
-  background: rgba(249,115,22,0.12);
+  background: rgb(var(--c-brand-rgb) / 0.12);
   color: #FB923C;
 }
 
@@ -617,7 +617,7 @@ body {
 .mobile-nav-item:hover,
 .mobile-nav-item:active { background: rgba(255,255,255,0.06); color: #E5E7EB; }
 
-.mobile-nav-item.router-link-active { background: rgba(249,115,22,0.12); color: #FB923C; }
+.mobile-nav-item.router-link-active { background: rgb(var(--c-brand-rgb) / 0.12); color: #FB923C; }
 
 /* ── Drawer transition ──────────────────────────────────────────── */
 .mobile-drawer-enter-active,
@@ -667,7 +667,7 @@ body {
   transition: color 0.15s;
 }
 
-.bc-home:hover { color: #F97316; }
+.bc-home:hover { color: var(--c-brand); }
 
 .bc-sep {
   font-size: 12px;

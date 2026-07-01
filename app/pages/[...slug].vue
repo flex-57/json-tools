@@ -47,7 +47,7 @@ useSeoMeta({
 }
 
 .error-num {
-  color: #F97316;
+  color: var(--c-brand);
 }
 
 .error-title {

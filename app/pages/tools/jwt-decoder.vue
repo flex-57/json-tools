@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -280,7 +280,7 @@ function formatDate(d: Date): string {
 .decoded-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .decoded-dot--header { background: #3B82F6; }
 .decoded-dot--payload { background: #16A34A; }
-.decoded-dot--signature { background: #F97316; }
+.decoded-dot--signature { background: var(--c-brand); }
 
 
 .decoded-body { padding: 8px 0; }

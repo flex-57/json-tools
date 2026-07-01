@@ -147,7 +147,7 @@
 .uuid-part { padding: 2px 0; }
 .uuid-a { color: #60a5fa; }
 .uuid-b { color: #34d399; }
-.uuid-c { color: #f97316; }
+.uuid-c { color: var(--c-brand); }
 .uuid-d { color: #a78bfa; }
 .uuid-e { color: #f472b6; }
 
@@ -161,7 +161,7 @@
 .ul { padding: 2px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
 .ul-a { background: rgba(96,165,250,0.12);  color: #60a5fa; }
 .ul-b { background: rgba(52,211,153,0.12);  color: #34d399; }
-.ul-c { background: rgba(249,115,22,0.12);  color: #f97316; }
+.ul-c { background: rgb(var(--c-brand-rgb) / 0.12);  color: var(--c-brand); }
 .ul-d { background: rgba(167,139,250,0.12); color: #a78bfa; }
 .ul-e { background: rgba(244,114,182,0.12); color: #f472b6; }
 .uuid-caption { font-size: 12.5px; color: var(--c-t4); }

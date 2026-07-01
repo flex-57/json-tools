@@ -154,9 +154,9 @@ const seoCards = [
   position: absolute;
   top: 3px; bottom: 3px; left: 3px;
   width: calc((100% - 6px) / 3);
-  background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+  background: linear-gradient(135deg, var(--c-brand) 0%, #FB923C 100%);
   border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(249,115,22,0.4), 0 2px 10px rgba(249,115,22,0.15);
+  box-shadow: 0 1px 4px rgb(var(--c-brand-rgb) / 0.4), 0 2px 10px rgb(var(--c-brand-rgb) / 0.15);
   transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
@@ -251,7 +251,7 @@ const seoCards = [
   transition: all 0.15s;
   white-space: nowrap;
 }
-.btn-hint:hover:not(:disabled) { color: #F97316; border-color: rgba(249,115,22,0.4); background: rgba(249,115,22,0.05); }
+.btn-hint:hover:not(:disabled) { color: var(--c-brand); border-color: rgb(var(--c-brand-rgb) / 0.4); background: rgb(var(--c-brand-rgb) / 0.05); }
 .btn-hint:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* ── Output card ─────────────────────────────────────────────────── */

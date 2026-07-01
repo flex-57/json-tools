@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
       <div>
@@ -61,7 +61,7 @@
               <rect x="6" y="4" width="24" height="30" rx="3" stroke="#D1CEC8" stroke-width="2"/>
               <path d="M14 4v8h8" stroke="#D1CEC8" stroke-width="2" stroke-linecap="round"/>
               <path d="M13 22h14M13 27h10" stroke="#D1CEC8" stroke-width="1.5" stroke-linecap="round"/>
-              <rect x="4" y="16" width="14" height="10" rx="2" fill="#F97316"/>
+              <rect x="4" y="16" width="14" height="10" rx="2" fill="var(--c-brand)"/>
               <path d="M8 19l2 4 2-4M13 19v6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
@@ -86,7 +86,7 @@
         <div v-if="loading" class="loading-overlay">
           <svg class="spinner" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="10" stroke="#E8E5DF" stroke-width="2"/>
-            <path d="M12 2a10 10 0 0110 10" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 2a10 10 0 0110 10" stroke="var(--c-brand)" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
       </div>
@@ -173,7 +173,7 @@ function formatSize(bytes: number) {
   align-items: center;
 }
 .drop-zone:hover { border-color: #FDBA74; background: #FFFBF6; }
-.drop-zone--active { border-color: #F97316 !important; border-style: dashed; background: #FFFBF6 !important; }
+.drop-zone--active { border-color: var(--c-brand) !important; border-style: dashed; background: #FFFBF6 !important; }
 .drop-zone--loaded { cursor: default; }
 .drop-zone--loaded:hover { border-color: var(--c-border); background: var(--c-card); }
 .drop-icon svg rect, .drop-icon svg path, .drop-icon svg circle { stroke: var(--c-border); }

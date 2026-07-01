@@ -280,7 +280,7 @@ const seoCards = [
   flex-shrink: 0;
 }
 
-.toggle-input:checked + .toggle-track { background: #F97316; }
+.toggle-input:checked + .toggle-track { background: var(--c-brand); }
 
 .toggle-thumb {
   position: absolute;

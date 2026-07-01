@@ -98,7 +98,7 @@ useSeoMeta({
   transition: color 0.15s;
 }
 
-.legal-back-link:hover { color: #F97316; }
+.legal-back-link:hover { color: var(--c-brand); }
 
 @media (max-width: 768px) {
   .legal-page { padding: 32px 16px 64px; }

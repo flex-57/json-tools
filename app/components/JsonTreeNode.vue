@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="tn" :class="{ 'tn--dim': isDimmed }">
     <div class="tn-row" :class="{ 'tn-row--clickable': hasChildren }" @click="hasChildren ? toggle(node.id) : null">
       <span v-for="d in depth" :key="d" class="tn-indent"><span class="tn-guide" /></span>
@@ -147,7 +147,7 @@ const { copied, copy } = useClipboard(() => props.node.path)
 .tn-chevron--open { transform: rotate(90deg); }
 
 .tn-key { color: #E06C75; white-space: nowrap; }
-.tn-key--match { background: rgba(249,115,22,0.2); border-radius: 3px; padding: 0 2px; }
+.tn-key--match { background: rgb(var(--c-brand-rgb) / 0.2); border-radius: 3px; padding: 0 2px; }
 .tn-key-text { color: #E06C75; }
 .tn-index { color: #5C6470; }
 .tn-sep { color: #5C6470; }
@@ -168,7 +168,7 @@ const { copied, copy } = useClipboard(() => props.node.path)
 .tn-val--number  { color: #61AFEF; }
 .tn-val--boolean { color: #E5C07B; }
 .tn-val--null    { color: #5C6470; font-style: italic; }
-.tn-val--match   { background: rgba(249,115,22,0.2); border-radius: 3px; padding: 0 2px; }
+.tn-val--match   { background: rgb(var(--c-brand-rgb) / 0.2); border-radius: 3px; padding: 0 2px; }
 
 .tn-copy {
   opacity: 0.25;

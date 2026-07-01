@@ -198,8 +198,8 @@ const algoOpen = ref<number | null>(null)
 .algo-row code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
-  background: rgba(249, 115, 22, 0.08);
-  color: #F97316;
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  color: var(--c-brand);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -224,13 +224,13 @@ const algoOpen = ref<number | null>(null)
   transition: background 0.15s;
 }
 .algo-acc-trigger:hover,
-.algo-acc-item--open .algo-acc-trigger { background: rgba(249, 115, 22, 0.04); }
+.algo-acc-item--open .algo-acc-trigger { background: rgb(var(--c-brand-rgb) / 0.04); }
 
 .algo-acc-trigger code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  background: rgba(249, 115, 22, 0.08);
-  color: #F97316;
+  background: rgb(var(--c-brand-rgb) / 0.08);
+  color: var(--c-brand);
   padding: 2px 6px;
   border-radius: 4px;
 }

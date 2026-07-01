@@ -150,7 +150,7 @@ const cards = [
   cursor: pointer;
   transition: border-color 0.15s;
 }
-.indent-select:focus { outline: none; border-color: #F97316; }
+.indent-select:focus { outline: none; border-color: var(--c-brand); }
 
 .editor-body { flex-direction: column; }
 </style>

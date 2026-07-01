@@ -203,9 +203,9 @@ useHead({
   transition: background 0.15s, color 0.15s;
 }
 
-.faq-q:hover { background: rgba(249, 115, 22, 0.04); }
+.faq-q:hover { background: rgb(var(--c-brand-rgb) / 0.04); }
 
-.faq-item--open .faq-q { color: #F97316; }
+.faq-item--open .faq-q { color: var(--c-brand); }
 
 .faq-chevron {
   flex-shrink: 0;
@@ -246,7 +246,7 @@ useHead({
 .faq-cta-btn {
   display: inline-block;
   padding: 10px 22px;
-  background: #F97316;
+  background: var(--c-brand);
   color: #fff;
   font-size: 13.5px;
   font-weight: 600;

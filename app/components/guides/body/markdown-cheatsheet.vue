@@ -185,13 +185,13 @@ const FORMAT = [
   ['***bold italic***',     '<strong><em>bold italic</em></strong>',                   ''],
   ['~~strikethrough~~',     '<del>strikethrough</del>',                                'GFM extension'],
   ['`inline code`',         '<code class="r-inline">inline code</code>',              ''],
-  ['==highlight==',         '<mark style="background:#F97316;color:#fff;padding:0 3px;border-radius:2px">highlight</mark>', 'Not all parsers'],
+  ['==highlight==',         '<mark style="background:var(--c-brand);color:#fff;padding:0 3px;border-radius:2px">highlight</mark>', 'Not all parsers'],
 ]
 
 const LINKS = [
-  ['[text](https://example.com)',       '<a style="color:#F97316">text</a>'],
-  ['[text](url "tooltip")',             '<a style="color:#F97316" title="tooltip">text with tooltip</a>'],
-  ['<https://example.com>',             '<a style="color:#F97316">https://example.com</a> (auto-link)'],
+  ['[text](https://example.com)',       '<a style="color:var(--c-brand)">text</a>'],
+  ['[text](url "tooltip")',             '<a style="color:var(--c-brand)" title="tooltip">text with tooltip</a>'],
+  ['<https://example.com>',             '<a style="color:var(--c-brand)">https://example.com</a> (auto-link)'],
   ['![alt text](image.png)',            '<span style="color:var(--c-t4);font-style:italic">🖼 image (alt text)</span>'],
   ['[![alt](img.png)](url)',            '<span style="color:var(--c-t4);font-style:italic">🖼 clickable image</span>'],
 ]
@@ -222,7 +222,7 @@ const LISTS = [
 
 <style scoped>
 /* ── Inline link ───────────────────────────────────────────── */
-.inline-link { color: #F97316; text-decoration: none; font-weight: 500; }
+.inline-link { color: var(--c-brand); text-decoration: none; font-weight: 500; }
 .inline-link:hover { text-decoration: underline; }
 
 /* ── Cheat table ───────────────────────────────────────────── */
@@ -279,12 +279,12 @@ const LISTS = [
   border: 1px solid var(--c-border-s);
   border-radius: 4px;
   padding: 1px 5px;
-  color: #F97316;
+  color: var(--c-brand);
 }
 
 /* ── Blockquote render ─────────────────────────────────────── */
 .r-bq {
-  border-left: 3px solid #F97316;
+  border-left: 3px solid var(--c-brand);
   padding: 4px 10px;
   background: var(--c-faint);
   border-radius: 0 5px 5px 0;
