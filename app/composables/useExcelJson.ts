@@ -12,46 +12,93 @@ export interface ExcelConvertResult {
   activeSheet: string
 }
 
+const WORKER_TIMEOUT_MS = 30_000
+
+let _worker: Worker | null = null
+
+function getWorker(): Worker | null {
+  if (!import.meta.client) return null
+  if (!_worker) {
+    try {
+      _worker = new Worker(new URL('../workers/excel.worker.ts', import.meta.url), { type: 'module' })
+      _worker.onerror = () => { _worker = null }
+    }
+    catch {
+      return null
+    }
+  }
+  return _worker
+}
+
+function callWorker<T>(payload: Record<string, unknown>, transfer: Transferable[] = []): Promise<T> {
+  return new Promise<T>((resolve) => {
+    const worker = getWorker()
+    if (!worker) {
+      resolve({ error: 'Worker unavailable' } as unknown as T)
+      return
+    }
+
+    const { port1, port2 } = new MessageChannel()
+
+    const timer = setTimeout(() => {
+      port1.close()
+      _worker?.terminate()
+      _worker = null
+      resolve({ error: 'Excel processing timed out' } as unknown as T)
+    }, WORKER_TIMEOUT_MS)
+
+    port1.onmessage = (e: MessageEvent) => {
+      clearTimeout(timer)
+      port1.close()
+      resolve(e.data as T)
+    }
+
+    port1.onmessageerror = () => {
+      clearTimeout(timer)
+      port1.close()
+      resolve({ error: 'Worker message error' } as unknown as T)
+    }
+
+    worker.postMessage({ ...payload, port: port2 }, [port2, ...transfer])
+  })
+}
+
 export async function excelToJson(file: File, sheetName?: string, hasHeader = true): Promise<ExcelConvertResult> {
-  const XLSX = await import('xlsx')
   try {
     const buffer = await file.arrayBuffer()
-    const wb = XLSX.read(buffer, { type: 'array' })
-
-    const sheets: SheetInfo[] = wb.SheetNames.map(name => ({
-      name,
-      rowCount: XLSX.utils.sheet_to_json(wb.Sheets[name]!).length,
-    }))
-
-    const target = sheetName ?? wb.SheetNames[0] ?? ''
-    const ws = wb.Sheets[target]
-    if (!ws) return { output: '', error: `Sheet "${target}" not found`, sheets, activeSheet: target }
-
-    const data = XLSX.utils.sheet_to_json(ws, { header: hasHeader ? undefined : 1, defval: null })
+    const result = await callWorker<ExcelConvertResult>(
+      { type: 'excelToJson', buffer, sheetName, hasHeader },
+      [buffer],
+    )
     return {
-      output: JSON.stringify(data, null, 2),
-      error: null,
-      sheets,
-      activeSheet: target,
+      output: result.output ?? '',
+      error: result.error ?? null,
+      sheets: result.sheets ?? [],
+      activeSheet: result.activeSheet ?? '',
     }
-  } catch (e) {
+  }
+  catch (e) {
     return { output: '', error: (e as Error).message, sheets: [], activeSheet: '' }
   }
 }
 
-export async function jsonToExcel(input: string, sheetName = 'Sheet1'): Promise<{ blob: Blob | null, error: string | null }> {
+export async function jsonToExcel(input: string, sheetName = 'Sheet1'): Promise<{ blob: Blob | null; error: string | null }> {
   const trimmed = input.trim()
   if (!trimmed) return { blob: null, error: 'empty' }
   try {
-    const XLSX = await import('xlsx')
-    const parsed = JSON.parse(trimmed)
-    const arr = Array.isArray(parsed) ? parsed : [parsed]
-    const ws = XLSX.utils.json_to_sheet(arr)
-    const wb = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(wb, ws, sheetName)
-    const buffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
-    return { blob: new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), error: null }
-  } catch (e) {
+    const result = await callWorker<{ blobBuffer?: ArrayBuffer; error: string | null }>(
+      { type: 'jsonToExcel', input: trimmed, sheetName },
+    )
+    if (result.error) return { blob: null, error: result.error }
+    if (!result.blobBuffer) return { blob: null, error: 'No data returned from worker' }
+    return {
+      blob: new Blob([new Uint8Array(result.blobBuffer)], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      }),
+      error: null,
+    }
+  }
+  catch (e) {
     return { blob: null, error: (e as Error).message }
   }
 }
