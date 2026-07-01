@@ -58,9 +58,16 @@
               <button class="btn-xs" @click="expandAll">Expand all</button>
               <button class="btn-xs" @click="collapseAll">Collapse all</button>
             </div>
-            <button class="btn-xs" @click="exportAsPdf">PDF</button>
+            <div class="card-actions">
+              <button class="btn-xs" @click="exportAsPdf">PDF</button>
+            </div>
           </template>
-          <button v-else-if="viewMode === 'graph' && graphNodes.length" class="btn-xs" @click="exportGraphAsPdf">PDF</button>
+          <template v-else-if="viewMode === 'graph' && graphNodes.length">
+            <span class="editor-label">Graph</span>
+            <div class="card-actions">
+              <button class="btn-xs" @click="exportGraphAsPdf">PDF</button>
+            </div>
+          </template>
         </div>
 
         <!-- Tree view -->
