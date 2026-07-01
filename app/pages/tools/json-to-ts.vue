@@ -163,6 +163,8 @@ const seoCards = [
   border: 1px solid var(--c-border);
   border-radius: 8px;
   padding: 2px;
+  min-width: 210px;
+  gap: 0;
 }
 
 .mode-indicator {

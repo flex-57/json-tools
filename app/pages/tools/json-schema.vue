@@ -35,12 +35,6 @@
           </button>
         </label>
 
-        <!-- Draft selector -->
-        <div class="draft-toggle">
-          <div class="draft-indicator" :class="{ 'draft-indicator--right': draft === '2020-12' }" />
-          <button :class="['draft-btn', draft === 'draft-07' ? 'draft-btn--active' : '']" @click="draft = 'draft-07'">Draft-07</button>
-          <button :class="['draft-btn', draft === '2020-12' ? 'draft-btn--active' : '']" @click="draft = '2020-12'">2020-12</button>
-        </div>
       </div>
     </div>
 
@@ -65,7 +59,11 @@
         <div class="editor-card-header">
           <span class="editor-label">JSON Schema</span>
           <div class="card-actions">
-            <span class="editor-hint">{{ draft === 'draft-07' ? 'Draft-07' : 'Draft 2020-12' }}</span>
+            <div class="draft-toggle">
+              <div class="draft-indicator" :class="{ 'draft-indicator--right': draft === '2020-12' }" />
+              <button :class="['draft-btn', draft === 'draft-07' ? 'draft-btn--active' : '']" @click="draft = 'draft-07'">Draft-07</button>
+              <button :class="['draft-btn', draft === '2020-12' ? 'draft-btn--active' : '']" @click="draft = '2020-12'">2020-12</button>
+            </div>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>

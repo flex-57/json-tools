@@ -9,8 +9,6 @@
     </div>
 
     <div class="toolbar">
-      <div class="toolbar-left">
-      </div>
       <div class="toolbar-right" aria-live="polite">
         <Transition name="status">
           <div v-if="error && error !== 'empty'" class="status-pill status-pill--invalid">
@@ -44,7 +42,7 @@
             <span class="editor-hint">First 5 rows</span>
             <button class="btn-xs" @click="download" :disabled="!input || loading">
               <svg v-if="loading" class="spinner" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/><path d="M6 2a4 4 0 014 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              {{ loading ? 'Generating…' : 'Download .xlsx' }}<span v-if="!loading" class="kb"> Ctrl ↵</span>
+              {{ loading ? 'Generating…' : 'Download .xlsx' }}
             </button>
           </div>
         </div>
@@ -89,7 +87,6 @@ useToolSeo(
 )
 
 const { input, error, loading, download, clear } = useJsonToExcel()
-useToolShortcut(() => { if (!loading.value) download() })
 useUrlInput(input)
 
 const seoCards = [
