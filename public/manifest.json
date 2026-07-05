@@ -1,0 +1,12 @@
+{
+  "name": "JSON Tools",
+  "short_name": "JSON Tools",
+  "description": "Free browser-based developer utilities. No signup, no tracking.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#F97316",
+  "background_color": "#13181F",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
