@@ -87,7 +87,7 @@ html.dark {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation: page-in 0.2s ease both;
+  animation: page-in 0.2s ease;
 }
 
 .page-header {
