@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <div class="legal-page-inner">
     <div class="page-header">
       <div>
         <h1 class="page-title">Terms of Use</h1>
@@ -52,6 +53,7 @@
         <NuxtLink to="/" class="legal-back-link">← Back to tools</NuxtLink>
       </div>
     </div>
+    </div>
   </div>
 </template>
 
@@ -64,7 +66,7 @@ useSeoMeta({
 </script>
 
 <style scoped>
-.legal-body { max-width: 720px; }
+.legal-page-inner { max-width: 720px; margin: 0 auto; width: 100%; }
 
 .legal-back {
   margin-top: 16px;

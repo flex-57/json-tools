@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <div class="faq-page-inner">
     <div class="page-header">
       <div>
         <h1 class="page-title">Frequently Asked Questions</h1>
@@ -24,6 +25,7 @@
     <div class="faq-cta">
       <p>Ready to get started?</p>
       <NuxtLink to="/" class="faq-cta-btn">Browse all tools →</NuxtLink>
+    </div>
     </div>
   </div>
 </template>
@@ -129,8 +131,9 @@ useHead({
 </script>
 
 <style scoped>
+.faq-page-inner { max-width: 760px; margin: 0 auto; width: 100%; }
+
 .faq-list {
-  max-width: 760px;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--c-border);
