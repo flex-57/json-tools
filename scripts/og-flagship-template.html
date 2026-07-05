@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@500;700;800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px;
+  height: 630px;
+  background: #0A0912;
+  font-family: 'Public Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #1c1830 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+}
+
+/* Giant decorative brackets, low-opacity depth layer */
+.deco {
+  position: absolute;
+  font-family: 'Fragment Mono', monospace;
+  font-weight: 700;
+  color: #FF3D8F;
+  line-height: 1;
+  user-select: none;
+}
+.deco-brace  { top: -160px; right: 60px;  font-size: 620px; opacity: 0.09; }
+.deco-bracket-l { bottom: -210px; left: 360px; font-size: 460px; opacity: 0.08; }
+.deco-bracket-r { top: 120px; right: -60px; font-size: 380px; opacity: 0.1; color: #C6FF3D; }
+
+/* Faint scattered JSON text texture */
+.code-scrap {
+  position: absolute;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #4a4460;
+  opacity: 0.4;
+  white-space: pre;
+}
+.code-scrap--tl { top: 44px; left: 470px; }
+.code-scrap--bl { bottom: 34px; left: 470px; }
+
+.accent-bar {
+  position: absolute;
+  left: 0; top: 0;
+  width: 6px; height: 100%;
+  background: linear-gradient(180deg, #FF3D8F 0%, #C6FF3D 100%);
+}
+
+/* Foreground content */
+.stage { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; padding: 56px 72px 48px; }
+
+.hero { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 620px; }
+.brand-row { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+.logo-mark { flex-shrink: 0; display: block; }
+.title {
+  font-family: 'Big Shoulders', sans-serif;
+  font-size: 76px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #EFE9F5;
+  line-height: 1;
+  letter-spacing: 0.005em;
+}
+.title em { font-style: normal; color: #FF3D8F; }
+.subtitle { font-size: 24px; color: #8b85a3; font-weight: 400; line-height: 1.5; }
+
+.footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 22px; }
+.footer-badges { display: flex; gap: 10px; }
+.badge { font-size: 11px; font-weight: 600; font-family: 'Fragment Mono', monospace; color: #6f688c; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 5px; padding: 4px 10px; letter-spacing: 0.04em; }
+.footer-url { font-size: 15px; color: #6f688c; font-family: 'Fragment Mono', monospace; font-weight: 500; }
+
+/* Floating editor window */
+.window {
+  position: absolute;
+  top: 210px;
+  right: 68px;
+  width: 460px;
+  background: #100e1c;
+  border: 1px solid #322c50;
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  overflow: hidden;
+  z-index: 2;
+}
+.window-bar { display: flex; align-items: center; gap: 6px; padding: 11px 14px; background: #0d0b17; border-bottom: 1px solid #26213d; }
+.window-dot { width: 9px; height: 9px; border-radius: 50%; background: #322c50; }
+.window-dot--accent { background: #FF3D8F; }
+.window-body { padding: 18px 20px; font-family: 'Fragment Mono', monospace; font-size: 13px; line-height: 1.85; color: #EFE9F5; white-space: pre; }
+.k { color: #8b85a3; }
+.s { color: #9FCB78; }
+.n { color: #A9ACE8; }
+.b { color: #E0B75C; }
+.p { color: #4a4460; }
+</style>
+</head>
+<body>
+  <div class="bg-dots"></div>
+  <div class="deco deco-brace">{</div>
+  <div class="deco deco-bracket-l">[</div>
+  <div class="deco deco-bracket-r">]</div>
+  <div class="code-scrap code-scrap--tl">{
+  "name": "json-formatter",
+  "input": {
+    "type": "raw",
+    "source": "clipboard"
+  }
+}</div>
+  <div class="code-scrap code-scrap--bl">{
+  "status": "valid",
+  "lines": 42,
+  "encoding": "utf-8"
+}</div>
+  <div class="accent-bar"></div>
+
+  <div class="stage">
+    <div class="hero">
+      <div class="brand-row">
+        <svg class="logo-mark" width="84" height="84" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="38" height="38" rx="9" fill="#0A0912" stroke="#26213D" stroke-width="1.5"/>
+          <circle cx="20" cy="20" r="6.5" fill="#FF3D8F"/>
+          <circle cx="20" cy="20" r="10.5" stroke="#FF3D8F" stroke-width="1.2" opacity="0.35" fill="none"/>
+        </svg>
+        <div class="title">json<em>tools</em></div>
+      </div>
+      <div class="subtitle">Free developer tools — no signup, no tracking.</div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-badges">
+        <span class="badge">Free</span>
+        <span class="badge">100% Client-Side</span>
+        <span class="badge">No Signup</span>
+      </div>
+      <div class="footer-url">jsontools.space</div>
+    </div>
+  </div>
+
+  <div class="window">
+    <div class="window-bar">
+      <span class="window-dot"></span>
+      <span class="window-dot"></span>
+      <span class="window-dot window-dot--accent"></span>
+    </div>
+    <div class="window-body"><span class="p">{</span>
+  <span class="k">"tools"</span><span class="p">:</span> [
+    <span class="p">{</span><span class="k">"name"</span><span class="p">:</span> <span class="s">"Formatter"</span><span class="p">,</span> <span class="k">"type"</span><span class="p">:</span> <span class="s">"Core"</span><span class="p">},</span>
+    <span class="p">{</span><span class="k">"name"</span><span class="p">:</span> <span class="s">"Tree View"</span><span class="p">,</span> <span class="k">"type"</span><span class="p">:</span> <span class="s">"Visual"</span><span class="p">},</span>
+    <span class="p">{</span><span class="k">"name"</span><span class="p">:</span> <span class="s">"Diff"</span><span class="p">,</span> <span class="k">"type"</span><span class="p">:</span> <span class="s">"Compare"</span><span class="p">}</span>
+  <span class="p">],</span>
+  <span class="k">"tools_total"</span><span class="p">:</span> <span class="n">29</span><span class="p">,</span>
+  <span class="k">"tracking"</span><span class="p">:</span> <span class="b">false</span>
+<span class="p">}</span></div>
+  </div>
+</body>
+</html>

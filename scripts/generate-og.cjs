@@ -2,8 +2,9 @@ const { chromium } = require('../node_modules/playwright');
 const path = require('path');
 const fs = require('fs');
 
+// Note: the default 'og-image' (homepage fallback) is NOT generated here —
+// it has its own richer flagship design, see generate-og-flagship.cjs.
 const TOOLS = [
-  { slug: 'og-image',        tag: 'Free Developer Tools',   title: 'JSON Tools',                    subtitle: 'Format, convert, validate & debug JSON.\nFree online tools for developers.',      size: 80 },
   { slug: 'csv-to-json',     tag: 'Converter',              title: 'CSV to JSON\nConverter',         subtitle: 'Convert CSV and TSV files to JSON instantly.',                                    size: 68 },
   { slug: 'json-to-csv',     tag: 'Converter',              title: 'JSON to CSV\nConverter',         subtitle: 'Export JSON arrays to CSV spreadsheets.',                                        size: 68 },
   { slug: 'xml-to-json',     tag: 'Converter',              title: 'XML to JSON\nConverter',         subtitle: 'Convert XML documents to clean JSON.',                                           size: 68 },
