@@ -4,8 +4,8 @@
   "description": "Free browser-based developer utilities. No signup, no tracking.",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#F97316",
-  "background_color": "#13181F",
+  "theme_color": "#FF3D8F",
+  "background_color": "#0A0912",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
