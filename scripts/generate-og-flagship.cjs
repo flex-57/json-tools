@@ -1,5 +1,6 @@
 const { chromium } = require('../node_modules/playwright');
 const path = require('path');
+const brand = require('./brand-tokens.cjs');
 
 const TEMPLATE = path.join(__dirname, 'og-flagship-template.html');
 const OUT_PATH = path.join(__dirname, '../public/og/og-image.png');
@@ -12,6 +13,10 @@ const OUT_PATH = path.join(__dirname, '../public/og/og-image.png');
   const templateUrl = 'file:///' + TEMPLATE.replace(/\\/g, '/');
   await page.goto(templateUrl);
   await page.waitForLoadState('networkidle');
+
+  await page.evaluate((svg) => {
+    document.getElementById('logo-mark').innerHTML = svg;
+  }, brand.logoMarkSvg);
 
   await page.screenshot({ path: OUT_PATH, type: 'png' });
   await browser.close();

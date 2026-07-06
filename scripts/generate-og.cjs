@@ -1,10 +1,12 @@
 const { chromium } = require('../node_modules/playwright');
 const path = require('path');
 const fs = require('fs');
+const brand = require('./brand-tokens.cjs');
 
 // Note: the default 'og-image' (homepage fallback) is NOT generated here —
 // it has its own richer flagship design, see generate-og-flagship.cjs.
 const TOOLS = [
+  { slug: 'json-formatter',   tag: 'JSON Tool',             title: 'JSON Formatter\n& Validator',    subtitle: 'Format, validate, and minify JSON instantly. No data sent to servers.',           size: 68 },
   { slug: 'csv-to-json',     tag: 'Converter',              title: 'CSV to JSON\nConverter',         subtitle: 'Convert CSV and TSV files to JSON instantly.',                                    size: 68 },
   { slug: 'json-to-csv',     tag: 'Converter',              title: 'JSON to CSV\nConverter',         subtitle: 'Export JSON arrays to CSV spreadsheets.',                                        size: 68 },
   { slug: 'xml-to-json',     tag: 'Converter',              title: 'XML to JSON\nConverter',         subtitle: 'Convert XML documents to clean JSON.',                                           size: 68 },
@@ -68,6 +70,10 @@ const TEMPLATE = path.join(__dirname, 'og-template.html');
   const templateUrl = 'file:///' + TEMPLATE.replace(/\\/g, '/');
   await page.goto(templateUrl);
   await page.waitForLoadState('networkidle');
+
+  await page.evaluate((svg) => {
+    document.getElementById('logo-mark').innerHTML = svg;
+  }, brand.logoMarkSvg);
 
   for (const tool of TOOLS) {
     await page.evaluate(({ tag, title, subtitle, size }) => {
