@@ -118,17 +118,17 @@ const FEATURES = [
   {
     icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10H2M18 10h-2M10 4V2M10 18v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
     title: 'Instant, no friction',
-    body: 'Open any tool and start working. No account, no onboarding, no waiting — results appear as you type.',
+    body: 'Open any tool and start working right away. No signup screen, no setup wizard. Paste your data and watch it update as you type.',
   },
   {
     icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 5.5v5c0 4 3.1 7.4 7 8.5 3.9-1.1 7-4.5 7-8.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     title: 'Your data stays yours',
-    body: 'Everything runs directly in your browser. Nothing is sent to a server — not a single byte of your data leaves your machine.',
+    body: 'Everything runs in your browser tab. Your data never touches a server, and it never leaves your machine.',
   },
   {
     icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M3 6h14M3 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
     title: 'Free, all of it',
-    body: 'All 29 tools, forever free. No premium tier, no rate limits, no ads in the way. Just tools that work.',
+    body: "All 29 tools are free, with no premium tier and no rate limits. We'd rather you bookmark the site than sign up for one.",
   },
 ]
 
