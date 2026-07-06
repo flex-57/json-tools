@@ -204,7 +204,7 @@ const PATTERNS = [
     name: 'Email (basic)',
     pattern: '^[\\w.-]+@[\\w-]+\\.[a-z]{2,}$',
     flags: 'i',
-    ok: ['user@example.com', 'first.last@sub.domain.org'],
+    ok: ['user@example.com', 'first.last@example.com'],
     no: ['@example.com', 'user@', 'user @example.com'],
   },
   {
@@ -225,7 +225,7 @@ const PATTERNS = [
     name: 'Hex color',
     pattern: '^#([0-9a-f]{3}|[0-9a-f]{6})$',
     flags: 'i',
-    ok: ['#fff', 'var(--c-brand)', '#000000'],
+    ok: ['#fff', '#FF3D8F', '#000000'],
     no: ['#gg0000', 'F97316', '#12345'],
   },
   {

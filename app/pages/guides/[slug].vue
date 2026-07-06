@@ -110,19 +110,19 @@ const bodyComponents: Record<string, Component> = {
 }
 
 const route = useRoute()
-const slug = route.params.slug as string
-const guide = GUIDES[slug]
+const slug = computed(() => route.params.slug as string)
+const guide = computed(() => GUIDES[slug.value])
 
-if (!guide) {
+if (!guide.value) {
   throw createError({ statusCode: 404, statusMessage: 'Guide not found' })
 }
 
-const BodyComponent = bodyComponents[slug]
+const BodyComponent = computed(() => bodyComponents[slug.value])
 const openFaq = ref<number | null>(null)
 
 const tocItems = ref<{ id: string; title: string }[]>([])
 
-onMounted(() => {
+function buildToc() {
   const bodyEl = document.querySelector('.guide-body')
   if (!bodyEl) return
   const headings = Array.from(bodyEl.querySelectorAll('h2'))
@@ -133,6 +133,17 @@ onMounted(() => {
     return { id, title }
   })
   tocItems.value.push({ id: 'faq', title: 'FAQ' })
+}
+
+onMounted(buildToc)
+
+// Vue Router reuses this component instance across /guides/:slug navigations
+// (same route record) — setup() doesn't re-run, so per-guide state has to be
+// refreshed explicitly when the slug changes rather than only once on mount.
+watch(slug, () => {
+  openFaq.value = null
+  tocItems.value = []
+  nextTick(buildToc)
 })
 
 function scrollTo(id: string) {
@@ -148,65 +159,70 @@ function formatDate(iso: string) {
 }
 
 const BASE_URL = 'https://jsontools.space'
-const pageUrl = `${BASE_URL}/guides/${slug}`
-const ogImage = `${BASE_URL}/og/guide-${slug}.png`
 
-useSeoMeta({
-  title: `${guide.title} — JSON Tools`,
-  description: guide.description,
-  ogTitle: `${guide.title} — JSON Tools`,
-  ogDescription: guide.description,
-  ogImage,
-  twitterTitle: guide.title,
-  twitterDescription: guide.description,
-  twitterImage: ogImage,
-  twitterCard: 'summary_large_image',
+useSeoMeta(() => {
+  const title = `${guide.value.title} — JSON Tools`
+  const ogImage = `${BASE_URL}/og/guide-${slug.value}.png`
+  return {
+    title,
+    description: guide.value.description,
+    ogTitle: title,
+    ogDescription: guide.value.description,
+    ogImage,
+    twitterTitle: guide.value.title,
+    twitterDescription: guide.value.description,
+    twitterImage: ogImage,
+    twitterCard: 'summary_large_image',
+  }
 })
 
-useHead({
-  script: [
-    {
-      key: 'schema-article',
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: guide.title,
-        description: guide.description,
-        url: pageUrl,
-        datePublished: guide.datePublished,
-        dateModified: guide.dateModified,
-        author: { '@type': 'Organization', name: 'JSON Tools', url: BASE_URL },
-        publisher: { '@type': 'Organization', name: 'JSON Tools', url: BASE_URL },
-      }),
-    },
-    {
-      key: 'schema-breadcrumb',
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'JSON Tools', item: `${BASE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Guides', item: `${BASE_URL}/guides` },
-          { '@type': 'ListItem', position: 3, name: guide.title, item: pageUrl },
-        ],
-      }),
-    },
-    {
-      key: 'schema-faq',
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: guide.faqs.map(item => ({
-          '@type': 'Question',
-          name: item.q,
-          acceptedAnswer: { '@type': 'Answer', text: item.a.join(' ') },
-        })),
-      }),
-    },
-  ],
+useHead(() => {
+  const pageUrl = `${BASE_URL}/guides/${slug.value}`
+  return {
+    script: [
+      {
+        key: 'schema-article',
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: guide.value.title,
+          description: guide.value.description,
+          url: pageUrl,
+          datePublished: guide.value.datePublished,
+          dateModified: guide.value.dateModified,
+          author: { '@type': 'Organization', name: 'JSON Tools', url: BASE_URL },
+          publisher: { '@type': 'Organization', name: 'JSON Tools', url: BASE_URL },
+        }),
+      },
+      {
+        key: 'schema-breadcrumb',
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'JSON Tools', item: `${BASE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Guides', item: `${BASE_URL}/guides` },
+            { '@type': 'ListItem', position: 3, name: guide.value.title, item: pageUrl },
+          ],
+        }),
+      },
+      {
+        key: 'schema-faq',
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: guide.value.faqs.map(item => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a.join(' ') },
+          })),
+        }),
+      },
+    ],
+  }
 })
 </script>
 
