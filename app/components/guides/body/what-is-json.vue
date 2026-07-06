@@ -62,7 +62,7 @@
 
       <div class="compare-split">
         <div class="compare-block">
-          <div class="compare-header compare-header--json">JSON <span class="compare-badge">66 chars</span></div>
+          <div class="compare-header compare-header--json">JSON <span class="compare-badge">59 chars</span></div>
           <pre class="compare-code"><span class="jk">{</span>
   <span class="jkey">"name"</span><span class="jp">:</span> <span class="js">"Alice"</span><span class="jp">,</span>
   <span class="jkey">"age"</span><span class="jp">:</span> <span class="jn">30</span><span class="jp">,</span>
@@ -71,7 +71,7 @@
 <span class="jk">}</span></pre>
         </div>
         <div class="compare-block">
-          <div class="compare-header compare-header--xml">XML <span class="compare-badge">122 chars</span></div>
+          <div class="compare-header compare-header--xml">XML <span class="compare-badge">104 chars</span></div>
           <pre class="compare-code compare-code--xml"><span class="xt">&lt;user&gt;</span>
   <span class="xt">&lt;name&gt;</span>Alice<span class="xt">&lt;/name&gt;</span>
   <span class="xt">&lt;age&gt;</span>30<span class="xt">&lt;/age&gt;</span>

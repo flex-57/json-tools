@@ -72,11 +72,10 @@
           <tr><td><code>if / then / else</code></td><td>Conditional validation — if the <code>if</code> schema matches, apply <code>then</code>; otherwise apply <code>else</code></td></tr>
         </tbody>
       </table>
-      <pre class="code-block"><code>// A field that is either a string or null
-{ "anyOf": [{ "type": "string" }, { "type": "null" }] }
-
-// Conditional: if premium, require billingPlan
-{
+      <p>A field that is either a string or null:</p>
+      <pre class="code-block"><code>{ "anyOf": [{ "type": "string" }, { "type": "null" }] }</code></pre>
+      <p>Conditional: if premium, require billingPlan:</p>
+      <pre class="code-block"><code>{
   "if":   { "properties": { "type": { "const": "premium" } } },
   "then": { "required": ["billingPlan"] }
 }</code></pre>
