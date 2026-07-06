@@ -248,7 +248,7 @@ const LISTS = [
 .cheat-table td {
   padding: 9px 12px;
   color: var(--c-t2);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--c-border);
   vertical-align: middle;
 }
 

@@ -8,7 +8,6 @@
       </div>
     </div>
 
-    <div class="legal-body">
       <section class="legal-section">
         <h2>Overview</h2>
         <p>JSON Tools (jsontools.space) is a free collection of browser-based developer utilities. All data processing happens locally in your browser — nothing you enter into any tool is ever sent to our servers.</p>
@@ -48,7 +47,6 @@
       <div class="legal-back">
         <NuxtLink to="/" class="legal-back-link">← Back to tools</NuxtLink>
       </div>
-    </div>
     </div>
   </div>
 </template>

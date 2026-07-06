@@ -50,19 +50,7 @@
 
       <section class="guide-faq" id="faq">
         <h2 class="guide-faq-title">Frequently asked questions</h2>
-        <div class="faq-list">
-          <div v-for="(item, i) in guide.faqs" :key="i" class="faq-item" :class="{ 'faq-item--open': openFaq === i }">
-            <button class="faq-q" @click="openFaq = openFaq === i ? null : i">
-              {{ item.q }}
-              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <div v-if="openFaq === i" class="faq-a">
-              <p v-for="(para, j) in item.a" :key="j">{{ para }}</p>
-            </div>
-          </div>
-        </div>
+        <FaqAccordion :items="guide.faqs" :key="slug" />
       </section>
     </div>
   </div>
@@ -71,42 +59,27 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
 import { GUIDES } from '~/data/guides'
-import WhatIsJwt from '~/components/guides/body/what-is-jwt.vue'
-import WhatIsBase64 from '~/components/guides/body/what-is-base64.vue'
-import CronExpressionExamples from '~/components/guides/body/cron-expression-examples.vue'
-import JsonVsYaml from '~/components/guides/body/json-vs-yaml.vue'
-import HowToValidateJson from '~/components/guides/body/how-to-validate-json.vue'
-import WhatIsRegex from '~/components/guides/body/what-is-regex.vue'
-import WhatIsJson from '~/components/guides/body/what-is-json.vue'
-import WhatIsMarkdown from '~/components/guides/body/what-is-markdown.vue'
-import MarkdownCheatsheet from '~/components/guides/body/markdown-cheatsheet.vue'
-import WhatIsUrlEncoding from '~/components/guides/body/what-is-url-encoding.vue'
-import WhatIsHash from '~/components/guides/body/what-is-hash.vue'
-import WhatIsXml from '~/components/guides/body/what-is-xml.vue'
-import WhatIsUuid from '~/components/guides/body/what-is-uuid.vue'
-import WhatIsJsonSchema from '~/components/guides/body/what-is-json-schema.vue'
-import WhatIsYaml from '~/components/guides/body/what-is-yaml.vue'
-import RegexCheatsheet from '~/components/guides/body/regex-cheatsheet.vue'
-import JsonBestPractices from '~/components/guides/body/json-best-practices.vue'
 
+// Lazy per-slug: a guide page only downloads the one body component it needs,
+// instead of bundling all 17 (~4,300 lines) into every /guides/:slug request.
 const bodyComponents: Record<string, Component> = {
-  'what-is-jwt': WhatIsJwt,
-  'what-is-base64': WhatIsBase64,
-  'cron-expression-examples': CronExpressionExamples,
-  'json-vs-yaml': JsonVsYaml,
-  'how-to-validate-json': HowToValidateJson,
-  'what-is-regex': WhatIsRegex,
-  'what-is-json': WhatIsJson,
-  'what-is-markdown': WhatIsMarkdown,
-  'markdown-cheatsheet': MarkdownCheatsheet,
-  'what-is-url-encoding': WhatIsUrlEncoding,
-  'what-is-hash': WhatIsHash,
-  'what-is-xml': WhatIsXml,
-  'what-is-uuid': WhatIsUuid,
-  'what-is-json-schema': WhatIsJsonSchema,
-  'what-is-yaml': WhatIsYaml,
-  'regex-cheatsheet': RegexCheatsheet,
-  'json-best-practices': JsonBestPractices,
+  'what-is-jwt': defineAsyncComponent(() => import('~/components/guides/body/what-is-jwt.vue')),
+  'what-is-base64': defineAsyncComponent(() => import('~/components/guides/body/what-is-base64.vue')),
+  'cron-expression-examples': defineAsyncComponent(() => import('~/components/guides/body/cron-expression-examples.vue')),
+  'json-vs-yaml': defineAsyncComponent(() => import('~/components/guides/body/json-vs-yaml.vue')),
+  'how-to-validate-json': defineAsyncComponent(() => import('~/components/guides/body/how-to-validate-json.vue')),
+  'what-is-regex': defineAsyncComponent(() => import('~/components/guides/body/what-is-regex.vue')),
+  'what-is-json': defineAsyncComponent(() => import('~/components/guides/body/what-is-json.vue')),
+  'what-is-markdown': defineAsyncComponent(() => import('~/components/guides/body/what-is-markdown.vue')),
+  'markdown-cheatsheet': defineAsyncComponent(() => import('~/components/guides/body/markdown-cheatsheet.vue')),
+  'what-is-url-encoding': defineAsyncComponent(() => import('~/components/guides/body/what-is-url-encoding.vue')),
+  'what-is-hash': defineAsyncComponent(() => import('~/components/guides/body/what-is-hash.vue')),
+  'what-is-xml': defineAsyncComponent(() => import('~/components/guides/body/what-is-xml.vue')),
+  'what-is-uuid': defineAsyncComponent(() => import('~/components/guides/body/what-is-uuid.vue')),
+  'what-is-json-schema': defineAsyncComponent(() => import('~/components/guides/body/what-is-json-schema.vue')),
+  'what-is-yaml': defineAsyncComponent(() => import('~/components/guides/body/what-is-yaml.vue')),
+  'regex-cheatsheet': defineAsyncComponent(() => import('~/components/guides/body/regex-cheatsheet.vue')),
+  'json-best-practices': defineAsyncComponent(() => import('~/components/guides/body/json-best-practices.vue')),
 }
 
 const route = useRoute()
@@ -118,7 +91,6 @@ if (!guide.value) {
 }
 
 const BodyComponent = computed(() => bodyComponents[slug.value])
-const openFaq = ref<number | null>(null)
 
 const tocItems = ref<{ id: string; title: string }[]>([])
 
@@ -126,13 +98,24 @@ function buildToc() {
   const bodyEl = document.querySelector('.guide-body')
   if (!bodyEl) return
   const headings = Array.from(bodyEl.querySelectorAll('h2'))
+  const seen = new Set<string>()
   tocItems.value = headings.map(h => {
     const title = h.textContent?.trim() || ''
-    const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+    let id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+    while (seen.has(id)) id += '-2'
+    seen.add(id)
     h.id = id
     return { id, title }
   })
   tocItems.value.push({ id: 'faq', title: 'FAQ' })
+
+  // Heading ids only exist after this runs (client-side), so the browser's
+  // native fragment-scroll on initial load fires too early and does nothing —
+  // scroll to the hash manually once the target id actually exists.
+  const hash = window.location.hash.slice(1)
+  if (hash && tocItems.value.some(item => item.id === hash)) {
+    scrollTo(hash)
+  }
 }
 
 onMounted(buildToc)
@@ -141,7 +124,6 @@ onMounted(buildToc)
 // (same route record) — setup() doesn't re-run, so per-guide state has to be
 // refreshed explicitly when the slug changes rather than only once on mount.
 watch(slug, () => {
-  openFaq.value = null
   tocItems.value = []
   nextTick(buildToc)
 })
@@ -272,24 +254,4 @@ useHead(() => {
 
 .guide-faq { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--c-border); }
 .guide-faq-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 18px; color: var(--c-t1); margin-bottom: 16px; }
-
-.faq-list { display: flex; flex-direction: column; border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden; }
-.faq-item { border-bottom: 1px solid var(--c-border); }
-.faq-item:last-child { border-bottom: none; }
-.faq-q {
-  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: 16px 18px; background: var(--c-card); border: none; cursor: pointer; text-align: left;
-  font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--c-t1); transition: background 0.15s, color 0.15s;
-}
-.faq-q:hover { background: var(--c-subtle); }
-.faq-item--open .faq-q { color: var(--c-accent); }
-.faq-chevron { flex-shrink: 0; color: var(--c-t4); transition: transform 0.2s ease; }
-.faq-item--open .faq-chevron { transform: rotate(180deg); color: var(--c-accent); }
-.faq-a { padding: 0 18px 18px; background: var(--c-card); display: flex; flex-direction: column; gap: 10px; }
-.faq-a p { font-family: var(--font-body); font-size: 13px; color: var(--c-t3); line-height: 1.7; }
-
-@media (max-width: 768px) {
-  .faq-q { font-size: 13px; padding: 14px; }
-  .faq-a { padding: 0 14px 14px; }
-}
 </style>

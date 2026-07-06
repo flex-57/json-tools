@@ -8,7 +8,6 @@
       </div>
     </div>
 
-    <div class="legal-body">
       <section class="legal-section">
         <h2>Acceptance</h2>
         <p>By using jsontools.space you agree to these terms. If you do not agree, please stop using the site.</p>
@@ -52,7 +51,6 @@
       <div class="legal-back">
         <NuxtLink to="/" class="legal-back-link">← Back to tools</NuxtLink>
       </div>
-    </div>
     </div>
   </div>
 </template>

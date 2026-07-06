@@ -32,7 +32,7 @@
 
     <section class="guide-section">
       <h2>Key differences</h2>
-      <div class="diff-table">
+      <div class="diff-grid">
         <div class="diff-row diff-row--head">
           <span></span>
           <span>JSON</span>
@@ -174,8 +174,8 @@ const DIFF_ROWS = [
 .split-header--json { background: rgba(99, 179, 237, 0.08); color: #63B3ED; border-right: 1px solid var(--c-border); }
 .split-header--yaml { background: rgba(104, 211, 145, 0.08); color: #68D391; }
 
-/* ── Diff table ───────────────────────────────────────────── */
-.diff-table {
+/* ── Diff grid (div-based comparison, not a <table> — see what-is-json.vue's .diff-table for the real-table variant) ── */
+.diff-grid {
   border: 1px solid var(--c-border);
   border-radius: 8px;
   overflow: hidden;

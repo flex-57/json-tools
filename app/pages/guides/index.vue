@@ -1,5 +1,11 @@
 <template>
   <div class="page">
+    <nav class="guide-breadcrumb" aria-label="Breadcrumb">
+      <NuxtLink to="/" class="bc-link">JSON Tools</NuxtLink>
+      <span class="bc-sep" aria-hidden="true">›</span>
+      <span class="bc-current">Guides</span>
+    </nav>
+
     <div class="page-header">
       <div>
         <h1 class="page-title">Developer Guides</h1>
@@ -101,6 +107,12 @@ useHead({
 </script>
 
 <style scoped>
+.guide-breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; }
+.bc-link { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); text-decoration: none; transition: color 0.15s; }
+.bc-link:hover { color: var(--c-accent); }
+.bc-sep { font-size: 12px; color: var(--c-t5); }
+.bc-current { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t3); }
+
 .guides-section { padding: 0 0 8px; }
 
 .section-header {
