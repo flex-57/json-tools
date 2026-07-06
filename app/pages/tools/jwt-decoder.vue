@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JWT <span class="title-amp">Decoder</span></h1>
-        <p class="page-subtitle">Decode and inspect JSON Web Tokens instantly — no data sent to servers, never.</p>
+        <p class="page-subtitle">Decode and inspect JSON Web Tokens instantly. No data ever sent to servers.</p>
         <NuxtLink to="/guides/what-is-jwt" class="guide-link">New to JWTs? Read our guide →</NuxtLink>
       </div>
     </div>
@@ -13,7 +13,7 @@
         <span class="editor-label">Token</span>
         <button v-if="token" @click="clear" class="btn-xs">Clear</button>
       </div>
-      <textarea v-model="token" class="token-input" placeholder="Paste your JWT here — eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0In0.signature" spellcheck="false" rows="3" />
+      <textarea v-model="token" class="token-input" placeholder="Paste your JWT here, e.g. eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0In0.signature" spellcheck="false" rows="3" />
       <div v-if="token && !result.error" class="token-parts">
         <span class="token-part token-part--header">{{ result.header.raw }}</span>
         <span class="token-dot">.</span>
@@ -75,7 +75,7 @@
       <div class="sig-card">
         <div class="decoded-label-wrap"><span class="decoded-dot decoded-dot--signature" /><span class="editor-label">Signature</span></div>
         <p class="sig-text">{{ result.signature }}</p>
-        <p class="sig-note">Signature is not verified — the secret key is never required or sent anywhere.</p>
+        <p class="sig-note">Signature is not verified. The secret key is never required or sent anywhere.</p>
       </div>
     </div>
 
@@ -87,7 +87,7 @@
 import { useJwtDecoder } from '~/composables/useJwtDecoder'
 
 useToolSeo(
-  'JWT Decoder Online — Inspect & Decode JWT Tokens Free',
+  'JWT Decoder Online: Inspect & Decode JWT Tokens Free',
   'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
 )
 
@@ -97,15 +97,15 @@ useUrlInput(token)
 const seoCards = [
   {
     title: 'What is a JWT and what does decoding reveal?',
-    text: 'A JSON Web Token (JWT) is a compact, URL-safe token with three Base64URL-encoded parts: a header (algorithm and type), a payload (claims about the user or session), and a signature. Decoding the header and payload requires no secret — it\'s public data. The signature proves integrity but can only be verified with the original key, which stays on your server.',
+    text: 'A JSON Web Token (JWT) is a compact, URL-safe token with three Base64URL-encoded parts: a header (algorithm and type), a payload (claims about the user or session), and a signature. Decoding the header and payload requires no secret: it\'s public data. The signature proves integrity but can only be verified with the original key, which stays on your server.',
   },
   {
     title: 'Claims, expiry, and common debugging scenarios',
-    text: 'The payload carries standard claims: sub (subject / user ID), iss (issuer), exp (expiration timestamp), iat (issued at), nbf (not before). The most common debugging need is checking whether a token is expired — the decoder shows exp as a human-readable date alongside the raw timestamp. Custom claims added by your auth service also appear in full.',
+    text: 'The payload carries standard claims: sub (subject / user ID), iss (issuer), exp (expiration timestamp), iat (issued at), nbf (not before). The most common debugging need is checking whether a token is expired, and the decoder shows exp as a human-readable date alongside the raw timestamp. Custom claims added by your auth service also appear in full.',
   },
   {
     title: 'Security: what you can and cannot do here',
-    text: 'This tool decodes (base64-decodes) the header and payload — it does not verify the signature. Verification requires the secret or public key, which you should never paste into a third-party tool. Decoding is safe: there is no secret involved, and because all processing happens in your browser, the token never reaches any server. Use this tool to inspect claims, not to validate tokens in production.',
+    text: 'This tool decodes (base64-decodes) the header and payload. It does not verify the signature. Verification requires the secret or public key, which you should never paste into a third-party tool. Decoding is safe: there is no secret involved, and because all processing happens in your browser, the token never reaches any server. Use this tool to inspect claims, not to validate tokens in production.',
   },
 ]
 

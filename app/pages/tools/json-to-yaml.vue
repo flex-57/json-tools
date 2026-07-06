@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> YAML</h1>
-        <p class="page-subtitle">Convert JSON to YAML — paste or drop a .json file.</p>
+        <p class="page-subtitle">Convert JSON to YAML. Paste or drop a .json file.</p>
         <NuxtLink to="/guides/json-vs-yaml" class="guide-link">JSON vs YAML: what's the difference? →</NuxtLink>
       </div>
       <ToolSwitch from-path="/tools/yaml-to-json" to-path="/tools/json-to-yaml" from-label="YAML → JSON" to-label="JSON → YAML" />
@@ -69,7 +69,7 @@
 <script setup lang="ts">
 import { useJsonToYaml } from '~/composables/useYamlJson'
 useToolSeo(
-  'JSON to YAML Converter — Export JSON as YAML Config Online',
+  'JSON to YAML Converter: Export JSON as YAML Config Online',
   'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
 )
 const { input, output, error, indent, copied, convert, copy, download, clear } = useJsonToYaml()
@@ -83,7 +83,7 @@ const seoCards = [
   },
   {
     title: 'Indentation and type serialization',
-    text: 'YAML is sensitive to indentation — it\'s part of the syntax. The converter lets you choose 2-space or 4-space indent to match your team\'s style. JSON strings become unquoted YAML scalars where possible. Booleans, numbers, and null values are emitted without quotes. If a string value looks like a YAML keyword (e.g., "true"), it will be quoted to preserve the type.',
+    text: 'YAML is sensitive to indentation: it\'s part of the syntax. The converter lets you choose 2-space or 4-space indent to match your team\'s style. JSON strings become unquoted YAML scalars where possible. Booleans, numbers, and null values are emitted without quotes. If a string value looks like a YAML keyword (e.g., "true"), it will be quoted to preserve the type.',
   },
   {
     title: 'Scaffolding and templating use cases',

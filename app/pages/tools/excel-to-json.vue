@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Excel <span class="title-arrow">→</span> JSON</h1>
-        <p class="page-subtitle">Convert .xlsx or .xls files to JSON — drop your file below.</p>
+        <p class="page-subtitle">Convert .xlsx or .xls files to JSON. Drop your file below.</p>
       </div>
       <div style="display:flex; align-items:center; gap: 14px; flex-wrap: wrap;">
         <template v-if="sheets.length > 1">
@@ -78,8 +78,8 @@
       <span>excel-to-json</span>
     </div>
 
-    <div class="info-strip">Parsed in an isolated Web Worker — no file is uploaded to servers</div>
-    <div class="info-strip info-strip--warn">SheetJS has known CVEs (prototype pollution, ReDoS) — the Worker sandbox limits exposure but does not fix them</div>
+    <div class="info-strip">Parsed in an isolated Web Worker: no file is uploaded to servers</div>
+    <div class="info-strip info-strip--warn">SheetJS has known CVEs (prototype pollution, ReDoS). The Worker sandbox limits exposure but does not fix them</div>
 
     <SeoSection :cards="seoCards" />
   </div>
@@ -89,7 +89,7 @@
 import { useExcelToJson } from '~/composables/useExcelJson'
 
 useToolSeo(
-  'Excel to JSON Converter — Upload .xlsx & Get JSON Free',
+  'Excel to JSON Converter: Upload .xlsx & Get JSON Free',
   'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
 )
 
@@ -98,11 +98,11 @@ const { file, output, error, sheets, activeSheet, hasHeader, copied, loading, co
 const seoCards = [
   {
     title: 'Excel to JSON: bridging spreadsheets and code',
-    text: 'Excel remains the default tool for data collection, financial modeling, and reporting across most organisations. But applications and APIs don\'t speak .xlsx. Converting Excel to JSON lets you load spreadsheet data into a JavaScript app, seed a database, or pass it to a REST endpoint — without writing a parser or installing a library.',
+    text: 'Excel remains the default tool for data collection, financial modeling, and reporting across most organisations. But applications and APIs don\'t speak .xlsx. Converting Excel to JSON lets you load spreadsheet data into a JavaScript app, seed a database, or pass it to a REST endpoint, all without writing a parser or installing a library.',
   },
   {
     title: 'Multi-sheet support and header detection',
-    text: 'Real-world Excel files often contain multiple sheets — a summary tab, regional breakdowns, monthly data. The converter lists every sheet and lets you switch between them instantly. Enable "Headers" to use the first row as JSON object keys; disable it to get arrays of raw values per row. Files are parsed entirely in your browser using the SheetJS library.',
+    text: 'Real-world Excel files often contain multiple sheets: a summary tab, regional breakdowns, monthly data. The converter lists every sheet and lets you switch between them instantly. Enable "Headers" to use the first row as JSON object keys; disable it to get arrays of raw values per row. Files are parsed entirely in your browser using the SheetJS library.',
   },
   {
     title: 'Data migration and integration use cases',

@@ -82,17 +82,17 @@
 import { useRegexTester } from '~/composables/useRegexTester'
 
 useToolSeo(
-  'Regex Tester Online — Test & Debug Regular Expressions',
+  'Regex Tester Online: Test & Debug Regular Expressions',
   'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
 )
 
 const { pattern, flags, input, regexError, matches, highlightedHtml, clear } = useRegexTester()
 
 const FLAGS = [
-  { key: 'g', title: 'Global — find all matches' },
+  { key: 'g', title: 'Global: find all matches' },
   { key: 'i', title: 'Case insensitive' },
-  { key: 'm', title: 'Multiline — ^ and $ match line boundaries' },
-  { key: 's', title: 'Dotall — . matches newlines too' },
+  { key: 'm', title: 'Multiline: ^ and $ match line boundaries' },
+  { key: 's', title: 'Dotall: . matches newlines too' },
 ]
 
 const activeFlags = ref(new Set(['g']))
@@ -121,7 +121,7 @@ const seoCards = [
   },
   {
     title: 'Common regex patterns for developers',
-    text: 'Email validation: ^[\\w.-]+@[\\w.-]+\\.[a-z]{2,}$. UUID: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}. ISO date: \\d{4}-\\d{2}-\\d{2}. IP address: (\\d{1,3}\\.){3}\\d{1,3}. Semantic version: \\d+\\.\\d+\\.\\d+. These are starting points — production validation usually needs stricter patterns or a dedicated library.',
+    text: 'Email validation: ^[\\w.-]+@[\\w.-]+\\.[a-z]{2,}$. UUID: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}. ISO date: \\d{4}-\\d{2}-\\d{2}. IP address: (\\d{1,3}\\.){3}\\d{1,3}. Semantic version: \\d+\\.\\d+\\.\\d+. These are starting points; production validation usually needs stricter patterns or a dedicated library.',
   },
 ]
 </script>

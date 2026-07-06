@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Hash <span class="title-amp">Generator</span></h1>
-        <p class="page-subtitle">Compute MD5, SHA-1, SHA-256 and SHA-512 hashes instantly in your browser — nothing is sent to any server.</p>
+        <p class="page-subtitle">Compute MD5, SHA-1, SHA-256 and SHA-512 hashes instantly in your browser. Nothing is sent to any server.</p>
       </div>
     </div>
 
@@ -38,7 +38,7 @@ import { computeHashes, HASH_ALGORITHMS } from '~/composables/useHash'
 import type { HashAlgorithm } from '~/composables/useHash'
 
 useToolSeo(
-  'Hash Generator — MD5, SHA-1, SHA-256, SHA-512 | JSON Tools',
+  'Hash Generator: MD5, SHA-1, SHA-256, SHA-512 | JSON Tools',
   'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
 )
 
@@ -79,7 +79,7 @@ const seoCards = [
   },
   {
     title: 'Client-side, no data sent',
-    text: 'All hashes are computed directly in your browser using the native Web Crypto API (SHA family) and a pure JavaScript MD5 implementation. Your input never leaves your machine. This makes the tool safe to use with sensitive data such as passwords, tokens, or private keys — though you should never hash production secrets in a web tool as a general rule.',
+    text: 'All hashes are computed directly in your browser using the native Web Crypto API (SHA family) and a pure JavaScript MD5 implementation. Your input never leaves your machine. This makes the tool safe to use with sensitive data such as passwords, tokens, or private keys, though as a general rule you should never hash production secrets in a web tool.',
   },
 ]
 </script>

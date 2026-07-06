@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Number <span class="title-amp">Base</span> Converter</h1>
-        <p class="page-subtitle">Convert between binary, octal, decimal and hexadecimal — instantly.</p>
+        <p class="page-subtitle">Convert between binary, octal, decimal and hexadecimal, instantly.</p>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
 import { useNumberBase } from '~/composables/useNumberBase'
 
 useToolSeo(
-  'Number Base Converter — Binary, Octal, Decimal, Hex',
+  'Number Base Converter: Binary, Octal, Decimal, Hex',
   'Convert numbers between binary (base 2), octal (base 8), decimal (base 10) and hexadecimal (base 16) instantly. Supports 0x, 0b, 0o prefixes and negative numbers. Free, no data sent to servers.',
 )
 
@@ -73,7 +73,7 @@ const PLACEHOLDER_ROWS = [
 const seoCards = [
   {
     title: 'How number bases work',
-    text: 'A number base (or radix) defines how many digits a positional numeral system uses. Decimal (base 10) uses digits 0–9 and is the everyday standard. Binary (base 2) uses only 0 and 1 — it is the native language of computers, where each digit is one bit. Octal (base 8) uses digits 0–7 and was common in early Unix permissions (chmod 755). Hexadecimal (base 16) uses digits 0–9 and letters A–F, and is the dominant format for memory addresses, color codes (#FF5733), byte values, and binary file inspection because one hex digit maps exactly to 4 bits (one nibble) and two hex digits represent one byte.',
+    text: 'A number base (or radix) defines how many digits a positional numeral system uses. Decimal (base 10) uses digits 0-9 and is the everyday standard. Binary (base 2) uses only 0 and 1: it is the native language of computers, where each digit is one bit. Octal (base 8) uses digits 0-7 and was common in early Unix permissions (chmod 755). Hexadecimal (base 16) uses digits 0-9 and letters A-F, and is the dominant format for memory addresses, color codes (#FF5733), byte values, and binary file inspection because one hex digit maps exactly to 4 bits (one nibble) and two hex digits represent one byte.',
   },
   {
     title: 'Reading binary and hex in code',
@@ -81,7 +81,7 @@ const seoCards = [
   },
   {
     title: 'Common conversions for developers',
-    text: 'Unix file permissions are written in octal: 755 means rwxr-xr-x (7=111, 5=101 in binary). CSS and HTML colors use hex: #RRGGBB where each channel is one byte (00–FF). Network masks like 255.255.255.0 are 0xFFFFFF00 in hex, or 32 ones followed by zeros in binary. ASCII and Unicode code points are typically shown in hex: the letter A is 0x41 (decimal 65, binary 0100 0001). IPv4 addresses are sometimes written as 32-bit hex integers: 192.168.1.1 = 0xC0A80101.',
+    text: 'Unix file permissions are written in octal: 755 means rwxr-xr-x (7=111, 5=101 in binary). CSS and HTML colors use hex: #RRGGBB where each channel is one byte (00-FF). Network masks like 255.255.255.0 are 0xFFFFFF00 in hex, or 32 ones followed by zeros in binary. ASCII and Unicode code points are typically shown in hex: the letter A is 0x41 (decimal 65, binary 0100 0001). IPv4 addresses are sometimes written as 32-bit hex integers: 192.168.1.1 = 0xC0A80101.',
   },
 ]
 </script>

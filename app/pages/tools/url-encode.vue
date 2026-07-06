@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">URL <span class="title-amp">{{ mode === 'encode' ? 'Encoder' : 'Decoder' }}</span></h1>
-        <p class="page-subtitle">Percent-encode or decode URL components — instantly, client-side.</p>
+        <p class="page-subtitle">Percent-encode or decode URL components, instantly and client-side.</p>
       </div>
       <div style="display:flex; gap: 8px; align-items:center; flex-wrap: wrap;">
         <div class="mode-toggle" style="min-width: 170px;">
@@ -12,8 +12,8 @@
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'decode' }" @click="mode = 'decode'">Decode</button>
         </div>
         <div class="variant-toggle">
-          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'component' }" @click="variant = 'component'" title="encodeURIComponent — encodes ?, &, =, #, + and more. Use for query param values and path segments.">Component</button>
-          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'full' }" @click="variant = 'full'" title="encodeURI — preserves URI structure characters like /, ?, #, &. Use for full URLs.">Full URI</button>
+          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'component' }" @click="variant = 'component'" title="encodeURIComponent: encodes ?, &, =, #, + and more. Use for query param values and path segments.">Component</button>
+          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'full' }" @click="variant = 'full'" title="encodeURI: preserves URI structure characters like /, ?, #, &. Use for full URLs.">Full URI</button>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
 import { useUrlEncode } from '~/composables/useUrlEncode'
 
 useToolSeo(
-  'URL Encode & Decode Online — Percent-Encoding Tool',
+  'URL Encode & Decode Online: Percent-Encoding Tool',
   'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
 )
 
@@ -87,11 +87,11 @@ function handleSwap() {
 const seoCards = [
   {
     title: 'Component vs Full URI encoding',
-    text: 'encodeURIComponent encodes everything except letters, digits, and - _ . ! ~ * \' ( ) — including ?, &, =, #, and /. Use it for query parameter values and path segments. encodeURI preserves those characters plus : / ? # [ ] @ ! $ & \' ( ) * + , ; = because they have meaning in a full URL. Use it when encoding a complete URL to make it safe for a header or attribute without breaking its structure.',
+    text: 'encodeURIComponent encodes everything except letters, digits, and - _ . ! ~ * \' ( ), including ?, &, =, #, and /. Use it for query parameter values and path segments. encodeURI preserves those characters plus : / ? # [ ] @ ! $ & \' ( ) * + , ; = because they have meaning in a full URL. Use it when encoding a complete URL to make it safe for a header or attribute without breaking its structure.',
   },
   {
     title: 'When you need percent-encoding',
-    text: 'Spaces, non-ASCII characters, and reserved symbols must be encoded before being placed in a URL. A space becomes %20 (or + in form-encoded contexts), é becomes %C3%A9, and & in a query value must be %26 or it will be parsed as a parameter separator. OAuth signatures, redirect_uri parameters, and search queries all require proper encoding — a single unencoded character can break the entire request.',
+    text: 'Spaces, non-ASCII characters, and reserved symbols must be encoded before being placed in a URL. A space becomes %20 (or + in form-encoded contexts), é becomes %C3%A9, and & in a query value must be %26 or it will be parsed as a parameter separator. OAuth signatures, redirect_uri parameters, and search queries all require proper encoding: a single unencoded character can break the entire request.',
   },
   {
     title: 'Reading percent-encoded sequences',

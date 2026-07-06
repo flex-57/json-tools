@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">CSV <span class="title-arrow">→</span> JSON</h1>
-        <p class="page-subtitle">Convert CSV or TSV data to JSON — paste text or drop a file.</p>
+        <p class="page-subtitle">Convert CSV or TSV data to JSON. Paste text or drop a file.</p>
       </div>
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
     </div>
@@ -72,7 +72,7 @@
 import { useCsvToJson } from '~/composables/useCsvJson'
 
 useToolSeo(
-  'CSV to JSON Converter Online — Instant, No Upload Required',
+  'CSV to JSON Converter Online: Instant, No Upload Required',
   'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
 )
 
@@ -93,15 +93,15 @@ function onDrop(e: DragEvent) {
 const seoCards = [
   {
     title: 'What is CSV and when do you need JSON?',
-    text: 'CSV (Comma-Separated Values) is the universal export format for spreadsheets, databases, and reporting tools. But modern APIs, JavaScript apps, and NoSQL databases speak JSON. Converting CSV to JSON lets you feed spreadsheet data directly into a fetch call, seed a database, or pass records to a charting library — without writing a single line of parsing code.',
+    text: 'CSV (Comma-Separated Values) is the universal export format for spreadsheets, databases, and reporting tools. But modern APIs, JavaScript apps, and NoSQL databases speak JSON. Converting CSV to JSON lets you feed spreadsheet data directly into a fetch call, seed a database, or pass records to a charting library, all without writing a single line of parsing code.',
   },
   {
     title: 'How the converter handles your data',
-    text: 'Paste your CSV or drop a file and the converter parses it in your browser. When "Headers" is enabled, the first row becomes the keys of each JSON object — the most common shape for API payloads. Auto-detect picks up commas, semicolons, and tabs automatically; switch it manually if your data uses an unusual delimiter or contains quoted fields with commas inside.',
+    text: 'Paste your CSV or drop a file and the converter parses it in your browser. When "Headers" is enabled, the first row becomes the keys of each JSON object, the most common shape for API payloads. Auto-detect picks up commas, semicolons, and tabs automatically; switch it manually if your data uses an unusual delimiter or contains quoted fields with commas inside.',
   },
   {
     title: 'Common use cases',
-    text: 'Data engineers use this to prototype ETL pipelines before writing code. Front-end developers convert exported Google Sheets data into JSON fixtures for mock APIs. QA teams transform test-case spreadsheets into structured input for automated test runners. Because everything runs locally, sensitive CSV exports — financial records, user data — never leave your browser.',
+    text: 'Data engineers use this to prototype ETL pipelines before writing code. Front-end developers convert exported Google Sheets data into JSON fixtures for mock APIs. QA teams transform test-case spreadsheets into structured input for automated test runners. Because everything runs locally, sensitive CSV exports (financial records, user data) never leave your browser.',
   },
 ]
 </script>

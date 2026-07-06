@@ -107,7 +107,7 @@ import { useColorMode } from '~/composables/useColorMode'
 import type { TreeNode } from '~/composables/useJsonTree'
 
 useToolSeo(
-  'JSON Tree Viewer — Collapsible Tree & Graph | JSON Tools',
+  'JSON Tree Viewer: Collapsible Tree & Graph | JSON Tools',
   'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
 )
 
@@ -255,11 +255,11 @@ function onDrop(e: DragEvent) {
 const seoCards = [
   {
     title: 'What is a JSON Tree Viewer?',
-    text: 'A JSON Tree Viewer transforms raw JSON text into a visual, navigable structure. Instead of scanning through hundreds of lines of nested braces and brackets, you can collapse and expand individual nodes to focus on the part of the data that matters. It is especially useful when working with API responses, configuration files, or any deeply nested payload — making it easy to understand the shape of the data at a glance without modifying it.',
+    text: 'A JSON Tree Viewer transforms raw JSON text into a visual, navigable structure. Instead of scanning through hundreds of lines of nested braces and brackets, you can collapse and expand individual nodes to focus on the part of the data that matters. It is especially useful when working with API responses, configuration files, or any deeply nested payload, letting you understand the shape of the data at a glance without modifying it.',
   },
   {
     title: 'Tree view: navigate and search',
-    text: 'The tree view renders each key-value pair as an indented row with color-coded types: strings, numbers, booleans and null each get a distinct color. Objects and arrays show a count of their children and can be collapsed to a single line. Hover any node to reveal a copy icon that captures the full dot/bracket path (e.g. features[0].name) — ready to paste directly into your code. Use the search box to instantly highlight matching keys and values across the entire tree.',
+    text: 'The tree view renders each key-value pair as an indented row with color-coded types: strings, numbers, booleans and null each get a distinct color. Objects and arrays show a count of their children and can be collapsed to a single line. Hover any node to reveal a copy icon that captures the full dot/bracket path (e.g. features[0].name), ready to paste directly into your code. Use the search box to instantly highlight matching keys and values across the entire tree.',
   },
   {
     title: 'Graph view: visualise the full structure',

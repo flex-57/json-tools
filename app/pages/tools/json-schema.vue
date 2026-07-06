@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> <span class="title-amp">Schema</span></h1>
-        <p class="page-subtitle">Generate a JSON Schema (Draft-07 or 2020-12) from any JSON value — automatically, client-side.</p>
+        <p class="page-subtitle">Generate a JSON Schema (Draft-07 or 2020-12) from any JSON value, automatically and client-side.</p>
         <NuxtLink to="/guides/how-to-validate-json" class="guide-link">Learn how JSON validation works →</NuxtLink>
       </div>
       <div class="mode-toggle" style="min-width: 200px;">
@@ -67,7 +67,7 @@
 import { useJsonSchema } from '~/composables/useJsonSchema'
 
 useToolSeo(
-  'JSON Schema Generator — Draft-07 & 2020-12 | JSON Tools',
+  'JSON Schema Generator: Draft-07 & 2020-12 | JSON Tools',
   'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
 )
 
@@ -90,7 +90,7 @@ const seoCards = [
   },
   {
     title: 'How the inference works',
-    text: 'The generator traverses your JSON recursively. Each primitive maps to its JSON Schema type: strings become {"type":"string"}, integers {"type":"integer"}, floats {"type":"number"}, booleans {"type":"boolean"}, and null {"type":"null"}. Objects become {"type":"object","properties":{...}} with a required array listing all present keys. Arrays are typed by their elements: if all items share the same structure, a single schema is inferred; mixed arrays produce {"oneOf":[...]}. Arrays of objects merge all item schemas — keys present in every item are required, keys present in only some are not.',
+    text: 'The generator traverses your JSON recursively. Each primitive maps to its JSON Schema type: strings become {"type":"string"}, integers {"type":"integer"}, floats {"type":"number"}, booleans {"type":"boolean"}, and null {"type":"null"}. Objects become {"type":"object","properties":{...}} with a required array listing all present keys. Arrays are typed by their elements: if all items share the same structure, a single schema is inferred; mixed arrays produce {"oneOf":[...]}. Arrays of objects merge all item schemas: keys present in every item are required, keys present in only some are not.',
   },
   {
     title: 'After generation: refine and validate',

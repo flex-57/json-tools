@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> <span class="title-amp">TypeScript</span></h1>
-        <p class="page-subtitle">Generate TypeScript interfaces or Zod schemas from any JSON — automatically, client-side.</p>
+        <p class="page-subtitle">Generate TypeScript interfaces or Zod schemas from any JSON, automatically and client-side.</p>
       </div>
       <div style="display:flex; align-items:center; gap:16px; flex-wrap: wrap;">
         <div class="option-wrap">
@@ -95,7 +95,7 @@
 import { useJsonToTs } from '~/composables/useJsonToTs'
 
 useToolSeo(
-  'JSON to TypeScript Generator — Interfaces & Zod Schemas Online',
+  'JSON to TypeScript Generator: Interfaces & Zod Schemas Online',
   'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
 )
 
@@ -117,7 +117,7 @@ const charCount = computed(() => output.value?.length ?? 0)
 const seoCards = [
   {
     title: 'TypeScript interfaces vs Zod schemas',
-    text: 'TypeScript interfaces exist only at compile time — they validate types during development and are erased at runtime. Zod schemas are runtime objects that can parse and validate data, generate TypeScript types via z.infer<>, and throw detailed errors when data doesn\'t match. Use interfaces when you control the data source and just need IDE support. Use Zod (or similar: Valibot, Yup, ArkType) when you receive data from untrusted sources like APIs, form inputs, or config files.',
+    text: 'TypeScript interfaces exist only at compile time: they validate types during development and are erased at runtime. Zod schemas are runtime objects that can parse and validate data, generate TypeScript types via z.infer<>, and throw detailed errors when data doesn\'t match. Use interfaces when you control the data source and just need IDE support. Use Zod (or similar: Valibot, Yup, ArkType) when you receive data from untrusted sources like APIs, form inputs, or config files.',
   },
   {
     title: 'How type inference works',

@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> XML</h1>
-        <p class="page-subtitle">Convert a JSON object to XML — paste or drop a .json file.</p>
+        <p class="page-subtitle">Convert a JSON object to XML. Paste or drop a .json file.</p>
       </div>
       <ToolSwitch from-path="/tools/xml-to-json" to-path="/tools/json-to-xml" from-label="XML → JSON" to-label="JSON → XML" />
     </div>
@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { useJsonToXml } from '~/composables/useXmlJson'
 useToolSeo(
-  'JSON to XML Converter — Generate Valid XML from JSON Online',
+  'JSON to XML Converter: Generate Valid XML from JSON Online',
   'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
 )
 const { input, output, error, copied, convert, copy, download, clear } = useJsonToXml()
@@ -75,7 +75,7 @@ const seoCards = [
   },
   {
     title: 'How JSON keys become XML elements',
-    text: 'Each JSON key becomes an XML element name. String and number values become text content. Arrays produce repeated sibling elements with the same tag. Nested objects become nested elements. One constraint: XML element names cannot start with a number or contain spaces — keep your JSON keys valid XML identifiers to get clean output.',
+    text: 'Each JSON key becomes an XML element name. String and number values become text content. Arrays produce repeated sibling elements with the same tag. Nested objects become nested elements. One constraint: XML element names cannot start with a number or contain spaces, so keep your JSON keys valid XML identifiers to get clean output.',
   },
   {
     title: 'Integration and config use cases',

@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Base64 <span class="title-amp">{{ mode === 'encode' ? 'Encoder' : 'Decoder' }}</span></h1>
-        <p class="page-subtitle">Encode text to Base64 or decode Base64 back to text — instantly, client-side.</p>
+        <p class="page-subtitle">Encode text to Base64 or decode Base64 back to text, instantly and client-side.</p>
         <NuxtLink to="/guides/what-is-base64" class="guide-link">What is Base64? Read our guide →</NuxtLink>
       </div>
       <div style="display:flex; gap: 8px; align-items:center; flex-wrap: wrap;">
@@ -14,7 +14,7 @@
         </div>
         <div class="variant-toggle">
           <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'standard' }" @click="variant = 'standard'" title="Standard Base64 (A-Z a-z 0-9 + /)">Standard</button>
-          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'urlsafe' }" @click="variant = 'urlsafe'" title="URL-safe Base64 (- _ no padding) — used in JWT">URL-safe</button>
+          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'urlsafe' }" @click="variant = 'urlsafe'" title="URL-safe Base64 (- _ no padding), used in JWT">URL-safe</button>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
 import { useBase64 } from '~/composables/useBase64'
 
 useToolSeo(
-  'Base64 Encode & Decode Online — Text & File Converter',
+  'Base64 Encode & Decode Online: Text & File Converter',
   'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
 )
 
@@ -88,11 +88,11 @@ function handleSwap() {
 const seoCards = [
   {
     title: 'What Base64 encoding is and is not',
-    text: 'Base64 is an encoding scheme, not encryption. It converts binary data or text into a safe ASCII string using 64 printable characters. The output is about 33% larger than the input. It doesn\'t hide data — anyone can decode it instantly. Its purpose is transport safety: embedding binary in JSON, XML, or HTTP headers that only accept text.',
+    text: 'Base64 is an encoding scheme, not encryption. It converts binary data or text into a safe ASCII string using 64 printable characters. The output is about 33% larger than the input. It doesn\'t hide data: anyone can decode it instantly. Its purpose is transport safety, embedding binary in JSON, XML, or HTTP headers that only accept text.',
   },
   {
     title: 'Standard vs URL-safe (Base64url)',
-    text: 'Standard Base64 uses + and / characters, which are special in URLs and can break query strings. URL-safe Base64 (Base64url) replaces + with - and / with _, making the output safe for URLs, filenames, and HTTP headers. JWT tokens use Base64url for their header and payload sections — the "JWT-compatible" variant here matches that format exactly.',
+    text: 'Standard Base64 uses + and / characters, which are special in URLs and can break query strings. URL-safe Base64 (Base64url) replaces + with - and / with _, making the output safe for URLs, filenames, and HTTP headers. JWT tokens use Base64url for their header and payload sections, which is exactly what the "JWT-compatible" variant here produces.',
   },
   {
     title: 'Common uses: images, auth tokens, data URIs',

@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Text <span class="title-amp">Case</span> Converter</h1>
-        <p class="page-subtitle">Convert text between camelCase, PascalCase, snake_case, kebab-case and more — instantly.</p>
+        <p class="page-subtitle">Convert text between camelCase, PascalCase, snake_case, kebab-case and more, instantly.</p>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
           </div>
         </Transition>
       </div>
-      <textarea v-model="input" class="input-textarea" placeholder="Type or paste text — supports camelCase, snake_case, kebab-case, spaces and mixed input…" spellcheck="false" rows="3" @focus="focused = true" @blur="focused = false" />
+      <textarea v-model="input" class="input-textarea" placeholder="Type or paste text (camelCase, snake_case, kebab-case, spaces and mixed input all work)…" spellcheck="false" rows="3" @focus="focused = true" @blur="focused = false" />
     </div>
 
     <div class="results">
@@ -38,7 +38,7 @@
 import { useTextCase } from '~/composables/useTextCase'
 
 useToolSeo(
-  'Text Case Converter — camelCase, snake_case, kebab-case & more',
+  'Text Case Converter: camelCase, snake_case, kebab-case & more',
   'Convert text between camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, Title Case and more. Auto-detects input format. Free, instant, no data sent to servers.',
 )
 

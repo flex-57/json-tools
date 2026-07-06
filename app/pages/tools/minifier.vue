@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">{{ modeLabel }} <span class="title-amp">Minifier</span></h1>
-        <p class="page-subtitle">Compress CSS, HTML, or JavaScript instantly — client-side, nothing is sent to a server.</p>
+        <p class="page-subtitle">Compress CSS, HTML, or JavaScript instantly. Client-side, nothing is sent to a server.</p>
       </div>
       <div class="mode-toggle" style="min-width: 210px;">
         <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 3)', transform: indicatorTransform }"></div>
@@ -67,7 +67,7 @@ import { useMinifier, type MinifyMode } from '~/composables/useMinifier'
 import type { EditorLang } from '~/components/JsonEditor.vue'
 
 useToolSeo(
-  'CSS / HTML / JS Minifier — Compress Code Online Free',
+  'CSS / HTML / JS Minifier: Compress Code Online Free',
   'Minify CSS, HTML, and JavaScript instantly in your browser. Remove whitespace, comments, and redundant code. Embedded CSS and JS inside HTML are minified too. Free, no data sent to servers.',
 )
 
@@ -118,15 +118,15 @@ function fmtBytes(n: number): string {
 const seoCards = [
   {
     title: 'Why minify your code?',
-    text: 'Minification removes whitespace, comments, and redundant syntax from CSS, HTML, and JavaScript without changing behaviour. The result is smaller files that transfer faster over the network. A typical CSS file shrinks by 20–40%, HTML by 10–20%, and JavaScript by 30–60% with variable renaming. Faster transfers improve page load time, reduce bandwidth costs on servers and CDNs, and positively affect Core Web Vitals scores — especially LCP and FID. Minification is a standard step in every production build pipeline alongside bundling and compression (gzip/brotli).',
+    text: 'Minification removes whitespace, comments, and redundant syntax from CSS, HTML, and JavaScript without changing behaviour. The result is smaller files that transfer faster over the network. A typical CSS file shrinks by 20-40%, HTML by 10-20%, and JavaScript by 30-60% with variable renaming. Faster transfers improve page load time, reduce bandwidth costs on servers and CDNs, and positively affect Core Web Vitals scores, especially LCP and FID. Minification is a standard step in every production build pipeline alongside bundling and compression (gzip/brotli).',
   },
   {
-    title: 'CSS, HTML, and JS — how each is minified',
-    text: 'CSS minification is powered by lightningcss, a Rust-based parser compiled to WebAssembly — it runs entirely in your browser and produces correct, spec-compliant output including nested selectors, custom properties, and modern syntax. HTML minification (html-minifier-terser) collapses inter-element whitespace, strips HTML comments, removes optional closing tags, and recursively minifies any embedded <style> and <script> blocks using the same CSS and JS engines. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, renames local variables to single letters, and removes unreachable branches — achieving the highest compression ratios of the three.',
+    title: 'CSS, HTML, and JS: how each is minified',
+    text: 'CSS minification is powered by lightningcss, a Rust-based parser compiled to WebAssembly. It runs entirely in your browser and produces correct, spec-compliant output including nested selectors, custom properties, and modern syntax. HTML minification (html-minifier-terser) collapses inter-element whitespace, strips HTML comments, removes optional closing tags, and recursively minifies any embedded <style> and <script> blocks using the same CSS and JS engines. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, renames local variables to single letters, and removes unreachable branches, achieving the highest compression ratios of the three.',
   },
   {
     title: 'Before deploying minified code',
-    text: 'Always keep your original source files — minified code is nearly impossible to debug or maintain. In production, generate source maps alongside your minified files so browser DevTools can map errors back to the original lines. Most build tools (Vite, webpack, Rollup, esbuild) handle minification and source maps automatically via their production mode. Use this tool for quick one-off checks, to understand how much a file compresses, or to minify standalone snippets. For full projects, integrate minification into your build pipeline rather than minifying manually.',
+    text: 'Always keep your original source files. Minified code is nearly impossible to debug or maintain. In production, generate source maps alongside your minified files so browser DevTools can map errors back to the original lines. Most build tools (Vite, webpack, Rollup, esbuild) handle minification and source maps automatically via their production mode. Use this tool for quick one-off checks, to understand how much a file compresses, or to minify standalone snippets. For full projects, integrate minification into your build pipeline rather than minifying manually.',
   },
 ]
 </script>

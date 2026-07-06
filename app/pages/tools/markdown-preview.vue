@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Markdown <span class="title-amp">Preview</span></h1>
-        <p class="page-subtitle">Write or paste Markdown on the left and see the rendered result instantly — client-side, nothing sent to a server.</p>
+        <p class="page-subtitle">Write or paste Markdown on the left and see the rendered result instantly. Client-side, nothing sent to a server.</p>
         <NuxtLink to="/guides/markdown-cheatsheet" class="guide-link">Markdown syntax cheatsheet →</NuxtLink>
         <NuxtLink to="/guides/what-is-markdown" class="guide-link">New to Markdown? Read the guide →</NuxtLink>
       </div>
@@ -49,8 +49,8 @@ import { useColorMode } from '~/composables/useColorMode'
 import { useMarkdown } from '~/composables/useMarkdown'
 
 useToolSeo(
-  'Markdown Preview — Render & Preview Markdown Online Free',
-  'Write or paste Markdown and see the rendered HTML preview instantly. Supports CommonMark — headings, code blocks, tables, and more. Free, client-side, no signup.',
+  'Markdown Preview: Render & Preview Markdown Online Free',
+  'Write or paste Markdown and see the rendered HTML preview instantly. Supports CommonMark: headings, code blocks, tables, and more. Free, client-side, no signup.',
 )
 
 const { input, html, copied, copy, clear } = useMarkdown()
@@ -280,15 +280,15 @@ function onDrop(e: DragEvent) {
 const seoCards = [
   {
     title: 'What is Markdown?',
-    text: 'Markdown is a lightweight markup language created by John Gruber in 2004. It uses plain-text formatting conventions — asterisks for bold, hashes for headings, backticks for code — that are both readable as raw text and convertible to HTML. It is the standard format for README files on GitHub, documentation systems like MkDocs and Docusaurus, note-taking apps like Obsidian and Notion, and static site generators. CommonMark is the widely adopted specification that standardises the syntax across tools.',
+    text: 'Markdown is a lightweight markup language created by John Gruber in 2004. It uses plain-text formatting conventions (asterisks for bold, hashes for headings, backticks for code) that are both readable as raw text and convertible to HTML. It is the standard format for README files on GitHub, documentation systems like MkDocs and Docusaurus, note-taking apps like Obsidian and Notion, and static site generators. CommonMark is the widely adopted specification that standardises the syntax across tools.',
   },
   {
     title: 'Reading the preview',
-    text: 'The left panel accepts raw Markdown text. As you type, the right panel shows the rendered HTML output in real time. Headings become h1–h6 elements, fenced code blocks (triple backtick) render with monospace styling, tables render with borders, and blockquotes are highlighted with an accent left border. The rendered output is sanitized with DOMPurify before display — raw HTML tags embedded in your Markdown are stripped for safety.',
+    text: 'The left panel accepts raw Markdown text. As you type, the right panel shows the rendered HTML output in real time. Headings become h1-h6 elements, fenced code blocks (triple backtick) render with monospace styling, tables render with borders, and blockquotes are highlighted with an accent left border. The rendered output is sanitized with DOMPurify before display, so raw HTML tags embedded in your Markdown are stripped for safety.',
   },
   {
     title: 'Copying the HTML output',
-    text: 'The "Copy HTML" button copies the full rendered HTML to your clipboard — useful when you need to paste the output into a CMS, an email template, or a static site that accepts raw HTML. If you need just the source Markdown, copy it directly from the left panel. You can also pass Markdown to this tool via the ?input= URL parameter to share pre-filled previews with teammates.',
+    text: 'The "Copy HTML" button copies the full rendered HTML to your clipboard. Useful when you need to paste the output into a CMS, an email template, or a static site that accepts raw HTML. If you need just the source Markdown, copy it directly from the left panel. You can also pass Markdown to this tool via the ?input= URL parameter to share pre-filled previews with teammates.',
   },
 ]
 </script>

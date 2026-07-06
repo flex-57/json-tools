@@ -57,7 +57,7 @@
       <div v-if="result" class="diff-section">
         <div class="statusbar" :class="result.error ? 'error' : result.same ? 'same' : ''">
           <template v-if="result.error">{{ result.error }}</template>
-          <template v-else-if="result.same">Identical — no differences found</template>
+          <template v-else-if="result.same">Identical, no differences found</template>
           <template v-else>
             <span class="diff-stat diff-stat--added">+{{ result.additions }} addition{{ result.additions !== 1 ? 's' : '' }}</span>
             <span class="diff-stat diff-stat--removed">-{{ result.deletions }} deletion{{ result.deletions !== 1 ? 's' : '' }}</span>
@@ -83,7 +83,7 @@
 import { useJsonDiff } from '~/composables/useJsonDiff'
 
 useToolSeo(
-  'JSON Diff Tool — Compare & Highlight JSON Differences Online',
+  'JSON Diff Tool: Compare & Highlight JSON Differences Online',
   'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
 )
 
@@ -112,7 +112,7 @@ function onDropRight(e: DragEvent) {
 const seoCards = [
   {
     title: 'Why compare JSON rather than raw text',
-    text: 'A plain text diff treats {"b":2,"a":1} and {"a":1,"b":2} as different — but they\'re the same JSON object. A JSON-aware diff normalises key order and data types before comparing, so you see only semantic differences: a field that changed value, a key that was added, an array element that was removed. This eliminates noise from formatting and key reordering.',
+    text: 'A plain text diff treats {"b":2,"a":1} and {"a":1,"b":2} as different, but they\'re the same JSON object. A JSON-aware diff normalises key order and data types before comparing, so you see only semantic differences: a field that changed value, a key that was added, an array element that was removed. This eliminates noise from formatting and key reordering.',
   },
   {
     title: 'Reading the diff output',

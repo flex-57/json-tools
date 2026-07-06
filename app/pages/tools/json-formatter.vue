@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-amp">Formatter</span></h1>
-        <p class="page-subtitle">Format, validate, and minify JSON instantly — free, no data sent to servers.</p>
+        <p class="page-subtitle">Format, validate, and minify JSON instantly. Free, no data sent to servers.</p>
         <NuxtLink to="/guides/how-to-validate-json" class="guide-link">Common JSON errors and how to fix them →</NuxtLink>
         <NuxtLink to="/guides/what-is-json" class="guide-link">New to JSON? Read our guide →</NuxtLink>
       </div>
@@ -88,7 +88,7 @@
 import { useJsonFormatter } from '~/composables/useJsonFormatter'
 
 useToolSeo(
-  'JSON Formatter & Validator — Beautify & Validate JSON Online',
+  'JSON Formatter & Validator: Beautify & Validate JSON Online',
   'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
 )
 
@@ -120,7 +120,7 @@ const charCount = computed(() => (output.value || input.value)?.length ?? 0)
 const cards = [
   {
     title: 'What is a JSON Formatter?',
-    text: 'A JSON formatter takes raw, unindented or minified JSON and outputs it in a human-readable structure with consistent indentation. It makes deeply nested objects and arrays easy to read at a glance — especially useful when working with API responses or config files.',
+    text: 'A JSON formatter takes raw, unindented or minified JSON and outputs it in a human-readable structure with consistent indentation. It makes deeply nested objects and arrays easy to read at a glance, which helps most when working with API responses or config files.',
   },
   {
     title: 'JSON Validation explained',
@@ -128,7 +128,7 @@ const cards = [
   },
   {
     title: 'Minify JSON for production',
-    text: 'Minifying removes all unnecessary whitespace, reducing payload size for API responses and config files. A 10 KB formatted JSON typically compresses to under 4 KB — a meaningful saving at scale. All processing happens in your browser; your data never leaves your machine.',
+    text: 'Minifying removes all unnecessary whitespace, reducing payload size for API responses and config files. A 10 KB formatted JSON typically compresses to under 4 KB, a meaningful saving at scale. All processing happens in your browser; your data never leaves your machine.',
   },
 ]
 </script>

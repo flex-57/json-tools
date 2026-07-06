@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">SQL <span class="title-amp">Formatter</span></h1>
-        <p class="page-subtitle">Format and beautify SQL queries instantly — supports MySQL, PostgreSQL, SQLite, T-SQL and more.</p>
+        <p class="page-subtitle">Format and beautify SQL queries instantly. Supports MySQL, PostgreSQL, SQLite, T-SQL and more.</p>
       </div>
       <div style="display:flex; flex-direction: column; gap: 10px; align-items: flex-end;">
         <div class="mode-toggle" style="min-width: 570px;">
@@ -72,7 +72,7 @@
 import { useSqlFormatter, type SqlDialect } from '~/composables/useSqlFormatter'
 
 useToolSeo(
-  'SQL Formatter — Free Online SQL Beautifier | JSON Tools',
+  'SQL Formatter: Free Online SQL Beautifier | JSON Tools',
   'Format and beautify SQL queries instantly in your browser. Supports MySQL, PostgreSQL, SQLite, T-SQL (SQL Server), and standard SQL. Choose indent size and keyword case. Free, no data sent to servers.',
 )
 
@@ -112,15 +112,15 @@ const indicatorTransform = computed(() => {
 const seoCards = [
   {
     title: 'Why format SQL queries?',
-    text: 'Unformatted SQL is notoriously hard to read — especially complex queries with multiple JOINs, subqueries, or CTEs. Consistent formatting makes it easier to spot errors, understand query structure at a glance, and collaborate with teammates. Formatted SQL is also easier to diff in version control: a consistently formatted file produces clean, meaningful diffs instead of noise from whitespace changes. This formatter applies standard indentation, aligns clauses (SELECT, FROM, WHERE, JOIN, GROUP BY…), and optionally uppercases SQL keywords to visually separate them from identifiers.',
+    text: 'Unformatted SQL is notoriously hard to read, especially complex queries with multiple JOINs, subqueries, or CTEs. Consistent formatting makes it easier to spot errors, understand query structure at a glance, and collaborate with teammates. Formatted SQL is also easier to diff in version control: a consistently formatted file produces clean, meaningful diffs instead of noise from whitespace changes. This formatter applies standard indentation, aligns clauses (SELECT, FROM, WHERE, JOIN, GROUP BY…), and optionally uppercases SQL keywords to visually separate them from identifiers.',
   },
   {
     title: 'SQL dialect differences',
-    text: 'While standard SQL (ISO/ANSI) is the foundation, each database engine extends or modifies the syntax. MySQL uses backtick identifiers and has specific functions like GROUP_CONCAT. PostgreSQL uses double-quote identifiers, supports dollar-quoted strings ($$ … $$), and has a rich set of extensions (RETURNING, DISTINCT ON, lateral joins). SQLite is more permissive — it accepts many syntax variants and ignores type constraints. T-SQL (SQL Server / Azure SQL) uses square-bracket identifiers, TOP instead of LIMIT, and has constructs like NOLOCK hints. Selecting the right dialect ensures the formatter applies correct keyword sets and quoting conventions.',
+    text: 'While standard SQL (ISO/ANSI) is the foundation, each database engine extends or modifies the syntax. MySQL uses backtick identifiers and has specific functions like GROUP_CONCAT. PostgreSQL uses double-quote identifiers, supports dollar-quoted strings ($$ … $$), and has a rich set of extensions (RETURNING, DISTINCT ON, lateral joins). SQLite is more permissive: it accepts many syntax variants and ignores type constraints. T-SQL (SQL Server / Azure SQL) uses square-bracket identifiers, TOP instead of LIMIT, and has constructs like NOLOCK hints. Selecting the right dialect ensures the formatter applies correct keyword sets and quoting conventions.',
   },
   {
     title: 'Tips for clean SQL',
-    text: 'Uppercase SQL keywords (SELECT, FROM, WHERE) and lowercase identifiers (table names, columns) is the most common convention. Use meaningful table aliases (u for users, o for orders) rather than single letters like a, b. Break long SELECT lists onto separate lines, one column per line. Place each JOIN on its own line with the ON condition indented beneath it. Use CTEs (WITH … AS) to name and reuse complex subqueries instead of nesting them. Add trailing commas rather than leading commas — most style guides now prefer this. Finally, run EXPLAIN or EXPLAIN ANALYZE on slow queries to understand the execution plan rather than guessing at optimisations.',
+    text: 'Uppercase SQL keywords (SELECT, FROM, WHERE) and lowercase identifiers (table names, columns) is the most common convention. Use meaningful table aliases (u for users, o for orders) rather than single letters like a, b. Break long SELECT lists onto separate lines, one column per line. Place each JOIN on its own line with the ON condition indented beneath it. Use CTEs (WITH … AS) to name and reuse complex subqueries instead of nesting them. Add trailing commas rather than leading commas; most style guides now prefer this. Finally, run EXPLAIN or EXPLAIN ANALYZE on slow queries to understand the execution plan rather than guessing at optimisations.',
   },
 ]
 </script>

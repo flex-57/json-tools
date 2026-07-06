@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">YAML <span class="title-arrow">→</span> JSON</h1>
-        <p class="page-subtitle">Convert YAML to JSON — paste text or drop a .yaml / .yml file.</p>
+        <p class="page-subtitle">Convert YAML to JSON. Paste text or drop a .yaml / .yml file.</p>
         <NuxtLink to="/guides/json-vs-yaml" class="guide-link">JSON vs YAML: what's the difference? →</NuxtLink>
       </div>
       <ToolSwitch from-path="/tools/yaml-to-json" to-path="/tools/json-to-yaml" from-label="YAML → JSON" to-label="JSON → YAML" />
@@ -62,7 +62,7 @@
 <script setup lang="ts">
 import { useYamlToJson } from '~/composables/useYamlJson'
 useToolSeo(
-  'YAML to JSON Converter Online — Parse YAML Files Free',
+  'YAML to JSON Converter Online: Parse YAML Files Free',
   'Convert YAML to JSON instantly. Free online YAML to JSON converter, no data sent to servers.',
 )
 const { input, output, error, copied, convert, copy, download, clear } = useYamlToJson()
@@ -72,15 +72,15 @@ useUrlInput(input, convert)
 const seoCards = [
   {
     title: 'YAML: the config language of the cloud',
-    text: 'Kubernetes manifests, GitHub Actions workflows, Docker Compose files, Ansible playbooks, and Helm charts are all written in YAML. It\'s designed for humans to write — but programs consume JSON. When you need to read a Kubernetes resource in code, pass a GitHub Actions config to an API, or debug what a Helm chart resolves to, YAML-to-JSON is the first step.',
+    text: 'Kubernetes manifests, GitHub Actions workflows, Docker Compose files, Ansible playbooks, and Helm charts are all written in YAML. It\'s designed for humans to write, but programs consume JSON. When you need to read a Kubernetes resource in code, pass a GitHub Actions config to an API, or debug what a Helm chart resolves to, YAML-to-JSON is the first step.',
   },
   {
     title: 'What the conversion preserves and drops',
-    text: 'YAML comments are not part of the data model and are dropped — JSON has no equivalent. YAML anchors (&) and aliases (*) are resolved before conversion, so the JSON output is fully expanded. YAML booleans (true/false/yes/no) and null values (null/~) are correctly typed in the JSON output. Indentation and block style are irrelevant once parsed.',
+    text: 'YAML comments are not part of the data model and are dropped, since JSON has no equivalent. YAML anchors (&) and aliases (*) are resolved before conversion, so the JSON output is fully expanded. YAML booleans (true/false/yes/no) and null values (null/~) are correctly typed in the JSON output. Indentation and block style are irrelevant once parsed.',
   },
   {
     title: 'Debugging and introspection use cases',
-    text: 'Platform engineers paste Kubernetes YAML into this tool to inspect the exact structure that kubectl apply will see, without running a cluster. Developers debug GitHub Actions by converting the workflow YAML to JSON and querying it with jq. DevOps teams validate Helm chart values.yaml by checking what a downstream template will receive. All parsing runs locally — paste your secrets safely.',
+    text: 'Platform engineers paste Kubernetes YAML into this tool to inspect the exact structure that kubectl apply will see, without running a cluster. Developers debug GitHub Actions by converting the workflow YAML to JSON and querying it with jq. DevOps teams validate Helm chart values.yaml by checking what a downstream template will receive. All parsing runs locally, so it\'s safe to paste your secrets.',
   },
 ]
 const isDragging = ref(false)

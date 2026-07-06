@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">XML <span class="title-arrow">→</span> JSON</h1>
-        <p class="page-subtitle">Parse XML and convert it to JSON — paste text or drop a .xml file.</p>
+        <p class="page-subtitle">Parse XML and convert it to JSON. Paste text or drop a .xml file.</p>
       </div>
       <ToolSwitch from-path="/tools/xml-to-json" to-path="/tools/json-to-xml" from-label="XML → JSON" to-label="JSON → XML" />
     </div>
@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { useXmlToJson } from '~/composables/useXmlJson'
 useToolSeo(
-  'XML to JSON Converter Online — Parse & Transform XML Free',
+  'XML to JSON Converter Online: Parse & Transform XML Free',
   'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
 )
 const { input, output, error, copied, convert, copy, download, clear } = useXmlToJson()
@@ -71,7 +71,7 @@ useUrlInput(input, convert)
 const seoCards = [
   {
     title: 'XML is still everywhere',
-    text: 'Despite JSON\'s dominance, XML remains the backbone of enterprise systems, SOAP web services, RSS/Atom feeds, Office Open XML documents, and Android manifests. If you work with any of these — or integrate with a legacy ERP, a bank API, or an XML-based CMS — you\'ll need to convert XML to JSON to work with it in modern JavaScript or Python code.',
+    text: 'Despite JSON\'s dominance, XML remains the backbone of enterprise systems, SOAP web services, RSS/Atom feeds, Office Open XML documents, and Android manifests. If you work with any of these, or integrate with a legacy ERP, a bank API, or an XML-based CMS, you\'ll need to convert XML to JSON to work with it in modern JavaScript or Python code.',
   },
   {
     title: 'How XML maps to JSON',
