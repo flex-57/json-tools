@@ -6,7 +6,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 
 ## Available Tools
 
-- [JSON Formatter & Validator](https://jsontools.space/): Format, validate, and minify JSON with syntax highlighting and error detection.
+- [JSON Formatter & Validator](https://jsontools.space/tools/json-formatter): Format, validate, and minify JSON with syntax highlighting and error detection.
 - [CSV to JSON Converter](https://jsontools.space/tools/csv-to-json): Convert CSV and TSV files to JSON. Auto-detect delimiters, headers, and data types.
 - [JSON to CSV Converter](https://jsontools.space/tools/json-to-csv): Flatten JSON arrays to CSV. Handles nested objects and arrays.
 - [XML to JSON Converter](https://jsontools.space/tools/xml-to-json): Convert XML documents to clean JSON. Handles attributes and nested elements.
