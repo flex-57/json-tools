@@ -38,7 +38,7 @@ const FAQS = [
   {
     q: 'Is my data safe? Does it leave my browser?',
     a: [
-      'Your data never leaves your machine. Every tool runs entirely in your browser using client-side JavaScript — nothing is sent to any server.',
+      'Your data never leaves your machine. Every tool runs entirely in your browser using client-side JavaScript, and nothing is sent to any server.',
       'This means you can safely use JSON Tools with sensitive data, API keys, JWT tokens, or confidential JSON payloads.',
     ],
   },
@@ -52,7 +52,7 @@ const FAQS = [
   {
     q: 'What is a JWT token?',
     a: [
-      'JWT (JSON Web Token) is a compact, signed token used to securely transmit information between parties — most commonly for authentication. A JWT is made of three base64url-encoded parts: a header, a payload, and a signature.',
+      'JWT (JSON Web Token) is a compact, signed token used to securely transmit information between parties, most commonly for authentication. A JWT is made of three base64url-encoded parts: a header, a payload, and a signature.',
       'The JWT Decoder tool lets you inspect the header and payload of any JWT instantly. The JWT Generator lets you create signed tokens using HS256, HS384, or HS512.',
     ],
   },
@@ -81,7 +81,7 @@ const FAQS = [
   {
     q: 'What keyboard shortcuts does JSON Tools support?',
     a: [
-      'Most conversion and formatting tools support Ctrl+Enter (Cmd+Enter on Mac) to trigger the primary action — Format or Convert — without reaching for the mouse.',
+      'Most conversion and formatting tools support Ctrl+Enter (Cmd+Enter on Mac) to trigger the primary action, Format or Convert, without reaching for the mouse.',
       'Supported tools: JSON Formatter, CSV/XML/YAML ↔ JSON converters, UUID Generator, and Password Generator (refresh). The shortcut hint is visible next to the primary button on each supported tool.',
     ],
   },
