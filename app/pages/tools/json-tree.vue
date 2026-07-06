@@ -49,9 +49,8 @@
           </template>
           <template v-else-if="viewMode === 'graph' && graphNodes.length">
             <span class="pane-label">Graph</span>
-            <div class="card-actions">
-              <button class="btn-xs" @click="exportGraphAsPdf">PDF</button>
-            </div>
+            <!-- Graph PDF export disabled — persistent UX issues, revisit later.
+                 exportGraphAsPdf() below is left intact to re-enable quickly. -->
           </template>
           <template v-else>
             <span class="pane-label">Output</span>
