@@ -12,6 +12,8 @@ export interface ToolMeta {
   hidden?: boolean
   /** Renders a `.nav-dropdown-divider` right before this entry in the nav (desktop + mobile) — used to separate bidirectional converter pairs from single-direction ones. */
   navDividerBefore?: boolean
+  /** Last date this tool's page content meaningfully changed (YYYY-MM-DD). Feeds the sitemap's lastmod — bump it when editing the page, don't touch it otherwise. */
+  updatedAt?: string
 }
 
 export const CATEGORIES = {
@@ -26,43 +28,43 @@ export const CATEGORIES = {
 // and the homepage grid so they never drift apart (see DUAL-PANE-SYSTEM.md).
 export const TOOLS: ToolMeta[] = [
   // JSON
-  { slug: 'json-formatter', name: 'JSON Formatter', short: 'Beautify & validate', category: 'json', variant: 'transform' },
-  { slug: 'json-diff', name: 'JSON Diff', short: 'Compare two documents', category: 'json', variant: 'compare' },
-  { slug: 'json-tree', name: 'Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer' },
+  { slug: 'json-formatter', name: 'JSON Formatter', short: 'Beautify & validate', category: 'json', variant: 'transform', updatedAt: '2026-07-07' },
+  { slug: 'json-diff', name: 'JSON Diff', short: 'Compare two documents', category: 'json', variant: 'compare', updatedAt: '2026-07-07' },
+  { slug: 'json-tree', name: 'Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer', updatedAt: '2026-07-07' },
 
   // Converters
-  { slug: 'csv-to-json', name: 'CSV to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'CSV ↔ JSON' },
-  { slug: 'json-to-csv', name: 'JSON to CSV', short: 'Flatten to rows', category: 'converters', variant: 'transform', hidden: true },
-  { slug: 'xml-to-json', name: 'XML to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'XML ↔ JSON' },
-  { slug: 'json-to-xml', name: 'JSON to XML', short: 'Convert structure', category: 'converters', variant: 'transform', hidden: true },
-  { slug: 'yaml-to-json', name: 'YAML to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'YAML ↔ JSON' },
-  { slug: 'json-to-yaml', name: 'JSON to YAML', short: 'Readable config output', category: 'converters', variant: 'transform', hidden: true },
-  { slug: 'excel-to-json', name: 'Excel to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'Excel ↔ JSON' },
-  { slug: 'json-to-excel', name: 'JSON to Excel', short: 'Export as .xlsx', category: 'converters', variant: 'transform', hidden: true },
-  { slug: 'json-to-ts', name: 'To TypeScript', short: 'Interfaces or Zod', category: 'converters', variant: 'transform', navLabel: 'JSON → TypeScript / Zod', navDividerBefore: true },
-  { slug: 'json-schema', name: 'To Schema', short: 'Infer JSON Schema', category: 'converters', variant: 'transform', navLabel: 'JSON → Schema' },
+  { slug: 'csv-to-json', name: 'CSV to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'CSV ↔ JSON', updatedAt: '2026-07-07' },
+  { slug: 'json-to-csv', name: 'JSON to CSV', short: 'Flatten to rows', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
+  { slug: 'xml-to-json', name: 'XML to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'XML ↔ JSON', updatedAt: '2026-07-07' },
+  { slug: 'json-to-xml', name: 'JSON to XML', short: 'Convert structure', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
+  { slug: 'yaml-to-json', name: 'YAML to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'YAML ↔ JSON', updatedAt: '2026-07-07' },
+  { slug: 'json-to-yaml', name: 'JSON to YAML', short: 'Readable config output', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
+  { slug: 'excel-to-json', name: 'Excel to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'Excel ↔ JSON', updatedAt: '2026-07-07' },
+  { slug: 'json-to-excel', name: 'JSON to Excel', short: 'Export as .xlsx', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
+  { slug: 'json-to-ts', name: 'To TypeScript', short: 'Interfaces or Zod', category: 'converters', variant: 'transform', navLabel: 'JSON → TypeScript / Zod', navDividerBefore: true, updatedAt: '2026-07-07' },
+  { slug: 'json-schema', name: 'To Schema', short: 'Infer JSON Schema', category: 'converters', variant: 'transform', navLabel: 'JSON → Schema', updatedAt: '2026-07-07' },
 
   // Text & Code
-  { slug: 'text-case', name: 'Text Case', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer' },
-  { slug: 'minifier', name: 'Minifier', short: 'CSS / HTML / JS', category: 'textcode', variant: 'transform' },
-  { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform' },
-  { slug: 'url-encode', name: 'URL Encode', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional' },
-  { slug: 'base64', name: 'Base64', short: 'Encode / decode', category: 'textcode', variant: 'bidirectional' },
-  { slug: 'markdown-preview', name: 'Markdown Preview', short: 'Live rendered output', category: 'textcode', variant: 'transform' },
+  { slug: 'text-case', name: 'Text Case', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'minifier', name: 'Minifier', short: 'CSS / HTML / JS', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
+  { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
+  { slug: 'url-encode', name: 'URL Encode', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-07' },
+  { slug: 'base64', name: 'Base64', short: 'Encode / decode', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-07' },
+  { slug: 'markdown-preview', name: 'Markdown Preview', short: 'Live rendered output', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
 
   // Security
-  { slug: 'jwt-decoder', name: 'JWT Decoder', short: 'Inspect claims', category: 'security', variant: 'analyzer' },
-  { slug: 'jwt-generator', name: 'JWT Generator', short: 'Sign a token', category: 'security', variant: 'generator' },
-  { slug: 'hash', name: 'Hash Generator', short: 'MD5, SHA-1, SHA-256…', category: 'security', variant: 'analyzer' },
-  { slug: 'uuid', name: 'UUID Generator', short: 'Bulk v4 identifiers', category: 'security', variant: 'generator' },
-  { slug: 'password-generator', name: 'Password Generator', short: 'Cryptographically secure', category: 'security', variant: 'generator' },
+  { slug: 'jwt-decoder', name: 'JWT Decoder', short: 'Inspect claims', category: 'security', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'jwt-generator', name: 'JWT Generator', short: 'Sign a token', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
+  { slug: 'hash', name: 'Hash Generator', short: 'MD5, SHA-1, SHA-256…', category: 'security', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'uuid', name: 'UUID Generator', short: 'Bulk v4 identifiers', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
+  { slug: 'password-generator', name: 'Password Generator', short: 'Cryptographically secure', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
 
   // Dev Utils
-  { slug: 'regex-tester', name: 'Regex Tester', short: 'Live match highlighting', category: 'devutils', variant: 'analyzer' },
-  { slug: 'cron-parser', name: 'Cron Parser', short: 'Plain-English schedules', category: 'devutils', variant: 'analyzer' },
-  { slug: 'unix-timestamp', name: 'Unix Timestamp', short: 'Epoch ↔ date', category: 'devutils', variant: 'analyzer' },
-  { slug: 'number-base', name: 'Number Base', short: 'Binary, octal, hex', category: 'devutils', variant: 'analyzer' },
-  { slug: 'color', name: 'Color Picker', short: 'HEX / RGB / HSL + contrast', category: 'devutils', variant: 'generator' },
+  { slug: 'regex-tester', name: 'Regex Tester', short: 'Live match highlighting', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'cron-parser', name: 'Cron Parser', short: 'Plain-English schedules', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'unix-timestamp', name: 'Unix Timestamp', short: 'Epoch ↔ date', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'number-base', name: 'Number Base', short: 'Binary, octal, hex', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'color', name: 'Color Picker', short: 'HEX / RGB / HSL + contrast', category: 'devutils', variant: 'generator', updatedAt: '2026-07-07' },
 ]
 
 // Used by nav, footer and the homepage grid — excludes tools flagged `hidden`

@@ -1,4 +1,5 @@
 import { GUIDES } from '~/data/guides'
+import { TOOLS } from '~/data/tools'
 
 interface SitemapUrl {
   loc: string
@@ -8,8 +9,6 @@ interface SitemapUrl {
 }
 
 export default defineEventHandler((event) => {
-  const today = new Date().toISOString().split('T')[0]
-
   // Guide URLs are derived from app/data/guides.ts so a new guide can never
   // be forgotten here, and lastmod reflects each guide's real dateModified.
   const guideUrls: SitemapUrl[] = Object.values(GUIDES).map(guide => ({
@@ -19,6 +18,16 @@ export default defineEventHandler((event) => {
     lastmod: guide.dateModified,
   }))
 
+  // Tool URLs are derived from app/data/tools.ts so a new tool can never be
+  // forgotten here. lastmod is omitted unless the tool has a real updatedAt —
+  // a fake "today" default made Google treat the whole field as unreliable.
+  const toolUrls: SitemapUrl[] = TOOLS.map(tool => ({
+    loc: `/tools/${tool.slug}`,
+    priority: tool.slug === 'json-formatter' ? '0.9' : '0.8',
+    changefreq: 'monthly',
+    lastmod: tool.updatedAt,
+  }))
+
   const urls: SitemapUrl[] = [
     { loc: '/',                             priority: '1.0', changefreq: 'weekly' },
     { loc: '/faq',                          priority: '0.7', changefreq: 'monthly' },
@@ -26,42 +35,13 @@ export default defineEventHandler((event) => {
     ...guideUrls,
     { loc: '/terms',                        priority: '0.3', changefreq: 'yearly' },
     { loc: '/privacy',                      priority: '0.3', changefreq: 'yearly' },
-    { loc: '/tools/json-formatter',         priority: '0.9', changefreq: 'monthly' },
-    { loc: '/tools/csv-to-json' },
-    { loc: '/tools/json-to-csv' },
-    { loc: '/tools/xml-to-json' },
-    { loc: '/tools/json-to-xml' },
-    { loc: '/tools/yaml-to-json' },
-    { loc: '/tools/json-to-yaml' },
-    { loc: '/tools/excel-to-json' },
-    { loc: '/tools/json-to-excel' },
-    { loc: '/tools/jwt-decoder' },
-    { loc: '/tools/base64' },
-    { loc: '/tools/json-diff' },
-    { loc: '/tools/url-encode' },
-    { loc: '/tools/unix-timestamp' },
-    { loc: '/tools/regex-tester' },
-    { loc: '/tools/cron-parser' },
-    { loc: '/tools/json-tree' },
-    { loc: '/tools/json-to-ts' },
-    { loc: '/tools/hash' },
-    { loc: '/tools/uuid' },
-    { loc: '/tools/json-schema' },
-    { loc: '/tools/minifier' },
-    { loc: '/tools/sql-formatter' },
-    { loc: '/tools/text-case' },
-    { loc: '/tools/number-base' },
-    { loc: '/tools/jwt-generator' },
-    { loc: '/tools/color' },
-    { loc: '/tools/password-generator' },
-    { loc: '/tools/markdown-preview' },
+    ...toolUrls,
   ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(({ loc, priority = '0.8', changefreq = 'monthly', lastmod = today }) => `  <url>
-    <loc>https://jsontools.space${loc}</loc>
-    <lastmod>${lastmod}</lastmod>
+${urls.map(({ loc, priority = '0.8', changefreq = 'monthly', lastmod }) => `  <url>
+    <loc>https://jsontools.space${loc}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''}
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`).join('\n')}
