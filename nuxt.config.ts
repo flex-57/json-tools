@@ -15,7 +15,7 @@ export default defineNuxtConfig({
           'X-Content-Type-Options': 'nosniff',
           'Referrer-Policy': 'strict-origin-when-cross-origin',
           'X-Powered-By': '',
-          'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://tpc.googlesyndication.com https://ep1.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none';",
+          'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://tpc.googlesyndication.com https://ep1.adtrafficquality.google https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://fundingchoicesmessages.google.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://fundingchoicesmessages.google.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none';",
           'cache-control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
         },
       },
@@ -57,6 +57,30 @@ export default defineNuxtConfig({
         {
           // Dark is the brand default — only an explicit stored 'light' opts out. Must match useColorMode.ts.
           innerHTML: "(function(){try{var m=localStorage.getItem('color-mode');if(m!=='light'){document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()",
+        },
+        {
+          // Consent Mode default (denied) must run before gtag.js/adsbygoogle.js execute — Google's CMP
+          // (configured in AdSense > Privacy & messaging) updates this automatically once the visitor
+          // answers the popup. Both tags are appended here (not as separate head.script entries) because
+          // unhead renders src-scripts before inline ones regardless of array order, which would break
+          // the required sequencing. adsbygoogle.js also triggers the Funding Choices popup for EEA/UK/CH
+          // visitors — it must load unconditionally, not gated behind our own consent decision.
+          innerHTML: `
+            window.dataLayer=window.dataLayer||[];
+            function gtag(){window.dataLayer.push(arguments)}
+            gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+            gtag('js',new Date());
+            gtag('config','G-2YDLBQ1QSH');
+            var gtagScript=document.createElement('script');
+            gtagScript.async=true;
+            gtagScript.src='https://www.googletagmanager.com/gtag/js?id=G-2YDLBQ1QSH';
+            document.head.appendChild(gtagScript);
+            var adsScript=document.createElement('script');
+            adsScript.async=true;
+            adsScript.crossOrigin='anonymous';
+            adsScript.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010651564611690';
+            document.head.appendChild(adsScript);
+          `,
         },
       ],
       link: [

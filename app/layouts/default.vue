@@ -94,12 +94,11 @@
       <AdSlot slot-id="6882001481" />
     </div>
     <AppFooter />
-    <CookieBanner />
   </div>
 </template>
 
 <script setup>
-import { useConsent, trackPageView } from '~/composables/useConsent'
+import { trackPageView } from '~/composables/useConsent'
 import { useColorMode } from '~/composables/useColorMode'
 import { CATEGORIES, toolsByCategory, toolMeta } from '~/data/tools'
 
@@ -110,12 +109,10 @@ const activeGroup = ref(null)
 function closeIfFocusLeft(e) {
   if (!e.currentTarget.contains(e.relatedTarget)) activeGroup.value = null
 }
-const { init } = useConsent()
 const { isDark, init: initColorMode, toggle } = useColorMode()
 const { addRecent } = useRecentTools()
 
 onMounted(() => {
-  init()
   initColorMode()
   if (route.path.startsWith('/tools/')) {
     addRecent(route.path.replace('/tools/', ''))

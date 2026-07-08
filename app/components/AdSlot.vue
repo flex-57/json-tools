@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div v-if="consent === 'accepted'" class="ad-slot">
+    <div class="ad-slot">
       <ins
         ref="insEl"
         class="adsbygoogle"
@@ -15,29 +15,20 @@
 </template>
 
 <script setup lang="ts">
-import { useConsent, ADSENSE_ID } from '~/composables/useConsent'
+import { ADSENSE_ID } from '~/composables/useConsent'
 
 defineProps<{ slotId: string }>()
 
-const { consent } = useConsent()
 const insEl = ref<HTMLElement | null>(null)
-const pushed = ref(false)
-
-function pushAd() {
-  if (pushed.value || !insEl.value) return
-  pushed.value = true
-  try {
-    const w = window as any
-    ;(w.adsbygoogle = w.adsbygoogle || []).push({})
-  } catch {}
-}
 
 onMounted(() => {
-  if (consent.value === 'accepted') nextTick(pushAd)
-})
-
-watch(consent, (val) => {
-  if (val === 'accepted') nextTick(pushAd)
+  nextTick(() => {
+    if (!insEl.value) return
+    try {
+      const w = window as any
+      ;(w.adsbygoogle = w.adsbygoogle || []).push({})
+    } catch {}
+  })
 })
 </script>
 
