@@ -59,16 +59,21 @@ export default defineNuxtConfig({
           innerHTML: "(function(){try{var m=localStorage.getItem('color-mode');if(m!=='light'){document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()",
         },
         {
-          // Consent Mode default (denied) must run before gtag.js/adsbygoogle.js execute — Google's CMP
-          // (configured in AdSense > Privacy & messaging) updates this automatically once the visitor
-          // answers the popup. Both tags are appended here (not as separate head.script entries) because
-          // unhead renders src-scripts before inline ones regardless of array order, which would break
-          // the required sequencing. adsbygoogle.js also triggers the Funding Choices popup for EEA/UK/CH
-          // visitors — it must load unconditionally, not gated behind our own consent decision.
+          // Consent Mode default must run before gtag.js/adsbygoogle.js execute — Google's CMP (configured
+          // in AdSense > Privacy & messaging) updates this automatically once the visitor answers the popup.
+          // Denial is scoped to EEA/UK/Switzerland ONLY (region param) — everywhere else defaults to granted,
+          // so GA4/ads aren't blocked worldwide while Google's CMP is inactive/pending (e.g. site still under
+          // AdSense review). Without this scoping, a global 'denied' default with no CMP ever granting it
+          // back silently kills analytics for every visitor, everywhere, indefinitely.
+          // Both tags are appended here (not as separate head.script entries) because unhead renders
+          // src-scripts before inline ones regardless of array order, which would break the required
+          // sequencing. adsbygoogle.js also triggers the Funding Choices popup for EEA/UK/CH visitors — it
+          // must load unconditionally, not gated behind our own consent decision.
           innerHTML: `
             window.dataLayer=window.dataLayer||[];
             function gtag(){window.dataLayer.push(arguments)}
-            gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+            gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
+            gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
             gtag('js',new Date());
             gtag('config','G-2YDLBQ1QSH');
             var gtagScript=document.createElement('script');
