@@ -59,6 +59,9 @@ const TOOLS = [
   { slug: 'guide-what-is-unix-timestamp',   tag: 'Developer Guide', title: 'What is a Unix\nTimestamp?',     subtitle: 'The epoch, seconds vs milliseconds,\nand the Year 2038 problem.',            size: 68 },
   { slug: 'guide-understanding-number-bases', tag: 'Developer Guide', title: 'Understanding\nNumber Bases', subtitle: 'Binary, octal, and hex explained,\nand how to convert between them.',        size: 68 },
   { slug: 'guide-password-entropy-explained', tag: 'Developer Guide', title: 'Password Strength\n& Entropy', subtitle: 'How entropy is calculated, and why\nlength beats complexity.',              size: 64 },
+  { slug: 'guide-understanding-color-formats', tag: 'Developer Guide', title: 'HEX, RGB, and\nHSL Explained', subtitle: 'Color formats compared, plus WCAG\ncontrast ratio thresholds.',           size: 64 },
+  { slug: 'guide-sql-cheatsheet',              tag: 'Developer Guide', title: 'SQL\nCheatsheet',            subtitle: 'Clause order, joins, filtering,\nand dialect differences.',                  size: 76 },
+  { slug: 'guide-encoding-vs-encryption-vs-hashing', tag: 'Developer Guide', title: 'Encoding vs\nEncryption vs Hashing', subtitle: 'What\'s reversible, what needs a key,\nand why Base64 isn\'t encryption.', size: 56 },
 ];
 
 const OUT_DIR = path.join(__dirname, '../public/og');

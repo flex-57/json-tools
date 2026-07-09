@@ -56,6 +56,9 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [What is a Unix Timestamp?](https://jsontools.space/guides/what-is-unix-timestamp): The Unix epoch, seconds vs milliseconds, the Year 2038 problem, and why leap seconds are not counted.
 - [Understanding Number Bases](https://jsontools.space/guides/understanding-number-bases): Binary, octal, and hexadecimal explained, how to convert between them, and where each base shows up in real code.
 - [Password Strength and Entropy Explained](https://jsontools.space/guides/password-entropy-explained): How password entropy is calculated, why length beats character-class complexity, and why human-invented passwords are weaker than the math suggests.
+- [HEX, RGB, and HSL Explained](https://jsontools.space/guides/understanding-color-formats): How HEX, RGB, and HSL represent color, RGBA/HSLA transparency, and WCAG 2.1 contrast ratio thresholds.
+- [SQL Cheatsheet](https://jsontools.space/guides/sql-cheatsheet): SQL clause execution order, joins, filtering, aggregates, and syntax differences between MySQL, PostgreSQL, SQLite, and T-SQL.
+- [Encoding vs Encryption vs Hashing](https://jsontools.space/guides/encoding-vs-encryption-vs-hashing): What's reversible, what needs a key, and why Base64 encoding is not a form of encryption.
 
 ## Key Facts
 

@@ -950,4 +950,134 @@ export const GUIDES: Record<string, GuideConfig> = {
       },
     ],
   },
+  'understanding-color-formats': {
+    slug: 'understanding-color-formats',
+    type: 'guide',
+    title: 'HEX, RGB, and HSL Explained',
+    subtitle: 'Color formats compared: how HEX, RGB, and HSL represent the same color, transparency, and WCAG contrast ratios for accessible text.',
+    readTime: '4 min read',
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    description: 'Learn how HEX, RGB, and HSL represent color, how to convert between them, RGBA/HSLA transparency, and WCAG 2.1 contrast ratio thresholds for accessible text.',
+    tools: [
+      { name: 'Color Picker & Converter', desc: 'Pick a color visually and convert instantly between HEX, RGB, HSL, and HSB. Includes a WCAG contrast checker.', href: '/tools/color', icon: ICONS.color },
+    ],
+    faqs: [
+      {
+        q: 'Why do HEX, RGB, and HSL all exist for the same color?',
+        a: [
+          'They are different coordinate systems for the same color space, each convenient for a different task. RGB matches how a screen actually produces light (three color channels). HEX is RGB written compactly as hexadecimal. HSL matches how people intuitively describe color adjustments (hue, how vivid, how light/dark).',
+          'All three are lossless conversions of each other — there is no "more accurate" one, only more convenient for the task at hand.',
+        ],
+      },
+      {
+        q: 'How do I read a HEX shorthand like #F0F?',
+        a: [
+          '3-digit HEX is only valid when each channel\'s two digits repeat. Each shorthand digit is doubled, not padded with a zero: #F0F expands to #FF00FF, not #F00F0F.',
+          'If a color\'s channels do not repeat like this, it has no 3-digit shorthand and must be written in full 6-digit form.',
+        ],
+      },
+      {
+        q: 'What contrast ratio do I need for accessible text?',
+        a: [
+          'WCAG 2.1 AA (the commonly required minimum) requires 4.5:1 for normal text and 3:1 for large text (18pt+, or 14pt+ bold). AAA (enhanced) requires 7:1 and 4.5:1 respectively.',
+          'The ratio ranges from 1:1 (identical colors, unreadable) to 21:1 (pure black on pure white, maximum possible contrast).',
+        ],
+      },
+      {
+        q: 'What is the alpha channel in RGBA and 8-digit HEX?',
+        a: [
+          'It controls opacity: 0 is fully transparent, 1 (RGBA/HSLA) or FF (8-digit HEX) is fully opaque. rgba(255,61,143,0.5) and #FF3D8F80 both describe the same brand pink at roughly 50% opacity.',
+          '8-digit HEX opacity is not directly the percentage — it is a byte value (0-255) like the other channels, so 50% opacity is 128 (0x80), not 50 or 0x50.',
+        ],
+      },
+    ],
+  },
+  'sql-cheatsheet': {
+    slug: 'sql-cheatsheet',
+    type: 'reference',
+    title: 'SQL Cheatsheet',
+    subtitle: 'A quick reference for SQL syntax: clause execution order, joins, filtering, aggregates, and where MySQL, PostgreSQL, SQLite, and T-SQL disagree.',
+    readTime: '4 min read',
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    description: 'A practical SQL reference: the logical clause execution order, join types, filtering operators, aggregate functions with GROUP BY/HAVING, and syntax differences between MySQL, PostgreSQL, SQLite, and T-SQL.',
+    tools: [
+      { name: 'SQL Formatter', desc: 'Format and beautify SQL queries for MySQL, PostgreSQL, SQLite, T-SQL, or standard SQL.', href: '/tools/sql-formatter', icon: ICONS.sql },
+    ],
+    faqs: [
+      {
+        q: 'Why can\'t my WHERE clause use a column alias from SELECT?',
+        a: [
+          'SQL is written SELECT-first but executed FROM-first: FROM and WHERE both run before SELECT creates any aliases, so the alias does not exist yet at the point WHERE is evaluated.',
+          'ORDER BY runs last, after SELECT, which is why it can reference SELECT aliases without any issue.',
+        ],
+      },
+      {
+        q: 'What is the difference between WHERE and HAVING?',
+        a: [
+          'WHERE filters individual rows before grouping happens. HAVING filters groups after GROUP BY has produced them, which is the only place you can filter on an aggregate value like COUNT(*) or SUM(col).',
+          'Using WHERE to try to filter on an aggregate fails, because at the point WHERE runs, no aggregation has happened yet.',
+        ],
+      },
+      {
+        q: 'Why does WHERE col = NULL never match anything?',
+        a: [
+          'NULL represents "unknown," not a comparable value. Any comparison against unknown (including = NULL) evaluates to unknown, not true, so the row is excluded either way.',
+          'Use IS NULL or IS NOT NULL instead, which are dedicated NULL-checking predicates rather than equality comparisons.',
+        ],
+      },
+      {
+        q: 'Is LIMIT standard SQL?',
+        a: [
+          'No. LIMIT (MySQL, PostgreSQL, SQLite) and TOP (T-SQL) are both vendor extensions that predate the ISO/ANSI standard row-limiting syntax, FETCH FIRST n ROWS ONLY.',
+          'PostgreSQL and modern SQL Server both support the standard OFFSET/FETCH form in addition to their own LIMIT/TOP syntax.',
+        ],
+      },
+    ],
+  },
+  'encoding-vs-encryption-vs-hashing': {
+    slug: 'encoding-vs-encryption-vs-hashing',
+    type: 'guide',
+    title: 'Encoding vs Encryption vs Hashing',
+    subtitle: "Three commonly confused transformations compared: what's reversible, what needs a key, and why Base64 is not encryption.",
+    readTime: '4 min read',
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    description: 'Encoding, encryption, and hashing compared side by side: purpose, reversibility, whether a secret key is required, and the common mistake of treating Base64 encoding as if it provided security.',
+    tools: [
+      { name: 'Base64 Encoder / Decoder', desc: 'Encode text to Base64 or decode it back — reversible by anyone, not a security measure.', href: '/tools/base64', icon: ICONS.base64 },
+      { name: 'Hash Generator', desc: 'Compute MD5, SHA-1, SHA-256, and SHA-512 digests — one-way, for verification and integrity checks.', href: '/tools/hash', icon: ICONS.hash },
+    ],
+    faqs: [
+      {
+        q: 'Is Base64 a form of encryption?',
+        a: [
+          'No. Base64 has no key and no secret of any kind — decoding it back to the original data takes one line of code in any language. It exists purely so binary or special-character data can safely pass through systems that only accept a limited character set.',
+          'If a value needs to stay confidential, it needs encryption. Base64-encoding a password or API key and treating it as protected is a genuine, common security bug.',
+        ],
+      },
+      {
+        q: 'Is a JWT encrypted?',
+        a: [
+          'A standard JWT is Base64url-encoded and signed, not encrypted. Its payload is fully readable by anyone who has the token; the signature only proves it was not tampered with.',
+          'An encrypted JWT variant exists (JWE — JSON Web Encryption), but it is far less common than the standard signed JWT (JWS).',
+        ],
+      },
+      {
+        q: 'Why can\'t a hash be reversed back to the original input?',
+        a: [
+          'A hash function is deliberately one-way: it is designed so there is no computationally feasible inverse operation. This is exactly the property needed for password storage — the server never needs to store or read back the original password, only compare a freshly computed hash against the one on file.',
+          'This is different from encryption, which is intentionally reversible for anyone holding the correct key.',
+        ],
+      },
+      {
+        q: 'When should I use encryption instead of hashing?',
+        a: [
+          'Use hashing when you never need the original value back — passwords, integrity checks, deduplication. Use encryption when you do need to recover the original value later — data at rest, data in transit, anything the application itself needs to read again.',
+          'Storing passwords with encryption instead of hashing is itself a common mistake: it means whoever holds the decryption key can read every password in the database, which defeats the point of not storing them in plaintext.',
+        ],
+      },
+    ],
+  },
 }

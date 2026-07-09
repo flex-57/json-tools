@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">SQL <span class="title-amp">Formatter</span></h1>
         <p class="page-subtitle">Format and beautify SQL queries instantly. Supports MySQL, PostgreSQL, SQLite, T-SQL and more.</p>
+        <NuxtLink to="/guides/sql-cheatsheet" class="guide-link">SQL syntax cheatsheet →</NuxtLink>
       </div>
       <div style="display:flex; flex-direction: column; gap: 10px; align-items: flex-end;">
         <div class="mode-toggle" style="min-width: 570px;">

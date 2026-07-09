@@ -88,6 +88,9 @@ const bodyComponents: Record<string, Component> = {
   'what-is-unix-timestamp': defineAsyncComponent(() => import('~/components/guides/body/what-is-unix-timestamp.vue')),
   'understanding-number-bases': defineAsyncComponent(() => import('~/components/guides/body/understanding-number-bases.vue')),
   'password-entropy-explained': defineAsyncComponent(() => import('~/components/guides/body/password-entropy-explained.vue')),
+  'understanding-color-formats': defineAsyncComponent(() => import('~/components/guides/body/understanding-color-formats.vue')),
+  'sql-cheatsheet': defineAsyncComponent(() => import('~/components/guides/body/sql-cheatsheet.vue')),
+  'encoding-vs-encryption-vs-hashing': defineAsyncComponent(() => import('~/components/guides/body/encoding-vs-encryption-vs-hashing.vue')),
 }
 
 const route = useRoute()

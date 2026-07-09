@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Color <span class="title-amp">Picker & Converter</span></h1>
         <p class="page-subtitle">Pick a color visually and convert between HEX, RGBA, HSLA and HSBA. Check WCAG contrast ratios.</p>
+        <NuxtLink to="/guides/understanding-color-formats" class="guide-link">HEX, RGB, HSL — what's the difference? →</NuxtLink>
       </div>
     </div>
 

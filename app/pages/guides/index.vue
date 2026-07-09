@@ -63,9 +63,9 @@ const referenceList = allGuides.filter(g => g.type === 'reference')
 const BASE_URL = 'https://jsontools.space'
 
 useSeoMeta({
-  title: 'Developer Guides & References — JSON Tools',
+  title: 'Developer Guides & Reference — JSON Tools',
   description: 'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
-  ogTitle: 'Developer Guides & References — JSON Tools',
+  ogTitle: 'Developer Guides & Reference — JSON Tools',
   ogDescription: 'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
   ogImage: `${BASE_URL}/og/og-image.png`,
   twitterCard: 'summary_large_image',
@@ -92,7 +92,7 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: 'Developer Guides & References',
+        name: 'Developer Guides & Reference',
         description: 'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
         url: `${BASE_URL}/guides`,
         hasPart: allGuides.map(g => ({

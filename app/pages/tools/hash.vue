@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Hash <span class="title-amp">Generator</span></h1>
         <p class="page-subtitle">Compute MD5, SHA-1, SHA-256 and SHA-512 hashes instantly in your browser. Nothing is sent to any server.</p>
+        <NuxtLink to="/guides/what-is-hash" class="guide-link">What is a hash function? Read our guide →</NuxtLink>
       </div>
     </div>
 
