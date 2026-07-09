@@ -1,4 +1,17 @@
 import { ICONS } from '~/utils/icons'
+import { CATEGORIES } from './tools'
+
+export type GuideCategory = keyof typeof CATEGORIES
+
+// Same category keys as tools.ts (for icon/order reuse), own display labels —
+// "Converters" doesn't fit guide content, these are concept explainers, not converter tools.
+export const GUIDE_CATEGORY_LABELS: Record<GuideCategory, string> = {
+  json: 'JSON',
+  converters: 'Data Formats',
+  textcode: 'Text & Code',
+  security: 'Security',
+  devutils: 'Dev Utils',
+}
 
 export interface GuideFaq { q: string; a: string[] }
 export interface GuideToolCard { name: string; desc: string; href: string; icon: string }
@@ -6,6 +19,7 @@ export interface GuideToolCard { name: string; desc: string; href: string; icon:
 export interface GuideConfig {
   slug: string
   type: 'guide' | 'reference'
+  category: GuideCategory
   title: string
   subtitle: string
   readTime: string
@@ -20,6 +34,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-jwt': {
     slug: 'what-is-jwt',
     type: 'guide',
+    category: 'security',
     title: 'What is a JWT Token?',
     subtitle: 'JSON Web Tokens explained: structure, how they work, common algorithms, and security best practices.',
     readTime: '6 min read',
@@ -65,6 +80,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-base64': {
     slug: 'what-is-base64',
     type: 'guide',
+    category: 'textcode',
     title: 'What is Base64 Encoding?',
     subtitle: 'Base64 explained: how it works, why it exists, common use cases, and the difference with Base64url.',
     readTime: '5 min read',
@@ -109,6 +125,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'how-to-validate-json': {
     slug: 'how-to-validate-json',
     type: 'guide',
+    category: 'json',
     title: 'How to Validate JSON',
     subtitle: 'Understand what makes JSON valid, spot the most common errors, and go further with JSON Schema.',
     readTime: '5 min read',
@@ -154,6 +171,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'json-vs-yaml': {
     slug: 'json-vs-yaml',
     type: 'reference',
+    category: 'converters',
     title: 'JSON vs YAML: What\'s the Difference?',
     subtitle: 'A side-by-side comparison of JSON and YAML: syntax, use cases, and when to choose one over the other.',
     readTime: '5 min read',
@@ -199,6 +217,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-json': {
     slug: 'what-is-json',
     type: 'guide',
+    category: 'json',
     title: 'What is JSON?',
     subtitle: 'JSON explained: data types, syntax rules, and why it became the universal data format for APIs and config files.',
     readTime: '6 min read',
@@ -245,6 +264,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-regex': {
     slug: 'what-is-regex',
     type: 'guide',
+    category: 'textcode',
     title: 'What is a Regular Expression?',
     subtitle: 'Regex explained: character classes, quantifiers, anchors, groups, and practical patterns for everyday use.',
     readTime: '7 min read',
@@ -289,6 +309,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-markdown': {
     slug: 'what-is-markdown',
     type: 'guide',
+    category: 'textcode',
     title: 'What is Markdown?',
     subtitle: 'Markdown explained: why it was created, how plain text becomes HTML, the core syntax, and where it is used today.',
     readTime: '5 min read',
@@ -334,6 +355,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'markdown-cheatsheet': {
     slug: 'markdown-cheatsheet',
     type: 'reference',
+    category: 'textcode',
     title: 'Markdown Cheatsheet',
     subtitle: 'A quick reference for all Markdown syntax: headings, emphasis, links, code blocks, tables, task lists, and more.',
     readTime: '4 min read',
@@ -379,6 +401,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-url-encoding': {
     slug: 'what-is-url-encoding',
     type: 'guide',
+    category: 'textcode',
     title: 'What is URL Encoding?',
     subtitle: 'Percent-encoding explained: which characters must be encoded, how it works, and the difference between encodeURI and encodeURIComponent.',
     readTime: '5 min read',
@@ -424,6 +447,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-hash': {
     slug: 'what-is-hash',
     type: 'guide',
+    category: 'security',
     title: 'What is a Hash Function?',
     subtitle: 'Hash functions explained: one-way digests, MD5 vs SHA-256, use cases, and why you should never hash passwords with SHA.',
     readTime: '6 min read',
@@ -468,6 +492,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-xml': {
     slug: 'what-is-xml',
     type: 'guide',
+    category: 'converters',
     title: 'What is XML?',
     subtitle: 'XML explained: element structure, attributes, well-formed vs valid, XML vs JSON, and where XML is still used today.',
     readTime: '5 min read',
@@ -513,6 +538,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-uuid': {
     slug: 'what-is-uuid',
     type: 'guide',
+    category: 'security',
     title: 'What is a UUID?',
     subtitle: 'UUIDs explained: the 5-part structure, v1 vs v4 vs v7, uniqueness guarantees, and when to choose UUID over auto-increment.',
     readTime: '5 min read',
@@ -557,6 +583,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-json-schema': {
     slug: 'what-is-json-schema',
     type: 'guide',
+    category: 'json',
     title: 'What is JSON Schema?',
     subtitle: 'JSON Schema explained: core keywords, composition, Draft-07 vs 2020-12, and practical validation use cases.',
     readTime: '6 min read',
@@ -602,6 +629,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-yaml': {
     slug: 'what-is-yaml',
     type: 'guide',
+    category: 'converters',
     title: 'What is YAML?',
     subtitle: 'YAML explained: indentation-based syntax, scalars, sequences, anchors, and common gotchas like the Norway problem.',
     readTime: '6 min read',
@@ -647,6 +675,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'regex-cheatsheet': {
     slug: 'regex-cheatsheet',
     type: 'reference',
+    category: 'textcode',
     title: 'Regex Cheatsheet',
     subtitle: 'A quick reference for regular expression syntax: character classes, quantifiers, anchors, lookarounds, flags, and common patterns.',
     readTime: '4 min read',
@@ -692,6 +721,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'json-best-practices': {
     slug: 'json-best-practices',
     type: 'reference',
+    category: 'json',
     title: 'JSON Best Practices',
     subtitle: 'Naming conventions, dates, null vs omit, large numbers, pagination, error responses, and nesting: the conventions that save debugging time.',
     readTime: '7 min read',
@@ -737,6 +767,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'cron-expression-examples': {
     slug: 'cron-expression-examples',
     type: 'reference',
+    category: 'devutils',
     title: 'Cron Expression Examples',
     subtitle: 'A practical reference for cron syntax: field breakdown, special characters, and ready-to-use schedules.',
     readTime: '5 min read',
@@ -780,6 +811,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-csv': {
     slug: 'what-is-csv',
     type: 'guide',
+    category: 'converters',
     title: 'What is CSV?',
     subtitle: 'CSV explained: structure, quoting and escaping rules, delimiters, and why CSV vs JSON is not a lossless conversion.',
     readTime: '5 min read',
@@ -824,6 +856,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'what-is-unix-timestamp': {
     slug: 'what-is-unix-timestamp',
     type: 'guide',
+    category: 'devutils',
     title: 'What is a Unix Timestamp?',
     subtitle: 'Unix time explained: the epoch, seconds vs milliseconds, the Year 2038 problem, and why computers store time as a plain integer.',
     readTime: '4 min read',
@@ -867,6 +900,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'understanding-number-bases': {
     slug: 'understanding-number-bases',
     type: 'guide',
+    category: 'devutils',
     title: 'Understanding Number Bases',
     subtitle: 'Binary, octal, and hexadecimal explained: how positional counting systems work, why hex maps cleanly to bits, and where each base shows up in real code.',
     readTime: '4 min read',
@@ -910,6 +944,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'password-entropy-explained': {
     slug: 'password-entropy-explained',
     type: 'guide',
+    category: 'security',
     title: 'Password Strength and Entropy Explained',
     subtitle: 'How password entropy is calculated, why length matters more than character variety, and why human-invented passwords are weaker than the math suggests.',
     readTime: '4 min read',
@@ -953,6 +988,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'understanding-color-formats': {
     slug: 'understanding-color-formats',
     type: 'guide',
+    category: 'devutils',
     title: 'HEX, RGB, and HSL Explained',
     subtitle: 'Color formats compared: how HEX, RGB, and HSL represent the same color, transparency, and WCAG contrast ratios for accessible text.',
     readTime: '4 min read',
@@ -996,6 +1032,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'sql-cheatsheet': {
     slug: 'sql-cheatsheet',
     type: 'reference',
+    category: 'textcode',
     title: 'SQL Cheatsheet',
     subtitle: 'A quick reference for SQL syntax: clause execution order, joins, filtering, aggregates, and where MySQL, PostgreSQL, SQLite, and T-SQL disagree.',
     readTime: '4 min read',
@@ -1039,6 +1076,7 @@ export const GUIDES: Record<string, GuideConfig> = {
   'encoding-vs-encryption-vs-hashing': {
     slug: 'encoding-vs-encryption-vs-hashing',
     type: 'guide',
+    category: 'security',
     title: 'Encoding vs Encryption vs Hashing',
     subtitle: "Three commonly confused transformations compared: what's reversible, what needs a key, and why Base64 is not encryption.",
     readTime: '4 min read',
