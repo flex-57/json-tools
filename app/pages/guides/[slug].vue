@@ -9,49 +9,53 @@
         <span class="bc-current">{{ guide.title }}</span>
       </nav>
 
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">{{ guide.title }}</h1>
-          <p class="page-subtitle">{{ guide.subtitle }}</p>
-          <div class="guide-meta">
-            <span class="guide-meta-item">{{ guide.readTime }}</span>
-            <span class="guide-meta-sep">·</span>
-            <span class="guide-meta-item">Updated {{ formatDate(guide.dateModified) }}</span>
-          </div>
-        </div>
-      </div>
+      <div class="guide-layout">
+        <ClientOnly>
+          <nav v-if="tocItems.length >= 3" class="guide-toc" aria-label="Table of contents">
+            <p class="toc-title">Contents</p>
+            <ol class="toc-list">
+              <li v-for="item in tocItems" :key="item.id">
+                <a :href="'#' + item.id" class="toc-link" @click.prevent="scrollTo(item.id)">{{ item.title }}</a>
+              </li>
+            </ol>
+          </nav>
+        </ClientOnly>
 
-      <ClientOnly>
-        <nav v-if="tocItems.length >= 3" class="guide-toc" aria-label="Table of contents">
-          <p class="toc-title">Contents</p>
-          <ol class="toc-list">
-            <li v-for="item in tocItems" :key="item.id">
-              <a :href="'#' + item.id" class="toc-link" @click.prevent="scrollTo(item.id)">{{ item.title }}</a>
-            </li>
-          </ol>
-        </nav>
-      </ClientOnly>
-
-      <component :is="BodyComponent" />
-
-      <div class="guide-tools">
-        <p class="guide-tools-label">Try it now</p>
-        <div class="guide-tool-cards">
-          <NuxtLink v-for="tool in guide.tools" :key="tool.href" :to="tool.href" class="guide-tool-card">
-            <div class="guide-tool-card-icon" v-html="tool.icon" />
+        <div class="guide-content">
+          <div class="page-header">
             <div>
-              <div class="guide-tool-card-name">{{ tool.name }}</div>
-              <div class="guide-tool-card-desc">{{ tool.desc }}</div>
+              <h1 class="page-title">{{ guide.title }}</h1>
+              <p class="page-subtitle">{{ guide.subtitle }}</p>
+              <div class="guide-meta">
+                <span class="guide-meta-item">{{ guide.readTime }}</span>
+                <span class="guide-meta-sep">·</span>
+                <span class="guide-meta-item">Updated {{ formatDate(guide.dateModified) }}</span>
+              </div>
             </div>
-            <span class="guide-tool-card-arrow">→</span>
-          </NuxtLink>
+          </div>
+
+          <component :is="BodyComponent" />
+
+          <div class="guide-tools">
+            <p class="guide-tools-label">Try it now</p>
+            <div class="guide-tool-cards">
+              <NuxtLink v-for="tool in guide.tools" :key="tool.href" :to="tool.href" class="guide-tool-card">
+                <div class="guide-tool-card-icon" v-html="tool.icon" />
+                <div>
+                  <div class="guide-tool-card-name">{{ tool.name }}</div>
+                  <div class="guide-tool-card-desc">{{ tool.desc }}</div>
+                </div>
+                <span class="guide-tool-card-arrow">→</span>
+              </NuxtLink>
+            </div>
+          </div>
+
+          <section class="guide-faq" id="faq">
+            <h2 class="guide-faq-title">Frequently asked questions</h2>
+            <FaqAccordion :items="guide.faqs" :key="slug" />
+          </section>
         </div>
       </div>
-
-      <section class="guide-faq" id="faq">
-        <h2 class="guide-faq-title">Frequently asked questions</h2>
-        <FaqAccordion :items="guide.faqs" :key="slug" />
-      </section>
     </div>
   </div>
 </template>
@@ -210,7 +214,7 @@ useHead(() => {
 </script>
 
 <style scoped>
-.guide-page-inner { max-width: 760px; margin: 0 auto; width: 100%; }
+.guide-page-inner { width: 100%; }
 
 .guide-breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; }
 .bc-link { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); text-decoration: none; transition: color 0.15s; }
@@ -222,12 +226,16 @@ useHead(() => {
 .guide-meta-item { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); }
 .guide-meta-sep { font-size: 12px; color: var(--c-t5); }
 
+.guide-layout { display: block; }
+.guide-content { max-width: 850px; width: 100%; }
+
 .guide-toc { display: none; }
 @media (min-width: 1300px) {
+  .guide-layout { display: grid; grid-template-columns: 450px 1fr; align-items: start; gap: 50px; }
   .guide-toc {
-    display: block; position: fixed; left: calc(50% - 604px); top: 136px; width: 204px;
+    display: block; position: sticky; top: 136px; width: 450px;
     background: var(--c-subtle); border: 1px solid var(--c-border); border-radius: 10px; padding: 16px;
-    z-index: 10; max-height: calc(100vh - 120px); overflow-y: auto;
+    max-height: calc(100vh - 152px); overflow-y: auto;
   }
 }
 .toc-title { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--c-t4); margin-bottom: 12px; }
