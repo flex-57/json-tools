@@ -21,11 +21,21 @@ export function decodeBase64(input: string, variant: Base64Variant = 'standard')
   return decodeURIComponent(escape(atob(normalized)))
 }
 
+const SAMPLE_PLAIN = 'Hello, World! This is a Base64 encoding example.'
+const SAMPLE_ENCODED = encodeBase64(SAMPLE_PLAIN, 'standard')
+
 export function useBase64() {
   const mode = ref<'encode' | 'decode'>('encode')
   const variant = ref<Base64Variant>('standard')
-  const input = ref('Hello, World! This is a Base64 encoding example.')
+  const input = ref(SAMPLE_PLAIN)
   const error = ref<string | null>(null)
+
+  watch(mode, (newMode, oldMode) => {
+    const oldSample = oldMode === 'encode' ? SAMPLE_PLAIN : SAMPLE_ENCODED
+    if (input.value === oldSample) {
+      input.value = newMode === 'encode' ? SAMPLE_PLAIN : SAMPLE_ENCODED
+    }
+  })
 
   const output = computed(() => {
     if (!input.value) return ''

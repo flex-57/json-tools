@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { nextTick } from 'vue'
 import { useUrlEncode } from '../app/composables/useUrlEncode'
 
 describe('useUrlEncode — encode component', () => {
@@ -98,5 +99,34 @@ describe('useUrlEncode — empty input', () => {
   it('no error on empty input', () => {
     const { error } = useUrlEncode()
     expect(error.value).toBeNull()
+  })
+})
+
+describe('useUrlEncode — mode switch keeps the sample meaningful', () => {
+  it('swaps the untouched sample to its encoded form when switching to decode', async () => {
+    const { input, mode } = useUrlEncode()
+    const plainSample = input.value
+    mode.value = 'decode'
+    await nextTick()
+    expect(input.value).not.toBe(plainSample)
+    expect(input.value).toContain('%20')
+  })
+
+  it('swaps back to the plain sample when returning to encode', async () => {
+    const { input, mode } = useUrlEncode()
+    const plainSample = input.value
+    mode.value = 'decode'
+    await nextTick()
+    mode.value = 'encode'
+    await nextTick()
+    expect(input.value).toBe(plainSample)
+  })
+
+  it('does not touch input the user has typed themselves', async () => {
+    const { input, mode } = useUrlEncode()
+    input.value = 'my own text, not the sample'
+    mode.value = 'decode'
+    await nextTick()
+    expect(input.value).toBe('my own text, not the sample')
   })
 })
