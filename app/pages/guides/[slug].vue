@@ -142,20 +142,19 @@ function formatDate(iso: string) {
 
 const BASE_URL = 'https://jsontools.space'
 
-useSeoMeta(() => {
-  const title = `${guide.value.title} — JSON Tools`
-  const ogImage = `${BASE_URL}/og/guide-${slug.value}.png`
-  return {
-    title,
-    description: guide.value.description,
-    ogTitle: title,
-    ogDescription: guide.value.description,
-    ogImage,
-    twitterTitle: guide.value.title,
-    twitterDescription: guide.value.description,
-    twitterImage: ogImage,
-    twitterCard: 'summary_large_image',
-  }
+const seoTitle = computed(() => `${guide.value.title} — JSON Tools`)
+const seoImage = computed(() => `${BASE_URL}/og/guide-${slug.value}.png`)
+
+useSeoMeta({
+  title: seoTitle,
+  description: () => guide.value.description,
+  ogTitle: seoTitle,
+  ogDescription: () => guide.value.description,
+  ogImage: seoImage,
+  twitterTitle: () => guide.value.title,
+  twitterDescription: () => guide.value.description,
+  twitterImage: seoImage,
+  twitterCard: 'summary_large_image',
 })
 
 useHead(() => {
