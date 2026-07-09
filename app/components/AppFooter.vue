@@ -92,7 +92,7 @@ const GUIDES = [
 }
 
 .footer-brand-row {
-  max-width: 1280px;
+  max-width: var(--container-w);
   margin: 0 auto;
   padding: 36px 24px 28px;
   border-bottom: 1px solid var(--c-border);
@@ -106,7 +106,7 @@ const GUIDES = [
 .brand-tagline { font-size: 12px; color: var(--c-t4); line-height: 1.7; }
 
 .footer-nav-desktop {
-  max-width: 1280px;
+  max-width: var(--container-w);
   margin: 0 auto;
   padding: 32px 24px;
   display: grid;
@@ -136,7 +136,7 @@ const GUIDES = [
 .footer-link:hover { color: var(--c-accent); }
 
 .footer-guides-desktop {
-  max-width: 1280px;
+  max-width: var(--container-w);
   margin: 0 auto;
   padding: 16px 24px 32px;
   border-top: 1px solid var(--c-border-s);
@@ -186,7 +186,7 @@ const GUIDES = [
 .footer-mobile-pills { display: flex; flex-wrap: wrap; gap: 6px; }
 
 .footer-bottom {
-  max-width: 1280px;
+  max-width: var(--container-w);
   margin: 0 auto;
   padding: 14px 24px 20px;
   border-top: 1px solid var(--c-border-s);
@@ -210,7 +210,7 @@ const GUIDES = [
     display: flex;
     flex-direction: column;
     gap: 18px;
-    max-width: 1280px;
+    max-width: var(--container-w);
     margin: 0 auto;
     padding: 24px 20px 28px;
   }

@@ -213,7 +213,7 @@ body {
 }
 
 .header-inner {
-  max-width: 1280px;
+  max-width: var(--container-w);
   margin: 0 auto;
   padding: 0 24px;
   height: 52px;
@@ -319,9 +319,9 @@ body {
 
 .app-main { flex: 1; display: flex; flex-direction: column; }
 
-.ad-footer-wrap { max-width: 1280px; width: 100%; margin: 0 auto; padding: 0 24px 8px; }
+.ad-footer-wrap { max-width: var(--container-w); width: 100%; margin: 0 auto; padding: 0 24px 8px; }
 
-.breadcrumb-bar { max-width: 1280px; margin: 0 auto; width: 100%; padding: 14px 24px 0; }
+.breadcrumb-bar { max-width: var(--container-w); margin: 0 auto; width: 100%; padding: 14px 24px 0; }
 .breadcrumb { display: flex; align-items: center; gap: 6px; }
 .bc-home { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); text-decoration: none; transition: color 0.15s; }
 .bc-home:hover { color: var(--c-accent); }

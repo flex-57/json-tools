@@ -142,7 +142,7 @@ const recentTools = computed(() =>
 </script>
 
 <style scoped>
-.home { max-width: 1280px; margin: 0 auto; padding: 0 24px 60px; width: 100%; }
+.home { max-width: var(--container-w); margin: 0 auto; padding: 0 24px 60px; width: 100%; }
 
 .hero { padding: 56px 0 40px; text-align: center; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--c-valid); letter-spacing: 0.1em; margin-bottom: 16px; }

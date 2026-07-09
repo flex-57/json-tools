@@ -36,6 +36,7 @@
   --font-mono:    'Fragment Mono', monospace;
 
   --radius-card: 12px;
+  --container-w: 1536px;
   color-scheme: light;
 }
 
@@ -79,7 +80,7 @@ html.dark {
 }
 
 .page {
-  max-width: 1280px;
+  max-width: var(--container-w);
   margin: 0 auto;
   padding: 32px 24px 40px;
   width: 100%;
@@ -118,7 +119,7 @@ html.dark {
   font-family: var(--font-body);
   font-size: 13px;
   color: var(--c-t3);
-  max-width: 480px;
+  max-width: 800px;
   line-height: 1.5;
 }
 
