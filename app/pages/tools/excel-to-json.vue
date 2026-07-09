@@ -14,11 +14,6 @@
             </select>
           </div>
         </template>
-        <label class="toggle-wrap">
-          <input type="checkbox" v-model="hasHeader" @change="file && convert()" class="toggle-input" />
-          <span class="toggle-track"><span class="toggle-thumb" /></span>
-          <span class="toggle-label">Headers</span>
-        </label>
         <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" />
       </div>
     </div>
@@ -60,6 +55,11 @@
         <div class="pane-header">
           <span class="pane-label">JSON Output</span>
           <div class="card-actions">
+            <label class="toggle-wrap">
+              <input type="checkbox" v-model="hasHeader" @change="file && convert()" class="toggle-input" />
+              <span class="toggle-track"><span class="toggle-thumb" /></span>
+              <span class="toggle-label">Headers</span>
+            </label>
             <button class="btn-xs" @click="download" :disabled="!output">Download</button>
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
