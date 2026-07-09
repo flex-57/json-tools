@@ -36,8 +36,9 @@ export function parseJsonTree(raw: string): { root: TreeNode | null; error: stri
   try {
     _seq = 0
     return { root: build(JSON.parse(raw), '', ''), error: '' }
-  } catch (e: any) {
-    return { root: null, error: e.message }
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : String(e)
+    return { root: null, error: message }
   }
 }
 

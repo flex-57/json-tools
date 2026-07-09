@@ -1,3 +1,5 @@
+import { MarkerType } from '@vue-flow/core'
+import type { EdgeMarkerType, Styles } from '@vue-flow/core'
 import type { TreeNode, NodeType } from './useJsonTree'
 
 export type GraphNodeType = 'body' | 'header' | 'leaf'
@@ -34,8 +36,8 @@ export interface VfEdge {
   source: string
   target: string
   type: string
-  style: object
-  markerEnd?: object
+  style: Styles
+  markerEnd?: EdgeMarkerType
 }
 
 const BODY_W   = 230
@@ -64,7 +66,7 @@ function edge(src: string, tgt: string): VfEdge {
     source: src, target: tgt,
     type: 'smoothstep',
     style: { stroke: '#3D4349', strokeWidth: 1.5 },
-    markerEnd: { type: 'arrowclosed', color: '#3D4349', width: 18, height: 18 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#3D4349', width: 18, height: 18 },
   }
 }
 

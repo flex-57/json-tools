@@ -105,6 +105,8 @@ import { parseJsonTree, collectDeepIds, collectAllExpandableIds } from '~/compos
 import { buildGraph } from '~/composables/useJsonGraph'
 import { useColorMode } from '~/composables/useColorMode'
 import type { TreeNode } from '~/composables/useJsonTree'
+import type { VfNode, VfEdge } from '~/composables/useJsonGraph'
+import type { NodeComponent, NodeTypesObject } from '@vue-flow/core'
 
 useToolSeo(
   'JSON Tree Viewer: Interactive Collapsible Tree & Graph',
@@ -135,15 +137,18 @@ const collapsed   = ref(new Set<string>())
 const root        = ref<TreeNode | null>(null)
 const error       = ref('')
 const viewMode    = ref<'tree' | 'graph'>('tree')
-const graphNodes  = ref<any[]>([])
-const graphEdges  = ref<any[]>([])
+const graphNodes  = ref<VfNode[]>([])
+const graphEdges  = ref<VfEdge[]>([])
 const graphLoading = ref(false)
 
 const VueFlow    = defineAsyncComponent(() => import('@vue-flow/core').then(m => m.VueFlow))
 const Background = defineAsyncComponent(() => import('@vue-flow/background').then(m => m.Background))
 const Controls   = defineAsyncComponent(() => import('@vue-flow/controls').then(m => m.Controls))
 
-const nodeTypes: any = { jsonNode: resolveComponent('JsonGraphNode') }
+// JsonGraphNode only declares the `data` prop it actually uses, not Vue Flow's full NodeProps
+// shape, so resolveComponent()'s return type can't structurally satisfy NodeComponent — assert
+// this one value rather than widen nodeTypes itself.
+const nodeTypes: NodeTypesObject = { jsonNode: resolveComponent('JsonGraphNode') as NodeComponent }
 
 provide('tree:collapsed', collapsed)
 provide('tree:toggle', (id: string) => {
@@ -169,8 +174,8 @@ async function switchToGraph() {
   graphLoading.value = true
   try {
     const { nodes, edges } = await buildGraph(root.value)
-    graphNodes.value = nodes as any
-    graphEdges.value = edges as any
+    graphNodes.value = nodes
+    graphEdges.value = edges
   } finally {
     graphLoading.value = false
   }
@@ -183,8 +188,8 @@ watch(root, async (r) => {
     graphLoading.value = true
     try {
       const { nodes, edges } = await buildGraph(r)
-      graphNodes.value = nodes as any
-      graphEdges.value = edges as any
+      graphNodes.value = nodes
+      graphEdges.value = edges
     } finally {
       graphLoading.value = false
     }
