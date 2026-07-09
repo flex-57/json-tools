@@ -72,7 +72,7 @@
 import { useSqlFormatter, type SqlDialect } from '~/composables/useSqlFormatter'
 
 useToolSeo(
-  'SQL Formatter: Free Online SQL Beautifier | JSON Tools',
+  'SQL Formatter: Beautify MySQL, PostgreSQL, SQLite & More',
   'Format and beautify SQL queries instantly in your browser. Supports MySQL, PostgreSQL, SQLite, T-SQL (SQL Server), and standard SQL. Choose indent size and keyword case. Free, no data sent to servers.',
 )
 

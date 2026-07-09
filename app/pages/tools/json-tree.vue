@@ -107,7 +107,7 @@ import { useColorMode } from '~/composables/useColorMode'
 import type { TreeNode } from '~/composables/useJsonTree'
 
 useToolSeo(
-  'JSON Tree Viewer: Collapsible Tree & Graph | JSON Tools',
+  'JSON Tree Viewer: Interactive Collapsible Tree & Graph',
   'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
 )
 

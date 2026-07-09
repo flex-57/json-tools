@@ -67,7 +67,7 @@
 import { useJsonSchema } from '~/composables/useJsonSchema'
 
 useToolSeo(
-  'JSON Schema Generator: Draft-07 & 2020-12 | JSON Tools',
+  'JSON Schema Generator: Auto-Infer Draft-07 & 2020-12',
   'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
 )
 

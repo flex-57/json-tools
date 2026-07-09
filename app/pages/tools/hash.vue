@@ -38,7 +38,7 @@ import { computeHashes, HASH_ALGORITHMS } from '~/composables/useHash'
 import type { HashAlgorithm } from '~/composables/useHash'
 
 useToolSeo(
-  'Hash Generator: MD5, SHA-1, SHA-256, SHA-512 | JSON Tools',
+  'Hash Generator: MD5, SHA-1, SHA-256, SHA-512 Online',
   'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
 )
 

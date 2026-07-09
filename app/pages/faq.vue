@@ -88,11 +88,11 @@ const FAQS = [
 ]
 
 useSeoMeta({
-  title: 'FAQ — JSON Tools',
+  title: 'FAQ: Is JSON Tools Free, Safe & Does It Work Offline?',
   description: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
-  ogTitle: 'FAQ — JSON Tools',
+  ogTitle: 'FAQ: Is JSON Tools Free, Safe & Does It Work Offline?',
   ogDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
-  twitterTitle: 'FAQ — JSON Tools',
+  twitterTitle: 'FAQ: Is JSON Tools Free, Safe & Does It Work Offline?',
   twitterDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
   ogImage: 'https://jsontools.space/og/faq.png',
   twitterImage: 'https://jsontools.space/og/faq.png',

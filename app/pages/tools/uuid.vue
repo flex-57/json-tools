@@ -63,7 +63,7 @@
 import { useClipboard } from '../../composables/useClipboard'
 
 useToolSeo(
-  'UUID Generator: Random UUID v4 | JSON Tools',
+  'UUID Generator: Bulk Random UUID v4, Free & Instant',
   'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
 )
 

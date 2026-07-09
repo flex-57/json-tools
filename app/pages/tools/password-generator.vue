@@ -81,7 +81,7 @@
 import { useClipboard } from '../../composables/useClipboard'
 
 useToolSeo(
-  'Password Generator: Secure & Random | JSON Tools',
+  'Password Generator: Secure Random Passwords, Custom Length',
   'Generate strong, random passwords with custom length, uppercase, lowercase, numbers and symbols. Uses crypto.getRandomValues, 100% client-side, nothing sent to servers.',
 )
 

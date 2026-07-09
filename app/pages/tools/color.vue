@@ -103,7 +103,7 @@
 import { useClipboard } from '../../composables/useClipboard'
 
 useToolSeo(
-  'Color Picker & Converter: HEX RGBA HSL Alpha | JSON Tools',
+  'Color Picker & Converter: HEX, RGBA, HSL & Contrast Checker',
   'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
 )
 
