@@ -46,7 +46,7 @@
         <span class="editor-label">Results</span>
         <span class="hint">{{ uuids.length }} UUIDs</span>
       </div>
-      <div class="uuid-body">
+      <div class="uuid-body" aria-live="polite">
         <div v-for="(uuid, i) in uuids" :key="i" class="uuid-row">
           <span class="uuid-index">{{ String(i + 1).padStart(2, '0') }}</span>
           <span class="uuid-value">{{ formatUuid(uuid) }}</span>

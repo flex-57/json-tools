@@ -20,11 +20,11 @@
       <textarea v-model="input" class="input-textarea" placeholder="Type or paste text (camelCase, snake_case, kebab-case, spaces and mixed input all work)…" spellcheck="false" rows="3" @focus="focused = true" @blur="focused = false" />
     </div>
 
-    <div class="results">
+    <div class="results" aria-live="polite">
       <div v-for="r in results" :key="r.key" class="result-row" :class="{ 'result-row--empty': !r.value }">
         <span class="case-badge">{{ r.label }}</span>
         <span class="result-value">{{ r.value || r.example }}</span>
-        <button @click="copy(r.key, r.value)" class="btn-copy" :class="{ 'btn-copy--done': copiedKey === r.key }" :disabled="!r.value">{{ copiedKey === r.key ? 'Copied!' : 'Copy' }}</button>
+        <button @click="copy(r.key, r.value)" class="case-copy" :class="{ 'case-copy--done': copiedKey === r.key }" :disabled="!r.value">{{ copiedKey === r.key ? 'Copied!' : 'Copy' }}</button>
       </div>
     </div>
 
@@ -86,10 +86,10 @@ const seoCards = [
 .btn-clear { font-family: var(--font-body); font-size: 12px; color: var(--c-t4); background: none; border: none; cursor: pointer; padding: 2px 7px; border-radius: 5px; transition: all 0.15s; }
 .btn-clear:hover { color: var(--c-error); background: rgb(var(--c-error-rgb) / 0.1); }
 
-.btn-copy { display: flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 6px; flex-shrink: 0; border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t3); cursor: pointer; transition: all 0.15s; }
-.btn-copy:hover:not(:disabled) { background: var(--c-subtle); border-color: var(--c-border); }
-.btn-copy--done { background: rgb(var(--c-valid-rgb) / 0.12); border-color: rgb(var(--c-valid-rgb) / 0.35); color: var(--c-valid); }
-.btn-copy:disabled { opacity: 0.35; cursor: not-allowed; }
+.case-copy { display: flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 6px; flex-shrink: 0; border: 1px solid var(--c-border-m); background: var(--c-faint); color: var(--c-t3); cursor: pointer; transition: all 0.15s; }
+.case-copy:hover:not(:disabled) { background: var(--c-subtle); border-color: var(--c-border); }
+.case-copy--done { background: rgb(var(--c-valid-rgb) / 0.12); border-color: rgb(var(--c-valid-rgb) / 0.35); color: var(--c-valid); }
+.case-copy:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
 .fade-slot-enter-from, .fade-slot-leave-to { opacity: 0; transform: translateY(-3px); }

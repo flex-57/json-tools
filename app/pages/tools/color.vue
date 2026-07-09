@@ -82,7 +82,7 @@
           <button class="btn btn-ghost use-current-btn" @click="contrastBg = currentHex" title="Use current color (opaque) as background">Use current</button>
         </div>
 
-        <div class="contrast-result">
+        <div class="contrast-result" aria-live="polite">
           <div class="ratio-value">{{ contrastRatioVal }}:1</div>
           <div class="wcag-badges">
             <span :class="['wcag-badge', contrastRatioVal >= 3 ? 'pass' : 'fail']">AA Large {{ contrastRatioVal >= 3 ? '✓' : '✗' }}</span>

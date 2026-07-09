@@ -63,7 +63,7 @@
             </button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;">
+        <div class="pane-body" style="padding: 0;" aria-live="polite">
           <ClientOnly>
             <JsonEditor v-model="output" :readonly="true" />
             <template #fallback><EditorSkeleton /></template>

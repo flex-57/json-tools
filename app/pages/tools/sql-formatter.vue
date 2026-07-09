@@ -54,8 +54,8 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div v-if="error" class="pane-body">{{ error }}</div>
-        <div v-else class="pane-body" style="padding: 0;">
+        <div v-if="error" class="pane-body" aria-live="polite">{{ error }}</div>
+        <div v-else class="pane-body" style="padding: 0;" aria-live="polite">
           <ClientOnly>
             <JsonEditor v-model="output" :readonly="true" lang="sql" />
             <template #fallback><EditorSkeleton /></template>

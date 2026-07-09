@@ -1,3 +1,4 @@
+import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
 
 export type JwtAlgorithm = 'HS256' | 'HS384' | 'HS512'
@@ -42,8 +43,9 @@ export function useJwtGenerator() {
     const pl = payload.value.trim()
     if (!pl) { token.value = ''; error.value = null; return }
 
-    let payloadObj: Record<string, unknown>
-    try { payloadObj = JSON.parse(pl) } catch { error.value = 'Invalid JSON payload'; token.value = ''; return }
+    const parsed = safeJsonParse<Record<string, unknown>>(pl)
+    if (parsed.error || !parsed.data) { error.value = 'Invalid JSON payload'; token.value = ''; return }
+    const payloadObj = parsed.data
     error.value = null
 
     try {
@@ -67,30 +69,30 @@ export function useJwtGenerator() {
   onMounted(generate)
 
   function setIatNow() {
-    try {
-      const obj = JSON.parse(payload.value)
-      obj.iat = Math.floor(Date.now() / 1000)
-      payload.value = JSON.stringify(obj, null, 2)
-    } catch { /* ignore invalid JSON */ }
+    const parsed = safeJsonParse<Record<string, unknown>>(payload.value)
+    if (parsed.error || !parsed.data) return
+    const obj = parsed.data
+    obj.iat = Math.floor(Date.now() / 1000)
+    payload.value = JSON.stringify(obj, null, 2)
   }
 
   function addExp(hours = 1) {
-    try {
-      const obj = JSON.parse(payload.value)
-      const base = typeof obj.iat === 'number' ? obj.iat : Math.floor(Date.now() / 1000)
-      if (!obj.iat) obj.iat = base
-      obj.exp = base + hours * 3600
-      payload.value = JSON.stringify(obj, null, 2)
-    } catch { /* ignore */ }
+    const parsed = safeJsonParse<Record<string, unknown>>(payload.value)
+    if (parsed.error || !parsed.data) return
+    const obj = parsed.data
+    const base = typeof obj.iat === 'number' ? obj.iat : Math.floor(Date.now() / 1000)
+    if (!obj.iat) obj.iat = base
+    obj.exp = base + hours * 3600
+    payload.value = JSON.stringify(obj, null, 2)
   }
 
   const { copied, copy } = useClipboard(() => token.value)
 
-  function clear() { payload.value = DEFAULT_PAYLOAD; secret.value = 'your-256-bit-secret'; token.value = ''; error.value = null }
+  function clear() { payload.value = ''; token.value = ''; error.value = null }
 
   const parts = computed(() => token.value.split('.'))
 
-  const payloadValid = computed(() => { try { JSON.parse(payload.value); return true } catch { return false } })
+  const payloadValid = computed(() => !safeJsonParse(payload.value).error)
 
   return { algorithm, payload, secret, token, parts, error, copied, payloadValid, copy, clear, setIatNow, addExp }
 }

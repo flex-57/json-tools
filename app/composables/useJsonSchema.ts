@@ -1,4 +1,5 @@
 import { triggerDownload } from '../utils/download'
+import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
 
 type JsonVal = string | number | boolean | null | JsonVal[] | JsonObj
@@ -100,8 +101,10 @@ export function useJsonSchema() {
 
   const result = computed((): { output: string; error: string | null } => {
     if (!input.value.trim()) return { output: '', error: null }
+    const parsed = safeJsonParse(input.value)
+    if (parsed.error) return { output: '', error: parsed.error }
     try {
-      const schema = buildSchema(JSON.parse(input.value), { draft: draft.value, required: required.value })
+      const schema = buildSchema(parsed.data, { draft: draft.value, required: required.value })
       return { output: JSON.stringify(schema, null, 2), error: null }
     } catch (e) {
       return { output: '', error: (e as Error).message }

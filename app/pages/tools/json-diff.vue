@@ -54,7 +54,7 @@
     </div>
 
     <Transition name="status">
-      <div v-if="result" class="diff-section">
+      <div v-if="result" class="diff-section" aria-live="polite">
         <div class="statusbar" :class="result.error ? 'error' : result.same ? 'same' : ''">
           <template v-if="result.error">{{ result.error }}</template>
           <template v-else-if="result.same">Identical, no differences found</template>

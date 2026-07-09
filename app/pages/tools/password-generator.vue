@@ -9,7 +9,7 @@
 
     <div class="editor-card pw-card">
       <div class="pw-display">
-        <code class="pw-output" :class="{ 'pw-output--empty': !password }">{{ password || 'Select at least one character type' }}</code>
+        <code class="pw-output" :class="{ 'pw-output--empty': !password }" aria-live="polite">{{ password || 'Select at least one character type' }}</code>
         <div class="pw-action-btns">
           <button class="icon-btn" @click="regen" title="Regenerate">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M13.5 8A5.5 5.5 0 112.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2.5 2v3.5H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <div v-if="bulkPasswords.length" class="bulk-list">
+      <div v-if="bulkPasswords.length" class="bulk-list" aria-live="polite">
         <div v-for="(pw, i) in bulkPasswords" :key="i" class="bulk-item">
           <code class="bulk-pw">{{ pw }}</code>
           <button class="copy-btn" :class="{ 'copy-btn--done': copiedBulk === i }" @click="copyBulkItem(pw, i)">{{ copiedBulk === i ? 'Copied!' : 'Copy' }}</button>

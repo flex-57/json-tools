@@ -43,14 +43,14 @@
           <span class="editor-label">Highlighted</span>
           <span class="hint">{{ matches.length }} match{{ matches.length !== 1 ? 'es' : '' }}</span>
         </div>
-        <div class="highlight-body" v-html="highlightedHtml" />
+        <div class="highlight-body" v-html="highlightedHtml" aria-live="polite" />
       </div>
     </Transition>
 
     <Transition name="slide-in">
       <div v-if="detailedMatches.length > 0" class="matches-card">
         <div class="editor-card-header"><span class="editor-label">Matches</span></div>
-        <div class="matches-body">
+        <div class="matches-body" aria-live="polite">
           <div v-for="(m, i) in detailedMatches" :key="i" class="match-item">
             <div class="match-header">
               <span class="match-index">{{ i + 1 }}</span>

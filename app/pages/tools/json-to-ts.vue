@@ -2,7 +2,7 @@
   <div class="page">
     <div class="page-header">
       <div>
-        <h1 class="page-title">JSON <span class="title-arrow">→</span> <span class="title-amp">TypeScript</span></h1>
+        <h1 class="page-title">JSON <span class="title-arrow">→</span> <span class="title-amp">{{ mode === 'ts' ? 'TypeScript' : 'Zod' }}</span></h1>
         <p class="page-subtitle">Generate TypeScript interfaces or Zod schemas from any JSON, automatically and client-side.</p>
       </div>
       <div style="display:flex; align-items:center; gap:16px; flex-wrap: wrap;">
@@ -70,7 +70,7 @@
             </button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;">
+        <div class="pane-body" style="padding: 0;" aria-live="polite">
           <ClientOnly>
             <JsonEditor v-model="output" :readonly="true" lang="typescript" />
             <template #fallback><EditorSkeleton /></template>

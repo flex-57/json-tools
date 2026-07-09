@@ -48,7 +48,7 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body">
+        <div class="pane-body" aria-live="polite">
           <textarea v-model="output" readonly class="pane-textarea" spellcheck="false" placeholder="CSV output appears here…" />
         </div>
       </div>

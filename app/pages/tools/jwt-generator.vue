@@ -18,6 +18,7 @@
         <div class="section-header-right">
           <button @click="setIatNow" class="btn-hint" :disabled="!payloadValid" title="Set iat to current timestamp">iat = now</button>
           <button @click="addExp(1)" class="btn-hint" :disabled="!payloadValid" title="Add exp claim: iat + 1 hour">+ exp 1h</button>
+          <button @click="clear" class="btn-xs">Clear</button>
         </div>
       </div>
       <textarea v-model="payload" class="section-textarea" spellcheck="false" rows="6" />
@@ -39,7 +40,7 @@
         <span class="editor-label">Generated JWT</span>
         <button @click="copy" class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!token">{{ copied ? 'Copied!' : 'Copy' }}</button>
       </div>
-      <div class="token-body">
+      <div class="token-body" aria-live="polite">
         <div v-if="token" class="token-parts">
           <span class="token-part token-part--header">{{ parts[0] }}</span>
           <span class="token-dot">.</span>

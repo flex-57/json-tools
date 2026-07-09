@@ -6,9 +6,15 @@
         <p class="about-text">{{ card.text }}</p>
       </div>
     </div>
-    <div v-if="displayRelated.length" class="related-row">
+    <div v-if="relatedTools.length" class="related-row">
       <span class="related-label">Related tools</span>
-      <NuxtLink v-for="r in displayRelated" :key="r.to" :to="r.to" class="related-link">
+      <NuxtLink v-for="r in relatedTools" :key="r.to" :to="r.to" class="related-link">
+        {{ r.label }}
+      </NuxtLink>
+    </div>
+    <div v-if="relatedGuides.length" class="related-row">
+      <span class="related-label">Related guides</span>
+      <NuxtLink v-for="r in relatedGuides" :key="r.to" :to="r.to" class="related-link">
         {{ r.label }}
       </NuxtLink>
     </div>
@@ -58,6 +64,8 @@ const AUTO_RELATED: Record<string, RelatedTool[]> = {
 }
 
 const displayRelated = computed(() => props.related ?? AUTO_RELATED[route.path] ?? [])
+const relatedTools = computed(() => displayRelated.value.filter(r => r.to.startsWith('/tools/')))
+const relatedGuides = computed(() => displayRelated.value.filter(r => r.to.startsWith('/guides/')))
 
 useHead(() => ({
   script: [{

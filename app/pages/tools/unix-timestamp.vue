@@ -24,7 +24,7 @@
     </div>
 
     <Transition name="slide-in">
-      <div v-if="parsed" class="result-card">
+      <div v-if="parsed" class="result-card" aria-live="polite">
         <div class="result-row" v-for="row in resultRows" :key="row.key">
           <span class="result-label">{{ row.label }}</span>
           <span v-if="row.key !== 'relative'" class="result-value" :class="row.mono ? 'result-value--mono' : ''">{{ row.value }}</span>

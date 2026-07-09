@@ -28,8 +28,8 @@
           <span class="pane-label">Preview</span>
           <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!html">{{ copied ? 'Copied HTML!' : 'Copy HTML' }}</button>
         </div>
-        <div v-if="!html && !input.trim()" class="pane-body pane-body--empty">Rendered preview will appear here…</div>
-        <div v-else ref="previewRef" class="markdown-body" v-html="html" />
+        <div v-if="!html && !input.trim()" class="pane-body pane-body--empty" aria-live="polite">Rendered preview will appear here…</div>
+        <div v-else ref="previewRef" class="markdown-body" v-html="html" aria-live="polite" />
       </div>
     </div>
 

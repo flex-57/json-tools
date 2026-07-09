@@ -64,7 +64,7 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;">
+        <div class="pane-body" style="padding: 0;" aria-live="polite">
           <ClientOnly>
             <JsonEditor v-model="output" :readonly="true" />
             <template #fallback><EditorSkeleton /></template>

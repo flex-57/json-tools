@@ -53,8 +53,8 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div v-if="error" class="pane-body" style="color: var(--c-error);">{{ error }}</div>
-        <textarea v-else :value="output" class="pane-textarea" style="padding: 14px 16px;" readonly :placeholder="mode === 'encode' ? 'Base64 output will appear here…' : 'Decoded text will appear here…'" spellcheck="false" />
+        <div v-if="error" class="pane-body" style="color: var(--c-error);" aria-live="polite">{{ error }}</div>
+        <textarea v-else :value="output" class="pane-textarea" style="padding: 14px 16px;" readonly aria-live="polite" :placeholder="mode === 'encode' ? 'Base64 output will appear here…' : 'Decoded text will appear here…'" spellcheck="false" />
       </div>
     </div>
 

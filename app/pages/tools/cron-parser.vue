@@ -30,7 +30,7 @@
     </div>
 
     <Transition name="slide-in">
-      <div v-if="description && !error" class="result-section">
+      <div v-if="description && !error" class="result-section" aria-live="polite">
         <div class="desc-card">
           <div class="desc-icon">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v2M7 11v2M1 7h2M11 7h2M2.93 2.93l1.42 1.41M9.65 9.65l1.41 1.42M2.93 11.07l1.42-1.41M9.65 4.35l1.41-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>

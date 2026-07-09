@@ -41,7 +41,7 @@
       </div>
     </Transition>
 
-    <div v-if="result.header.decoded || result.payload.decoded" class="decoded-grid">
+    <div v-if="result.header.decoded || result.payload.decoded" class="decoded-grid" aria-live="polite">
       <div class="decoded-card">
         <div class="decoded-card-header">
           <div class="decoded-label-wrap"><span class="decoded-dot decoded-dot--header" /><span class="editor-label">Header</span></div>

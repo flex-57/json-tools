@@ -48,8 +48,8 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'text-case', name: 'Text Case', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'minifier', name: 'Minifier', short: 'CSS / HTML / JS', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
-  { slug: 'url-encode', name: 'URL Encode', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-07' },
-  { slug: 'base64', name: 'Base64', short: 'Encode / decode', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-07' },
+  { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
+  { slug: 'base64', name: 'Base64 Encoder / Decoder', short: 'Binary-to-text conversion', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
   { slug: 'markdown-preview', name: 'Markdown Preview', short: 'Live rendered output', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
 
   // Security

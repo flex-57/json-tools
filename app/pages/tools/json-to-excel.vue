@@ -36,7 +36,7 @@
             <button class="btn-xs" @click="download" :disabled="!input || loading">{{ loading ? 'Generating…' : 'Download .xlsx' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;">
+        <div class="pane-body" style="padding: 0;" aria-live="polite">
           <div v-if="preview.length > 0" class="table-wrap">
             <table class="preview-table">
               <thead><tr><th v-for="col in previewCols" :key="col">{{ col }}</th></tr></thead>

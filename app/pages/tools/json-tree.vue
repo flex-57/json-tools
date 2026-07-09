@@ -2,7 +2,7 @@
   <div class="page">
     <div class="page-header">
       <div>
-        <h1 class="page-title">JSON <span class="title-amp">Tree Viewer</span></h1>
+        <h1 class="page-title">JSON <span class="title-amp">{{ viewMode === 'tree' ? 'Tree Viewer' : 'Graph Viewer' }}</span></h1>
         <p class="page-subtitle">Explore JSON structure as an interactive collapsible tree or graph. Click nodes to expand, hover to copy the full path.</p>
       </div>
       <div class="mode-toggle" style="min-width: 150px;">
@@ -57,7 +57,7 @@
           </template>
         </div>
 
-        <div v-if="viewMode === 'tree'" class="pane-body">
+        <div v-if="viewMode === 'tree'" class="pane-body" aria-live="polite">
           <div v-if="error" class="tree-message tree-message--error">{{ error }}</div>
           <div v-else-if="!input.trim()" class="tree-message">Paste valid JSON in the input panel</div>
           <div v-else-if="root" class="tree-wrap">
@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <div v-else class="pane-body pane-body--graph">
+        <div v-else class="pane-body pane-body--graph" aria-live="polite">
           <div v-if="error" class="tree-message tree-message--error">{{ error }}</div>
           <div v-else-if="!input.trim()" class="tree-message">Paste valid JSON in the input panel</div>
           <div v-else-if="graphLoading" class="tree-message">Building graph…</div>

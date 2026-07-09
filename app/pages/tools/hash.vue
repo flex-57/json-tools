@@ -19,7 +19,7 @@
         <textarea v-model="input" class="hash-textarea" placeholder="Type or paste any text…" spellcheck="false" @focus="focused = true" @blur="focused = false" />
       </div>
 
-      <div class="hash-results">
+      <div class="hash-results" aria-live="polite">
         <div v-for="alg in HASH_ALGORITHMS" :key="alg" class="hash-row">
           <span class="hash-alg">{{ alg }}</span>
           <span class="hash-value" :class="{ 'hash-value--empty': !hashes[alg] }">{{ hashes[alg] || '—' }}</span>

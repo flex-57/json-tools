@@ -1,4 +1,5 @@
 import { triggerDownload } from '../utils/download'
+import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
 
 type JsonVal = string | number | boolean | null | JsonVal[] | JsonObj
@@ -125,8 +126,8 @@ export function useJsonToTs() {
 
   const parsed = computed(() => {
     if (!input.value.trim()) return undefined
-    try { return JSON.parse(input.value) }
-    catch { return undefined }
+    const result = safeJsonParse<JsonVal>(input.value)
+    return result.error ? undefined : result.data
   })
 
   const error = computed((): string | null => {

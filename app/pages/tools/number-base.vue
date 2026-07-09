@@ -25,7 +25,7 @@
       </Transition>
     </div>
 
-    <div class="results" :class="{ 'results--empty': !results.length }">
+    <div class="results" :class="{ 'results--empty': !results.length }" aria-live="polite">
       <div v-if="!results.length" class="results-placeholder">
         <div v-for="r in PLACEHOLDER_ROWS" :key="r.label" class="result-row result-row--empty">
           <span class="base-badge">{{ r.label }}</span>
