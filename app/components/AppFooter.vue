@@ -80,6 +80,13 @@ const GUIDES = [
   { label: 'What is YAML?', to: '/guides/what-is-yaml' },
   { label: 'Regex Cheatsheet', to: '/guides/regex-cheatsheet' },
   { label: 'JSON Best Practices', to: '/guides/json-best-practices' },
+  { label: 'What is CSV?', to: '/guides/what-is-csv' },
+  { label: 'Unix Timestamp', to: '/guides/what-is-unix-timestamp' },
+  { label: 'Number Bases', to: '/guides/understanding-number-bases' },
+  { label: 'Password Entropy', to: '/guides/password-entropy-explained' },
+  { label: 'Color Formats', to: '/guides/understanding-color-formats' },
+  { label: 'SQL Cheatsheet', to: '/guides/sql-cheatsheet' },
+  { label: 'Encoding vs Encryption', to: '/guides/encoding-vs-encryption-vs-hashing' },
 ]
 </script>
 
