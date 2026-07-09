@@ -84,11 +84,13 @@ const bodyComponents: Record<string, Component> = {
 
 const route = useRoute()
 const slug = computed(() => route.params.slug as string)
-const guide = computed(() => GUIDES[slug.value])
-
-if (!guide.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Guide not found' })
-}
+const guide = computed(() => {
+  const found = GUIDES[slug.value]
+  if (!found) {
+    throw createError({ statusCode: 404, statusMessage: 'Guide not found' })
+  }
+  return found
+})
 
 const BodyComponent = computed(() => bodyComponents[slug.value])
 
