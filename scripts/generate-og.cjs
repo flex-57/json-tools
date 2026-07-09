@@ -55,6 +55,10 @@ const TOOLS = [
   { slug: 'guide-what-is-yaml',             tag: 'Developer Guide', title: 'What is YAML?',                 subtitle: 'Syntax, anchors, YAML vs JSON,\nand gotchas like the Norway problem.',        size: 80 },
   { slug: 'guide-regex-cheatsheet',         tag: 'Developer Guide', title: 'Regex\nCheatsheet',             subtitle: 'Character classes, quantifiers, anchors,\nlookaheads, flags, patterns.',       size: 72 },
   { slug: 'guide-json-best-practices',      tag: 'Developer Guide', title: 'JSON Best\nPractices',           subtitle: 'Naming, dates, null vs omit, pagination,\nerror responses, nesting.',         size: 72 },
+  { slug: 'guide-what-is-csv',              tag: 'Developer Guide', title: 'What is CSV?',                   subtitle: 'Structure, quoting rules, delimiters,\nand CSV vs JSON.',                     size: 84 },
+  { slug: 'guide-what-is-unix-timestamp',   tag: 'Developer Guide', title: 'What is a Unix\nTimestamp?',     subtitle: 'The epoch, seconds vs milliseconds,\nand the Year 2038 problem.',            size: 68 },
+  { slug: 'guide-understanding-number-bases', tag: 'Developer Guide', title: 'Understanding\nNumber Bases', subtitle: 'Binary, octal, and hex explained,\nand how to convert between them.',        size: 68 },
+  { slug: 'guide-password-entropy-explained', tag: 'Developer Guide', title: 'Password Strength\n& Entropy', subtitle: 'How entropy is calculated, and why\nlength beats complexity.',              size: 64 },
 ];
 
 const OUT_DIR = path.join(__dirname, '../public/og');

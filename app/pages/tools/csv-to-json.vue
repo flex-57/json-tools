@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">CSV <span class="title-arrow">→</span> JSON</h1>
         <p class="page-subtitle">Convert CSV or TSV data to JSON. Paste text or drop a file.</p>
+        <NuxtLink to="/guides/what-is-csv" class="guide-link">New to CSV? Read our guide →</NuxtLink>
       </div>
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
     </div>

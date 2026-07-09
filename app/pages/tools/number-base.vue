@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Number <span class="title-amp">Base</span> Converter</h1>
         <p class="page-subtitle">Convert between binary, octal, decimal and hexadecimal, instantly.</p>
+        <NuxtLink to="/guides/understanding-number-bases" class="guide-link">New to number bases? Read our guide →</NuxtLink>
       </div>
     </div>
 

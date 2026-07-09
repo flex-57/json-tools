@@ -84,6 +84,10 @@ const bodyComponents: Record<string, Component> = {
   'what-is-yaml': defineAsyncComponent(() => import('~/components/guides/body/what-is-yaml.vue')),
   'regex-cheatsheet': defineAsyncComponent(() => import('~/components/guides/body/regex-cheatsheet.vue')),
   'json-best-practices': defineAsyncComponent(() => import('~/components/guides/body/json-best-practices.vue')),
+  'what-is-csv': defineAsyncComponent(() => import('~/components/guides/body/what-is-csv.vue')),
+  'what-is-unix-timestamp': defineAsyncComponent(() => import('~/components/guides/body/what-is-unix-timestamp.vue')),
+  'understanding-number-bases': defineAsyncComponent(() => import('~/components/guides/body/understanding-number-bases.vue')),
+  'password-entropy-explained': defineAsyncComponent(() => import('~/components/guides/body/password-entropy-explained.vue')),
 }
 
 const route = useRoute()

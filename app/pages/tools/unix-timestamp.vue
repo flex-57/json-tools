@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Unix <span class="title-amp">Timestamp</span></h1>
         <p class="page-subtitle">Convert Unix timestamps to readable dates and back, instantly and client-side.</p>
+        <NuxtLink to="/guides/what-is-unix-timestamp" class="guide-link">New to Unix time? Read our guide →</NuxtLink>
       </div>
       <button @click="setNow" class="btn btn-primary">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>

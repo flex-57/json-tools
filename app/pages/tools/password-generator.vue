@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Password <span class="title-amp">Generator</span></h1>
         <p class="page-subtitle">Generate cryptographically secure passwords in your browser. No data is ever sent to a server.</p>
+        <NuxtLink to="/guides/password-entropy-explained" class="guide-link">What makes a password strong? Read our guide →</NuxtLink>
       </div>
     </div>
 

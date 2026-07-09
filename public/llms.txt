@@ -19,8 +19,8 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [JSON Tree Viewer](https://jsontools.space/tools/json-tree): Visualize JSON as an interactive collapsible tree or node graph. Copy paths with one click.
 - [JSON Schema Generator](https://jsontools.space/tools/json-schema): Generate JSON Schema (Draft-07 or 2020-12) from any JSON sample.
 - [JSON to TypeScript / Zod](https://jsontools.space/tools/json-to-ts): Generate TypeScript interfaces or Zod schemas from JSON.
-- [Base64 Encode / Decode](https://jsontools.space/tools/base64): Encode text or files to Base64, decode Base64 strings. Supports URL-safe variant.
-- [URL Encode / Decode](https://jsontools.space/tools/url-encode): Encode special characters for URLs or decode percent-encoded strings.
+- [Base64 Encoder / Decoder](https://jsontools.space/tools/base64): Encode text or files to Base64, decode Base64 strings. Supports URL-safe variant.
+- [URL Encoder / Decoder](https://jsontools.space/tools/url-encode): Encode special characters for URLs or decode percent-encoded strings.
 - [JWT Decoder](https://jsontools.space/tools/jwt-decoder): Decode and inspect JWT tokens. Displays header, payload, and signature without verification.
 - [Hash Generator](https://jsontools.space/tools/hash): Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text input.
 - [Regex Tester](https://jsontools.space/tools/regex-tester): Test regular expressions with live match highlighting. Supports flags and capture groups.
@@ -52,6 +52,10 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [What is YAML?](https://jsontools.space/guides/what-is-yaml): YAML syntax (scalars, sequences, mappings, anchors), YAML vs JSON, and common gotchas like the Norway problem and tab prohibition.
 - [Regex Cheatsheet](https://jsontools.space/guides/regex-cheatsheet): Quick reference for regex syntax — character classes, quantifiers, anchors, lookaheads, flags, and common patterns.
 - [JSON Best Practices](https://jsontools.space/guides/json-best-practices): JSON API design conventions — naming, ISO dates, null vs omit, large numbers, pagination, error responses, and nesting depth.
+- [What is CSV?](https://jsontools.space/guides/what-is-csv): CSV structure, RFC 4180 quoting and escaping rules, comma vs semicolon vs tab delimiters, CSV vs JSON, and common Excel/encoding pitfalls.
+- [What is a Unix Timestamp?](https://jsontools.space/guides/what-is-unix-timestamp): The Unix epoch, seconds vs milliseconds, the Year 2038 problem, and why leap seconds are not counted.
+- [Understanding Number Bases](https://jsontools.space/guides/understanding-number-bases): Binary, octal, and hexadecimal explained, how to convert between them, and where each base shows up in real code.
+- [Password Strength and Entropy Explained](https://jsontools.space/guides/password-entropy-explained): How password entropy is calculated, why length beats character-class complexity, and why human-invented passwords are weaker than the math suggests.
 
 ## Key Facts
 

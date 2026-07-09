@@ -777,4 +777,177 @@ export const GUIDES: Record<string, GuideConfig> = {
       },
     ],
   },
+  'what-is-csv': {
+    slug: 'what-is-csv',
+    type: 'guide',
+    title: 'What is CSV?',
+    subtitle: 'CSV explained: structure, quoting and escaping rules, delimiters, and why CSV vs JSON is not a lossless conversion.',
+    readTime: '5 min read',
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    description: 'Learn how CSV works: row/column structure, RFC 4180 quoting and escaping rules, comma vs semicolon vs tab delimiters, CSV vs JSON, and common pitfalls like Excel auto-formatting and encoding.',
+    tools: [
+      { name: 'CSV to JSON', desc: 'Paste or drop a CSV/TSV file to convert it to JSON, with auto-detected delimiter and header handling.', href: '/tools/csv-to-json', icon: ICONS.csvIn },
+      { name: 'JSON to CSV', desc: 'Flatten a JSON array of objects into downloadable CSV rows.', href: '/tools/json-to-csv', icon: ICONS.csvOut },
+    ],
+    faqs: [
+      {
+        q: 'Is there an official CSV standard?',
+        a: [
+          'Not a binding one. RFC 4180 documents the conventions most parsers follow (comma delimiter, optional double-quoting, doubled quotes for escaping), but it is informational, not a mandatory standard.',
+          'In practice this means CSV files from different sources can disagree on delimiter, line-ending style, or quoting, and a parser that is strict about RFC 4180 will reject files that Excel happily opens.',
+        ],
+      },
+      {
+        q: 'Why does my CSV file open as a single column in Excel?',
+        a: [
+          'Excel guesses the delimiter from your system locale, not from the file. If the file was exported from a European-locale spreadsheet (semicolon-delimited, since comma is the decimal separator there) and you open it on a US/UK-locale Excel expecting commas, every row lands in one column.',
+          'Fix it with Data → Text to Columns and pick the delimiter manually, or re-export the file with the delimiter your Excel locale expects.',
+        ],
+      },
+      {
+        q: 'How do I put a comma inside a CSV value?',
+        a: [
+          'Wrap the whole field in double quotes: "12 Rue de Paris, 3rd floor". Without the quotes, the comma inside the value is indistinguishable from a real field separator and shifts every column after it.',
+          'If the value itself contains a double quote, double it: "She said ""hello""" decodes to She said "hello".',
+        ],
+      },
+      {
+        q: 'Can CSV represent nested data like JSON can?',
+        a: [
+          'No. CSV is strictly flat: rows and columns, no objects or arrays inside a cell. There is no standard way to represent a JSON array of objects containing nested objects as CSV without a lossy transformation.',
+          'Common workarounds: flatten nested keys into dotted column names (address.city, address.country), or serialize the nested value as a JSON string inside a single cell and parse it back on the way in.',
+        ],
+      },
+    ],
+  },
+  'what-is-unix-timestamp': {
+    slug: 'what-is-unix-timestamp',
+    type: 'guide',
+    title: 'What is a Unix Timestamp?',
+    subtitle: 'Unix time explained: the epoch, seconds vs milliseconds, the Year 2038 problem, and why computers store time as a plain integer.',
+    readTime: '4 min read',
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    description: 'Learn what a Unix timestamp is, how to tell seconds from milliseconds, common gotchas like the Year 2038 problem and leap seconds, and why time is stored as an integer instead of a formatted date string.',
+    tools: [
+      { name: 'Unix Timestamp Converter', desc: 'Convert between Unix timestamps and human-readable dates, both directions, seconds or milliseconds.', href: '/tools/unix-timestamp', icon: ICONS.unix },
+    ],
+    faqs: [
+      {
+        q: 'How do I know if a timestamp is in seconds or milliseconds?',
+        a: [
+          'Count the digits. A real near-term date in seconds is a 10-digit number (under 10,000,000,000, which is the year 2286). The same moment in milliseconds is a 13-digit number.',
+          'If you see 13 digits, divide by 1000 to get seconds before treating it as seconds-based Unix time.',
+        ],
+      },
+      {
+        q: 'What is the Year 2038 problem?',
+        a: [
+          'Systems that store a Unix timestamp as a signed 32-bit integer overflow at 2,147,483,647 seconds after the epoch — January 19, 2038, 03:14:07 UTC. The next second wraps to a large negative number, typically read back as a date in December 1901.',
+          'Modern 64-bit systems are not affected in any practical timeframe. The risk is mostly in older embedded systems, legacy file formats, and databases still using 32-bit time fields.',
+        ],
+      },
+      {
+        q: 'Does Unix time account for leap seconds?',
+        a: [
+          "No. Unix time defines every day as exactly 86,400 seconds. When a leap second is inserted into UTC, Unix time does not gain a matching second — most systems either repeat a second or 'smear' the extra second across a longer window using NTP.",
+          'This is invisible for everyday application logic and only matters for systems requiring sub-second precision across a leap-second event.',
+        ],
+      },
+      {
+        q: 'Why do timestamps use UTC instead of a local timezone?',
+        a: [
+          'A Unix timestamp has no timezone at all — it is a count of seconds since a fixed instant, identical everywhere on Earth. UTC only enters the picture when converting the integer to a human-readable string.',
+          'This is why storing UTC-based timestamps and converting to the viewer\'s local timezone only at display time avoids the ambiguity of a date stored as an already-localized string.',
+        ],
+      },
+    ],
+  },
+  'understanding-number-bases': {
+    slug: 'understanding-number-bases',
+    type: 'guide',
+    title: 'Understanding Number Bases',
+    subtitle: 'Binary, octal, and hexadecimal explained: how positional counting systems work, why hex maps cleanly to bits, and where each base shows up in real code.',
+    readTime: '4 min read',
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    description: 'Learn how binary, octal, and hexadecimal number bases work, how to convert between them, why hex maps exactly to 4-bit binary groups, and where each base is used in practice: Unix permissions, colors, network addresses, and hashes.',
+    tools: [
+      { name: 'Number Base Converter', desc: 'Convert any number between binary, octal, decimal, and hexadecimal instantly, with automatic prefix detection.', href: '/tools/number-base', icon: ICONS.numBase },
+    ],
+    faqs: [
+      {
+        q: 'Why does hexadecimal use letters A–F?',
+        a: [
+          'Hex needs 16 distinct digits per position, but decimal only supplies 10 (0–9). Letters A through F stand in for the values 10 through 15, so every value a 4-bit group can hold (0–15) has a single-character digit.',
+          'This is what makes hex convenient: one hex digit always represents exactly 4 bits, with no digit ever needing two characters.',
+        ],
+      },
+      {
+        q: 'Why is hex used instead of octal for bytes and colors?',
+        a: [
+          'A byte is 8 bits, which splits evenly into two 4-bit hex digits (e.g. 0xFF). Octal digits are 3 bits each, so a byte does not divide evenly into octal digits, making conversion messier.',
+          'Octal survives mainly in Unix file permissions, where each permission triplet (read/write/execute) is naturally 3 bits — a case where octal\'s 3-bit grouping is actually the better fit.',
+        ],
+      },
+      {
+        q: 'How do I convert hex to binary without a calculator?',
+        a: [
+          'Substitute each hex digit with its fixed 4-bit pattern: 0xC0 becomes 1100 0000 by replacing C with 1100 and 0 with 0000. No division or multiplication needed, since 1 hex digit always equals exactly 4 bits.',
+          'Decimal does not have this clean relationship with binary, which is why decimal-to-binary conversion requires actual division, while hex-to-binary is pure lookup.',
+        ],
+      },
+      {
+        q: 'What does a bare leading zero mean in a number literal?',
+        a: [
+          'In C, C++, and older JavaScript, a number literal starting with a plain 0 (like 0755) is interpreted as octal, not decimal — a classic source of bugs when a decimal number is zero-padded without realizing it changes the value\'s meaning.',
+          'Modern languages avoid the ambiguity by requiring an explicit prefix: 0o755 for octal, 0x1F for hex, 0b101 for binary.',
+        ],
+      },
+    ],
+  },
+  'password-entropy-explained': {
+    slug: 'password-entropy-explained',
+    type: 'guide',
+    title: 'Password Strength and Entropy Explained',
+    subtitle: 'How password entropy is calculated, why length matters more than character variety, and why human-invented passwords are weaker than the math suggests.',
+    readTime: '4 min read',
+    datePublished: '2026-07-09',
+    dateModified: '2026-07-09',
+    description: 'Learn how password entropy is calculated (length × log2 of charset size), what it means for brute-force resistance, why length beats character-class complexity, and why humans are bad at generating truly random passwords.',
+    tools: [
+      { name: 'Password Generator', desc: 'Generate cryptographically secure random passwords with the browser\'s crypto API, so the entropy math actually applies.', href: '/tools/password-generator', icon: ICONS.pwdGen },
+    ],
+    faqs: [
+      {
+        q: 'How is password entropy calculated?',
+        a: [
+          'entropy (in bits) = length × log2(charset size). An 8-character password using only lowercase letters (26 possibilities per character) has about 37.6 bits of entropy; the same 8 characters drawn from the full printable ASCII set (~94 possibilities) has about 52.4 bits.',
+          'Each additional bit doubles the number of possible passwords an attacker would need to search through.',
+        ],
+      },
+      {
+        q: 'Does adding symbols help more than adding length?',
+        a: [
+          'No. Going from a 26-character set to a 94-character set adds roughly 2 bits per character. Adding one more character of length adds a full multiplier\'s worth of bits regardless of charset. A longer password with fewer character classes usually beats a shorter one that is forced to include every class.',
+          'This is why current guidance (NIST SP 800-63B) favors encouraging length over mandating uppercase/digit/symbol composition rules.',
+        ],
+      },
+      {
+        q: 'Why is a password I invented myself weaker than its entropy score suggests?',
+        a: [
+          'The entropy formula assumes every character was chosen independently and uniformly at random. Humans are not random: common substitutions (@ for a, 0 for o), keyboard patterns, and dictionary words are all things password-cracking tools specifically test for first.',
+          'A password generated by a cryptographically secure random number generator does not have this weakness, because it genuinely was sampled uniformly at random from the character set.',
+        ],
+      },
+      {
+        q: 'Is a high-entropy password enough to keep an account safe?',
+        a: [
+          'Entropy only protects against brute-force guessing of that one password. It does nothing against credential stuffing (reusing a password leaked from a different, unrelated breach) or phishing.',
+          'A unique password per site (ideally from a password manager) plus two-factor authentication protects against those other attack paths that entropy alone cannot address.',
+        ],
+      },
+    ],
+  },
 }
