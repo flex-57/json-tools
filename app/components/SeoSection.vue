@@ -76,7 +76,7 @@ function labelFor(to: string): string {
     // navLabel containing '↔' represents a merged nav/footer/home entry that
     // covers BOTH directions of a converter pair — wrong here, since a related
     // link always points to one specific page. Fall back to the plain,
-    // direction-specific name in that case (e.g. "CSV to JSON", not "CSV ↔ JSON").
+    // direction-specific name in that case (e.g. "CSV → JSON", not "CSV ↔ JSON").
     return meta.navLabel && !meta.navLabel.includes('↔') ? meta.navLabel : meta.name
   }
   if (to.startsWith('/guides/')) {
@@ -85,8 +85,12 @@ function labelFor(to: string): string {
   return to
 }
 
+// Strips a trailing slash (but not the root "/") so a stray trailing slash
+// in the URL can't silently make AUTO_RELATED miss the current route.
+const currentPath = computed(() => route.path.length > 1 ? route.path.replace(/\/$/, '') : route.path)
+
 const displayRelated = computed<RelatedTool[]>(() =>
-  props.related ?? (AUTO_RELATED[route.path] ?? []).map(to => ({ to, label: labelFor(to) }))
+  props.related ?? (AUTO_RELATED[currentPath.value] ?? []).map(to => ({ to, label: labelFor(to) }))
 )
 const relatedTools = computed(() => displayRelated.value.filter(r => r.to.startsWith('/tools/')))
 const relatedGuides = computed(() => displayRelated.value.filter(r => r.to.startsWith('/guides/')))
