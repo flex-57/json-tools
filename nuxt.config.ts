@@ -43,6 +43,16 @@ export default defineNuxtConfig({
   router: {
     options: { strict: true },
   },
+  experimental: {
+    // Default NuxtLink prefetch fires on viewport visibility, not on hover/click —
+    // on the homepage's tool grid that silently downloads every visible tool's JS
+    // chunk (CodeMirror, Vue Flow+D3...) before the visitor ever clicks one.
+    defaults: {
+      nuxtLink: {
+        prefetchOn: { visibility: false, interaction: true },
+      },
+    },
+  },
   app: {
     head: {
       charset: 'utf-8',
