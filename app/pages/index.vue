@@ -18,7 +18,7 @@
       <div class="recent-row">
         <NuxtLink v-for="t in recentTools" :key="t.slug" :to="`/tools/${t.slug}`" class="recent-pill">
           <span class="recent-pill-icon" v-html="toolIcon(t.slug)"></span>
-          <span class="recent-pill-name">{{ t.name }}</span>
+          <span class="recent-pill-name">{{ t.navLabel ?? t.name }}</span>
         </NuxtLink>
       </div>
     </section>
