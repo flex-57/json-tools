@@ -366,8 +366,17 @@ html.dark .toggle-thumb { background: #fff; }
 @media (max-width: 768px) {
   .page { padding: 20px 16px 32px; gap: 12px; }
   .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .dualpane, .dualpane.no-mid { grid-template-columns: 1fr; min-height: unset; }
-  .midcol { flex-direction: row; padding: 10px; border-left: none; border-right: none; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); }
+  .dualpane, .dualpane.no-mid { grid-template-columns: 1fr; min-height: unset; overflow: visible; }
+  /* overflow:hidden (desktop) clips each pane's square corners to the container's
+     rounded ones — but it also breaks position:sticky on .midcol below (a sticky
+     element's containing-block search stops at the first ancestor with a non-visible
+     overflow). Rebuild the rounding on the panes themselves instead. */
+  .pane:first-child { border-radius: var(--radius-card) var(--radius-card) 0 0; }
+  .pane--alt { border-radius: 0 0 var(--radius-card) var(--radius-card); }
+  .midcol {
+    flex-direction: row; padding: 10px; border-left: none; border-right: none; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);
+    position: sticky; top: 52px; z-index: 50; box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+  }
 }
 
 /* ── Guide article shared styles ───────────────────────────────────── */
