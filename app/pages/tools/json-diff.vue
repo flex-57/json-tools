@@ -54,15 +54,15 @@
     </div>
 
     <Transition name="status">
-      <div v-if="result" class="diff-section" aria-live="polite">
-        <div class="statusbar" :class="result.error ? 'error' : result.same ? 'same' : ''">
+      <div v-if="result" class="diff-section">
+        <StatusBar :class="result.error ? 'error' : result.same ? 'same' : ''">
           <template v-if="result.error">{{ result.error }}</template>
           <template v-else-if="result.same">Identical, no differences found</template>
           <template v-else>
             <span class="diff-stat diff-stat--added">+{{ result.additions }} addition{{ result.additions !== 1 ? 's' : '' }}</span>
             <span class="diff-stat diff-stat--removed">-{{ result.deletions }} deletion{{ result.deletions !== 1 ? 's' : '' }}</span>
           </template>
-        </div>
+        </StatusBar>
 
         <div v-if="!result.error && !result.same" class="diff-view">
           <div v-for="(entry, i) in result.lines" :key="i" :class="['diff-line', `diff-line--${entry.type}`]">

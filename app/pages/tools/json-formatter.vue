@@ -72,13 +72,13 @@
       </div>
     </div>
 
-    <div class="statusbar">
+    <StatusBar>
       <span>
         <span class="led" :class="isValid ? 'valid' : 'error'"></span>
         {{ isValid ? 'Valid' : (error || 'Waiting for input') }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-formatter</span>
-    </div>
+    </StatusBar>
 
     <SeoSection :cards="cards" />
   </div>

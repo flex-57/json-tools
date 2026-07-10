@@ -66,22 +66,6 @@ const AUTO_RELATED: Record<string, RelatedTool[]> = {
 const displayRelated = computed(() => props.related ?? AUTO_RELATED[route.path] ?? [])
 const relatedTools = computed(() => displayRelated.value.filter(r => r.to.startsWith('/tools/')))
 const relatedGuides = computed(() => displayRelated.value.filter(r => r.to.startsWith('/guides/')))
-
-useHead(() => ({
-  script: [{
-    key: 'schema-faq',
-    type: 'application/ld+json',
-    innerHTML: JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: props.cards.map(card => ({
-        '@type': 'Question',
-        name: card.title,
-        acceptedAnswer: { '@type': 'Answer', text: card.text },
-      })),
-    }),
-  }],
-}))
 </script>
 
 <style scoped>

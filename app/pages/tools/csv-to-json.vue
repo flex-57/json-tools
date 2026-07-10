@@ -60,10 +60,10 @@
       </div>
     </div>
 
-    <div class="statusbar">
+    <StatusBar>
       <span><span class="led" :class="rowCount > 0 ? 'valid' : 'error'"></span>{{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error && error !== 'empty' ? error : 'Waiting for input') }}</span>
       <span>csv-to-json</span>
-    </div>
+    </StatusBar>
 
     <SeoSection :cards="seoCards" />
   </div>

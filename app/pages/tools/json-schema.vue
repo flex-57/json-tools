@@ -54,10 +54,10 @@
       </div>
     </div>
 
-    <div class="statusbar">
+    <StatusBar>
       <span><span class="led" :class="output && !error ? 'valid' : 'error'"></span>{{ error || (output ? 'Ready' : 'Waiting for input') }}</span>
       <span>json-schema</span>
-    </div>
+    </StatusBar>
 
     <SeoSection :cards="seoCards" />
   </div>

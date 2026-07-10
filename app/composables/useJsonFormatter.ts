@@ -37,20 +37,6 @@ export function validateJson(input: string): JsonResult {
   return { output: trimmed, error: null, valid: true }
 }
 
-export function diffJsonLines(left: string, right: string): { added: string[]; removed: string[]; same: boolean } {
-  try {
-    const l = JSON.stringify(JSON.parse(left.trim()), null, 2).split('\n')
-    const r = JSON.stringify(JSON.parse(right.trim()), null, 2).split('\n')
-    const lSet = new Set(l)
-    const rSet = new Set(r)
-    const added = r.filter(line => !lSet.has(line))
-    const removed = l.filter(line => !rSet.has(line))
-    return { added, removed, same: added.length === 0 && removed.length === 0 }
-  } catch {
-    return { added: [], removed: [], same: false }
-  }
-}
-
 const SAMPLE_JSON = `{
   "id": 1,
   "name": "Alice Martin",
@@ -75,6 +61,8 @@ export function useJsonFormatter() {
     isValid.value = result.valid
   }
 
+  watch(indent, format)
+
   function minify() {
     const result = minifyJson(input.value)
     output.value = result.output
@@ -84,7 +72,7 @@ export function useJsonFormatter() {
 
   function validate() {
     const result = validateJson(input.value)
-    output.value = ''
+    output.value = result.output
     error.value = result.error
     isValid.value = result.valid
   }

@@ -57,10 +57,10 @@
       </div>
     </div>
 
-    <div class="statusbar">
+    <StatusBar>
       <span><span class="led" :class="output && !error ? 'valid' : 'error'"></span>{{ output && !error ? 'Converted' : (error && error !== 'empty' ? error : 'Waiting for input') }}</span>
       <span>json-to-yaml</span>
-    </div>
+    </StatusBar>
 
     <SeoSection :cards="seoCards" />
   </div>

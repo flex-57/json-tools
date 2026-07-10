@@ -2,6 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  modules: ['@nuxt/fonts'],
+  fonts: {
+    families: [
+      { name: 'Big Shoulders', provider: 'google', weights: [500, 700, 800] },
+      { name: 'Public Sans', provider: 'google', weights: [400, 500, 600, 700], styles: ['normal', 'italic'] },
+      { name: 'Fragment Mono', provider: 'google', styles: ['normal', 'italic'] },
+    ],
+  },
   css: ['~/assets/css/tools.css', '@vue-flow/core/dist/style.css', '@vue-flow/core/dist/theme-default.css', '@vue-flow/controls/dist/style.css'],
   nitro: {
     prerender: {
@@ -15,7 +23,7 @@ export default defineNuxtConfig({
           'X-Content-Type-Options': 'nosniff',
           'Referrer-Policy': 'strict-origin-when-cross-origin',
           'X-Powered-By': '',
-          'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://fundingchoicesmessages.google.com https://fonts.googleapis.com https://fonts.gstatic.com https://*.adtrafficquality.google; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://fundingchoicesmessages.google.com https://pagead2.googlesyndication.com https://*.adtrafficquality.google; object-src 'none'; base-uri 'self'; frame-ancestors 'none';",
+          'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://fundingchoicesmessages.google.com https://pagead2.googlesyndication.com https://*.adtrafficquality.google; object-src 'none'; base-uri 'self'; frame-ancestors 'none';",
           'cache-control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
         },
       },
@@ -91,9 +99,6 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'manifest', href: '/manifest.json' },
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@500;700;800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Fragment+Mono:ital@0;1&display=swap', crossorigin: '' },
       ],
     },
   },

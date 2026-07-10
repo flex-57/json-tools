@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatJson, minifyJson, validateJson, diffJsonLines } from '../app/composables/useJsonFormatter'
+import { formatJson, minifyJson, validateJson } from '../app/composables/useJsonFormatter'
 
 const VALID_JSON = '{"name":"John","age":30,"active":true}'
 const PRETTY_JSON = `{
@@ -98,40 +98,5 @@ describe('validateJson', () => {
 
   it('returns empty error on empty input', () => {
     expect(validateJson('').error).toBe('empty')
-  })
-})
-
-describe('diffJsonLines', () => {
-  it('detects identical JSON', () => {
-    const result = diffJsonLines(VALID_JSON, VALID_JSON)
-    expect(result.same).toBe(true)
-    expect(result.added).toHaveLength(0)
-    expect(result.removed).toHaveLength(0)
-  })
-
-  it('detects added keys', () => {
-    const left = '{"a":1}'
-    const right = '{"a":1,"b":2}'
-    const result = diffJsonLines(left, right)
-    expect(result.same).toBe(false)
-    expect(result.added.length).toBeGreaterThan(0)
-  })
-
-  it('detects removed keys', () => {
-    const left = '{"a":1,"b":2}'
-    const right = '{"a":1}'
-    const result = diffJsonLines(left, right)
-    expect(result.same).toBe(false)
-    expect(result.removed.length).toBeGreaterThan(0)
-  })
-
-  it('ignores formatting differences', () => {
-    const result = diffJsonLines(VALID_JSON, PRETTY_JSON)
-    expect(result.same).toBe(true)
-  })
-
-  it('handles invalid JSON gracefully', () => {
-    const result = diffJsonLines(INVALID_JSON, VALID_JSON)
-    expect(result.same).toBe(false)
   })
 })

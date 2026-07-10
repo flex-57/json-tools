@@ -53,10 +53,10 @@
       </div>
     </div>
 
-    <div class="statusbar" v-if="result && !error && result.originalSize > 0">
+    <StatusBar v-if="result && !error && result.originalSize > 0">
       <span>{{ fmtBytes(result.originalSize) }} → {{ fmtBytes(result.minifiedSize) }} · <strong style="color: var(--c-valid);">{{ result.savings }}% saved</strong> · {{ fmtBytes(result.originalSize - result.minifiedSize) }} removed</span>
       <span>powered by {{ engineLabel }}</span>
-    </div>
+    </StatusBar>
 
     <SeoSection :cards="seoCards" />
   </div>

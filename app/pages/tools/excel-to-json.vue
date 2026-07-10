@@ -73,10 +73,10 @@
       </div>
     </div>
 
-    <div class="statusbar" v-if="sheets.length || error">
+    <StatusBar v-if="sheets.length || error">
       <span><span class="led" :class="error ? 'error' : 'valid'"></span>{{ error || `${sheets.length} sheet${sheets.length > 1 ? 's' : ''}` }}</span>
       <span>excel-to-json</span>
-    </div>
+    </StatusBar>
 
     <div class="info-strip">Parsed in an isolated Web Worker: no file is uploaded to servers</div>
     <div class="info-strip info-strip--warn">SheetJS has known CVEs (prototype pollution, ReDoS). The Worker sandbox limits exposure but does not fix them</div>

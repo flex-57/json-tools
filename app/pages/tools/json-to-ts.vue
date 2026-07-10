@@ -79,13 +79,13 @@
       </div>
     </div>
 
-    <div class="statusbar">
+    <StatusBar>
       <span>
         <span class="led" :class="error ? 'error' : 'valid'"></span>
         {{ error || 'Valid' }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-to-ts</span>
-    </div>
+    </StatusBar>
 
     <SeoSection :cards="seoCards" />
   </div>
