@@ -30,22 +30,22 @@ export const TOOLS: ToolMeta[] = [
   // JSON
   { slug: 'json-formatter', name: 'JSON Formatter', short: 'Beautify & validate', category: 'json', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'json-diff', name: 'JSON Diff', short: 'Compare two documents', category: 'json', variant: 'compare', updatedAt: '2026-07-07' },
-  { slug: 'json-tree', name: 'Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer', updatedAt: '2026-07-07' },
+  { slug: 'json-tree', name: 'JSON Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer', updatedAt: '2026-07-10' },
 
   // Converters
-  { slug: 'csv-to-json', name: 'CSV to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'CSV ↔ JSON', updatedAt: '2026-07-07' },
-  { slug: 'json-to-csv', name: 'JSON to CSV', short: 'Flatten to rows', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
-  { slug: 'xml-to-json', name: 'XML to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'XML ↔ JSON', updatedAt: '2026-07-07' },
-  { slug: 'json-to-xml', name: 'JSON to XML', short: 'Convert structure', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
-  { slug: 'yaml-to-json', name: 'YAML to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'YAML ↔ JSON', updatedAt: '2026-07-07' },
-  { slug: 'json-to-yaml', name: 'JSON to YAML', short: 'Readable config output', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
-  { slug: 'excel-to-json', name: 'Excel to JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'Excel ↔ JSON', updatedAt: '2026-07-07' },
-  { slug: 'json-to-excel', name: 'JSON to Excel', short: 'Export as .xlsx', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-07' },
-  { slug: 'json-to-ts', name: 'To TypeScript', short: 'Interfaces or Zod', category: 'converters', variant: 'transform', navLabel: 'JSON → TypeScript / Zod', navDividerBefore: true, updatedAt: '2026-07-07' },
-  { slug: 'json-schema', name: 'To Schema', short: 'Infer JSON Schema', category: 'converters', variant: 'transform', navLabel: 'JSON → Schema', updatedAt: '2026-07-07' },
+  { slug: 'csv-to-json', name: 'CSV → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'CSV ↔ JSON', updatedAt: '2026-07-10' },
+  { slug: 'json-to-csv', name: 'JSON → CSV', short: 'Flatten to rows', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
+  { slug: 'xml-to-json', name: 'XML → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'XML ↔ JSON', updatedAt: '2026-07-10' },
+  { slug: 'json-to-xml', name: 'JSON → XML', short: 'Convert structure', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
+  { slug: 'yaml-to-json', name: 'YAML → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'YAML ↔ JSON', updatedAt: '2026-07-10' },
+  { slug: 'json-to-yaml', name: 'JSON → YAML', short: 'Readable config output', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
+  { slug: 'excel-to-json', name: 'Excel → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'Excel ↔ JSON', updatedAt: '2026-07-10' },
+  { slug: 'json-to-excel', name: 'JSON → Excel', short: 'Export as .xlsx', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
+  { slug: 'json-to-ts', name: 'JSON → TypeScript / Zod', short: 'Interfaces or Zod', category: 'converters', variant: 'transform', navDividerBefore: true, updatedAt: '2026-07-10' },
+  { slug: 'json-schema', name: 'JSON → Schema', short: 'Infer JSON Schema', category: 'converters', variant: 'transform', updatedAt: '2026-07-10' },
 
   // Text & Code
-  { slug: 'text-case', name: 'Text Case', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'text-case', name: 'Text Case Converter', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer', updatedAt: '2026-07-10' },
   { slug: 'minifier', name: 'Minifier', short: 'CSS / HTML / JS', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
@@ -63,7 +63,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'regex-tester', name: 'Regex Tester', short: 'Live match highlighting', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'cron-parser', name: 'Cron Parser', short: 'Plain-English schedules', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'unix-timestamp', name: 'Unix Timestamp', short: 'Epoch ↔ date', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
-  { slug: 'number-base', name: 'Number Base', short: 'Binary, octal, hex', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'number-base', name: 'Number Base Converter', short: 'Binary, octal, hex', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-10' },
   { slug: 'color', name: 'Color Picker', short: 'HEX / RGB / HSL + contrast', category: 'devutils', variant: 'generator', updatedAt: '2026-07-07' },
 ]
 

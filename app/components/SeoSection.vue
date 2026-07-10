@@ -22,6 +22,9 @@
 </template>
 
 <script setup lang="ts">
+import { toolMeta } from '~/data/tools'
+import { GUIDES } from '~/data/guides'
+
 interface RelatedTool { label: string; to: string }
 
 const props = defineProps<{
@@ -31,39 +34,60 @@ const props = defineProps<{
 
 const route = useRoute()
 
-const AUTO_RELATED: Record<string, RelatedTool[]> = {
-  '/tools/json-formatter': [{ label: 'JSON Diff', to: '/tools/json-diff' }, { label: 'JSON Tree', to: '/tools/json-tree' }, { label: 'JSON Best Practices', to: '/guides/json-best-practices' }],
-  '/tools/csv-to-json':    [{ label: 'JSON → CSV', to: '/tools/json-to-csv' }, { label: 'Excel → JSON', to: '/tools/excel-to-json' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'What is CSV?', to: '/guides/what-is-csv' }],
-  '/tools/json-to-csv':    [{ label: 'CSV → JSON', to: '/tools/csv-to-json' }, { label: 'JSON → Excel', to: '/tools/json-to-excel' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'What is CSV?', to: '/guides/what-is-csv' }],
-  '/tools/xml-to-json':    [{ label: 'JSON → XML', to: '/tools/json-to-xml' }, { label: 'What is XML?', to: '/guides/what-is-xml' }, { label: 'YAML → JSON', to: '/tools/yaml-to-json' }],
-  '/tools/json-to-xml':    [{ label: 'XML → JSON', to: '/tools/xml-to-json' }, { label: 'What is XML?', to: '/guides/what-is-xml' }, { label: 'JSON → YAML', to: '/tools/json-to-yaml' }],
-  '/tools/yaml-to-json':   [{ label: 'JSON → YAML', to: '/tools/json-to-yaml' }, { label: 'What is YAML?', to: '/guides/what-is-yaml' }, { label: 'JSON vs YAML', to: '/guides/json-vs-yaml' }],
-  '/tools/json-to-yaml':   [{ label: 'YAML → JSON', to: '/tools/yaml-to-json' }, { label: 'What is YAML?', to: '/guides/what-is-yaml' }, { label: 'JSON vs YAML', to: '/guides/json-vs-yaml' }],
-  '/tools/excel-to-json':  [{ label: 'JSON → Excel', to: '/tools/json-to-excel' }, { label: 'CSV → JSON', to: '/tools/csv-to-json' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }],
-  '/tools/json-to-excel':  [{ label: 'Excel → JSON', to: '/tools/excel-to-json' }, { label: 'JSON → CSV', to: '/tools/json-to-csv' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }],
-  '/tools/json-diff':      [{ label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'JSON Tree', to: '/tools/json-tree' }, { label: 'JSON → Schema', to: '/tools/json-schema' }],
-  '/tools/json-tree':      [{ label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'JSON Diff', to: '/tools/json-diff' }, { label: 'JSON → TypeScript / Zod', to: '/tools/json-to-ts' }],
-  '/tools/json-to-ts':     [{ label: 'JSON → Schema', to: '/tools/json-schema' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'JSON Diff', to: '/tools/json-diff' }],
-  '/tools/json-schema':    [{ label: 'What is JSON Schema?', to: '/guides/what-is-json-schema' }, { label: 'JSON → TypeScript / Zod', to: '/tools/json-to-ts' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }],
-  '/tools/base64':         [{ label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'What is Base64?', to: '/guides/what-is-base64' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'Encoding vs Encryption vs Hashing', to: '/guides/encoding-vs-encryption-vs-hashing' }],
-  '/tools/url-encode':     [{ label: 'What is URL Encoding?', to: '/guides/what-is-url-encoding' }, { label: 'Base64', to: '/tools/base64' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }],
-  '/tools/jwt-decoder':    [{ label: 'JWT Generator', to: '/tools/jwt-generator' }, { label: 'What is a JWT?', to: '/guides/what-is-jwt' }, { label: 'Base64', to: '/tools/base64' }],
-  '/tools/regex-tester':   [{ label: 'Regex Cheatsheet', to: '/guides/regex-cheatsheet' }, { label: 'What is Regex?', to: '/guides/what-is-regex' }, { label: 'Cron Parser', to: '/tools/cron-parser' }],
-  '/tools/cron-parser':    [{ label: 'Unix Timestamp', to: '/tools/unix-timestamp' }, { label: 'Cron Examples', to: '/guides/cron-expression-examples' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
-  '/tools/unix-timestamp': [{ label: 'Cron Parser', to: '/tools/cron-parser' }, { label: 'Regex Tester', to: '/tools/regex-tester' }, { label: 'What is a Unix Timestamp?', to: '/guides/what-is-unix-timestamp' }],
-  '/tools/hash':           [{ label: 'What is a Hash Function?', to: '/guides/what-is-hash' }, { label: 'UUID Generator', to: '/tools/uuid' }, { label: 'Base64', to: '/tools/base64' }, { label: 'Encoding vs Encryption vs Hashing', to: '/guides/encoding-vs-encryption-vs-hashing' }],
-  '/tools/uuid':                [{ label: 'What is a UUID?', to: '/guides/what-is-uuid' }, { label: 'Hash Generator', to: '/tools/hash' }, { label: 'Password Generator', to: '/tools/password-generator' }],
-  '/tools/password-generator': [{ label: 'Hash Generator', to: '/tools/hash' }, { label: 'UUID Generator', to: '/tools/uuid' }, { label: 'JWT Generator', to: '/tools/jwt-generator' }, { label: 'Password Strength & Entropy', to: '/guides/password-entropy-explained' }],
-  '/tools/minifier':       [{ label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'Base64', to: '/tools/base64' }],
-  '/tools/sql-formatter':  [{ label: 'Minifier', to: '/tools/minifier' }, { label: 'JSON Formatter', to: '/tools/json-formatter' }, { label: 'Regex Tester', to: '/tools/regex-tester' }, { label: 'SQL Cheatsheet', to: '/guides/sql-cheatsheet' }],
-  '/tools/text-case':          [{ label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'Minifier', to: '/tools/minifier' }, { label: 'Regex Tester', to: '/tools/regex-tester' }],
-  '/tools/markdown-preview':   [{ label: 'What is Markdown?', to: '/guides/what-is-markdown' }, { label: 'Markdown Cheatsheet', to: '/guides/markdown-cheatsheet' }, { label: 'Text Case Converter', to: '/tools/text-case' }],
-  '/tools/number-base':    [{ label: 'Hash Generator', to: '/tools/hash' }, { label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'URL Encode / Decode', to: '/tools/url-encode' }, { label: 'Understanding Number Bases', to: '/guides/understanding-number-bases' }],
-  '/tools/color':          [{ label: 'Number Base Converter', to: '/tools/number-base' }, { label: 'Hash Generator', to: '/tools/hash' }, { label: 'UUID Generator', to: '/tools/uuid' }, { label: 'HEX, RGB, and HSL Explained', to: '/guides/understanding-color-formats' }],
-  '/tools/jwt-generator':  [{ label: 'JWT Decoder', to: '/tools/jwt-decoder' }, { label: 'What is a JWT?', to: '/guides/what-is-jwt' }, { label: 'Hash Generator', to: '/tools/hash' }],
+// Only the route is hand-picked here — the display label is always derived
+// from tools.ts / guides.ts below, so it can never drift from the tool's
+// real name or the guide's real title again.
+const AUTO_RELATED: Record<string, string[]> = {
+  '/tools/json-formatter': ['/tools/json-diff', '/tools/json-tree', '/guides/json-best-practices'],
+  '/tools/csv-to-json':    ['/tools/json-to-csv', '/tools/excel-to-json', '/tools/json-formatter', '/guides/what-is-csv'],
+  '/tools/json-to-csv':    ['/tools/csv-to-json', '/tools/json-to-excel', '/tools/json-formatter', '/guides/what-is-csv'],
+  '/tools/xml-to-json':    ['/tools/json-to-xml', '/guides/what-is-xml', '/tools/yaml-to-json'],
+  '/tools/json-to-xml':    ['/tools/xml-to-json', '/guides/what-is-xml', '/tools/json-to-yaml'],
+  '/tools/yaml-to-json':   ['/tools/json-to-yaml', '/guides/what-is-yaml', '/guides/json-vs-yaml'],
+  '/tools/json-to-yaml':   ['/tools/yaml-to-json', '/guides/what-is-yaml', '/guides/json-vs-yaml'],
+  '/tools/excel-to-json':  ['/tools/json-to-excel', '/tools/csv-to-json', '/tools/json-formatter'],
+  '/tools/json-to-excel':  ['/tools/excel-to-json', '/tools/json-to-csv', '/tools/json-formatter'],
+  '/tools/json-diff':      ['/tools/json-formatter', '/tools/json-tree', '/tools/json-schema'],
+  '/tools/json-tree':      ['/tools/json-formatter', '/tools/json-diff', '/tools/json-to-ts'],
+  '/tools/json-to-ts':     ['/tools/json-schema', '/tools/json-formatter', '/tools/json-diff'],
+  '/tools/json-schema':    ['/guides/what-is-json-schema', '/tools/json-to-ts', '/tools/json-formatter'],
+  '/tools/base64':         ['/tools/url-encode', '/guides/what-is-base64', '/tools/jwt-decoder', '/guides/encoding-vs-encryption-vs-hashing'],
+  '/tools/url-encode':     ['/guides/what-is-url-encoding', '/tools/base64', '/tools/jwt-decoder'],
+  '/tools/jwt-decoder':    ['/tools/jwt-generator', '/guides/what-is-jwt', '/tools/base64'],
+  '/tools/regex-tester':   ['/guides/regex-cheatsheet', '/guides/what-is-regex', '/tools/cron-parser'],
+  '/tools/cron-parser':    ['/tools/unix-timestamp', '/guides/cron-expression-examples', '/tools/regex-tester'],
+  '/tools/unix-timestamp': ['/tools/cron-parser', '/tools/regex-tester', '/guides/what-is-unix-timestamp'],
+  '/tools/hash':           ['/guides/what-is-hash', '/tools/uuid', '/tools/base64', '/guides/encoding-vs-encryption-vs-hashing'],
+  '/tools/uuid':                ['/guides/what-is-uuid', '/tools/hash', '/tools/password-generator'],
+  '/tools/password-generator': ['/tools/hash', '/tools/uuid', '/tools/jwt-generator', '/guides/password-entropy-explained'],
+  '/tools/minifier':       ['/tools/json-formatter', '/tools/base64'],
+  '/tools/sql-formatter':  ['/tools/minifier', '/tools/json-formatter', '/tools/regex-tester', '/guides/sql-cheatsheet'],
+  '/tools/text-case':          ['/tools/url-encode', '/tools/minifier', '/tools/regex-tester'],
+  '/tools/markdown-preview':   ['/guides/what-is-markdown', '/guides/markdown-cheatsheet', '/tools/text-case'],
+  '/tools/number-base':    ['/tools/hash', '/tools/jwt-decoder', '/tools/url-encode', '/guides/understanding-number-bases'],
+  '/tools/color':          ['/tools/number-base', '/tools/hash', '/tools/uuid', '/guides/understanding-color-formats'],
+  '/tools/jwt-generator':  ['/tools/jwt-decoder', '/guides/what-is-jwt', '/tools/hash'],
 }
 
-const displayRelated = computed(() => props.related ?? AUTO_RELATED[route.path] ?? [])
+function labelFor(to: string): string {
+  if (to.startsWith('/tools/')) {
+    const meta = toolMeta(to.replace('/tools/', ''))
+    if (!meta) return to
+    // navLabel containing '↔' represents a merged nav/footer/home entry that
+    // covers BOTH directions of a converter pair — wrong here, since a related
+    // link always points to one specific page. Fall back to the plain,
+    // direction-specific name in that case (e.g. "CSV to JSON", not "CSV ↔ JSON").
+    return meta.navLabel && !meta.navLabel.includes('↔') ? meta.navLabel : meta.name
+  }
+  if (to.startsWith('/guides/')) {
+    return GUIDES[to.replace('/guides/', '')]?.title ?? to
+  }
+  return to
+}
+
+const displayRelated = computed<RelatedTool[]>(() =>
+  props.related ?? (AUTO_RELATED[route.path] ?? []).map(to => ({ to, label: labelFor(to) }))
+)
 const relatedTools = computed(() => displayRelated.value.filter(r => r.to.startsWith('/tools/')))
 const relatedGuides = computed(() => displayRelated.value.filter(r => r.to.startsWith('/guides/')))
 </script>

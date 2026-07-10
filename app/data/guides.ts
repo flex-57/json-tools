@@ -126,11 +126,11 @@ export const GUIDES: Record<string, GuideConfig> = {
     slug: 'how-to-validate-json',
     type: 'guide',
     category: 'json',
-    title: 'How to Validate JSON',
+    title: 'How to Validate JSON?',
     subtitle: 'Understand what makes JSON valid, spot the most common errors, and go further with JSON Schema.',
     readTime: '5 min read',
     datePublished: '2026-06-19',
-    dateModified: '2026-06-19',
+    dateModified: '2026-07-10',
     description: 'Learn how to validate JSON: syntax rules, the most common errors (trailing commas, single quotes, unquoted keys), and how to validate structure with JSON Schema.',
     tools: [
       { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it: errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: ICONS.formatter },
