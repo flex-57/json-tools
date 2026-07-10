@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/fonts'],
   fonts: {
+    // Site content is English with the occasional accented Latin character
+    // (café, naïve...) — the module's default subset list also fetches
+    // cyrillic/greek/vietnamese we never display, so restrict to latin/latin-ext.
+    defaults: { subsets: ['latin', 'latin-ext'] },
     families: [
       { name: 'Big Shoulders', provider: 'google', weights: [500, 700, 800] },
       { name: 'Public Sans', provider: 'google', weights: [400, 500, 600, 700], styles: ['normal', 'italic'] },
@@ -109,6 +113,17 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'manifest', href: '/manifest.json' },
+        // @nuxt/fonts' own `preload` option isn't subset/style-aware — it preloaded
+        // the latin-ext + italic variants instead of the normal-weight latin ones
+        // every page actually renders above the fold (headline, body text, mono
+        // labels), so the browser only discovered the real ones after parsing the
+        // CSS. Preloading these 3 explicitly (found via the compiled CSS's
+        // unicode-range: U+0000-00FF entries) removes that extra round-trip.
+        // Content-hashed from the font data itself, not our code — stable across
+        // app rebuilds, only changes if the fonts.families config above does.
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: 'anonymous', href: '/_fonts/v0Gof_ovEr_VMeGc8oizTPGRJxogA8OY-x4wxCppOPc-BZrL8W8Nayz5Luu0puSoa0E3ijn1ZSXSztDAnTtPmN0.woff2' },
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: 'anonymous', href: '/_fonts/GsKUclqeNLJ96g5AU593ug6yanivOiwjW_7zESNPChw-jHA4tBeM1bjF7LATGUpfBuSTyomIFrWBTzjF7txVYfg.woff2' },
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: 'anonymous', href: '/_fonts/uad4kCqb7y1SeJd0GABjFyKl9Dw1alPHDBrHPL_iMGk-7xHwdlxahUomNQdGjCBQJJPfKB4xxi3x2UXnCqH_m_o.woff2' },
       ],
     },
   },
