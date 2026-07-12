@@ -32,6 +32,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [Text Case Converter](https://jsontools.space/tools/text-case): Convert text between camelCase, snake_case, PascalCase, kebab-case, UPPER_CASE, and more.
 - [Number Base Converter](https://jsontools.space/tools/number-base): Convert numbers between binary, octal, decimal, and hexadecimal bases.
 - [Color Picker & Converter](https://jsontools.space/tools/color): Pick colors and convert between HEX, RGB, HSL, and HSV. Generates CSS-ready values.
+- [CSS Gradient Generator](https://jsontools.space/tools/gradient): Build linear, radial, and conic CSS gradients visually with a live preview. Add color stops, use presets, copy the generated CSS.
 - [JWT Generator](https://jsontools.space/tools/jwt-generator): Generate signed JWT tokens with custom headers, payloads, and algorithms (HS256, HS384, HS512).
 - [Markdown Preview](https://jsontools.space/tools/markdown-preview): Write or paste Markdown and see the rendered HTML instantly. Supports headings, code blocks, tables, and blockquotes.
 - [Password Generator](https://jsontools.space/tools/password-generator): Generate cryptographically secure random passwords. Configurable length and character sets, bulk generation.

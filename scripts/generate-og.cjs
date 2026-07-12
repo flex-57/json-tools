@@ -34,6 +34,7 @@ const TOOLS = [
   { slug: 'text-case',         tag: 'Text & Code', title: 'Text Case\nConverter', subtitle: 'Convert between camelCase, snake_case,\nPascalCase, kebab-case, and more.',           size: 68 },
   { slug: 'number-base',       tag: 'Dev Util',    title: 'Number Base\nConverter', subtitle: 'Convert numbers between binary, octal,\ndecimal, and hexadecimal.',                size: 68 },
   { slug: 'color',             tag: 'Dev Util',    title: 'Color Picker\n& Converter', subtitle: 'Pick colors and convert between HEX,\nRGB, HSL, and HSV.',                     size: 68 },
+  { slug: 'gradient',          tag: 'Dev Util',    title: 'CSS Gradient\nGenerator',   subtitle: 'Build linear, radial, and conic CSS\ngradients visually. Copy the code.',        size: 68 },
   { slug: 'jwt-generator',     tag: 'Security',    title: 'JWT Generator',        subtitle: 'Generate signed JWT tokens with custom\npayloads, headers, and algorithms.',         size: 80 },
   { slug: 'faq',               tag: 'JSON Tools',  title: 'FAQ',                 subtitle: 'Answers about privacy, features, and how\nJSON Tools works.',                          size: 88 },
 

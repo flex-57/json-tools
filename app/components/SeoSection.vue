@@ -65,7 +65,8 @@ const AUTO_RELATED: Record<string, string[]> = {
   '/tools/text-case':          ['/tools/url-encode', '/tools/minifier', '/tools/regex-tester'],
   '/tools/markdown-preview':   ['/guides/what-is-markdown', '/guides/markdown-cheatsheet', '/tools/text-case'],
   '/tools/number-base':    ['/tools/hash', '/tools/jwt-decoder', '/tools/url-encode', '/guides/understanding-number-bases'],
-  '/tools/color':          ['/tools/number-base', '/tools/hash', '/tools/uuid', '/guides/understanding-color-formats'],
+  '/tools/color':          ['/tools/gradient', '/tools/number-base', '/tools/uuid', '/guides/understanding-color-formats'],
+  '/tools/gradient':       ['/tools/color', '/tools/number-base', '/guides/understanding-color-formats'],
   '/tools/jwt-generator':  ['/tools/jwt-decoder', '/guides/what-is-jwt', '/tools/hash'],
 }
 

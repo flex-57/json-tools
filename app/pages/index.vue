@@ -105,7 +105,7 @@ const TOOL_ICONS: Record<string, string> = {
   'jwt-decoder': ICONS.jwtDec, 'jwt-generator': ICONS.jwtGen, 'hash': ICONS.hash,
   'uuid': ICONS.uuid, 'password-generator': ICONS.pwdGen,
   'regex-tester': ICONS.regex, 'cron-parser': ICONS.cron, 'unix-timestamp': ICONS.unix,
-  'number-base': ICONS.numBase, 'color': ICONS.color,
+  'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient,
 }
 function toolIcon(slug: string) { return TOOL_ICONS[slug] ?? '' }
 

@@ -65,6 +65,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'unix-timestamp', name: 'Unix Timestamp', short: 'Epoch ↔ date', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'number-base', name: 'Number Base Converter', short: 'Binary, octal, hex', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-10' },
   { slug: 'color', name: 'Color Picker', short: 'HEX / RGB / HSL + contrast', category: 'devutils', variant: 'generator', updatedAt: '2026-07-07' },
+  { slug: 'gradient', name: 'CSS Gradient Generator', short: 'Linear, radial, conic', category: 'devutils', variant: 'generator', updatedAt: '2026-07-11' },
 ]
 
 // Used by nav, footer and the homepage grid — excludes tools flagged `hidden`
