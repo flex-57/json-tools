@@ -66,4 +66,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - All tools run entirely in the browser (no server processing)
 - No user accounts, no data storage, no cookies (except optional dark mode preference)
 - Free to use with no rate limits
+- Open source, maintained by flex-57: https://github.com/flex-57/json-tools
+- About: https://jsontools.space/about
+- Contact: https://jsontools.space/contact
 - Available at: https://jsontools.space

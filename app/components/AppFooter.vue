@@ -49,6 +49,10 @@
       <span class="footer-sep">·</span>
       <span>100% client-side</span>
       <span class="footer-sep">·</span>
+      <NuxtLink to="/about" class="footer-bottom-link">About</NuxtLink>
+      <span class="footer-sep">·</span>
+      <NuxtLink to="/contact" class="footer-bottom-link">Contact</NuxtLink>
+      <span class="footer-sep">·</span>
       <NuxtLink to="/faq" class="footer-bottom-link">FAQ</NuxtLink>
       <span class="footer-sep">·</span>
       <NuxtLink to="/privacy" class="footer-bottom-link">Privacy</NuxtLink>

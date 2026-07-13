@@ -37,4 +37,8 @@ export const ICONS = {
   numBase:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L6 4M10 4l4 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.5 9h5M10.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   color:     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 2.5V6M8 10V13.5M2.5 8H6M10 8H13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   gradient:  `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3 13L13 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3 9.5L9.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-opacity="0.6"/><path d="M3 6L6 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-opacity="0.3"/></svg>`,
+
+  /* ── About / Contact ──────────────────────────────── */
+  mail:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4.5l6 4.5 6-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  code:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5.5 4L2 8l3.5 4M10.5 4L14 8l-3.5 4M9 3l-2 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 }

@@ -33,6 +33,8 @@ export default defineEventHandler((event) => {
     { loc: '/faq',                          priority: '0.7', changefreq: 'monthly' },
     { loc: '/guides',                       priority: '0.7', changefreq: 'monthly' },
     ...guideUrls,
+    { loc: '/about',                        priority: '0.5', changefreq: 'yearly' },
+    { loc: '/contact',                      priority: '0.4', changefreq: 'yearly' },
     { loc: '/terms',                        priority: '0.3', changefreq: 'yearly' },
     { loc: '/privacy',                      priority: '0.3', changefreq: 'yearly' },
     ...toolUrls,
