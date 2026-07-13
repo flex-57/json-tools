@@ -86,6 +86,7 @@ const DIALECTS: { value: SqlDialect; label: string }[] = [
 ]
 
 const { input, dialect, uppercase, indentSize, output, error, loading, copied, copy, download, clear } = useSqlFormatter()
+useUrlInput(input)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

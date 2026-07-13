@@ -61,6 +61,7 @@ useToolSeo(
 )
 
 const { input, results, error, detectedBase, bitInfo, copiedKey, copy, clear } = useNumberBase()
+useUrlInput(input)
 
 const focused = ref(false)
 

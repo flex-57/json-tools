@@ -327,6 +327,9 @@ html.dark .toggle-thumb { background: #fff; }
 .pane--drag { border-color: var(--c-accent); }
 .pane--drag .pane-body { outline: 1px dashed rgb(var(--c-accent-rgb) / 0.5); outline-offset: -8px; }
 
+/* Generic drag-over highlight for input containers that aren't a .pane (single-card layouts). */
+.drop-target--active { border-color: var(--c-accent); }
+
 .midcol {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
   background: var(--c-subtle); border-left: 1px solid var(--c-border); border-right: 1px solid var(--c-border);

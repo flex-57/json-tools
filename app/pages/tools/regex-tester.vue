@@ -24,11 +24,11 @@
       </div>
     </div>
 
-    <div class="editor-card">
+    <div class="editor-card" :class="{ 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="editor-card-header">
         <span class="editor-label">Test string</span>
         <div class="card-actions">
-          <span v-if="input" class="hint">{{ input.length }} chars</span>
+          <span class="hint">paste or type · or drop a .txt file</span>
           <button class="btn-xs" @click="clear">Clear</button>
         </div>
       </div>
@@ -94,6 +94,16 @@ const FLAGS = [
   { key: 'm', title: 'Multiline: ^ and $ match line boundaries' },
   { key: 's', title: 'Dotall: . matches newlines too' },
 ]
+
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
 
 const activeFlags = ref(new Set(['g']))
 

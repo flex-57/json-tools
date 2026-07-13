@@ -8,10 +8,13 @@
       </div>
     </div>
 
-    <div class="token-card">
+    <div class="token-card" :class="{ 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="token-card-header">
         <span class="editor-label">Token</span>
-        <button v-if="token" @click="clear" class="btn-xs">Clear</button>
+        <div class="card-actions">
+          <span class="hint">paste or type · or drop a .txt file</span>
+          <button v-if="token" @click="clear" class="btn-xs">Clear</button>
+        </div>
       </div>
       <textarea v-model="token" class="token-input" placeholder="Paste your JWT here, e.g. eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0In0.signature" spellcheck="false" rows="3" />
       <div v-if="token && !result.error" class="token-parts">
@@ -93,6 +96,16 @@ useToolSeo(
 
 const { token, result, copiedHeader, copiedPayload, copyHeader, copyPayload, clear } = useJwtDecoder()
 useUrlInput(token)
+
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { token.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
 
 const seoCards = [
   {

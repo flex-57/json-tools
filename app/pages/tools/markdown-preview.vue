@@ -54,6 +54,7 @@ useToolSeo(
 )
 
 const { input, html, copied, copy, clear } = useMarkdown()
+useUrlInput(input)
 const { isDark } = useColorMode()
 
 const inputFocused = ref(false)

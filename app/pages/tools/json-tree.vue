@@ -132,6 +132,7 @@ const SAMPLE = `{
 
 const { isDark } = useColorMode()
 const input       = ref(SAMPLE)
+useUrlInput(input)
 const search      = ref('')
 const collapsed   = ref(new Set<string>())
 const root        = ref<TreeNode | null>(null)

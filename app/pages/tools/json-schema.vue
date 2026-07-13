@@ -72,6 +72,7 @@ useToolSeo(
 )
 
 const { input, draft, required, output, error, copied, copy, clear, download } = useJsonSchema()
+useUrlInput(input)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

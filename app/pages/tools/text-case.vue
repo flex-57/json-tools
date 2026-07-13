@@ -7,15 +7,16 @@
       </div>
     </div>
 
-    <div class="input-card" :class="{ 'input-card--focused': focused }">
+    <div class="input-card" :class="{ 'input-card--focused': focused, 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="input-header">
         <span class="editor-label">Input</span>
-        <Transition name="fade-slot">
-          <div v-if="input" class="input-header-right">
-            <span class="word-count">{{ wordCount }} word{{ wordCount !== 1 ? 's' : '' }}</span>
-            <button @click="clear" class="btn-clear">Clear</button>
-          </div>
-        </Transition>
+        <div class="input-header-right">
+          <span class="hint">paste or type · or drop a .txt file</span>
+          <Transition name="fade-slot">
+            <span v-if="input" class="word-count">{{ wordCount }} word{{ wordCount !== 1 ? 's' : '' }}</span>
+          </Transition>
+          <button v-if="input" @click="clear" class="btn-clear">Clear</button>
+        </div>
       </div>
       <textarea v-model="input" class="input-textarea" placeholder="Type or paste text (camelCase, snake_case, kebab-case, spaces and mixed input all work)…" spellcheck="false" rows="3" @focus="focused = true" @blur="focused = false" />
     </div>
@@ -43,8 +44,19 @@ useToolSeo(
 )
 
 const { input, results, wordCount, copiedKey, copy, clear } = useTextCase()
+useUrlInput(input)
 
 const focused = ref(false)
+
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
 
 const seoCards = [
   {

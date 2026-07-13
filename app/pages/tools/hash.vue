@@ -9,11 +9,11 @@
     </div>
 
     <div class="hash-layout">
-      <div class="editor-card" :class="{ 'editor-card--focus': focused }">
+      <div class="editor-card" :class="{ 'editor-card--focus': focused, 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="editor-card-header">
           <span class="editor-label">Input</span>
           <div class="card-actions">
-            <span class="hint">{{ byteCount }} bytes</span>
+            <span class="hint">{{ byteCount }} bytes · or drop a .txt file</span>
             <button class="btn-xs" @click="clear">Clear</button>
           </div>
         </div>
@@ -44,8 +44,19 @@ useToolSeo(
 )
 
 const input   = ref('Hello, World!')
+useUrlInput(input)
 const focused = ref(false)
 const hashes  = ref<Record<HashAlgorithm, string>>({ 'MD5': '', 'SHA-1': '', 'SHA-256': '', 'SHA-384': '', 'SHA-512': '' })
+
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
 
 const byteCount = computed(() => new TextEncoder().encode(input.value).length)
 

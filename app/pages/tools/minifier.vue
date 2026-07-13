@@ -78,6 +78,7 @@ const MODES: { value: MinifyMode; label: string }[] = [
 ]
 
 const { input, mode, output, error, loading, copied, result, copy, download, clear } = useMinifier()
+useUrlInput(input)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

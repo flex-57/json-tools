@@ -48,6 +48,7 @@ useToolSeo(
 )
 
 const { input, parsed, error, unix, unixMs, iso, utc, local, relative, copied, setNow, clear, refresh, copyValue } = useUnixTimestamp()
+useUrlInput(input)
 
 const resultRows = computed(() => [
   { key: 'relative', label: 'Relative',     value: relative.value ?? '',  mono: false, copyable: false },

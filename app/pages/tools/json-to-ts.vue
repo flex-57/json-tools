@@ -100,6 +100,7 @@ useToolSeo(
 )
 
 const { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict, download } = useJsonToTs()
+useUrlInput(input)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

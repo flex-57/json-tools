@@ -12,10 +12,11 @@
       </div>
     </div>
 
-    <div class="section-card" :class="{ 'section-card--error': !!error && !payloadValid }">
+    <div class="section-card" :class="{ 'section-card--error': !!error && !payloadValid, 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="section-header">
         <span class="editor-label">Payload <span class="editor-label-sub">(JSON)</span></span>
         <div class="section-header-right">
+          <span class="hint">or drop a .json file</span>
           <button @click="setIatNow" class="btn-hint" :disabled="!payloadValid" title="Set iat to current timestamp">iat = now</button>
           <button @click="addExp(1)" class="btn-hint" :disabled="!payloadValid" title="Add exp claim: iat + 1 hour">+ exp 1h</button>
           <button @click="clear" class="btn-xs">Clear</button>
@@ -70,6 +71,16 @@ const { algorithm, payload, secret, token, parts, error, copied, payloadValid, c
 
 const ALGOS = ['HS256', 'HS384', 'HS512'] as const
 
+const isDragging = ref(false)
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (ev) => { payload.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
+
 const indicatorTransform = computed(() => {
   const idx = ALGOS.indexOf(algorithm.value)
   return idx === 0 ? 'none' : `translateX(${idx * 100}%)`
@@ -94,8 +105,9 @@ const seoCards = [
 <style scoped>
 .section-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; transition: border-color 0.2s; }
 .section-card--error { border-color: rgb(var(--c-error-rgb) / 0.4); }
-.section-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; }
-.section-header-right { display: flex; align-items: center; gap: 8px; }
+.section-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; flex-wrap: wrap; gap: 6px; }
+.section-header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.section-header-right .hint { white-space: nowrap; }
 .editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
 .editor-label-sub { font-family: var(--font-body); font-size: 11px; color: var(--c-t5); font-weight: 400; text-transform: none; letter-spacing: 0; }
 

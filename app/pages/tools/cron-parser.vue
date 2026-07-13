@@ -81,6 +81,7 @@ useToolSeo(
 )
 
 const { expression, error, description, nextExecutions } = useCronParser()
+useUrlInput(expression)
 
 const PRESETS = [
   { label: 'Every minute',  expr: '* * * * *'   },
