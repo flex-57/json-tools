@@ -24,7 +24,7 @@ export const CATEGORIES = {
   devutils: 'Dev Utils',
 } as const
 
-// Single source of truth for the 29 tools — consumed by the nav dropdown
+// Single source of truth for the tools — consumed by the nav dropdown
 // and the homepage grid so they never drift apart (see DUAL-PANE-SYSTEM.md).
 export const TOOLS: ToolMeta[] = [
   // JSON

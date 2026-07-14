@@ -1,6 +1,6 @@
 # JSON Tools
 
-**[jsontools.space](https://jsontools.space)** — 29 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
+**[jsontools.space](https://jsontools.space)** — 30 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
 
 ![JSON Tools homepage](.github/screenshot.png)
 
@@ -10,7 +10,7 @@ JSON Tools is a toolbench for the small, repetitive jobs developers reach for co
 
 It also includes 24 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, Base64, hashing, JWTs, regex, cron syntax, and more.
 
-## The 29 tools
+## The 30 tools
 
 **JSON**
 JSON Formatter & Validator · JSON Diff · Tree / Graph Viewer
@@ -25,7 +25,7 @@ Text Case Converter · CSS/HTML/JS Minifier · SQL Formatter · URL Encoder / De
 JWT Decoder · JWT Generator · Hash Generator (MD5/SHA-1/SHA-256…) · UUID Generator · Password Generator
 
 **Dev Utils**
-Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter · Color Picker (HEX/RGB/HSL + contrast)
+Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter · Color Picker (HEX/RGB/HSL + contrast) · CSS Gradient Generator
 
 ## Stack
 
@@ -33,7 +33,7 @@ Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter
 - **CodeMirror 6** for syntax-highlighted editors, **Vue Flow** + **dagre** for the JSON graph view
 - **@nuxt/fonts** — Google Fonts self-hosted and bundled at build time, no third-party font requests at runtime
 - Format-specific libraries: `js-yaml`, `papaparse`, `xlsx`, `fast-xml-parser`, `sql-formatter`, `marked`, `jspdf`, `html-to-image`, `dompurify`, `html-minifier-terser`, `lightningcss-wasm`
-- **Vitest** + `@vue/test-utils` for unit tests (236 tests across composables), **Playwright** for scripted checks
+- **Vitest** + `@vue/test-utils` for unit tests (251 tests across composables), **Playwright** for scripted checks
 - Plain scoped CSS + one global stylesheet — no CSS utility framework
 
 ## Architecture
