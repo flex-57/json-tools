@@ -1,6 +1,6 @@
 # JSON Tools
 
-**[jsontools.space](https://jsontools.space)** — 30 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
+**[jsontools.space](https://jsontools.space)** — 26 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
 
 ![JSON Tools homepage](.github/screenshot.png)
 
@@ -10,7 +10,7 @@ JSON Tools is a toolbench for the small, repetitive jobs developers reach for co
 
 It also includes 24 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, Base64, hashing, JWTs, regex, cron syntax, and more.
 
-## The 30 tools
+## The 26 tools
 
 **JSON**
 JSON Formatter & Validator · JSON Diff · Tree / Graph Viewer

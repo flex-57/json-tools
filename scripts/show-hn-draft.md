@@ -2,7 +2,7 @@
 
 ## Titre (champ "Title" du formulaire de soumission)
 
-Show HN: I built a JSON toolbox that runs entirely in your browser (30 tools, no signup)
+Show HN: I built a JSON toolbox that runs entirely in your browser (26 tools, no signup)
 
 Variante plus courte si besoin (limite HN ~80 caractères pour rester bien affiché) :
 Show HN: A JSON/dev toolbox that runs entirely in your browser, no signup
@@ -15,7 +15,7 @@ https://jsontools.space
 
 Hi HN,
 
-I built JSON Tools, a set of 30 small utilities (JSON formatter, diff, tree
+I built JSON Tools, a set of 26 small utilities (JSON formatter, diff, tree
 viewer, schema generator, JWT decoder/generator, CSV/XML/YAML/Excel
 converters, regex tester, SQL formatter, and a few others) that all run
 client-side in the browser. Nothing you paste gets sent to a server: it's

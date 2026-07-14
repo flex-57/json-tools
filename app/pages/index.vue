@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <section class="hero">
-      <div class="eyebrow"><span class="eyebrow-dot"></span>{{ TOOLS.length }} TOOLS · RUNS ENTIRELY IN YOUR BROWSER</div>
+      <div class="eyebrow"><span class="eyebrow-dot"></span>{{ VISIBLE_TOOL_COUNT }} TOOLS · RUNS ENTIRELY IN YOUR BROWSER</div>
       <h1>The toolbench for devs who'd rather not open <span>twelve tabs</span>.</h1>
       <p>JSON, regex, cron, SQL, colors, hashes and more — paste, transform, copy. No account, no upload, nothing tracked.</p>
       <form class="hero-search" @submit.prevent>
@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { CATEGORIES, TOOLS, toolsByCategory, toolMeta } from '~/data/tools'
+import { CATEGORIES, VISIBLE_TOOL_COUNT, toolsByCategory, toolMeta } from '~/data/tools'
 import { ICONS } from '~/utils/icons'
 
 useHead({
@@ -128,7 +128,7 @@ const FEATURES = [
   {
     icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M3 6h14M3 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
     title: 'Free, all of it',
-    body: `All ${TOOLS.length} tools are free, with no premium tier and no rate limits. We'd rather you bookmark the site than sign up for one.`,
+    body: `All ${VISIBLE_TOOL_COUNT} tools are free, with no premium tier and no rate limits. We'd rather you bookmark the site than sign up for one.`,
   },
 ]
 

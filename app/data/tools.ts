@@ -68,6 +68,15 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'gradient', name: 'CSS Gradient Generator', short: 'Linear, radial, conic', category: 'devutils', variant: 'generator', updatedAt: '2026-07-11' },
 ]
 
+// The number of tools as a user would count them: one per card/nav entry, not
+// one per route. A converter pair (csv-to-json + json-to-csv) is a single card
+// with a direction toggle, same as Base64 encode/decode or the 3 Minifier
+// languages are a single card each — so it's `hidden` entries that get
+// excluded here, consistent with toolsByCategory below. TOOLS.length counts
+// routes (30), which matters for the sitemap but overstates what "N tools"
+// means to a visitor by exactly the number of hidden reverse-direction pages.
+export const VISIBLE_TOOL_COUNT = TOOLS.filter(t => !t.hidden).length
+
 // Used by nav, footer and the homepage grid — excludes tools flagged `hidden`
 // (the other direction of a converter pair, e.g. json-to-csv next to csv-to-json).
 export function toolsByCategory(category: keyof typeof CATEGORIES): ToolMeta[] {

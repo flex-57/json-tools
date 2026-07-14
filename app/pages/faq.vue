@@ -19,13 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import { TOOLS } from '~/data/tools'
+import { VISIBLE_TOOL_COUNT } from '~/data/tools'
 
 const FAQS = [
   {
     q: 'What is JSON Tools?',
     a: [
-      `JSON Tools is a free collection of ${TOOLS.length} developer utilities for working with JSON, data formats, text, and security tokens. It includes tools like a JSON formatter, CSV/XML/YAML converters, JWT decoder, regex tester, hash generator, and more.`,
+      `JSON Tools is a free collection of ${VISIBLE_TOOL_COUNT} developer utilities for working with JSON, data formats, text, and security tokens. It includes tools like a JSON formatter, CSV/XML/YAML converters, JWT decoder, regex tester, hash generator, and more.`,
       'The goal is simple: provide fast, reliable tools that developers can open and use immediately, without any friction.',
     ],
   },

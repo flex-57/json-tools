@@ -49,10 +49,10 @@
 
 <script setup lang="ts">
 import { ICONS } from '~/utils/icons'
-import { TOOLS } from '~/data/tools'
+import { VISIBLE_TOOL_COUNT } from '~/data/tools'
 import { GUIDES } from '~/data/guides'
 
-const toolCount = TOOLS.length
+const toolCount = VISIBLE_TOOL_COUNT
 const guideCount = Object.keys(GUIDES).length
 
 useSeoMeta({
