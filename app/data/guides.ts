@@ -170,6 +170,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-json', '/guides/how-to-validate-json'],
   },
   // Data Formats (converters)
   'what-is-csv': {
@@ -262,6 +263,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-json', '/guides/what-is-csv', '/guides/what-is-yaml'],
   },
   'what-is-yaml': {
     slug: 'what-is-yaml',
@@ -307,6 +309,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/json-vs-yaml', '/guides/what-is-json', '/guides/what-is-xml'],
   },
   'json-vs-yaml': {
     slug: 'json-vs-yaml',
@@ -398,6 +401,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-json', '/guides/how-to-validate-json', '/guides/json-best-practices'],
   },
   // Text & Code
   'what-is-url-encoding': {
@@ -444,6 +448,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-base64', '/guides/encoding-vs-encryption-vs-hashing'],
   },
   'what-is-base64': {
     slug: 'what-is-base64',
@@ -534,6 +539,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/markdown-cheatsheet'],
   },
   'markdown-cheatsheet': {
     slug: 'markdown-cheatsheet',
@@ -579,6 +585,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-markdown'],
   },
   'sql-cheatsheet': {
     slug: 'sql-cheatsheet',
@@ -715,6 +722,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/encoding-vs-encryption-vs-hashing', '/guides/what-is-base64', '/guides/password-entropy-explained'],
   },
   'encoding-vs-encryption-vs-hashing': {
     slug: 'encoding-vs-encryption-vs-hashing',
@@ -760,6 +768,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-hash', '/guides/what-is-base64', '/guides/what-is-jwt'],
   },
   'what-is-uuid': {
     slug: 'what-is-uuid',
@@ -804,6 +813,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-hash', '/guides/password-entropy-explained'],
   },
   'password-entropy-explained': {
     slug: 'password-entropy-explained',
@@ -894,6 +904,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/regex-cheatsheet'],
   },
   'regex-cheatsheet': {
     slug: 'regex-cheatsheet',
@@ -939,6 +950,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-regex'],
   },
   'cron-expression-examples': {
     slug: 'cron-expression-examples',
@@ -1073,6 +1085,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/understanding-color-formats', '/guides/what-is-regex'],
   },
   'understanding-color-formats': {
     slug: 'understanding-color-formats',
@@ -1117,5 +1130,6 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/understanding-number-bases'],
   },
 }
