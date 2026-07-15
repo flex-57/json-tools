@@ -6,18 +6,8 @@
         <p class="about-text">{{ card.text }}</p>
       </div>
     </div>
-    <div v-if="relatedTools.length" class="related-row">
-      <span class="related-label">Related tools</span>
-      <NuxtLink v-for="r in relatedTools" :key="r.to" :to="r.to" class="related-link">
-        {{ r.label }}
-      </NuxtLink>
-    </div>
-    <div v-if="relatedGuides.length" class="related-row">
-      <span class="related-label">Related guides</span>
-      <NuxtLink v-for="r in relatedGuides" :key="r.to" :to="r.to" class="related-link">
-        {{ r.label }}
-      </NuxtLink>
-    </div>
+    <RelatedLinks label="Related tools" :items="relatedTools" />
+    <RelatedLinks label="Related guides" :items="relatedGuides" />
   </section>
 </template>
 
@@ -103,43 +93,6 @@ const relatedGuides = computed(() => displayRelated.value.filter(r => r.to.start
 .about-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); padding: 20px 22px; }
 .about-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; font-size: 14px; color: var(--c-t1); margin-bottom: 10px; }
 .about-text { font-size: 13px; color: var(--c-t3); line-height: 1.75; }
-
-.related-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
-  padding: 0 2px;
-}
-
-.related-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--c-t5);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  margin-right: 2px;
-  flex-shrink: 0;
-}
-
-.related-link {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--c-t3);
-  text-decoration: none;
-  padding: 3px 11px;
-  border-radius: 20px;
-  border: 1px solid var(--c-border);
-  background: var(--c-card);
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
-}
-
-.related-link:hover {
-  color: var(--c-accent);
-  border-color: rgb(var(--c-accent-rgb) / 0.35);
-  background: rgb(var(--c-accent-rgb) / 0.06);
-}
 
 @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
 </style>

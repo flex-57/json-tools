@@ -28,6 +28,7 @@ export interface GuideConfig {
   description: string
   tools: GuideToolCard[]
   faqs: GuideFaq[]
+  related?: string[]
 }
 
 export const GUIDES: Record<string, GuideConfig> = {
@@ -77,6 +78,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/how-to-validate-json', '/guides/json-best-practices', '/guides/json-vs-yaml'],
   },
   'how-to-validate-json': {
     slug: 'how-to-validate-json',
@@ -122,6 +124,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-json', '/guides/json-best-practices', '/guides/what-is-json-schema'],
   },
   'json-best-practices': {
     slug: 'json-best-practices',
@@ -213,6 +216,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-json', '/guides/what-is-xml', '/guides/what-is-yaml'],
   },
   'what-is-xml': {
     slug: 'what-is-xml',
@@ -348,6 +352,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-yaml', '/guides/what-is-json', '/guides/what-is-csv'],
   },
   'what-is-json-schema': {
     slug: 'what-is-json-schema',
@@ -483,6 +488,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/encoding-vs-encryption-vs-hashing', '/guides/what-is-url-encoding', '/guides/what-is-jwt'],
   },
   'what-is-markdown': {
     slug: 'what-is-markdown',
@@ -617,6 +623,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/regex-cheatsheet', '/guides/markdown-cheatsheet', '/guides/cron-expression-examples'],
   },
   // Security
   'what-is-jwt': {
@@ -663,6 +670,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-base64', '/guides/what-is-hash', '/guides/encoding-vs-encryption-vs-hashing'],
   },
   'what-is-hash': {
     slug: 'what-is-hash',
@@ -840,6 +848,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-hash', '/guides/encoding-vs-encryption-vs-hashing', '/guides/what-is-uuid'],
   },
   // Dev Utils
   'what-is-regex': {
@@ -974,6 +983,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/what-is-unix-timestamp', '/guides/what-is-regex', '/guides/regex-cheatsheet'],
   },
   'what-is-unix-timestamp': {
     slug: 'what-is-unix-timestamp',
@@ -1018,6 +1028,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
+    related: ['/guides/cron-expression-examples', '/guides/understanding-number-bases', '/guides/what-is-regex'],
   },
   'understanding-number-bases': {
     slug: 'understanding-number-bases',

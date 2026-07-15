@@ -54,6 +54,8 @@
             <h2 class="guide-faq-title">Frequently asked questions</h2>
             <FaqAccordion :items="guide.faqs" :key="slug" />
           </section>
+
+          <RelatedLinks label="Related guides" :items="relatedGuideItems" />
         </div>
       </div>
     </div>
@@ -104,6 +106,13 @@ const guide = computed(() => {
 })
 
 const BodyComponent = computed(() => bodyComponents[slug.value])
+
+const relatedGuideItems = computed(() =>
+  (guide.value.related ?? []).map(to => ({
+    to,
+    label: GUIDES[to.replace('/guides/', '')]?.title ?? to,
+  }))
+)
 
 const tocItems = ref<{ id: string; title: string }[]>([])
 
