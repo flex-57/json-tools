@@ -24,6 +24,7 @@
               @click="activeGroup = key"
               @focus="activeGroup = key"
             >
+              <span class="nav-group-icon" v-html="catIcon(key)"></span>
               {{ label }}
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -262,6 +263,8 @@ body {
 
 .nav-group { position: relative; }
 .nav-group-trigger { display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; }
+.nav-group-icon { display: flex; flex-shrink: 0; }
+.nav-group-icon svg { width: 13px; height: 13px; }
 
 .nav-dropdown {
   position: absolute;
