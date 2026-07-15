@@ -86,6 +86,9 @@
         <span class="bc-current">{{ breadcrumbName }}</span>
       </nav>
     </div>
+    <div v-if="breadcrumbName && recentTools.length" class="tool-recent-wrap">
+      <RecentTools :tools="recentTools" :default-open="false" />
+    </div>
 
     <main class="app-main">
       <slot />
@@ -110,13 +113,23 @@ function closeIfFocusLeft(e) {
   if (!e.currentTarget.contains(e.relatedTarget)) activeGroup.value = null
 }
 const { isDark, init: initColorMode, toggle } = useColorMode()
-const { addRecent } = useRecentTools()
+const { addRecent, getRecent } = useRecentTools()
+
+const recentSlugs = ref([])
+const currentSlug = computed(() => route.path.startsWith('/tools/') ? route.path.replace('/tools/', '') : null)
+const recentTools = computed(() =>
+  recentSlugs.value
+    .filter(s => s !== currentSlug.value)
+    .map(s => toolMeta(s))
+    .filter((t) => !!t)
+)
 
 onMounted(() => {
   initColorMode()
   if (route.path.startsWith('/tools/')) {
     addRecent(route.path.replace('/tools/', ''))
   }
+  recentSlugs.value = getRecent()
 })
 
 watch(() => route.path, (path) => {
@@ -126,6 +139,7 @@ watch(() => route.path, (path) => {
   if (path.startsWith('/tools/')) {
     addRecent(path.replace('/tools/', ''))
   }
+  recentSlugs.value = getRecent()
 })
 
 function isCategoryActive(category) {
@@ -322,6 +336,8 @@ body {
 .ad-footer-wrap { max-width: var(--container-w); width: 100%; margin: 0 auto; padding: 0 24px 8px; }
 
 .breadcrumb-bar { max-width: var(--container-w); margin: 0 auto; width: 100%; padding: 14px 24px 0; }
+.tool-recent-wrap { max-width: var(--container-w); margin: 0 auto; width: 100%; padding: 0 24px; }
+.tool-recent-wrap .recent-section { padding-bottom: 0; }
 .breadcrumb { display: flex; align-items: center; gap: 6px; }
 .bc-home { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); text-decoration: none; transition: color 0.15s; }
 .bc-home:hover { color: var(--c-accent); }
@@ -339,6 +355,7 @@ body {
   .mobile-menu-btn { display: flex; }
   .ad-footer-wrap { padding: 0 16px 8px; }
   .breadcrumb-bar { padding: 12px 16px 0; }
+  .tool-recent-wrap { padding: 0 16px; }
   .bc-current { max-width: 200px; }
 }
 </style>

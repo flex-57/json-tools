@@ -13,15 +13,7 @@
       </form>
     </section>
 
-    <section v-if="!query.trim() && recentTools.length" class="recent-section">
-      <span class="recent-label">Recently Used</span>
-      <div class="recent-row">
-        <NuxtLink v-for="t in recentTools" :key="t.slug" :to="`/tools/${t.slug}`" class="recent-pill">
-          <span class="recent-pill-icon" v-html="toolIcon(t.slug)"></span>
-          <span class="recent-pill-name">{{ t.navLabel ?? t.name }}</span>
-        </NuxtLink>
-      </div>
-    </section>
+    <RecentTools v-if="!query.trim()" :tools="recentTools" />
 
     <template v-for="(label, key) in CATEGORIES" :key="key">
       <section v-if="filtered(key).length" class="cat-section">
@@ -56,7 +48,7 @@
 
 <script setup lang="ts">
 import { CATEGORIES, VISIBLE_TOOL_COUNT, toolsByCategory, toolMeta } from '~/data/tools'
-import { ICONS } from '~/utils/icons'
+import { ICONS, toolIcon } from '~/utils/icons'
 
 useHead({
   script: [{
@@ -92,22 +84,6 @@ function filtered(category: keyof typeof CATEGORIES) {
 }
 
 const hasAnyResult = computed(() => !query.value.trim() || (Object.keys(CATEGORIES) as (keyof typeof CATEGORIES)[]).some(key => filtered(key).length > 0))
-
-const TOOL_ICONS: Record<string, string> = {
-  'json-formatter': ICONS.formatter, 'json-diff': ICONS.diff, 'json-tree': ICONS.tree,
-  'csv-to-json': ICONS.csvIn, 'json-to-csv': ICONS.csvOut,
-  'xml-to-json': ICONS.xmlIn, 'json-to-xml': ICONS.xmlOut,
-  'yaml-to-json': ICONS.yamlIn, 'json-to-yaml': ICONS.yamlOut,
-  'excel-to-json': ICONS.xlIn, 'json-to-excel': ICONS.xlOut,
-  'json-to-ts': ICONS.ts, 'json-schema': ICONS.schema,
-  'text-case': ICONS.textCase, 'minifier': ICONS.minifier, 'sql-formatter': ICONS.sql,
-  'url-encode': ICONS.url, 'base64': ICONS.base64, 'markdown-preview': ICONS.markdown,
-  'jwt-decoder': ICONS.jwtDec, 'jwt-generator': ICONS.jwtGen, 'hash': ICONS.hash,
-  'uuid': ICONS.uuid, 'password-generator': ICONS.pwdGen,
-  'regex-tester': ICONS.regex, 'cron-parser': ICONS.cron, 'unix-timestamp': ICONS.unix,
-  'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient,
-}
-function toolIcon(slug: string) { return TOOL_ICONS[slug] ?? '' }
 
 const CAT_ICONS: Record<keyof typeof CATEGORIES, string> = {
   json: ICONS.catJson, converters: ICONS.catConv, textcode: ICONS.catText, security: ICONS.catSec, devutils: ICONS.catDev,
@@ -164,20 +140,6 @@ const recentTools = computed(() =>
 .hero-search input::placeholder { color: var(--c-t5); }
 .hero-search-clear { display: flex; color: var(--c-t4); background: none; border: none; cursor: pointer; }
 .hero-search-clear:hover { color: var(--c-t1); }
-
-.recent-section { padding: 24px 0 32px; }
-.recent-label { display: block; font-family: var(--font-display); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-t5); margin-bottom: 12px; }
-.recent-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.recent-pill {
-  display: flex; align-items: center; gap: 8px; padding: 8px 14px;
-  background: var(--c-card); border: 1px solid var(--c-border); border-radius: 20px;
-  text-decoration: none; transition: border-color 0.15s, transform 0.1s;
-}
-.recent-pill:hover { border-color: var(--c-accent); transform: translateY(-1px); }
-.recent-pill-icon { display: flex; color: var(--c-t3); transition: color 0.15s; }
-.recent-pill:hover .recent-pill-icon { color: var(--c-accent); }
-.recent-pill-name { font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; color: var(--c-t2); white-space: nowrap; transition: color 0.15s; }
-.recent-pill:hover .recent-pill-name { color: var(--c-t1); }
 
 .cat-section { padding: 0 0 8px; }
 .cat-head { display: flex; align-items: center; gap: 12px; padding: 26px 0 14px; border-top: 1px solid var(--c-border); }

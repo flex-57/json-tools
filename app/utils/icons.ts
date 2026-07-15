@@ -41,4 +41,21 @@ export const ICONS = {
   /* ── About / Contact ──────────────────────────────── */
   mail:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4.5l6 4.5 6-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   code:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5.5 4L2 8l3.5 4M10.5 4L14 8l-3.5 4M9 3l-2 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  recent: `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.7" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3.2l2.2 1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 }
+
+const TOOL_ICONS: Record<string, string> = {
+  'json-formatter': ICONS.formatter, 'json-diff': ICONS.diff, 'json-tree': ICONS.tree,
+  'csv-to-json': ICONS.csvIn, 'json-to-csv': ICONS.csvOut,
+  'xml-to-json': ICONS.xmlIn, 'json-to-xml': ICONS.xmlOut,
+  'yaml-to-json': ICONS.yamlIn, 'json-to-yaml': ICONS.yamlOut,
+  'excel-to-json': ICONS.xlIn, 'json-to-excel': ICONS.xlOut,
+  'json-to-ts': ICONS.ts, 'json-schema': ICONS.schema,
+  'text-case': ICONS.textCase, 'minifier': ICONS.minifier, 'sql-formatter': ICONS.sql,
+  'url-encode': ICONS.url, 'base64': ICONS.base64, 'markdown-preview': ICONS.markdown,
+  'jwt-decoder': ICONS.jwtDec, 'jwt-generator': ICONS.jwtGen, 'hash': ICONS.hash,
+  'uuid': ICONS.uuid, 'password-generator': ICONS.pwdGen,
+  'regex-tester': ICONS.regex, 'cron-parser': ICONS.cron, 'unix-timestamp': ICONS.unix,
+  'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient,
+}
+export function toolIcon(slug: string): string { return TOOL_ICONS[slug] ?? '' }
