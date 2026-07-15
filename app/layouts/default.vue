@@ -263,8 +263,7 @@ body {
 
 .nav-group { position: relative; }
 .nav-group-trigger { display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; }
-.nav-group-icon { display: flex; flex-shrink: 0; }
-.nav-group-icon svg { width: 13px; height: 13px; }
+.nav-group-icon { display: flex; flex-shrink: 0; color: var(--c-accent); }
 
 .nav-dropdown {
   position: absolute;
@@ -329,7 +328,7 @@ body {
 .mobile-nav-inner { padding: 16px; display: flex; flex-direction: column; gap: 8px; max-width: 480px; }
 .mobile-section { display: flex; flex-direction: column; gap: 2px; }
 .mobile-nav-divider { height: 1px; width: 64px; background: var(--c-border-m); margin: 6px 12px; }
-.mobile-section-label { display: flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t1); padding: 8px 12px 4px; }
+.mobile-section-label { display: flex; align-items: center; gap: 7px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t1); padding: 8px 12px 4px; }
 .mobile-section-icon { display: flex; color: var(--c-accent); flex-shrink: 0; }
 .mobile-nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--c-t3); text-decoration: none; transition: background 0.1s, color 0.1s; }
 .mobile-nav-item--main { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--c-t1); }
