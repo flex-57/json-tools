@@ -59,3 +59,8 @@ const TOOL_ICONS: Record<string, string> = {
   'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient,
 }
 export function toolIcon(slug: string): string { return TOOL_ICONS[slug] ?? '' }
+
+const CAT_ICONS: Record<string, string> = {
+  json: ICONS.catJson, converters: ICONS.catConv, textcode: ICONS.catText, security: ICONS.catSec, devutils: ICONS.catDev,
+}
+export function catIcon(key: string): string { return CAT_ICONS[key] ?? '' }

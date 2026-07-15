@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import { CATEGORIES, VISIBLE_TOOL_COUNT, toolsByCategory, toolMeta } from '~/data/tools'
-import { ICONS, toolIcon } from '~/utils/icons'
+import { toolIcon, catIcon } from '~/utils/icons'
 
 useHead({
   script: [{
@@ -84,11 +84,6 @@ function filtered(category: keyof typeof CATEGORIES) {
 }
 
 const hasAnyResult = computed(() => !query.value.trim() || (Object.keys(CATEGORIES) as (keyof typeof CATEGORIES)[]).some(key => filtered(key).length > 0))
-
-const CAT_ICONS: Record<keyof typeof CATEGORIES, string> = {
-  json: ICONS.catJson, converters: ICONS.catConv, textcode: ICONS.catText, security: ICONS.catSec, devutils: ICONS.catDev,
-}
-function catIcon(key: keyof typeof CATEGORIES) { return CAT_ICONS[key] }
 
 const FEATURES = [
   {
