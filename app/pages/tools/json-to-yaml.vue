@@ -79,15 +79,24 @@ useUrlInput(input, convert)
 const seoCards = [
   {
     title: 'JSON to YAML: from API to config',
-    text: 'REST APIs return JSON, but the infrastructure that runs your app is configured in YAML. Kubernetes resource specs, GitHub Actions inputs, Ansible vars files, and Terraform module configs are all YAML. When you\'re scaffolding a new deployment from an API response or translating a JSON schema into a config template, converting JSON to YAML is the fastest path.',
+    text: [
+      'REST APIs return JSON, but the infrastructure that runs your app is configured in YAML. Kubernetes resource specs, GitHub Actions inputs, Ansible vars files, and Terraform module configs are all YAML.',
+      'When you\'re scaffolding a new deployment from an API response or translating a JSON schema into a config template, converting JSON to YAML is the fastest path.',
+    ],
   },
   {
     title: 'Indentation and type serialization',
-    text: 'YAML is sensitive to indentation: it\'s part of the syntax. The converter lets you choose 2-space or 4-space indent to match your team\'s style. JSON strings become unquoted YAML scalars where possible. Booleans, numbers, and null values are emitted without quotes. If a string value looks like a YAML keyword (e.g., "true"), it will be quoted to preserve the type.',
+    text: [
+      'YAML is sensitive to indentation: it\'s part of the syntax. The converter lets you choose 2-space or 4-space indent to match your team\'s style.',
+      'JSON strings become unquoted YAML scalars where possible. Booleans, numbers, and null values are emitted without quotes. If a string value looks like a YAML keyword (e.g., "true"), it will be quoted to preserve the type.',
+    ],
   },
   {
     title: 'Scaffolding and templating use cases',
-    text: 'Infrastructure engineers convert JSON Terraform state output to YAML to populate Ansible inventory files. Backend developers generate Kubernetes ConfigMap data from a JSON config object. Technical writers convert JSON API examples to YAML for documentation that targets Swagger or AsyncAPI. Use the Download button to save the output as a .yaml file ready to commit.',
+    text: [
+      'Infrastructure engineers convert JSON Terraform state output to YAML to populate Ansible inventory files. Backend developers generate Kubernetes ConfigMap data from a JSON config object.',
+      'Technical writers convert JSON API examples to YAML for documentation that targets Swagger or AsyncAPI. Use the Download button to save the output as a .yaml file ready to commit.',
+    ],
   },
 ]
 const isDragging = ref(false)

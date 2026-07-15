@@ -87,15 +87,34 @@ function onDrop(e: DragEvent) {
 const seoCards = [
   {
     title: 'What is JSON Schema?',
-    text: 'JSON Schema is a vocabulary for annotating and validating JSON data. A schema document describes the expected structure of a JSON value: which keys are required, what types are allowed, and how nested objects and arrays are shaped. It is supported by validators in every major language (Ajv for JavaScript, jsonschema for Python, networknt for Go) and used in OpenAPI specs, VS Code settings, GitHub Actions, and many API platforms. Draft-07 is the most widely supported version. Draft 2020-12 is the latest stable specification.',
+    text: [
+      'JSON Schema is a vocabulary for annotating and validating JSON data. A schema document describes the expected structure of a JSON value: which keys are required, what types are allowed, and how nested objects and arrays are shaped.',
+      'It is supported by validators in every major language (Ajv for JavaScript, jsonschema for Python, networknt for Go) and used in OpenAPI specs, VS Code settings, GitHub Actions, and many API platforms. Draft-07 is the most widely supported version; Draft 2020-12 is the latest stable specification.',
+    ],
   },
   {
     title: 'How the inference works',
-    text: 'The generator traverses your JSON recursively. Each primitive maps to its JSON Schema type: strings become {"type":"string"}, integers {"type":"integer"}, floats {"type":"number"}, booleans {"type":"boolean"}, and null {"type":"null"}. Objects become {"type":"object","properties":{...}} with a required array listing all present keys. Arrays are typed by their elements: if all items share the same structure, a single schema is inferred; mixed arrays produce {"oneOf":[...]}. Arrays of objects merge all item schemas: keys present in every item are required, keys present in only some are not.',
+    text: 'The generator traverses your JSON recursively. Arrays are typed by their elements: if all items share the same structure, a single schema is inferred; mixed arrays produce {"oneOf":[...]}.',
+    table: [
+      { label: 'string', value: '{"type":"string"}' },
+      { label: 'integer', value: '{"type":"integer"}' },
+      { label: 'float', value: '{"type":"number"}' },
+      { label: 'boolean', value: '{"type":"boolean"}' },
+      { label: 'null', value: '{"type":"null"}' },
+      { label: 'object', value: '{"type":"object","properties":{...}} + required[]' },
+    ],
   },
   {
     title: 'After generation: refine and validate',
-    text: 'The generated schema is a structural starting point. You will usually want to add constraints: use minLength/maxLength for strings, minimum/maximum for numbers, pattern for regex-validated strings, format for emails or dates, and enum for fixed value sets. Set additionalProperties: false on objects to reject unknown keys. To validate your JSON against the schema, paste both into an online validator or use a library like Ajv (npm install ajv). For API schemas, consider generating from your OpenAPI spec with tools like openapi-typescript rather than from example JSON.',
+    text: 'The generated schema is a structural starting point. To validate your JSON against it, paste both into an online validator or use a library like Ajv (npm install ajv). For API schemas, consider generating from your OpenAPI spec with tools like openapi-typescript rather than from example JSON.',
+    table: [
+      { label: 'minLength', value: 'maxLength — bounds for strings' },
+      { label: 'minimum', value: 'maximum — bounds for numbers' },
+      { label: 'pattern', value: 'regex-validated strings' },
+      { label: 'format', value: 'emails, dates, and other known shapes' },
+      { label: 'enum', value: 'fixed set of allowed values' },
+      { label: 'additionalProperties', value: 'false — reject unknown keys' },
+    ],
   },
 ]
 </script>

@@ -110,15 +110,28 @@ function onDrop(e: DragEvent) {
 const seoCards = [
   {
     title: 'What is a JWT and what does decoding reveal?',
-    text: 'A JSON Web Token (JWT) is a compact, URL-safe token with three Base64URL-encoded parts: a header (algorithm and type), a payload (claims about the user or session), and a signature. Decoding the header and payload requires no secret: it\'s public data. The signature proves integrity but can only be verified with the original key, which stays on your server.',
+    text: [
+      'A JSON Web Token (JWT) is a compact, URL-safe token with three Base64URL-encoded parts: a header (algorithm and type), a payload (claims about the user or session), and a signature.',
+      'Decoding the header and payload requires no secret: it\'s public data. The signature proves integrity but can only be verified with the original key, which stays on your server.',
+    ],
   },
   {
     title: 'Claims, expiry, and common debugging scenarios',
-    text: 'The payload carries standard claims: sub (subject / user ID), iss (issuer), exp (expiration timestamp), iat (issued at), nbf (not before). The most common debugging need is checking whether a token is expired, and the decoder shows exp as a human-readable date alongside the raw timestamp. Custom claims added by your auth service also appear in full.',
+    text: 'The most common debugging need is checking whether a token is expired — the decoder shows exp as a human-readable date alongside the raw timestamp. Custom claims added by your auth service also appear in full.',
+    table: [
+      { label: 'sub', value: 'Subject — the user or session ID' },
+      { label: 'iss', value: 'Issuer' },
+      { label: 'exp', value: 'Expiration timestamp' },
+      { label: 'iat', value: 'Issued at' },
+      { label: 'nbf', value: 'Not before' },
+    ],
   },
   {
     title: 'Security: what you can and cannot do here',
-    text: 'This tool decodes (base64-decodes) the header and payload. It does not verify the signature. Verification requires the secret or public key, which you should never paste into a third-party tool. Decoding is safe: there is no secret involved, and because all processing happens in your browser, the token never reaches any server. Use this tool to inspect claims, not to validate tokens in production.',
+    text: [
+      'This tool decodes (base64-decodes) the header and payload. It does not verify the signature — that requires the secret or public key, which you should never paste into a third-party tool.',
+      'Decoding is safe: there is no secret involved, and because all processing happens in your browser, the token never reaches any server. Use this tool to inspect claims, not to validate tokens in production.',
+    ],
   },
 ]
 

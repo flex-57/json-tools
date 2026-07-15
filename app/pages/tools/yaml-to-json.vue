@@ -72,15 +72,26 @@ useUrlInput(input, convert)
 const seoCards = [
   {
     title: 'YAML: the config language of the cloud',
-    text: 'Kubernetes manifests, GitHub Actions workflows, Docker Compose files, Ansible playbooks, and Helm charts are all written in YAML. It\'s designed for humans to write, but programs consume JSON. When you need to read a Kubernetes resource in code, pass a GitHub Actions config to an API, or debug what a Helm chart resolves to, YAML-to-JSON is the first step.',
+    text: [
+      'Kubernetes manifests, GitHub Actions workflows, Docker Compose files, Ansible playbooks, and Helm charts are all written in YAML. It\'s designed for humans to write, but programs consume JSON.',
+      'When you need to read a Kubernetes resource in code, pass a GitHub Actions config to an API, or debug what a Helm chart resolves to, YAML-to-JSON is the first step.',
+    ],
   },
   {
     title: 'What the conversion preserves and drops',
-    text: 'YAML comments are not part of the data model and are dropped, since JSON has no equivalent. YAML anchors (&) and aliases (*) are resolved before conversion, so the JSON output is fully expanded. YAML booleans (true/false/yes/no) and null values (null/~) are correctly typed in the JSON output. Indentation and block style are irrelevant once parsed.',
+    text: 'Indentation and block style are irrelevant once parsed.',
+    table: [
+      { label: 'Comments', value: 'Dropped — no equivalent in JSON' },
+      { label: 'Anchors & aliases', value: 'Resolved — output is fully expanded' },
+      { label: 'Booleans / null', value: 'true/false/yes/no and null/~ correctly typed' },
+    ],
   },
   {
     title: 'Debugging and introspection use cases',
-    text: 'Platform engineers paste Kubernetes YAML into this tool to inspect the exact structure that kubectl apply will see, without running a cluster. Developers debug GitHub Actions by converting the workflow YAML to JSON and querying it with jq. DevOps teams validate Helm chart values.yaml by checking what a downstream template will receive. All parsing runs locally, so it\'s safe to paste your secrets.',
+    text: [
+      'Platform engineers paste Kubernetes YAML into this tool to inspect the exact structure that kubectl apply will see, without running a cluster. Developers debug GitHub Actions by converting the workflow YAML to JSON and querying it with jq.',
+      'DevOps teams validate Helm chart values.yaml by checking what a downstream template will receive. All parsing runs locally, so it\'s safe to paste your secrets.',
+    ],
   },
 ]
 const isDragging = ref(false)

@@ -89,15 +89,24 @@ function onDrop(e: DragEvent) {
 const seoCards = [
   {
     title: 'When JSON data needs to become a spreadsheet',
-    text: 'REST APIs return JSON, but analysts, PMs, and clients want CSV they can open in Excel or Google Sheets. Converting JSON to CSV bridges that gap instantly, without a Python script or an ETL pipeline. It\'s particularly useful for API responses that return flat arrays of records, which map naturally to CSV rows.',
+    text: [
+      'REST APIs return JSON, but analysts, PMs, and clients want CSV they can open in Excel or Google Sheets. Converting JSON to CSV bridges that gap instantly, without a Python script or an ETL pipeline.',
+      'It\'s particularly useful for API responses that return flat arrays of records, which map naturally to CSV rows.',
+    ],
   },
   {
     title: 'How column headers are derived',
-    text: 'The converter scans the first object in the array and uses its keys as column headers. Every subsequent object is flattened to match. If your JSON array contains objects with different keys, you\'ll see empty cells where a key was absent, which is the correct, lossless representation in CSV. Nested objects are not supported; flatten them first if needed.',
+    text: [
+      'The converter scans the first object in the array and uses its keys as column headers. Every subsequent object is flattened to match.',
+      'If your JSON array contains objects with different keys, you\'ll see empty cells where a key was absent, which is the correct, lossless representation in CSV. Nested objects are not supported; flatten them first if needed.',
+    ],
   },
   {
     title: 'Use cases: reporting, exports, data handoff',
-    text: 'Product teams export API data to CSV to build pivot tables without engineering help. Data analysts pull JSON from internal tools and drop it into BI platforms that require CSV import. Developers generate CSV fixtures from seed data for database migrations. All conversion happens in your browser, and nothing is sent to a server.',
+    text: [
+      'Product teams export API data to CSV to build pivot tables without engineering help. Data analysts pull JSON from internal tools and drop it into BI platforms that require CSV import.',
+      'Developers generate CSV fixtures from seed data for database migrations. All conversion happens in your browser, and nothing is sent to a server.',
+    ],
   },
 ]
 </script>

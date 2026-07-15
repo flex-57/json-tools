@@ -89,15 +89,32 @@ const indicatorTransform = computed(() => {
 const seoCards = [
   {
     title: 'What is a JSON Web Token?',
-    text: 'A JSON Web Token (JWT) is a compact, URL-safe string used to securely transmit information between parties. It consists of three Base64URL-encoded parts separated by dots: the header (algorithm and token type), the payload (claims such as user ID, roles, and expiry), and the signature. The signature is computed by hashing the header and payload with a secret key, allowing the receiver to verify that the token was not tampered with. JWTs are stateless: the server does not need to store session data because all the information needed to authenticate a request is contained within the token itself.',
+    text: [
+      'A JSON Web Token (JWT) is a compact, URL-safe string used to securely transmit information between parties. It consists of three Base64URL-encoded parts separated by dots: the header (algorithm and token type), the payload (claims such as user ID, roles, and expiry), and the signature.',
+      'The signature is computed by hashing the header and payload with a secret key, allowing the receiver to verify that the token was not tampered with. JWTs are stateless: all the information needed to authenticate a request is contained within the token itself.',
+    ],
   },
   {
     title: 'HS256 vs HS384 vs HS512',
-    text: 'All three are HMAC algorithms that use a shared secret key. The number refers to the SHA hash size in bits: HS256 produces a 32-byte signature, HS384 a 48-byte signature, and HS512 a 64-byte signature. HS256 is by far the most common: it is fast, widely supported, and secure for most use cases as long as the secret is strong (at least 256 bits of entropy). HS384 and HS512 offer marginally stronger signatures but are rarely needed in practice. For asymmetric signing (where you want to verify without revealing the signing key), use RS256 or ES256 instead. Those require a private/public key pair and are not covered by this tool.',
+    text: 'All three are HMAC algorithms that use a shared secret key — the number is the SHA hash size in bits. HS256 is by far the most common: fast, widely supported, and secure as long as the secret is strong (at least 256 bits of entropy). For asymmetric signing, use RS256 or ES256 instead — those need a key pair and aren\'t covered by this tool.',
+    table: [
+      { label: 'HS256', value: '32-byte signature — the common default' },
+      { label: 'HS384', value: '48-byte signature — rarely needed' },
+      { label: 'HS512', value: '64-byte signature — rarely needed' },
+    ],
   },
   {
     title: 'Standard JWT claims',
-    text: 'The JWT specification defines several registered claim names: iss (issuer) identifies who issued the token; sub (subject) identifies the principal (usually a user ID); aud (audience) identifies the intended recipient; exp (expiration time) is a Unix timestamp after which the token must not be accepted; nbf (not before) is a timestamp before which the token must not be accepted; iat (issued at) records when the token was created; jti (JWT ID) is a unique identifier to prevent replay attacks. All of these are optional. The iat = now and + exp 1h buttons above are shortcuts for the two most commonly set claims during development and testing.',
+    text: 'All registered claims are optional. The iat = now and + exp 1h buttons above are shortcuts for the two most commonly set ones during development and testing.',
+    table: [
+      { label: 'iss', value: 'Issuer — who issued the token' },
+      { label: 'sub', value: 'Subject — usually a user ID' },
+      { label: 'aud', value: 'Audience — the intended recipient' },
+      { label: 'exp', value: 'Expiration time — Unix timestamp' },
+      { label: 'nbf', value: 'Not before — Unix timestamp' },
+      { label: 'iat', value: 'Issued at — when the token was created' },
+      { label: 'jti', value: 'JWT ID — unique, prevents replay attacks' },
+    ],
   },
 ]
 </script>

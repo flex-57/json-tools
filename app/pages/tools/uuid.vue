@@ -111,15 +111,26 @@ onMounted(generate)
 const seoCards = [
   {
     title: 'What is a UUID?',
-    text: 'A UUID (Universally Unique Identifier) is a 128-bit label standardised by RFC 4122. It is represented as 32 hexadecimal digits grouped in five sections separated by hyphens: 8-4-4-4-12. UUIDs are designed to be unique across space and time without requiring a central registry, making them ideal for distributed systems, database primary keys, session tokens, and any situation where you need a unique ID without coordination.',
+    text: [
+      'A UUID (Universally Unique Identifier) is a 128-bit label standardised by RFC 4122. It is represented as 32 hexadecimal digits grouped in five sections separated by hyphens: 8-4-4-4-12.',
+      'UUIDs are designed to be unique across space and time without requiring a central registry, making them ideal for distributed systems, database primary keys, session tokens, and any situation where you need a unique ID without coordination.',
+    ],
   },
   {
     title: 'UUID v4: random generation',
-    text: 'Version 4 UUIDs are generated from random or pseudo-random numbers. Two bits are fixed (version and variant), and the remaining 122 bits are random, giving roughly 5.3 × 10³⁶ possible values. The probability of generating a duplicate is astronomically low: you would need to generate about 2.7 × 10¹⁸ UUIDs before having a 50% chance of a single collision. This tool uses the browser\'s native crypto.randomUUID() which relies on a cryptographically secure random number generator.',
+    text: [
+      'Version 4 UUIDs are generated from random or pseudo-random numbers. Two bits are fixed (version and variant), and the remaining 122 bits are random, giving roughly 5.3 × 10³⁶ possible values.',
+      'The probability of generating a duplicate is astronomically low: you would need to generate about 2.7 × 10¹⁸ UUIDs before having a 50% chance of a single collision. This tool uses the browser\'s native crypto.randomUUID().',
+    ],
   },
   {
     title: 'Format variants',
-    text: 'The standard format uses lowercase and dashes: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx. Uppercase format is identical but with A-F instead of a-f, which some older systems require. The no-dash format strips the hyphens to produce a 32-character string, useful in URLs, filenames, or databases that do not support the full UUID syntax. All three formats represent the same 128-bit value.',
+    text: 'All three formats represent the same 128-bit value.',
+    table: [
+      { label: 'Standard', value: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx — lowercase, dashed' },
+      { label: 'Uppercase', value: 'Same, but A-F instead of a-f — some older systems require it' },
+      { label: 'No-dash', value: '32-char string — URLs, filenames, limited-syntax databases' },
+    ],
   },
 ]
 </script>

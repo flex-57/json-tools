@@ -120,15 +120,24 @@ const charCount = computed(() => (output.value || input.value)?.length ?? 0)
 const cards = [
   {
     title: 'What is a JSON Formatter?',
-    text: 'A JSON formatter takes raw, unindented or minified JSON and outputs it in a human-readable structure with consistent indentation. It makes deeply nested objects and arrays easy to read at a glance, which helps most when working with API responses or config files.',
+    text: [
+      'A JSON formatter takes raw, unindented or minified JSON and outputs it in a human-readable structure with consistent indentation.',
+      'It makes deeply nested objects and arrays easy to read at a glance, which helps most when working with API responses or config files.',
+    ],
   },
   {
     title: 'JSON Validation explained',
-    text: 'Valid JSON must follow strict syntax rules: keys must be quoted strings, values can be strings, numbers, booleans, null, arrays or objects. A single missing comma or trailing comma breaks the whole document. The validator pinpoints the exact error so you can fix it immediately.',
+    text: [
+      'Valid JSON must follow strict syntax rules: keys must be quoted strings, values can be strings, numbers, booleans, null, arrays or objects. A single missing comma or trailing comma breaks the whole document.',
+      'The validator pinpoints the exact error so you can fix it immediately.',
+    ],
   },
   {
     title: 'Minify JSON for production',
-    text: 'Minifying removes all unnecessary whitespace, reducing payload size for API responses and config files. A 10 KB formatted JSON typically compresses to under 4 KB, a meaningful saving at scale. All processing happens in your browser; your data never leaves your machine.',
+    text: [
+      'Minifying removes all unnecessary whitespace, reducing payload size for API responses and config files. A 10 KB formatted JSON typically compresses to under 4 KB, a meaningful saving at scale.',
+      'All processing happens in your browser; your data never leaves your machine.',
+    ],
   },
 ]
 </script>

@@ -208,15 +208,30 @@ const contrastRatioVal = computed(() => calcContrastRatio(contrastFg.value, cont
 const cards = [
   {
     title: 'HEX, RGBA, HSLA, HSBA: what is the difference?',
-    text: 'HEX is a 6-digit hexadecimal notation (#RRGGBB) widely used in HTML and CSS. Add two more digits for alpha (#RRGGBBAA). RGBA (Red, Green, Blue, Alpha) expresses color as three 0-255 values plus an alpha channel from 0 (transparent) to 1 (opaque). HSLA (Hue, Saturation, Lightness, Alpha) and HSBA (Hue, Saturation, Brightness, Alpha) are cylindrical models that match human intuition, extended with an alpha component. All four families describe exactly the same set of colors including transparency. Conversion between them is lossless.',
+    text: 'Four notations for exactly the same set of colors, including transparency. Conversion between them is lossless.',
+    table: [
+      { label: 'HEX', value: '#RRGGBB, add two digits for alpha (#RRGGBBAA)' },
+      { label: 'RGBA', value: 'Red, Green, Blue 0-255, alpha 0 (transparent) to 1 (opaque)' },
+      { label: 'HSLA', value: 'Hue, Saturation, Lightness, alpha — matches human intuition' },
+      { label: 'HSBA', value: 'Hue, Saturation, Brightness, alpha — same idea as HSLA' },
+    ],
   },
   {
     title: 'How does WCAG contrast work?',
-    text: 'The Web Content Accessibility Guidelines (WCAG 2.1) define contrast ratio as (L1+0.05)/(L2+0.05), where L1 and L2 are the relative luminances of the two colors (computed from gamma-corrected RGB). A ratio of 1:1 means identical colors; 21:1 is maximum (black on white). For normal-size text (below 18pt / 14pt bold), AA requires 4.5:1 and AAA requires 7:1. Large text has lower thresholds: 3:1 for AA and 4.5:1 for AAA. Note: WCAG 2.1 defines contrast only for fully opaque colors. The contrast checker always uses the opaque version of your current color.',
+    text: 'WCAG 2.1 defines contrast ratio as (L1+0.05)/(L2+0.05), from L1 and L2, the relative luminances of the two colors. 1:1 is identical colors, 21:1 is maximum (black on white). Only fully opaque colors are defined — the checker always uses the opaque version of your current color.',
+    table: [
+      { label: 'Normal AA', value: '4.5:1 — text below 18pt / 14pt bold' },
+      { label: 'Normal AAA', value: '7:1' },
+      { label: 'Large AA', value: '3:1 — text at or above 18pt / 14pt bold' },
+      { label: 'Large AAA', value: '4.5:1' },
+    ],
   },
   {
     title: 'How to use the color picker',
-    text: 'Drag inside the square to adjust saturation (left-right) and brightness (top-bottom). Drag the rainbow strip to change hue. Drag the checkerboard strip below it to set opacity: fully right is 100% opaque, fully left is fully transparent. All format fields (HEX, RGB, HSL, HSB) update instantly and are editable; type a value with or without an alpha component and press Enter to apply. Click any shade swatch to jump to that tone. In the contrast checker, "Use current" loads the opaque version of your color as background.',
+    text: [
+      'Drag inside the square to adjust saturation (left-right) and brightness (top-bottom). Drag the rainbow strip to change hue. Drag the checkerboard strip below it to set opacity: fully right is 100% opaque, fully left is fully transparent.',
+      'All format fields (HEX, RGB, HSL, HSB) update instantly and are editable; type a value with or without an alpha component and press Enter to apply. Click any shade swatch to jump to that tone. In the contrast checker, "Use current" loads the opaque version of your color as background.',
+    ],
   },
 ]
 </script>

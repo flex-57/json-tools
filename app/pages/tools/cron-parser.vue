@@ -130,15 +130,31 @@ function formatRelative(date: Date): string {
 const seoCards = [
   {
     title: 'What is cron?',
-    text: 'Cron is a time-based job scheduler in Unix-like operating systems. A cron expression describes a recurring schedule using five space-separated fields: minute (0-59), hour (0-23), day of month (1-31), month (1-12), and day of week (0-7, where both 0 and 7 mean Sunday). Cron is commonly used to run scripts, backups, reports, and maintenance tasks at regular intervals without manual intervention.',
+    text: [
+      'Cron is a time-based job scheduler in Unix-like operating systems. A cron expression describes a recurring schedule using five space-separated fields: minute (0-59), hour (0-23), day of month (1-31), month (1-12), and day of week (0-7, where both 0 and 7 mean Sunday).',
+      'Cron is commonly used to run scripts, backups, reports, and maintenance tasks at regular intervals without manual intervention.',
+    ],
   },
   {
     title: 'Field syntax: *, /, -, and ,',
-    text: 'An asterisk (*) matches every value in a field. A step expression (*/15) matches every nth value: */15 in minutes means "at 0, 15, 30, and 45". A range (1-5) includes all values between two bounds. A list (1,3,5) combines specific values. These constructs can be mixed: 1-5/2 means "every 2nd value from 1 to 5", i.e. 1, 3, and 5. Day-of-month and day-of-week work as a logical OR when both are non-wildcard.',
+    text: 'Day-of-month and day-of-week work as a logical OR when both are non-wildcard. These constructs can be mixed: 1-5/2 means "every 2nd value from 1 to 5", i.e. 1, 3, and 5.',
+    table: [
+      { label: '*', value: 'Matches every value in the field' },
+      { label: '*/15', value: 'Every nth value — in minutes: 0, 15, 30, 45' },
+      { label: '1-5', value: 'Range — all values between two bounds' },
+      { label: '1,3,5', value: 'List — combines specific values' },
+    ],
   },
   {
     title: 'Common cron patterns',
-    text: '"0 * * * *" runs at the start of every hour. "0 0 * * *" runs daily at midnight. "0 9 * * 1-5" runs at 9 AM on weekdays. "0 0 1 * *" runs at midnight on the first of every month. "*/5 * * * *" runs every 5 minutes. Most cloud schedulers (GitHub Actions, Cloud Run Jobs, AWS EventBridge) accept the same 5-field syntax. Some also support a 6-field format with seconds as the first field. This tool uses the standard 5-field format.',
+    text: 'Most cloud schedulers (GitHub Actions, Cloud Run Jobs, AWS EventBridge) accept the same 5-field syntax. Some also support a 6-field format with seconds as the first field — this tool uses the standard 5-field format.',
+    table: [
+      { label: '0 * * * *', value: 'Start of every hour' },
+      { label: '0 0 * * *', value: 'Daily at midnight' },
+      { label: '0 9 * * 1-5', value: '9 AM on weekdays' },
+      { label: '0 0 1 * *', value: 'Midnight on the first of every month' },
+      { label: '*/5 * * * *', value: 'Every 5 minutes' },
+    ],
   },
 ]
 </script>

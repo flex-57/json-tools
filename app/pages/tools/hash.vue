@@ -83,15 +83,27 @@ function clear() { input.value = '' }
 const seoCards = [
   {
     title: 'What is a hash function?',
-    text: 'A hash function takes an input of any size and produces a fixed-length string called a digest or checksum. The same input always produces the same output, but even a single character change produces a completely different hash. Hash functions are used to verify file integrity, store passwords (SHA-256 and above), generate cache keys, and sign API requests.',
+    text: [
+      'A hash function takes an input of any size and produces a fixed-length string called a digest or checksum. The same input always produces the same output, but even a single character change produces a completely different hash.',
+      'Hash functions are used to verify file integrity, store passwords (SHA-256 and above), generate cache keys, and sign API requests.',
+    ],
   },
   {
     title: 'MD5, SHA-1, SHA-256 and SHA-512',
-    text: 'MD5 produces a 128-bit (32 hex characters) digest and is still widely used for checksums and non-security identifiers. SHA-1 produces 160 bits (40 hex chars) and is now deprecated for security. SHA-256 (256 bits, 64 hex chars) is the current standard for most security applications. SHA-512 (512 bits, 128 hex chars) provides extra margin and is used when maximum collision resistance is needed.',
+    text: 'Four algorithms cover almost every use case, from legacy checksums to modern security.',
+    table: [
+      { label: 'MD5', value: '128-bit · 32 hex chars — checksums, non-security IDs' },
+      { label: 'SHA-1', value: '160-bit · 40 hex chars — deprecated for security' },
+      { label: 'SHA-256', value: '256-bit · 64 hex chars — current security standard' },
+      { label: 'SHA-512', value: '512-bit · 128 hex chars — maximum collision resistance' },
+    ],
   },
   {
     title: 'Client-side, no data sent',
-    text: 'All hashes are computed directly in your browser using the native Web Crypto API (SHA family) and a pure JavaScript MD5 implementation. Your input never leaves your machine. This makes the tool safe to use with sensitive data such as passwords, tokens, or private keys, though as a general rule you should never hash production secrets in a web tool.',
+    text: [
+      'All hashes are computed directly in your browser using the native Web Crypto API (SHA family) and a pure JavaScript MD5 implementation. Your input never leaves your machine.',
+      'This makes the tool safe to use with sensitive data such as passwords, tokens, or private keys, though as a general rule you should never hash production secrets in a web tool.',
+    ],
   },
 ]
 </script>

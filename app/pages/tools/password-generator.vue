@@ -178,15 +178,27 @@ function copyBulkItem(pw: string, i: number) {
 const cards = [
   {
     title: 'Why use a browser-based password generator?',
-    text: 'This generator runs entirely in your browser using the Web Cryptography API (crypto.getRandomValues), which produces cryptographically secure random numbers using the same standard operating systems use for key generation. Because nothing is sent to a server, you are protected from network interception and server breaches. Compare this to some online generators that log generated passwords server-side, intentionally or not.',
+    text: [
+      'This generator runs entirely in your browser using the Web Cryptography API (crypto.getRandomValues), which produces cryptographically secure random numbers using the same standard operating systems use for key generation.',
+      'Because nothing is sent to a server, you are protected from network interception and server breaches. Compare this to some online generators that log generated passwords server-side, intentionally or not.',
+    ],
   },
   {
     title: 'How long and complex should a password be?',
-    text: 'Password strength is measured in bits of entropy: log₂(charsetSize ^ length). A 16-character password mixing uppercase, lowercase and numbers yields ~95 bits, enough to resist all known brute-force attacks. For high-value accounts (email, banking, password manager master password) aim for 20+ characters and at least 3 character types. Using a password manager lets you use a unique strong password for every site without memorising them.',
+    text: [
+      'Password strength is measured in bits of entropy: log₂(charsetSize ^ length). A 16-character password mixing uppercase, lowercase and numbers yields ~95 bits, enough to resist all known brute-force attacks.',
+      'For high-value accounts (email, banking, password manager master password) aim for 20+ characters and at least 3 character types. Using a password manager lets you use a unique strong password for every site without memorising them.',
+    ],
   },
   {
     title: 'What do the character set options mean?',
-    text: 'Uppercase adds 26 characters (A-Z), lowercase 26 (a-z), numbers 10 (0-9), and symbols roughly 28 printable special characters. The "exclude ambiguous" option removes characters that look similar in certain fonts, like 0/O and 1/l/I, reducing transcription errors when you must type a password manually. The charset size directly drives entropy: toggling symbols on a 16-char password raises entropy from ~95 to ~105 bits.',
+    text: 'The charset size directly drives entropy: toggling symbols on a 16-char password raises entropy from ~95 to ~105 bits. "Exclude ambiguous" removes characters that look similar in certain fonts, like 0/O and 1/l/I.',
+    table: [
+      { label: 'Uppercase', value: '26 characters — A-Z' },
+      { label: 'Lowercase', value: '26 characters — a-z' },
+      { label: 'Numbers', value: '10 characters — 0-9' },
+      { label: 'Symbols', value: '~28 printable special characters' },
+    ],
   },
 ]
 </script>

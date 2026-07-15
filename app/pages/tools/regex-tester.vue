@@ -123,15 +123,31 @@ const detailedMatches = computed(() => matches.value.slice(0, 50))
 const seoCards = [
   {
     title: 'Flags: g, i, m, s explained',
-    text: 'The g (global) flag finds all matches instead of stopping at the first one. The i flag makes matching case-insensitive. The m (multiline) flag makes ^ and $ match the start and end of each line rather than the full string. The s (dotAll) flag makes . match newline characters (\n), which it normally skips. Combining flags like gi is common for case-insensitive global search.',
+    text: 'Combining flags like gi is common for case-insensitive global search.',
+    table: [
+      { label: 'g', value: 'Global — finds all matches, not just the first' },
+      { label: 'i', value: 'Case-insensitive matching' },
+      { label: 'm', value: 'Multiline — ^ and $ match line boundaries' },
+      { label: 's', value: 'DotAll — . also matches newline characters' },
+    ],
   },
   {
     title: 'Capture groups and named groups',
-    text: 'Wrap part of a pattern in parentheses to create a capture group: (\\d+) captures digits. The captured text appears in $1, $2, etc. Named groups (?<year>\\d{4}) give the capture a label accessible via the match.groups object. Non-capturing groups (?:...) group for quantifiers without capturing. This tool shows all captured groups below each match.',
+    text: [
+      'Wrap part of a pattern in parentheses to create a capture group: (\\d+) captures digits. The captured text appears in $1, $2, etc.',
+      'Named groups (?<year>\\d{4}) give the capture a label accessible via the match.groups object. Non-capturing groups (?:...) group for quantifiers without capturing. This tool shows all captured groups below each match.',
+    ],
   },
   {
     title: 'Common regex patterns for developers',
-    text: 'Email validation: ^[\\w.-]+@[\\w.-]+\\.[a-z]{2,}$. UUID: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}. ISO date: \\d{4}-\\d{2}-\\d{2}. IP address: (\\d{1,3}\\.){3}\\d{1,3}. Semantic version: \\d+\\.\\d+\\.\\d+. These are starting points; production validation usually needs stricter patterns or a dedicated library.',
+    text: 'These are starting points; production validation usually needs stricter patterns or a dedicated library.',
+    table: [
+      { label: 'Email', value: '^[\\w.-]+@[\\w.-]+\\.[a-z]{2,}$' },
+      { label: 'UUID', value: '[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}' },
+      { label: 'ISO date', value: '\\d{4}-\\d{2}-\\d{2}' },
+      { label: 'IP address', value: '(\\d{1,3}\\.){3}\\d{1,3}' },
+      { label: 'Semver', value: '\\d+\\.\\d+\\.\\d+' },
+    ],
   },
 ]
 </script>

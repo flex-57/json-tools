@@ -112,15 +112,26 @@ function onDropRight(e: DragEvent) {
 const seoCards = [
   {
     title: 'Why compare JSON rather than raw text',
-    text: 'A plain text diff treats {"b":2,"a":1} and {"a":1,"b":2} as different, but they\'re the same JSON object. A JSON-aware diff normalises key order and data types before comparing, so you see only semantic differences: a field that changed value, a key that was added, an array element that was removed. This eliminates noise from formatting and key reordering.',
+    text: [
+      'A plain text diff treats {"b":2,"a":1} and {"a":1,"b":2} as different, but they\'re the same JSON object. A JSON-aware diff normalises key order and data types before comparing.',
+      'You see only semantic differences: a field that changed value, a key that was added, an array element that was removed — no noise from formatting or key reordering.',
+    ],
   },
   {
     title: 'Reading the diff output',
-    text: 'Lines highlighted in the error tone appear only in the left document (removed). Lines highlighted in the valid tone appear only in the right document (added). Unchanged lines are shown in neutral color. The counters in each panel header tell you at a glance how many additions and removals there are. Paste the two JSON documents and the diff updates immediately.',
+    text: 'The counters in each panel header tell you at a glance how many additions and removals there are. Paste the two JSON documents and the diff updates immediately.',
+    table: [
+      { label: 'Removed', value: 'Error tone — appears only in the left document' },
+      { label: 'Added', value: 'Valid tone — appears only in the right document' },
+      { label: 'Unchanged', value: 'Neutral color' },
+    ],
   },
   {
     title: 'Debugging and review use cases',
-    text: 'Developers compare API responses across environments to catch configuration drift between staging and production. QA engineers diff before/after snapshots of database records to verify a migration. Backend teams review the delta between two versions of a config file before deployment. Because both documents stay in your browser, you can paste sensitive payloads without concern.',
+    text: [
+      'Developers compare API responses across environments to catch configuration drift between staging and production. QA engineers diff before/after snapshots of database records to verify a migration.',
+      'Backend teams review the delta between two versions of a config file before deployment. Because both documents stay in your browser, you can paste sensitive payloads without concern.',
+    ],
   },
 ]
 </script>

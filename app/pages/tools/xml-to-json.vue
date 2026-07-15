@@ -71,15 +71,27 @@ useUrlInput(input, convert)
 const seoCards = [
   {
     title: 'XML is still everywhere',
-    text: 'Despite JSON\'s dominance, XML remains the backbone of enterprise systems, SOAP web services, RSS/Atom feeds, Office Open XML documents, and Android manifests. If you work with any of these, or integrate with a legacy ERP, a bank API, or an XML-based CMS, you\'ll need to convert XML to JSON to work with it in modern JavaScript or Python code.',
+    text: [
+      'Despite JSON\'s dominance, XML remains the backbone of enterprise systems, SOAP web services, RSS/Atom feeds, Office Open XML documents, and Android manifests.',
+      'If you work with any of these, or integrate with a legacy ERP, a bank API, or an XML-based CMS, you\'ll need to convert XML to JSON to work with it in modern JavaScript or Python code.',
+    ],
   },
   {
     title: 'How XML maps to JSON',
-    text: 'XML elements become JSON object keys. Attributes are typically prefixed (e.g., @attr) to distinguish them from child elements. Repeated sibling elements become arrays. Text-only nodes become string values. The converter handles these conventions automatically, so you get a predictable structure you can traverse with standard JSON tooling.',
+    text: 'The converter handles these conventions automatically, so you get a predictable structure you can traverse with standard JSON tooling.',
+    table: [
+      { label: 'Element', value: 'Becomes a JSON object key' },
+      { label: 'Attribute', value: 'Prefixed (e.g. @attr) to distinguish from children' },
+      { label: 'Repeated sibling', value: 'Becomes an array' },
+      { label: 'Text-only node', value: 'Becomes a string value' },
+    ],
   },
   {
     title: 'Typical workflows',
-    text: 'Backend developers convert SOAP responses to JSON before passing them to a React front-end. DevOps engineers parse Maven POM files or Ant build scripts to extract dependency information. Content teams convert RSS feeds to JSON to feed a Next.js blog or newsletter. Because parsing runs locally, XML documents containing internal data never leave your machine.',
+    text: [
+      'Backend developers convert SOAP responses to JSON before passing them to a React front-end. DevOps engineers parse Maven POM files or Ant build scripts to extract dependency information.',
+      'Content teams convert RSS feeds to JSON to feed a Next.js blog or newsletter. Because parsing runs locally, XML documents containing internal data never leave your machine.',
+    ],
   },
 ]
 const isDragging = ref(false)

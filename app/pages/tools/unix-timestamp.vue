@@ -66,15 +66,26 @@ onUnmounted(() => clearInterval(timer))
 const seoCards = [
   {
     title: 'What is a Unix timestamp?',
-    text: 'A Unix timestamp counts the number of seconds elapsed since January 1, 1970 at 00:00:00 UTC, also called the Unix epoch. It is timezone-independent: 1749649920 refers to the same instant everywhere in the world, regardless of local time. This makes it ideal for storing dates in databases, logging events, and computing time differences without timezone confusion.',
+    text: [
+      'A Unix timestamp counts the number of seconds elapsed since January 1, 1970 at 00:00:00 UTC, also called the Unix epoch. It is timezone-independent: 1749649920 refers to the same instant everywhere in the world, regardless of local time.',
+      'This makes it ideal for storing dates in databases, logging events, and computing time differences without timezone confusion.',
+    ],
   },
   {
     title: 'Seconds vs milliseconds',
-    text: 'Most Unix systems and APIs use seconds. JavaScript\'s Date.now() and most browser APIs return milliseconds. This tool auto-detects: if the number is larger than 10 000 000 000 (13 digits), it\'s treated as milliseconds; otherwise as seconds. JWT tokens use seconds for their exp and iat claims. Node.js performance timers use nanoseconds.',
+    text: 'This tool auto-detects: if the number is larger than 10 000 000 000 (13 digits), it\'s treated as milliseconds; otherwise as seconds.',
+    table: [
+      { label: 'Seconds', value: 'Most Unix systems and APIs, JWT exp/iat claims' },
+      { label: 'Milliseconds', value: "JavaScript's Date.now() and most browser APIs" },
+      { label: 'Nanoseconds', value: 'Node.js performance timers' },
+    ],
   },
   {
     title: 'Common use cases',
-    text: 'Backend developers use Unix timestamps in JWT exp claims to set token expiration, in database records for created_at and updated_at fields, and in logs for unambiguous event ordering. Frontend developers convert timestamps to local strings for display and compute relative times ("3 hours ago") for activity feeds. The ISO 8601 format (2026-06-11T14:32:00Z) is the standard for APIs and is sortable as a string.',
+    text: [
+      'Backend developers use Unix timestamps in JWT exp claims to set token expiration, in database records for created_at and updated_at fields, and in logs for unambiguous event ordering.',
+      'Frontend developers convert timestamps to local strings for display and compute relative times ("3 hours ago") for activity feeds. The ISO 8601 format (2026-06-11T14:32:00Z) is the standard for APIs and is sortable as a string.',
+    ],
   },
 ]
 </script>

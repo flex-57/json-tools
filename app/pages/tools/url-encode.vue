@@ -97,15 +97,28 @@ function handleSwap() {
 const seoCards = [
   {
     title: 'Component vs Full URI encoding',
-    text: 'encodeURIComponent encodes everything except letters, digits, and - _ . ! ~ * \' ( ), including ?, &, =, #, and /. Use it for query parameter values and path segments. encodeURI preserves those characters plus : / ? # [ ] @ ! $ & \' ( ) * + , ; = because they have meaning in a full URL. Use it when encoding a complete URL to make it safe for a header or attribute without breaking its structure.',
+    text: 'Both leave letters, digits, and - _ . ! ~ * \' ( ) untouched — the difference is what else they preserve.',
+    table: [
+      { label: 'encodeURIComponent', value: 'Encodes ?, &, =, #, / too — for query values and path segments' },
+      { label: 'encodeURI', value: 'Preserves : / ? # [ ] @ ! $ & \' ( ) * + , ; = — for a full URL' },
+    ],
   },
   {
     title: 'When you need percent-encoding',
-    text: 'Spaces, non-ASCII characters, and reserved symbols must be encoded before being placed in a URL. A space becomes %20 (or + in form-encoded contexts), é becomes %C3%A9, and & in a query value must be %26 or it will be parsed as a parameter separator. OAuth signatures, redirect_uri parameters, and search queries all require proper encoding: a single unencoded character can break the entire request.',
+    text: [
+      'Spaces, non-ASCII characters, and reserved symbols must be encoded before being placed in a URL. A space becomes %20 (or + in form-encoded contexts), é becomes %C3%A9, and & in a query value must be %26 or it will be parsed as a parameter separator.',
+      'OAuth signatures, redirect_uri parameters, and search queries all require proper encoding: a single unencoded character can break the entire request.',
+    ],
   },
   {
     title: 'Reading percent-encoded sequences',
-    text: 'Each percent-encoded sequence is a % followed by two hexadecimal digits representing one byte of a UTF-8 encoded character. %20 is a space (byte 0x20), %2F is a slash (/), %3A is a colon (:). Multi-byte characters need multiple sequences: the euro sign € is %E2%82%AC (three bytes in UTF-8). The Decode mode here converts any valid percent-encoded string back to its original form.',
+    text: 'Each sequence is a % followed by two hex digits representing one byte of a UTF-8 character. Multi-byte characters need multiple sequences. The Decode mode here converts any valid percent-encoded string back to its original form.',
+    table: [
+      { label: '%20', value: 'Space (byte 0x20)' },
+      { label: '%2F', value: 'Slash (/)' },
+      { label: '%3A', value: 'Colon (:)' },
+      { label: '%E2%82%AC', value: 'Euro sign € — 3 bytes in UTF-8' },
+    ],
   },
 ]
 </script>

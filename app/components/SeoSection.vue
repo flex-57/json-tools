@@ -3,7 +3,13 @@
     <div class="about-grid">
       <div v-for="card in cards" :key="card.title" class="about-card">
         <h2 class="about-title">{{ card.title }}</h2>
-        <p class="about-text">{{ card.text }}</p>
+        <p v-for="(paragraph, i) in paragraphsOf(card.text)" :key="i" class="about-text">{{ paragraph }}</p>
+        <div v-if="card.table" class="about-table">
+          <div v-for="row in card.table" :key="row.label" class="about-table-row">
+            <span class="about-table-label">{{ row.label }}</span>
+            <span class="about-table-value">{{ row.value }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <RelatedLinks label="Related tools" :items="relatedTools" />
@@ -16,11 +22,20 @@ import { toolMeta } from '~/data/tools'
 import { GUIDES } from '~/data/guides'
 
 interface RelatedTool { label: string; to: string }
+interface AboutCard {
+  title: string
+  text: string | string[]
+  table?: { label: string; value: string }[]
+}
 
 const props = defineProps<{
-  cards: { title: string; text: string }[]
+  cards: AboutCard[]
   related?: RelatedTool[]
 }>()
+
+function paragraphsOf(text: string | string[]): string[] {
+  return Array.isArray(text) ? text : [text]
+}
 
 const route = useRoute()
 
@@ -91,8 +106,14 @@ const relatedGuides = computed(() => displayRelated.value.filter(r => r.to.start
 .about { margin-top: 8px; padding-bottom: 8px; font-family: var(--font-body); }
 .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .about-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); padding: 20px 22px; }
-.about-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; font-size: 14px; color: var(--c-t1); margin-bottom: 10px; }
+.about-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; font-size: 14px; color: var(--c-t1); margin-bottom: 12px; }
 .about-text { font-size: 13px; color: var(--c-t3); line-height: 1.75; }
+.about-text + .about-text { margin-top: 10px; }
+
+.about-table { margin-top: 14px; display: flex; flex-direction: column; }
+.about-table-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-top: 1px solid var(--c-border); }
+.about-table-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--c-accent); flex-shrink: 0; min-width: 58px; }
+.about-table-value { font-size: 12px; color: var(--c-t3); line-height: 1.5; }
 
 @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
 </style>

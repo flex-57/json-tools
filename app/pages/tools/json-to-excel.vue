@@ -72,15 +72,24 @@ useUrlInput(input)
 const seoCards = [
   {
     title: 'From JSON array to a real Excel file',
-    text: 'Sending a JSON array to a non-technical stakeholder means they need to run code to read it. Converting to Excel gives them a file they can open directly, filter with AutoFilter, and share without any setup. This tool generates a proper .xlsx binary, not a renamed CSV, with correct column headers and cell types.',
+    text: [
+      'Sending a JSON array to a non-technical stakeholder means they need to run code to read it. Converting to Excel gives them a file they can open directly, filter with AutoFilter, and share without any setup.',
+      'This tool generates a proper .xlsx binary, not a renamed CSV, with correct column headers and cell types.',
+    ],
   },
   {
     title: 'What the preview tells you',
-    text: 'Before downloading, the live preview shows the first five rows of the Excel sheet so you can confirm that keys became column headers and values landed in the right cells. If your JSON contains nested objects, flatten them first. Nested values otherwise serialize as JSON strings in the cell, which is usually not what you want in a spreadsheet.',
+    text: [
+      'Before downloading, the live preview shows the first five rows of the Excel sheet so you can confirm that keys became column headers and values landed in the right cells.',
+      'If your JSON contains nested objects, flatten them first. Nested values otherwise serialize as JSON strings in the cell, which is usually not what you want in a spreadsheet.',
+    ],
   },
   {
     title: 'Reporting and handoff use cases',
-    text: 'Backend developers export JSON API responses to Excel for product review meetings. Support teams convert JSON log data to spreadsheets for ticket analysis. Data analysts receive JSON from a data warehouse and convert it to Excel for pivot table work. The generated file downloads instantly, with no server round-trip and no file size limit imposed by an upload endpoint.',
+    text: [
+      'Backend developers export JSON API responses to Excel for product review meetings. Support teams convert JSON log data to spreadsheets for ticket analysis.',
+      'Data analysts receive JSON from a data warehouse and convert it to Excel for pivot table work. The generated file downloads instantly, with no server round-trip and no file size limit imposed by an upload endpoint.',
+    ],
   },
 ]
 const isDragging = ref(false)

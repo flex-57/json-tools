@@ -61,15 +61,35 @@ function onDrop(e: DragEvent) {
 const seoCards = [
   {
     title: 'When to use each case',
-    text: 'camelCase is the standard for JavaScript and TypeScript variables, functions, and object keys. PascalCase (UpperCamelCase) is used for class names, React components, and TypeScript types. snake_case is common in Python, Ruby, and database column names. SCREAMING_SNAKE_CASE is the convention for constants and environment variables. kebab-case is used in CSS class names, HTML attributes, URL slugs, and npm package names. Title Case appears in headings and proper nouns. dot.case is used in configuration keys (e.g. logging.level) and some framework conventions.',
+    text: 'Seven conventions cover almost everything you\'ll touch as a developer.',
+    table: [
+      { label: 'camelCase', value: 'JS/TS variables, functions, object keys' },
+      { label: 'PascalCase', value: 'Class names, React components, TS types' },
+      { label: 'snake_case', value: 'Python, Ruby, database columns' },
+      { label: 'SCREAMING_SNAKE', value: 'Constants, environment variables' },
+      { label: 'kebab-case', value: 'CSS classes, HTML attributes, URL slugs' },
+      { label: 'Title Case', value: 'Headings and proper nouns' },
+      { label: 'dot.case', value: 'Config keys (e.g. logging.level)' },
+    ],
   },
   {
     title: 'How auto-detection works',
-    text: 'The converter parses any input format into a sequence of words, then re-formats them into every target case. It splits on spaces, underscores, hyphens, dots, slashes, and colons. For camelCase and PascalCase input, it inserts a split point before each uppercase letter following a lowercase one (e.g. "myVariableName" → ["my", "variable", "name"]) and handles consecutive uppercase sequences like acronyms (e.g. "parseHTMLString" → ["parse", "HTML", "string"]). Mixed inputs like "my-Variable_name" are fully supported.',
+    text: [
+      'The converter parses any input format into a sequence of words, then re-formats them into every target case. It splits on spaces, underscores, hyphens, dots, slashes, and colons.',
+      'For camelCase and PascalCase input, it inserts a split point before each uppercase letter following a lowercase one (e.g. "myVariableName" → ["my", "variable", "name"]) and handles acronyms (e.g. "parseHTMLString" → ["parse", "HTML", "string"]). Mixed inputs like "my-Variable_name" are fully supported.',
+    ],
   },
   {
     title: 'Case conventions by language',
-    text: 'JavaScript / TypeScript: camelCase for variables and functions, PascalCase for classes and components, SCREAMING_SNAKE_CASE for constants. Python: snake_case for variables and functions, PascalCase for classes, SCREAMING_SNAKE_CASE for constants. CSS: kebab-case for class names and custom properties (--my-color). SQL: UPPER_SNAKE_CASE for keywords by convention, snake_case for table and column names. Go: PascalCase for exported identifiers, camelCase for unexported. Rust: snake_case for functions and variables, PascalCase for types and traits, SCREAMING_SNAKE_CASE for constants.',
+    text: 'The same case can carry different meaning depending on the ecosystem.',
+    table: [
+      { label: 'JS / TS', value: 'camelCase vars/fns, PascalCase classes, SCREAMING constants' },
+      { label: 'Python', value: 'snake_case vars/fns, PascalCase classes, SCREAMING constants' },
+      { label: 'CSS', value: 'kebab-case classes and custom properties (--my-color)' },
+      { label: 'SQL', value: 'UPPER_SNAKE keywords by convention, snake_case tables/columns' },
+      { label: 'Go', value: 'PascalCase exported, camelCase unexported' },
+      { label: 'Rust', value: 'snake_case fns/vars, PascalCase types/traits' },
+    ],
   },
 ]
 </script>

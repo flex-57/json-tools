@@ -119,15 +119,26 @@ function fmtBytes(n: number): string {
 const seoCards = [
   {
     title: 'Why minify your code?',
-    text: 'Minification removes whitespace, comments, and redundant syntax from CSS, HTML, and JavaScript without changing behaviour. The result is smaller files that transfer faster over the network. A typical CSS file shrinks by 20-40%, HTML by 10-20%, and JavaScript by 30-60% with variable renaming. Faster transfers improve page load time, reduce bandwidth costs on servers and CDNs, and positively affect Core Web Vitals scores, especially LCP and FID. Minification is a standard step in every production build pipeline alongside bundling and compression (gzip/brotli).',
+    text: 'Minification removes whitespace, comments, and redundant syntax without changing behaviour. Faster transfers improve page load time, reduce bandwidth costs, and positively affect Core Web Vitals scores, especially LCP and FID — a standard step in every production build pipeline alongside bundling and compression (gzip/brotli).',
+    table: [
+      { label: 'CSS', value: 'Shrinks 20-40%' },
+      { label: 'HTML', value: 'Shrinks 10-20%' },
+      { label: 'JavaScript', value: 'Shrinks 30-60% with variable renaming' },
+    ],
   },
   {
     title: 'CSS, HTML, and JS: how each is minified',
-    text: 'CSS minification is powered by lightningcss, a Rust-based parser compiled to WebAssembly. It runs entirely in your browser and produces correct, spec-compliant output including nested selectors, custom properties, and modern syntax. HTML minification (html-minifier-terser) collapses inter-element whitespace, strips HTML comments, removes optional closing tags, and recursively minifies any embedded <style> and <script> blocks using the same CSS and JS engines. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, renames local variables to single letters, and removes unreachable branches, achieving the highest compression ratios of the three.',
+    text: [
+      'CSS minification is powered by lightningcss, a Rust-based parser compiled to WebAssembly. It runs entirely in your browser and produces correct, spec-compliant output including nested selectors, custom properties, and modern syntax.',
+      'HTML minification (html-minifier-terser) collapses inter-element whitespace, strips comments, and recursively minifies embedded <style>/<script> blocks. JavaScript minification (terser) parses the AST, removes dead code, inlines constants, and renames local variables — the highest compression ratio of the three.',
+    ],
   },
   {
     title: 'Before deploying minified code',
-    text: 'Always keep your original source files. Minified code is nearly impossible to debug or maintain. In production, generate source maps alongside your minified files so browser DevTools can map errors back to the original lines. Most build tools (Vite, webpack, Rollup, esbuild) handle minification and source maps automatically via their production mode. Use this tool for quick one-off checks, to understand how much a file compresses, or to minify standalone snippets. For full projects, integrate minification into your build pipeline rather than minifying manually.',
+    text: [
+      'Always keep your original source files. Minified code is nearly impossible to debug or maintain. In production, generate source maps so browser DevTools can map errors back to the original lines.',
+      'Most build tools (Vite, webpack, Rollup, esbuild) handle minification and source maps automatically via their production mode. Use this tool for quick one-off checks; for full projects, integrate minification into your build pipeline rather than minifying manually.',
+    ],
   },
 ]
 </script>

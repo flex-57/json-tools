@@ -98,15 +98,24 @@ const { file, output, error, sheets, activeSheet, hasHeader, copied, loading, co
 const seoCards = [
   {
     title: 'Excel to JSON: bridging spreadsheets and code',
-    text: 'Excel remains the default tool for data collection, financial modeling, and reporting across most organisations. But applications and APIs don\'t speak .xlsx. Converting Excel to JSON lets you load spreadsheet data into a JavaScript app, seed a database, or pass it to a REST endpoint, all without writing a parser or installing a library.',
+    text: [
+      'Excel remains the default tool for data collection, financial modeling, and reporting across most organisations. But applications and APIs don\'t speak .xlsx.',
+      'Converting Excel to JSON lets you load spreadsheet data into a JavaScript app, seed a database, or pass it to a REST endpoint, all without writing a parser or installing a library.',
+    ],
   },
   {
     title: 'Multi-sheet support and header detection',
-    text: 'Real-world Excel files often contain multiple sheets: a summary tab, regional breakdowns, monthly data. The converter lists every sheet and lets you switch between them instantly. Enable "Headers" to use the first row as JSON object keys; disable it to get arrays of raw values per row. Files are parsed entirely in your browser using the SheetJS library.',
+    text: [
+      'Real-world Excel files often contain multiple sheets: a summary tab, regional breakdowns, monthly data. The converter lists every sheet and lets you switch between them instantly.',
+      'Enable "Headers" to use the first row as JSON object keys; disable it to get arrays of raw values per row. Files are parsed entirely in your browser using the SheetJS library.',
+    ],
   },
   {
     title: 'Data migration and integration use cases',
-    text: 'Finance teams export budget spreadsheets to JSON to feed a dashboard or planning tool. Operations teams convert inventory .xlsx files into JSON for database seeding. Analysts share clean JSON with developers who need structured data without spreadsheet tooling. Because no file is uploaded to a server, sensitive financial or HR data stays private.',
+    text: [
+      'Finance teams export budget spreadsheets to JSON to feed a dashboard or planning tool. Operations teams convert inventory .xlsx files into JSON for database seeding.',
+      'Analysts share clean JSON with developers who need structured data without spreadsheet tooling. Because no file is uploaded to a server, sensitive financial or HR data stays private.',
+    ],
   },
 ]
 

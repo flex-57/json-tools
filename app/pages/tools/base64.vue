@@ -98,15 +98,24 @@ function handleSwap() {
 const seoCards = [
   {
     title: 'What Base64 encoding is and is not',
-    text: 'Base64 is an encoding scheme, not encryption. It converts binary data or text into a safe ASCII string using 64 printable characters. The output is about 33% larger than the input. It doesn\'t hide data: anyone can decode it instantly. Its purpose is transport safety, embedding binary in JSON, XML, or HTTP headers that only accept text.',
+    text: [
+      'Base64 is an encoding scheme, not encryption. It converts binary data or text into a safe ASCII string using 64 printable characters. The output is about 33% larger than the input.',
+      'It doesn\'t hide data: anyone can decode it instantly. Its purpose is transport safety, embedding binary in JSON, XML, or HTTP headers that only accept text.',
+    ],
   },
   {
     title: 'Standard vs URL-safe (Base64url)',
-    text: 'Standard Base64 uses + and / characters, which are special in URLs and can break query strings. URL-safe Base64 (Base64url) replaces + with - and / with _, making the output safe for URLs, filenames, and HTTP headers. JWT tokens use Base64url for their header and payload sections, which is exactly what the "JWT-compatible" variant here produces.',
+    text: [
+      'Standard Base64 uses + and / characters, which are special in URLs and can break query strings. URL-safe Base64 (Base64url) replaces + with - and / with _, making the output safe for URLs, filenames, and HTTP headers.',
+      'JWT tokens use Base64url for their header and payload sections, which is exactly what the "JWT-compatible" variant here produces.',
+    ],
   },
   {
     title: 'Common uses: images, auth tokens, data URIs',
-    text: 'Developers encode images or PDFs to Base64 to embed them directly in HTML data URIs or JSON API responses, avoiding a separate file request. Auth tokens, API keys, and session cookies are often Base64-encoded before being placed in Authorization headers. Configuration systems encode secrets to prevent accidental whitespace or special-character corruption in environment variables.',
+    text: [
+      'Developers encode images or PDFs to Base64 to embed them directly in HTML data URIs or JSON API responses, avoiding a separate file request.',
+      'Auth tokens, API keys, and session cookies are often Base64-encoded before being placed in Authorization headers. Configuration systems encode secrets to prevent accidental whitespace or special-character corruption in environment variables.',
+    ],
   },
 ]
 </script>

@@ -118,15 +118,26 @@ const charCount = computed(() => output.value?.length ?? 0)
 const seoCards = [
   {
     title: 'TypeScript interfaces vs Zod schemas',
-    text: 'TypeScript interfaces exist only at compile time: they validate types during development and are erased at runtime. Zod schemas are runtime objects that can parse and validate data, generate TypeScript types via z.infer<>, and throw detailed errors when data doesn\'t match. Use interfaces when you control the data source and just need IDE support. Use Zod (or similar: Valibot, Yup, ArkType) when you receive data from untrusted sources like APIs, form inputs, or config files.',
+    text: [
+      'TypeScript interfaces exist only at compile time: they validate types during development and are erased at runtime. Zod schemas are runtime objects that can parse and validate data, generate TypeScript types via z.infer<>, and throw detailed errors when data doesn\'t match.',
+      'Use interfaces when you control the data source and just need IDE support. Use Zod (or similar: Valibot, Yup, ArkType) when you receive data from untrusted sources like APIs, form inputs, or config files.',
+    ],
   },
   {
     title: 'How type inference works',
-    text: 'This tool traverses your JSON value recursively. Each primitive maps to its TypeScript type (string, number, boolean, null). Objects become interfaces or z.object() schemas with one field per key. Arrays are typed by their elements: if all elements share the same structure, a single type is inferred; mixed arrays produce union types (string | number). When JSON contains an array of objects with different keys, missing keys are marked optional (key?: Type or .optional()) and present types are merged.',
+    text: 'This tool traverses your JSON value recursively. Arrays are typed by their elements: if all elements share the same structure, a single type is inferred; mixed arrays produce union types (string | number). Missing keys across objects are marked optional.',
+    table: [
+      { label: 'primitive', value: 'string, number, boolean, null' },
+      { label: 'object', value: 'interface or z.object() — one field per key' },
+      { label: 'optional key', value: 'key?: Type or .optional()' },
+    ],
   },
   {
     title: 'Next steps after generation',
-    text: 'The generated types are a starting point. For stricter validation, refine Zod schemas with constraints like z.string().email(), z.number().positive(), or z.array(...).min(1). For TypeScript interfaces, consider adding readonly modifiers and replacing any with proper union types. If your JSON comes from an API with a published OpenAPI spec, tools like openapi-typescript or Orval can generate more complete, versioned types directly from the spec.',
+    text: [
+      'The generated types are a starting point. For stricter validation, refine Zod schemas with constraints like z.string().email(), z.number().positive(), or z.array(...).min(1).',
+      'For TypeScript interfaces, consider adding readonly modifiers and replacing any with proper union types. If your JSON comes from an API with a published OpenAPI spec, tools like openapi-typescript or Orval can generate more complete, versioned types directly from the spec.',
+    ],
   },
 ]
 </script>

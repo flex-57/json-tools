@@ -71,15 +71,27 @@ useUrlInput(input, convert)
 const seoCards = [
   {
     title: 'Why generate XML from JSON',
-    text: 'Enterprise service buses, SOAP APIs, SAP integrations, and legacy B2B platforms often require XML payloads. If your application stores data as JSON but needs to talk to one of these systems, generating XML by hand is error-prone. Paste your JSON object, get valid XML back, and use it directly in your SOAP envelope or configuration file.',
+    text: [
+      'Enterprise service buses, SOAP APIs, SAP integrations, and legacy B2B platforms often require XML payloads. If your application stores data as JSON but needs to talk to one of these systems, generating XML by hand is error-prone.',
+      'Paste your JSON object, get valid XML back, and use it directly in your SOAP envelope or configuration file.',
+    ],
   },
   {
     title: 'How JSON keys become XML elements',
-    text: 'Each JSON key becomes an XML element name. String and number values become text content. Arrays produce repeated sibling elements with the same tag. Nested objects become nested elements. One constraint: XML element names cannot start with a number or contain spaces, so keep your JSON keys valid XML identifiers to get clean output.',
+    text: 'One constraint: XML element names cannot start with a number or contain spaces, so keep your JSON keys valid XML identifiers to get clean output.',
+    table: [
+      { label: 'Key', value: 'Becomes the XML element name' },
+      { label: 'String / number', value: 'Becomes text content' },
+      { label: 'Array', value: 'Repeated sibling elements with the same tag' },
+      { label: 'Nested object', value: 'Nested elements' },
+    ],
   },
   {
     title: 'Integration and config use cases',
-    text: 'Developers use this to prototype SOAP request bodies before building a client library. Teams migrating data between systems generate XML configuration files from JSON seed data. QA engineers create XML test fixtures from JSON responses captured in staging. The download button lets you save the output directly as a .xml file.',
+    text: [
+      'Developers use this to prototype SOAP request bodies before building a client library. Teams migrating data between systems generate XML configuration files from JSON seed data.',
+      'QA engineers create XML test fixtures from JSON responses captured in staging. The download button lets you save the output directly as a .xml file.',
+    ],
   },
 ]
 const isDragging = ref(false)

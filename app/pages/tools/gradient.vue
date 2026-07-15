@@ -110,7 +110,12 @@ const { copied, copy } = useClipboard(() => backgroundCss.value)
 const cards = [
   {
     title: 'Linear, radial, and conic gradients',
-    text: 'A linear gradient transitions colors along a straight line at a given angle. A radial gradient radiates from a center point outward, either as a circle or an ellipse. A conic gradient sweeps colors around a center point like a color wheel, useful for pie charts and loading spinners. All three accept the same list of color stops.',
+    text: 'All three accept the same list of color stops — only the direction the color travels changes.',
+    table: [
+      { label: 'Linear', value: 'Transitions along a straight line at a given angle' },
+      { label: 'Radial', value: 'Radiates from a center point, as a circle or ellipse' },
+      { label: 'Conic', value: 'Sweeps around a center point like a color wheel' },
+    ],
   },
   {
     title: 'What a color stop is',
