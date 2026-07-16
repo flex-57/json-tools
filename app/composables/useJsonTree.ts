@@ -10,7 +10,14 @@ export interface TreeNode {
   size: number
 }
 
+// Hard cap on total nodes built, so a huge/flat payload can't render tens of
+// thousands of DOM rows and freeze the tab. `node.size` still holds the true
+// child count, so the UI can tell "children.length < size" and show how many
+// were left out — see JsonTreeNode.vue's truncation row.
+export const MAX_TREE_NODES = 5000
+
 let _seq = 0
+let _count = 0
 
 function getType(v: unknown): NodeType {
   if (v === null) return 'null'
@@ -21,24 +28,38 @@ function getType(v: unknown): NodeType {
 function build(data: unknown, key: string, path: string): TreeNode {
   const type = getType(data)
   const id = `n${_seq++}`
+  _count++
   if (type === 'array') {
     const arr = data as unknown[]
-    return { id, key, path, type, size: arr.length, children: arr.map((v, i) => build(v, String(i), `${path}[${i}]`)) }
+    const children: TreeNode[] = []
+    for (let i = 0; i < arr.length; i++) {
+      if (_count >= MAX_TREE_NODES) break
+      children.push(build(arr[i], String(i), `${path}[${i}]`))
+    }
+    return { id, key, path, type, size: arr.length, children }
   }
   if (type === 'object') {
     const obj = data as Record<string, unknown>
-    return { id, key, path, type, size: Object.keys(obj).length, children: Object.entries(obj).map(([k, v]) => build(v, k, path ? `${path}.${k}` : k)) }
+    const entries = Object.entries(obj)
+    const children: TreeNode[] = []
+    for (const [k, v] of entries) {
+      if (_count >= MAX_TREE_NODES) break
+      children.push(build(v, k, path ? `${path}.${k}` : k))
+    }
+    return { id, key, path, type, size: entries.length, children }
   }
   return { id, key, path, type, value: data as string | number | boolean | null, children: [], size: 0 }
 }
 
-export function parseJsonTree(raw: string): { root: TreeNode | null; error: string } {
+export function parseJsonTree(raw: string): { root: TreeNode | null; error: string; truncated: boolean } {
   try {
     _seq = 0
-    return { root: build(JSON.parse(raw), '', ''), error: '' }
+    _count = 0
+    const root = build(JSON.parse(raw), '', '')
+    return { root, error: '', truncated: _count >= MAX_TREE_NODES }
   } catch (e: unknown) {
     const message = e instanceof Error ? e.message : String(e)
-    return { root: null, error: message }
+    return { root: null, error: message, truncated: false }
   }
 }
 

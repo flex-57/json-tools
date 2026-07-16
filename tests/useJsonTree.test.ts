@@ -4,6 +4,7 @@ import {
   nodeHasMatch,
   collectDeepIds,
   collectAllExpandableIds,
+  MAX_TREE_NODES,
 } from '../app/composables/useJsonTree'
 
 describe('parseJsonTree', () => {
@@ -85,6 +86,43 @@ describe('parseJsonTree', () => {
   it('size on object node is key count', () => {
     const { root } = parseJsonTree('{"a":1,"b":2,"c":3}')
     expect(root!.size).toBe(3)
+  })
+})
+
+describe('parseJsonTree — node cap', () => {
+  it('does not truncate payloads under the cap', () => {
+    const arr = Array.from({ length: 100 }, (_, i) => i)
+    const { root, truncated } = parseJsonTree(JSON.stringify(arr))
+    expect(truncated).toBe(false)
+    expect(root!.children).toHaveLength(100)
+    expect(root!.size).toBe(100)
+  })
+
+  it('truncates a flat array beyond MAX_TREE_NODES and reports it', () => {
+    const arr = Array.from({ length: MAX_TREE_NODES + 500 }, (_, i) => i)
+    const { root, truncated } = parseJsonTree(JSON.stringify(arr))
+    expect(truncated).toBe(true)
+    expect(root!.size).toBe(MAX_TREE_NODES + 500)
+    expect(root!.children.length).toBeLessThan(root!.size)
+    expect(root!.children.length).toBeGreaterThan(0)
+  })
+
+  it('caps total nodes across nested structures, not just top level', () => {
+    const obj: Record<string, unknown> = {}
+    for (let i = 0; i < MAX_TREE_NODES + 200; i++) obj[`k${i}`] = { nested: i }
+    const { root, truncated } = parseJsonTree(JSON.stringify(obj))
+    expect(truncated).toBe(true)
+    let count = 0
+    const walk = (n: typeof root) => { if (!n) return; count++; n.children.forEach(walk) }
+    walk(root)
+    expect(count).toBeLessThanOrEqual(MAX_TREE_NODES)
+  })
+
+  it('leaves size accurate even when children are truncated, so the UI can compute how many were omitted', () => {
+    const arr = Array.from({ length: MAX_TREE_NODES + 50 }, (_, i) => i)
+    const { root } = parseJsonTree(JSON.stringify(arr))
+    const omitted = root!.size - root!.children.length
+    expect(omitted).toBeGreaterThan(0)
   })
 })
 

@@ -92,7 +92,9 @@
     </div>
 
     <StatusBar v-if="root">
-      <span>{{ nodeCount }} nodes</span>
+      <span :class="{ 'status-warn': truncated }">
+        {{ nodeCount }}{{ truncated ? '+' : '' }} nodes<template v-if="truncated"> · large payload, tree truncated to stay responsive</template>
+      </span>
       <span>json-tree</span>
     </StatusBar>
 
@@ -137,6 +139,7 @@ const search      = ref('')
 const collapsed   = ref(new Set<string>())
 const root        = ref<TreeNode | null>(null)
 const error       = ref('')
+const truncated   = ref(false)
 const viewMode    = ref<'tree' | 'graph'>('tree')
 const graphNodes  = ref<VfNode[]>([])
 const graphEdges  = ref<VfEdge[]>([])
@@ -160,10 +163,11 @@ provide('tree:toggle', (id: string) => {
 provide('tree:search', search)
 
 watch(input, (val) => {
-  if (!val.trim()) { root.value = null; error.value = ''; graphNodes.value = []; graphEdges.value = []; return }
-  const { root: r, error: e } = parseJsonTree(val)
+  if (!val.trim()) { root.value = null; error.value = ''; truncated.value = false; graphNodes.value = []; graphEdges.value = []; return }
+  const { root: r, error: e, truncated: t } = parseJsonTree(val)
   root.value = r
   error.value = e
+  truncated.value = t
   graphNodes.value = []
   graphEdges.value = []
   if (r) collapsed.value = new Set(collectDeepIds(r, 2))
@@ -291,6 +295,7 @@ const seoCards = [
 </style>
 
 <style scoped>
+.status-warn { color: var(--c-error); }
 .tree-toolbar { display: flex; align-items: center; gap: 8px; flex: 1; flex-wrap: wrap; }
 .tree-search-wrap { position: relative; display: flex; align-items: center; flex: 1; min-width: 120px; max-width: 200px; }
 .tree-search-icon { position: absolute; left: 8px; color: var(--c-t4); pointer-events: none; }

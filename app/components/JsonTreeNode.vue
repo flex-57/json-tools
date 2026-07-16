@@ -46,6 +46,11 @@
         :depth="depth + 1"
         :is-array-parent="node.type === 'array'"
       />
+      <div v-if="node.size > node.children.length" class="tn-row tn-truncated">
+        <span v-for="d in depth + 1" :key="d" class="tn-indent"><span class="tn-guide" /></span>
+        <span class="tn-toggle-slot" />
+        <span class="tn-truncated-text">… {{ node.size - node.children.length }} more {{ node.type === 'array' ? 'item' : 'key' }}{{ node.size - node.children.length === 1 ? '' : 's' }} not shown (tree size limit reached)</span>
+      </div>
       <div class="tn-row tn-row--close">
         <span v-for="d in depth" :key="d" class="tn-indent"><span class="tn-guide" /></span>
         <span class="tn-toggle-slot" />
@@ -150,6 +155,7 @@ const { copied, copy } = useClipboard(() => props.node.path)
 
 .tn-bracket { color: var(--c-t3); }
 .tn-ellipsis { color: var(--c-t4); }
+.tn-truncated-text { color: var(--c-error); font-style: italic; font-size: 11.5px; }
 .tn-count {
   font-size: 11px;
   color: var(--c-t4);
