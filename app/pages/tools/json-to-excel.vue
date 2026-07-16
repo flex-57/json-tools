@@ -8,19 +8,26 @@
       <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" />
     </div>
 
+    <ErrorBanner
+      v-if="error"
+      :message="errorTip || error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
     <div class="dualpane no-mid">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">JSON Input</span>
           <div class="card-actions">
-            <span v-if="error && error !== 'empty'" class="hint" style="color: var(--c-error);">{{ error }}</span>
-            <span v-else class="hint">array of objects · or drop a .json file</span>
+            <span class="hint">array of objects · or drop a .json file</span>
             <button class="btn-xs" @click="clear"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" />
+            <JsonEditor ref="inputEditorRef" v-model="input" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -33,10 +40,10 @@
           <span class="pane-label">Preview</span>
           <div class="card-actions">
             <span class="hint">First 5 rows</span>
-            <button class="btn-xs" @click="download" :disabled="!input || loading">{{ loading ? 'Generating…' : 'Download .xlsx' }}</button>
+            <button class="btn-xs" @click="download" :disabled="!isValid || loading">{{ loading ? 'Generating…' : 'Download .xlsx' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
+        <div class="pane-body" :class="{ 'pane-body--empty': preview.length === 0 }" :style="preview.length > 0 ? 'padding: 0;' : ''" aria-live="polite">
           <div v-if="preview.length > 0" class="table-wrap">
             <table class="preview-table">
               <thead><tr><th v-for="col in previewCols" :key="col">{{ col }}</th></tr></thead>
@@ -47,7 +54,7 @@
               </tbody>
             </table>
           </div>
-          <div v-else class="pane-body--empty" style="height:100%;">Paste JSON to see a preview</div>
+          <template v-else>{{ error ? 'Fix the error in your input to see a preview' : 'Paste JSON to see a preview' }}</template>
         </div>
       </div>
     </div>
@@ -60,14 +67,17 @@
 
 <script setup lang="ts">
 import { useJsonToExcel } from '~/composables/useExcelJson'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'JSON to Excel Converter: Download .xlsx from JSON Free',
   'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
 )
 
-const { input, error, loading, download, clear } = useJsonToExcel()
+const { input, isValid, error, errorTip, errorLine, errorColumn, loading, download, clear } = useJsonToExcel()
 useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const seoCards = [
   {

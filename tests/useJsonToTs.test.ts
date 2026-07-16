@@ -144,7 +144,9 @@ describe('useJsonToTs — error handling', () => {
   it('returns error for invalid JSON', () => {
     const { input, error } = useJsonToTs()
     input.value = '{bad}'
-    expect(error.value).toBe('Invalid JSON')
+    // Now the real safeJsonParse message (with line/column), not a generic placeholder.
+    expect(error.value).toBeTruthy()
+    expect(error.value).not.toBe('Invalid JSON')
   })
 
   it('returns empty output on invalid JSON', () => {

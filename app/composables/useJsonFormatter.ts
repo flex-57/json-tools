@@ -47,51 +47,35 @@ const SAMPLE_JSON = `{
   "created_at": "2024-01-15T09:00:00Z"
 }`
 
+export type OutputMode = 'format' | 'minify'
+
 export function useJsonFormatter() {
   const input = ref(SAMPLE_JSON)
-  const output = ref('')
-  const error = ref<string | null>(null)
-  const isValid = ref<boolean | null>(null)
   const indent = ref<IndentStyle>(2)
+  const mode = ref<OutputMode>('format')
 
-  function format() {
-    const result = formatJson(input.value, indent.value)
-    output.value = result.output
-    error.value = result.error
-    isValid.value = result.valid
-  }
+  // Live: no click/shortcut needed to (re)validate — see project todo notes
+  // on why json-formatter used to be the odd one out among JSON tools here.
+  const parsed = computed(() => safeJsonParse(input.value.trim()))
+  const isValid = computed(() => input.value.trim() !== '' && parsed.value.error == null)
+  const error = computed(() => (input.value.trim() && parsed.value.error) || null)
+  const errorTip = computed(() => parsed.value.tip ?? null)
+  const errorLine = computed(() => parsed.value.line ?? null)
+  const errorColumn = computed(() => parsed.value.column ?? null)
 
-  watch(indent, format)
+  const output = computed(() => {
+    if (!isValid.value) return ''
+    return mode.value === 'format' ? JSON.stringify(parsed.value.data, null, indent.value) : JSON.stringify(parsed.value.data)
+  })
 
-  function minify() {
-    const result = minifyJson(input.value)
-    output.value = result.output
-    error.value = result.error
-    isValid.value = result.valid
-  }
+  const { copied, copy } = useClipboard(() => output.value)
 
-  function validate() {
-    const result = validateJson(input.value)
-    output.value = result.output
-    error.value = result.error
-    isValid.value = result.valid
-  }
-
-  const { copied, copy } = useClipboard(() => output.value || input.value)
-
-  function clear() {
-    input.value = ''
-    output.value = ''
-    error.value = null
-    isValid.value = null
-  }
+  function clear() { input.value = '' }
 
   function download() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'formatted.json')
   }
 
-  onMounted(format)
-
-  return { input, output, error, isValid, indent, copied, format, minify, validate, copy, download, clear }
+  return { input, output, error, errorTip, errorLine, errorColumn, isValid, indent, mode, copied, copy, download, clear }
 }

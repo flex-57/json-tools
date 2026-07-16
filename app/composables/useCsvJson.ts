@@ -20,6 +20,9 @@ interface ConvertResult {
   output: string
   error: string | null
   rowCount: number
+  line?: number | null
+  column?: number | null
+  tip?: string | null
 }
 
 export function csvToJson(input: string, delimiter: Delimiter = 'auto', hasHeader = true): ConvertResult {
@@ -48,8 +51,8 @@ export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): Con
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', rowCount: 0 }
 
-  const { data: parsed, error } = safeJsonParse(trimmed)
-  if (error) return { output: '', error, rowCount: 0 }
+  const { data: parsed, error, line, column, tip } = safeJsonParse(trimmed)
+  if (error) return { output: '', error, rowCount: 0, line, column, tip }
   const arr = Array.isArray(parsed) ? parsed : [parsed]
   if (arr.length === 0) return { output: '', error: 'Array is empty', rowCount: 0 }
   const csv = Papa.unparse(arr as object[], { delimiter })
@@ -92,17 +95,19 @@ export function useCsvToJson() {
 
 export function useJsonToCsv() {
   const input = ref(SAMPLE_JSON_ARRAY)
-  const output = ref('')
-  const error = ref<string | null>(null)
-  const rowCount = ref(0)
   const delimiter = ref<',' | ';' | '\t'>(',')
 
-  function convert() {
-    const result = jsonToCsv(input.value, delimiter.value)
-    output.value = result.output
-    error.value = result.error
-    rowCount.value = result.rowCount
-  }
+  // Live: no click/shortcut needed — same reasoning as json-formatter's move
+  // away from a manual trigger. Unlike json-formatter there's no output-mode
+  // choice here (only one transform), so unlike FMT/MIN there's no button to
+  // keep at all once this is live.
+  const result = computed(() => jsonToCsv(input.value, delimiter.value))
+  const output      = computed(() => result.value.output)
+  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
+  const errorTip    = computed(() => result.value.tip ?? null)
+  const errorLine   = computed(() => result.value.line ?? null)
+  const errorColumn = computed(() => result.value.column ?? null)
+  const rowCount    = computed(() => result.value.rowCount)
 
   const { copied, copy } = useClipboard(() => output.value)
 
@@ -111,14 +116,7 @@ export function useJsonToCsv() {
     triggerDownload(new Blob([output.value], { type: 'text/csv' }), 'converted.csv')
   }
 
-  function clear() {
-    input.value = ''
-    output.value = ''
-    error.value = null
-    rowCount.value = 0
-  }
+  function clear() { input.value = '' }
 
-  onMounted(convert)
-
-  return { input, output, error, rowCount, delimiter, copied, convert, copy, downloadCsv, clear }
+  return { input, output, error, errorTip, errorLine, errorColumn, rowCount, delimiter, copied, copy, downloadCsv, clear }
 }

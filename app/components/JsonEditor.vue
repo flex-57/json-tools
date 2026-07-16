@@ -4,8 +4,9 @@
 
 <script setup lang="ts">
 import { EditorView, basicSetup } from 'codemirror'
+import { Decoration, GutterMarker, gutterLineClass } from '@codemirror/view'
 import { syntaxHighlighting, defaultHighlightStyle } from '@codemirror/language'
-import { EditorState, Compartment } from '@codemirror/state'
+import { EditorState, Compartment, RangeSet, type Extension } from '@codemirror/state'
 import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
 
@@ -16,6 +17,8 @@ const props = defineProps<{
   readonly?: boolean
   lang?: EditorLang
   lineWrap?: boolean
+  // 1-based line to highlight (gutter dot + row tint) — e.g. a JSON parse error location.
+  errorLine?: number | null
 }>()
 
 const emit = defineEmits<{
@@ -28,6 +31,42 @@ let view: EditorView | null = null
 const themeConfig = new Compartment()
 const highlightConfig = new Compartment()
 const langConfig = new Compartment()
+const errorLineConfig = new Compartment()
+
+class ErrorGutterMarker extends GutterMarker {
+  elementClass = 'cm-error-gutter'
+}
+const errorGutterMarker = new ErrorGutterMarker()
+
+// Locates the line by counting '\n' in the plain string rather than going
+// through view.state.doc — needed at mount time (before `view` exists) and
+// kept the same afterwards so both call sites agree on the offset.
+function lineOffset(content: string, line: number): number | null {
+  const lines = content.split('\n')
+  if (line < 1 || line > lines.length) return null
+  let from = 0
+  for (let i = 0; i < line - 1; i++) from += lines[i]!.length + 1
+  return from
+}
+
+function buildErrorLineExtension(content: string, line: number | null | undefined): Extension {
+  if (!line) return []
+  const from = lineOffset(content, line)
+  if (from === null) return []
+  return [
+    EditorView.decorations.of(Decoration.set([
+      Decoration.line({ attributes: { class: 'cm-error-line' } }).range(from),
+    ])),
+    gutterLineClass.of(RangeSet.of([errorGutterMarker.range(from)])),
+  ]
+}
+
+function scrollToLine(line: number) {
+  if (!view || line < 1 || line > view.state.doc.lines) return
+  const from = view.state.doc.line(line).from
+  view.dispatch({ effects: EditorView.scrollIntoView(from, { y: 'center' }) })
+}
+defineExpose({ scrollToLine })
 
 const lightTheme = EditorView.theme({
   '&': {
@@ -144,6 +183,7 @@ onMounted(async () => {
     langConfig.of(langExtension),
     highlightConfig.of(syntaxHighlighting(isDark.value ? oneDarkHighlightStyle : defaultHighlightStyle)),
     themeConfig.of(isDark.value ? [oneDarkTheme, darkOverride] : lightTheme),
+    errorLineConfig.of(buildErrorLineExtension(props.modelValue, props.errorLine)),
     ...(props.lineWrap ? [EditorView.lineWrapping] : []),
   ]
 
@@ -179,13 +219,22 @@ watch(() => props.lang, async () => {
   view?.dispatch({ effects: langConfig.reconfigure(ext) })
 })
 
-watch(() => props.modelValue, (val) => {
+// Combined on purpose: the error-line decoration is computed against `val`,
+// so it must be reconfigured in the same dispatch as the doc change that
+// produced it — two separate watchers give Vue no ordering guarantee, which
+// could momentarily point the decoration at a line from the previous doc.
+let lastErrorLine: number | null | undefined = props.errorLine
+watch([() => props.modelValue, () => props.errorLine], ([val, line]) => {
   if (!view) return
   const current = view.state.doc.toString()
-  if (current === val) return
-  view.dispatch({
-    changes: { from: 0, to: current.length, insert: val },
-  })
+  const changes = current === val ? undefined : { from: 0, to: current.length, insert: val }
+  const effects = [errorLineConfig.reconfigure(buildErrorLineExtension(val, line))]
+  view.dispatch(changes ? { changes, effects } : { effects })
+  // Only auto-scroll when the error moves to a *new* line — re-centering on
+  // every keystroke while the user is actively fixing that same line would
+  // fight their scroll position instead of helping it.
+  if (line && line !== lastErrorLine) scrollToLine(line)
+  lastErrorLine = line
 })
 
 onUnmounted(() => view?.destroy())
@@ -200,5 +249,26 @@ onUnmounted(() => view?.destroy())
 
 .json-editor :deep(.cm-editor) {
   height: 100%;
+}
+
+.json-editor :deep(.cm-error-line) {
+  background: rgb(var(--c-error-rgb) / 0.15);
+  box-shadow: inset 3px 0 0 0 var(--c-error);
+}
+.json-editor :deep(.cm-error-gutter) {
+  color: var(--c-error) !important;
+  font-weight: 700;
+  position: relative;
+}
+.json-editor :deep(.cm-error-gutter)::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--c-error);
 }
 </style>

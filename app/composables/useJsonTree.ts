@@ -1,3 +1,5 @@
+import { safeJsonParse } from '../utils/json'
+
 export type NodeType = 'string' | 'number' | 'boolean' | 'null' | 'array' | 'object'
 
 export interface TreeNode {
@@ -51,16 +53,21 @@ function build(data: unknown, key: string, path: string): TreeNode {
   return { id, key, path, type, value: data as string | number | boolean | null, children: [], size: 0 }
 }
 
-export function parseJsonTree(raw: string): { root: TreeNode | null; error: string; truncated: boolean } {
-  try {
-    _seq = 0
-    _count = 0
-    const root = build(JSON.parse(raw), '', '')
-    return { root, error: '', truncated: _count >= MAX_TREE_NODES }
-  } catch (e: unknown) {
-    const message = e instanceof Error ? e.message : String(e)
-    return { root: null, error: message, truncated: false }
-  }
+export function parseJsonTree(raw: string): {
+  root: TreeNode | null
+  error: string
+  line: number | null
+  column: number | null
+  tip: string | null
+  truncated: boolean
+} {
+  _seq = 0
+  _count = 0
+  const { data, error, line, column, tip } = safeJsonParse(raw)
+  if (error) return { root: null, error, line: line ?? null, column: column ?? null, tip: tip ?? null, truncated: false }
+
+  const root = build(data, '', '')
+  return { root, error: '', line: null, column: null, tip: null, truncated: _count >= MAX_TREE_NODES }
 }
 
 export function nodeHasMatch(node: TreeNode, q: string): boolean {

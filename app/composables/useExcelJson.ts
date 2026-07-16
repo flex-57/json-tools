@@ -1,4 +1,5 @@
 import { triggerDownload } from '../utils/download'
+import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
 
 export interface SheetInfo {
@@ -157,20 +158,34 @@ export function useExcelToJson() {
 
 export function useJsonToExcel() {
   const input = ref('')
-  const error = ref<string | null>(null)
+  // Worker-time failures only (e.g. the xlsx write itself throwing) — kept
+  // separate from the live JSON-syntax `error` below so a valid-JSON-but-
+  // failed-generation message doesn't get mistaken for a parse error.
+  const downloadError = ref<string | null>(null)
   const loading = ref(false)
 
+  // Validated on the main thread, live, as the user types — the worker is
+  // only invoked once this already confirms valid JSON, so the banner/line
+  // highlight UI doesn't have to wait on a worker round-trip to appear.
+  const parsed = computed(() => (input.value.trim() ? safeJsonParse(input.value) : null))
+  const isValid = computed(() => input.value.trim() !== '' && !parsed.value?.error)
+  const error       = computed(() => parsed.value?.error ?? downloadError.value)
+  const errorTip    = computed(() => parsed.value?.tip ?? null)
+  const errorLine   = computed(() => parsed.value?.line ?? null)
+  const errorColumn = computed(() => parsed.value?.column ?? null)
+
   async function download() {
+    if (!isValid.value) return
+    downloadError.value = null
     loading.value = true
     const { blob, error: err } = await jsonToExcel(input.value)
     loading.value = false
-    if (err) { error.value = err; return }
+    if (err) { downloadError.value = err; return }
     if (!blob) return
     triggerDownload(blob, 'converted.xlsx')
-    error.value = null
   }
 
-  function clear() { input.value = ''; error.value = null }
+  function clear() { input.value = ''; downloadError.value = null }
 
-  return { input, error, loading, download, clear }
+  return { input, isValid, error, errorTip, errorLine, errorColumn, loading, download, clear }
 }

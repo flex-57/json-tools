@@ -1,4 +1,5 @@
 import { triggerDownload } from '../utils/download'
+import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 
@@ -29,6 +30,9 @@ const SAMPLE_JSON = `{
 interface ConvertResult {
   output: string
   error: string | null
+  line?: number | null
+  column?: number | null
+  tip?: string | null
 }
 
 export function xmlToJson(input: string): ConvertResult {
@@ -46,10 +50,11 @@ export function xmlToJson(input: string): ConvertResult {
 export function jsonToXml(input: string): ConvertResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty' }
+  const { data, error, line, column, tip } = safeJsonParse(trimmed)
+  if (error) return { output: '', error, line, column, tip }
   try {
-    const parsed = JSON.parse(trimmed)
     const builder = new XMLBuilder({ ignoreAttributes: false, attributeNamePrefix: '@', format: true, indentBy: '  ' })
-    return { output: builder.build(parsed), error: null }
+    return { output: builder.build(data), error: null }
   } catch (e) {
     return { output: '', error: (e as Error).message }
   }
@@ -82,14 +87,13 @@ export function useXmlToJson() {
 
 export function useJsonToXml() {
   const input = ref(SAMPLE_JSON)
-  const output = ref('')
-  const error = ref<string | null>(null)
 
-  function convert() {
-    const r = jsonToXml(input.value)
-    output.value = r.output
-    error.value = r.error
-  }
+  const result = computed(() => jsonToXml(input.value))
+  const output      = computed(() => result.value.output)
+  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
+  const errorTip    = computed(() => result.value.tip ?? null)
+  const errorLine   = computed(() => result.value.line ?? null)
+  const errorColumn = computed(() => result.value.column ?? null)
 
   const { copied, copy } = useClipboard(() => output.value)
 
@@ -98,9 +102,7 @@ export function useJsonToXml() {
     triggerDownload(new Blob([output.value], { type: 'application/xml' }), 'converted.xml')
   }
 
-  function clear() { input.value = ''; output.value = ''; error.value = null }
+  function clear() { input.value = '' }
 
-  onMounted(convert)
-
-  return { input, output, error, copied, convert, copy, download, clear }
+  return { input, output, error, errorTip, errorLine, errorColumn, copied, copy, download, clear }
 }

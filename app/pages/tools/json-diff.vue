@@ -11,8 +11,18 @@
       </button>
     </div>
 
+    <ErrorBanner
+      v-if="result?.error"
+      :message="result.errorTip || result.error"
+      :line="result.errorLine"
+      :column="result.errorColumn"
+      :side-dot="result.errorSide === 'left' ? 'var(--c-error)' : 'var(--c-valid)'"
+      :side-label="result.errorSide === 'left' ? 'Original' : 'Modified'"
+      @jump="onJump"
+    />
+
     <div class="dualpane no-mid">
-      <div class="pane" :class="{ 'pane--drag': isDraggingLeft }" @dragover.prevent="isDraggingLeft = true" @dragleave="isDraggingLeft = false" @drop.prevent="onDropLeft">
+      <div class="pane" :class="{ 'pane--drag': isDraggingLeft, 'pane--invalid': result?.errorSide === 'left' }" @dragover.prevent="isDraggingLeft = true" @dragleave="isDraggingLeft = false" @drop.prevent="onDropLeft">
         <div class="pane-header">
           <span class="pane-label"><span class="side-dot side-dot--left"></span>Original</span>
           <div class="card-actions">
@@ -23,7 +33,7 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="left" />
+            <JsonEditor ref="leftEditorRef" v-model="left" :error-line="result?.errorSide === 'left' ? result.errorLine : null" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -35,7 +45,7 @@
         </button>
       </div>
 
-      <div class="pane pane--alt" :class="{ 'pane--drag': isDraggingRight }" @dragover.prevent="isDraggingRight = true" @dragleave="isDraggingRight = false" @drop.prevent="onDropRight">
+      <div class="pane pane--alt" :class="{ 'pane--drag': isDraggingRight, 'pane--invalid': result?.errorSide === 'right' }" @dragover.prevent="isDraggingRight = true" @dragleave="isDraggingRight = false" @drop.prevent="onDropRight">
         <div class="pane-header">
           <span class="pane-label"><span class="side-dot side-dot--right"></span>Modified</span>
           <div class="card-actions">
@@ -46,7 +56,7 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="right" />
+            <JsonEditor ref="rightEditorRef" v-model="right" :error-line="result?.errorSide === 'right' ? result.errorLine : null" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -56,7 +66,7 @@
     <Transition name="status">
       <div v-if="result" class="diff-section">
         <StatusBar :class="result.error ? 'error' : result.same ? 'same' : ''">
-          <template v-if="result.error">{{ result.error }}</template>
+          <template v-if="result.error">{{ result.errorSide === 'left' ? 'Original' : 'Modified' }} panel is invalid — see details above</template>
           <template v-else-if="result.same">Identical, no differences found</template>
           <template v-else>
             <span class="diff-stat diff-stat--added">+{{ result.additions }} addition{{ result.additions !== 1 ? 's' : '' }}</span>
@@ -81,6 +91,7 @@
 
 <script setup lang="ts">
 import { useJsonDiff } from '~/composables/useJsonDiff'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'JSON Diff Tool: Compare & Highlight JSON Differences Online',
@@ -88,6 +99,14 @@ useToolSeo(
 )
 
 const { left, right, result, swap } = useJsonDiff()
+
+const leftEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
+const rightEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
+function onJump() {
+  if (!result.value?.errorLine) return
+  const editor = result.value.errorSide === 'left' ? leftEditorRef.value : rightEditorRef.value
+  editor?.scrollToLine(result.value.errorLine)
+}
 
 const isDraggingLeft = ref(false)
 const isDraggingRight = ref(false)

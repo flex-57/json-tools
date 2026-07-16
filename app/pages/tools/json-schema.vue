@@ -13,8 +13,16 @@
       </div>
     </div>
 
+    <ErrorBanner
+      v-if="error"
+      :message="errorTip || error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
     <div class="dualpane no-mid">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">JSON Input</span>
           <div class="card-actions">
@@ -24,7 +32,7 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" />
+            <JsonEditor ref="inputEditorRef" v-model="input" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -45,8 +53,9 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see the schema' : 'Paste JSON to see the schema' }}</template>
+          <ClientOnly v-else>
             <JsonEditor v-model="output" :readonly="true" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -55,7 +64,10 @@
     </div>
 
     <StatusBar>
-      <span><span class="led" :class="output && !error ? 'valid' : 'error'"></span>{{ error || (output ? 'Ready' : 'Waiting for input') }}</span>
+      <span>
+        <span class="led" :class="output && !error ? 'valid' : 'error'"></span>
+        {{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : (output ? 'Ready' : 'Waiting for input') }}
+      </span>
       <span>json-schema</span>
     </StatusBar>
 
@@ -65,14 +77,17 @@
 
 <script setup lang="ts">
 import { useJsonSchema } from '~/composables/useJsonSchema'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'JSON Schema Generator: Auto-Infer Draft-07 & 2020-12',
   'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
 )
 
-const { input, draft, required, output, error, copied, copy, clear, download } = useJsonSchema()
+const { input, draft, required, output, error, errorTip, errorLine, errorColumn, copied, copy, clear, download } = useJsonSchema()
 useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

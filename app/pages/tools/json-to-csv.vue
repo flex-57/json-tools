@@ -9,8 +9,16 @@
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
     </div>
 
-    <div class="dualpane">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+    <ErrorBanner
+      v-if="error"
+      :message="errorTip || error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
+    <div class="dualpane no-mid">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">JSON Input</span>
           <div class="card-actions">
@@ -20,18 +28,13 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" />
+            <JsonEditor ref="inputEditorRef" v-model="input" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
 
-      <div class="midcol">
-        <button class="mid-btn" title="Convert (Ctrl + Enter)" @click="convert">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>CONV</span>
-        </button>
-      </div>
+      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -49,14 +52,18 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body" aria-live="polite">
-          <textarea v-model="output" readonly class="pane-textarea" spellcheck="false" placeholder="CSV output appears here…" />
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" aria-live="polite">
+          <template v-if="!output">{{ error ? 'Fix the error in your input to see CSV output' : 'Paste JSON to see CSV output' }}</template>
+          <textarea v-else v-model="output" readonly class="pane-textarea" spellcheck="false" />
         </div>
       </div>
     </div>
 
     <StatusBar>
-      <span><span class="led" :class="rowCount > 0 ? 'valid' : 'error'"></span>{{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error && error !== 'empty' ? error : 'Waiting for input') }}</span>
+      <span>
+        <span class="led" :class="rowCount > 0 ? 'valid' : 'error'"></span>
+        {{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
+      </span>
       <span>json-to-csv</span>
     </StatusBar>
 
@@ -66,15 +73,17 @@
 
 <script setup lang="ts">
 import { useJsonToCsv } from '~/composables/useCsvJson'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'JSON to CSV Converter: Export JSON Arrays to CSV Free',
   'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
 )
 
-const { input, output, error, rowCount, delimiter, copied, convert, copy, downloadCsv, clear } = useJsonToCsv()
-useToolShortcut(convert)
-useUrlInput(input, convert)
+const { input, output, error, errorTip, errorLine, errorColumn, rowCount, delimiter, copied, copy, downloadCsv, clear } = useJsonToCsv()
+useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
@@ -82,7 +91,7 @@ function onDrop(e: DragEvent) {
   const file = e.dataTransfer?.files[0]
   if (!file) return
   const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string; convert() }
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
 }
 

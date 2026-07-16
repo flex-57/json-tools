@@ -1,3 +1,5 @@
+import { safeJsonParse } from '../utils/json'
+
 export type DiffLineType = 'added' | 'removed' | 'unchanged'
 
 export interface DiffLine {
@@ -13,7 +15,13 @@ export interface DiffResult {
   deletions: number
   same: boolean
   error: string | null
+  errorSide: 'left' | 'right' | null
+  errorLine: number | null
+  errorColumn: number | null
+  errorTip: string | null
 }
+
+const NO_ERROR = { error: null, errorSide: null, errorLine: null, errorColumn: null, errorTip: null } as const
 
 function lcsMatrix(a: string[], b: string[]): number[][] {
   const m = a.length
@@ -52,11 +60,23 @@ export function diffJson(left: string, right: string): DiffResult {
   const leftTrim = left.trim()
   const rightTrim = right.trim()
 
-  if (!leftTrim && !rightTrim) return { lines: [], additions: 0, deletions: 0, same: true, error: null }
+  if (!leftTrim && !rightTrim) return { lines: [], additions: 0, deletions: 0, same: true, ...NO_ERROR }
+
+  // Parsed separately (rather than one try/catch around both) so a failure
+  // can be attributed to a specific side — the banner needs to say which
+  // editor to highlight, not just that "something" is invalid.
+  const leftParsed = leftTrim ? safeJsonParse(leftTrim) : null
+  if (leftParsed?.error) {
+    return { lines: [], additions: 0, deletions: 0, same: false, error: leftParsed.error, errorSide: 'left', errorLine: leftParsed.line, errorColumn: leftParsed.column, errorTip: leftParsed.tip }
+  }
+  const rightParsed = rightTrim ? safeJsonParse(rightTrim) : null
+  if (rightParsed?.error) {
+    return { lines: [], additions: 0, deletions: 0, same: false, error: rightParsed.error, errorSide: 'right', errorLine: rightParsed.line, errorColumn: rightParsed.column, errorTip: rightParsed.tip }
+  }
 
   try {
-    const leftFormatted = leftTrim ? JSON.stringify(JSON.parse(leftTrim), null, 2) : ''
-    const rightFormatted = rightTrim ? JSON.stringify(JSON.parse(rightTrim), null, 2) : ''
+    const leftFormatted = leftParsed ? JSON.stringify(leftParsed.data, null, 2) : ''
+    const rightFormatted = rightParsed ? JSON.stringify(rightParsed.data, null, 2) : ''
     const leftLines = leftFormatted ? leftFormatted.split('\n') : []
     const rightLines = rightFormatted ? rightFormatted.split('\n') : []
 
@@ -64,9 +84,9 @@ export function diffJson(left: string, right: string): DiffResult {
     const additions = lines.filter(l => l.type === 'added').length
     const deletions = lines.filter(l => l.type === 'removed').length
 
-    return { lines, additions, deletions, same: additions === 0 && deletions === 0, error: null }
+    return { lines, additions, deletions, same: additions === 0 && deletions === 0, ...NO_ERROR }
   } catch (e) {
-    return { lines: [], additions: 0, deletions: 0, same: false, error: (e as Error).message }
+    return { lines: [], additions: 0, deletions: 0, same: false, error: (e as Error).message, errorSide: null, errorLine: null, errorColumn: null, errorTip: null }
   }
 }
 

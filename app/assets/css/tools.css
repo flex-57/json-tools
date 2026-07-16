@@ -23,8 +23,8 @@
 
   --c-valid:     #5C7A00;
   --c-valid-rgb: 92 122 0;
-  --c-error:     #C43A3A;
-  --c-error-rgb: 196 58 58;
+  --c-error:     #C91D3C;
+  --c-error-rgb: 201 29 60;
 
   --type-str:  #4C7A2E;
   --type-num:  #4C4FA8;
@@ -62,8 +62,8 @@ html.dark {
 
   --c-valid:     #C6FF3D;
   --c-valid-rgb: 198 255 61;
-  --c-error:     #FF5C5C;
-  --c-error-rgb: 255 92 92;
+  --c-error:     #FF4D6D;
+  --c-error-rgb: 255 77 109;
 
   --type-str:  #9FCB78;
   --type-num:  #A9ACE8;
@@ -278,6 +278,11 @@ html.dark .toggle-thumb { background: #fff; }
 .pane { display: flex; flex-direction: column; background: var(--c-card); min-width: 0; }
 .pane--alt { background: var(--c-card-alt); }
 .pane:focus-within { box-shadow: inset 0 0 0 2px rgb(var(--c-accent-rgb) / 0.25); }
+.pane--invalid { box-shadow: inset 0 0 0 2px var(--c-error); }
+/* Same specificity as :focus-within (one class + one pseudo-class) and placed after it,
+   so the error ring wins the cascade while the error still exists — fixing it in the
+   editor shouldn't make the red border vanish just because the pane gained focus. */
+.pane--invalid:focus-within { box-shadow: inset 0 0 0 2px var(--c-error); }
 
 .pane-header {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -342,6 +347,8 @@ html.dark .toggle-thumb { background: #fff; }
 }
 .mid-btn span { font-family: var(--font-body); font-size: 9px; font-weight: 700; letter-spacing: 0.03em; }
 .mid-btn:hover, .mid-btn:focus-visible { border-color: var(--c-accent); color: var(--c-accent); box-shadow: 0 0 0 1px var(--c-accent); outline: none; }
+.mid-btn--active { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-accent-ink); }
+.mid-btn--active:hover { color: var(--c-accent-ink); box-shadow: none; }
 .mid-arrow { color: var(--c-t4); display: flex; }
 
 .statusbar {

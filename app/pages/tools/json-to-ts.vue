@@ -18,8 +18,16 @@
       </div>
     </div>
 
+    <ErrorBanner
+      v-if="error"
+      :message="errorTip || error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
     <div class="dualpane no-mid">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">JSON Input</span>
           <div class="card-actions">
@@ -29,7 +37,7 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" />
+            <JsonEditor ref="inputEditorRef" v-model="input" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -70,8 +78,9 @@
             </button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see the generated code' : 'Paste JSON to see the generated code' }}</template>
+          <ClientOnly v-else>
             <JsonEditor v-model="output" :readonly="true" lang="typescript" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -82,7 +91,7 @@
     <StatusBar>
       <span>
         <span class="led" :class="error ? 'error' : 'valid'"></span>
-        {{ error || 'Valid' }} · {{ lineCount }} lines · {{ charCount }} chars
+        {{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Valid' }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-to-ts</span>
     </StatusBar>
@@ -93,14 +102,17 @@
 
 <script setup lang="ts">
 import { useJsonToTs } from '~/composables/useJsonToTs'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'JSON to TypeScript Generator: Interfaces & Zod Schemas Online',
   'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
 )
 
-const { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict, download } = useJsonToTs()
+const { input, mode, rootName, output, error, errorTip, errorLine, errorColumn, copied, copy, clear, readonlyFields, useType, zodStrict, download } = useJsonToTs()
 useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

@@ -99,20 +99,23 @@ export function useJsonSchema() {
   const draft   = ref<SchemaDraft>('draft-07')
   const required = ref(true)
 
-  const result = computed((): { output: string; error: string | null } => {
-    if (!input.value.trim()) return { output: '', error: null }
+  const result = computed((): { output: string; error: string | null; line: number | null; column: number | null; tip: string | null } => {
+    if (!input.value.trim()) return { output: '', error: null, line: null, column: null, tip: null }
     const parsed = safeJsonParse(input.value)
-    if (parsed.error) return { output: '', error: parsed.error }
+    if (parsed.error) return { output: '', error: parsed.error, line: parsed.line, column: parsed.column, tip: parsed.tip }
     try {
       const schema = buildSchema(parsed.data, { draft: draft.value, required: required.value })
-      return { output: JSON.stringify(schema, null, 2), error: null }
+      return { output: JSON.stringify(schema, null, 2), error: null, line: null, column: null, tip: null }
     } catch (e) {
-      return { output: '', error: (e as Error).message }
+      return { output: '', error: (e as Error).message, line: null, column: null, tip: null }
     }
   })
 
-  const output = computed(() => result.value.output)
-  const error  = computed(() => result.value.error)
+  const output      = computed(() => result.value.output)
+  const error       = computed(() => result.value.error)
+  const errorTip    = computed(() => result.value.tip)
+  const errorLine   = computed(() => result.value.line)
+  const errorColumn = computed(() => result.value.column)
 
   const { copied, copy } = useClipboard(() => output.value)
 
@@ -123,5 +126,5 @@ export function useJsonSchema() {
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'schema.json')
   }
 
-  return { input, draft, required, output, error, copied, copy, clear, download }
+  return { input, draft, required, output, error, errorTip, errorLine, errorColumn, copied, copy, clear, download }
 }

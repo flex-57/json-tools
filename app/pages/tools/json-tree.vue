@@ -12,8 +12,16 @@
       </div>
     </div>
 
+    <ErrorBanner
+      v-if="error"
+      :message="errorTip || error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
     <div class="dualpane no-mid">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">JSON Input</span>
           <div class="card-actions">
@@ -23,7 +31,7 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" />
+            <JsonEditor ref="inputEditorRef" v-model="input" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -58,16 +66,16 @@
         </div>
 
         <div v-if="viewMode === 'tree'" class="pane-body" aria-live="polite">
-          <div v-if="error" class="tree-message tree-message--error">{{ error }}</div>
-          <div v-else-if="!input.trim()" class="tree-message">Paste valid JSON in the input panel</div>
+          <div v-if="error" class="tree-message tree-message--error">Fix the error in your input to see the tree</div>
+          <div v-else-if="!input.trim()" class="tree-message">Paste JSON to see the tree</div>
           <div v-else-if="root" class="tree-wrap">
             <JsonTreeNode :node="root" :depth="0" />
           </div>
         </div>
 
         <div v-else class="pane-body pane-body--graph" aria-live="polite">
-          <div v-if="error" class="tree-message tree-message--error">{{ error }}</div>
-          <div v-else-if="!input.trim()" class="tree-message">Paste valid JSON in the input panel</div>
+          <div v-if="error" class="tree-message tree-message--error">Fix the error in your input to see the graph</div>
+          <div v-else-if="!input.trim()" class="tree-message">Paste JSON to see the graph</div>
           <div v-else-if="graphLoading" class="tree-message">Building graph…</div>
           <ClientOnly v-else-if="graphNodes.length">
             <VueFlow
@@ -106,6 +114,7 @@
 import { parseJsonTree, collectDeepIds, collectAllExpandableIds } from '~/composables/useJsonTree'
 import { buildGraph } from '~/composables/useJsonGraph'
 import { useColorMode } from '~/composables/useColorMode'
+import JsonEditor from '~/components/JsonEditor.vue'
 import type { TreeNode } from '~/composables/useJsonTree'
 import type { VfNode, VfEdge } from '~/composables/useJsonGraph'
 import type { NodeComponent, NodeTypesObject } from '@vue-flow/core'
@@ -139,7 +148,11 @@ const search      = ref('')
 const collapsed   = ref(new Set<string>())
 const root        = ref<TreeNode | null>(null)
 const error       = ref('')
+const errorTip    = ref<string | null>(null)
+const errorLine   = ref<number | null>(null)
+const errorColumn = ref<number | null>(null)
 const truncated   = ref(false)
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 const viewMode    = ref<'tree' | 'graph'>('tree')
 const graphNodes  = ref<VfNode[]>([])
 const graphEdges  = ref<VfEdge[]>([])
@@ -163,10 +176,17 @@ provide('tree:toggle', (id: string) => {
 provide('tree:search', search)
 
 watch(input, (val) => {
-  if (!val.trim()) { root.value = null; error.value = ''; truncated.value = false; graphNodes.value = []; graphEdges.value = []; return }
-  const { root: r, error: e, truncated: t } = parseJsonTree(val)
+  if (!val.trim()) {
+    root.value = null; error.value = ''; errorTip.value = null; errorLine.value = null; errorColumn.value = null
+    truncated.value = false; graphNodes.value = []; graphEdges.value = []
+    return
+  }
+  const { root: r, error: e, line, column, tip, truncated: t } = parseJsonTree(val)
   root.value = r
   error.value = e
+  errorTip.value = tip
+  errorLine.value = line
+  errorColumn.value = column
   truncated.value = t
   graphNodes.value = []
   graphEdges.value = []

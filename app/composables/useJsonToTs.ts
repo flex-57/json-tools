@@ -124,17 +124,18 @@ export function useJsonToTs() {
   const useType = ref(false)
   const zodStrict = ref(false)
 
-  const parsed = computed(() => {
-    if (!input.value.trim()) return undefined
+  const parseResult = computed(() => {
+    if (!input.value.trim()) return { data: undefined, error: null, line: null, column: null, tip: null }
     const result = safeJsonParse<JsonVal>(input.value)
-    return result.error ? undefined : result.data
+    if (result.error) return { data: undefined, error: result.error, line: result.line, column: result.column, tip: result.tip }
+    return { data: result.data, error: null, line: null, column: null, tip: null }
   })
 
-  const error = computed((): string | null => {
-    if (!input.value.trim()) return null
-    if (parsed.value === undefined) return 'Invalid JSON'
-    return null
-  })
+  const parsed      = computed(() => parseResult.value.data)
+  const error       = computed(() => parseResult.value.error)
+  const errorTip    = computed(() => parseResult.value.tip)
+  const errorLine   = computed(() => parseResult.value.line)
+  const errorColumn = computed(() => parseResult.value.column)
 
   const output = computed((): string => {
     const val = parsed.value
@@ -173,5 +174,5 @@ export function useJsonToTs() {
     triggerDownload(new Blob([output.value], { type: 'text/plain' }), 'types.ts')
   }
 
-  return { input, mode, rootName, output, error, copied, copy, clear, readonlyFields, useType, zodStrict, download }
+  return { input, mode, rootName, output, error, errorTip, errorLine, errorColumn, copied, copy, clear, readonlyFields, useType, zodStrict, download }
 }

@@ -9,8 +9,16 @@
       <ToolSwitch from-path="/tools/yaml-to-json" to-path="/tools/json-to-yaml" from-label="YAML → JSON" to-label="JSON → YAML" />
     </div>
 
-    <div class="dualpane">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+    <ErrorBanner
+      v-if="error"
+      :message="errorTip || error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
+    <div class="dualpane no-mid">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">JSON Input</span>
           <div class="card-actions">
@@ -20,18 +28,13 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" />
+            <JsonEditor ref="inputEditorRef" v-model="input" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
 
-      <div class="midcol">
-        <button class="mid-btn" title="Convert (Ctrl + Enter)" @click="convert">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>CONV</span>
-        </button>
-      </div>
+      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -48,8 +51,9 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see YAML output' : 'Paste JSON to see YAML output' }}</template>
+          <ClientOnly v-else>
             <JsonEditor v-model="output" :readonly="true" lang="yaml" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -58,7 +62,10 @@
     </div>
 
     <StatusBar>
-      <span><span class="led" :class="output && !error ? 'valid' : 'error'"></span>{{ output && !error ? 'Converted' : (error && error !== 'empty' ? error : 'Waiting for input') }}</span>
+      <span>
+        <span class="led" :class="output && !error ? 'valid' : 'error'"></span>
+        {{ output && !error ? 'Converted' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
+      </span>
       <span>json-to-yaml</span>
     </StatusBar>
 
@@ -68,13 +75,15 @@
 
 <script setup lang="ts">
 import { useJsonToYaml } from '~/composables/useYamlJson'
+import JsonEditor from '~/components/JsonEditor.vue'
 useToolSeo(
   'JSON to YAML Converter: Export JSON as YAML Config Online',
   'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
 )
-const { input, output, error, indent, copied, convert, copy, download, clear } = useJsonToYaml()
-useToolShortcut(convert)
-useUrlInput(input, convert)
+const { input, output, error, errorTip, errorLine, errorColumn, indent, copied, copy, download, clear } = useJsonToYaml()
+useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const seoCards = [
   {
@@ -105,7 +114,7 @@ function onDrop(e: DragEvent) {
   const file = e.dataTransfer?.files[0]
   if (!file) return
   const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string; convert() }
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
 }
 </script>

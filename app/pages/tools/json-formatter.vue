@@ -17,8 +17,16 @@
       </div>
     </div>
 
+    <ErrorBanner
+      v-if="error"
+      :message="errorTip || error || ''"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
     <div class="dualpane">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">Input</span>
           <div class="card-actions">
@@ -28,24 +36,20 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" />
+            <JsonEditor ref="inputEditorRef" v-model="input" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
 
       <div class="midcol">
-        <button class="mid-btn" title="Format (Ctrl + Enter)" @click="format">
+        <button class="mid-btn" :class="{ 'mid-btn--active': mode === 'format' }" title="Format" @click="mode = 'format'">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3h10M2 7h6M2 11h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <span>FMT</span>
         </button>
-        <button class="mid-btn" title="Minify" @click="minify">
+        <button class="mid-btn" :class="{ 'mid-btn--active': mode === 'minify' }" title="Minify" @click="mode = 'minify'">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M5 4l-3 3 3 3M9 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span>MIN</span>
-        </button>
-        <button class="mid-btn" title="Validate" @click="validate">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>VAL</span>
         </button>
       </div>
 
@@ -63,8 +67,9 @@
             </button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !isValid }" :style="isValid ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!isValid">{{ input.trim() ? 'Fix the error in your input to see formatted output' : 'Paste JSON to see formatted output' }}</template>
+          <ClientOnly v-else>
             <JsonEditor v-model="output" :readonly="true" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -75,7 +80,7 @@
     <StatusBar>
       <span>
         <span class="led" :class="isValid ? 'valid' : 'error'"></span>
-        {{ isValid ? 'Valid' : (error || 'Waiting for input') }} · {{ lineCount }} lines · {{ charCount }} chars
+        {{ isValid ? 'Valid' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-formatter</span>
     </StatusBar>
@@ -86,15 +91,17 @@
 
 <script setup lang="ts">
 import { useJsonFormatter } from '~/composables/useJsonFormatter'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'JSON Formatter & Validator: Beautify & Validate JSON Online',
   'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
 )
 
-const { input, output, error, isValid, indent, copied, format, minify, validate, copy, download, clear } = useJsonFormatter()
-useToolShortcut(format)
-useUrlInput(input, format)
+const { input, output, error, errorTip, errorLine, errorColumn, isValid, indent, mode, copied, copy, download, clear } = useJsonFormatter()
+useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

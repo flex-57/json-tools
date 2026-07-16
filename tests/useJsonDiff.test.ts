@@ -53,6 +53,22 @@ describe('diffJson', () => {
     expect(r.error).not.toBeNull()
   })
 
+  it('attributes the error to the left side when only the left is invalid', () => {
+    const r = diffJson('{"a":1,}', A)
+    expect(r.errorSide).toBe('left')
+    expect(r.errorLine).not.toBeNull()
+  })
+
+  it('attributes the error to the right side when only the right is invalid', () => {
+    const r = diffJson(A, '{"a":1,}')
+    expect(r.errorSide).toBe('right')
+  })
+
+  it('reports the left error even when both sides are invalid (checked first)', () => {
+    const r = diffJson('{bad}', '{worse}')
+    expect(r.errorSide).toBe('left')
+  })
+
   it('all lines are typed', () => {
     const r = diffJson(A, B)
     expect(r.lines.every(l => ['added', 'removed', 'unchanged'].includes(l.type))).toBe(true)

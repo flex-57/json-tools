@@ -1,4 +1,5 @@
 import { triggerDownload } from '../utils/download'
+import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
 import yaml from 'js-yaml'
 
@@ -24,6 +25,9 @@ const SAMPLE_JSON = `{
 interface ConvertResult {
   output: string
   error: string | null
+  line?: number | null
+  column?: number | null
+  tip?: string | null
 }
 
 export function yamlToJson(input: string): ConvertResult {
@@ -40,9 +44,10 @@ export function yamlToJson(input: string): ConvertResult {
 export function jsonToYaml(input: string, indent = 2): ConvertResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty' }
+  const { data, error, line, column, tip } = safeJsonParse(trimmed)
+  if (error) return { output: '', error, line, column, tip }
   try {
-    const parsed = JSON.parse(trimmed)
-    return { output: yaml.dump(parsed, { indent, lineWidth: -1 }), error: null }
+    return { output: yaml.dump(data, { indent, lineWidth: -1 }), error: null }
   } catch (e) {
     return { output: '', error: (e as Error).message }
   }
@@ -75,15 +80,14 @@ export function useYamlToJson() {
 
 export function useJsonToYaml() {
   const input = ref(SAMPLE_JSON)
-  const output = ref('')
-  const error = ref<string | null>(null)
   const indent = ref(2)
 
-  function convert() {
-    const r = jsonToYaml(input.value, indent.value)
-    output.value = r.output
-    error.value = r.error
-  }
+  const result = computed(() => jsonToYaml(input.value, indent.value))
+  const output      = computed(() => result.value.output)
+  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
+  const errorTip    = computed(() => result.value.tip ?? null)
+  const errorLine   = computed(() => result.value.line ?? null)
+  const errorColumn = computed(() => result.value.column ?? null)
 
   const { copied, copy } = useClipboard(() => output.value)
 
@@ -92,9 +96,7 @@ export function useJsonToYaml() {
     triggerDownload(new Blob([output.value], { type: 'text/yaml' }), 'converted.yaml')
   }
 
-  function clear() { input.value = ''; output.value = ''; error.value = null }
+  function clear() { input.value = '' }
 
-  onMounted(convert)
-
-  return { input, output, error, indent, copied, convert, copy, download, clear }
+  return { input, output, error, errorTip, errorLine, errorColumn, indent, copied, copy, download, clear }
 }
