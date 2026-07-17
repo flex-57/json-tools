@@ -23,6 +23,15 @@ describe('xmlToJson', () => {
   it('returns empty error on empty input', () => {
     expect(xmlToJson('').error).toBe('empty')
   })
+
+  it('returns a structured line/column on invalid XML', () => {
+    const bad = `<users><user id="1"><name>Alice</name></user><user id="2"><name>Bob</user></users>`
+    const r = xmlToJson(bad)
+    expect(r.error).not.toBeNull()
+    expect(r.error).not.toContain('\n')
+    expect(r.line).toBeGreaterThan(0)
+    expect(r.column).toBeGreaterThan(0)
+  })
 })
 
 describe('jsonToXml', () => {

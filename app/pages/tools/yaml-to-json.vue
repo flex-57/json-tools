@@ -10,15 +10,15 @@
     </div>
 
     <ErrorBanner
-      v-if="error && error !== 'empty'"
+      v-if="error"
       :message="error"
       :line="errorLine"
       :column="errorColumn"
       @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
     />
 
-    <div class="dualpane">
-      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error && error !== 'empty' }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+    <div class="dualpane no-mid">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">YAML Input</span>
           <div class="card-actions">
@@ -34,12 +34,7 @@
         </div>
       </div>
 
-      <div class="midcol">
-        <button class="mid-btn" title="Convert (Ctrl + Enter)" @click="convert">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>CONV</span>
-        </button>
-      </div>
+      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -62,7 +57,7 @@
     <StatusBar>
       <span>
         <span class="led" :class="output && !error ? 'valid' : 'error'"></span>
-        {{ output && !error ? 'Converted' : (error && error !== 'empty' ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
+        {{ output && !error ? 'Converted' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
       </span>
       <span>yaml-to-json</span>
     </StatusBar>
@@ -78,9 +73,8 @@ useToolSeo(
   'YAML to JSON Converter Online: Parse YAML Files Free',
   'Convert YAML to JSON instantly. Free online YAML to JSON converter, no data sent to servers.',
 )
-const { input, output, error, errorLine, errorColumn, copied, convert, copy, download, clear } = useYamlToJson()
-useToolShortcut(convert)
-useUrlInput(input, convert)
+const { input, output, error, errorLine, errorColumn, copied, copy, download, clear } = useYamlToJson()
+useUrlInput(input)
 
 const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
@@ -115,7 +109,7 @@ function onDrop(e: DragEvent) {
   const file = e.dataTransfer?.files[0]
   if (!file) return
   const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string; convert() }
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
 }
 </script>

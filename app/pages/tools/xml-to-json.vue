@@ -8,8 +8,16 @@
       <ToolSwitch from-path="/tools/xml-to-json" to-path="/tools/json-to-xml" from-label="XML → JSON" to-label="JSON → XML" />
     </div>
 
-    <div class="dualpane">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+    <ErrorBanner
+      v-if="error"
+      :message="error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
+    <div class="dualpane no-mid">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">XML Input</span>
           <div class="card-actions">
@@ -19,18 +27,13 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" lang="xml" />
+            <JsonEditor ref="inputEditorRef" v-model="input" lang="xml" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
       </div>
 
-      <div class="midcol">
-        <button class="mid-btn" title="Convert (Ctrl + Enter)" @click="convert">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>CONV</span>
-        </button>
-      </div>
+      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -40,8 +43,9 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see JSON output' : 'Paste XML to see JSON output' }}</template>
+          <ClientOnly v-else>
             <JsonEditor v-model="output" :readonly="true" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -50,7 +54,10 @@
     </div>
 
     <StatusBar>
-      <span><span class="led" :class="output && !error ? 'valid' : 'error'"></span>{{ output && !error ? 'Converted' : (error && error !== 'empty' ? error : 'Waiting for input') }}</span>
+      <span>
+        <span class="led" :class="output && !error ? 'valid' : 'error'"></span>
+        {{ output && !error ? 'Converted' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
+      </span>
       <span>xml-to-json</span>
     </StatusBar>
 
@@ -60,13 +67,15 @@
 
 <script setup lang="ts">
 import { useXmlToJson } from '~/composables/useXmlJson'
+import JsonEditor from '~/components/JsonEditor.vue'
 useToolSeo(
   'XML to JSON Converter Online: Parse & Transform XML Free',
   'Convert XML to JSON instantly. Free online XML to JSON converter, no data sent to servers.',
 )
-const { input, output, error, copied, convert, copy, download, clear } = useXmlToJson()
-useToolShortcut(convert)
-useUrlInput(input, convert)
+const { input, output, error, errorLine, errorColumn, copied, copy, download, clear } = useXmlToJson()
+useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const seoCards = [
   {
@@ -100,7 +109,7 @@ function onDrop(e: DragEvent) {
   const file = e.dataTransfer?.files[0]
   if (!file) return
   const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string; convert() }
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
 }
 </script>

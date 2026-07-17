@@ -9,8 +9,10 @@
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
     </div>
 
-    <div class="dualpane">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+    <ErrorBanner v-if="error" :message="errorMessage" />
+
+    <div class="dualpane no-mid">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">CSV Input</span>
           <div class="card-actions">
@@ -36,12 +38,7 @@
         </div>
       </div>
 
-      <div class="midcol">
-        <button class="mid-btn" title="Convert (Ctrl + Enter)" @click="convert">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>CONV</span>
-        </button>
-      </div>
+      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -51,8 +48,9 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see JSON output' : 'Paste CSV to see JSON output' }}</template>
+          <ClientOnly v-else>
             <JsonEditor v-model="output" :readonly="true" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -61,7 +59,10 @@
     </div>
 
     <StatusBar>
-      <span><span class="led" :class="rowCount > 0 ? 'valid' : 'error'"></span>{{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error && error !== 'empty' ? error : 'Waiting for input') }}</span>
+      <span>
+        <span class="led" :class="rowCount > 0 ? 'valid' : 'error'"></span>
+        {{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error ? `Invalid${errorLine ? ` · around line ${errorLine}` : ''}` : 'Waiting for input') }}
+      </span>
       <span>csv-to-json</span>
     </StatusBar>
 
@@ -77,9 +78,13 @@ useToolSeo(
   'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
 )
 
-const { input, output, error, rowCount, delimiter, hasHeader, copied, convert, copy, downloadJson, clear } = useCsvToJson()
-useToolShortcut(convert)
-useUrlInput(input, convert)
+const { input, output, error, errorLine, rowCount, delimiter, hasHeader, copied, copy, downloadJson, clear } = useCsvToJson()
+useUrlInput(input)
+
+// CSV input is a plain <textarea>, not a CodeMirror JsonEditor — there's no
+// line-highlight/jump target to wire up, so the approximate line (see
+// useCsvJson.ts) is folded into the banner text instead of a clickable action.
+const errorMessage = computed(() => error.value ? `${error.value}${errorLine.value ? ` (around line ${errorLine.value})` : ''}` : '')
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
@@ -87,7 +92,7 @@ function onDrop(e: DragEvent) {
   const file = e.dataTransfer?.files[0]
   if (!file) return
   const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string; convert() }
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
 }
 

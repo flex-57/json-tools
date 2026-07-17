@@ -41,6 +41,14 @@ describe('csvToJson', () => {
     expect(csvToJson('').error).toBe('empty')
   })
 
+  it('approximates a source line from the error row + header offset', () => {
+    // Single unterminated-quote field — PapaParse can't produce any data row
+    // at all here, which is what triggers our error path (row=0 + header offset).
+    const result = csvToJson('"unterminated')
+    expect(result.error).not.toBeNull()
+    expect(result.line).toBe(2)
+  })
+
   it('auto-detects delimiter', () => {
     const csv = 'name,age\nAlice,30'
     const result = csvToJson(csv, 'auto')

@@ -1,7 +1,7 @@
 import { triggerDownload } from '../utils/download'
 import { safeJsonParse } from '../utils/json'
 import { useClipboard } from './useClipboard'
-import { XMLParser, XMLBuilder } from 'fast-xml-parser'
+import { XMLParser, XMLBuilder, XMLValidator } from 'fast-xml-parser'
 
 const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
 <users>
@@ -38,6 +38,17 @@ interface ConvertResult {
 export function xmlToJson(input: string): ConvertResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty' }
+
+  // XMLValidator gives a clean { err: { msg, line, col } } before we even
+  // attempt to parse — no ASCII-art snippet, no regex-scraping a thrown
+  // message. It's flagged deprecated in favor of the separate
+  // 'fast-xml-validator' package, but still fully functional and avoids
+  // adding a new dependency just for this.
+  const validation = XMLValidator.validate(trimmed)
+  if (validation !== true) {
+    return { output: '', error: validation.err.msg, line: validation.err.line, column: validation.err.col }
+  }
+
   try {
     const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@', parseAttributeValue: true, parseTagValue: true })
     const parsed = parser.parse(trimmed)
@@ -62,14 +73,12 @@ export function jsonToXml(input: string): ConvertResult {
 
 export function useXmlToJson() {
   const input = ref(SAMPLE_XML)
-  const output = ref('')
-  const error = ref<string | null>(null)
 
-  function convert() {
-    const r = xmlToJson(input.value)
-    output.value = r.output
-    error.value = r.error
-  }
+  const result = computed(() => xmlToJson(input.value))
+  const output      = computed(() => result.value.output)
+  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
+  const errorLine   = computed(() => result.value.line ?? null)
+  const errorColumn = computed(() => result.value.column ?? null)
 
   const { copied, copy } = useClipboard(() => output.value)
 
@@ -78,11 +87,9 @@ export function useXmlToJson() {
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() { input.value = ''; output.value = ''; error.value = null }
+  function clear() { input.value = '' }
 
-  onMounted(convert)
-
-  return { input, output, error, copied, convert, copy, download, clear }
+  return { input, output, error, errorLine, errorColumn, copied, copy, download, clear }
 }
 
 export function useJsonToXml() {

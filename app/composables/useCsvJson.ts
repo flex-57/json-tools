@@ -37,7 +37,13 @@ export function csvToJson(input: string, delimiter: Delimiter = 'auto', hasHeade
   })
 
   if (result.errors.length > 0 && result.data.length === 0) {
-    return { output: '', error: result.errors[0]!.message, rowCount: 0 }
+    const err = result.errors[0]!
+    // PapaParse's `row` is an index into the *parsed data*, not a source
+    // line number — approximate the source line by adding back the header
+    // row. Blank lines skipped before the error (skipEmptyLines) would
+    // throw this off further; PapaParse doesn't expose an exact position.
+    const line = typeof err.row === 'number' ? err.row + (hasHeader ? 2 : 1) : null
+    return { output: '', error: err.message, rowCount: 0, line, column: null }
   }
 
   return {
@@ -61,18 +67,14 @@ export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): Con
 
 export function useCsvToJson() {
   const input = ref(SAMPLE_CSV)
-  const output = ref('')
-  const error = ref<string | null>(null)
-  const rowCount = ref(0)
   const delimiter = ref<Delimiter>('auto')
   const hasHeader = ref(true)
 
-  function convert() {
-    const result = csvToJson(input.value, delimiter.value, hasHeader.value)
-    output.value = result.output
-    error.value = result.error
-    rowCount.value = result.rowCount
-  }
+  const result = computed(() => csvToJson(input.value, delimiter.value, hasHeader.value))
+  const output      = computed(() => result.value.output)
+  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
+  const errorLine   = computed(() => result.value.line ?? null)
+  const rowCount    = computed(() => result.value.rowCount)
 
   const { copied, copy } = useClipboard(() => output.value)
 
@@ -81,16 +83,9 @@ export function useCsvToJson() {
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() {
-    input.value = ''
-    output.value = ''
-    error.value = null
-    rowCount.value = 0
-  }
+  function clear() { input.value = '' }
 
-  onMounted(convert)
-
-  return { input, output, error, rowCount, delimiter, hasHeader, copied, convert, copy, downloadJson, clear }
+  return { input, output, error, errorLine, rowCount, delimiter, hasHeader, copied, copy, downloadJson, clear }
 }
 
 export function useJsonToCsv() {

@@ -67,18 +67,12 @@ export function jsonToYaml(input: string, indent = 2): ConvertResult {
 
 export function useYamlToJson() {
   const input = ref(SAMPLE_YAML)
-  const output = ref('')
-  const error = ref<string | null>(null)
-  const errorLine = ref<number | null>(null)
-  const errorColumn = ref<number | null>(null)
 
-  function convert() {
-    const r = yamlToJson(input.value)
-    output.value = r.output
-    error.value = r.error
-    errorLine.value = r.line ?? null
-    errorColumn.value = r.column ?? null
-  }
+  const result = computed(() => yamlToJson(input.value))
+  const output      = computed(() => result.value.output)
+  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
+  const errorLine   = computed(() => result.value.line ?? null)
+  const errorColumn = computed(() => result.value.column ?? null)
 
   const { copied, copy } = useClipboard(() => output.value)
 
@@ -87,14 +81,9 @@ export function useYamlToJson() {
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() {
-    input.value = ''; output.value = ''; error.value = null
-    errorLine.value = null; errorColumn.value = null
-  }
+  function clear() { input.value = '' }
 
-  onMounted(convert)
-
-  return { input, output, error, errorLine, errorColumn, copied, convert, copy, download, clear }
+  return { input, output, error, errorLine, errorColumn, copied, copy, download, clear }
 }
 
 export function useJsonToYaml() {
