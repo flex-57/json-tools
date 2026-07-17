@@ -66,7 +66,7 @@
         </div>
 
         <div v-if="viewMode === 'tree'" class="pane-body" aria-live="polite">
-          <div v-if="error" class="tree-message tree-message--error">Fix the error in your input to see the tree</div>
+          <div v-if="error" class="tree-message">Fix the error in your input to see the tree</div>
           <div v-else-if="!input.trim()" class="tree-message">Paste JSON to see the tree</div>
           <div v-else-if="root" class="tree-wrap">
             <JsonTreeNode :node="root" :depth="0" />
@@ -74,7 +74,7 @@
         </div>
 
         <div v-else class="pane-body pane-body--graph" aria-live="polite">
-          <div v-if="error" class="tree-message tree-message--error">Fix the error in your input to see the graph</div>
+          <div v-if="error" class="tree-message">Fix the error in your input to see the graph</div>
           <div v-else-if="!input.trim()" class="tree-message">Paste JSON to see the graph</div>
           <div v-else-if="graphLoading" class="tree-message">Building graph…</div>
           <ClientOnly v-else-if="graphNodes.length">
@@ -335,6 +335,5 @@ const seoCards = [
   display: flex; align-items: center; gap: 8px;
   padding: 32px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--c-t4); justify-content: center;
 }
-.tree-message--error { color: var(--c-error); }
 .tree-wrap { padding: 4px 0; }
 </style>
