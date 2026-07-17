@@ -51,7 +51,7 @@ const TOOL_ICONS: Record<string, string> = {
   'yaml-to-json': ICONS.yamlIn, 'json-to-yaml': ICONS.yamlOut,
   'excel-to-json': ICONS.xlIn, 'json-to-excel': ICONS.xlOut,
   'json-to-ts': ICONS.ts, 'json-schema': ICONS.schema,
-  'text-case': ICONS.textCase, 'minifier': ICONS.minifier, 'sql-formatter': ICONS.sql,
+  'text-case': ICONS.textCase, 'css-minifier': ICONS.minifier, 'html-minifier': ICONS.minifier, 'js-minifier': ICONS.minifier, 'sql-formatter': ICONS.sql,
   'url-encode': ICONS.url, 'base64': ICONS.base64, 'markdown-preview': ICONS.markdown,
   'jwt-decoder': ICONS.jwtDec, 'jwt-generator': ICONS.jwtGen, 'hash': ICONS.hash,
   'uuid': ICONS.uuid, 'password-generator': ICONS.pwdGen,

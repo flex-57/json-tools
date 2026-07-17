@@ -46,7 +46,9 @@ export const TOOLS: ToolMeta[] = [
 
   // Text & Code
   { slug: 'text-case', name: 'Text Case Converter', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer', updatedAt: '2026-07-10' },
-  { slug: 'minifier', name: 'Minifier', short: 'CSS / HTML / JS', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
+  { slug: 'css-minifier', name: 'CSS Minifier', short: 'Compress stylesheets', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
+  { slug: 'html-minifier', name: 'HTML Minifier', short: 'Compress markup', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
+  { slug: 'js-minifier', name: 'JavaScript Minifier', short: 'Compress & mangle', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
   { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
   { slug: 'base64', name: 'Base64 Encoder / Decoder', short: 'Binary-to-text conversion', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
@@ -73,7 +75,7 @@ export const TOOLS: ToolMeta[] = [
 // with a direction toggle, same as Base64 encode/decode or the 3 Minifier
 // languages are a single card each — so it's `hidden` entries that get
 // excluded here, consistent with toolsByCategory below. TOOLS.length counts
-// routes (30), which matters for the sitemap but overstates what "N tools"
+// routes (32), which matters for the sitemap but overstates what "N tools"
 // means to a visitor by exactly the number of hidden reverse-direction pages.
 export const VISIBLE_TOOL_COUNT = TOOLS.filter(t => !t.hidden).length
 

@@ -1,6 +1,6 @@
 # JSON Tools
 
-**[jsontools.space](https://jsontools.space)** — 26 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
+**[jsontools.space](https://jsontools.space)** — 28 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
 
 ![JSON Tools homepage](.github/screenshot.png)
 
@@ -10,7 +10,7 @@ JSON Tools is a toolbench for the small, repetitive jobs developers reach for co
 
 It also includes 24 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, Base64, hashing, JWTs, regex, cron syntax, and more.
 
-## The 26 tools
+## The 28 tools
 
 **JSON**
 JSON Formatter & Validator · JSON Diff · Tree / Graph Viewer
@@ -19,7 +19,7 @@ JSON Formatter & Validator · JSON Diff · Tree / Graph Viewer
 CSV ↔ JSON · XML ↔ JSON · YAML ↔ JSON · Excel ↔ JSON · JSON → TypeScript / Zod · JSON → Schema
 
 **Text & Code**
-Text Case Converter · CSS/HTML/JS Minifier · SQL Formatter · URL Encoder / Decoder · Base64 Encoder / Decoder · Markdown Preview
+Text Case Converter · CSS Minifier · HTML Minifier · JavaScript Minifier · SQL Formatter · URL Encoder / Decoder · Base64 Encoder / Decoder · Markdown Preview
 
 **Security**
 JWT Decoder · JWT Generator · Hash Generator (MD5/SHA-1/SHA-256…) · UUID Generator · Password Generator
@@ -41,7 +41,7 @@ Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter
 ```
 app/
 ├─ pages/
-│  ├─ tools/*.vue        # 29 tool pages — thin UI layer per tool
+│  ├─ tools/*.vue        # 32 tool pages — thin UI layer per tool
 │  ├─ guides/[slug].vue  # single dynamic page rendering all 24 guides
 │  └─ index.vue          # homepage (tool catalog + search)
 ├─ composables/          # business logic per tool (parsing, formatting,
@@ -51,7 +51,7 @@ app/
 │  └─ *.vue              # shared UI: JsonEditor, StatusBar, SeoSection,
 │                        # ToolSwitch, FaqAccordion, AdSlot...
 ├─ data/
-│  ├─ tools.ts           # single source of truth for the 29 tools —
+│  ├─ tools.ts           # single source of truth for the 32 tools —
 │  │                     # nav, footer, homepage and sitemap all derive from it
 │  └─ guides.ts          # same pattern for the 24 guides
 ├─ utils/                # small stateless helpers (safeJsonParse, triggerDownload...)

@@ -175,9 +175,11 @@ const result = formatDate(new Date());
 console.log(result);`,
 }
 
-export function useMinifier() {
-  const input   = ref(SAMPLES.css)
-  const mode    = ref<MinifyMode>('css')
+// One page per language now (css-minifier / html-minifier / js-minifier) —
+// each fixed to a single mode, so there's no toggle-driven sample-swapping
+// or mode ref to expose, unlike the old combined-page composable this replaces.
+function useSingleMinifier(mode: MinifyMode) {
+  const input   = ref(SAMPLES[mode])
   const loading = ref(false)
   const result  = ref<MinifyResult | null>(null)
 
@@ -186,15 +188,11 @@ export function useMinifier() {
   async function run() {
     if (!input.value.trim()) { result.value = null; return }
     loading.value = true
-    result.value = await MINIFIERS[mode.value]!(input.value)
+    result.value = await MINIFIERS[mode](input.value)
     loading.value = false
   }
 
-  watch(mode, (newMode, oldMode) => {
-    if (input.value === SAMPLES[oldMode]) input.value = SAMPLES[newMode]
-  })
-
-  watch([input, mode], () => {
+  watch(input, () => {
     if (!import.meta.client) return
     if (timer) clearTimeout(timer)
     timer = setTimeout(run, 280)
@@ -211,10 +209,13 @@ export function useMinifier() {
 
   function download() {
     if (!output.value) return
-    const ext = mode.value
-    const mime = ext === 'js' ? 'application/javascript' : ext === 'css' ? 'text/css' : 'text/html'
-    triggerDownload(new Blob([output.value], { type: mime }), `minified.${ext}`)
+    const mime = mode === 'js' ? 'application/javascript' : mode === 'css' ? 'text/css' : 'text/html'
+    triggerDownload(new Blob([output.value], { type: mime }), `minified.${mode}`)
   }
 
-  return { input, mode, output, error, loading, copied, result, copy, download, clear }
+  return { input, output, error, loading, copied, result, copy, download, clear }
 }
+
+export function useCssMinifier()  { return useSingleMinifier('css') }
+export function useHtmlMinifier() { return useSingleMinifier('html') }
+export function useJsMinifier()   { return useSingleMinifier('js') }
