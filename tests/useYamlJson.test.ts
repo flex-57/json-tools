@@ -31,6 +31,16 @@ describe('yamlToJson', () => {
   it('returns empty error on empty input', () => {
     expect(yamlToJson('').error).toBe('empty')
   })
+
+  it('returns a clean reason and a 1-indexed line/column on invalid YAML', () => {
+    const bad = `name: Alice\ntags:\n  - api\n  - auth\ncreated_at:\n"2024-01-15T09:00:00Z"`
+    const r = yamlToJson(bad)
+    expect(r.error).not.toBeNull()
+    // .reason has no embedded newlines/ASCII-art snippet, unlike the raw .message
+    expect(r.error).not.toContain('\n')
+    expect(r.line).toBe(6)
+    expect(r.column).toBe(23)
+  })
 })
 
 describe('jsonToYaml', () => {

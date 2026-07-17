@@ -37,6 +37,18 @@ export function yamlToJson(input: string): ConvertResult {
     const parsed = yaml.load(trimmed)
     return { output: JSON.stringify(parsed, null, 2), error: null }
   } catch (e) {
+    // js-yaml's YAMLException carries a clean `reason` (no ASCII-art
+    // snippet) plus a structured `mark` with 0-indexed line/column — far
+    // more useful than the raw .message, which mashes both together onto
+    // one line that's unreadable once it hits a single-line status bar.
+    if (e instanceof yaml.YAMLException) {
+      return {
+        output: '',
+        error: e.reason || e.message,
+        line: e.mark ? e.mark.line + 1 : null,
+        column: e.mark ? e.mark.column + 1 : null,
+      }
+    }
     return { output: '', error: (e as Error).message }
   }
 }
@@ -57,11 +69,15 @@ export function useYamlToJson() {
   const input = ref(SAMPLE_YAML)
   const output = ref('')
   const error = ref<string | null>(null)
+  const errorLine = ref<number | null>(null)
+  const errorColumn = ref<number | null>(null)
 
   function convert() {
     const r = yamlToJson(input.value)
     output.value = r.output
     error.value = r.error
+    errorLine.value = r.line ?? null
+    errorColumn.value = r.column ?? null
   }
 
   const { copied, copy } = useClipboard(() => output.value)
@@ -71,11 +87,14 @@ export function useYamlToJson() {
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() { input.value = ''; output.value = ''; error.value = null }
+  function clear() {
+    input.value = ''; output.value = ''; error.value = null
+    errorLine.value = null; errorColumn.value = null
+  }
 
   onMounted(convert)
 
-  return { input, output, error, copied, convert, copy, download, clear }
+  return { input, output, error, errorLine, errorColumn, copied, convert, copy, download, clear }
 }
 
 export function useJsonToYaml() {
