@@ -70,7 +70,7 @@
         <div class="pane-body" :class="{ 'pane-body--empty': !isValid }" :style="isValid ? 'padding: 0;' : ''" aria-live="polite">
           <template v-if="!isValid">{{ input.trim() ? 'Fix the error in your input to see formatted output' : 'Paste JSON to see formatted output' }}</template>
           <ClientOnly v-else>
-            <JsonEditor v-model="output" :readonly="true" />
+            <JsonEditor v-model="output" :readonly="true" :line-wrap="true" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
