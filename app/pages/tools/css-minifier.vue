@@ -8,8 +8,16 @@
       <MinifierSwitch active="css" />
     </div>
 
+    <ErrorBanner
+      v-if="error"
+      :message="error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+
     <div class="dualpane no-mid">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">Source CSS</span>
           <div class="card-actions">
@@ -19,7 +27,7 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" lang="css" />
+            <JsonEditor ref="inputEditorRef" v-model="input" lang="css" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -40,9 +48,9 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div v-if="error" class="pane-body" aria-live="polite">{{ error }}</div>
-        <div v-else class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see minified output' : 'Paste CSS to see minified output' }}</template>
+          <ClientOnly v-else>
             <JsonEditor :model-value="output" lang="css" :readonly="true" :line-wrap="true" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -50,8 +58,12 @@
       </div>
     </div>
 
-    <StatusBar v-if="result && !error && result.originalSize > 0">
-      <span>{{ fmtBytes(result.originalSize) }} → {{ fmtBytes(result.minifiedSize) }} · <strong style="color: var(--c-valid);">{{ result.savings }}% saved</strong> · {{ fmtBytes(result.originalSize - result.minifiedSize) }} removed</span>
+    <StatusBar>
+      <span>
+        <span class="led" :class="result && !error ? 'valid' : 'error'"></span>
+        <template v-if="result && !error && result.originalSize > 0">{{ fmtBytes(result.originalSize) }} → {{ fmtBytes(result.minifiedSize) }} · <strong style="color: var(--c-valid);">{{ result.savings }}% saved</strong> · {{ fmtBytes(result.originalSize - result.minifiedSize) }} removed</template>
+        <template v-else>{{ error ? `Invalid${errorLine ? ` · Line ${errorLine}` : ''}` : 'Waiting for input' }}</template>
+      </span>
       <span>powered by lightningcss</span>
     </StatusBar>
 
@@ -62,14 +74,17 @@
 <script setup lang="ts">
 import { useCssMinifier } from '~/composables/useMinifier'
 import { fmtBytes } from '~/utils/download'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'CSS Minifier: Compress CSS Online Free',
   'Minify CSS instantly in your browser with lightningcss. Removes whitespace, comments, and redundant code while keeping nested selectors and custom properties intact. Free, no data sent to servers.',
 )
 
-const { input, output, error, loading, copied, result, copy, download, clear } = useCssMinifier()
+const { input, output, error, errorLine, errorColumn, loading, copied, result, copy, download, clear } = useCssMinifier()
 useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {

@@ -8,8 +8,21 @@
       <MinifierSwitch active="html" />
     </div>
 
+    <ErrorBanner
+      v-if="error"
+      :message="error"
+      :line="errorLine"
+      :column="errorColumn"
+      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+    />
+    <!-- Non-blocking: the document still minified fine overall, just one or
+         more embedded <script> blocks failed and were left as-is — no
+         line/column here since terser's position is relative to that block's
+         own content, not this document, so a "jump to line" would mislead. -->
+    <ErrorBanner v-else-if="warning" :message="warning" />
+
     <div class="dualpane no-mid">
-      <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
+      <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
           <span class="pane-label">Source HTML</span>
           <div class="card-actions">
@@ -19,7 +32,7 @@
         </div>
         <div class="pane-body" style="padding: 0;">
           <ClientOnly>
-            <JsonEditor v-model="input" lang="html" />
+            <JsonEditor ref="inputEditorRef" v-model="input" lang="html" :error-line="errorLine" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
         </div>
@@ -40,9 +53,9 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div v-if="error" class="pane-body" aria-live="polite">{{ error }}</div>
-        <div v-else class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see minified output' : 'Paste HTML to see minified output' }}</template>
+          <ClientOnly v-else>
             <JsonEditor :model-value="output" lang="html" :readonly="true" :line-wrap="true" />
             <template #fallback><EditorSkeleton /></template>
           </ClientOnly>
@@ -50,8 +63,12 @@
       </div>
     </div>
 
-    <StatusBar v-if="result && !error && result.originalSize > 0">
-      <span>{{ fmtBytes(result.originalSize) }} → {{ fmtBytes(result.minifiedSize) }} · <strong style="color: var(--c-valid);">{{ result.savings }}% saved</strong> · {{ fmtBytes(result.originalSize - result.minifiedSize) }} removed</span>
+    <StatusBar>
+      <span>
+        <span class="led" :class="result && !error ? 'valid' : 'error'"></span>
+        <template v-if="result && !error && result.originalSize > 0">{{ fmtBytes(result.originalSize) }} → {{ fmtBytes(result.minifiedSize) }} · <strong style="color: var(--c-valid);">{{ result.savings }}% saved</strong> · {{ fmtBytes(result.originalSize - result.minifiedSize) }} removed<template v-if="warning"> · <span class="status-warn">see warning above</span></template></template>
+        <template v-else>{{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input' }}</template>
+      </span>
       <span>powered by html-minifier-terser</span>
     </StatusBar>
 
@@ -62,14 +79,17 @@
 <script setup lang="ts">
 import { useHtmlMinifier } from '~/composables/useMinifier'
 import { fmtBytes } from '~/utils/download'
+import JsonEditor from '~/components/JsonEditor.vue'
 
 useToolSeo(
   'HTML Minifier: Compress HTML Online Free',
   'Minify HTML instantly in your browser. Collapses inter-element whitespace, strips comments, and minifies embedded CSS and JavaScript too. Free, no data sent to servers.',
 )
 
-const { input, output, error, loading, copied, result, copy, download, clear } = useHtmlMinifier()
+const { input, output, error, errorLine, errorColumn, warning, loading, copied, result, copy, download, clear } = useHtmlMinifier()
 useUrlInput(input)
+
+const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
 
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
@@ -109,6 +129,7 @@ const seoCards = [
 </script>
 
 <style scoped>
+.status-warn { color: var(--c-error); }
 .savings-badge {
   font-family: var(--font-mono); font-size: 11px; font-weight: 700;
   padding: 2px 7px; border-radius: 20px;

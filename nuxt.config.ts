@@ -39,6 +39,19 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    resolve: {
+      // clean-css (an html-minifier-terser dep, used for embedded <style>
+      // minification) does `import path from 'path'` at module scope. Vite
+      // has no browser build of Node's `path` and "externalizes" it into an
+      // inert stub instead (every method silently undefined) rather than
+      // failing the build — confirmed live via the exact console warning:
+      // 'Module "path" has been externalized for browser compatibility'.
+      // Unlike `process` (a true ambient global patchable at runtime), `path`
+      // is always module-imported, so there's no client-side workaround —
+      // alias it to `pathe`, a real dependency-free implementation already
+      // in the tree via Nitro, so that import resolves to something real.
+      alias: { path: 'pathe' },
+    },
     optimizeDeps: {
       include: ['codemirror', '@codemirror/state', '@codemirror/lang-json', '@codemirror/lang-javascript', '@codemirror/lang-xml', '@codemirror/lang-yaml', '@codemirror/lang-sql', '@codemirror/lang-css', '@codemirror/lang-html', '@codemirror/language', '@codemirror/theme-one-dark', '@vue-flow/core', '@dagrejs/dagre'],
       exclude: ['lightningcss-wasm'],

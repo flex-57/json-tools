@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { minifyCSS, minifyHTML, minifyJS } from '../app/composables/useMinifier'
+import { minifyCSS, minifyHTML, minifyJS, humanizeCssError } from '../app/composables/useMinifier'
 
 describe('minifyCSS', () => {
   it('collapses whitespace and removes braces spacing', async () => {
@@ -31,6 +31,24 @@ describe('minifyCSS', () => {
     const { output, error } = await minifyCSS(src)
     expect(error).toBeNull()
     expect(output.length).toBeLessThan(src.length)
+  })
+
+  // minifyCSS's WASM path is gated behind import.meta.client, which is never
+  // truthy under Vitest's plain node environment (no Nuxt runtime) — it
+  // always takes the regex fallback here and never throws, so the humanizer
+  // is tested directly against real lightningcss-wasm error messages
+  // (captured empirically, see useMinifier.ts) instead of through minifyCSS.
+  describe('humanizeCssError', () => {
+    it('rewrites known lightningcss-wasm messages into a tip, with no fake position', async () => {
+      expect(humanizeCssError('Unexpected end of input')).toBe('Unexpected end of input — check for an unclosed { or a missing value.')
+      expect(humanizeCssError('Invalid media query')).toBe('Invalid media query — check the feature syntax, e.g. (min-width: 600px).')
+      expect(humanizeCssError('Invalid dangling combinator in selector')).toBe('Invalid dangling combinator in selector — remove the trailing >, +, or ~, or add a selector after it.')
+      expect(humanizeCssError('Unexpected token CloseCurlyBracket')).toBe('Unexpected token CloseCurlyBracket — check for a stray character or misplaced bracket.')
+    })
+
+    it('leaves unrecognized messages untouched rather than guessing', async () => {
+      expect(humanizeCssError('Some future lightningcss message')).toBe('Some future lightningcss message')
+    })
   })
 
   it('measures bytes not chars', async () => {
@@ -65,6 +83,25 @@ describe('minifyHTML', () => {
     expect(output.length).toBeLessThan(src.length)
   })
 
+  it('surfaces a non-blocking warning with the real terser message when an embedded <script> fails, instead of failing silently', async () => {
+    const html = '<div>ok</div>\n<script>function foo( { return 1 } </script>'
+    const { error, warning, output } = await minifyHTML(html)
+    expect(error).toBeNull()
+    expect(warning).toContain('1 embedded <script> block was left unminified — ')
+    expect(output).toContain('function foo(')
+  })
+
+  it('lists every failing block distinctly when more than one embedded <script> fails', async () => {
+    const html = '<script>function foo( { return 1 }</script><script>function bar( { return 2 }</script>'
+    const { warning } = await minifyHTML(html)
+    expect(warning).toMatch(/^2 embedded <script> blocks were left unminified — #1: .+; #2: .+\.$/)
+  })
+
+  it('reports no warning on a clean document', async () => {
+    const { warning } = await minifyHTML('<div><script>function add(a,b){return a+b}</script></div>')
+    expect(warning).toBeNull()
+  })
+
   it('returns empty for blank input', async () => {
     const { output, error } = await minifyHTML('  ')
     expect(output).toBe('')
@@ -75,6 +112,14 @@ describe('minifyHTML', () => {
     const html = '<html>\n  <head>\n    <title>Test</title>\n  </head>\n  <body>\n    <p>Hello World</p>\n  </body>\n</html>'
     const { savings } = await minifyHTML(html)
     expect(savings).toBeGreaterThan(0)
+  })
+
+  it('derives line/column for an unclosed attribute quote from the parser\'s unconsumed remainder', async () => {
+    const html = '<!DOCTYPE html>\n<html>\n<body>\n  <div class="unclosed>\n    <p>hi</p>\n  </div>\n</body>\n</html>'
+    const { error, errorLine, errorColumn } = await minifyHTML(html)
+    expect(error).toBe('Unclosed tag or attribute — the parser could not recover past this point.')
+    expect(errorLine).toBe(4)
+    expect(errorColumn).toBe(3)
   })
 })
 
@@ -100,6 +145,18 @@ describe('minifyJS', () => {
     const { error } = await minifyJS('function { broken syntax')
     expect(error).not.toBeNull()
     expect(typeof error).toBe('string')
+  })
+
+  it('reports 1-indexed line and column from terser for a syntax error', async () => {
+    const { errorLine, errorColumn } = await minifyJS('function { broken syntax')
+    expect(errorLine).toBe(1)
+    expect(errorColumn).toBe(10)
+  })
+
+  it('humanizes an unterminated string error', async () => {
+    const { error, errorLine } = await minifyJS('const x = "unterminated')
+    expect(error).toBe('Unterminated string — check for a missing closing quote.')
+    expect(errorLine).toBe(1)
   })
 
   it('reports savings for real code', async () => {
