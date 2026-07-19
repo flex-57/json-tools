@@ -185,7 +185,12 @@ export async function minifyHTML(input: string): Promise<MinifyResult> {
         minifyJS: { compress: true, mangle: true },
         log: (msg: unknown) => {
           if (msg instanceof Error) {
-            const line = typeof (msg as { line?: unknown }).line === 'number' ? (msg as { line: number }).line : null
+            // `msg` is narrowed to Error here, which doesn't declare `line`
+            // itself (terser's SyntaxError subtype adds it at runtime) — cast
+            // through `unknown` first rather than straight to `{ line }`,
+            // since Error and `{ line: number }` don't structurally overlap.
+            const rawLine = (msg as unknown as { line?: unknown }).line
+            const line = typeof rawLine === 'number' ? rawLine : null
             jsErrors.push({ message: msg.message, line })
           }
         },
