@@ -22,7 +22,7 @@
     <div class="footer-guides-desktop">
       <span class="footer-guides-label">Guides</span>
       <div class="footer-guides-pills">
-        <NuxtLink v-for="g in GUIDES" :key="g.to" :to="g.to" class="footer-pill">{{ g.label }}</NuxtLink>
+        <NuxtLink v-for="g in GUIDE_LINKS" :key="g.to" :to="g.to" class="footer-pill">{{ g.label }}</NuxtLink>
       </div>
     </div>
 
@@ -37,7 +37,7 @@
       <div class="footer-mobile-row">
         <span class="footer-mobile-cat">Guides</span>
         <div class="footer-mobile-pills">
-          <NuxtLink v-for="g in GUIDES" :key="g.to" :to="g.to" class="footer-pill">{{ g.label }}</NuxtLink>
+          <NuxtLink v-for="g in GUIDE_LINKS" :key="g.to" :to="g.to" class="footer-pill">{{ g.label }}</NuxtLink>
         </div>
       </div>
     </nav>
@@ -65,33 +65,12 @@
 
 <script setup lang="ts">
 import { CATEGORIES, toolsByCategory } from '~/data/tools'
+import { GUIDES } from '~/data/guides'
 
-const GUIDES = [
-  { label: 'What is JSON?', to: '/guides/what-is-json' },
-  { label: 'What is a JWT?', to: '/guides/what-is-jwt' },
-  { label: 'What is Base64?', to: '/guides/what-is-base64' },
-  { label: 'Cron Examples', to: '/guides/cron-expression-examples' },
-  { label: 'JSON vs YAML', to: '/guides/json-vs-yaml' },
-  { label: 'Validate JSON', to: '/guides/how-to-validate-json' },
-  { label: 'What is Regex?', to: '/guides/what-is-regex' },
-  { label: 'What is Markdown?', to: '/guides/what-is-markdown' },
-  { label: 'Markdown Cheatsheet', to: '/guides/markdown-cheatsheet' },
-  { label: 'URL Encoding', to: '/guides/what-is-url-encoding' },
-  { label: 'Hash Functions', to: '/guides/what-is-hash' },
-  { label: 'What is XML?', to: '/guides/what-is-xml' },
-  { label: 'What is UUID?', to: '/guides/what-is-uuid' },
-  { label: 'JSON Schema', to: '/guides/what-is-json-schema' },
-  { label: 'What is YAML?', to: '/guides/what-is-yaml' },
-  { label: 'Regex Cheatsheet', to: '/guides/regex-cheatsheet' },
-  { label: 'JSON Best Practices', to: '/guides/json-best-practices' },
-  { label: 'What is CSV?', to: '/guides/what-is-csv' },
-  { label: 'Unix Timestamp', to: '/guides/what-is-unix-timestamp' },
-  { label: 'Number Bases', to: '/guides/understanding-number-bases' },
-  { label: 'Password Entropy', to: '/guides/password-entropy-explained' },
-  { label: 'Color Formats', to: '/guides/understanding-color-formats' },
-  { label: 'SQL Cheatsheet', to: '/guides/sql-cheatsheet' },
-  { label: 'Encoding vs Encryption', to: '/guides/encoding-vs-encryption-vs-hashing' },
-]
+const GUIDE_LINKS = Object.values(GUIDES).map(g => ({
+  label: g.title,
+  to: `/guides/${g.slug}`,
+}))
 </script>
 
 <style scoped>
