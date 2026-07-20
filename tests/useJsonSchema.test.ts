@@ -64,19 +64,19 @@ describe('buildSchema — objects', () => {
 
   it('nested object is recursively typed', () => {
     const s = buildSchema({ user: { name: 'Alice', age: 25 } }, OPTS_D7)
-    const userSchema = (s['properties'] as any)['user']
-    expect(userSchema['type']).toBe('object')
-    expect((userSchema['properties'] as any)['name']['type']).toBe('string')
+    const userSchema = (s['properties'] as Record<string, unknown>)['user']
+    expect((userSchema as Record<string, unknown>)['type']).toBe('object')
+    expect(((userSchema as Record<string, unknown>)['properties'] as Record<string, unknown>)['name']['type']).toBe('string')
   })
 
   it('boolean property typed correctly', () => {
     const s = buildSchema({ active: true }, OPTS_D7)
-    expect((s['properties'] as any)['active']['type']).toBe('boolean')
+    expect((s['properties'] as Record<string, unknown>)['active']['type']).toBe('boolean')
   })
 
   it('null property typed correctly', () => {
     const s = buildSchema({ val: null }, OPTS_D7)
-    expect((s['properties'] as any)['val']['type']).toBe('null')
+    expect((s['properties'] as Record<string, unknown>)['val']['type']).toBe('null')
   })
 
   it('empty object has empty properties', () => {
@@ -97,27 +97,27 @@ describe('buildSchema — arrays', () => {
   it('uniform integer array', () => {
     const s = buildSchema([1, 2, 3], OPTS_D7)
     expect(s['type']).toBe('array')
-    expect((s['items'] as any)['type']).toBe('integer')
+    expect((s['items'] as Record<string, unknown>)['type']).toBe('integer')
   })
 
   it('deduplicates identical item types', () => {
     const s = buildSchema(['a', 'b', 'c'], OPTS_D7)
-    expect((s['items'] as any)['type']).toBe('string')
-    expect((s['items'] as any)['oneOf']).toBeUndefined()
+    expect((s['items'] as Record<string, unknown>)['type']).toBe('string')
+    expect((s['items'] as Record<string, unknown>)['oneOf']).toBeUndefined()
   })
 
   it('mixed-type array uses oneOf', () => {
     const s = buildSchema([1, 'hello', true], OPTS_D7)
-    const items = s['items'] as any
+    const items = s['items'] as Record<string, unknown>
     expect(items['oneOf']).toBeDefined()
-    expect(items['oneOf']).toHaveLength(3)
+    expect((items['oneOf'] as unknown[])).toHaveLength(3)
   })
 
   it('array with null uses oneOf', () => {
     const s = buildSchema(['a', null], OPTS_D7)
-    const items = s['items'] as any
+    const items = s['items'] as Record<string, unknown>
     expect(items['oneOf']).toBeDefined()
-    const types = items['oneOf'].map((o: any) => o['type'])
+    const types = (items['oneOf'] as { type: string }[]).map((o) => o['type'])
     expect(types).toContain('string')
     expect(types).toContain('null')
   })
@@ -126,28 +126,28 @@ describe('buildSchema — arrays', () => {
 describe('buildSchema — array of objects', () => {
   it('uniform object array merges into single schema', () => {
     const s = buildSchema([{ id: 1, name: 'a' }, { id: 2, name: 'b' }], OPTS_D7)
-    const items = s['items'] as any
+    const items = s['items'] as Record<string, unknown>
     expect(items['type']).toBe('object')
     expect(items['oneOf']).toBeUndefined()
   })
 
   it('merged schema has all present keys in properties', () => {
     const s = buildSchema([{ id: 1 }, { id: 2, extra: true }], OPTS_D7)
-    const items = s['items'] as any
+    const items = s['items'] as Record<string, unknown>
     expect(Object.keys(items['properties'])).toContain('id')
     expect(Object.keys(items['properties'])).toContain('extra')
   })
 
   it('required contains only keys present in all items', () => {
     const s = buildSchema([{ id: 1 }, { id: 2, extra: true }], OPTS_D7)
-    const items = s['items'] as any
+    const items = s['items'] as Record<string, unknown>
     expect(items['required']).toEqual(['id'])
     expect(items['required']).not.toContain('extra')
   })
 
   it('all keys required when they appear in every item', () => {
     const s = buildSchema([{ a: 1, b: 2 }, { a: 3, b: 4 }], OPTS_D7)
-    const items = s['items'] as any
+    const items = s['items'] as Record<string, unknown>
     expect(items['required']).toEqual(expect.arrayContaining(['a', 'b']))
   })
 })

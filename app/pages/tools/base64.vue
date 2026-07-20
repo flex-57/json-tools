@@ -8,13 +8,13 @@
       </div>
       <div style="display:flex; gap: 8px; align-items:center; flex-wrap: wrap;">
         <div class="mode-toggle" style="min-width: 170px;">
-          <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'decode' }"></div>
+          <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'decode' }"/>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'encode' }" @click="mode = 'encode'">Encode</button>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'decode' }" @click="mode = 'decode'">Decode</button>
         </div>
         <div class="variant-toggle">
-          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'standard' }" @click="variant = 'standard'" title="Standard Base64 (A-Z a-z 0-9 + /)">Standard</button>
-          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'urlsafe' }" @click="variant = 'urlsafe'" title="URL-safe Base64 (- _ no padding), used in JWT">URL-safe</button>
+          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'standard' }" title="Standard Base64 (A-Z a-z 0-9 + /)" @click="variant = 'standard'">Standard</button>
+          <button class="variant-btn" :class="{ 'variant-btn--active': variant === 'urlsafe' }" title="URL-safe Base64 (- _ no padding), used in JWT" @click="variant = 'urlsafe'">URL-safe</button>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       </div>
 
       <div class="midcol">
-        <button class="swap-btn" :class="{ 'swap-btn--spinning': swapping }" @click="handleSwap" :disabled="!output" title="Use output as input">
+        <button class="swap-btn" :class="{ 'swap-btn--spinning': swapping }" :disabled="!output" title="Use output as input" @click="handleSwap">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 5h11M9 2l3 3-3 3M15 11H4M7 8l-3 3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
@@ -50,7 +50,7 @@
           <span class="pane-label">{{ mode === 'encode' ? 'Base64 output' : 'Decoded text' }}</span>
           <div class="card-actions">
             <span v-if="output && !error" class="hint">{{ output.length }} chars</span>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div v-if="error" class="pane-body" style="color: var(--c-error);" aria-live="polite">{{ error }}</div>

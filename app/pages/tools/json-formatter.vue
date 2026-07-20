@@ -57,11 +57,11 @@
         <div class="pane-header">
           <span class="pane-label">Output</span>
           <div class="card-actions">
-            <button class="btn-xs" @click="download" :disabled="!output">
+            <button class="btn-xs" :disabled="!output" @click="download">
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1.5v7.5M4 6.5L7 9.5 10 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               Download
             </button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               {{ copied ? 'Copied!' : 'Copy' }}
             </button>
@@ -79,7 +79,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="isValid ? 'valid' : 'error'"></span>
+        <span class="led" :class="isValid ? 'valid' : 'error'"/>
         {{ isValid ? 'Valid' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-formatter</span>

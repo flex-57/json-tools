@@ -13,7 +13,7 @@
         <span class="editor-label">Token</span>
         <div class="card-actions">
           <span class="hint">paste or type · or drop a .txt file</span>
-          <button v-if="token" @click="clear" class="btn-xs">Clear</button>
+          <button v-if="token" class="btn-xs" @click="clear">Clear</button>
         </div>
       </div>
       <textarea v-model="token" class="token-input" placeholder="Paste your JWT here, e.g. eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0In0.signature" spellcheck="false" rows="3" />
@@ -48,7 +48,7 @@
       <div class="decoded-card">
         <div class="decoded-card-header">
           <div class="decoded-label-wrap"><span class="decoded-dot decoded-dot--header" /><span class="editor-label">Header</span></div>
-          <button @click="copyHeader" class="btn-copy" :class="{ 'btn-copy--done': copiedHeader }">{{ copiedHeader ? '✓ Copied' : 'Copy' }}</button>
+          <button class="btn-copy" :class="{ 'btn-copy--done': copiedHeader }" @click="copyHeader">{{ copiedHeader ? '✓ Copied' : 'Copy' }}</button>
         </div>
         <div class="decoded-body">
           <template v-if="result.header.decoded">
@@ -63,7 +63,7 @@
       <div class="decoded-card">
         <div class="decoded-card-header">
           <div class="decoded-label-wrap"><span class="decoded-dot decoded-dot--payload" /><span class="editor-label">Payload</span></div>
-          <button @click="copyPayload" class="btn-copy" :class="{ 'btn-copy--done': copiedPayload }">{{ copiedPayload ? '✓ Copied' : 'Copy' }}</button>
+          <button class="btn-copy" :class="{ 'btn-copy--done': copiedPayload }" @click="copyPayload">{{ copiedPayload ? '✓ Copied' : 'Copy' }}</button>
         </div>
         <div class="decoded-body">
           <template v-if="result.payload.decoded">

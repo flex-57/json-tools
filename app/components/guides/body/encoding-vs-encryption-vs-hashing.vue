@@ -14,7 +14,7 @@
     <section class="guide-section">
       <h2>Side by side</h2>
       <table class="cheat-table">
-        <thead><tr><th></th><th>Encoding</th><th>Encryption</th><th>Hashing</th></tr></thead>
+        <thead><tr><th/><th>Encoding</th><th>Encryption</th><th>Hashing</th></tr></thead>
         <tbody>
           <tr><td>Purpose</td><td>Safe transport / storage in a system with format restrictions</td><td>Keep data secret from anyone without the key</td><td>Verify integrity or store a value without keeping the original</td></tr>
           <tr><td>Reversible?</td><td>Yes, always, no key needed</td><td>Yes, but only with the correct key</td><td>No — one-way by design</td></tr>

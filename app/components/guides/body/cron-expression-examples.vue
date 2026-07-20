@@ -21,7 +21,7 @@
 
       <div class="code-block">
         <span class="code-header">full expression</span>
-        <code><span v-for="f in FIELDS" :key="f.name" class="cron-token" :style="{ color: f.color }">{{ f.example }}<span class="cron-space"> </span></span><span class="cron-comment"># {{ fullDescription }}</span></code>
+        <code><span v-for="f in FIELDS" :key="f.name" class="cron-token" :style="{ color: f.color }">{{ f.example }}<span class="cron-space"/></span><span class="cron-comment"># {{ fullDescription }}</span></code>
       </div>
     </section>
 

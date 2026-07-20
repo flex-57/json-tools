@@ -12,17 +12,17 @@
       <div class="pw-display">
         <code class="pw-output" :class="{ 'pw-output--empty': !password }" aria-live="polite">{{ password || 'Select at least one character type' }}</code>
         <div class="pw-action-btns">
-          <button class="icon-btn" @click="regen" title="Regenerate">
+          <button class="icon-btn" title="Regenerate" @click="regen">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M13.5 8A5.5 5.5 0 112.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2.5 2v3.5H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <button class="copy-btn" :class="{ 'copy-btn--done': copied }" @click="doCopy" :disabled="!password">{{ copied ? 'Copied!' : 'Copy' }}</button>
+          <button class="copy-btn" :class="{ 'copy-btn--done': copied }" :disabled="!password" @click="doCopy">{{ copied ? 'Copied!' : 'Copy' }}</button>
         </div>
       </div>
 
       <div class="strength-row">
         <div class="strength-track"><div class="strength-fill" :class="'s' + strength.level" :style="{ width: (strength.level / 4 * 100) + '%' }" /></div>
         <span class="strength-label" :class="'s' + strength.level">{{ strength.label }}</span>
-        <span class="entropy-label" v-if="password">· {{ entropy }} bits</span>
+        <span v-if="password" class="entropy-label">· {{ entropy }} bits</span>
       </div>
 
       <div class="pw-divider" />
@@ -31,25 +31,25 @@
         <div class="cfg-row">
           <span class="cfg-label">Length</span>
           <div class="length-controls">
-            <input type="range" min="4" max="64" v-model.number="length" class="pw-slider" />
-            <input type="number" min="4" max="64" v-model.number="length" class="len-num" @blur="clampLength" />
+            <input v-model.number="length" type="range" min="4" max="64" class="pw-slider" >
+            <input v-model.number="length" type="number" min="4" max="64" class="len-num" @blur="clampLength" >
           </div>
         </div>
 
         <div class="cfg-row">
           <span class="cfg-label">Include</span>
           <div class="opts-grid">
-            <label class="opt-label"><input type="checkbox" v-model="useUpper" class="opt-cb" /><span>Uppercase (A-Z)</span></label>
-            <label class="opt-label"><input type="checkbox" v-model="useLower" class="opt-cb" /><span>Lowercase (a-z)</span></label>
-            <label class="opt-label"><input type="checkbox" v-model="useNums"  class="opt-cb" /><span>Numbers (0-9)</span></label>
-            <label class="opt-label"><input type="checkbox" v-model="useSyms"  class="opt-cb" /><span>Symbols (!@#$…)</span></label>
+            <label class="opt-label"><input v-model="useUpper" type="checkbox" class="opt-cb" ><span>Uppercase (A-Z)</span></label>
+            <label class="opt-label"><input v-model="useLower" type="checkbox" class="opt-cb" ><span>Lowercase (a-z)</span></label>
+            <label class="opt-label"><input v-model="useNums" type="checkbox"  class="opt-cb" ><span>Numbers (0-9)</span></label>
+            <label class="opt-label"><input v-model="useSyms" type="checkbox"  class="opt-cb" ><span>Symbols (!@#$…)</span></label>
           </div>
         </div>
 
         <div class="cfg-row">
           <span class="cfg-label" />
           <label class="opt-label opt-label--wide">
-            <input type="checkbox" v-model="excludeAmbig" class="opt-cb" />
+            <input v-model="excludeAmbig" type="checkbox" class="opt-cb" >
             <span>Exclude ambiguous characters (0 / O, 1 / l / I)</span>
           </label>
         </div>
@@ -60,8 +60,8 @@
       <div class="editor-card-header">
         <span class="editor-label">Bulk generate</span>
         <div class="bulk-header-controls">
-          <input type="number" min="2" max="20" v-model.number="bulkCount" class="bulk-count-input" />
-          <button class="btn btn-primary" @click="generateBulk" :disabled="!charset">Generate {{ bulkCount }}</button>
+          <input v-model.number="bulkCount" type="number" min="2" max="20" class="bulk-count-input" >
+          <button class="btn btn-primary" :disabled="!charset" @click="generateBulk">Generate {{ bulkCount }}</button>
         </div>
       </div>
 

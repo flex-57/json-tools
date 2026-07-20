@@ -49,8 +49,8 @@
           <span class="pane-label">Minified</span>
           <div class="card-actions">
             <span v-if="result && !error" class="savings-badge">-{{ result.savings }}%</span>
-            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-xs" :disabled="!output" @click="download">Download</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
@@ -65,7 +65,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="result && !error ? 'valid' : 'error'"></span>
+        <span class="led" :class="result && !error ? 'valid' : 'error'"/>
         <template v-if="result && !error && result.originalSize > 0">{{ fmtBytes(result.originalSize) }} → {{ fmtBytes(result.minifiedSize) }} · <strong style="color: var(--c-valid);">{{ result.savings }}% saved</strong> · {{ fmtBytes(result.originalSize - result.minifiedSize) }} removed<template v-if="warning"> · <span class="status-warn">see warning above</span></template></template>
         <template v-else>{{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input' }}</template>
       </span>

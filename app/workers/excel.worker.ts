@@ -51,7 +51,7 @@ addEventListener('message', async (e: MessageEvent) => {
   catch (err) {
     // Guard: some environments throw non-Error values; convert to string defensively.
     const message = err instanceof Error ? err.message : String(err)
-    // eslint-disable-next-line no-console
+     
     console.error('[excel.worker]', message, err)
     port.postMessage({ error: message })
   }

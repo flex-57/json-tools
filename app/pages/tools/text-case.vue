@@ -15,7 +15,7 @@
           <Transition name="fade-slot">
             <span v-if="input" class="word-count">{{ wordCount }} word{{ wordCount !== 1 ? 's' : '' }}</span>
           </Transition>
-          <button v-if="input" @click="clear" class="btn-clear">Clear</button>
+          <button v-if="input" class="btn-clear" @click="clear">Clear</button>
         </div>
       </div>
       <textarea v-model="input" class="input-textarea" placeholder="Type or paste text (camelCase, snake_case, kebab-case, spaces and mixed input all work)…" spellcheck="false" rows="3" @focus="focused = true" @blur="focused = false" />
@@ -25,7 +25,7 @@
       <div v-for="r in results" :key="r.key" class="result-row" :class="{ 'result-row--empty': !r.value }">
         <span class="case-badge">{{ r.label }}</span>
         <span class="result-value">{{ r.value || r.example }}</span>
-        <button @click="copy(r.key, r.value)" class="case-copy" :class="{ 'case-copy--done': copiedKey === r.key }" :disabled="!r.value">{{ copiedKey === r.key ? 'Copied!' : 'Copy' }}</button>
+        <button class="case-copy" :class="{ 'case-copy--done': copiedKey === r.key }" :disabled="!r.value" @click="copy(r.key, r.value)">{{ copiedKey === r.key ? 'Copied!' : 'Copy' }}</button>
       </div>
     </div>
 

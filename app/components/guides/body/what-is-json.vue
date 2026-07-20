@@ -85,7 +85,7 @@
       </div>
 
       <table class="diff-table">
-        <thead><tr><th></th><th>JSON</th><th>XML</th></tr></thead>
+        <thead><tr><th/><th>JSON</th><th>XML</th></tr></thead>
         <tbody>
           <tr><td>Verbosity</td><td class="ok">Compact</td><td class="no">Verbose</td></tr>
           <tr><td>Native types</td><td class="ok">number, boolean, null, array</td><td class="no">Strings only (attributes aside)</td></tr>

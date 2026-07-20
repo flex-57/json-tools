@@ -24,7 +24,7 @@
               @click="activeGroup = key"
               @focus="activeGroup = key"
             >
-              <span class="nav-group-icon" v-html="catIcon(key)"></span>
+              <span class="nav-group-icon" v-html="catIcon(key)"/>
               {{ label }}
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -41,12 +41,12 @@
 
         <div class="header-badge">Free · No signup · No tracking</div>
 
-        <button class="theme-toggle" @click="toggle" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+        <button class="theme-toggle" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'" @click="toggle">
           <svg v-if="isDark" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M7 1v1.6M7 11.4V13M13 7h-1.6M2.6 7H1M11.2 2.8l-1.1 1.1M3.9 10.1l-1.1 1.1M11.2 11.2l-1.1-1.1M3.9 3.9L2.8 2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
           <svg v-else width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 8.2A5 5 0 116.3 2.5 4 4 0 0011 8.2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
         </button>
 
-        <button class="mobile-menu-btn" :class="{ 'is-open': mobileOpen }" @click="mobileOpen = !mobileOpen" aria-label="Toggle menu">
+        <button class="mobile-menu-btn" :class="{ 'is-open': mobileOpen }" aria-label="Toggle menu" @click="mobileOpen = !mobileOpen">
           <span class="hb-line" />
           <span class="hb-line" />
           <span class="hb-line" />
@@ -66,7 +66,7 @@
 
           <div v-for="(label, key) in CATEGORIES" :key="key" class="mobile-section">
             <div class="mobile-section-label">
-              <span class="mobile-section-icon" v-html="catIcon(key)"></span>
+              <span class="mobile-section-icon" v-html="catIcon(key)"/>
               {{ label }}
             </div>
             <template v-for="t in toolsByCategory(key)" :key="t.slug">

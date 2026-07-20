@@ -48,8 +48,8 @@
                 <option value="	">Tab</option>
               </select>
             </div>
-            <button class="btn-xs" @click="downloadCsv" :disabled="!output">Download</button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-xs" :disabled="!output" @click="downloadCsv">Download</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" aria-live="polite">
@@ -61,7 +61,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="rowCount > 0 ? 'valid' : 'error'"></span>
+        <span class="led" :class="rowCount > 0 ? 'valid' : 'error'"/>
         {{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
       </span>
       <span>json-to-csv</span>

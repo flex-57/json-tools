@@ -11,15 +11,15 @@
     <div class="picker-card editor-card">
       <div class="picker-layout">
         <div class="picker-col">
-          <div class="picker-sq" ref="pickerEl" :style="pickerBg" @pointerdown="onPickerDown" @pointermove="onPickerMove" @pointerup="onPickerUp" @pointercancel="onPickerUp">
+          <div ref="pickerEl" class="picker-sq" :style="pickerBg" @pointerdown="onPickerDown" @pointermove="onPickerMove" @pointerup="onPickerUp" @pointercancel="onPickerUp">
             <div class="picker-cursor" :style="cursorStyle" />
           </div>
 
-          <div class="hue-strip" ref="hueEl" @pointerdown="onHueDown" @pointermove="onHueMove" @pointerup="onHueUp" @pointercancel="onHueUp">
+          <div ref="hueEl" class="hue-strip" @pointerdown="onHueDown" @pointermove="onHueMove" @pointerup="onHueUp" @pointercancel="onHueUp">
             <div class="hue-thumb" :style="hueThumbStyle" />
           </div>
 
-          <div class="alpha-strip" ref="alphaEl" @pointerdown="onAlphaDown" @pointermove="onAlphaMove" @pointerup="onAlphaUp" @pointercancel="onAlphaUp">
+          <div ref="alphaEl" class="alpha-strip" @pointerdown="onAlphaDown" @pointermove="onAlphaMove" @pointerup="onAlphaUp" @pointercancel="onAlphaUp">
             <div class="alpha-gradient" :style="{ background: alphaGradientBg }" />
             <div class="alpha-thumb" :style="alphaThumbStyle" />
           </div>
@@ -33,25 +33,25 @@
         <div class="values-col">
           <div class="value-row">
             <span class="fmt-label">HEX</span>
-            <input v-model="hexInput" class="fmt-input" spellcheck="false" @blur="applyHex(hexInput)" @keydown.enter="applyHex(hexInput)" />
+            <input v-model="hexInput" class="fmt-input" spellcheck="false" @blur="applyHex(hexInput)" @keydown.enter="applyHex(hexInput)" >
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'hex' }" @click="doCopy(hexInput, 'hex')">{{ copied === 'hex' ? 'Copied!' : 'Copy' }}</button>
           </div>
 
           <div class="value-row">
             <span class="fmt-label">RGB</span>
-            <input v-model="rgbInput" class="fmt-input" spellcheck="false" @blur="applyRgb(rgbInput)" @keydown.enter="applyRgb(rgbInput)" />
+            <input v-model="rgbInput" class="fmt-input" spellcheck="false" @blur="applyRgb(rgbInput)" @keydown.enter="applyRgb(rgbInput)" >
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'rgb' }" @click="doCopy(rgbInput, 'rgb')">{{ copied === 'rgb' ? 'Copied!' : 'Copy' }}</button>
           </div>
 
           <div class="value-row">
             <span class="fmt-label">HSL</span>
-            <input v-model="hslInput" class="fmt-input" spellcheck="false" @blur="applyHsl(hslInput)" @keydown.enter="applyHsl(hslInput)" />
+            <input v-model="hslInput" class="fmt-input" spellcheck="false" @blur="applyHsl(hslInput)" @keydown.enter="applyHsl(hslInput)" >
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'hsl' }" @click="doCopy(hslInput, 'hsl')">{{ copied === 'hsl' ? 'Copied!' : 'Copy' }}</button>
           </div>
 
           <div class="value-row">
             <span class="fmt-label">HSB</span>
-            <input v-model="hsbInput" class="fmt-input" spellcheck="false" @blur="applyHsb(hsbInput)" @keydown.enter="applyHsb(hsbInput)" />
+            <input v-model="hsbInput" class="fmt-input" spellcheck="false" @blur="applyHsb(hsbInput)" @keydown.enter="applyHsb(hsbInput)" >
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'hsb' }" @click="doCopy(hsbInput, 'hsb')">{{ copied === 'hsb' ? 'Copied!' : 'Copy' }}</button>
           </div>
 
@@ -74,13 +74,13 @@
         <div class="contrast-inputs">
           <div class="contrast-field">
             <label class="c-label">Foreground</label>
-            <div class="c-input-row"><div class="c-dot" :style="{ background: contrastFg }" /><input v-model="contrastFg" class="c-hex-input" spellcheck="false" /></div>
+            <div class="c-input-row"><div class="c-dot" :style="{ background: contrastFg }" /><input v-model="contrastFg" class="c-hex-input" spellcheck="false" ></div>
           </div>
           <div class="contrast-field">
             <label class="c-label">Background</label>
-            <div class="c-input-row"><div class="c-dot" :style="{ background: contrastBg }" /><input v-model="contrastBg" class="c-hex-input" spellcheck="false" /></div>
+            <div class="c-input-row"><div class="c-dot" :style="{ background: contrastBg }" /><input v-model="contrastBg" class="c-hex-input" spellcheck="false" ></div>
           </div>
-          <button class="btn btn-ghost use-current-btn" @click="contrastBg = currentHex" title="Use current color (opaque) as background">Use current</button>
+          <button class="btn btn-ghost use-current-btn" title="Use current color (opaque) as background" @click="contrastBg = currentHex">Use current</button>
         </div>
 
         <div class="contrast-result" aria-live="polite">

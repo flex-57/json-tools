@@ -6,7 +6,7 @@
         <p class="page-subtitle">Explore JSON structure as an interactive collapsible tree or graph. Click nodes to expand, hover to copy the full path.</p>
       </div>
       <div class="mode-toggle" style="min-width: 150px;">
-        <div class="mode-indicator" :class="{ 'mode-indicator--right': viewMode === 'graph' }"></div>
+        <div class="mode-indicator" :class="{ 'mode-indicator--right': viewMode === 'graph' }"/>
         <button class="mode-btn" :class="{ 'mode-btn--active': viewMode === 'tree' }" @click="viewMode = 'tree'">Tree</button>
         <button class="mode-btn" :class="{ 'mode-btn--active': viewMode === 'graph' }" @click="switchToGraph">Graph</button>
       </div>
@@ -45,8 +45,8 @@
             <div class="tree-toolbar">
               <span class="tree-search-wrap">
                 <svg width="11" height="11" viewBox="0 0 14 14" fill="none" class="tree-search-icon"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-                <input v-model="search" class="tree-search" placeholder="Search…" aria-label="Search tree nodes" />
-                <button v-if="search" class="tree-search-clear" @click="search = ''" aria-label="Clear search">×</button>
+                <input v-model="search" class="tree-search" placeholder="Search…" aria-label="Search tree nodes" >
+                <button v-if="search" class="tree-search-clear" aria-label="Clear search" @click="search = ''">×</button>
               </span>
               <button class="btn-xs" @click="expandAll">Expand all</button>
               <button class="btn-xs" @click="collapseAll">Collapse all</button>
@@ -170,7 +170,8 @@ const nodeTypes: NodeTypesObject = { jsonNode: resolveComponent('JsonGraphNode')
 provide('tree:collapsed', collapsed)
 provide('tree:toggle', (id: string) => {
   const next = new Set(collapsed.value)
-  next.has(id) ? next.delete(id) : next.add(id)
+  if (next.has(id)) next.delete(id)
+  else next.add(id)
   collapsed.value = next
 })
 provide('tree:search', search)
@@ -260,6 +261,7 @@ async function exportAsPdf() {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function exportGraphAsPdf() {
   const el = document.querySelector('.vf-instance') as HTMLElement
   if (!el) return

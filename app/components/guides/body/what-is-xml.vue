@@ -60,7 +60,7 @@
     <section class="guide-section">
       <h2>XML vs JSON</h2>
       <table class="cheat-table">
-        <thead><tr><th></th><th>XML</th><th>JSON</th></tr></thead>
+        <thead><tr><th/><th>XML</th><th>JSON</th></tr></thead>
         <tbody>
           <tr><td>Syntax</td><td>Tag-based, verbose</td><td>Key-value, concise</td></tr>
           <tr><td>Comments</td><td>Yes — <code>&lt;!-- comment --&gt;</code></td><td>No</td></tr>

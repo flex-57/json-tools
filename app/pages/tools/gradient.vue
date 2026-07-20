@@ -8,18 +8,18 @@
     </div>
 
     <div class="mode-toggle" style="min-width: 250px;">
-      <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 3)', transform: indicatorTransform }"></div>
+      <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 3)', transform: indicatorTransform }"/>
       <button v-for="t in TYPES" :key="t.value" class="mode-btn" :class="{ 'mode-btn--active': type === t.value }" @click="type = t.value">{{ t.label }}</button>
     </div>
 
     <div class="editor-card">
-      <div class="preview-box" :style="{ background: css }"></div>
+      <div class="preview-box" :style="{ background: css }"/>
 
       <div class="controls-body">
         <div v-if="type === 'linear' || type === 'conic'" class="control-row">
           <span class="control-label">Angle</span>
-          <input type="range" min="0" max="360" v-model.number="angle" class="grad-slider" />
-          <input type="number" min="0" max="360" v-model.number="angle" class="angle-num" />
+          <input v-model.number="angle" type="range" min="0" max="360" class="grad-slider" >
+          <input v-model.number="angle" type="number" min="0" max="360" class="angle-num" >
           <span class="unit">deg</span>
         </div>
 
@@ -45,12 +45,12 @@
           </div>
           <div class="stops-list">
             <div v-for="stop in stops" :key="stop.id" class="stop-row">
-              <input type="color" v-model="stop.color" class="stop-color" :aria-label="`Stop color`" />
-              <input type="text" v-model="stop.color" class="stop-hex" spellcheck="false" aria-label="Stop color hex" />
-              <input type="range" min="0" max="100" v-model.number="stop.position" class="grad-slider" aria-label="Stop position" />
-              <input type="number" min="0" max="100" v-model.number="stop.position" class="stop-pos-num" aria-label="Stop position percent" />
+              <input v-model="stop.color" type="color" class="stop-color" :aria-label="`Stop color`" >
+              <input v-model="stop.color" type="text" class="stop-hex" spellcheck="false" aria-label="Stop color hex" >
+              <input v-model.number="stop.position" type="range" min="0" max="100" class="grad-slider" aria-label="Stop position" >
+              <input v-model.number="stop.position" type="number" min="0" max="100" class="stop-pos-num" aria-label="Stop position percent" >
               <span class="unit">%</span>
-              <button class="stop-remove" :disabled="stops.length <= 2" @click="removeStop(stop.id)" aria-label="Remove color stop">
+              <button class="stop-remove" :disabled="stops.length <= 2" aria-label="Remove color stop" @click="removeStop(stop.id)">
                 <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               </button>
             </div>
@@ -64,7 +64,7 @@
               v-for="p in PRESETS" :key="p.name" class="preset-chip"
               :style="{ background: buildGradientCss(p.type, p.angle, 'ellipse', 'center', p.stops) }"
               :title="p.name" :aria-label="`Use ${p.name} preset`" @click="applyPreset(p)"
-            ></button>
+            />
           </div>
         </div>
       </div>

@@ -10,8 +10,8 @@
 
     <div class="cron-input-card" :class="{ 'cron-input-card--error': !!error }">
       <div class="cron-input-row">
-        <input v-model="expression" class="cron-input" placeholder="0 9 * * 1-5" spellcheck="false" autocomplete="off" />
-        <button v-if="expression" @click="expression = ''" class="btn-clear-inline">
+        <input v-model="expression" class="cron-input" placeholder="0 9 * * 1-5" spellcheck="false" autocomplete="off" >
+        <button v-if="expression" class="btn-clear-inline" @click="expression = ''">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
       </div>
@@ -61,7 +61,7 @@
     <div class="reference-card">
       <div class="reference-header">Cron syntax reference</div>
       <div class="reference-grid">
-        <div class="ref-item" v-for="r in REFERENCE" :key="r.expr">
+        <div v-for="r in REFERENCE" :key="r.expr" class="ref-item">
           <code class="ref-expr">{{ r.expr }}</code>
           <span class="ref-desc">{{ r.desc }}</span>
         </div>

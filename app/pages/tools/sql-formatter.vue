@@ -8,11 +8,11 @@
       </div>
       <div style="display:flex; flex-direction: column; gap: 10px; align-items: flex-end;">
         <div class="mode-toggle" style="min-width: 570px;">
-          <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 5)', transform: indicatorTransform }"></div>
+          <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 5)', transform: indicatorTransform }"/>
           <button v-for="d in DIALECTS" :key="d.value" class="mode-btn" :class="{ 'mode-btn--active': dialect === d.value }" @click="dialect = d.value">{{ d.label }}</button>
         </div>
         <div class="option-wrap">
-          <label class="option-label"><input type="checkbox" v-model="uppercase" style="accent-color: var(--c-accent); margin-right: 5px;" />UPPERCASE keywords</label>
+          <label class="option-label"><input v-model="uppercase" type="checkbox" style="accent-color: var(--c-accent); margin-right: 5px;" >UPPERCASE keywords</label>
           <label class="option-label">Indent</label>
           <select v-model="indentSizeNum" class="option-select">
             <option :value="2">2 spaces</option>
@@ -51,8 +51,8 @@
           <span class="pane-label">Formatted SQL</span>
           <div class="card-actions">
             <span v-if="output && !error" class="dialect-badge">{{ dialectLabel }}</span>
-            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-xs" :disabled="!output" @click="download">Download</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div v-if="error" class="pane-body" aria-live="polite">{{ error }}</div>

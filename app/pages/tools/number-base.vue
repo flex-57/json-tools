@@ -16,11 +16,11 @@
             <span v-if="detectedBase" class="detected-badge">{{ detectedBase }}</span>
           </Transition>
           <Transition name="fade-slot">
-            <button v-if="input" @click="clear" class="btn-xs">Clear</button>
+            <button v-if="input" class="btn-xs" @click="clear">Clear</button>
           </Transition>
         </div>
       </div>
-      <input v-model="input" class="input-field" placeholder="255   or   0xFF   or   0b11111111   or   0o377" spellcheck="false" autocomplete="off" @focus="focused = true" @blur="focused = false" />
+      <input v-model="input" class="input-field" placeholder="255   or   0xFF   or   0b11111111   or   0o377" spellcheck="false" autocomplete="off" @focus="focused = true" @blur="focused = false" >
       <Transition name="fade-slot">
         <div v-if="error" class="error-line">{{ error }}</div>
       </Transition>
@@ -38,7 +38,7 @@
         <div v-for="r in results" :key="r.key" class="result-row">
           <span class="base-badge">{{ r.label }}</span>
           <span class="result-value">{{ r.display }}</span>
-          <button @click="copy(r.key, r.raw)" class="btn-copy" :class="{ 'btn-copy--done': copiedKey === r.key }">{{ copiedKey === r.key ? 'Copied!' : 'Copy' }}</button>
+          <button class="btn-copy" :class="{ 'btn-copy--done': copiedKey === r.key }" @click="copy(r.key, r.raw)">{{ copiedKey === r.key ? 'Copied!' : 'Copy' }}</button>
         </div>
       </template>
     </div>

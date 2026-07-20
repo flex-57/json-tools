@@ -1,7 +1,7 @@
 <template>
   <section v-if="tools.length" class="recent-section">
-    <button class="recent-toggle" @click="open = !open" :aria-expanded="open">
-      <span class="recent-toggle-icon" v-html="ICONS.recent"></span>
+    <button class="recent-toggle" :aria-expanded="open" @click="open = !open">
+      <span class="recent-toggle-icon" v-html="ICONS.recent"/>
       <span class="recent-label">Recently Used</span>
       <svg class="recent-chevron" :class="{ 'recent-chevron--open': open }" width="10" height="6" viewBox="0 0 10 6" fill="none">
         <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -9,7 +9,7 @@
     </button>
     <div v-if="open" class="recent-row">
       <NuxtLink v-for="t in tools" :key="t.slug" :to="`/tools/${t.slug}`" class="recent-pill">
-        <span class="recent-pill-icon" v-html="toolIcon(t.slug)"></span>
+        <span class="recent-pill-icon" v-html="toolIcon(t.slug)"/>
         <span class="recent-pill-name">{{ t.navLabel ?? t.name }}</span>
       </NuxtLink>
     </div>

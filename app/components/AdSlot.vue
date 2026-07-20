@@ -25,9 +25,9 @@ onMounted(() => {
   nextTick(() => {
     if (!insEl.value) return
     try {
-      const w = window as any
+      const w = window as unknown as { adsbygoogle: unknown[] }
       ;(w.adsbygoogle = w.adsbygoogle || []).push({})
-    } catch {}
+    } catch { /* empty */ }
   })
 })
 </script>

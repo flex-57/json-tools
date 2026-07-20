@@ -40,7 +40,7 @@
           <span class="pane-label">Preview</span>
           <div class="card-actions">
             <span class="hint">First 5 rows</span>
-            <button class="btn-xs" @click="download" :disabled="!isValid || loading">{{ loading ? 'Generating…' : 'Download .xlsx' }}</button>
+            <button class="btn-xs" :disabled="!isValid || loading" @click="download">{{ loading ? 'Generating…' : 'Download .xlsx' }}</button>
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': preview.length === 0 }" :style="preview.length > 0 ? 'padding: 0;' : ''" aria-live="polite">

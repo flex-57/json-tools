@@ -5,7 +5,7 @@
         <h1 class="page-title">JSON <span class="title-amp">Diff</span></h1>
         <p class="page-subtitle">Compare two JSON objects and highlight every addition and deletion.</p>
       </div>
-      <button @click="swap" class="btn btn-ghost" title="Swap left and right">
+      <button class="btn btn-ghost" title="Swap left and right" @click="swap">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 4h9M7 1l3 3-3 3M13 10H4M7 7l-3 3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Swap
       </button>
@@ -24,7 +24,7 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDraggingLeft, 'pane--invalid': result?.errorSide === 'left' }" @dragover.prevent="isDraggingLeft = true" @dragleave="isDraggingLeft = false" @drop.prevent="onDropLeft">
         <div class="pane-header">
-          <span class="pane-label"><span class="side-dot side-dot--left"></span>Original</span>
+          <span class="pane-label"><span class="side-dot side-dot--left"/>Original</span>
           <div class="card-actions">
             <span v-if="result && !result.error" class="diff-stat diff-stat--removed">-{{ result.deletions }}</span>
             <span class="hint">drop a .json file</span>
@@ -40,14 +40,14 @@
       </div>
 
       <div class="midcol">
-        <button class="swap-btn" @click="swap" title="Swap left and right">
+        <button class="swap-btn" title="Swap left and right" @click="swap">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 5h11M9 2l3 3-3 3M15 11H4M7 8l-3 3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
 
       <div class="pane pane--alt" :class="{ 'pane--drag': isDraggingRight, 'pane--invalid': result?.errorSide === 'right' }" @dragover.prevent="isDraggingRight = true" @dragleave="isDraggingRight = false" @drop.prevent="onDropRight">
         <div class="pane-header">
-          <span class="pane-label"><span class="side-dot side-dot--right"></span>Modified</span>
+          <span class="pane-label"><span class="side-dot side-dot--right"/>Modified</span>
           <div class="card-actions">
             <span v-if="result && !result.error" class="diff-stat diff-stat--added">+{{ result.additions }}</span>
             <span class="hint">drop a .json file</span>

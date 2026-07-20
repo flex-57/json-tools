@@ -84,7 +84,7 @@
     <section class="guide-section">
       <h2>UUID vs auto-increment IDs</h2>
       <table class="cheat-table">
-        <thead><tr><th></th><th>UUID (v4)</th><th>Auto-increment integer</th></tr></thead>
+        <thead><tr><th/><th>UUID (v4)</th><th>Auto-increment integer</th></tr></thead>
         <tbody>
           <tr><td>Globally unique</td><td>Yes</td><td>Only within one table</td></tr>
           <tr><td>Merge-safe</td><td>Yes — no conflicts when merging databases</td><td>No — IDs collide</td></tr>

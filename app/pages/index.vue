@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <section class="hero">
-      <div class="eyebrow"><span class="eyebrow-dot"></span>{{ VISIBLE_TOOL_COUNT }} TOOLS · RUNS ENTIRELY IN YOUR BROWSER</div>
+      <div class="eyebrow"><span class="eyebrow-dot"/>{{ VISIBLE_TOOL_COUNT }} TOOLS · RUNS ENTIRELY IN YOUR BROWSER</div>
       <h1>The toolbench for devs who'd rather not open <span>twelve tabs</span>.</h1>
       <p>JSON, regex, cron, SQL, colors, hashes and more — paste, transform, copy. No account, no upload, nothing tracked.</p>
       <form class="hero-search" @submit.prevent>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-        <input v-model="query" placeholder="Jump to a tool — formatter, base64, cron…" aria-label="Search developer tools" />
-        <button v-if="query" type="button" class="hero-search-clear" @click="query = ''" aria-label="Clear search">
+        <input v-model="query" placeholder="Jump to a tool — formatter, base64, cron…" aria-label="Search developer tools" >
+        <button v-if="query" type="button" class="hero-search-clear" aria-label="Clear search" @click="query = ''">
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
       </form>
@@ -18,13 +18,13 @@
     <template v-for="(label, key) in CATEGORIES" :key="key">
       <section v-if="filtered(key).length" class="cat-section">
         <div class="cat-head">
-          <div class="cat-icon" v-html="catIcon(key)"></div>
+          <div class="cat-icon" v-html="catIcon(key)"/>
           <h2 class="cat-title">{{ label }}</h2>
           <span class="cat-count">— {{ filtered(key).length }} tool{{ filtered(key).length !== 1 ? 's' : '' }} —</span>
         </div>
         <div class="cat-grid">
           <NuxtLink v-for="t in filtered(key)" :key="t.slug" :to="`/tools/${t.slug}`" class="tool-card">
-            <div class="tool-badge" v-html="toolIcon(t.slug)"></div>
+            <div class="tool-badge" v-html="toolIcon(t.slug)"/>
             <div>
               <div class="tool-name">{{ t.navLabel ?? t.name }}</div>
               <div class="tool-desc">{{ t.short }}</div>
@@ -38,7 +38,7 @@
 
     <section class="features">
       <div v-for="f in FEATURES" :key="f.title" class="feature-card">
-        <div class="feature-icon" v-html="f.icon"></div>
+        <div class="feature-icon" v-html="f.icon"/>
         <h2 class="feature-title">{{ f.title }}</h2>
         <p class="feature-body">{{ f.body }}</p>
       </div>

@@ -38,8 +38,6 @@ function computeDiffLines(a: string[], b: string[]): DiffLine[] {
   const result: DiffLine[] = []
   let i = a.length
   let j = b.length
-  let leftLine = i
-  let rightLine = j
 
   while (i > 0 || j > 0) {
     if (i > 0 && j > 0 && a[i - 1]! === b[j - 1]!) {

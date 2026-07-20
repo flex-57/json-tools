@@ -87,7 +87,7 @@
         JSON Schema has several published drafts. The two most widely used are:
       </p>
       <table class="cheat-table">
-        <thead><tr><th></th><th>Draft-07</th><th>2020-12</th></tr></thead>
+        <thead><tr><th/><th>Draft-07</th><th>2020-12</th></tr></thead>
         <tbody>
           <tr><td>$schema URI</td><td><code>http://json-schema.org/draft-07/schema</code></td><td><code>https://json-schema.org/draft/2020-12/schema</code></td></tr>
           <tr><td>Reusable definitions</td><td><code>definitions</code></td><td><code>$defs</code> (renamed)</td></tr>

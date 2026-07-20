@@ -47,8 +47,8 @@
                 <option :value="4">4 spaces</option>
               </select>
             </div>
-            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-xs" :disabled="!output" @click="download">Download</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
@@ -63,7 +63,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="output && !error ? 'valid' : 'error'"></span>
+        <span class="led" :class="output && !error ? 'valid' : 'error'"/>
         {{ output && !error ? 'Converted' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
       </span>
       <span>json-to-yaml</span>

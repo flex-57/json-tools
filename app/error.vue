@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ error: { statusCode: number; message?: string } }>()
+defineProps<{ error: { statusCode: number; message?: string } }>()
 
 useSeoMeta({
   title: '404 — Page Not Found',

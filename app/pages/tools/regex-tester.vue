@@ -11,7 +11,7 @@
     <div class="pattern-card" :class="{ 'pattern-card--error': !!regexError }">
       <div class="pattern-row">
         <span class="pattern-slash">/</span>
-        <input v-model="pattern" class="pattern-input" placeholder="[a-z]+" spellcheck="false" autocomplete="off" />
+        <input v-model="pattern" class="pattern-input" placeholder="[a-z]+" spellcheck="false" autocomplete="off" >
         <span class="pattern-slash">/</span>
         <div class="flag-group">
           <button v-for="f in FLAGS" :key="f.key" :class="['flag-btn', activeFlags.has(f.key) ? 'flag-btn--on' : '']" :title="f.title" @click="toggleFlag(f.key)">{{ f.key }}</button>
@@ -43,7 +43,7 @@
           <span class="editor-label">Highlighted</span>
           <span class="hint">{{ matches.length }} match{{ matches.length !== 1 ? 'es' : '' }}</span>
         </div>
-        <div class="highlight-body" v-html="highlightedHtml" aria-live="polite" />
+        <div class="highlight-body" aria-live="polite" v-html="highlightedHtml" />
       </div>
     </Transition>
 

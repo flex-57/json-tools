@@ -78,7 +78,7 @@ Alice,"12 Rue de Paris, 3rd floor",30</code></pre>
     <section class="guide-section">
       <h2>CSV vs JSON</h2>
       <table class="cheat-table">
-        <thead><tr><th></th><th>CSV</th><th>JSON</th></tr></thead>
+        <thead><tr><th/><th>CSV</th><th>JSON</th></tr></thead>
         <tbody>
           <tr><td>Structure</td><td>Flat — rows and columns only</td><td>Nested — objects and arrays at any depth</td></tr>
           <tr><td>Types</td><td>None — everything is text</td><td>String, number, boolean, null, object, array</td></tr>

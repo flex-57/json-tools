@@ -26,7 +26,7 @@
               </select>
             </div>
             <label class="toggle-wrap">
-              <input type="checkbox" v-model="hasHeader" class="toggle-input" />
+              <input v-model="hasHeader" type="checkbox" class="toggle-input" >
               <span class="toggle-track"><span class="toggle-thumb" /></span>
               <span class="toggle-label">Headers</span>
             </label>
@@ -44,8 +44,8 @@
         <div class="pane-header">
           <span class="pane-label">JSON Output</span>
           <div class="card-actions">
-            <button class="btn-xs" @click="downloadJson" :disabled="!output">Download</button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-xs" :disabled="!output" @click="downloadJson">Download</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
@@ -60,7 +60,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="rowCount > 0 ? 'valid' : 'error'"></span>
+        <span class="led" :class="rowCount > 0 ? 'valid' : 'error'"/>
         {{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error ? `Invalid${errorLine ? ` · around line ${errorLine}` : ''}` : 'Waiting for input') }}
       </span>
       <span>csv-to-json</span>

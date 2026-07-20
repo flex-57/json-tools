@@ -16,7 +16,7 @@
             <span v-html="ICONS.mail" />
             contact@jsontools.space
           </a>
-          <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" type="button">{{ copied ? 'Copied!' : 'Copy address' }}</button>
+          <button class="btn-copy" :class="{ 'btn-copy--done': copied }" type="button" @click="copy">{{ copied ? 'Copied!' : 'Copy address' }}</button>
         </p>
         <p class="email-hint">Nothing happens when you click the button above? Your browser may not have a default mail app set up. Copy the address instead.</p>
       </section>

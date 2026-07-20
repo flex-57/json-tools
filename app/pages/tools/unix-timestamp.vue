@@ -6,7 +6,7 @@
         <p class="page-subtitle">Convert Unix timestamps to readable dates and back, instantly and client-side.</p>
         <NuxtLink to="/guides/what-is-unix-timestamp" class="guide-link">New to Unix time? Read our guide →</NuxtLink>
       </div>
-      <button @click="setNow" class="btn btn-primary">
+      <button class="btn btn-primary" @click="setNow">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Now
       </button>
@@ -14,8 +14,8 @@
 
     <div class="input-card">
       <div class="input-card-inner">
-        <input v-model="input" class="ts-input" placeholder="1749649920  or  2026-06-11T14:32:00Z  or  June 11 2026" spellcheck="false" @keydown.enter="setNow" />
-        <button v-if="input" @click="clear" class="btn-clear-inline">
+        <input v-model="input" class="ts-input" placeholder="1749649920  or  2026-06-11T14:32:00Z  or  June 11 2026" spellcheck="false" @keydown.enter="setNow" >
+        <button v-if="input" class="btn-clear-inline" @click="clear">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
       </div>
@@ -26,11 +26,11 @@
 
     <Transition name="slide-in">
       <div v-if="parsed" class="result-card" aria-live="polite">
-        <div class="result-row" v-for="row in resultRows" :key="row.key">
+        <div v-for="row in resultRows" :key="row.key" class="result-row">
           <span class="result-label">{{ row.label }}</span>
           <span v-if="row.key !== 'relative'" class="result-value" :class="row.mono ? 'result-value--mono' : ''">{{ row.value }}</span>
           <span v-else class="result-badge">{{ row.value }}</span>
-          <button v-if="row.copyable" @click="copyValue(row.value, row.key)" class="btn-copy-row" :class="{ 'btn-copy-row--done': copied === row.key }">{{ copied === row.key ? 'Copied!' : 'Copy' }}</button>
+          <button v-if="row.copyable" class="btn-copy-row" :class="{ 'btn-copy-row--done': copied === row.key }" @click="copyValue(row.value, row.key)">{{ copied === row.key ? 'Copied!' : 'Copy' }}</button>
         </div>
       </div>
     </Transition>

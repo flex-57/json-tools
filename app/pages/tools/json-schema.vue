@@ -7,7 +7,7 @@
         <NuxtLink to="/guides/how-to-validate-json" class="guide-link">Learn how JSON validation works →</NuxtLink>
       </div>
       <div class="mode-toggle" style="min-width: 200px;">
-        <div class="mode-indicator" :class="{ 'mode-indicator--right': draft === '2020-12' }"></div>
+        <div class="mode-indicator" :class="{ 'mode-indicator--right': draft === '2020-12' }"/>
         <button class="mode-btn" :class="{ 'mode-btn--active': draft === 'draft-07' }" @click="draft = 'draft-07'">Draft-07</button>
         <button class="mode-btn" :class="{ 'mode-btn--active': draft === '2020-12' }" @click="draft = '2020-12'">2020-12</button>
       </div>
@@ -45,12 +45,12 @@
           <span class="pane-label">JSON Schema</span>
           <div class="card-actions">
             <label class="toggle-wrap">
-              <input type="checkbox" class="toggle-input" v-model="required" />
+              <input v-model="required" type="checkbox" class="toggle-input" >
               <span class="toggle-track"><span class="toggle-thumb" /></span>
               <span class="toggle-label">Required</span>
             </label>
-            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-xs" :disabled="!output" @click="download">Download</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
@@ -65,7 +65,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="output && !error ? 'valid' : 'error'"></span>
+        <span class="led" :class="output && !error ? 'valid' : 'error'"/>
         {{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : (output ? 'Ready' : 'Waiting for input') }}
       </span>
       <span>json-schema</span>

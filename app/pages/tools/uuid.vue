@@ -14,7 +14,7 @@
           <label class="control-label">Count</label>
           <div class="count-wrap">
             <button class="count-btn" @click="count = Math.max(1, count - 1)">−</button>
-            <input v-model.number="count" type="number" min="1" max="100" class="count-input" />
+            <input v-model.number="count" type="number" min="1" max="100" class="count-input" >
             <button class="count-btn" @click="count = Math.min(100, count + 1)">+</button>
           </div>
         </div>
@@ -28,11 +28,11 @@
         </div>
 
         <div class="control-actions">
-          <button @click="generate" class="btn btn-primary">
+          <button class="btn btn-primary" @click="generate">
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 7a6 6 0 1 0 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 3v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Generate <span class="kb">Ctrl ↵</span>
           </button>
-          <button @click="copyAll" class="btn btn-ghost" :class="{ 'btn--success': copiedAll }">
+          <button class="btn btn-ghost" :class="{ 'btn--success': copiedAll }" @click="copyAll">
             <svg v-if="!copiedAll" width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             <svg v-else width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             {{ copiedAll ? 'Copied!' : 'Copy all' }}

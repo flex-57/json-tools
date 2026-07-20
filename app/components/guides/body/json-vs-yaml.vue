@@ -34,7 +34,7 @@
       <h2>Key differences</h2>
       <div class="diff-grid">
         <div class="diff-row diff-row--head">
-          <span></span>
+          <span/>
           <span>JSON</span>
           <span>YAML</span>
         </div>
@@ -75,13 +75,7 @@ summary: >
       <h3>Anchors and aliases</h3>
       <div class="code-block">
         <span class="code-header">YAML anchors (&) reuse values — avoids repetition</span>
-        <code>defaults: &defaults
-  retries: 3
-  timeout: 30
-
-production:
-  <<: *defaults   # inherits retries and timeout
-  timeout: 60     # overrides just this value</code>
+        <code>{{ YAML_ANCHORS }}</code>
       </div>
     </section>
 
@@ -135,6 +129,14 @@ roles:
 address:
   city: Paris
   country: France`
+
+const YAML_ANCHORS = `defaults: &defaults
+  retries: 3
+  timeout: 30
+
+production:
+  <<: *defaults   # inherits retries and timeout
+  timeout: 60     # overrides just this value`
 
 const DIFF_ROWS = [
   { feature: 'Syntax',       json: 'Braces, quotes, commas',      yaml: 'Indentation, minimal punctuation' },

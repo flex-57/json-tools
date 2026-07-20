@@ -50,9 +50,9 @@
             </div>
           </div>
 
-          <section class="guide-faq" id="faq">
+          <section id="faq" class="guide-faq">
             <h2 class="guide-faq-title">Frequently asked questions</h2>
-            <FaqAccordion :items="guide.faqs" :key="slug" />
+            <FaqAccordion :key="slug" :items="guide.faqs" />
           </section>
 
           <RelatedLinks label="Related guides" :items="relatedGuideItems" />

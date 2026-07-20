@@ -5,7 +5,7 @@
     </div>
     <div class="error-banner-body">
       <div class="error-banner-title">
-        <span v-if="sideDot" class="error-banner-dot" :style="{ background: sideDot }"></span>
+        <span v-if="sideDot" class="error-banner-dot" :style="{ background: sideDot }"/>
         <span v-if="sideLabel" class="error-banner-side-label">{{ sideLabel }}</span>
         {{ headline }}
       </div>

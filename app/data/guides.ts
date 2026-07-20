@@ -1,5 +1,5 @@
 import { ICONS } from '~/utils/icons'
-import { CATEGORIES } from './tools'
+import type { CATEGORIES } from './tools'
 
 export type GuideCategory = keyof typeof CATEGORIES
 

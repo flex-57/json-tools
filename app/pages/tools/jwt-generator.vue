@@ -7,7 +7,7 @@
         <NuxtLink to="/guides/what-is-jwt" class="guide-link">New to JWTs? Read our guide →</NuxtLink>
       </div>
       <div class="mode-toggle" style="min-width: 225px;">
-        <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 3)', transform: indicatorTransform }"></div>
+        <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 3)', transform: indicatorTransform }"/>
         <button v-for="a in ALGOS" :key="a" class="mode-btn" :class="{ 'mode-btn--active': algorithm === a }" @click="algorithm = a">{{ a }}</button>
       </div>
     </div>
@@ -17,9 +17,9 @@
         <span class="editor-label">Payload <span class="editor-label-sub">(JSON)</span></span>
         <div class="section-header-right">
           <span class="hint">or drop a .json file</span>
-          <button @click="setIatNow" class="btn-hint" :disabled="!payloadValid" title="Set iat to current timestamp">iat = now</button>
-          <button @click="addExp(1)" class="btn-hint" :disabled="!payloadValid" title="Add exp claim: iat + 1 hour">+ exp 1h</button>
-          <button @click="clear" class="btn-xs">Clear</button>
+          <button class="btn-hint" :disabled="!payloadValid" title="Set iat to current timestamp" @click="setIatNow">iat = now</button>
+          <button class="btn-hint" :disabled="!payloadValid" title="Add exp claim: iat + 1 hour" @click="addExp(1)">+ exp 1h</button>
+          <button class="btn-xs" @click="clear">Clear</button>
         </div>
       </div>
       <textarea v-model="payload" class="section-textarea" spellcheck="false" rows="6" />
@@ -33,13 +33,13 @@
         <span class="editor-label">Secret Key</span>
         <span class="algo-hint">HMAC · {{ algorithm }}</span>
       </div>
-      <input v-model="secret" class="secret-input" type="text" placeholder="your-256-bit-secret" spellcheck="false" autocomplete="off" />
+      <input v-model="secret" class="secret-input" type="text" placeholder="your-256-bit-secret" spellcheck="false" autocomplete="off" >
     </div>
 
     <div class="output-card">
       <div class="section-header">
         <span class="editor-label">Generated JWT</span>
-        <button @click="copy" class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!token">{{ copied ? 'Copied!' : 'Copy' }}</button>
+        <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!token" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
       </div>
       <div class="token-body" aria-live="polite">
         <div v-if="token" class="token-parts">

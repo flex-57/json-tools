@@ -105,7 +105,7 @@
         Hashing and encryption are fundamentally different:
       </p>
       <table class="cheat-table">
-        <thead><tr><th></th><th>Hashing</th><th>Encryption</th></tr></thead>
+        <thead><tr><th/><th>Hashing</th><th>Encryption</th></tr></thead>
         <tbody>
           <tr><td>Reversible?</td><td>No — one-way only</td><td>Yes — with the key</td></tr>
           <tr><td>Output size</td><td>Fixed</td><td>Variable (close to input size)</td></tr>

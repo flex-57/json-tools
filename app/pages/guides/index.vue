@@ -15,8 +15,8 @@
 
     <form class="guide-search" @submit.prevent>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input v-model="query" placeholder="Search guides — JSON, hash, regex, entropy…" aria-label="Search guides" />
-      <button v-if="query" type="button" class="guide-search-clear" @click="query = ''" aria-label="Clear search">
+      <input v-model="query" placeholder="Search guides — JSON, hash, regex, entropy…" aria-label="Search guides" >
+      <button v-if="query" type="button" class="guide-search-clear" aria-label="Clear search" @click="query = ''">
         <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
     </form>
@@ -25,7 +25,7 @@
 
     <div v-for="group in groups" :key="group.key" class="cat-section">
       <div class="cat-head">
-        <div class="cat-icon" v-html="group.icon"></div>
+        <div class="cat-icon" v-html="group.icon"/>
         <h2 class="cat-title">{{ group.label }}</h2>
         <span class="cat-count">{{ group.guides.length }}</span>
       </div>

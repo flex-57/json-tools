@@ -9,7 +9,7 @@
         <template v-if="sheets.length > 1">
           <div class="option-wrap">
             <label class="option-label">Sheet</label>
-            <select :value="activeSheet" @change="switchSheet(($event.target as HTMLSelectElement).value)" class="option-select">
+            <select :value="activeSheet" class="option-select" @change="switchSheet(($event.target as HTMLSelectElement).value)">
               <option v-for="s in sheets" :key="s.name" :value="s.name">{{ s.name }} ({{ s.rowCount }} rows)</option>
             </select>
           </div>
@@ -27,7 +27,7 @@
         @drop.prevent="onDrop"
         @click="triggerFileInput"
       >
-        <input ref="fileInput" type="file" accept=".xlsx,.xls,.ods,.csv" class="file-input" @change="onFileInput" />
+        <input ref="fileInput" type="file" accept=".xlsx,.xls,.ods,.csv" class="file-input" @change="onFileInput" >
         <div v-if="!file" class="drop-content">
           <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
             <rect x="6" y="4" width="24" height="30" rx="3" stroke="var(--c-border-m)" stroke-width="2"/>
@@ -56,12 +56,12 @@
           <span class="pane-label">JSON Output</span>
           <div class="card-actions">
             <label class="toggle-wrap">
-              <input type="checkbox" v-model="hasHeader" @change="file && convert()" class="toggle-input" />
+              <input v-model="hasHeader" type="checkbox" class="toggle-input" @change="file && convert()" >
               <span class="toggle-track"><span class="toggle-thumb" /></span>
               <span class="toggle-label">Headers</span>
             </label>
-            <button class="btn-xs" @click="download" :disabled="!output">Download</button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">{{ copied ? 'Copied!' : 'Copy' }}</button>
+            <button class="btn-xs" :disabled="!output" @click="download">Download</button>
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
         <div class="pane-body" style="padding: 0;" aria-live="polite">
@@ -74,7 +74,7 @@
     </div>
 
     <StatusBar v-if="sheets.length || error">
-      <span><span class="led" :class="error ? 'error' : 'valid'"></span>{{ error || `${sheets.length} sheet${sheets.length > 1 ? 's' : ''}` }}</span>
+      <span><span class="led" :class="error ? 'error' : 'valid'"/>{{ error || `${sheets.length} sheet${sheets.length > 1 ? 's' : ''}` }}</span>
       <span>excel-to-json</span>
     </StatusBar>
 
@@ -93,7 +93,7 @@ useToolSeo(
   'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
 )
 
-const { file, output, error, sheets, activeSheet, hasHeader, copied, loading, convert, switchSheet, copy, clear, download } = useExcelToJson()
+const { file, output, error, sheets, activeSheet, hasHeader, copied, convert, switchSheet, copy, clear, download } = useExcelToJson()
 
 const seoCards = [
   {

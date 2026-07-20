@@ -8,10 +8,10 @@
       <div style="display:flex; align-items:center; gap:16px; flex-wrap: wrap;">
         <div class="option-wrap">
           <label class="option-label">Name</label>
-          <input v-model="rootName" class="root-input" placeholder="Root" spellcheck="false" />
+          <input v-model="rootName" class="root-input" placeholder="Root" spellcheck="false" >
         </div>
         <div class="mode-toggle" style="min-width: 230px;">
-          <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'zod' }"></div>
+          <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'zod' }"/>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'ts' }" @click="mode = 'ts'">TypeScript</button>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'zod' }" @click="mode = 'zod'">Zod</button>
         </div>
@@ -51,28 +51,28 @@
           <div class="card-actions">
             <template v-if="mode === 'ts'">
               <label class="toggle-wrap">
-                <input type="checkbox" class="toggle-input" v-model="readonlyFields" />
+                <input v-model="readonlyFields" type="checkbox" class="toggle-input" >
                 <span class="toggle-track"><span class="toggle-thumb" /></span>
                 <span class="toggle-label">readonly</span>
               </label>
               <label class="toggle-wrap">
-                <input type="checkbox" class="toggle-input" v-model="useType" />
+                <input v-model="useType" type="checkbox" class="toggle-input" >
                 <span class="toggle-track"><span class="toggle-thumb" /></span>
                 <span class="toggle-label">type</span>
               </label>
             </template>
             <template v-else>
               <label class="toggle-wrap">
-                <input type="checkbox" class="toggle-input" v-model="zodStrict" />
+                <input v-model="zodStrict" type="checkbox" class="toggle-input" >
                 <span class="toggle-track"><span class="toggle-thumb" /></span>
                 <span class="toggle-label">.strict()</span>
               </label>
             </template>
-            <button class="btn-xs" @click="download" :disabled="!output">
+            <button class="btn-xs" :disabled="!output" @click="download">
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1.5v7.5M4 6.5L7 9.5 10 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11.5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               Download
             </button>
-            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" @click="copy" :disabled="!output">
+            <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="1.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 4.5v7a1.5 1.5 0 001.5 1.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               {{ copied ? 'Copied!' : 'Copy' }}
             </button>
@@ -90,7 +90,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="error ? 'error' : 'valid'"></span>
+        <span class="led" :class="error ? 'error' : 'valid'"/>
         {{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Valid' }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-to-ts</span>
