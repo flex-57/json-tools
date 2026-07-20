@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/fonts'],
+  modules: ['@nuxt/fonts', '@nuxt/eslint'],
   fonts: {
     // Site content is English with the occasional accented Latin character
     // (café, naïve...) — the module's default subset list also fetches

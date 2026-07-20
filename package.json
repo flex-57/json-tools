@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -54,6 +55,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^1.16.0",
     "@playwright/test": "^1.60.0",
     "@types/clean-css": "^4.2.11",
     "@types/html-minifier-terser": "^7.0.2",
