@@ -18,6 +18,7 @@ logs
 .fleet
 .idea
 .claude
+opencode.json
 
 # Local env files
 .env

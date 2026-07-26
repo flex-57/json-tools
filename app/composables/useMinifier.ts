@@ -144,7 +144,7 @@ export async function minifyHTML(input: string): Promise<MinifyResult> {
     // replacing it, so process.client/.dev checks elsewhere keep working.
     const proc = globalThis.process as { cwd?: () => string; nextTick?: (fn: (...a: unknown[]) => void, ...args: unknown[]) => void; env?: Record<string, string> } | undefined
     if (!proc) {
-      const g = globalThis as unknown as { process: { env: Record<string, string>; nextTick: (...a: unknown[]) => void; cwd: () => string } }
+      const g = globalThis as unknown as { process: { env: Record<string, string>; nextTick: (fn: (...a: unknown[]) => void, ...args: unknown[]) => void; cwd: () => string } }
       g.process = {
         env: {},
         nextTick: (fn: (...a: unknown[]) => void, ...args: unknown[]) => setTimeout(() => fn(...args), 0),
