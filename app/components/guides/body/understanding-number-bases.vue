@@ -68,6 +68,7 @@
         actual division (repeatedly dividing by 2 and reading the remainders bottom-up), while hex-to-binary
         is pure lookup.
       </p>
+      <p>This site's <NuxtLink to="/tools/number-base" class="guide-inline-link">Number Base Converter</NuxtLink> converts any value between binary, octal, decimal, and hex instantly.</p>
     </section>
 
     <section class="guide-section">

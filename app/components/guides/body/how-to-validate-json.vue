@@ -9,6 +9,7 @@
         <li><strong>Schema validity</strong> — the data has the expected structure: required fields exist, values have the right type, numbers are within allowed ranges.</li>
       </ul>
       <p>A JSON parser validates syntax. JSON Schema validates structure. Both matter — but you need syntax to be valid first.</p>
+      <p>This site's <NuxtLink to="/tools/json-formatter" class="guide-inline-link">JSON Formatter</NuxtLink> validates syntax live and points to the exact line where parsing fails.</p>
     </section>
 
     <section class="guide-section">
@@ -112,7 +113,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
       <p>With this schema, <code>{"name": "Jane", "age": -5, "email": "jane@example.com"}</code> would fail validation because <code>age</code> is below the minimum of 0 — even though it's perfectly valid JSON syntax.</p>
 
       <div class="guide-callout guide-callout--info">
-        Use the <strong>JSON Schema Generator</strong> tool to automatically create a schema from any valid JSON — then refine it to add your constraints.
+        Use the <NuxtLink to="/tools/json-schema" class="guide-inline-link">JSON Schema Generator</NuxtLink> to create a schema from any valid JSON, then refine it to add your constraints.
       </div>
     </section>
 

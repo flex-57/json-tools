@@ -28,6 +28,7 @@
       </div>
 
       <p style="margin-top:14px">Both represent exactly the same data. YAML removes the quotes, braces, and commas — indentation does the structural work instead.</p>
+      <p>This site's <NuxtLink to="/tools/yaml-to-json" class="guide-inline-link">YAML ↔ JSON Converter</NuxtLink> switches between the two blocks above instantly, in either direction.</p>
     </section>
 
     <section class="guide-section">

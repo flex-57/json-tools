@@ -37,6 +37,7 @@
 "M"    (1 byte)  → "TQ=="  (2 padding chars)
 "Man"  (3 bytes) → "TWFu"  (no padding)</code>
       </div>
+      <p>This site's <NuxtLink to="/tools/base64" class="guide-inline-link">Base64 Encoder / Decoder</NuxtLink> handles this padding automatically, converting text or files in either direction.</p>
     </section>
 
     <section class="guide-section">

@@ -53,6 +53,7 @@
         <code>HMACSHA256(base64url(header) + "." + base64url(payload), secretKey)</code>
       </div>
       <p>The signature guarantees that the token hasn't been tampered with. If anyone modifies the payload, the signature no longer matches and the server rejects the token.</p>
+      <p>This site's <NuxtLink to="/tools/jwt-decoder" class="guide-inline-link">JWT Decoder</NuxtLink> splits a token like this one into its three parts and shows the decoded header and payload.</p>
     </section>
 
     <section class="guide-section">

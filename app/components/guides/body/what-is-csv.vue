@@ -93,6 +93,7 @@ Alice,"12 Rue de Paris, 3rd floor",30</code></pre>
         serialized as a JSON string inside a single CSV cell — there is no lossless general mapping between
         the two formats.
       </p>
+      <p>This site's <NuxtLink to="/tools/csv-to-json" class="guide-inline-link">CSV ↔ JSON Converter</NuxtLink> handles this conversion directly, including the quoting edge cases described above.</p>
     </section>
 
     <section class="guide-section">

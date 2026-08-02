@@ -94,6 +94,7 @@ hsla(335, 100%, 62%, 0.5)
         For reference, <code>#767676</code> gray text on a white background sits right at 4.5:1 — the exact
         AA threshold for normal-size text. Anything lighter than that gray fails AA on white.
       </p>
+      <p>This site's <NuxtLink to="/tools/color" class="guide-inline-link">Color Picker</NuxtLink> converts between HEX, RGB, and HSL live, and checks the WCAG contrast ratio between any two colors.</p>
     </section>
 
   </div>

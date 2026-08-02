@@ -73,6 +73,7 @@
           <tr><td>Typical payload size</td><td>Larger (tag overhead)</td><td>Smaller</td></tr>
         </tbody>
       </table>
+      <p>This site's <NuxtLink to="/tools/xml-to-json" class="guide-inline-link">XML ↔ JSON Converter</NuxtLink> switches between the two formats, handling attributes and repeated elements without manual cleanup.</p>
     </section>
 
     <section class="guide-section">

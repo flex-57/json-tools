@@ -12,6 +12,7 @@
         The syntax looks cryptic at first, but it follows a handful of rules. Once you know them, you can
         read most regex patterns in seconds.
       </p>
+      <p>This site's <NuxtLink to="/tools/regex-tester" class="guide-inline-link">Regex Tester</NuxtLink> highlights matches live as a pattern is typed, before it goes into code.</p>
     </section>
 
     <!-- Anatomy -->

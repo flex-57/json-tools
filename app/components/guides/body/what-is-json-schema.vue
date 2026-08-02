@@ -36,6 +36,7 @@
   },
   "additionalProperties": false
 }</code></pre>
+      <p>This site's <NuxtLink to="/tools/json-schema" class="guide-inline-link">JSON Schema Generator</NuxtLink> can infer a schema like this one directly from an example JSON document.</p>
     </section>
 
     <section class="guide-section">

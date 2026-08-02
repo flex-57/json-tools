@@ -79,6 +79,7 @@
         When in doubt, use <strong>v4</strong> for general identifiers and <strong>v7</strong> if you need
         UUIDs that sort correctly (e.g. as database primary keys with B-tree indexes).
       </p>
+      <p>This site's <NuxtLink to="/tools/uuid" class="guide-inline-link">UUID Generator</NuxtLink> can produce a batch of v4 UUIDs instantly, useful for seeding test data.</p>
     </section>
 
     <section class="guide-section">

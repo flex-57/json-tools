@@ -67,6 +67,7 @@
         <code>0/30 * * * * ?   # every 30 seconds (Quartz syntax)</code>
       </div>
       <p>Always check which format your platform expects. Tools like Kubernetes CronJobs use standard 5-field cron. GitHub Actions workflows and AWS EventBridge use their own extended syntax.</p>
+      <p>This site's <NuxtLink to="/tools/cron-parser" class="guide-inline-link">Cron Parser</NuxtLink> translates any expression like these into a plain-English description instantly.</p>
     </section>
 
   </article>

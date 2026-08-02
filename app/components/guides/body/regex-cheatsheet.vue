@@ -5,6 +5,7 @@
       <p>
         A quick-reference for regular expression syntax. For a conceptual introduction, see the
         <NuxtLink to="/guides/what-is-regex" class="guide-inline-link">What is a Regular Expression?</NuxtLink> guide.
+        Test any of these patterns live in the <NuxtLink to="/tools/regex-tester" class="guide-inline-link">Regex Tester</NuxtLink> before dropping them into code.
       </p>
     </section>
 

@@ -64,6 +64,7 @@
         practice. MD5 collisions take seconds on modern hardware. Never use MD5 or SHA-1 for anything
         security-critical.
       </p>
+      <p>This site's <NuxtLink to="/tools/hash" class="guide-inline-link">Hash Generator</NuxtLink> computes MD5, SHA-1, SHA-256, and SHA-512 digests for any text instantly.</p>
     </section>
 
     <section class="guide-section">

@@ -76,7 +76,7 @@
       <p>
         Base64-encoding a password or API key and calling it "encrypted" is a frequent, genuine security bug.
         Base64 has no key and no secret — decoding it back to plaintext takes one line of code in any
-        language, or a five-second paste into an online decoder. If a value needs to stay secret, it needs
+        language, or a five-second paste into <NuxtLink to="/tools/base64" class="guide-inline-link">an online decoder</NuxtLink>. If a value needs to stay secret, it needs
         encryption (or, if it is a credential being verified rather than retrieved, hashing) — encoding alone
         provides exactly zero confidentiality.
       </p>

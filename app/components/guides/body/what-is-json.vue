@@ -111,6 +111,7 @@
           </div>
         </div>
       </div>
+      <p>This site's <NuxtLink to="/tools/json-formatter" class="guide-inline-link">JSON Formatter</NuxtLink> validates and beautifies any JSON document instantly, without leaving the browser.</p>
     </section>
 
   </div>

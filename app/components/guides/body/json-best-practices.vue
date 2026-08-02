@@ -230,6 +230,7 @@
         and run validation on both sides (server: reject bad input; client: reject unexpected responses).
         This catches contract violations at the boundary, before bad data propagates into your system.
       </p>
+      <p>This site's <NuxtLink to="/tools/json-schema" class="guide-inline-link">JSON Schema Generator</NuxtLink> can infer a first draft directly from an example payload, often faster than writing one by hand.</p>
     </section>
 
   </div>

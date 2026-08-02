@@ -50,6 +50,7 @@
           <tr><td><code>€</code></td><td><code>%E2%82%AC</code></td><td>Three UTF-8 bytes</td></tr>
         </tbody>
       </table>
+      <p>This site's <NuxtLink to="/tools/url-encode" class="guide-inline-link">URL Encoder / Decoder</NuxtLink> converts text to and from percent-encoding instantly.</p>
     </section>
 
     <section class="guide-section">

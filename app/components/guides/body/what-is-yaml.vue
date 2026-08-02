@@ -45,6 +45,7 @@ address:
         YAML is a superset of JSON — every valid JSON document is also valid YAML.
         Conversely, YAML supports features JSON does not: comments, multi-line strings, anchors, and aliases.
       </p>
+      <p>This site's <NuxtLink to="/tools/yaml-to-json" class="guide-inline-link">YAML ↔ JSON Converter</NuxtLink> turns the block on the left into the block on the right, or back again, instantly.</p>
     </section>
 
     <section class="guide-section">
