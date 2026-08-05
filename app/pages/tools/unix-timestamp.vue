@@ -102,8 +102,6 @@ const seoCards = [
 .input-error { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-family: var(--font-body); font-size: 12.5px; color: var(--c-error); }
 
 .result-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; }
-.result-row { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid var(--c-border-s); transition: background 0.12s; }
-.result-row:last-child { border-bottom: none; }
 .result-row:hover { background: var(--c-faint); }
 
 .result-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-t5); width: 90px; flex-shrink: 0; }

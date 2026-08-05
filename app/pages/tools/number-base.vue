@@ -119,8 +119,6 @@ const seoCards = [
 .error-line { display: flex; align-items: center; gap: 6px; padding: 8px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--c-error); border-top: 1px solid rgb(var(--c-error-rgb) / 0.3); background: rgb(var(--c-error-rgb) / 0.06); }
 
 .results { display: flex; flex-direction: column; border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; background: var(--c-card); }
-.result-row { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid var(--c-border-s); transition: background 0.12s; }
-.result-row:last-child { border-bottom: none; }
 .result-row:not(.result-row--empty):hover { background: var(--c-faint); }
 
 .base-badge { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; color: var(--c-accent); background: rgb(var(--c-accent-rgb) / 0.08); border: 1px solid rgb(var(--c-accent-rgb) / 0.25); border-radius: 4px; padding: 2px 7px; white-space: nowrap; flex-shrink: 0; min-width: 172px; text-align: center; }

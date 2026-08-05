@@ -435,3 +435,6 @@ html.dark .toggle-thumb { background: #fff; }
 
 .spinner { animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+.result-row { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid var(--c-border-s); transition: background 0.12s; }
+.result-row:last-child { border-bottom: none; }
