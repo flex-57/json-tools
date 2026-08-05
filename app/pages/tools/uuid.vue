@@ -3,13 +3,22 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">UUID <span class="title-amp">Generator</span></h1>
-        <p class="page-subtitle">Generate random UUID v4 identifiers instantly. Choose format, bulk-generate up to 100, copy individually or all at once.</p>
+        <p class="page-subtitle">Generate random UUID v4, time-sortable UUID v7 or ULID identifiers instantly. Choose format, bulk-generate up to 100, copy individually or all at once.</p>
+        <NuxtLink to="/guides/uuid-v4-vs-v7-vs-ulid" class="guide-link">UUID v4 vs v7 vs ULID: which one to use? →</NuxtLink>
       </div>
     </div>
 
     <div class="uuid-controls editor-card">
       <div class="editor-card-header"><span class="editor-label">Options</span></div>
       <div class="controls-body">
+        <div class="control-group">
+          <label class="control-label">Version</label>
+          <div class="format-toggle">
+            <div class="format-indicator" :style="{ transform: 'translateX(' + versionIndex * 100 + '%)' }" />
+            <button v-for="v in VERSIONS" :key="v.id" :class="['format-btn', version === v.id ? 'format-btn--active' : '']" @click="version = v.id">{{ v.label }}</button>
+          </div>
+        </div>
+
         <div class="control-group">
           <label class="control-label">Count</label>
           <div class="count-wrap">
@@ -19,13 +28,14 @@
           </div>
         </div>
 
-        <div class="control-group">
+        <div v-if="version !== 'ulid'" class="control-group">
           <label class="control-label">Format</label>
           <div class="format-toggle">
             <div class="format-indicator" :style="{ transform: 'translateX(' + formatIndex * 100 + '%)' }" />
             <button v-for="f in FORMATS" :key="f.id" :class="['format-btn', format === f.id ? 'format-btn--active' : '']" @click="format = f.id">{{ f.label }}</button>
           </div>
         </div>
+        <span v-else class="hint">ULID format is fixed — 26 uppercase Crockford-base32 characters, no dashes</span>
 
         <div class="control-actions">
           <button class="btn btn-primary" @click="generate">
@@ -61,11 +71,19 @@
 
 <script setup lang="ts">
 import { useClipboard } from '../../composables/useClipboard'
+import { generateBatch } from '~/composables/useUuidGen'
+import type { UuidVersion } from '~/composables/useUuidGen'
 
 useToolSeo(
-  'UUID Generator: Bulk Random UUID v4, Free & Instant',
-  'Generate random UUID v4 identifiers in your browser. Bulk-generate up to 100 UUIDs, choose from standard, uppercase or no-dash formats, copy with one click.',
+  'UUID Generator: v4, v7 & ULID, Bulk & Free',
+  'Generate random UUID v4, time-sortable UUID v7 or ULID identifiers in your browser. Bulk-generate up to 100, choose from standard, uppercase or no-dash formats, copy with one click.',
 )
+
+const VERSIONS = [
+  { id: 'v4',   label: 'v4' },
+  { id: 'v7',   label: 'v7' },
+  { id: 'ulid', label: 'ULID' },
+] as const
 
 const FORMATS = [
   { id: 'standard', label: 'Standard' },
@@ -75,6 +93,7 @@ const FORMATS = [
 type Format = typeof FORMATS[number]['id']
 
 const count       = ref(10)
+const version     = ref<UuidVersion>('v4')
 const format      = ref<Format>('standard')
 const uuids       = ref<string[]>([])
 const { isCopied, copy: copyKeyed } = useClipboard()
@@ -84,15 +103,17 @@ const copiedIndex = computed<number | null>(() => {
 })
 const copiedAll   = computed(() => isCopied('all'))
 
-const formatIndex = computed(() => FORMATS.findIndex(f => f.id === format.value))
+const formatIndex  = computed(() => FORMATS.findIndex(f => f.id === format.value))
+const versionIndex = computed(() => VERSIONS.findIndex(v => v.id === version.value))
 
 useToolShortcut(generate)
 
 function generate() {
-  uuids.value = Array.from({ length: count.value }, () => crypto.randomUUID())
+  uuids.value = generateBatch(version.value, count.value)
 }
 
 function formatUuid(uuid: string): string {
+  if (version.value === 'ulid') return uuid
   if (format.value === 'upper')  return uuid.toUpperCase()
   if (format.value === 'nodash') return uuid.replace(/-/g, '')
   return uuid
@@ -121,6 +142,13 @@ const seoCards = [
     text: [
       'Version 4 UUIDs are generated from random or pseudo-random numbers. Two bits are fixed (version and variant), and the remaining 122 bits are random, giving roughly 5.3 × 10³⁶ possible values.',
       'The probability of generating a duplicate is astronomically low: you would need to generate about 2.7 × 10¹⁸ UUIDs before having a 50% chance of a single collision. This tool uses the browser\'s native crypto.randomUUID().',
+    ],
+  },
+  {
+    title: 'UUID v7 and ULID: sortable identifiers',
+    text: [
+      'Both v7 (RFC 9562) and ULID lead with a 48-bit millisecond timestamp, so IDs generated later always sort after earlier ones — useful as a database primary key, since it avoids the random-insert B-tree fragmentation that plain v4 causes.',
+      'The difference is encoding: v7 keeps the standard 8-4-4-4-12 hyphenated hex format, while ULID is a 26-character Crockford-base32 string with no dashes — shorter and case-insensitive to compare, but not a drop-in UUID.',
     ],
   },
   {

@@ -60,7 +60,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'jwt-generator', name: 'JWT Generator', short: 'Sign a token', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
   { slug: 'hash', name: 'Hash Generator', short: 'MD5, SHA-1, SHA-256…', category: 'security', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'hmac', name: 'HMAC Generator', short: 'Sign with a secret key', category: 'security', variant: 'generator', updatedAt: '2026-08-05' },
-  { slug: 'uuid', name: 'UUID Generator', short: 'Bulk v4 identifiers', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
+  { slug: 'uuid', name: 'UUID Generator', short: 'v4, v7 & ULID, bulk', category: 'security', variant: 'generator', updatedAt: '2026-08-05' },
   { slug: 'password-generator', name: 'Password Generator', short: 'Cryptographically secure', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
 
   // Dev Utils
