@@ -18,7 +18,7 @@ export interface OgFields {
 
 const DEFAULT_FIELDS: OgFields = {
   title: 'JSON Tools — Free Developer Tools Online',
-  description: '33 free browser-based developer tools. JSON, regex, cron, SQL, colors, hashes and more. No account, no upload, nothing tracked.',
+  description: 'Free browser-based developer tools for JSON, data conversion, text, security and more. No account, no upload, nothing tracked.',
   url: 'https://jsontools.space',
   imageUrl: 'https://jsontools.space/og/og-image.png',
   siteName: 'JSON Tools',
