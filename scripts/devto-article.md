@@ -113,7 +113,7 @@ The tool also generates **Zod schemas** from the same input, which required a se
 
 ### 3. SEO on a static tool site
 
-28 tools, each needing unique meta tags, Open Graph images, and structured data — without a CMS. Everything lives in the Vue pages themselves with `useSeoMeta()` and a generated sitemap.
+31 tools, each needing unique meta tags, Open Graph images, and structured data — without a CMS. Everything lives in the Vue pages themselves with `useSeoMeta()` and a generated sitemap.
 
 The FAQ page uses **JSON-LD `FAQPage` schema**, which lets Google display accordion answers directly in search results. Worth the 20 minutes it took to add.
 
@@ -123,7 +123,7 @@ The FAQ page uses **JSON-LD `FAQPage` schema**, which lets Google display accord
 
 *(image)*
 
-28 tools across 5 categories:
+31 tools across 5 categories:
 
 - 🗂️ **JSON** — formatter, diff, tree viewer, schema generator, JSON → TypeScript/Zod
 - 🔄 **Converters** — CSV, XML, YAML, Excel ↔ JSON

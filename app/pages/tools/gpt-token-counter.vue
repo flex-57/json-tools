@@ -94,12 +94,6 @@ const seoCards = [
 </script>
 
 <style scoped>
-.input-card { position: relative; background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; transition: box-shadow 0.2s; }
-.input-card--focused { box-shadow: inset 0 0 0 2px rgb(var(--c-accent-rgb) / 0.2); }
-
-.input-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; }
-.input-header-right { display: flex; align-items: center; gap: 8px; }
-
 .input-textarea { width: 100%; border: none; outline: none; resize: vertical; padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; background: transparent; color: var(--c-t1); line-height: 1.7; display: block; min-height: 160px; }
 .input-textarea::placeholder { color: var(--c-t5); }
 

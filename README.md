@@ -1,6 +1,6 @@
 # JSON Tools
 
-**[jsontools.space](https://jsontools.space)** — 28 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
+**[jsontools.space](https://jsontools.space)** — 31 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
 
 ![JSON Tools homepage](.github/screenshot.png)
 
@@ -8,9 +8,9 @@
 
 JSON Tools is a toolbench for the small, repetitive jobs developers reach for constantly — formatting JSON, converting between data formats, decoding a JWT, testing a regex — without opening a dozen different sites or trusting a random one with real data. Every tool is client-side only (parsing, formatting, hashing, encoding all happen in the tab), and the site ships as a fully static build with no backend or database.
 
-It also includes 24 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, Base64, hashing, JWTs, regex, cron syntax, and more.
+It also includes 26 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, Base64, hashing, JWTs, regex, cron syntax, and more.
 
-## The 28 tools
+## The 31 tools
 
 **JSON**
 JSON Formatter & Validator · JSON Diff · Tree / Graph Viewer
@@ -19,13 +19,13 @@ JSON Formatter & Validator · JSON Diff · Tree / Graph Viewer
 CSV ↔ JSON · XML ↔ JSON · YAML ↔ JSON · Excel ↔ JSON · JSON → TypeScript / Zod · JSON → Schema
 
 **Text & Code**
-Text Case Converter · CSS Minifier · HTML Minifier · JavaScript Minifier · SQL Formatter · URL Encoder / Decoder · Base64 Encoder / Decoder · Markdown Preview
+Text Case Converter · CSS Minifier · HTML Minifier · JavaScript Minifier · SQL Formatter · URL Encoder / Decoder · Base64 Encoder / Decoder · Markdown Preview · String Escaper / Unescaper
 
 **Security**
-JWT Decoder · JWT Generator · Hash Generator (MD5/SHA-1/SHA-256…) · UUID Generator · Password Generator
+JWT Decoder · JWT Generator · Hash Generator (MD5/SHA-1/SHA-256…) · HMAC Generator · UUID Generator (v4/v7/ULID) · Password Generator
 
 **Dev Utils**
-Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter · Color Picker (HEX/RGB/HSL + contrast) · CSS Gradient Generator
+Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter · Color Picker (HEX/RGB/HSL + contrast) · CSS Gradient Generator · GPT Token Counter
 
 ## Stack
 

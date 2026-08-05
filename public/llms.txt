@@ -23,18 +23,21 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [URL Encoder / Decoder](https://jsontools.space/tools/url-encode): Encode special characters for URLs or decode percent-encoded strings.
 - [JWT Decoder](https://jsontools.space/tools/jwt-decoder): Decode and inspect JWT tokens. Displays header, payload, and signature without verification.
 - [Hash Generator](https://jsontools.space/tools/hash): Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text input.
+- [HMAC Generator](https://jsontools.space/tools/hmac): Generate HMAC-SHA1, SHA-256, SHA-384, and SHA-512 signatures from a message and secret key. Hex or Base64 output.
 - [Regex Tester](https://jsontools.space/tools/regex-tester): Test regular expressions with live match highlighting. Supports flags and capture groups.
 - [Cron Parser](https://jsontools.space/tools/cron-parser): Parse and explain cron expressions in plain English. Shows next execution times.
 - [Unix Timestamp Converter](https://jsontools.space/tools/unix-timestamp): Convert between Unix timestamps and human-readable dates. Supports seconds and milliseconds.
-- [UUID Generator](https://jsontools.space/tools/uuid): Generate random UUID v4 identifiers. Bulk generation up to 100, multiple format options.
+- [UUID Generator](https://jsontools.space/tools/uuid): Generate random UUID v4, time-sortable UUID v7, or ULID identifiers. Bulk generation up to 100, multiple format options.
 - [CSS Minifier](https://jsontools.space/tools/css-minifier): Minify CSS with lightningcss to reduce file size. Client-side only.
 - [HTML Minifier](https://jsontools.space/tools/html-minifier): Minify HTML, including embedded CSS and JS, to reduce file size. Client-side only.
 - [JavaScript Minifier](https://jsontools.space/tools/js-minifier): Minify JavaScript with terser (mangling, dead-code elimination) to reduce file size. Client-side only.
 - [SQL Formatter](https://jsontools.space/tools/sql-formatter): Format and beautify SQL queries. Supports MySQL, PostgreSQL, SQLite, T-SQL, and standard SQL.
 - [Text Case Converter](https://jsontools.space/tools/text-case): Convert text between camelCase, snake_case, PascalCase, kebab-case, UPPER_CASE, and more.
+- [String Escaper / Unescaper](https://jsontools.space/tools/string-escape): Escape or unescape \n, \t, \", \\, and \uXXXX Unicode sequences for JSON or code string literals.
 - [Number Base Converter](https://jsontools.space/tools/number-base): Convert numbers between binary, octal, decimal, and hexadecimal bases.
 - [Color Picker & Converter](https://jsontools.space/tools/color): Pick colors and convert between HEX, RGB, HSL, and HSV. Generates CSS-ready values.
 - [CSS Gradient Generator](https://jsontools.space/tools/gradient): Build linear, radial, and conic CSS gradients visually with a live preview. Add color stops, use presets, copy the generated CSS.
+- [GPT Token Counter](https://jsontools.space/tools/gpt-token-counter): Count tokens for GPT-4o, o1, and o3 prompts using OpenAI's o200k_base BPE encoding, entirely client-side.
 - [JWT Generator](https://jsontools.space/tools/jwt-generator): Generate signed JWT tokens with custom headers, payloads, and algorithms (HS256, HS384, HS512).
 - [Markdown Preview](https://jsontools.space/tools/markdown-preview): Write or paste Markdown and see the rendered HTML instantly. Supports headings, code blocks, tables, and blockquotes.
 - [Password Generator](https://jsontools.space/tools/password-generator): Generate cryptographically secure random passwords. Configurable length and character sets, bulk generation.
@@ -50,7 +53,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [What is URL Encoding?](https://jsontools.space/guides/what-is-url-encoding): Percent-encoding explained — which characters must be encoded, how %XX works, and the difference between encodeURI and encodeURIComponent.
 - [What is a Hash Function?](https://jsontools.space/guides/what-is-hash): Cryptographic hash functions explained — MD5 vs SHA-256, one-way property, use cases, and why raw SHA must not be used for passwords.
 - [What is XML?](https://jsontools.space/guides/what-is-xml): XML structure, elements, attributes, well-formed vs valid, XML vs JSON comparison, and where XML is still used today.
-- [What is a UUID?](https://jsontools.space/guides/what-is-uuid): UUID structure, versions (v1/v4/v7), uniqueness guarantees, and when to choose UUID over auto-increment integers.
+- [What is a UUID?](https://jsontools.space/guides/what-is-uuid): UUID structure, versions (v1/v4/v7) vs ULID, uniqueness guarantees, and when to choose UUID over auto-increment integers.
 - [What is JSON Schema?](https://jsontools.space/guides/what-is-json-schema): JSON Schema core keywords, composition (anyOf/oneOf/allOf), Draft-07 vs 2020-12, and validation use cases.
 - [What is YAML?](https://jsontools.space/guides/what-is-yaml): YAML syntax (scalars, sequences, mappings, anchors), YAML vs JSON, and common gotchas like the Norway problem and tab prohibition.
 - [Regex Cheatsheet](https://jsontools.space/guides/regex-cheatsheet): Quick reference for regex syntax — character classes, quantifiers, anchors, lookaheads, flags, and common patterns.
@@ -62,6 +65,8 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [HEX, RGB, and HSL Explained](https://jsontools.space/guides/understanding-color-formats): How HEX, RGB, and HSL represent color, RGBA/HSLA transparency, and WCAG 2.1 contrast ratio thresholds.
 - [SQL Cheatsheet](https://jsontools.space/guides/sql-cheatsheet): SQL clause execution order, joins, filtering, aggregates, and syntax differences between MySQL, PostgreSQL, SQLite, and T-SQL.
 - [Encoding vs Encryption vs Hashing](https://jsontools.space/guides/encoding-vs-encryption-vs-hashing): What's reversible, what needs a key, and why Base64 encoding is not a form of encryption.
+- [What is a Token? LLM Tokenization Explained](https://jsontools.space/guides/what-is-a-token): How Byte Pair Encoding splits text into tokens, why token count drives API cost and context limits, and which models support offline counting.
+- [JSON Mode & Structured Outputs](https://jsontools.space/guides/json-mode-structured-outputs): Legacy JSON mode vs schema-constrained structured outputs, and how OpenAI, Claude, and Gemini each implement reliable JSON generation.
 
 ## Key Facts
 
