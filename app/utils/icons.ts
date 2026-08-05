@@ -43,6 +43,7 @@ export const ICONS = {
   tomlIn:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h3M2 7.5h4M2 11h2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 8h5M12.5 5.5L15 8l-2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   tomlOut:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 4h3M9 7.5h4M9 11h2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M6 8H1M3.5 5.5L1 8l2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   svgOpt:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L14 4.7v6.6L8 14.5 2 11.3V4.7L8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.5 8.5l1.8 1.8L11 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  ogCard:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 8.5h13" stroke="currentColor" stroke-width="1.3"/><path d="M4 11h5M4 12.5h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>`,
 
   /* ── About / Contact ──────────────────────────────── */
   mail:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4.5l6 4.5 6-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -63,7 +64,7 @@ const TOOL_ICONS: Record<string, string> = {
   'jwt-decoder': ICONS.jwtDec, 'jwt-generator': ICONS.jwtGen, 'hash': ICONS.hash,
   'uuid': ICONS.uuid, 'password-generator': ICONS.pwdGen,
   'regex-tester': ICONS.regex, 'cron-parser': ICONS.cron, 'unix-timestamp': ICONS.unix,
-  'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient,
+  'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient, 'og-generator': ICONS.ogCard,
   'string-escape': ICONS.strEsc, 'hmac': ICONS.hmac, 'gpt-token-counter': ICONS.tokenCount,
 }
 export function toolIcon(slug: string): string { return TOOL_ICONS[slug] ?? '' }
