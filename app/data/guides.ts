@@ -401,7 +401,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
-    related: ['/guides/what-is-json', '/guides/how-to-validate-json', '/guides/json-best-practices'],
+    related: ['/guides/what-is-json', '/guides/how-to-validate-json', '/guides/json-best-practices', '/guides/json-mode-structured-outputs'],
   },
   // Text & Code
   'what-is-url-encoding': {
@@ -1176,5 +1176,51 @@ export const GUIDES: Record<string, GuideConfig> = {
       },
     ],
     related: ['/guides/what-is-json-schema'],
+  },
+  'json-mode-structured-outputs': {
+    slug: 'json-mode-structured-outputs',
+    type: 'guide',
+    category: 'json',
+    title: 'JSON Mode & Structured Outputs: Reliable JSON from LLMs',
+    subtitle: 'Why plain JSON mode only guarantees valid syntax, how schema-constrained structured outputs enforce an exact shape, and how OpenAI, Claude and Gemini each implement it.',
+    readTime: '5 min read',
+    datePublished: '2026-08-05',
+    dateModified: '2026-08-05',
+    description: 'Learn the difference between legacy JSON mode (valid syntax only) and schema-constrained structured outputs (guaranteed shape), how OpenAI, Anthropic Claude and Google Gemini each implement structured JSON generation, and how to build the schema you feed them.',
+    tools: [
+      { name: 'JSON Schema Generator', desc: 'Generate a JSON Schema from a sample response shape, ready to use as a structured-output schema.', href: '/tools/json-schema', icon: ICONS.schema },
+      { name: 'JSON Formatter & Validator', desc: 'Validate and inspect what a model actually returned against the shape you asked for.', href: '/tools/json-formatter', icon: ICONS.formatter },
+    ],
+    faqs: [
+      {
+        q: 'If I ask for JSON in the prompt, isn\'t that enough?',
+        a: [
+          'It usually gets close, but "usually" is the problem: a plain-text instruction has no hard guarantee behind it. The model can still wrap the response in markdown code fences, add an explanatory sentence before the JSON, or produce a shape that is valid JSON but not the one you needed.',
+          'JSON mode and structured outputs exist specifically to remove that uncertainty at the API level instead of relying on prompt wording alone.',
+        ],
+      },
+      {
+        q: 'Does structured output guarantee the values are correct, not just the shape?',
+        a: [
+          'No. Schema constraints guarantee the response parses and matches your types, required fields, and enums, but they say nothing about factual accuracy. A model can still confidently fill a correctly-typed field with a wrong value.',
+          'Structured outputs solve a parsing problem, not a hallucination problem: still validate values you can check, and treat the rest with the same skepticism you would apply to any model output.',
+        ],
+      },
+      {
+        q: 'Why would a request with structured outputs enabled still fail?',
+        a: [
+          'The most common case is a refusal: the model declines to produce the content at all (a safety refusal, or a request it cannot fulfill), which comes back in a different field than the structured result. Treat refusals as a distinct, expected error case rather than something that will only ever happen in a normal JSON parse failure.',
+          'Overly deep or large schemas can also hit provider-specific limits on nesting depth or property count. Keep schemas as flat and specific as the data actually requires.',
+        ],
+      },
+      {
+        q: 'Can I reuse the same JSON Schema across OpenAI, Claude and Gemini?',
+        a: [
+          'Mostly, but not without changes. OpenAI and Claude both accept standard JSON Schema. Gemini\'s responseSchema field historically expected an OpenAPI-subset schema rather than JSON Schema directly, though a newer responseJsonSchema field accepts JSON Schema too, exposed separately.',
+          'Always check the current field name and accepted schema dialect for whichever provider you are integrating. This is exactly the kind of detail that shifts as providers ship new API versions.',
+        ],
+      },
+    ],
+    related: ['/guides/what-is-json-schema', '/guides/what-is-a-token'],
   },
 }

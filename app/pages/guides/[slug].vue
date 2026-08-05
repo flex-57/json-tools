@@ -94,6 +94,7 @@ const bodyComponents: Record<string, Component> = {
   'sql-cheatsheet': defineAsyncComponent(() => import('~/components/guides/body/sql-cheatsheet.vue')),
   'encoding-vs-encryption-vs-hashing': defineAsyncComponent(() => import('~/components/guides/body/encoding-vs-encryption-vs-hashing.vue')),
   'what-is-a-token': defineAsyncComponent(() => import('~/components/guides/body/what-is-a-token.vue')),
+  'json-mode-structured-outputs': defineAsyncComponent(() => import('~/components/guides/body/json-mode-structured-outputs.vue')),
 }
 
 const route = useRoute()
