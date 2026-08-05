@@ -79,7 +79,45 @@
         When in doubt, use <strong>v4</strong> for general identifiers and <strong>v7</strong> if you need
         UUIDs that sort correctly (e.g. as database primary keys with B-tree indexes).
       </p>
-      <p>This site's <NuxtLink to="/tools/uuid" class="guide-inline-link">UUID Generator</NuxtLink> can produce a batch of v4 UUIDs instantly, useful for seeding test data.</p>
+      <p>This site's <NuxtLink to="/tools/uuid" class="guide-inline-link">UUID Generator</NuxtLink> can produce a batch of v4, v7 or ULID identifiers instantly, useful for seeding test data.</p>
+    </section>
+
+    <section class="guide-section">
+      <h2>UUID v7 vs ULID: two ways to get sortable IDs</h2>
+      <p>
+        v7 and ULID solve the same problem with the same core idea: a random-looking ID that still sorts in
+        creation order, built by leading with a 48-bit millisecond timestamp and filling the rest with random
+        bits. They differ in encoding, not in the guarantee they give you.
+      </p>
+      <p>
+        A v7 UUID's 128 bits break down into a 48-bit timestamp, a fixed 4-bit version field (<code>0111</code>),
+        12 bits of random data, a fixed 2-bit variant field (<code>10</code>), then a final 62 bits of random
+        data, written in the standard 32-hex-digit, hyphenated form. ULID skips the version and variant bits
+        entirely: a 48-bit timestamp plus 80 bits of randomness, encoded as 26 characters of
+        <a href="https://www.crockford.com/base32.html" target="_blank" rel="noopener">Crockford's base32</a>
+        (case-insensitive, excludes the letters I, L, O and the digit that looks like O, to avoid transcription
+        errors), with no hyphens and 10 fewer characters than a hyphenated UUID string.
+      </p>
+      <table class="cheat-table">
+        <thead><tr><th/><th>UUID v7</th><th>ULID</th></tr></thead>
+        <tbody>
+          <tr><td>Standard</td><td>RFC 9562</td><td>Community spec, not an RFC</td></tr>
+          <tr><td>Encoding</td><td>32 hex digits, hyphenated</td><td>26-char Crockford base32, no hyphens</td></tr>
+          <tr><td>Drop-in UUID column?</td><td>Yes, a valid RFC 4122 UUID</td><td>No, needs its own text or binary(16) column</td></tr>
+          <tr><td>Random bits</td><td>74</td><td>80</td></tr>
+        </tbody>
+      </table>
+      <p>
+        One nuance neither spec makes obvious up front: generating many IDs in the same millisecond with pure
+        randomness gives no ordering guarantee <em>within</em> that millisecond, and timestamp collisions are
+        common under any real bulk-insert or seed-data workload. Both specs address this the same way (RFC 9562
+        calls it the "Monotonic Random" method): instead of drawing fresh random bits every time, a generator that sees the
+        clock hasn't advanced since its last ID increments the previous random value instead of redrawing it, so
+        IDs minted in the same millisecond still sort in generation order. A generator that skips this, including
+        naive "timestamp + Math.random()" implementations, will produce technically-valid but unsorted IDs for
+        any burst of inserts that lands in one millisecond. That quietly defeats the entire reason to pick v7 or
+        ULID over v4 in the first place.
+      </p>
     </section>
 
     <section class="guide-section">

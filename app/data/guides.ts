@@ -775,13 +775,13 @@ export const GUIDES: Record<string, GuideConfig> = {
     type: 'guide',
     category: 'security',
     title: 'What is a UUID?',
-    subtitle: 'UUIDs explained: the 5-part structure, v1 vs v4 vs v7, uniqueness guarantees, and when to choose UUID over auto-increment.',
-    readTime: '5 min read',
+    subtitle: 'UUIDs explained: the 5-part structure, v1 vs v4 vs v7 vs ULID, uniqueness guarantees, and when to choose UUID over auto-increment.',
+    readTime: '6 min read',
     datePublished: '2026-06-30',
-    dateModified: '2026-06-30',
-    description: 'Learn what UUIDs are, how their 128-bit structure works, the differences between UUID v1, v4, v5, and v7, and when to choose UUIDs vs auto-increment integer IDs for database primary keys.',
+    dateModified: '2026-08-05',
+    description: 'Learn what UUIDs are, how their 128-bit structure works, the differences between UUID v1, v4, v5, v7, and ULID, and when to choose UUIDs vs auto-increment integer IDs for database primary keys.',
     tools: [
-      { name: 'UUID Generator', desc: 'Generate random UUID v4 identifiers, single or bulk, with multiple format options.', href: '/tools/uuid', icon: ICONS.uuid },
+      { name: 'UUID Generator', desc: 'Generate random UUID v4, time-sortable UUID v7, or ULID identifiers, single or bulk, with multiple format options.', href: '/tools/uuid', icon: ICONS.uuid },
     ],
     faqs: [
       {
