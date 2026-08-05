@@ -93,6 +93,7 @@ const bodyComponents: Record<string, Component> = {
   'understanding-color-formats': defineAsyncComponent(() => import('~/components/guides/body/understanding-color-formats.vue')),
   'sql-cheatsheet': defineAsyncComponent(() => import('~/components/guides/body/sql-cheatsheet.vue')),
   'encoding-vs-encryption-vs-hashing': defineAsyncComponent(() => import('~/components/guides/body/encoding-vs-encryption-vs-hashing.vue')),
+  'what-is-a-token': defineAsyncComponent(() => import('~/components/guides/body/what-is-a-token.vue')),
 }
 
 const route = useRoute()

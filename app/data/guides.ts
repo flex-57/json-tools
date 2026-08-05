@@ -1132,4 +1132,49 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
     related: ['/guides/understanding-number-bases'],
   },
+  'what-is-a-token': {
+    slug: 'what-is-a-token',
+    type: 'guide',
+    category: 'devutils',
+    title: 'What is a Token? LLM Tokenization Explained',
+    subtitle: 'How GPT and other LLMs split text into tokens with Byte Pair Encoding, why token count drives API cost and context limits, and which models you can count offline.',
+    readTime: '5 min read',
+    datePublished: '2026-08-05',
+    dateModified: '2026-08-05',
+    description: 'Learn what a token is, how Byte Pair Encoding (BPE) splits text into tokens, why token count determines API pricing and context window limits, and which LLM providers let you count tokens client-side versus only through a network API.',
+    tools: [
+      { name: 'GPT Token Counter', desc: 'Count tokens for GPT-4o, o1 and o3 prompts instantly using the real o200k_base BPE encoding, entirely in your browser.', href: '/tools/gpt-token-counter', icon: ICONS.tokenCount },
+    ],
+    faqs: [
+      {
+        q: 'Is one token roughly one word?',
+        a: [
+          'No. For English text, one token is closer to 0.75 words, or about 4 characters. Common short words are usually a single token, but longer or rarer words often split into two or three ("tokenization" might become "token" + "ization").',
+          'The ratio gets worse for anything that is not everyday English: source code, JSON, and non-Latin scripts typically need more tokens per character, since the BPE vocabulary was trained mostly on natural-language web text.',
+        ],
+      },
+      {
+        q: 'Why does OpenAI use a different tokenizer for different models?',
+        a: [
+          'Older models (GPT-3.5, GPT-4) use the cl100k_base encoding with roughly 100,000 tokens in its vocabulary. GPT-4o, o1, and o3 use o200k_base, a newer, roughly 200,000-token vocabulary that packs common sequences (including many non-English ones) more efficiently.',
+          'The two encodings are not interchangeable: the same text produces a different token count, and different token IDs, depending on which one is used. Always check which encoding a model actually uses before estimating cost.',
+        ],
+      },
+      {
+        q: 'Can I count Claude or Gemini tokens the same way, offline?',
+        a: [
+          'Not accurately. Anthropic ships no local tokenizer for Claude 3 and later — their only supported method is the Count Tokens API, which requires an API key and a network call, so it cannot run as a client-side browser tool.',
+          'Google\'s Gemini SDK has a similar local tokenizer, but only in the Python and Go SDKs, not JavaScript, and it lags behind the newest model releases. Open-weight models like Kimi K2 publish their tokenizer files, but at a 160,000-token vocabulary the data alone runs several megabytes, which defeats the point of a lightweight browser tool.',
+        ],
+      },
+      {
+        q: 'Does a higher token count always mean higher cost?',
+        a: [
+          'Yes, directly: API pricing is quoted per token (typically per million), separately for input and output, and the two often have different rates. Doubling your prompt length roughly doubles the input cost for that request.',
+          'Token count also counts against the model\'s context window (input and output combined), so a prompt that reads as "short" in words can still fail to fit if it is dense in tokens: code, JSON payloads, and non-English text all push the tokens-per-character ratio higher than plain English prose.',
+        ],
+      },
+    ],
+    related: ['/guides/what-is-json-schema'],
+  },
 }
