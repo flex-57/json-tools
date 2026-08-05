@@ -113,16 +113,4 @@ const seoCards = [
 .editor-card--focus { box-shadow: inset 0 0 0 2px rgb(var(--c-accent-rgb) / 0.2); }
 
 .hash-textarea { width: 100%; min-height: 160px; padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--c-t1); background: transparent; border: none; outline: none; resize: vertical; line-height: 1.7; }
-
-.hash-results { display: flex; flex-direction: column; gap: 8px; }
-.hash-row { display: flex; align-items: center; gap: 12px; background: var(--c-card); border: 1px solid var(--c-border); border-radius: 10px; padding: 12px 16px; }
-.hash-alg { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--c-accent-ink); background: var(--c-t1); border-radius: 5px; padding: 3px 8px; white-space: nowrap; flex-shrink: 0; letter-spacing: 0.03em; min-width: 68px; text-align: center; }
-.hash-value { font-family: var(--font-mono); font-size: 12px; color: var(--c-t2); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-break: break-all; }
-.hash-value--empty { color: var(--c-t5); }
-.hash-copy { display: flex; align-items: center; font-family: var(--font-body); font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--c-border); background: var(--c-subtle); color: var(--c-t3); cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.15s; }
-.hash-copy:hover:not(:disabled) { background: var(--c-faint); color: var(--c-t1); }
-.hash-copy:disabled { opacity: 0.4; cursor: default; }
-.hash-copy--done { background: rgb(var(--c-valid-rgb) / 0.12); border-color: rgb(var(--c-valid-rgb) / 0.35); color: var(--c-valid); }
-
-@media (max-width: 640px) { .hash-value { font-size: 10px; } .hash-alg { min-width: 52px; font-size: 10px; } }
 </style>
