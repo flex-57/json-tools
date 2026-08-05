@@ -1,6 +1,6 @@
 # JSON Tools
 
-> Free online JSON, CSV, XML, YAML, and developer tools. No signup, no data sent to servers, 100% client-side.
+> Free online JSON, CSV, XML, YAML, TOML, and developer tools. No signup, no data sent to servers, 100% client-side.
 
 JSON Tools is a collection of free browser-based developer utilities for working with JSON and common data formats. All processing happens locally in the browser — no data is ever transmitted to any server.
 
@@ -15,6 +15,8 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [JSON to YAML Converter](https://jsontools.space/tools/json-to-yaml): Convert JSON to YAML with proper indentation and formatting.
 - [Excel to JSON Converter](https://jsontools.space/tools/excel-to-json): Upload .xlsx or .xls files and convert spreadsheet data to JSON.
 - [JSON to Excel Converter](https://jsontools.space/tools/json-to-excel): Export JSON arrays to downloadable Excel spreadsheets.
+- [TOML to JSON Converter](https://jsontools.space/tools/toml-to-json): Convert TOML config files to JSON, with line/column error reporting.
+- [JSON to TOML Converter](https://jsontools.space/tools/json-to-toml): Convert JSON to TOML, with explicit errors on values TOML can't represent (top-level arrays, null).
 - [JSON Diff](https://jsontools.space/tools/json-diff): Compare two JSON objects side-by-side. Highlights added, removed, and changed values.
 - [JSON Tree Viewer](https://jsontools.space/tools/json-tree): Visualize JSON as an interactive collapsible tree or node graph. Copy paths with one click.
 - [JSON Schema Generator](https://jsontools.space/tools/json-schema): Generate JSON Schema (Draft-07 or 2020-12) from any JSON sample.
@@ -31,6 +33,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [CSS Minifier](https://jsontools.space/tools/css-minifier): Minify CSS with lightningcss to reduce file size. Client-side only.
 - [HTML Minifier](https://jsontools.space/tools/html-minifier): Minify HTML, including embedded CSS and JS, to reduce file size. Client-side only.
 - [JavaScript Minifier](https://jsontools.space/tools/js-minifier): Minify JavaScript with terser (mangling, dead-code elimination) to reduce file size. Client-side only.
+- [SVG Optimizer](https://jsontools.space/tools/svg-optimizer): Compress SVG markup with SVGO, with an explicit toggle to strip scripts and event handlers.
 - [SQL Formatter](https://jsontools.space/tools/sql-formatter): Format and beautify SQL queries. Supports MySQL, PostgreSQL, SQLite, T-SQL, and standard SQL.
 - [Text Case Converter](https://jsontools.space/tools/text-case): Convert text between camelCase, snake_case, PascalCase, kebab-case, UPPER_CASE, and more.
 - [String Escaper / Unescaper](https://jsontools.space/tools/string-escape): Escape or unescape \n, \t, \", \\, and \uXXXX Unicode sequences for JSON or code string literals.
@@ -41,6 +44,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [JWT Generator](https://jsontools.space/tools/jwt-generator): Generate signed JWT tokens with custom headers, payloads, and algorithms (HS256, HS384, HS512).
 - [Markdown Preview](https://jsontools.space/tools/markdown-preview): Write or paste Markdown and see the rendered HTML instantly. Supports headings, code blocks, tables, and blockquotes.
 - [Password Generator](https://jsontools.space/tools/password-generator): Generate cryptographically secure random passwords. Configurable length and character sets, bulk generation.
+- [Open Graph Meta Tag Generator](https://jsontools.space/tools/og-generator): Generate og: and twitter: meta tags with a live preview, or import an existing snippet to pre-fill the form.
 - [What is JSON?](https://jsontools.space/guides/what-is-json): JSON explained — data types, syntax rules, and why it became the universal format for APIs and config files.
 - [What is a JWT Token?](https://jsontools.space/guides/what-is-jwt): JSON Web Tokens explained — structure, how they work, common algorithms, and security best practices.
 - [What is Base64 Encoding?](https://jsontools.space/guides/what-is-base64): Base64 explained — how it works, why it exists, common use cases, and the difference with Base64url.
@@ -67,6 +71,7 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [Encoding vs Encryption vs Hashing](https://jsontools.space/guides/encoding-vs-encryption-vs-hashing): What's reversible, what needs a key, and why Base64 encoding is not a form of encryption.
 - [What is a Token? LLM Tokenization Explained](https://jsontools.space/guides/what-is-a-token): How Byte Pair Encoding splits text into tokens, why token count drives API cost and context limits, and which models support offline counting.
 - [JSON Mode & Structured Outputs](https://jsontools.space/guides/json-mode-structured-outputs): Legacy JSON mode vs schema-constrained structured outputs, and how OpenAI, Claude, and Gemini each implement reliable JSON generation.
+- [What is TOML?](https://jsontools.space/guides/what-is-toml): TOML tables and arrays of tables, its native date-time type, and why it has no null value or top-level array.
 
 ## Key Facts
 

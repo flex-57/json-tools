@@ -1,6 +1,6 @@
 # JSON Tools
 
-**[jsontools.space](https://jsontools.space)** — 31 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
+**[jsontools.space](https://jsontools.space)** — 34 free developer tools in one static site. No signup, no upload, nothing tracked: every tool runs entirely in the browser, and no input ever touches a server.
 
 ![JSON Tools homepage](.github/screenshot.png)
 
@@ -8,32 +8,32 @@
 
 JSON Tools is a toolbench for the small, repetitive jobs developers reach for constantly — formatting JSON, converting between data formats, decoding a JWT, testing a regex — without opening a dozen different sites or trusting a random one with real data. Every tool is client-side only (parsing, formatting, hashing, encoding all happen in the tab), and the site ships as a fully static build with no backend or database.
 
-It also includes 26 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, Base64, hashing, JWTs, regex, cron syntax, and more.
+It also includes 27 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, TOML, Base64, hashing, JWTs, regex, cron syntax, and more.
 
-## The 31 tools
+## The 34 tools
 
 **JSON**
 JSON Formatter & Validator · JSON Diff · Tree / Graph Viewer
 
 **Converters**
-CSV ↔ JSON · XML ↔ JSON · YAML ↔ JSON · Excel ↔ JSON · JSON → TypeScript / Zod · JSON → Schema
+CSV ↔ JSON · XML ↔ JSON · YAML ↔ JSON · Excel ↔ JSON · TOML ↔ JSON · JSON → TypeScript / Zod · JSON → Schema
 
 **Text & Code**
-Text Case Converter · CSS Minifier · HTML Minifier · JavaScript Minifier · SQL Formatter · URL Encoder / Decoder · Base64 Encoder / Decoder · Markdown Preview · String Escaper / Unescaper
+Text Case Converter · CSS Minifier · HTML Minifier · JavaScript Minifier · SVG Optimizer · SQL Formatter · URL Encoder / Decoder · Base64 Encoder / Decoder · Markdown Preview · String Escaper / Unescaper
 
 **Security**
 JWT Decoder · JWT Generator · Hash Generator (MD5/SHA-1/SHA-256…) · HMAC Generator · UUID Generator (v4/v7/ULID) · Password Generator
 
 **Dev Utils**
-Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter · Color Picker (HEX/RGB/HSL + contrast) · CSS Gradient Generator · GPT Token Counter
+Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter · Color Picker (HEX/RGB/HSL + contrast) · CSS Gradient Generator · GPT Token Counter · Open Graph Meta Tag Generator
 
 ## Stack
 
 - **Nuxt 4 / Vue 3 / TypeScript**, built as a pure static site (`nuxt generate`) — no server runtime, deployed on Vercel
 - **CodeMirror 6** for syntax-highlighted editors, **Vue Flow** + **dagre** for the JSON graph view
 - **@nuxt/fonts** — Google Fonts self-hosted and bundled at build time, no third-party font requests at runtime
-- Format-specific libraries: `js-yaml`, `papaparse`, `xlsx`, `fast-xml-parser`, `sql-formatter`, `marked`, `jspdf`, `html-to-image`, `dompurify`, `html-minifier-terser`, `lightningcss-wasm`
-- **Vitest** + `@vue/test-utils` for unit tests (251 tests across composables), **Playwright** for scripted checks
+- Format-specific libraries: `js-yaml`, `papaparse`, `xlsx`, `fast-xml-parser`, `smol-toml`, `svgo`, `sql-formatter`, `marked`, `jspdf`, `html-to-image`, `dompurify`, `html-minifier-terser`, `lightningcss-wasm`, `gpt-tokenizer`
+- **Vitest** + `@vue/test-utils` for unit tests (356 tests across composables), **Playwright** for scripted checks
 - Plain scoped CSS + one global stylesheet — no CSS utility framework
 
 ## Architecture
@@ -41,8 +41,8 @@ Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter
 ```
 app/
 ├─ pages/
-│  ├─ tools/*.vue        # 32 tool pages — thin UI layer per tool
-│  ├─ guides/[slug].vue  # single dynamic page rendering all 24 guides
+│  ├─ tools/*.vue        # 39 tool pages (34 visible + 5 hidden reverse-direction converters) — thin UI layer per tool
+│  ├─ guides/[slug].vue  # single dynamic page rendering all 27 guides
 │  └─ index.vue          # homepage (tool catalog + search)
 ├─ composables/          # business logic per tool (parsing, formatting,
 │                        # generating) — framework-light, unit tested
@@ -51,9 +51,9 @@ app/
 │  └─ *.vue              # shared UI: JsonEditor, StatusBar, SeoSection,
 │                        # ToolSwitch, FaqAccordion, AdSlot...
 ├─ data/
-│  ├─ tools.ts           # single source of truth for the 32 tools —
+│  ├─ tools.ts           # single source of truth for the 34 visible tools —
 │  │                     # nav, footer, homepage and sitemap all derive from it
-│  └─ guides.ts          # same pattern for the 24 guides
+│  └─ guides.ts          # same pattern for the 27 guides
 ├─ utils/                # small stateless helpers (safeJsonParse, triggerDownload...)
 └─ workers/
    └─ excel.worker.ts    # sandboxes xlsx/SheetJS (known CVEs) off the main thread

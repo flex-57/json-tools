@@ -1,4 +1,4 @@
-# I Wanted to Practice Nuxt. I Accidentally Built 31 Developer Tools.
+# I Wanted to Practice Nuxt. I Accidentally Built 34 Developer Tools.
 
 > Every single one runs without a server. No signup. No data sent anywhere. Here's how and why that constraint made everything harder.
 
@@ -39,7 +39,7 @@ The tradeoff: some things that would be trivial server-side become interesting p
 
 ## Interesting challenges
 
-### 1. Syntax highlighting across 8 languages
+### 1. Syntax highlighting across 9 languages
 
 I started with a single `JsonEditor.vue` component using CodeMirror with `@codemirror/lang-json`. Fine for JSON tools. But when I added XML converters, YAML converters, a SQL formatter, and a TypeScript generator, each needed its own language extension.
 
@@ -113,7 +113,7 @@ The tool also generates **Zod schemas** from the same input, which required a se
 
 ### 3. SEO on a static tool site
 
-31 tools, each needing unique meta tags, Open Graph images, and structured data. No CMS. Everything lives in the Vue pages themselves with `useSeoMeta()` and a generated sitemap.
+34 tools, each needing unique meta tags, Open Graph images, and structured data. No CMS. Everything lives in the Vue pages themselves with `useSeoMeta()` and a generated sitemap.
 
 The FAQ page uses **JSON-LD `FAQPage` schema**, which lets Google display accordion answers directly in search results. Worth the 20 minutes it took to add.
 
@@ -123,13 +123,13 @@ The FAQ page uses **JSON-LD `FAQPage` schema**, which lets Google display accord
 
 ![Screenshot collage of JSON Formatter, JSON Tree Viewer, JWT Decoder, and Regex Tester on jsontools.space](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/llw374ohpbsgph6m34w2.png)
 
-31 tools across 5 categories:
+34 tools across 5 categories:
 
 - 🗂️ JSON: formatter, diff, tree viewer
-- 🔄 Converters: CSV, XML, YAML, Excel ↔ JSON, JSON → TypeScript/Zod, JSON → Schema
-- 📝 Text & Code: CSS/HTML/JS minifier, SQL formatter, Base64, URL encode, text case, Markdown preview, string escape/unescape
+- 🔄 Converters: CSV, XML, YAML, Excel, TOML ↔ JSON, JSON → TypeScript/Zod, JSON → Schema
+- 📝 Text & Code: CSS/HTML/JS minifier, SVG optimizer, SQL formatter, Base64, URL encode, text case, Markdown preview, string escape/unescape
 - 🔒 Security: JWT decoder/generator, hash generator, HMAC generator, UUID (v4/v7/ULID), password generator
-- 🛠️ Dev Utils: regex tester, cron parser, timestamp converter, number base, color picker, CSS gradient generator, GPT token counter
+- 🛠️ Dev Utils: regex tester, cron parser, timestamp converter, number base, color picker, CSS gradient generator, GPT token counter, Open Graph meta tag generator
 
 Everything is free, no account required.
 
@@ -139,7 +139,7 @@ Everything is free, no account required.
 
 A few things I want to add:
 
-- TOML support
+- SVG to JSX/Vue/Svelte conversion
 - GraphQL formatter
 
 ---
