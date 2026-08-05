@@ -110,10 +110,7 @@ const seoCards = [
 
 <style scoped>
 .hash-layout { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
-.editor-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; }
 .editor-card--focus { box-shadow: inset 0 0 0 2px rgb(var(--c-accent-rgb) / 0.2); }
-.editor-card-header { padding: 12px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
 
 .hash-textarea { width: 100%; min-height: 160px; padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; color: var(--c-t1); background: transparent; border: none; outline: none; resize: vertical; line-height: 1.7; }
 

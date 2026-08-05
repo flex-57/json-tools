@@ -163,7 +163,6 @@ function formatDate(d: Date): string {
 <style scoped>
 .token-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; }
 .token-card-header { padding: 12px 16px 10px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
 
 .token-input { width: 100%; border: none; outline: none; resize: none; padding: 14px 16px; font-family: var(--font-mono); font-size: 12.5px; background: transparent; color: var(--c-t1); line-height: 1.8; display: block; }
 .token-input::placeholder { color: var(--c-t5); }

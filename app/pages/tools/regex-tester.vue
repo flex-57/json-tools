@@ -168,9 +168,7 @@ const seoCards = [
 .match-badge { font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--c-valid); background: rgb(var(--c-valid-rgb) / 0.1); border: 1px solid rgb(var(--c-valid-rgb) / 0.3); border-radius: 20px; padding: 2px 10px; }
 .no-match-badge { font-family: var(--font-body); font-size: 12px; color: var(--c-t4); background: var(--c-subtle); border: 1px solid var(--c-border); border-radius: 20px; padding: 2px 10px; }
 
-.editor-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; }
-.editor-card-header { padding: 12px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
+.editor-card { display: flex; flex-direction: column; }
 .editor-body { flex: 1; overflow: hidden; display: flex; min-height: 140px; }
 
 .highlight-card, .matches-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; }
@@ -190,6 +188,4 @@ const seoCards = [
 .group-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--type-num); background: rgb(var(--c-accent-rgb) / 0.06); border: 1px solid var(--c-border); border-radius: 4px; padding: 1px 5px; }
 .group-value { font-family: var(--font-mono); font-size: 11.5px; color: var(--c-t2); background: var(--c-subtle); border-radius: 4px; padding: 1px 5px; }
 
-.slide-in-enter-active, .slide-in-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
-.slide-in-enter-from, .slide-in-leave-to { opacity: 0; transform: translateY(6px); }
 </style>

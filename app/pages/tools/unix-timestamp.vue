@@ -112,9 +112,4 @@ const seoCards = [
 .btn-copy-row { display: flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--c-border); background: var(--c-faint); color: var(--c-t3); cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.15s; }
 .btn-copy-row:hover { background: var(--c-subtle); color: var(--c-t1); }
 .btn-copy-row--done { background: rgb(var(--c-valid-rgb) / 0.12); border-color: rgb(var(--c-valid-rgb) / 0.35); color: var(--c-valid); }
-
-.status-enter-active, .status-leave-active { transition: opacity 0.15s, transform 0.15s; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: translateY(-3px); }
-.slide-in-enter-active, .slide-in-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
-.slide-in-enter-from, .slide-in-leave-to { opacity: 0; transform: translateY(6px); }
 </style>

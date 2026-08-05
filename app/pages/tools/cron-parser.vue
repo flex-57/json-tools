@@ -206,11 +206,6 @@ const seoCards = [
 .ref-expr { font-family: var(--font-mono); font-size: 12px; color: var(--c-accent); background: rgb(var(--c-accent-rgb) / 0.08); border-radius: 4px; padding: 2px 6px; flex-shrink: 0; min-width: 70px; }
 .ref-desc { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t3); }
 
-.status-enter-active, .status-leave-active { transition: opacity 0.15s, transform 0.15s; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: translateY(-3px); }
-.slide-in-enter-active, .slide-in-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
-.slide-in-enter-from, .slide-in-leave-to { opacity: 0; transform: translateY(6px); }
-
 @media (max-width: 768px) {
   .cron-input { font-size: 16px; }
   .cron-input::placeholder { font-size: 16px; }

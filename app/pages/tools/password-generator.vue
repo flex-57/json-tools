@@ -204,9 +204,6 @@ const cards = [
 </script>
 
 <style scoped>
-.editor-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; }
-.editor-card-header { padding: 12px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
 .pw-card { padding: 0; }
 
 .pw-display { display: flex; align-items: center; gap: 12px; padding: 16px 20px; }

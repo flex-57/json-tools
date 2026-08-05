@@ -129,9 +129,8 @@ const cards = [
 </script>
 
 <style scoped>
-.editor-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; margin-top: 14px; }
-.editor-card-header { padding: 12px 16px; border-bottom: 1px solid var(--c-border); display: flex; align-items: center; justify-content: space-between; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
+.editor-card { margin-top: 14px; }
+.editor-card-header { border-bottom-color: var(--c-border); }
 
 .preview-box { height: 200px; border-bottom: 1px solid var(--c-border); }
 

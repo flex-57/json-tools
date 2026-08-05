@@ -109,7 +109,6 @@ const seoCards = [
 
 .input-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; }
 .input-header-right { display: flex; align-items: center; gap: 8px; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
 
 .detected-badge { font-family: var(--font-mono); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: rgb(var(--c-accent-rgb) / 0.1); color: var(--c-accent); border: 1px solid rgb(var(--c-accent-rgb) / 0.3); }
 

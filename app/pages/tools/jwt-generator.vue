@@ -125,7 +125,6 @@ const seoCards = [
 .section-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; flex-wrap: wrap; gap: 6px; }
 .section-header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .section-header-right .hint { white-space: nowrap; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
 .editor-label-sub { font-family: var(--font-body); font-size: 11px; color: var(--c-t5); font-weight: 400; text-transform: none; letter-spacing: 0; }
 
 .section-textarea { width: 100%; border: none; outline: none; resize: none; padding: 14px 16px; font-family: var(--font-mono); font-size: 12.5px; background: transparent; color: var(--c-t1); line-height: 1.8; display: block; }
@@ -148,9 +147,6 @@ const seoCards = [
 .token-placeholder { font-family: var(--font-body); font-size: 13px; color: var(--c-t5); padding: 8px 0; }
 
 .error-line { padding: 8px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--c-error); border-top: 1px solid rgb(var(--c-error-rgb) / 0.3); background: rgb(var(--c-error-rgb) / 0.06); }
-
-.status-enter-active, .status-leave-active { transition: opacity 0.15s, transform 0.15s; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: translateY(-3px); }
 
 @media (max-width: 768px) { .mode-toggle { min-width: 190px; } .mode-btn { padding: 5px 10px; } }
 </style>

@@ -100,7 +100,6 @@ const seoCards = [
 
 .input-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; }
 .input-header-right { display: flex; align-items: center; gap: 8px; }
-.editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-t4); }
 .word-count { font-family: var(--font-mono); font-size: 11.5px; color: var(--c-t5); }
 
 .input-textarea { width: 100%; border: none; outline: none; resize: none; padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; background: transparent; color: var(--c-t1); line-height: 1.7; display: block; }
