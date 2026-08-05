@@ -52,6 +52,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
   { slug: 'base64', name: 'Base64 Encoder / Decoder', short: 'Binary-to-text conversion', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
+  { slug: 'string-escape', name: 'String Escaper / Unescaper', short: 'JSON & code string literals', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-08-05' },
   { slug: 'markdown-preview', name: 'Markdown Preview', short: 'Live rendered output', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
 
   // Security
