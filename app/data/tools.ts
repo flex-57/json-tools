@@ -51,6 +51,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'css-minifier', name: 'CSS Minifier', short: 'Compress stylesheets', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
   { slug: 'html-minifier', name: 'HTML Minifier', short: 'Compress markup', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
   { slug: 'js-minifier', name: 'JavaScript Minifier', short: 'Compress & mangle', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
+  { slug: 'svg-optimizer', name: 'SVG Optimizer', short: 'Compress with SVGO', category: 'textcode', variant: 'transform', updatedAt: '2026-08-05' },
   { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
   { slug: 'base64', name: 'Base64 Encoder / Decoder', short: 'Binary-to-text conversion', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
