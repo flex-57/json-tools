@@ -140,7 +140,6 @@ Everything is free, no account required.
 A few things I want to add:
 
 - TOML support
-- `curl` → `fetch` converter
 - GraphQL formatter
 
 ---
