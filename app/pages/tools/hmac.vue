@@ -58,7 +58,6 @@ useToolSeo(
 )
 
 const message = ref('Hello, World!')
-useUrlInput(message)
 const secret  = ref('secret-key')
 const format  = ref<HmacFormat>('hex')
 const messageFocused = ref(false)
