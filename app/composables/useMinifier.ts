@@ -61,6 +61,16 @@ async function getLightningCSS(): Promise<LightningModule | null> {
   return _lcss
 }
 
+type MinifyHtmlFn = typeof import('html-minifier-terser')['minify']
+let _minifyHtml: MinifyHtmlFn | undefined
+
+async function getMinifyHtml(): Promise<MinifyHtmlFn> {
+  if (!_minifyHtml) {
+    _minifyHtml = (await import('html-minifier-terser')).minify
+  }
+  return _minifyHtml
+}
+
 // lightningcss-wasm's error carries no usable position: its `loc`/`data`
 // fields come back empty {} regardless of error type (verified against the
 // actual .wasm binary, not just the JS wrapper — same binary is used for the
@@ -162,7 +172,7 @@ export async function minifyHTML(input: string): Promise<MinifyResult> {
     // to patch here at runtime; see the `path` → `pathe` alias in
     // nuxt.config.ts for the actual fix (verified live: a global patch had
     // zero effect since clean-css's bundled code never consults it).
-    const { minify } = await import('html-minifier-terser')
+    const minify = await getMinifyHtml()
     // html-minifier-terser deliberately never lets a broken embedded <script>
     // fail the whole document: it catches terser's error internally and
     // falls back to leaving that block unminified (see its source). The only
