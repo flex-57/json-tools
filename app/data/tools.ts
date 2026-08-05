@@ -41,6 +41,8 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'json-to-yaml', name: 'JSON → YAML', short: 'Readable config output', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
   { slug: 'excel-to-json', name: 'Excel → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'Excel ↔ JSON', updatedAt: '2026-07-10' },
   { slug: 'json-to-excel', name: 'JSON → Excel', short: 'Export as .xlsx', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
+  { slug: 'toml-to-json', name: 'TOML → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'TOML ↔ JSON', updatedAt: '2026-08-05' },
+  { slug: 'json-to-toml', name: 'JSON → TOML', short: 'Export as config', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-08-05' },
   { slug: 'json-to-ts', name: 'JSON → TypeScript / Zod', short: 'Interfaces or Zod', category: 'converters', variant: 'transform', navDividerBefore: true, updatedAt: '2026-07-10' },
   { slug: 'json-schema', name: 'JSON → Schema', short: 'Infer JSON Schema', category: 'converters', variant: 'transform', updatedAt: '2026-07-10' },
 

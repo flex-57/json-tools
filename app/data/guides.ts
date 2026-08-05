@@ -217,7 +217,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
-    related: ['/guides/what-is-json', '/guides/what-is-xml', '/guides/what-is-yaml'],
+    related: ['/guides/what-is-json', '/guides/what-is-xml', '/guides/what-is-yaml', '/guides/what-is-toml'],
   },
   'what-is-xml': {
     slug: 'what-is-xml',
@@ -309,7 +309,60 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
-    related: ['/guides/json-vs-yaml', '/guides/what-is-json', '/guides/what-is-xml'],
+    related: ['/guides/json-vs-yaml', '/guides/what-is-json', '/guides/what-is-xml', '/guides/what-is-toml'],
+  },
+  'what-is-toml': {
+    slug: 'what-is-toml',
+    type: 'guide',
+    category: 'converters',
+    title: 'What is TOML?',
+    subtitle: 'TOML explained: tables, arrays of tables, native dates, and why it has no null value or top-level array.',
+    readTime: '5 min read',
+    datePublished: '2026-08-05',
+    dateModified: '2026-08-05',
+    description: 'Learn what TOML (Tom\'s Obvious, Minimal Language) is, how tables and arrays of tables work, its native date-time type, why TOML has no null and no top-level array, and where it\'s used (Cargo.toml, pyproject.toml).',
+    tools: [
+      { name: 'TOML → JSON', desc: 'Paste or drop a .toml file to convert it to JSON, with 1-indexed line/column error reporting.', href: '/tools/toml-to-json', icon: ICONS.tomlIn },
+      { name: 'JSON → TOML', desc: 'Convert a JSON object to TOML: nested objects become tables, arrays of objects become arrays of tables.', href: '/tools/json-to-toml', icon: ICONS.tomlOut },
+    ],
+    faqs: [
+      {
+        q: 'What does TOML stand for?',
+        a: [
+          'Tom\'s Obvious, Minimal Language, created by GitHub co-founder Tom Preston-Werner. It was designed to map unambiguously to a hash table, so any two compliant parsers produce the exact same structure from the same file.',
+          'That predictability is the whole point: unlike YAML, where 1.1 and 1.2 parsers can disagree on what a bare "yes" or "NO" means, a TOML value only ever has one valid interpretation.',
+        ],
+      },
+      {
+        q: 'How is TOML different from YAML?',
+        a: [
+          'Both are human-editable config formats, but TOML uses explicit key = value lines and [table] headers instead of YAML\'s indentation-based nesting, so a misplaced space can\'t silently change the structure.',
+          'TOML also has a smaller feature set on purpose: no anchors/aliases, no multi-document files, no implicit type coercion. What you see on the line is the value, nothing is inferred from context.',
+        ],
+      },
+      {
+        q: 'Why does TOML have no null value?',
+        a: [
+          'The TOML spec simply never defined one. A key either has a value or it doesn\'t appear in the document at all, there is no third "present but empty" state to represent.',
+          'When converting JSON to TOML, any null field has to be resolved first: drop the key entirely, or replace it with a real value (an empty string, 0, false) depending on what it\'s meant to signal.',
+        ],
+      },
+      {
+        q: 'Why can\'t a TOML document be a top-level array?',
+        a: [
+          'A TOML document is always a table (the technical term for what JSON calls an object) at the root. There is no syntax for a bare list of values outside of a key.',
+          'To convert a JSON array like ["a", "b", "c"] to TOML, wrap it in an object first, e.g. { "items": ["a", "b", "c"] }, which becomes items = ["a", "b", "c"] in TOML.',
+        ],
+      },
+      {
+        q: 'Where is TOML actually used?',
+        a: [
+          'Cargo.toml is the manifest for every Rust package. pyproject.toml is the standard build-system and tool config for Python (PEP 518/621), used by Poetry, Black, Ruff, and pip. Hugo, Gitea, and many CLI tools also default to TOML for their config files.',
+          'It shows up wherever a maintainer wants config files that are diffable, unambiguous, and easy for a human to hand-edit without a YAML indentation mistake breaking a build.',
+        ],
+      },
+    ],
+    related: ['/guides/what-is-yaml', '/guides/what-is-json', '/guides/what-is-csv'],
   },
   'json-vs-yaml': {
     slug: 'json-vs-yaml',

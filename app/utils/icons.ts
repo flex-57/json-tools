@@ -40,6 +40,8 @@ export const ICONS = {
   strEsc:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l4 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 4v2M12.5 4v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   hmac:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M7.8 8H14M11 8v2.5M13 8v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   tokenCount: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="6.5" width="3.5" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="6.5" y="6.5" width="4.5" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="12" y="6.5" width="2.5" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>`,
+  tomlIn:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h3M2 7.5h4M2 11h2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 8h5M12.5 5.5L15 8l-2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  tomlOut:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 4h3M9 7.5h4M9 11h2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M6 8H1M3.5 5.5L1 8l2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 
   /* ── About / Contact ──────────────────────────────── */
   mail:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4.5l6 4.5 6-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -52,6 +54,7 @@ const TOOL_ICONS: Record<string, string> = {
   'csv-to-json': ICONS.csvIn, 'json-to-csv': ICONS.csvOut,
   'xml-to-json': ICONS.xmlIn, 'json-to-xml': ICONS.xmlOut,
   'yaml-to-json': ICONS.yamlIn, 'json-to-yaml': ICONS.yamlOut,
+  'toml-to-json': ICONS.tomlIn, 'json-to-toml': ICONS.tomlOut,
   'excel-to-json': ICONS.xlIn, 'json-to-excel': ICONS.xlOut,
   'json-to-ts': ICONS.ts, 'json-schema': ICONS.schema,
   'text-case': ICONS.textCase, 'css-minifier': ICONS.minifier, 'html-minifier': ICONS.minifier, 'js-minifier': ICONS.minifier, 'sql-formatter': ICONS.sql,

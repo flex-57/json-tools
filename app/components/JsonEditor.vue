@@ -5,12 +5,12 @@
 <script setup lang="ts">
 import { EditorView, basicSetup } from 'codemirror'
 import { Decoration, GutterMarker, gutterLineClass } from '@codemirror/view'
-import { syntaxHighlighting, defaultHighlightStyle } from '@codemirror/language'
+import { syntaxHighlighting, defaultHighlightStyle, StreamLanguage } from '@codemirror/language'
 import { EditorState, Compartment, RangeSet, type Extension } from '@codemirror/state'
 import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
 
-export type EditorLang = 'json' | 'typescript' | 'javascript' | 'xml' | 'yaml' | 'sql' | 'css' | 'html'
+export type EditorLang = 'json' | 'typescript' | 'javascript' | 'xml' | 'yaml' | 'sql' | 'css' | 'html' | 'toml'
 
 const props = defineProps<{
   modelValue: string
@@ -165,6 +165,10 @@ async function getLangExtension() {
     case 'html': {
       const { html } = await import('@codemirror/lang-html')
       return html()
+    }
+    case 'toml': {
+      const { toml } = await import('@codemirror/legacy-modes/mode/toml')
+      return StreamLanguage.define(toml)
     }
     default: {
       const { json } = await import('@codemirror/lang-json')

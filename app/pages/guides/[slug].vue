@@ -95,6 +95,7 @@ const bodyComponents: Record<string, Component> = {
   'encoding-vs-encryption-vs-hashing': defineAsyncComponent(() => import('~/components/guides/body/encoding-vs-encryption-vs-hashing.vue')),
   'what-is-a-token': defineAsyncComponent(() => import('~/components/guides/body/what-is-a-token.vue')),
   'json-mode-structured-outputs': defineAsyncComponent(() => import('~/components/guides/body/json-mode-structured-outputs.vue')),
+  'what-is-toml': defineAsyncComponent(() => import('~/components/guides/body/what-is-toml.vue')),
 }
 
 const route = useRoute()
