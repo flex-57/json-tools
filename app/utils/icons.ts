@@ -37,6 +37,9 @@ export const ICONS = {
   numBase:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L6 4M10 4l4 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.5 9h5M10.5 9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   color:     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 2.5V6M8 10V13.5M2.5 8H6M10 8H13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   gradient:  `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3 13L13 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3 9.5L9.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-opacity="0.6"/><path d="M3 6L6 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-opacity="0.3"/></svg>`,
+  strEsc:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l4 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 4v2M12.5 4v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  hmac:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M7.8 8H14M11 8v2.5M13 8v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  tokenCount: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="6.5" width="3.5" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="6.5" y="6.5" width="4.5" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="12" y="6.5" width="2.5" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>`,
 
   /* ── About / Contact ──────────────────────────────── */
   mail:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4.5l6 4.5 6-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -57,6 +60,7 @@ const TOOL_ICONS: Record<string, string> = {
   'uuid': ICONS.uuid, 'password-generator': ICONS.pwdGen,
   'regex-tester': ICONS.regex, 'cron-parser': ICONS.cron, 'unix-timestamp': ICONS.unix,
   'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient,
+  'string-escape': ICONS.strEsc, 'hmac': ICONS.hmac, 'gpt-token-counter': ICONS.tokenCount,
 }
 export function toolIcon(slug: string): string { return TOOL_ICONS[slug] ?? '' }
 
