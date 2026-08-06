@@ -52,6 +52,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'html-minifier', name: 'HTML Minifier', short: 'Compress markup', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
   { slug: 'js-minifier', name: 'JavaScript Minifier', short: 'Compress & mangle', category: 'textcode', variant: 'transform', updatedAt: '2026-07-17' },
   { slug: 'svg-optimizer', name: 'SVG Optimizer', short: 'Compress with SVGO', category: 'textcode', variant: 'transform', updatedAt: '2026-08-05' },
+  { slug: 'svg-to-jsx', name: 'SVG to JSX', short: 'React component from SVG', category: 'textcode', variant: 'transform', updatedAt: '2026-08-06' },
   { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'graphql-formatter', name: 'GraphQL Formatter', short: 'Queries, mutations & SDL', category: 'textcode', variant: 'transform', updatedAt: '2026-08-06' },
   { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },

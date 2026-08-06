@@ -10,7 +10,7 @@ import { EditorState, Compartment, RangeSet, type Extension } from '@codemirror/
 import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
 
-export type EditorLang = 'json' | 'typescript' | 'javascript' | 'xml' | 'yaml' | 'sql' | 'css' | 'html' | 'toml'
+export type EditorLang = 'json' | 'typescript' | 'javascript' | 'jsx' | 'xml' | 'yaml' | 'sql' | 'css' | 'html' | 'toml'
 
 const props = defineProps<{
   modelValue: string
@@ -145,6 +145,10 @@ async function getLangExtension() {
     case 'javascript': {
       const { javascript } = await import('@codemirror/lang-javascript')
       return javascript()
+    }
+    case 'jsx': {
+      const { javascript } = await import('@codemirror/lang-javascript')
+      return javascript({ jsx: true })
     }
     case 'xml': {
       const { xml } = await import('@codemirror/lang-xml')
