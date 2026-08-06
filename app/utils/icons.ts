@@ -45,6 +45,7 @@ export const ICONS = {
   svgOpt:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L14 4.7v6.6L8 14.5 2 11.3V4.7L8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.5 8.5l1.8 1.8L11 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   ogCard:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 8.5h13" stroke="currentColor" stroke-width="1.3"/><path d="M4 11h5M4 12.5h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>`,
   graphql:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l6 3.5v6L8 14.5l-6-3.5v-6L8 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.6" stroke="currentColor" stroke-width="1.1"/><path d="M8 1.5V6.4M8 9.6V14.5M2.6 4.9l4.4 2.5M9 8.6l4.4 2.5M13.4 4.9L9 7.4M7 8.6L2.6 11.1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>`,
+  boxShadow: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="4.5" y="4.5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.4"/></svg>`,
 
   /* ── About / Contact ──────────────────────────────── */
   mail:   `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4.5l6 4.5 6-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -65,7 +66,7 @@ const TOOL_ICONS: Record<string, string> = {
   'jwt-decoder': ICONS.jwtDec, 'jwt-generator': ICONS.jwtGen, 'hash': ICONS.hash,
   'uuid': ICONS.uuid, 'password-generator': ICONS.pwdGen,
   'regex-tester': ICONS.regex, 'cron-parser': ICONS.cron, 'unix-timestamp': ICONS.unix,
-  'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient, 'og-generator': ICONS.ogCard,
+  'number-base': ICONS.numBase, 'color': ICONS.color, 'gradient': ICONS.gradient, 'og-generator': ICONS.ogCard, 'box-shadow': ICONS.boxShadow,
   'string-escape': ICONS.strEsc, 'hmac': ICONS.hmac, 'gpt-token-counter': ICONS.tokenCount,
 }
 export function toolIcon(slug: string): string { return TOOL_ICONS[slug] ?? '' }

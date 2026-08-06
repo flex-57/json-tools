@@ -76,6 +76,7 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'color', name: 'Color Picker', short: 'HEX / RGB / HSL + contrast', category: 'devutils', variant: 'generator', updatedAt: '2026-07-07' },
   { slug: 'gradient', name: 'CSS Gradient Generator', short: 'Linear, radial, conic', category: 'devutils', variant: 'generator', updatedAt: '2026-07-11' },
   { slug: 'og-generator', name: 'Open Graph Meta Tag Generator', short: 'og: & twitter: tags + preview', category: 'devutils', variant: 'generator', updatedAt: '2026-08-06' },
+  { slug: 'box-shadow', name: 'CSS Box-Shadow Generator', short: 'Layered shadows, live preview', category: 'devutils', variant: 'generator', updatedAt: '2026-08-06' },
 ]
 
 // The number of tools as a user would count them: one per card/nav entry, not
