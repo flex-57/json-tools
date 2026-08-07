@@ -96,6 +96,11 @@ const bodyComponents: Record<string, Component> = {
   'what-is-a-token': defineAsyncComponent(() => import('~/components/guides/body/what-is-a-token.vue')),
   'json-mode-structured-outputs': defineAsyncComponent(() => import('~/components/guides/body/json-mode-structured-outputs.vue')),
   'what-is-toml': defineAsyncComponent(() => import('~/components/guides/body/what-is-toml.vue')),
+  'what-is-hmac': defineAsyncComponent(() => import('~/components/guides/body/what-is-hmac.vue')),
+  'what-is-svg': defineAsyncComponent(() => import('~/components/guides/body/what-is-svg.vue')),
+  'what-is-graphql': defineAsyncComponent(() => import('~/components/guides/body/what-is-graphql.vue')),
+  'what-is-open-graph': defineAsyncComponent(() => import('~/components/guides/body/what-is-open-graph.vue')),
+  'what-is-minification': defineAsyncComponent(() => import('~/components/guides/body/what-is-minification.vue')),
 }
 
 const route = useRoute()

@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">HMAC <span class="title-amp">Generator</span></h1>
         <p class="page-subtitle">Compute HMAC-SHA1, SHA-256, SHA-384 and SHA-512 signatures with a secret key, instantly in your browser.</p>
+        <NuxtLink to="/guides/what-is-hmac" class="guide-link">What is HMAC? Read our guide →</NuxtLink>
       </div>
       <div class="mode-toggle" style="min-width: 150px;">
         <div class="mode-indicator" :class="{ 'mode-indicator--right': format === 'base64' }"/>

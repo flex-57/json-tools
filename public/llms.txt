@@ -75,6 +75,11 @@ JSON Tools is a collection of free browser-based developer utilities for working
 - [What is a Token? LLM Tokenization Explained](https://jsontools.space/guides/what-is-a-token): How Byte Pair Encoding splits text into tokens, why token count drives API cost and context limits, and which models support offline counting.
 - [JSON Mode & Structured Outputs](https://jsontools.space/guides/json-mode-structured-outputs): Legacy JSON mode vs schema-constrained structured outputs, and how OpenAI, Claude, and Gemini each implement reliable JSON generation.
 - [What is TOML?](https://jsontools.space/guides/what-is-toml): TOML tables and arrays of tables, its native date-time type, and why it has no null value or top-level array.
+- [What is HMAC?](https://jsontools.space/guides/what-is-hmac): The keyed-hash construction, why it resists length-extension attacks, and where HS256 signs JWTs and webhooks.
+- [What is SVG?](https://jsontools.space/guides/what-is-svg): viewBox and path data explained, what SVGO actually removes when optimizing, and converting SVG markup to JSX.
+- [What is GraphQL?](https://jsontools.space/guides/what-is-graphql): Queries vs REST, the schema definition language, resolvers, and why over-fetching is the problem GraphQL solves.
+- [What is Open Graph?](https://jsontools.space/guides/what-is-open-graph): The four required og: properties, how Twitter/X cards fall back to them, and why og:image gets cached by sharing platforms.
+- [What is Minification?](https://jsontools.space/guides/what-is-minification): What CSS, HTML, and JS minifiers each remove, why JavaScript compresses the most, and why source maps matter once you minify.
 
 ## Key Facts
 

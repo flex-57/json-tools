@@ -8,7 +8,7 @@
 
 JSON Tools is a toolbench for the small, repetitive jobs developers reach for constantly — formatting JSON, converting between data formats, decoding a JWT, testing a regex — without opening a dozen different sites or trusting a random one with real data. Every tool is client-side only (parsing, formatting, hashing, encoding all happen in the tab), and the site ships as a fully static build with no backend or database.
 
-It also includes 27 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, TOML, Base64, hashing, JWTs, regex, cron syntax, and more.
+It also includes 32 reference guides (`/guides`) covering the concepts behind the tools — JSON, YAML, TOML, Base64, hashing, JWTs, regex, cron syntax, and more.
 
 ## The 37 tools
 
@@ -42,7 +42,7 @@ Regex Tester · Cron Parser · Unix Timestamp Converter · Number Base Converter
 app/
 ├─ pages/
 │  ├─ tools/*.vue        # 42 tool pages (37 visible + 5 hidden reverse-direction converters) — thin UI layer per tool
-│  ├─ guides/[slug].vue  # single dynamic page rendering all 27 guides
+│  ├─ guides/[slug].vue  # single dynamic page rendering all 32 guides
 │  └─ index.vue          # homepage (tool catalog + search)
 ├─ composables/          # business logic per tool (parsing, formatting,
 │                        # generating) — framework-light, unit tested
@@ -53,7 +53,7 @@ app/
 ├─ data/
 │  ├─ tools.ts           # single source of truth for the 37 visible tools —
 │  │                     # nav, footer, homepage and sitemap all derive from it
-│  └─ guides.ts          # same pattern for the 27 guides
+│  └─ guides.ts          # same pattern for the 32 guides
 ├─ utils/                # small stateless helpers (safeJsonParse, triggerDownload...)
 └─ workers/
    └─ excel.worker.ts    # sandboxes xlsx/SheetJS (known CVEs) off the main thread

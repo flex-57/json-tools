@@ -685,6 +685,97 @@ export const GUIDES: Record<string, GuideConfig> = {
     ],
     related: ['/guides/regex-cheatsheet', '/guides/markdown-cheatsheet', '/guides/cron-expression-examples'],
   },
+  'what-is-svg': {
+    slug: 'what-is-svg',
+    type: 'guide',
+    category: 'textcode',
+    title: 'What is SVG?',
+    subtitle: 'SVG explained: the XML structure behind vector graphics, why viewBox matters, what SVGO actually optimizes, and converting SVG to JSX.',
+    readTime: '5 min read',
+    datePublished: '2026-08-07',
+    dateModified: '2026-08-07',
+    description: 'Learn what SVG (Scalable Vector Graphics) is, how viewBox and path data work, what SVGO removes when optimizing a file, why optimizing is not the same as sanitizing, and how SVG maps to JSX for React components.',
+    tools: [
+      { name: 'SVG Optimizer', desc: 'Compress SVG markup with SVGO: strips editor bloat and redundant precision while keeping the rendered output identical.', href: '/tools/svg-optimizer', icon: ICONS.svgOpt },
+      { name: 'SVG to JSX', desc: 'Convert an SVG file into a React component: className, camelCase props, style objects.', href: '/tools/svg-to-jsx', icon: ICONS.svgJsx },
+    ],
+    faqs: [
+      {
+        q: 'Does optimizing an SVG strip the viewBox by default?',
+        a: [
+          'Not with a current SVGO. removeViewBox used to ship as part of the default preset in SVGO v2 and v3, which was controversial: dropping viewBox while keeping width/height fixes the rendered size and stops the SVG from scaling to fill a responsive container. As of SVGO v4, removeViewBox is no longer included in preset-default at all, it has to be opted into explicitly.',
+          'This site\'s optimizer runs SVGO v4, so viewBox survives a default optimization pass. If you\'re troubleshooting an SVG that lost its viewBox somewhere else in your pipeline, check whether that tool is still on SVGO v2/v3 defaults or has removeViewBox explicitly enabled.',
+        ],
+      },
+      {
+        q: 'Is optimizing an SVG the same as sanitizing it?',
+        a: [
+          'No, and this is the mistake that matters most. SVG can carry a <script> element or event-handler attributes like onload, and SVGO\'s default preset does not remove either, optimization is about file size, not safety.',
+          'If you\'re about to inline SVG markup into a page with v-html, dangerouslySetInnerHTML, or similar, and the SVG comes from anywhere you don\'t fully trust, strip scripts and event handlers explicitly first. An SVG loaded as an <img> src never executes embedded scripts regardless, since the image context doesn\'t run them.',
+        ],
+      },
+      {
+        q: 'Why does my SVG look identical after optimizing but load faster?',
+        a: [
+          'Because everything a typical optimizer removes is invisible to the renderer: XML comments, <metadata> blocks, editor-specific namespaces (Figma, Illustrator, and Sketch all stamp their own), and excess coordinate precision like 12.847293847px when 12.85px renders pixel-identical.',
+          'None of that data affects how the shape paints, it\'s an artifact of the export process, not the image. A design tool\'s export and a hand-optimized file can differ 2-3x in size while producing an indistinguishable result on screen.',
+        ],
+      },
+      {
+        q: 'Can an SVG be animated?',
+        a: [
+          'Yes, in three different ways with different levels of support. SMIL (<animate>, <animateTransform> elements inside the SVG itself) works in every major browser except it was briefly deprecated in Chrome before that decision was reversed, so it is usable but not universally recommended for new work.',
+          'CSS animations and transitions target SVG presentation attributes the same way they target regular DOM elements, and are the most common modern approach. JavaScript (the Web Animations API, or libraries like GSAP) gives full programmatic control for anything CSS can\'t express, like animating along a path.',
+        ],
+      },
+    ],
+    related: ['/guides/what-is-minification'],
+  },
+  'what-is-graphql': {
+    slug: 'what-is-graphql',
+    type: 'guide',
+    category: 'textcode',
+    title: 'What is GraphQL?',
+    subtitle: 'GraphQL explained: queries vs REST, the schema definition language, resolvers, and why over-fetching is the problem it was built to solve.',
+    readTime: '5 min read',
+    datePublished: '2026-08-07',
+    dateModified: '2026-08-07',
+    description: 'Learn what GraphQL is, how it differs from REST, the anatomy of a query and the schema definition language (SDL), what resolvers do, and where GraphQL trades off against a REST API.',
+    tools: [
+      { name: 'GraphQL Formatter', desc: 'Format GraphQL queries, mutations, fragments, and SDL type definitions with the reference graphql-js printer.', href: '/tools/graphql-formatter', icon: ICONS.graphql },
+    ],
+    faqs: [
+      {
+        q: 'Is GraphQL a database?',
+        a: [
+          'No, it\'s a query language and runtime for APIs, not a storage engine. A GraphQL server\'s resolvers typically fetch data from whatever actually stores it: a SQL database, a document store, a REST API, or another GraphQL service, and GraphQL just defines the contract for asking for it.',
+          'This is a common first misconception because the query syntax looks like it\'s querying a database directly. In practice a GraphQL layer is usually sitting in front of infrastructure that already exists.',
+        ],
+      },
+      {
+        q: 'What problem does GraphQL solve that REST doesn\'t?',
+        a: [
+          'Over-fetching and under-fetching. A REST endpoint returns a fixed shape, so a mobile screen that needs a user\'s name and avatar still gets the full user object, and a screen needing data from three resources needs three round trips (or a bespoke endpoint built just for that screen).',
+          'A GraphQL query specifies exactly which fields it wants, across however many related types, in one request and one round trip. The tradeoff is server-side complexity: the resolver layer has to make that flexibility actually performant, which is where problems like the N+1 query problem show up.',
+        ],
+      },
+      {
+        q: 'What is the difference between a query, a mutation, and a subscription?',
+        a: [
+          'A query reads data and is expected to have no side effects, a mutation writes data (create, update, delete) and the spec expects mutations in a request to run sequentially rather than in parallel, since each one might depend on the previous one\'s effect.',
+          'A subscription opens a long-lived connection (typically over WebSockets) and pushes updates to the client as matching events happen server-side, the closest GraphQL equivalent to a real-time feed.',
+        ],
+      },
+      {
+        q: 'What is SDL, and is it different from a query?',
+        a: [
+          'SDL (Schema Definition Language) is the syntax used to define a GraphQL API\'s shape: type, input, enum, interface, and union declarations describing every field a server exposes and what arguments each accepts. It\'s written by the API author, not sent by clients.',
+          'A query uses a related but distinct syntax, it selects fields from the shape the schema already defines. This site\'s formatter handles both with the same parser, since they share the same underlying GraphQL grammar (graphql-js, the reference JavaScript implementation, parses and prints both).',
+        ],
+      },
+    ],
+    related: [],
+  },
   // Security
   'what-is-jwt': {
     slug: 'what-is-jwt',
@@ -694,7 +785,7 @@ export const GUIDES: Record<string, GuideConfig> = {
     subtitle: 'JSON Web Tokens explained: structure, how they work, common algorithms, and security best practices.',
     readTime: '6 min read',
     datePublished: '2026-06-19',
-    dateModified: '2026-06-19',
+    dateModified: '2026-08-07',
     description: 'Learn what JSON Web Tokens (JWT) are, how they work, their three-part structure (header, payload, signature), signing algorithms, and security best practices.',
     tools: [
       { name: 'JWT Decoder', desc: 'Paste any JWT to instantly inspect its header, payload, and expiration. Fully client-side, no server involved.', href: '/tools/jwt-decoder', icon: ICONS.jwtDec },
@@ -730,7 +821,7 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
-    related: ['/guides/what-is-base64', '/guides/what-is-hash', '/guides/encoding-vs-encryption-vs-hashing'],
+    related: ['/guides/what-is-base64', '/guides/what-is-hash', '/guides/what-is-hmac', '/guides/encoding-vs-encryption-vs-hashing'],
   },
   'what-is-hash': {
     slug: 'what-is-hash',
@@ -740,7 +831,7 @@ export const GUIDES: Record<string, GuideConfig> = {
     subtitle: 'Hash functions explained: one-way digests, MD5 vs SHA-256, use cases, and why you should never hash passwords with SHA.',
     readTime: '6 min read',
     datePublished: '2026-06-30',
-    dateModified: '2026-06-30',
+    dateModified: '2026-08-07',
     description: 'Learn what cryptographic hash functions are, how MD5, SHA-1, SHA-256, and SHA-512 compare, their use cases (checksums, deduplication, digital signatures), and why bcrypt/Argon2 are required for passwords.',
     tools: [
       { name: 'Hash Generator', desc: 'Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text, right in your browser.', href: '/tools/hash', icon: ICONS.hash },
@@ -775,7 +866,53 @@ export const GUIDES: Record<string, GuideConfig> = {
         ],
       },
     ],
-    related: ['/guides/encoding-vs-encryption-vs-hashing', '/guides/what-is-base64', '/guides/password-entropy-explained'],
+    related: ['/guides/what-is-hmac', '/guides/encoding-vs-encryption-vs-hashing', '/guides/what-is-base64', '/guides/password-entropy-explained'],
+  },
+  'what-is-hmac': {
+    slug: 'what-is-hmac',
+    type: 'guide',
+    category: 'security',
+    title: 'What is HMAC?',
+    subtitle: 'HMAC explained: why a keyed hash beats a plain one, the ipad/opad construction, and where HS256 shows up in JWTs and webhooks.',
+    readTime: '5 min read',
+    datePublished: '2026-08-07',
+    dateModified: '2026-08-07',
+    description: 'Learn what HMAC (Hash-based Message Authentication Code) is, how its keyed double-hash construction works, why it resists length-extension attacks that break naive secret+message hashing, and where HMAC-SHA256 is used in webhooks, AWS SigV4, and JWTs.',
+    tools: [
+      { name: 'HMAC Generator', desc: 'Compute HMAC-SHA1, SHA-256, SHA-384 or SHA-512 signatures from a message and secret key, entirely in your browser.', href: '/tools/hmac', icon: ICONS.hmac },
+      { name: 'Hash Generator', desc: 'Compute a plain (unkeyed) hash to see the difference: change the input and every hash changes, but anyone can reproduce it without a secret.', href: '/tools/hash', icon: ICONS.hash },
+    ],
+    faqs: [
+      {
+        q: 'Is HMAC a form of encryption?',
+        a: [
+          'No. HMAC produces a fixed-size signature, not ciphertext, and there is no way to recover the original message from it, the same one-way property a plain hash has.',
+          'What HMAC adds over a plain hash is a secret key: only someone who knows the key can produce or verify a valid signature. It proves authenticity and integrity, not confidentiality, the message itself still travels in the clear unless you encrypt it separately.',
+        ],
+      },
+      {
+        q: "Why can't I just hash the secret and message concatenated together?",
+        a: [
+          'SHA-256(secret + message) looks equivalent to HMAC but is vulnerable to a length-extension attack: because SHA-256 and SHA-1 process input in fixed-size blocks and expose their internal state as the final digest, an attacker who sees a valid hash can compute a valid hash for secret + message + attacker-chosen-suffix, without ever learning the secret.',
+          "HMAC's nested construction, hashing the key into both an inner and outer pass, keeps the secret from ever appearing in a position an attacker can extend from. This is the actual reason HMAC exists instead of everyone just hashing a shared secret with their message.",
+        ],
+      },
+      {
+        q: 'What key length should I use for HMAC?',
+        a: [
+          'RFC 2104 recommends a key at least as long as the underlying hash\'s output, 32 bytes for HMAC-SHA256, 64 bytes for HMAC-SHA512, generated with a cryptographically secure random source, not a human-chosen passphrase.',
+          'Keys longer than the hash function\'s block size (64 bytes for SHA-1/256, 128 bytes for SHA-384/512) get hashed down to size first; keys shorter than the output length are technically valid but waste some of the security margin the algorithm can provide.',
+        ],
+      },
+      {
+        q: 'Is HMAC-SHA1 still safe to use?',
+        a: [
+          'As a MAC, yes, which surprises people who know SHA-1 is broken. The SHAttered collision attack breaks SHA-1\'s collision resistance, but HMAC\'s security proof relies on a different property (pseudorandomness), one that has not been broken for HMAC-SHA1 despite the underlying hash\'s other weaknesses.',
+          'That said, new systems should default to HMAC-SHA256: it carries no legacy baggage to explain, matches what JWT HS256 and most modern webhook schemes already use, and avoids the recurring "wait, isn\'t SHA-1 broken?" question entirely.',
+        ],
+      },
+    ],
+    related: ['/guides/what-is-hash', '/guides/what-is-jwt', '/guides/encoding-vs-encryption-vs-hashing'],
   },
   'encoding-vs-encryption-vs-hashing': {
     slug: 'encoding-vs-encryption-vs-hashing',
@@ -1184,6 +1321,98 @@ export const GUIDES: Record<string, GuideConfig> = {
       },
     ],
     related: ['/guides/understanding-number-bases'],
+  },
+  'what-is-open-graph': {
+    slug: 'what-is-open-graph',
+    type: 'guide',
+    category: 'devutils',
+    title: 'What is Open Graph?',
+    subtitle: 'Open Graph explained: the four required properties, how Twitter/X cards fall back to og: tags, and why og:image needs to be an absolute URL.',
+    readTime: '4 min read',
+    datePublished: '2026-08-07',
+    dateModified: '2026-08-07',
+    description: 'Learn what the Open Graph protocol is, its four required meta properties, how Twitter Card tags relate to and fall back on Open Graph tags, the 1200×630 image convention, and why link-sharing platforms cache og:image aggressively.',
+    tools: [
+      { name: 'Open Graph Meta Tag Generator', desc: 'Build og: and twitter: meta tags with a live preview of the share card. Import existing tags to edit them.', href: '/tools/og-generator', icon: ICONS.ogCard },
+    ],
+    faqs: [
+      {
+        q: 'Do og: and twitter: tags need different values, or is one enough?',
+        a: [
+          'One set of values is enough in almost every case. X\'s crawler reads twitter: tags first but falls back to the matching og: tag whenever a twitter: one is missing, twitter:title falls back to og:title, twitter:description to og:description, and so on.',
+          'In practice this means writing og:title, og:description, and og:image once covers Facebook, LinkedIn, Slack, Discord, and X together. The only twitter:-only tags worth adding are twitter:card (which has no og: equivalent) and optionally twitter:site / twitter:creator for attribution.',
+        ],
+      },
+      {
+        q: 'What are the four required Open Graph properties?',
+        a: [
+          'og:title, og:type, og:image, and og:url. The spec (ogp.me) technically requires all four for a page to be valid Open Graph, though most platforms will still render a card with some missing, just a worse one.',
+          'og:description and og:site_name are not required but are what actually makes a shared link look complete rather than bare, most sites should set them anyway.',
+        ],
+      },
+      {
+        q: 'Why do Open Graph tags use property= while Twitter tags use name=?',
+        a: [
+          'Open Graph is built on RDFa, a way of embedding structured metadata in HTML, and RDFa attributes use property=, so <meta property="og:title" content="..."> is the correct form, not name="og:title", even though that mistake renders fine in a browser (meta tags are inert HTML either way).',
+          'Twitter Cards predate widespread RDFa adoption on the web and just extended the ordinary HTML <meta name="..." content="..."> pattern instead. Getting the attribute wrong doesn\'t break the page, but some crawlers are strict about parsing the attribute they expect and will silently ignore a tag that uses the wrong one.',
+        ],
+      },
+      {
+        q: 'I updated og:image but the old one still shows when I share the link. Why?',
+        a: [
+          'Link-sharing platforms cache the scraped Open Graph data aggressively, sometimes for days, specifically so a link shared many times doesn\'t re-fetch the page on every share. Editing the tags on your server doesn\'t invalidate that cache automatically.',
+          'Facebook\'s Sharing Debugger and LinkedIn\'s Post Inspector both offer a "scrape again" action that forces a refetch for a given URL, that\'s the fix, not waiting or re-editing the meta tags further.',
+        ],
+      },
+    ],
+    related: [],
+  },
+  'what-is-minification': {
+    slug: 'what-is-minification',
+    type: 'guide',
+    category: 'devutils',
+    title: 'What is Minification?',
+    subtitle: 'Minification explained: what CSS, HTML, and JS minifiers actually remove, why JS shrinks the most, and why source maps matter once you minify.',
+    readTime: '4 min read',
+    datePublished: '2026-08-07',
+    dateModified: '2026-08-07',
+    description: 'Learn what code minification is, what CSS, HTML, and JavaScript minifiers each remove, why JavaScript compresses further than CSS or HTML, and why source maps are necessary once minified code ships to production.',
+    tools: [
+      { name: 'CSS Minifier', desc: 'Compress CSS with lightningcss: a real parser, not a regex pass, so nested selectors and custom properties survive intact.', href: '/tools/css-minifier', icon: ICONS.minifier },
+      { name: 'HTML Minifier', desc: 'Collapse whitespace and strip comments, plus recursively minify embedded <style> and <script> blocks.', href: '/tools/html-minifier', icon: ICONS.minifier },
+      { name: 'JavaScript Minifier', desc: 'Mangle local variable names and strip dead code with terser, an AST-based minifier.', href: '/tools/js-minifier', icon: ICONS.minifier },
+    ],
+    faqs: [
+      {
+        q: 'Does minifying change how my code behaves?',
+        a: [
+          'It shouldn\'t, that\'s the entire point of a real minifier versus a naive one. A parser-based minifier (lightningcss for CSS, terser for JS) builds an actual syntax tree before transforming it, so it only removes or renames things it has proven are safe: unreachable code, redundant whitespace, local variable names that aren\'t part of any public API.',
+          'A regex-based whitespace stripper can\'t make that guarantee, it can corrupt a CSS value containing calc() or a JS string that happens to contain code-like text, since it isn\'t actually parsing the grammar it\'s compressing.',
+        ],
+      },
+      {
+        q: 'Why does JavaScript minify so much more than CSS or HTML?',
+        a: [
+          'Because there\'s more that\'s provably safe to change. CSS and HTML minification is mostly subtractive, whitespace, comments, redundant attributes, with little left to rename since selectors and tag names are meaningful. JavaScript minification adds renaming and restructuring on top: local variable and function names can shrink to a single letter, dead branches can be deleted outright, and constants can be inlined at their use site.',
+          'That combination routinely cuts 30-60% off real-world JS, versus roughly 20-40% for CSS and 10-20% for HTML, where most of the document is content rather than syntax to begin with.',
+        ],
+      },
+      {
+        q: 'Why does my minified JS need a source map?',
+        a: [
+          'Because the transformation is not just whitespace removal, it renames variables and deletes code, so a stack trace or breakpoint in the shipped file no longer corresponds to anything recognizable in your original source. A source map is a lookup table the browser DevTools use to map minified positions back to the real file and line.',
+          'Every major bundler (Vite, webpack, Rollup, esbuild) can emit one automatically alongside its production minification step, that\'s the right place to generate it. A standalone minifier tool is for a quick one-off check, not a replacement for that build step.',
+        ],
+      },
+      {
+        q: 'Is minification the same as compression like gzip or Brotli?',
+        a: [
+          'No, they\'re complementary and both typically run. Minification changes the source text itself (shorter names, no whitespace) before the file is ever sent. gzip/Brotli compression happens at the HTTP layer afterward, finding repeated byte patterns in whatever text it\'s given, minified or not.',
+          'Minifying first still helps even though compression finds repetition on its own: a minified file has fewer bytes for the compressor to work with, and removing unpredictable content like comments and long identifier names is exactly the kind of thing general-purpose compression is worse at collapsing than a dedicated minifier.',
+        ],
+      },
+    ],
+    related: ['/guides/what-is-svg'],
   },
   'what-is-a-token': {
     slug: 'what-is-a-token',

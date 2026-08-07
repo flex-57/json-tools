@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">JavaScript <span class="title-amp">Minifier</span></h1>
         <p class="page-subtitle">Compress JS with variable mangling and dead-code elimination. Client-side, nothing is sent to a server.</p>
+        <NuxtLink to="/guides/what-is-minification" class="guide-link">What is minification? Read our guide →</NuxtLink>
       </div>
       <MinifierSwitch active="js" />
     </div>

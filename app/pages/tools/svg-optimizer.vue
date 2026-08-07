@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">SVG <span class="title-amp">Optimizer</span></h1>
         <p class="page-subtitle">Compress SVG markup with SVGO, entirely in your browser. Paste or drop a .svg file.</p>
+        <NuxtLink to="/guides/what-is-svg" class="guide-link">What is SVG? Read our guide →</NuxtLink>
       </div>
     </div>
 

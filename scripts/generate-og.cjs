@@ -65,6 +65,14 @@ const TOOLS = [
   { slug: 'guide-understanding-color-formats', tag: 'Developer Guide', title: 'HEX, RGB, and\nHSL Explained', subtitle: 'Color formats compared, plus WCAG\ncontrast ratio thresholds.',           size: 64 },
   { slug: 'guide-sql-cheatsheet',              tag: 'Developer Guide', title: 'SQL\nCheatsheet',            subtitle: 'Clause order, joins, filtering,\nand dialect differences.',                  size: 76 },
   { slug: 'guide-encoding-vs-encryption-vs-hashing', tag: 'Developer Guide', title: 'Encoding vs\nEncryption vs Hashing', subtitle: 'What\'s reversible, what needs a key,\nand why Base64 isn\'t encryption.', size: 56 },
+  { slug: 'guide-what-is-toml',              tag: 'Developer Guide', title: 'What is TOML?',                    subtitle: 'Tables, arrays of tables, native dates,\nand why there\'s no null or top-level array.', size: 80 },
+  { slug: 'guide-what-is-a-token',           tag: 'Developer Guide', title: 'What is a Token?',                 subtitle: 'How LLMs split text into tokens with BPE,\nand why it drives cost and context limits.', size: 76 },
+  { slug: 'guide-json-mode-structured-outputs', tag: 'Developer Guide', title: 'JSON Mode &\nStructured Outputs', subtitle: 'Reliable JSON from LLMs: OpenAI, Claude,\nand Gemini compared.', size: 56 },
+  { slug: 'guide-what-is-hmac',              tag: 'Developer Guide', title: 'What is\nHMAC?',                   subtitle: 'The ipad/opad construction, why it resists\nlength-extension attacks, and HS256 in JWTs.', size: 72 },
+  { slug: 'guide-what-is-svg',               tag: 'Developer Guide', title: 'What is SVG?',                     subtitle: 'viewBox, path data, what SVGO actually\nremoves, and converting SVG to JSX.',           size: 80 },
+  { slug: 'guide-what-is-graphql',           tag: 'Developer Guide', title: 'What is\nGraphQL?',                subtitle: 'Queries vs REST, the schema definition\nlanguage, and why over-fetching happens.',       size: 72 },
+  { slug: 'guide-what-is-open-graph',        tag: 'Developer Guide', title: 'What is\nOpen Graph?',             subtitle: 'The four required properties, Twitter/X\nfallback, and why og:image gets cached.',    size: 68 },
+  { slug: 'guide-what-is-minification',      tag: 'Developer Guide', title: 'What is\nMinification?',           subtitle: 'What CSS, HTML, and JS minifiers remove,\nand why JS shrinks the most.',              size: 68 },
 ];
 
 const OUT_DIR = path.join(__dirname, '../public/og');

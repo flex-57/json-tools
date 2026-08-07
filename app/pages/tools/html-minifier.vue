@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">HTML <span class="title-amp">Minifier</span></h1>
         <p class="page-subtitle">Collapse whitespace and minify embedded CSS/JS instantly. Client-side, nothing is sent to a server.</p>
+        <NuxtLink to="/guides/what-is-minification" class="guide-link">What is minification? Read our guide →</NuxtLink>
       </div>
       <MinifierSwitch active="html" />
     </div>

@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">Open Graph <span class="title-amp">Meta Tag</span> Generator</h1>
         <p class="page-subtitle">Build og: and twitter: meta tags with a live preview. Free, no signup, nothing sent to a server.</p>
+        <NuxtLink to="/guides/what-is-open-graph" class="guide-link">What is Open Graph? Read our guide →</NuxtLink>
       </div>
     </div>
 

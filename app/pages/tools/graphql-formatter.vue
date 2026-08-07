@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">GraphQL <span class="title-amp">Formatter</span></h1>
         <p class="page-subtitle">Format GraphQL queries, mutations, fragments and schema definitions instantly.</p>
+        <NuxtLink to="/guides/what-is-graphql" class="guide-link">What is GraphQL? Read our guide →</NuxtLink>
       </div>
     </div>
 

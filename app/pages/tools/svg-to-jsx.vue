@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">SVG to <span class="title-amp">JSX</span></h1>
         <p class="page-subtitle">Turn an SVG file into a React component: className, camelCase props, style objects. Entirely in your browser.</p>
+        <NuxtLink to="/guides/what-is-svg" class="guide-link">What is SVG? Read our guide →</NuxtLink>
       </div>
     </div>
 

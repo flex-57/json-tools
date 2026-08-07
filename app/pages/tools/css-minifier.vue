@@ -4,6 +4,7 @@
       <div>
         <h1 class="page-title">CSS <span class="title-amp">Minifier</span></h1>
         <p class="page-subtitle">Compress CSS instantly with lightningcss. Client-side, nothing is sent to a server.</p>
+        <NuxtLink to="/guides/what-is-minification" class="guide-link">What is minification? Read our guide →</NuxtLink>
       </div>
       <MinifierSwitch active="css" />
     </div>
