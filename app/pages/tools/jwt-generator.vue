@@ -23,7 +23,7 @@
         </div>
       </div>
       <textarea v-model="payload" class="section-textarea" spellcheck="false" rows="6" />
-      <Transition name="status">
+      <Transition name="fade">
         <div v-if="error" class="error-line">{{ error }}</div>
       </Transition>
     </div>

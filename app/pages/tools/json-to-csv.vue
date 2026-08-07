@@ -9,13 +9,15 @@
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
     </div>
 
-    <ErrorBanner
-      v-if="error"
-      :message="errorTip || error"
-      :line="errorLine"
-      :column="errorColumn"
-      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
-    />
+    <Transition name="fade">
+      <ErrorBanner
+        v-if="error"
+        :message="errorTip || error"
+        :line="errorLine"
+        :column="errorColumn"
+        @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+      />
+    </Transition>
 
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
@@ -53,8 +55,10 @@
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" aria-live="polite">
-          <template v-if="!output">{{ error ? 'Fix the error in your input to see CSV output' : 'Paste JSON to see CSV output' }}</template>
-          <textarea v-else v-model="output" readonly class="pane-textarea" spellcheck="false" />
+          <Transition name="reveal" mode="out-in">
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ error ? 'Fix the error in your input to see CSV output' : 'Paste JSON to see CSV output' }}</p>
+            <textarea v-else key="output" v-model="output" readonly class="pane-textarea" spellcheck="false" />
+          </Transition>
         </div>
       </div>
     </div>

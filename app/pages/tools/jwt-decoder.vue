@@ -26,11 +26,11 @@
       </div>
     </div>
 
-    <Transition name="status">
+    <Transition name="fade">
       <div v-if="result.error && result.error !== 'empty'" class="error-bar">{{ result.error }}</div>
     </Transition>
 
-    <Transition name="status">
+    <Transition name="fade">
       <div v-if="result.isExpired !== null" :class="['exp-banner', result.isExpired ? 'exp-banner--expired' : 'exp-banner--valid']">
         <div class="exp-main">
           <span class="exp-dot" />
@@ -211,9 +211,6 @@ function formatDate(d: Date): string {
 .sig-card { grid-column: 1 / -1; background: var(--c-card-alt); border: 1px solid var(--c-border); border-radius: var(--radius-card); padding: 14px 16px; display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
 .sig-text { font-family: var(--font-mono); font-size: 11.5px; color: var(--c-accent); word-break: break-all; flex: 1; min-width: 200px; }
 .sig-note { font-family: var(--font-body); font-size: 12px; color: var(--c-t4); flex-shrink: 0; max-width: 280px; }
-
-.status-enter-active, .status-leave-active { transition: all 0.2s ease; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: translateY(-4px); }
 
 @media (max-width: 768px) { .decoded-grid { grid-template-columns: 1fr; } }
 </style>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildGradientCss, useGradientGenerator, PRESETS } from '../app/composables/useGradientGenerator'
+import { buildGradientCss, useGradientGenerator, GRADIENT_PRESETS } from '../app/composables/useGradientGenerator'
 
 describe('buildGradientCss', () => {
   it('builds a linear gradient', () => {
@@ -68,7 +68,7 @@ describe('useGradientGenerator', () => {
 
   it('applyPreset sets type, angle and stops from the preset', () => {
     const { type, angle, stops, applyPreset } = useGradientGenerator()
-    const preset = PRESETS.find(p => p.type === 'conic')!
+    const preset = GRADIENT_PRESETS.find(p => p.type === 'conic')!
     applyPreset(preset)
     expect(type.value).toBe('conic')
     expect(angle.value).toBe(preset.angle)

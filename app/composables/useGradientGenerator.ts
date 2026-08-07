@@ -17,7 +17,7 @@ export interface GradientPreset {
 
 export const POSITIONS: GradientPosition[] = ['center', 'top', 'bottom', 'left', 'right', 'top left', 'top right', 'bottom left', 'bottom right']
 
-export const PRESETS: GradientPreset[] = [
+export const GRADIENT_PRESETS: GradientPreset[] = [
   { name: 'Sunset', type: 'linear', angle: 90, stops: [{ color: '#ff3d8f', position: 0 }, { color: '#ffb800', position: 100 }] },
   { name: 'Ocean', type: 'linear', angle: 135, stops: [{ color: '#0ea5e9', position: 0 }, { color: '#6366f1', position: 100 }] },
   { name: 'Mint', type: 'linear', angle: 90, stops: [{ color: '#34d399', position: 0 }, { color: '#06b6d4', position: 100 }] },

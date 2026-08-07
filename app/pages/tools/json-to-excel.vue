@@ -8,13 +8,15 @@
       <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" />
     </div>
 
-    <ErrorBanner
-      v-if="error"
-      :message="errorTip || error"
-      :line="errorLine"
-      :column="errorColumn"
-      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
-    />
+    <Transition name="fade">
+      <ErrorBanner
+        v-if="error"
+        :message="errorTip || error"
+        :line="errorLine"
+        :column="errorColumn"
+        @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+      />
+    </Transition>
 
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
@@ -44,17 +46,19 @@
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': preview.length === 0 }" :style="preview.length > 0 ? 'padding: 0;' : ''" aria-live="polite">
-          <div v-if="preview.length > 0" class="table-wrap">
-            <table class="preview-table">
-              <thead><tr><th v-for="col in previewCols" :key="col">{{ col }}</th></tr></thead>
-              <tbody>
-                <tr v-for="(row, i) in preview" :key="i">
-                  <td v-for="col in previewCols" :key="col">{{ row[col] ?? '' }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <template v-else>{{ error ? 'Fix the error in your input to see a preview' : 'Paste JSON to see a preview' }}</template>
+          <Transition name="reveal" mode="out-in">
+            <div v-if="preview.length > 0" key="output" class="table-wrap">
+              <table class="preview-table">
+                <thead><tr><th v-for="col in previewCols" :key="col">{{ col }}</th></tr></thead>
+                <tbody>
+                  <tr v-for="(row, i) in preview" :key="i">
+                    <td v-for="col in previewCols" :key="col">{{ row[col] ?? '' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p v-else key="empty" class="pane-body-placeholder">{{ error ? 'Fix the error in your input to see a preview' : 'Paste JSON to see a preview' }}</p>
+          </Transition>
         </div>
       </div>
     </div>

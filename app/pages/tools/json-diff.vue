@@ -11,15 +11,17 @@
       </button>
     </div>
 
-    <ErrorBanner
-      v-if="result?.error"
-      :message="result.errorTip || result.error"
-      :line="result.errorLine"
-      :column="result.errorColumn"
-      :side-dot="result.errorSide === 'left' ? 'var(--c-error)' : 'var(--c-valid)'"
-      :side-label="result.errorSide === 'left' ? 'Original' : 'Modified'"
-      @jump="onJump"
-    />
+    <Transition name="fade">
+      <ErrorBanner
+        v-if="result?.error"
+        :message="result.errorTip || result.error"
+        :line="result.errorLine"
+        :column="result.errorColumn"
+        :side-dot="result.errorSide === 'left' ? 'var(--c-error)' : 'var(--c-valid)'"
+        :side-label="result.errorSide === 'left' ? 'Original' : 'Modified'"
+        @jump="onJump"
+      />
+    </Transition>
 
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDraggingLeft, 'pane--invalid': result?.errorSide === 'left' }" @dragover.prevent="isDraggingLeft = true" @dragleave="isDraggingLeft = false" @drop.prevent="onDropLeft">
@@ -63,7 +65,7 @@
       </div>
     </div>
 
-    <Transition name="status">
+    <Transition name="reveal">
       <div v-if="result" class="diff-section">
         <StatusBar :class="result.error ? 'error' : result.same ? 'same' : ''">
           <template v-if="result.error">{{ result.errorSide === 'left' ? 'Original' : 'Modified' }} panel is invalid — see details above</template>
@@ -177,7 +179,4 @@ const seoCards = [
 .diff-gutter { width: 34px; min-width: 34px; padding: 4px 6px; text-align: right; font-size: 11px; color: var(--c-t5); user-select: none; }
 .diff-sign { width: 18px; min-width: 18px; text-align: center; font-weight: 700; user-select: none; padding: 4px 0; }
 .diff-content { flex: 1; padding: 4px 14px 4px 6px; white-space: pre; }
-
-.status-enter-active, .status-leave-active { transition: all 0.2s ease; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: translateY(8px); }
 </style>

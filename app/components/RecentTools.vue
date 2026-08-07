@@ -7,11 +7,15 @@
         <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <div v-if="open" class="recent-row">
-      <NuxtLink v-for="t in tools" :key="t.slug" :to="`/tools/${t.slug}`" class="recent-pill">
-        <span class="recent-pill-icon" v-html="toolIcon(t.slug)"/>
-        <span class="recent-pill-name">{{ t.navLabel ?? t.name }}</span>
-      </NuxtLink>
+    <div class="recent-collapse" :aria-hidden="!open">
+      <div class="recent-clip" :inert="!open || null">
+        <div class="recent-row">
+          <NuxtLink v-for="t in tools" :key="t.slug" :to="`/tools/${t.slug}`" class="recent-pill">
+            <span class="recent-pill-icon" v-html="toolIcon(t.slug)"/>
+            <span class="recent-pill-name">{{ t.navLabel ?? t.name }}</span>
+          </NuxtLink>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -34,13 +38,20 @@ const open = ref(props.defaultOpen)
 .recent-chevron { flex-shrink: 0; color: var(--c-t5); transition: transform 0.2s ease, color 0.15s; }
 .recent-chevron--open { transform: rotate(180deg); }
 .recent-toggle:hover .recent-chevron { color: var(--c-t3); }
-.recent-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+/* min-height:0 on the grid item (.recent-clip) lets it shrink to 0 content height,
+   but its own padding would still count toward its box height regardless — so the
+   12px gap lives on .recent-row, nested one level deeper, where overflow:hidden
+   on .recent-clip clips it away along with the rest when collapsed. */
+.recent-collapse { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-reveal) var(--ease-out); }
+.recent-toggle[aria-expanded="true"] ~ .recent-collapse { grid-template-rows: 1fr; }
+.recent-clip { overflow: hidden; min-height: 0; }
+.recent-row { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px; }
 .recent-pill {
   display: flex; align-items: center; gap: 8px; padding: 8px 14px;
   background: var(--c-card); border: 1px solid var(--c-border); border-radius: 20px;
-  text-decoration: none; transition: border-color 0.15s, transform 0.1s;
+  text-decoration: none; transition: border-color var(--dur-fast), transform var(--dur-fast) var(--ease-out);
 }
-.recent-pill:hover { border-color: var(--c-accent); transform: translateY(-1px); }
+.recent-pill:hover { border-color: var(--c-accent); transform: translateY(-2px) scale(1.02); }
 .recent-pill-icon { display: flex; color: var(--c-t3); transition: color 0.15s; }
 .recent-pill:hover .recent-pill-icon { color: var(--c-accent); }
 .recent-pill-name { font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; color: var(--c-t2); white-space: nowrap; transition: color 0.15s; }

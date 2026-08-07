@@ -23,7 +23,10 @@
           <span class="cat-count">— {{ filtered(key).length }} tool{{ filtered(key).length !== 1 ? 's' : '' }} —</span>
         </div>
         <div class="cat-grid">
-          <NuxtLink v-for="t in filtered(key)" :key="t.slug" :to="`/tools/${t.slug}`" class="tool-card">
+          <NuxtLink
+            v-for="(t, i) in filtered(key)" :key="t.slug" :to="`/tools/${t.slug}`" class="tool-card"
+            :style="{ animationDelay: `${Math.min(i * 30, 240)}ms` }"
+          >
             <div class="tool-badge" v-html="toolIcon(t.slug)"/>
             <div>
               <div class="tool-name">{{ t.navLabel ?? t.name }}</div>
@@ -115,7 +118,7 @@ const recentTools = computed(() =>
 <style scoped>
 .home { max-width: var(--container-w); margin: 0 auto; padding: 0 24px 60px; width: 100%; }
 
-.hero { padding: 56px 0 40px; text-align: center; }
+.hero { padding: 56px 0 40px; text-align: center; animation: page-in var(--dur-entrance) var(--ease-spring); }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--c-valid); letter-spacing: 0.1em; margin-bottom: 16px; }
 .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-valid); box-shadow: 0 0 6px rgb(var(--c-valid-rgb) / 0.6); flex-shrink: 0; }
 
@@ -150,9 +153,10 @@ const recentTools = computed(() =>
 
 .tool-card {
   background: var(--c-card); border: 1px solid var(--c-border); border-radius: 9px; padding: 14px;
-  display: flex; gap: 12px; align-items: flex-start; text-decoration: none; transition: border-color 0.15s, transform 0.1s;
+  display: flex; gap: 12px; align-items: flex-start; text-decoration: none; transition: border-color var(--dur-fast), transform var(--dur-fast) var(--ease-out);
+  animation: page-in var(--dur-reveal) var(--ease-spring) backwards;
 }
-.tool-card:hover { border-color: var(--c-accent); transform: translateY(-1px); }
+.tool-card:hover { border-color: var(--c-accent); transform: translateY(-2px) scale(1.02); }
 
 .tool-badge {
   width: 32px; height: 32px; border-radius: 6px; background: var(--c-subtle); border: 1px solid var(--c-border);

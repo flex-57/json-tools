@@ -1,12 +1,15 @@
 <template>
-  <div class="tool-switch">
-    <NuxtLink :to="fromPath" class="switch-option" :class="{ 'switch-option--active': isFrom }">{{ fromLabel }}</NuxtLink>
-    <button class="switch-arrow" title="Switch direction" @click="toggle">
+  <div class="tool-switch-row">
+    <div class="mode-toggle">
+      <div class="mode-indicator" :class="{ 'mode-indicator--right': !isFrom }" />
+      <NuxtLink :to="fromPath" class="mode-btn" :class="{ 'mode-btn--active': isFrom }">{{ fromLabel }}</NuxtLink>
+      <NuxtLink :to="toPath" class="mode-btn" :class="{ 'mode-btn--active': !isFrom }">{{ toLabel }}</NuxtLink>
+    </div>
+    <button class="swap-btn" title="Switch direction" @click="toggle">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path d="M1 4.5h12M10 2l3 2.5L10 7M13 9.5H1M4 7l-3 2.5L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <NuxtLink :to="toPath" class="switch-option" :class="{ 'switch-option--active': !isFrom }">{{ toLabel }}</NuxtLink>
   </div>
 </template>
 
@@ -29,34 +32,5 @@ function toggle() {
 </script>
 
 <style scoped>
-.tool-switch {
-  display: inline-flex;
-  align-items: center;
-  background: var(--c-subtle);
-  border: 1px solid var(--c-border);
-  border-radius: 10px;
-  padding: 3px;
-  gap: 2px;
-}
-
-.switch-option {
-  padding: 5px 14px;
-  border-radius: 7px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--c-t3);
-  text-decoration: none;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.switch-option:hover:not(.switch-option--active) { background: var(--c-faint); color: var(--c-t1); }
-.switch-option--active { background: var(--c-accent); color: var(--c-accent-ink); }
-
-.switch-arrow {
-  display: flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 6px; border: none;
-  background: transparent; color: var(--c-t5); cursor: pointer; transition: all 0.15s; flex-shrink: 0;
-}
-.switch-arrow:hover { background: var(--c-faint); color: var(--c-accent); }
+.tool-switch-row { display: flex; align-items: center; gap: 8px; }
 </style>

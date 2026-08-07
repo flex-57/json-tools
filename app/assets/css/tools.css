@@ -38,6 +38,13 @@
   --radius-card: 12px;
   --container-w: 1536px;
   color-scheme: light;
+
+  --dur-fast:     150ms;  /* hover, micro state flips */
+  --dur-reveal:   250ms;  /* content reveal, toggle/slide */
+  --dur-entrance: 280ms;  /* page/section entrance */
+
+  --ease-out:    ease-out;                          /* opacity-only, or size/layout properties — no overshoot */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* transform-based reveals/toggles — promoted from .mode-indicator */
 }
 
 html.dark {
@@ -75,7 +82,7 @@ html.dark {
 
 /* ── Shared page shell ───────────────────────────────────────────────── */
 @keyframes page-in {
-  from { opacity: 0; transform: translateY(5px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -88,8 +95,32 @@ html.dark {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation: page-in 0.2s ease;
+  animation: page-in var(--dur-entrance) var(--ease-spring);
 }
+
+/* Users who ask for reduced motion get near-instant transitions rather than
+   none: a real 0s duration can make Vue's <Transition> skip its post-leave
+   DOM cleanup, since it reads the computed duration to know when "done" fires. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Loading indicator, not decorative motion — must keep spinning or it reads
+     as a frozen/stuck UI mid-operation. */
+  .spinner {
+    animation: spin 0.8s linear infinite !important;
+  }
+}
+
+/* Route transition (nuxt.config.ts app.pageTransition) — only the leave is
+   styled; the incoming page's own .page/.hero entrance animation supplies
+   100% of the "arriving" motion. Styling route-enter too would double-animate
+   opacity on every navigation. */
+.route-leave-active { transition: opacity var(--dur-fast) var(--ease-out); }
+.route-leave-to { opacity: 0; }
 
 .page-header {
   display: flex;
@@ -154,21 +185,24 @@ html.dark {
   flex-shrink: 0;
 }
 .mode-indicator {
+  --mode-count: 2;
+  --mode-index: 0;
   position: absolute;
   top: 3px; left: 3px; bottom: 3px;
-  width: calc((100% - 6px) / 2);
+  width: calc((100% - 6px) / var(--mode-count));
   background: var(--c-accent);
   border-radius: 6px;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateX(calc(var(--mode-index) * 100%));
+  transition: transform var(--dur-reveal) var(--ease-spring);
 }
-.mode-indicator--right { transform: translateX(100%); }
+.mode-indicator--right { transform: translateX(100%); } /* unchanged — still works, --mode-count defaults to 2 */
 .mode-btn {
   position: relative; z-index: 1;
   flex: 1; min-width: 0;
   border: none; background: transparent;
   font-family: var(--font-body); font-size: 12px; font-weight: 600;
   padding: 6px 16px; border-radius: 6px; cursor: pointer;
-  color: var(--c-t3); white-space: nowrap;
+  color: var(--c-t3); white-space: nowrap; text-decoration: none; text-align: center;
   transition: color 0.15s;
 }
 .mode-btn--active { color: var(--c-accent-ink); }
@@ -188,14 +222,14 @@ html.dark {
 .toggle-input { position: absolute; opacity: 0; width: 0; height: 0; }
 .toggle-track {
   width: 32px; height: 18px; border-radius: 9px;
-  background: var(--c-border-m); transition: background 0.2s;
+  background: var(--c-border-m); transition: background var(--dur-reveal) var(--ease-spring);
   position: relative; flex-shrink: 0;
 }
 .toggle-input:checked + .toggle-track { background: var(--c-accent); }
 .toggle-thumb {
   position: absolute; top: 2px; left: 2px;
   width: 14px; height: 14px; border-radius: 50%;
-  background: var(--c-accent-ink); transition: transform 0.2s;
+  background: var(--c-accent-ink); transition: transform var(--dur-reveal) var(--ease-spring);
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 html.dark .toggle-thumb { background: #fff; }
@@ -215,8 +249,8 @@ html.dark .toggle-thumb { background: #fff; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
 
-.btn-primary { background: var(--c-accent); color: var(--c-accent-ink); border-color: var(--c-accent); }
-.btn-primary:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
+.btn-primary { background: var(--c-accent); color: var(--c-accent-ink); border-color: var(--c-accent); transition: transform var(--dur-fast) var(--ease-out), filter var(--dur-fast); }
+.btn-primary:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-2px) scale(1.02); }
 .btn-primary:active { transform: translateY(0) scale(0.98); }
 
 .btn-secondary { background: var(--c-faint); color: var(--c-t2); border-color: var(--c-border-m); }
@@ -246,8 +280,6 @@ html.dark .toggle-thumb { background: #fff; }
 .status-pill--valid .status-dot   { background: var(--c-valid); box-shadow: 0 0 0 2px rgb(var(--c-valid-rgb) / 0.25); }
 .status-pill--invalid .status-dot { background: var(--c-error); box-shadow: 0 0 0 2px rgb(var(--c-error-rgb) / 0.25); }
 .status-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.status-enter-active, .status-leave-active { transition: all 0.2s ease; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: scale(0.9); }
 
 /* ── Form controls ──────────────────────────────────────────────────── */
 .option-wrap { display: flex; align-items: center; gap: 7px; }
@@ -319,6 +351,11 @@ html.dark .toggle-thumb { background: #fff; }
   padding: 16px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.8; color: var(--c-t2);
 }
 .pane-body--empty { align-items: center; justify-content: center; color: var(--c-t4); }
+.pane-body-placeholder { margin: 0; } /* was a bare text node — now a <p> (Transition needs a single root element), reset the default paragraph margin */
+/* <ClientOnly> doesn't reliably resolve to one root element (Vue warns "non-element
+   root node that cannot be animated" if it's a direct <Transition> child) — wrap it
+   in a stable div and pass the flex sizing through to the skeleton/editor inside. */
+.pane-body-editor-wrap { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .pane-textarea {
   flex: 1; width: 100%; border: none; outline: none; resize: none;
   background: transparent; color: var(--c-t1); font-family: var(--font-mono); font-size: 12.5px; line-height: 1.8;
@@ -448,10 +485,12 @@ html.dark .toggle-thumb { background: #fff; }
 .input-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; }
 .input-header-right { display: flex; align-items: center; gap: 8px; }
 
-.status-enter-active, .status-leave-active { transition: opacity 0.15s, transform 0.15s; }
-.status-enter-from, .status-leave-to { opacity: 0; transform: translateY(-3px); }
-.slide-in-enter-active, .slide-in-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
-.slide-in-enter-from, .slide-in-leave-to { opacity: 0; transform: translateY(6px); }
+/* ── Reveal transitions — canonical, used sitewide for content appearing ── */
+.reveal-enter-active, .reveal-leave-active { transition: opacity var(--dur-reveal) var(--ease-spring), transform var(--dur-reveal) var(--ease-spring); }
+.reveal-enter-from, .reveal-leave-to { opacity: 0; transform: translateY(8px); }
+
+.fade-enter-active, .fade-leave-active { transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(-3px); }
 
 .hash-results { display: flex; flex-direction: column; gap: 8px; }
 .hash-row { display: flex; align-items: center; gap: 12px; background: var(--c-card); border: 1px solid var(--c-border); border-radius: 10px; padding: 12px 16px; }

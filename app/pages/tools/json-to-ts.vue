@@ -18,13 +18,15 @@
       </div>
     </div>
 
-    <ErrorBanner
-      v-if="error"
-      :message="errorTip || error"
-      :line="errorLine"
-      :column="errorColumn"
-      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
-    />
+    <Transition name="fade">
+      <ErrorBanner
+        v-if="error"
+        :message="errorTip || error"
+        :line="errorLine"
+        :column="errorColumn"
+        @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+      />
+    </Transition>
 
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
@@ -79,11 +81,15 @@
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
-          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see the generated code' : 'Paste JSON to see the generated code' }}</template>
-          <ClientOnly v-else>
-            <JsonEditor v-model="output" :readonly="true" lang="typescript" />
-            <template #fallback><EditorSkeleton /></template>
-          </ClientOnly>
+          <Transition name="reveal" mode="out-in">
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see the generated code' : 'Paste JSON to see the generated code' }}</p>
+            <div v-else key="output" class="pane-body-editor-wrap">
+              <ClientOnly>
+                <JsonEditor v-model="output" :readonly="true" lang="typescript" />
+                <template #fallback><EditorSkeleton /></template>
+              </ClientOnly>
+            </div>
+          </Transition>
         </div>
       </div>
     </div>

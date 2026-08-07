@@ -8,7 +8,9 @@
       </div>
     </div>
 
-    <ErrorBanner v-if="error" :message="errorMessage" />
+    <Transition name="fade">
+      <ErrorBanner v-if="error" :message="errorMessage" />
+    </Transition>
 
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">

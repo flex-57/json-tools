@@ -12,16 +12,16 @@
       <div class="input-header">
         <span class="editor-label">Input</span>
         <div class="input-header-right">
-          <Transition name="fade-slot">
+          <Transition name="fade">
             <span v-if="detectedBase" class="detected-badge">{{ detectedBase }}</span>
           </Transition>
-          <Transition name="fade-slot">
+          <Transition name="fade">
             <button v-if="input" class="btn-xs" @click="clear">Clear</button>
           </Transition>
         </div>
       </div>
       <input v-model="input" class="input-field" placeholder="255   or   0xFF   or   0b11111111   or   0o377" spellcheck="false" autocomplete="off" @focus="focused = true" @blur="focused = false" >
-      <Transition name="fade-slot">
+      <Transition name="fade">
         <div v-if="error" class="error-line">{{ error }}</div>
       </Transition>
     </div>
@@ -120,9 +120,6 @@ const seoCards = [
 .result-value--placeholder { color: var(--c-t5); }
 
 .info-strip code { font-family: var(--font-mono); font-size: 11px; background: var(--c-faint); border: 1px solid var(--c-border-s); border-radius: 3px; padding: 0 4px; color: var(--c-t3); }
-
-.fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
-.fade-slot-enter-from, .fade-slot-leave-to { opacity: 0; transform: translateY(-3px); }
 
 @media (max-width: 768px) { .base-badge { min-width: 130px; font-size: 10px; } .result-row { gap: 10px; padding: 10px 12px; } .input-field { font-size: 16px; } }
 </style>

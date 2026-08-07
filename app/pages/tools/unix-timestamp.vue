@@ -19,12 +19,12 @@
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
       </div>
-      <Transition name="status">
+      <Transition name="fade">
         <div v-if="error" class="input-error">{{ error }}</div>
       </Transition>
     </div>
 
-    <Transition name="slide-in">
+    <Transition name="reveal">
       <div v-if="parsed" class="result-card" aria-live="polite">
         <div v-for="row in resultRows" :key="row.key" class="result-row">
           <span class="result-label">{{ row.label }}</span>

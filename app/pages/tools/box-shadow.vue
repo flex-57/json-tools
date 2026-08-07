@@ -44,7 +44,7 @@
           <span class="editor-label">Presets</span>
           <div class="presets-row">
             <button
-              v-for="p in PRESETS" :key="p.name" class="preset-chip"
+              v-for="p in SHADOW_PRESETS" :key="p.name" class="preset-chip"
               :title="p.name" :aria-label="`Use ${p.name} preset`" @click="applyPreset(p)"
             >{{ p.name }}</button>
           </div>
@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBoxShadowGenerator, PRESETS } from '~/composables/useBoxShadowGenerator'
+import { useBoxShadowGenerator, SHADOW_PRESETS } from '~/composables/useBoxShadowGenerator'
 
 useToolSeo(
   'CSS Box-Shadow Generator: Layered Shadows Online',

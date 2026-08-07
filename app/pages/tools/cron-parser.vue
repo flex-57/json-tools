@@ -20,7 +20,7 @@
         <span>minute</span><span>hour</span><span>day</span><span>month</span><span>weekday</span>
       </div>
 
-      <Transition name="status">
+      <Transition name="fade">
         <div v-if="error" class="cron-error">{{ error }}</div>
       </Transition>
 
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <Transition name="slide-in">
+    <Transition name="reveal">
       <div v-if="description && !error" class="result-section" aria-live="polite">
         <div class="desc-card">
           <div class="desc-icon">

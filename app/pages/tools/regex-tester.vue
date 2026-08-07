@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <Transition name="slide-in">
+    <Transition name="reveal">
       <div v-if="matches.length > 0 && input" class="highlight-card">
         <div class="editor-card-header">
           <span class="editor-label">Highlighted</span>
@@ -47,7 +47,7 @@
       </div>
     </Transition>
 
-    <Transition name="slide-in">
+    <Transition name="reveal">
       <div v-if="detailedMatches.length > 0" class="matches-card">
         <div class="editor-card-header"><span class="editor-label">Matches</span></div>
         <div class="matches-body" aria-live="polite">

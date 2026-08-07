@@ -12,7 +12,7 @@
         <span class="editor-label">Input</span>
         <div class="input-header-right">
           <span class="hint">paste or type · or drop a .txt file</span>
-          <Transition name="fade-slot">
+          <Transition name="fade">
             <span v-if="input" class="word-count">{{ wordCount }} word{{ wordCount !== 1 ? 's' : '' }}</span>
           </Transition>
           <button v-if="input" class="btn-clear" @click="clear">Clear</button>
@@ -114,9 +114,6 @@ const seoCards = [
 .case-copy:hover:not(:disabled) { background: var(--c-subtle); border-color: var(--c-border); }
 .case-copy--done { background: rgb(var(--c-valid-rgb) / 0.12); border-color: rgb(var(--c-valid-rgb) / 0.35); color: var(--c-valid); }
 .case-copy:disabled { opacity: 0.35; cursor: not-allowed; }
-
-.fade-slot-enter-active, .fade-slot-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
-.fade-slot-enter-from, .fade-slot-leave-to { opacity: 0; transform: translateY(-3px); }
 
 @media (max-width: 768px) { .case-badge { min-width: 140px; font-size: 10px; } .result-row { gap: 10px; padding: 10px 12px; } }
 </style>

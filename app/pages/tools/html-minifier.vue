@@ -9,18 +9,20 @@
       <MinifierSwitch active="html" />
     </div>
 
-    <ErrorBanner
-      v-if="error"
-      :message="error"
-      :line="errorLine"
-      :column="errorColumn"
-      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
-    />
-    <!-- Non-blocking: the document still minified fine overall, just one or
-         more embedded <script> blocks failed and were left as-is — no
-         line/column here since terser's position is relative to that block's
-         own content, not this document, so a "jump to line" would mislead. -->
-    <ErrorBanner v-else-if="warning" :message="warning" />
+    <Transition name="fade">
+      <ErrorBanner
+        v-if="error"
+        :message="error"
+        :line="errorLine"
+        :column="errorColumn"
+        @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+      />
+      <!-- Non-blocking: the document still minified fine overall, just one or
+           more embedded <script> blocks failed and were left as-is — no
+           line/column here since terser's position is relative to that block's
+           own content, not this document, so a "jump to line" would mislead. -->
+      <ErrorBanner v-else-if="warning" :message="warning" />
+    </Transition>
 
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
@@ -55,11 +57,15 @@
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
-          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see minified output' : 'Paste HTML to see minified output' }}</template>
-          <ClientOnly v-else>
-            <JsonEditor :model-value="output" lang="html" :readonly="true" :line-wrap="true" />
-            <template #fallback><EditorSkeleton /></template>
-          </ClientOnly>
+          <Transition name="reveal" mode="out-in">
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see minified output' : 'Paste HTML to see minified output' }}</p>
+            <div v-else key="output" class="pane-body-editor-wrap">
+              <ClientOnly>
+                <JsonEditor :model-value="output" lang="html" :readonly="true" :line-wrap="true" />
+                <template #fallback><EditorSkeleton /></template>
+              </ClientOnly>
+            </div>
+          </Transition>
         </div>
       </div>
     </div>

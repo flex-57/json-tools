@@ -15,7 +15,7 @@ export interface ShadowPreset {
   layers: Omit<ShadowLayer, 'id'>[]
 }
 
-export const PRESETS: ShadowPreset[] = [
+export const SHADOW_PRESETS: ShadowPreset[] = [
   { name: 'Soft', layers: [{ offsetX: 0, offsetY: 4, blur: 12, spread: 0, color: 'rgba(0, 0, 0, 0.15)', inset: false }] },
   { name: 'Medium', layers: [{ offsetX: 0, offsetY: 8, blur: 20, spread: -4, color: 'rgba(0, 0, 0, 0.25)', inset: false }] },
   { name: 'Hard', layers: [{ offsetX: 6, offsetY: 6, blur: 0, spread: 0, color: 'rgba(0, 0, 0, 0.9)', inset: false }] },
@@ -108,7 +108,7 @@ function makeLayer(l: Omit<ShadowLayer, 'id'>): ShadowLayer {
 }
 
 export function useBoxShadowGenerator() {
-  const layers = ref<ShadowLayer[]>([makeLayer(PRESETS[0]!.layers[0]!)])
+  const layers = ref<ShadowLayer[]>([makeLayer(SHADOW_PRESETS[0]!.layers[0]!)])
   const bgColor = ref('#1c1830')
 
   const css = computed(() => buildBoxShadowCss(layers.value))

@@ -12,13 +12,15 @@
       </div>
     </div>
 
-    <ErrorBanner
-      v-if="error"
-      :message="errorTip || error"
-      :line="errorLine"
-      :column="errorColumn"
-      @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
-    />
+    <Transition name="fade">
+      <ErrorBanner
+        v-if="error"
+        :message="errorTip || error"
+        :line="errorLine"
+        :column="errorColumn"
+        @jump="errorLine && inputEditorRef?.scrollToLine(errorLine)"
+      />
+    </Transition>
 
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">

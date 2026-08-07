@@ -61,7 +61,7 @@
           <span class="editor-label">Presets</span>
           <div class="presets-row">
             <button
-              v-for="p in PRESETS" :key="p.name" class="preset-chip"
+              v-for="p in GRADIENT_PRESETS" :key="p.name" class="preset-chip"
               :style="{ background: buildGradientCss(p.type, p.angle, 'ellipse', 'center', p.stops) }"
               :title="p.name" :aria-label="`Use ${p.name} preset`" @click="applyPreset(p)"
             />
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGradientGenerator, buildGradientCss, PRESETS, POSITIONS, type GradientType } from '~/composables/useGradientGenerator'
+import { useGradientGenerator, buildGradientCss, GRADIENT_PRESETS, POSITIONS, type GradientType } from '~/composables/useGradientGenerator'
 import { useClipboard } from '~/composables/useClipboard'
 
 useToolSeo(
