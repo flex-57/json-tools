@@ -30,6 +30,11 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['hash']" />
+    </section>
   </div>
 </template>
 
@@ -37,10 +42,12 @@
 import { useClipboard } from '../../composables/useClipboard'
 import { computeHashes, HASH_ALGORITHMS } from '~/composables/useHash'
 import type { HashAlgorithm } from '~/composables/useHash'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Hash Generator: MD5, SHA-1, SHA-256, SHA-512 Online',
   'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
+  TOOL_FAQS['hash'],
 )
 
 const input   = ref('Hello, World!')

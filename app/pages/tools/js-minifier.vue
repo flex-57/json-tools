@@ -75,6 +75,11 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['js-minifier']" />
+    </section>
   </div>
 </template>
 
@@ -82,10 +87,12 @@
 import { useJsMinifier } from '~/composables/useMinifier'
 import { fmtBytes } from '~/utils/download'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JavaScript Minifier: Compress & Mangle JS Online Free',
   'Minify JavaScript instantly in your browser with terser. Removes dead code, inlines constants, and renames local variables for the smallest possible output. Free, no data sent to servers.',
+  TOOL_FAQS['js-minifier'],
 )
 
 const { input, output, error, errorLine, errorColumn, loading, copied, result, copy, download, clear } = useJsMinifier()

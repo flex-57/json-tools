@@ -80,6 +80,11 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['html-minifier']" />
+    </section>
   </div>
 </template>
 
@@ -87,10 +92,12 @@
 import { useHtmlMinifier } from '~/composables/useMinifier'
 import { fmtBytes } from '~/utils/download'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'HTML Minifier: Compress HTML Online Free',
   'Minify HTML instantly in your browser. Collapses inter-element whitespace, strips comments, and minifies embedded CSS and JavaScript too. Free, no data sent to servers.',
+  TOOL_FAQS['html-minifier'],
 )
 
 const { input, output, error, errorLine, errorColumn, warning, loading, copied, result, copy, download, clear } = useHtmlMinifier()

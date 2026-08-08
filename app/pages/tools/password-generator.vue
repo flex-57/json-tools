@@ -75,15 +75,22 @@
     </div>
 
     <SeoSection :cards="cards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['password-generator']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useClipboard } from '../../composables/useClipboard'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Password Generator: Secure Random Passwords, Custom Length',
   'Generate strong, random passwords with custom length, uppercase, lowercase, numbers and symbols. Uses crypto.getRandomValues, 100% client-side, nothing sent to servers.',
+  TOOL_FAQS['password-generator'],
 )
 
 const length       = ref(16)

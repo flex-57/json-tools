@@ -49,24 +49,24 @@ export const TOOLS: ToolMeta[] = [
   // Text & Code
   { slug: 'text-case', name: 'Text Case Converter', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer', updatedAt: '2026-07-10' },
   { slug: 'css-minifier', name: 'CSS Minifier', short: 'Compress stylesheets', category: 'textcode', variant: 'transform', updatedAt: '2026-08-08' },
-  { slug: 'html-minifier', name: 'HTML Minifier', short: 'Compress markup', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
-  { slug: 'js-minifier', name: 'JavaScript Minifier', short: 'Compress & mangle', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
+  { slug: 'html-minifier', name: 'HTML Minifier', short: 'Compress markup', category: 'textcode', variant: 'transform', updatedAt: '2026-08-08' },
+  { slug: 'js-minifier', name: 'JavaScript Minifier', short: 'Compress & mangle', category: 'textcode', variant: 'transform', updatedAt: '2026-08-08' },
   { slug: 'svg-optimizer', name: 'SVG Optimizer', short: 'Compress with SVGO', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
   { slug: 'svg-to-jsx', name: 'SVG to JSX', short: 'React component from SVG', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
   { slug: 'sql-formatter', name: 'SQL Formatter', short: 'Readable queries', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
   { slug: 'graphql-formatter', name: 'GraphQL Formatter', short: 'Queries, mutations & SDL', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
-  { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
-  { slug: 'base64', name: 'Base64 Encoder / Decoder', short: 'Binary-to-text conversion', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-07-09' },
+  { slug: 'url-encode', name: 'URL Encoder / Decoder', short: 'Percent-encode components', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-08-08' },
+  { slug: 'base64', name: 'Base64 Encoder / Decoder', short: 'Binary-to-text conversion', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-08-08' },
   { slug: 'string-escape', name: 'String Escaper / Unescaper', short: 'JSON & code string literals', category: 'textcode', variant: 'bidirectional', updatedAt: '2026-08-05' },
   { slug: 'markdown-preview', name: 'Markdown Preview', short: 'Live rendered output', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
 
   // Security
   { slug: 'jwt-decoder', name: 'JWT Decoder', short: 'Inspect claims', category: 'security', variant: 'analyzer', updatedAt: '2026-08-08' },
   { slug: 'jwt-generator', name: 'JWT Generator', short: 'Sign a token', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
-  { slug: 'hash', name: 'Hash Generator', short: 'MD5, SHA-1, SHA-256…', category: 'security', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'hash', name: 'Hash Generator', short: 'MD5, SHA-1, SHA-256…', category: 'security', variant: 'analyzer', updatedAt: '2026-08-08' },
   { slug: 'hmac', name: 'HMAC Generator', short: 'Sign with a secret key', category: 'security', variant: 'generator', updatedAt: '2026-08-07' },
   { slug: 'uuid', name: 'UUID Generator', short: 'v4, v7 & ULID, bulk', category: 'security', variant: 'generator', updatedAt: '2026-08-08' },
-  { slug: 'password-generator', name: 'Password Generator', short: 'Cryptographically secure', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
+  { slug: 'password-generator', name: 'Password Generator', short: 'Cryptographically secure', category: 'security', variant: 'generator', updatedAt: '2026-08-08' },
 
   // Dev Utils
   { slug: 'regex-tester', name: 'Regex Tester', short: 'Live match highlighting', category: 'devutils', variant: 'analyzer', updatedAt: '2026-08-08' },

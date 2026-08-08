@@ -157,4 +157,148 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  'html-minifier': [
+    {
+      q: 'Is my HTML uploaded anywhere to be minified?',
+      a: [
+        'No. Minification runs in your browser through html-minifier-terser. Nothing you paste here is sent to a server.',
+      ],
+    },
+    {
+      q: 'The underlying library doesn\'t report a line number for parse errors. How does this tool show one?',
+      a: [
+        'When the parser gives up, the text it leaves unconsumed is always an exact suffix of your original document. This tool measures how much was consumed before that point to derive the line and column, rather than guessing.',
+      ],
+    },
+    {
+      q: 'My HTML has a broken <script> tag. Why did the rest of the page still minify?',
+      a: [
+        'A broken embedded script doesn\'t fail the whole document: that one block is left unminified and a warning names which script had a problem. The line number in that warning is relative to the script block itself, not the document, since that\'s what the underlying tool reports.',
+      ],
+    },
+    {
+      q: 'The tool seems stuck on a large file. Is it frozen?',
+      a: [
+        'It shouldn\'t hang indefinitely: minification is bounded by an internal timeout, so a rare stall in the embedded CSS/JS minification step surfaces as a clear timeout message instead of leaving the page stuck with no explanation.',
+      ],
+    },
+  ],
+
+  'js-minifier': [
+    {
+      q: 'Is my JavaScript uploaded anywhere to be minified?',
+      a: [
+        'No. Minification runs in your browser through terser. Nothing you paste here is sent to a server.',
+      ],
+    },
+    {
+      q: 'Why does it say "TypeScript is not supported" instead of showing a parse error?',
+      a: [
+        'The tool checks for common TypeScript-only syntax, interface declarations, type aliases, as casts, primitive type annotations, before attempting to minify, and returns a plain message instead of a confusing low-level parser failure. Strip the type annotations first if you need the plain JavaScript minified.',
+      ],
+    },
+    {
+      q: 'Does this handle JSX?',
+      a: [
+        'No, and it\'s detected and rejected the same explicit way as TypeScript. terser only understands plain JavaScript, so run JSX through your build tool\'s transpiler first.',
+      ],
+    },
+    {
+      q: 'How accurate is the line number shown for a JS error here?',
+      a: [
+        'It comes directly from terser\'s own SyntaxError, which carries a real line and column, so it\'s reliable, unlike this site\'s CSS minifier, whose underlying parser doesn\'t expose a position at all.',
+      ],
+    },
+  ],
+
+  base64: [
+    {
+      q: 'Is my data uploaded anywhere to be encoded or decoded?',
+      a: [
+        'No. Both directions run through the browser\'s own btoa/atob functions on this page. Nothing you type or paste is sent anywhere.',
+      ],
+    },
+    {
+      q: 'Does this tool handle emoji or non-English text correctly?',
+      a: [
+        'Yes. Plain btoa() alone breaks on anything outside Latin-1, so this tool wraps it with encodeURIComponent/decodeURIComponent first to correctly round-trip UTF-8 text, emoji included.',
+      ],
+    },
+    {
+      q: 'What does the standard/URL-safe toggle actually change in the output?',
+      a: [
+        'URL-safe replaces + with - and / with _, and strips the trailing = padding, which is what JWTs and query parameters expect. Switching the toggle re-encodes your current input in the other form rather than just relabeling it.',
+      ],
+    },
+    {
+      q: 'Why do I just get "Invalid Base64 input" instead of a specific reason when decoding fails?',
+      a: [
+        'The tool normalizes any decoding failure to that one message rather than surfacing the raw browser error, since the exact wording of that error differs between browsers and isn\'t something you can act on either way.',
+      ],
+    },
+  ],
+
+  'url-encode': [
+    {
+      q: 'Is my text sent anywhere to be encoded or decoded?',
+      a: [
+        'No. Both directions run through the browser\'s own encodeURIComponent/encodeURI functions on this page. Nothing is sent to a server.',
+      ],
+    },
+    {
+      q: 'Why does my output still contain a raw & or = after encoding?',
+      a: [
+        'Check which variant is selected. The "full URI" mode deliberately leaves structural characters like & = ? / intact since they belong to URL syntax; switch to "component" mode to encode a single value that will be placed inside a query parameter.',
+      ],
+    },
+    {
+      q: 'Why do I get "Invalid percent-encoded sequence" when decoding?',
+      a: [
+        'That happens when the input has a % not followed by two valid hex digits, or a truncated multi-byte UTF-8 sequence. The browser\'s decode functions throw on malformed input rather than guessing, and this tool shows that as one consistent message.',
+      ],
+    },
+  ],
+
+  hash: [
+    {
+      q: 'Is my text sent anywhere to compute these hashes?',
+      a: [
+        'No. SHA-1 through SHA-512 run through the browser\'s native Web Crypto API, and MD5 through a small implementation on this page, both entirely client-side.',
+      ],
+    },
+    {
+      q: 'Why does this tool implement MD5 itself instead of using the browser\'s crypto API for it too?',
+      a: [
+        'The Web Crypto API\'s digest() function only supports the SHA family; browsers never shipped native MD5 support. This tool includes a standalone MD5 implementation (RFC 1321) specifically to cover that gap.',
+      ],
+    },
+    {
+      q: 'Are all five hashes computed from the same input at once?',
+      a: [
+        'Yes, every algorithm runs on whatever text is currently in the input box, computed together rather than one at a time, so you can compare them side by side immediately.',
+      ],
+    },
+  ],
+
+  'password-generator': [
+    {
+      q: 'Are these passwords predictable, or could someone reproduce them?',
+      a: [
+        'No. Every character is chosen using crypto.getRandomValues(), the browser\'s cryptographically secure random source, not Math.random() or any seeded algorithm. Nothing generated here is sent anywhere.',
+      ],
+    },
+    {
+      q: 'What does "exclude ambiguous characters" actually remove?',
+      a: [
+        'It strips 0, O, l, 1, and I from whichever character set you\'ve enabled, the characters most likely to be misread when a password is written down or read aloud. It reduces the character set slightly, which the entropy number updates to reflect.',
+      ],
+    },
+    {
+      q: 'Why is there a minimum and maximum length?',
+      a: [
+        'Length is clamped between 4 and 64. Below 4 there isn\'t enough room for a meaningful character mix, and 64 is generous enough for any realistic use while keeping the field predictable to work with.',
+      ],
+    },
+  ],
 }

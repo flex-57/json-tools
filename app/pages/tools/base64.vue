@@ -61,15 +61,22 @@
     <div class="info-strip">No data sent to servers · Unicode supported<span v-if="variant === 'urlsafe'"> · JWT-compatible</span></div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['base64']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useBase64 } from '~/composables/useBase64'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Base64 Encode & Decode Online: Text & File Converter',
   'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
+  TOOL_FAQS['base64'],
 )
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useBase64()

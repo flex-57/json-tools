@@ -60,15 +60,22 @@
     <div class="info-strip">No data sent to servers · {{ variant === 'component' ? 'encodeURIComponent' : 'encodeURI' }}</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['url-encode']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useUrlEncode } from '~/composables/useUrlEncode'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'URL Encode & Decode Online: Percent-Encoding Tool',
   'Percent-encode or decode URL components and full URLs instantly. Supports encodeURIComponent and encodeURI. Free, no data sent to servers.',
+  TOOL_FAQS['url-encode'],
 )
 
 const { mode, variant, input, output, error, copied, copy, clear, swap } = useUrlEncode()
