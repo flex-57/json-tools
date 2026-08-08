@@ -460,6 +460,10 @@ html.dark .toggle-thumb { background: #fff; }
 .guide-inline-link { color: var(--c-accent); text-decoration: none; border-bottom: 1px solid rgb(var(--c-accent-rgb) / 0.3); }
 .guide-inline-link:hover { border-bottom-color: var(--c-accent); }
 
+/* ── Tool page FAQ (mirrors .guide-faq spacing/type, different context) ── */
+.tool-faq { margin-top: 8px; padding-top: 28px; border-top: 1px solid var(--c-border); }
+.tool-faq h2 { font-family: var(--font-display); font-weight: 700; font-size: 18px; text-transform: uppercase; color: var(--c-t1); margin-bottom: 16px; }
+
 .legal-section { margin-bottom: 32px; }
 .legal-section h2 { font-family: var(--font-display); font-size: 17px; font-weight: 700; text-transform: uppercase; color: var(--c-t1); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--c-border); }
 .legal-section p { font-family: var(--font-body); font-size: 14px; color: var(--c-t3); line-height: 1.75; margin-bottom: 10px; }

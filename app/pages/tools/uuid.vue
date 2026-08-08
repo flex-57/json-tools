@@ -66,6 +66,11 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['uuid']" />
+    </section>
   </div>
 </template>
 
@@ -73,10 +78,12 @@
 import { useClipboard } from '../../composables/useClipboard'
 import { generateBatch } from '~/composables/useUuidGen'
 import type { UuidVersion } from '~/composables/useUuidGen'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'UUID Generator: v4, v7 & ULID, Bulk & Free',
   'Generate random UUID v4, time-sortable UUID v7 or ULID identifiers in your browser. Bulk-generate up to 100, choose from standard, uppercase or no-dash formats, copy with one click.',
+  TOOL_FAQS['uuid'],
 )
 
 const VERSIONS = [

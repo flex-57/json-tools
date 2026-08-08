@@ -83,15 +83,22 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['jwt-decoder']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJwtDecoder } from '~/composables/useJwtDecoder'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JWT Decoder Online: Inspect & Decode JWT Tokens Free',
   'Decode and inspect JSON Web Tokens (JWT) instantly. View header, payload and expiration. Free, no data sent to servers.',
+  TOOL_FAQS['jwt-decoder'],
 )
 
 const { token, result, copiedHeader, copiedPayload, copyHeader, copyPayload, clear } = useJwtDecoder()

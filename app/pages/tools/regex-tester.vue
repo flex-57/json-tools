@@ -75,15 +75,22 @@
     </Transition>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['regex-tester']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRegexTester } from '~/composables/useRegexTester'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Regex Tester Online: Test & Debug Regular Expressions',
   'Test regular expressions with live match highlighting, capture group inspection, and flag toggles. Free, no data sent to servers.',
+  TOOL_FAQS['regex-tester'],
 )
 
 const { pattern, flags, input, regexError, matches, highlightedHtml, clear } = useRegexTester()

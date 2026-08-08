@@ -68,15 +68,22 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['xml-to-json']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useXmlToJson } from '~/composables/useXmlJson'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 useToolSeo(
   'XML to JSON Converter Online: Parse & Transform XML Free',
   'Convert XML to JSON instantly in your browser. Preserves attributes (prefixed with @) and nested elements as objects or arrays. Free, no data sent to servers.',
+  TOOL_FAQS['xml-to-json'],
 )
 const { input, output, error, errorLine, errorColumn, copied, copy, download, clear } = useXmlToJson()
 useUrlInput(input)

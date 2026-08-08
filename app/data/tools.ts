@@ -28,14 +28,14 @@ export const CATEGORIES = {
 // and the homepage grid so they never drift apart (see DUAL-PANE-SYSTEM.md).
 export const TOOLS: ToolMeta[] = [
   // JSON
-  { slug: 'json-formatter', name: 'JSON Formatter', short: 'Beautify & validate', category: 'json', variant: 'transform', updatedAt: '2026-07-07' },
+  { slug: 'json-formatter', name: 'JSON Formatter', short: 'Beautify & validate', category: 'json', variant: 'transform', updatedAt: '2026-08-08' },
   { slug: 'json-diff', name: 'JSON Diff', short: 'Compare two documents', category: 'json', variant: 'compare', updatedAt: '2026-07-07' },
   { slug: 'json-tree', name: 'JSON Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer', updatedAt: '2026-07-10' },
 
   // Converters
   { slug: 'csv-to-json', name: 'CSV → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'CSV ↔ JSON', updatedAt: '2026-07-10' },
   { slug: 'json-to-csv', name: 'JSON → CSV', short: 'Flatten to rows', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
-  { slug: 'xml-to-json', name: 'XML → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'XML ↔ JSON', updatedAt: '2026-07-10' },
+  { slug: 'xml-to-json', name: 'XML → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'XML ↔ JSON', updatedAt: '2026-08-08' },
   { slug: 'json-to-xml', name: 'JSON → XML', short: 'Convert structure', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
   { slug: 'yaml-to-json', name: 'YAML → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'YAML ↔ JSON', updatedAt: '2026-07-10' },
   { slug: 'json-to-yaml', name: 'JSON → YAML', short: 'Readable config output', category: 'converters', variant: 'transform', hidden: true, updatedAt: '2026-07-10' },
@@ -48,7 +48,7 @@ export const TOOLS: ToolMeta[] = [
 
   // Text & Code
   { slug: 'text-case', name: 'Text Case Converter', short: 'camelCase → kebab-case', category: 'textcode', variant: 'analyzer', updatedAt: '2026-07-10' },
-  { slug: 'css-minifier', name: 'CSS Minifier', short: 'Compress stylesheets', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
+  { slug: 'css-minifier', name: 'CSS Minifier', short: 'Compress stylesheets', category: 'textcode', variant: 'transform', updatedAt: '2026-08-08' },
   { slug: 'html-minifier', name: 'HTML Minifier', short: 'Compress markup', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
   { slug: 'js-minifier', name: 'JavaScript Minifier', short: 'Compress & mangle', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
   { slug: 'svg-optimizer', name: 'SVG Optimizer', short: 'Compress with SVGO', category: 'textcode', variant: 'transform', updatedAt: '2026-08-07' },
@@ -61,15 +61,15 @@ export const TOOLS: ToolMeta[] = [
   { slug: 'markdown-preview', name: 'Markdown Preview', short: 'Live rendered output', category: 'textcode', variant: 'transform', updatedAt: '2026-07-07' },
 
   // Security
-  { slug: 'jwt-decoder', name: 'JWT Decoder', short: 'Inspect claims', category: 'security', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'jwt-decoder', name: 'JWT Decoder', short: 'Inspect claims', category: 'security', variant: 'analyzer', updatedAt: '2026-08-08' },
   { slug: 'jwt-generator', name: 'JWT Generator', short: 'Sign a token', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
   { slug: 'hash', name: 'Hash Generator', short: 'MD5, SHA-1, SHA-256…', category: 'security', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'hmac', name: 'HMAC Generator', short: 'Sign with a secret key', category: 'security', variant: 'generator', updatedAt: '2026-08-07' },
-  { slug: 'uuid', name: 'UUID Generator', short: 'v4, v7 & ULID, bulk', category: 'security', variant: 'generator', updatedAt: '2026-08-05' },
+  { slug: 'uuid', name: 'UUID Generator', short: 'v4, v7 & ULID, bulk', category: 'security', variant: 'generator', updatedAt: '2026-08-08' },
   { slug: 'password-generator', name: 'Password Generator', short: 'Cryptographically secure', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
 
   // Dev Utils
-  { slug: 'regex-tester', name: 'Regex Tester', short: 'Live match highlighting', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'regex-tester', name: 'Regex Tester', short: 'Live match highlighting', category: 'devutils', variant: 'analyzer', updatedAt: '2026-08-08' },
   { slug: 'cron-parser', name: 'Cron Parser', short: 'Plain-English schedules', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'unix-timestamp', name: 'Unix Timestamp', short: 'Epoch ↔ date', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'number-base', name: 'Number Base Converter', short: 'Binary, octal, hex', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-10' },

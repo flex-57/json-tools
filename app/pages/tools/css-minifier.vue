@@ -75,6 +75,11 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['css-minifier']" />
+    </section>
   </div>
 </template>
 
@@ -82,10 +87,12 @@
 import { useCssMinifier } from '~/composables/useMinifier'
 import { fmtBytes } from '~/utils/download'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'CSS Minifier: Compress CSS Online Free',
   'Minify CSS instantly in your browser with lightningcss. Removes whitespace, comments, and redundant code while keeping nested selectors and custom properties intact. Free, no data sent to servers.',
+  TOOL_FAQS['css-minifier'],
 )
 
 const { input, output, error, errorLine, errorColumn, loading, copied, result, copy, download, clear } = useCssMinifier()

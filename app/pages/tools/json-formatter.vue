@@ -92,16 +92,23 @@
     </StatusBar>
 
     <SeoSection :cards="cards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-formatter']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJsonFormatter } from '~/composables/useJsonFormatter'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JSON Formatter & Validator: Beautify & Validate JSON Online',
   'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
+  TOOL_FAQS['json-formatter'],
 )
 
 const { input, output, error, errorTip, errorLine, errorColumn, isValid, indent, mode, copied, copy, download, clear } = useJsonFormatter()
