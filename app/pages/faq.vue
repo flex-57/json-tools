@@ -91,11 +91,11 @@ const FAQS = [
 
 useSeoMeta({
   title: 'FAQ: Is JSON Tools Free, Safe & Does It Work Offline?',
-  description: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
+  description: 'Answers to common questions about JSON Tools: is it free, is my data safe, which tools are available, do I need an account, and how the tools process data.',
   ogTitle: 'FAQ: Is JSON Tools Free, Safe & Does It Work Offline?',
-  ogDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
+  ogDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, which tools are available, do I need an account, and how the tools process data.',
   twitterTitle: 'FAQ: Is JSON Tools Free, Safe & Does It Work Offline?',
-  twitterDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, what tools are available, and more.',
+  twitterDescription: 'Answers to common questions about JSON Tools: is it free, is my data safe, which tools are available, do I need an account, and how the tools process data.',
   ogImage: 'https://jsontools.space/og/faq.png',
   twitterImage: 'https://jsontools.space/og/faq.png',
 })

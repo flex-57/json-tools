@@ -77,7 +77,7 @@ import { useJsonToToml } from '~/composables/useTomlJson'
 import JsonEditor from '~/components/JsonEditor.vue'
 useToolSeo(
   'JSON to TOML Converter: Export JSON as TOML Config Online',
-  'Convert JSON to TOML instantly. Free online JSON to TOML converter, no data sent to servers.',
+  'Convert JSON to TOML instantly in your browser, generating valid TOML 1.0 output from objects, arrays, and nested tables. Free, no data sent to servers.',
 )
 const { input, output, error, errorLine, errorColumn, copied, copy, download, clear } = useJsonToToml()
 useUrlInput(input)

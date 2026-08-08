@@ -84,9 +84,9 @@ const BASE_URL = 'https://jsontools.space'
 
 useSeoMeta({
   title: 'Developer Guides & Reference — JSON Tools',
-  description: 'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
+  description: 'Concept guides and quick references covering JSON, JWT, Base64, regex, cron expressions, Markdown, YAML, UUIDs, hashing, and more. Clear explanations, no fluff.',
   ogTitle: 'Developer Guides & Reference — JSON Tools',
-  ogDescription: 'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
+  ogDescription: 'Concept guides and quick references covering JSON, JWT, Base64, regex, cron expressions, Markdown, YAML, UUIDs, hashing, and more. Clear explanations, no fluff.',
   ogImage: `${BASE_URL}/og/og-image.png`,
   twitterCard: 'summary_large_image',
   twitterImage: `${BASE_URL}/og/og-image.png`,
@@ -113,7 +113,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: 'Developer Guides & Reference',
-        description: 'Concept guides and quick references for JSON, JWT, Base64, regex, cron, Markdown, YAML and more.',
+        description: 'Concept guides and quick references covering JSON, JWT, Base64, regex, cron expressions, Markdown, YAML, UUIDs, hashing, and more. Clear explanations, no fluff.',
         url: `${BASE_URL}/guides`,
         hasPart: allGuides.map(g => ({
           '@type': 'Article',

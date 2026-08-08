@@ -84,7 +84,7 @@ import { useJsonToYaml } from '~/composables/useYamlJson'
 import JsonEditor from '~/components/JsonEditor.vue'
 useToolSeo(
   'JSON to YAML Converter: Export JSON as YAML Config Online',
-  'Convert JSON to YAML instantly. Free online JSON to YAML converter, no data sent to servers.',
+  'Convert JSON to readable YAML instantly in your browser, with proper indentation for nested objects and arrays. Free, no data sent to servers.',
 )
 const { input, output, error, errorTip, errorLine, errorColumn, indent, copied, copy, download, clear } = useJsonToYaml()
 useUrlInput(input)

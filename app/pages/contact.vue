@@ -51,7 +51,7 @@ const { copied, copy } = useClipboard(() => 'contact@jsontools.space')
 
 useSeoMeta({
   title: 'Contact JSON Tools — Report a Bug or Get in Touch',
-  description: 'Reach out to JSON Tools by email or open a GitHub issue to report a bug or request a new tool.',
+  description: 'Contact JSON Tools by email or GitHub issue to report a bug, request a new tool, or ask a question. Solo-maintained project, replies may take a few days.',
   ogTitle: 'Contact JSON Tools',
   ogDescription: 'Report a bug, request a feature, or just say hi.',
 })

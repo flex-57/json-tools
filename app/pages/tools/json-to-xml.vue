@@ -76,7 +76,7 @@ import { useJsonToXml } from '~/composables/useXmlJson'
 import JsonEditor from '~/components/JsonEditor.vue'
 useToolSeo(
   'JSON to XML Converter: Generate Valid XML from JSON Online',
-  'Convert JSON to XML instantly. Free online JSON to XML converter, no data sent to servers.',
+  'Convert JSON to valid XML instantly in your browser. Object keys become elements, and @-prefixed keys become attributes. Free, no data sent to servers.',
 )
 const { input, output, error, errorTip, errorLine, errorColumn, copied, copy, download, clear } = useJsonToXml()
 useUrlInput(input)
