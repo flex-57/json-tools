@@ -97,7 +97,7 @@
           <span class="preview-col-label">Open Graph card — Facebook, LinkedIn, Slack, Discord, X (large image)</span>
           <div class="og-card">
             <div class="og-card-image">
-              <img v-if="imageUrl && !largeImgError" :src="imageUrl" alt="" referrerpolicy="no-referrer" @error="largeImgError = true" >
+              <img v-if="imageUrl && !largeImgError" :src="imageUrl" alt="Open Graph preview image" referrerpolicy="no-referrer" @error="largeImgError = true" >
               <div v-else class="og-card-image-placeholder">{{ imageUrl ? 'Image not reachable' : 'No image set' }}</div>
             </div>
             <div class="og-card-body">
@@ -112,7 +112,7 @@
           <span class="preview-col-label">X (Twitter) small card — used only when card type is "summary"</span>
           <div class="og-card og-card--small">
             <div class="og-card-thumb">
-              <img v-if="imageUrl && !smallImgError" :src="imageUrl" alt="" referrerpolicy="no-referrer" @error="smallImgError = true" >
+              <img v-if="imageUrl && !smallImgError" :src="imageUrl" alt="X card preview image" referrerpolicy="no-referrer" @error="smallImgError = true" >
               <div v-else class="og-card-image-placeholder">{{ imageUrl ? '✕' : '—' }}</div>
             </div>
             <div class="og-card-body">
