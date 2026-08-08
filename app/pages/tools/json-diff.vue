@@ -88,16 +88,23 @@
     </Transition>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-diff']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJsonDiff } from '~/composables/useJsonDiff'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JSON Diff Tool: Compare & Highlight JSON Differences Online',
   'Compare two JSON objects side by side and see every addition and deletion highlighted. Free, instant, no data sent to servers.',
+  TOOL_FAQS['json-diff'],
 )
 
 const { left, right, result, swap } = useJsonDiff()

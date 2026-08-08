@@ -109,6 +109,11 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-tree']" />
+    </section>
   </div>
 </template>
 
@@ -120,10 +125,12 @@ import JsonEditor from '~/components/JsonEditor.vue'
 import type { TreeNode } from '~/composables/useJsonTree'
 import type { VfNode, VfEdge } from '~/composables/useJsonGraph'
 import type { NodeComponent, NodeTypesObject } from '@vue-flow/core'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JSON Tree Viewer: Interactive Collapsible Tree & Graph',
   'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
+  TOOL_FAQS['json-tree'],
 )
 
 const SAMPLE = `{

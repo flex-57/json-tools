@@ -56,15 +56,22 @@
     <div class="info-strip">Signed using the Web Crypto API. Your secret never leaves the browser</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['jwt-generator']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJwtGenerator } from '~/composables/useJwtGenerator'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JWT Generator: Create Signed JSON Web Tokens Online',
   'Generate signed JSON Web Tokens (JWT) in your browser. Supports HS256, HS384 and HS512. Set custom payload claims, secret key and expiry. Free, secret never sent to servers.',
+  TOOL_FAQS['jwt-generator'],
 )
 
 const { algorithm, payload, secret, token, parts, error, copied, payloadValid, copy, clear, setIatNow, addExp } = useJwtGenerator()

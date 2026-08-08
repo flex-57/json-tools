@@ -37,15 +37,22 @@
     <div class="info-strip">No data sent to servers · OpenAI o200k_base encoding (GPT-4o, o1, o3) · not an official OpenAI count</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['gpt-token-counter']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { countGptTokens } from '~/composables/useGptTokenCounter'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'GPT Token Counter: Count Tokens for GPT-4o & o1 Online',
   'Count tokens for GPT-4o, o1 and o3 prompts instantly using the real o200k_base BPE encoding, entirely in your browser. Free, no data sent to servers.',
+  TOOL_FAQS['gpt-token-counter'],
 )
 
 const input   = ref('')

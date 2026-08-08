@@ -301,4 +301,109 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  'json-diff': [
+    {
+      q: 'Will differences in whitespace or indentation between my two documents show up as changes?',
+      a: [
+        'No. Both sides are re-serialized with the same 2-space indentation before comparing, so only actual differences in the data show up, not how either document happened to be formatted originally.',
+      ],
+    },
+    {
+      q: 'If I just reorder keys without changing any values, will that show as a difference?',
+      a: [
+        'Yes. The comparison works on the two documents as formatted text, line by line, not as a structural match of keys regardless of position, so a key that moved shows as one removed line and one added line even though its value never changed.',
+      ],
+    },
+    {
+      q: 'How does the tool know which side has the error when only one document is invalid?',
+      a: [
+        'Each side is parsed on its own rather than in one combined attempt, so a syntax error is attributed to the exact editor, left or right, where it actually is.',
+      ],
+    },
+  ],
+
+  'json-tree': [
+    {
+      q: 'Why does the tree stop showing everything on a very large file?',
+      a: [
+        'Rendering is capped at 5,000 nodes so an unusually large or flat payload can\'t freeze the tab with tens of thousands of DOM rows. A truncated branch still tracks its real size, so you can see how many items were left out even though they aren\'t all rendered.',
+      ],
+    },
+    {
+      q: 'Does the search box match keys, values, or both?',
+      a: [
+        'Both. A search term matches a node\'s own key name or its value if it\'s a leaf, and a branch counts as matching if anything inside it matches, not only its own key.',
+      ],
+    },
+    {
+      q: 'What does the path shown for a node mean?',
+      a: [
+        'It\'s the route from the root to that node: dot notation for object keys and bracket notation with an index for array items, for example users[0].name.',
+      ],
+    },
+  ],
+
+  'jwt-generator': [
+    {
+      q: 'Is my secret key sent anywhere when I generate a token?',
+      a: [
+        'No. Signing runs through the Web Crypto API\'s native HMAC implementation directly in your browser. The secret and the resulting token never leave the page.',
+      ],
+    },
+    {
+      q: 'Can this generate a token signed with RS256 or another asymmetric algorithm?',
+      a: [
+        'No, only the HMAC family (HS256, HS384, HS512) is supported. Those need just one shared secret this tool can hold entirely client-side; RS256 and similar need a private key pair, a different trust model than typing a secret into a browser tool.',
+      ],
+    },
+    {
+      q: 'What do the "Set iat to now" and "add exp" buttons actually do?',
+      a: [
+        'They edit the payload JSON directly: setting iat to the current Unix timestamp, or adding an exp a chosen number of hours after iat, rather than tracking those as separate fields outside the payload you can see and edit.',
+      ],
+    },
+  ],
+
+  'cron-parser': [
+    {
+      q: 'Does this tool understand shortcuts like @daily or @hourly?',
+      a: [
+        '@yearly, @annually, @monthly, @weekly, @daily, @midnight, and @hourly are all recognized and normalized to their standard 5-field equivalent before parsing; @daily becomes 0 0 * * *.',
+      ],
+    },
+    {
+      q: 'Why did the plain-English description show my job running on more days than I expected?',
+      a: [
+        'When both the day-of-month and day-of-week fields are restricted (neither is *), standard cron treats them as OR, not AND: a match on either field is enough. This tool follows that same rule, which surprises people since it reads like it should require both.',
+      ],
+    },
+    {
+      q: 'How far ahead does the "next executions" preview look?',
+      a: [
+        'Up to 5 upcoming run times, searched minute by minute across a 4-year window. An expression that only matches something further out than that comes back with an empty list rather than searching indefinitely.',
+      ],
+    },
+  ],
+
+  'gpt-token-counter': [
+    {
+      q: 'Is my text sent anywhere to count tokens?',
+      a: [
+        'No. Counting runs through the gpt-tokenizer library, loaded on demand and executed entirely in your browser. Nothing you paste here is transmitted.',
+      ],
+    },
+    {
+      q: 'Will this give the same count as GPT-3.5 or the original GPT-4?',
+      a: [
+        'No. Those models use the older cl100k_base encoding, a different vocabulary that produces different counts for identical text. This tool matches GPT-4o, o1, and o3 specifically, which all use o200k_base.',
+      ],
+    },
+    {
+      q: 'Why is this scoped to OpenAI models only, not Claude or Gemini too?',
+      a: [
+        'Counting those accurately isn\'t possible as a pure browser tool right now, since neither ships an offline JavaScript tokenizer comparable to OpenAI\'s. See our guide on tokens for the full breakdown of what each provider actually offers.',
+      ],
+    },
+  ],
 }

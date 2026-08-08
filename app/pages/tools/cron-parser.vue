@@ -69,15 +69,22 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['cron-parser']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useCronParser } from '~/composables/useCronParser'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Cron Expression Parser: Explain Cron Jobs in Plain English',
   'Parse and validate cron expressions. See the schedule in plain English and preview the next 5 execution dates. Free, client-side, no data sent to servers.',
+  TOOL_FAQS['cron-parser'],
 )
 
 const { expression, error, description, nextExecutions } = useCronParser()

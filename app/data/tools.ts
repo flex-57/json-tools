@@ -29,8 +29,8 @@ export const CATEGORIES = {
 export const TOOLS: ToolMeta[] = [
   // JSON
   { slug: 'json-formatter', name: 'JSON Formatter', short: 'Beautify & validate', category: 'json', variant: 'transform', updatedAt: '2026-08-08' },
-  { slug: 'json-diff', name: 'JSON Diff', short: 'Compare two documents', category: 'json', variant: 'compare', updatedAt: '2026-07-07' },
-  { slug: 'json-tree', name: 'JSON Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer', updatedAt: '2026-07-10' },
+  { slug: 'json-diff', name: 'JSON Diff', short: 'Compare two documents', category: 'json', variant: 'compare', updatedAt: '2026-08-08' },
+  { slug: 'json-tree', name: 'JSON Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer', updatedAt: '2026-08-08' },
 
   // Converters
   { slug: 'csv-to-json', name: 'CSV → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'CSV ↔ JSON', updatedAt: '2026-07-10' },
@@ -62,7 +62,7 @@ export const TOOLS: ToolMeta[] = [
 
   // Security
   { slug: 'jwt-decoder', name: 'JWT Decoder', short: 'Inspect claims', category: 'security', variant: 'analyzer', updatedAt: '2026-08-08' },
-  { slug: 'jwt-generator', name: 'JWT Generator', short: 'Sign a token', category: 'security', variant: 'generator', updatedAt: '2026-07-07' },
+  { slug: 'jwt-generator', name: 'JWT Generator', short: 'Sign a token', category: 'security', variant: 'generator', updatedAt: '2026-08-08' },
   { slug: 'hash', name: 'Hash Generator', short: 'MD5, SHA-1, SHA-256…', category: 'security', variant: 'analyzer', updatedAt: '2026-08-08' },
   { slug: 'hmac', name: 'HMAC Generator', short: 'Sign with a secret key', category: 'security', variant: 'generator', updatedAt: '2026-08-07' },
   { slug: 'uuid', name: 'UUID Generator', short: 'v4, v7 & ULID, bulk', category: 'security', variant: 'generator', updatedAt: '2026-08-08' },
@@ -70,10 +70,10 @@ export const TOOLS: ToolMeta[] = [
 
   // Dev Utils
   { slug: 'regex-tester', name: 'Regex Tester', short: 'Live match highlighting', category: 'devutils', variant: 'analyzer', updatedAt: '2026-08-08' },
-  { slug: 'cron-parser', name: 'Cron Parser', short: 'Plain-English schedules', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
+  { slug: 'cron-parser', name: 'Cron Parser', short: 'Plain-English schedules', category: 'devutils', variant: 'analyzer', updatedAt: '2026-08-08' },
   { slug: 'unix-timestamp', name: 'Unix Timestamp', short: 'Epoch ↔ date', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-07' },
   { slug: 'number-base', name: 'Number Base Converter', short: 'Binary, octal, hex', category: 'devutils', variant: 'analyzer', updatedAt: '2026-07-10' },
-  { slug: 'gpt-token-counter', name: 'GPT Token Counter', short: 'o200k_base BPE tokens', category: 'devutils', variant: 'analyzer', updatedAt: '2026-08-05' },
+  { slug: 'gpt-token-counter', name: 'GPT Token Counter', short: 'o200k_base BPE tokens', category: 'devutils', variant: 'analyzer', updatedAt: '2026-08-08' },
   { slug: 'color', name: 'Color Picker', short: 'HEX / RGB / HSL + contrast', category: 'devutils', variant: 'generator', updatedAt: '2026-07-07' },
   { slug: 'gradient', name: 'CSS Gradient Generator', short: 'Linear, radial, conic', category: 'devutils', variant: 'generator', updatedAt: '2026-07-11' },
   { slug: 'og-generator', name: 'Open Graph Meta Tag Generator', short: 'og: & twitter: tags + preview', category: 'devutils', variant: 'generator', updatedAt: '2026-08-07' },
