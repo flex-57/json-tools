@@ -3,42 +3,197 @@ const path = require('path');
 const fs = require('fs');
 const brand = require('./brand-tokens.cjs');
 
+// Builds the window-body markup for a flat, JSON-object-shaped sample —
+// most tools render one of these. `pairs` is [key, type, value][], type is
+// 's' (quoted string), 'n' (bare number) or 'b' (bare true/false); value is
+// always plain text (HTML-escaped by the caller if it ever contains < > &).
+function J(pairs) {
+  const lines = pairs.map(([k, t, v], i) => {
+    const cls = t === 's' ? 's' : t === 'n' ? 'n' : 'b';
+    const val = t === 's' ? `"${v}"` : v;
+    const comma = i < pairs.length - 1 ? '<span class="p">,</span>' : '';
+    return `  <span class="k">"${k}"</span><span class="p">:</span> <span class="${cls}">${val}</span>${comma}`;
+  });
+  return `<span class="p">{</span>\n${lines.join('\n')}\n<span class="p">}</span>`;
+}
+
 // Note: the default 'og-image' (homepage fallback) is NOT generated here —
 // it has its own richer flagship design, see generate-og-flagship.cjs.
 const TOOLS = [
-  { slug: 'json-formatter',   tag: 'JSON Tool',             title: 'JSON Formatter\n& Validator',    subtitle: 'Format, validate, and minify JSON instantly. No data sent to servers.',           size: 68 },
-  { slug: 'csv-to-json',     tag: 'Converter',              title: 'CSV to JSON\nConverter',         subtitle: 'Convert CSV and TSV files to JSON instantly.',                                    size: 68 },
-  { slug: 'json-to-csv',     tag: 'Converter',              title: 'JSON to CSV\nConverter',         subtitle: 'Export JSON arrays to CSV spreadsheets.',                                        size: 68 },
-  { slug: 'xml-to-json',     tag: 'Converter',              title: 'XML to JSON\nConverter',         subtitle: 'Convert XML documents to clean JSON.',                                           size: 68 },
-  { slug: 'json-to-xml',     tag: 'Converter',              title: 'JSON to XML\nConverter',         subtitle: 'Convert JSON objects to valid XML.',                                             size: 68 },
-  { slug: 'yaml-to-json',    tag: 'Converter',              title: 'YAML to JSON\nConverter',        subtitle: 'Parse YAML files and convert to JSON instantly.',                                 size: 68 },
-  { slug: 'json-to-yaml',    tag: 'Converter',              title: 'JSON to YAML\nConverter',        subtitle: 'Convert JSON to YAML with proper formatting.',                                    size: 68 },
-  { slug: 'excel-to-json',   tag: 'Converter',              title: 'Excel to JSON\nConverter',       subtitle: 'Upload .xlsx files and convert spreadsheet data to JSON.',                        size: 68 },
-  { slug: 'json-to-excel',   tag: 'Converter',              title: 'JSON to Excel\nConverter',       subtitle: 'Export JSON arrays to downloadable Excel spreadsheets.',                          size: 68 },
-  { slug: 'json-diff',       tag: 'JSON Tool',              title: 'JSON Diff',                      subtitle: 'Compare two JSON objects side by side.\nHighlights added, removed, and changed.', size: 80 },
-  { slug: 'json-tree',       tag: 'JSON Tool',              title: 'JSON Tree\nViewer',              subtitle: 'Visualize JSON as an interactive tree or node graph.',                            size: 72 },
-  { slug: 'json-schema',     tag: 'JSON Tool',              title: 'JSON Schema\nGenerator',         subtitle: 'Generate JSON Schema (Draft-07 or 2020-12) from any JSON sample.',               size: 68 },
-  { slug: 'json-to-ts',      tag: 'JSON Tool',              title: 'JSON → TypeScript\n& Zod',       subtitle: 'Generate TypeScript interfaces and Zod schemas from JSON.',                      size: 64 },
-  { slug: 'base64',          tag: 'Encode & Decode',        title: 'Base64\nEncode / Decode',        subtitle: 'Encode text or files to Base64, or decode Base64 strings.',                      size: 68 },
-  { slug: 'url-encode',      tag: 'Encode & Decode',        title: 'URL\nEncode / Decode',           subtitle: 'Encode special characters for URLs or decode percent-encoded strings.',           size: 72 },
-  { slug: 'jwt-decoder',     tag: 'Encode & Decode',        title: 'JWT Decoder',                    subtitle: 'Decode and inspect JWT tokens.\nHeader, payload, and signature.',                 size: 80 },
-  { slug: 'hash',            tag: 'Encode & Decode',        title: 'Hash Generator',                 subtitle: 'Generate MD5, SHA-1, SHA-256, and SHA-512 hashes.',                              size: 72 },
-  { slug: 'regex-tester',      tag: 'Dev Util',               title: 'Regex Tester',                   subtitle: 'Test regular expressions with live match highlighting.',                          size: 80 },
-  { slug: 'markdown-preview',  tag: 'Text & Code',            title: 'Markdown Preview',               subtitle: 'Write or paste Markdown and see\nthe rendered HTML instantly.',                    size: 80 },
-  { slug: 'cron-parser',     tag: 'Dev Util',               title: 'Cron Parser',                    subtitle: 'Parse cron expressions in plain English.\nShows next execution times.',           size: 80 },
-  { slug: 'unix-timestamp',  tag: 'Dev Util',               title: 'Unix Timestamp\nConverter',      subtitle: 'Convert between Unix timestamps and human-readable dates.',                       size: 68 },
-  { slug: 'uuid',            tag: 'Dev Util',               title: 'UUID Generator',                 subtitle: 'Generate random UUID v4 identifiers.\nBulk generation up to 100.',               size: 72 },
-  { slug: 'css-minifier',    tag: 'Dev Util',               title: 'CSS Minifier',                   subtitle: 'Compress CSS with lightningcss, instantly.',                                       size: 84 },
-  { slug: 'html-minifier',   tag: 'Dev Util',               title: 'HTML Minifier',                  subtitle: 'Collapse whitespace, minify embedded CSS/JS too.',                                 size: 80 },
-  { slug: 'js-minifier',     tag: 'Dev Util',               title: 'JavaScript\nMinifier',            subtitle: 'Mangle variables and strip dead code with terser.',                                size: 72 },
-  { slug: 'sql-formatter',      tag: 'Dev Util',   title: 'SQL Formatter',       subtitle: 'Format and beautify SQL queries.\nMySQL, PostgreSQL, SQLite, T-SQL.',              size: 72 },
-  { slug: 'password-generator', tag: 'Security',   title: 'Password Generator',  subtitle: 'Generate strong, random passwords.\nCustom length, symbols, bulk export.',         size: 64 },
-  { slug: 'text-case',         tag: 'Text & Code', title: 'Text Case\nConverter', subtitle: 'Convert between camelCase, snake_case,\nPascalCase, kebab-case, and more.',           size: 68 },
-  { slug: 'number-base',       tag: 'Dev Util',    title: 'Number Base\nConverter', subtitle: 'Convert numbers between binary, octal,\ndecimal, and hexadecimal.',                size: 68 },
-  { slug: 'color',             tag: 'Dev Util',    title: 'Color Picker\n& Converter', subtitle: 'Pick colors and convert between HEX,\nRGB, HSL, and HSV.',                     size: 68 },
-  { slug: 'gradient',          tag: 'Dev Util',    title: 'CSS Gradient\nGenerator',   subtitle: 'Build linear, radial, and conic CSS\ngradients visually. Copy the code.',        size: 68 },
-  { slug: 'jwt-generator',     tag: 'Security',    title: 'JWT Generator',        subtitle: 'Generate signed JWT tokens with custom\npayloads, headers, and algorithms.',         size: 80 },
-  { slug: 'faq',               tag: 'JSON Tools',  title: 'FAQ',                 subtitle: 'Answers about privacy, features, and how\nJSON Tools works.',                          size: 88 },
+  {
+    slug: 'json-formatter', tag: 'JSON Tool', title: 'JSON Formatter\n& Validator', size: 68,
+    subtitle: 'Format, validate, and minify JSON instantly. No data sent to servers.',
+    window: J([['input', 's', '{"a":1,}'], ['error', 's', 'Unexpected token }'], ['line', 'n', '1'], ['tip', 's', 'trailing comma']]),
+  },
+  {
+    slug: 'csv-to-json', tag: 'Converter', title: 'CSV to JSON\nConverter', size: 68,
+    subtitle: 'Convert CSV and TSV files to JSON instantly.',
+    window: J([['delimiter', 's', 'auto'], ['detected', 's', ';'], ['headers', 'b', 'true'], ['rows', 'n', '128']]),
+  },
+  {
+    slug: 'json-to-csv', tag: 'Converter', title: 'JSON to CSV\nConverter', size: 68,
+    subtitle: 'Export JSON arrays to CSV spreadsheets.',
+    window: J([['input', 's', 'array'], ['rows', 'n', '3'], ['delimiter', 's', ',']]),
+  },
+  {
+    slug: 'xml-to-json', tag: 'Converter', title: 'XML to JSON\nConverter', size: 68,
+    subtitle: 'Convert XML documents to clean JSON.',
+    window: J([['@id', 's', '1'], ['name', 's', 'Alice'], ['email', 's', 'alice@example.com']]),
+  },
+  {
+    slug: 'json-to-xml', tag: 'Converter', title: 'JSON to XML\nConverter', size: 68,
+    subtitle: 'Convert JSON objects to valid XML.',
+    window: `<span class="p">&lt;user </span><span class="k">id</span><span class="p">=</span><span class="s">"1"</span><span class="p">&gt;</span>
+  <span class="p">&lt;name&gt;</span>Alice<span class="p">&lt;/name&gt;</span>
+<span class="p">&lt;/user&gt;</span>`,
+  },
+  {
+    slug: 'yaml-to-json', tag: 'Converter', title: 'YAML to JSON\nConverter', size: 68,
+    subtitle: 'Parse YAML files and convert to JSON instantly.',
+    window: J([['name', 's', 'Alice'], ['active', 'b', 'true'], ['role', 's', 'admin']]),
+  },
+  {
+    slug: 'json-to-yaml', tag: 'Converter', title: 'JSON to YAML\nConverter', size: 68,
+    subtitle: 'Convert JSON to YAML with proper formatting.',
+    window: `<span class="k">name</span><span class="p">:</span> <span class="s">Alice</span>
+<span class="k">active</span><span class="p">:</span> <span class="b">true</span>
+<span class="k">tags</span><span class="p">:</span>
+  <span class="p">-</span> <span class="s">api</span>
+  <span class="p">-</span> <span class="s">auth</span>`,
+  },
+  {
+    slug: 'excel-to-json', tag: 'Converter', title: 'Excel to JSON\nConverter', size: 68,
+    subtitle: 'Upload .xlsx files and convert spreadsheet data to JSON.',
+    window: J([['sheet', 's', 'Sheet1'], ['rows', 'n', '240'], ['headers', 'b', 'true']]),
+  },
+  {
+    slug: 'json-to-excel', tag: 'Converter', title: 'JSON to Excel\nConverter', size: 68,
+    subtitle: 'Export JSON arrays to downloadable Excel spreadsheets.',
+    window: J([['rows', 'n', '3'], ['format', 's', 'xlsx'], ['preview', 's', 'first 5 rows']]),
+  },
+  {
+    slug: 'json-diff', tag: 'JSON Tool', title: 'JSON Diff', size: 80,
+    subtitle: 'Compare two JSON objects side by side.\nHighlights added, removed, and changed.',
+    window: J([['added', 'n', '2'], ['removed', 'n', '1'], ['changed', 'n', '3']]),
+  },
+  {
+    slug: 'json-tree', tag: 'JSON Tool', title: 'JSON Tree\nViewer', size: 72,
+    subtitle: 'Visualize JSON as an interactive tree or node graph.',
+    window: J([['nodes', 'n', '428'], ['depth', 'n', '6'], ['search', 's', 'email']]),
+  },
+  {
+    slug: 'json-schema', tag: 'JSON Tool', title: 'JSON Schema\nGenerator', size: 68,
+    subtitle: 'Generate JSON Schema (Draft-07 or 2020-12) from any JSON sample.',
+    window: J([['type', 's', 'object'], ['required', 's', 'id, name'], ['draft', 's', '2020-12']]),
+  },
+  {
+    slug: 'json-to-ts', tag: 'JSON Tool', title: 'JSON → TypeScript\n& Zod', size: 64,
+    subtitle: 'Generate TypeScript interfaces and Zod schemas from JSON.',
+    window: `<span class="k">interface</span> Root {
+  id: <span class="n">number</span>;
+  name: <span class="s">string</span>;
+}`,
+  },
+  {
+    slug: 'base64', tag: 'Encode & Decode', title: 'Base64\nEncode / Decode', size: 68,
+    subtitle: 'Encode text or files to Base64, or decode Base64 strings.',
+    window: J([['input', 's', 'Hello!'], ['encoded', 's', 'SGVsbG8h'], ['urlSafe', 'b', 'false']]),
+  },
+  {
+    slug: 'url-encode', tag: 'Encode & Decode', title: 'URL\nEncode / Decode', size: 72,
+    subtitle: 'Encode special characters for URLs or decode percent-encoded strings.',
+    window: J([['input', 's', 'a b'], ['encoded', 's', 'a%20b'], ['mode', 's', 'component']]),
+  },
+  {
+    slug: 'jwt-decoder', tag: 'Encode & Decode', title: 'JWT Decoder', size: 80,
+    subtitle: 'Decode and inspect JWT tokens.\nHeader, payload, and signature.',
+    window: J([['alg', 's', 'HS256'], ['sub', 's', 'user_123'], ['exp', 'n', '1799999999']]),
+  },
+  {
+    slug: 'hash', tag: 'Encode & Decode', title: 'Hash Generator', size: 72,
+    subtitle: 'Generate MD5, SHA-1, SHA-256, and SHA-512 hashes.',
+    window: J([['input', 's', 'hello world'], ['sha256', 's', '2cf24dba5fb0a3e2...'], ['md5', 's', '5eb63bbbe01eeed0...']]),
+  },
+  {
+    slug: 'regex-tester', tag: 'Dev Util', title: 'Regex Tester', size: 80,
+    subtitle: 'Test regular expressions with live match highlighting.',
+    window: J([['pattern', 's', '\\\\d{3}-\\\\d{4}'], ['flags', 's', 'g'], ['matches', 'n', '4']]),
+  },
+  {
+    slug: 'markdown-preview', tag: 'Text & Code', title: 'Markdown Preview', size: 80,
+    subtitle: 'Write or paste Markdown and see\nthe rendered HTML instantly.',
+    window: `<span class="p">#</span> Heading
+<span class="b">**bold**</span> <span class="s">_italic_</span>
+<span class="p">-</span> list item`,
+  },
+  {
+    slug: 'cron-parser', tag: 'Dev Util', title: 'Cron Parser', size: 80,
+    subtitle: 'Parse cron expressions in plain English.\nShows next execution times.',
+    window: J([['expr', 's', '0 9 * * 1-5'], ['next', 's', 'Mon 09:00'], ['desc', 's', 'weekdays at 9am']]),
+  },
+  {
+    slug: 'unix-timestamp', tag: 'Dev Util', title: 'Unix Timestamp\nConverter', size: 68,
+    subtitle: 'Convert between Unix timestamps and human-readable dates.',
+    window: J([['unix', 'n', '1749649920'], ['iso', 's', '2025-06-11T14:32:00Z'], ['relative', 's', '3 hours ago']]),
+  },
+  {
+    slug: 'uuid', tag: 'Dev Util', title: 'UUID Generator', size: 72,
+    subtitle: 'Generate random UUID v4, time-sortable v7, or ULID identifiers. Bulk generation up to 100.',
+    window: J([['version', 's', 'v7'], ['id', 's', '0190f3a7-2c88-7000-8a21-4e6b9c1f3d02'], ['sortable', 'b', 'true'], ['batch_size', 'n', '100']]),
+  },
+  {
+    slug: 'css-minifier', tag: 'Dev Util', title: 'CSS Minifier', size: 84,
+    subtitle: 'Compress CSS with lightningcss, instantly.',
+    window: J([['before', 's', '2.4 KB'], ['after', 's', '1.1 KB'], ['saved', 's', '54%']]),
+  },
+  {
+    slug: 'html-minifier', tag: 'Dev Util', title: 'HTML Minifier', size: 80,
+    subtitle: 'Collapse whitespace, minify embedded CSS/JS too.',
+    window: J([['before', 's', '18.2 KB'], ['after', 's', '12.6 KB'], ['saved', 's', '31%']]),
+  },
+  {
+    slug: 'js-minifier', tag: 'Dev Util', title: 'JavaScript\nMinifier', size: 72,
+    subtitle: 'Mangle variables and strip dead code with terser.',
+    window: J([['before', 's', '44.8 KB'], ['after', 's', '16.2 KB'], ['mangled', 'b', 'true']]),
+  },
+  {
+    slug: 'sql-formatter', tag: 'Dev Util', title: 'SQL Formatter', size: 72,
+    subtitle: 'Format and beautify SQL queries.\nMySQL, PostgreSQL, SQLite, T-SQL.',
+    window: `<span class="k">SELECT</span> id, name
+<span class="k">FROM</span> users
+<span class="k">WHERE</span> active <span class="p">=</span> <span class="n">1</span>`,
+  },
+  {
+    slug: 'password-generator', tag: 'Security', title: 'Password Generator', size: 64,
+    subtitle: 'Generate strong, random passwords.\nCustom length, symbols, bulk export.',
+    window: J([['length', 'n', '20'], ['entropy', 's', '131 bits'], ['strength', 's', 'strong']]),
+  },
+  {
+    slug: 'text-case', tag: 'Text & Code', title: 'Text Case\nConverter', size: 68,
+    subtitle: 'Convert between camelCase, snake_case,\nPascalCase, kebab-case, and more.',
+    window: J([['camelCase', 's', 'helloWorld'], ['snake_case', 's', 'hello_world'], ['kebab-case', 's', 'hello-world']]),
+  },
+  {
+    slug: 'number-base', tag: 'Dev Util', title: 'Number Base\nConverter', size: 68,
+    subtitle: 'Convert numbers between binary, octal,\ndecimal, and hexadecimal.',
+    window: J([['decimal', 'n', '255'], ['hex', 's', '0xFF'], ['binary', 's', '0b11111111']]),
+  },
+  {
+    slug: 'color', tag: 'Dev Util', title: 'Color Picker\n& Converter', size: 68,
+    subtitle: 'Pick a color visually and convert between HEX, RGB, HSL, and HSB. Check WCAG contrast ratios.',
+    window: J([['hex', 's', '#FF3D8F'], ['rgb', 's', '255, 61, 143'], ['hsl', 's', '336, 100%, 62%'], ['contrast', 's', '4.8:1'], ['wcag_aa', 'b', 'true']]),
+  },
+  {
+    slug: 'gradient', tag: 'Dev Util', title: 'CSS Gradient\nGenerator', size: 68,
+    subtitle: 'Build linear, radial, and conic CSS\ngradients visually. Copy the code.',
+    window: J([['type', 's', 'linear'], ['angle', 'n', '135'], ['stops', 'n', '2']]),
+  },
+  {
+    slug: 'jwt-generator', tag: 'Security', title: 'JWT Generator', size: 80,
+    subtitle: 'Generate signed JWT tokens with custom\npayloads, headers, and algorithms.',
+    window: J([['alg', 's', 'HS256'], ['sub', 's', '123'], ['signed', 'b', 'true']]),
+  },
+  { slug: 'faq', tag: 'JSON Tools', title: 'FAQ', subtitle: 'Answers about privacy, features, and how\nJSON Tools works.', size: 88 },
 
   // Guides
   { slug: 'guide-what-is-json',             tag: 'Developer Guide', title: 'What is JSON?',              subtitle: 'Data types, syntax rules, and why JSON\nbecame the universal API format.',          size: 88 },
@@ -93,12 +248,29 @@ const TEMPLATE = path.join(__dirname, 'og-template.html');
     document.getElementById('logo-mark').innerHTML = svg;
   }, brand.logoMarkSvg);
 
-  for (const tool of TOOLS) {
-    await page.evaluate(({ tag, title, subtitle, size }) => {
+  // Optional CLI filter, e.g. `node scripts/generate-og.cjs uuid color`, to
+  // regenerate just a few images (for previewing a template change) instead
+  // of the full batch.
+  const only = process.argv.slice(2);
+  const toRender = only.length ? TOOLS.filter(t => only.includes(t.slug)) : TOOLS;
+
+  for (const tool of toRender) {
+    await page.evaluate(({ tag, title, subtitle, size, window: win }) => {
       document.getElementById('tag').textContent = tag;
       document.getElementById('title').textContent = title;
       document.getElementById('title').style.setProperty('--title-size', size + 'px');
       document.getElementById('subtitle').textContent = subtitle;
+
+      const contentEl = document.getElementById('content');
+      const windowEl = document.getElementById('window');
+      if (win) {
+        document.getElementById('window-body').innerHTML = win;
+        windowEl.classList.add('window--visible');
+        contentEl.classList.add('content--narrow');
+      } else {
+        windowEl.classList.remove('window--visible');
+        contentEl.classList.remove('content--narrow');
+      }
     }, tool);
 
     await page.waitForTimeout(80);
@@ -109,5 +281,5 @@ const TEMPLATE = path.join(__dirname, 'og-template.html');
   }
 
   await browser.close();
-  console.log(`\nDone — ${TOOLS.length} images saved to public/og/`);
+  console.log(`\nDone — ${toRender.length} images saved to public/og/`);
 })();

@@ -37,6 +37,51 @@ body {
   background: linear-gradient(180deg, #FF3D8F 0%, #C6FF3D 100%);
 }
 
+/* Giant decorative brackets, low-opacity depth layer — same treatment as
+   the flagship homepage OG image (og-flagship-template.html), reused here
+   so every tool card shares the same background texture. */
+.deco {
+  position: absolute;
+  font-family: 'Fragment Mono', monospace;
+  font-weight: 700;
+  color: #FF3D8F;
+  line-height: 1;
+  user-select: none;
+}
+.deco-brace  { top: -160px; right: 60px;  font-size: 620px; opacity: 0.09; }
+.deco-bracket-l { bottom: -210px; left: 360px; font-size: 460px; opacity: 0.08; }
+.deco-bracket-r { top: 120px; right: -60px; font-size: 380px; opacity: 0.1; color: #C6FF3D; }
+
+/* Floating editor window — optional per tool. Hidden unless the render
+   script adds .window--visible and fills #window-body. When visible,
+   .content gets a matching max-width so title/subtitle text doesn't run
+   under it. */
+.window {
+  display: none;
+  position: absolute;
+  top: 210px;
+  right: 68px;
+  width: 460px;
+  background: #100e1c;
+  border: 1px solid #322c50;
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  overflow: hidden;
+  z-index: 2;
+}
+.window--visible { display: block; }
+.window-bar { display: flex; align-items: center; gap: 6px; padding: 11px 14px; background: #0d0b17; border-bottom: 1px solid #26213d; }
+.window-dot { width: 9px; height: 9px; border-radius: 50%; background: #322c50; }
+.window-dot--accent { background: #FF3D8F; }
+.window-body { padding: 18px 20px; font-family: 'Fragment Mono', monospace; font-size: 13px; line-height: 1.85; color: #EFE9F5; white-space: pre; }
+.window-body .k { color: #8b85a3; }
+.window-body .s { color: #9FCB78; }
+.window-body .n { color: #A9ACE8; }
+.window-body .b { color: #E0B75C; }
+.window-body .p { color: #4a4460; }
+.content.content--narrow { max-width: 560px; }
+.content.content--narrow .subtitle { max-width: 560px; }
+
 /* Header */
 .header {
   display: flex;
@@ -143,6 +188,9 @@ body {
 </head>
 <body>
   <div class="bg-dots"></div>
+  <div class="deco deco-brace">{</div>
+  <div class="deco deco-bracket-l">[</div>
+  <div class="deco deco-bracket-r">]</div>
   <div class="accent-bar"></div>
 
   <div class="header">
@@ -150,7 +198,7 @@ body {
     <div class="logo-name">json<em>tools</em></div>
   </div>
 
-  <div class="content">
+  <div class="content" id="content">
     <div class="tag" id="tag">JSON Tool</div>
     <div class="title" id="title" style="--title-size: 72px">JSON Formatter</div>
     <div class="subtitle" id="subtitle">Format, validate, and minify JSON instantly</div>
@@ -163,6 +211,15 @@ body {
       <span class="badge">No Signup</span>
     </div>
     <div class="footer-url">jsontools.space</div>
+  </div>
+
+  <div class="window" id="window">
+    <div class="window-bar">
+      <span class="window-dot"></span>
+      <span class="window-dot"></span>
+      <span class="window-dot window-dot--accent"></span>
+    </div>
+    <div class="window-body" id="window-body"></div>
   </div>
 </body>
 </html>
