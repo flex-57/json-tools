@@ -406,4 +406,166 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  hmac: [
+    {
+      q: 'Why isn\'t HMAC-MD5 offered, when the plain Hash Generator on this site includes MD5?',
+      a: [
+        'Web Crypto\'s subtle.sign only accepts a SHA-family algorithm as the underlying hash for HMAC, there\'s no MD5 option to pass it. The Hash Generator works around that same kind of gap for plain hashing with its own hand-rolled MD5, but repeating that here wasn\'t worth it: none of the schemes HMAC actually gets used for, webhook signatures, AWS SigV4, JWT HS256, ever specify MD5.',
+      ],
+    },
+    {
+      q: 'Does the signature update as I type, or do I need to click a button?',
+      a: [
+        'It updates on its own, about 120ms after you stop typing in either the message or the secret field. There\'s no compute button; the short delay just avoids recalculating four signatures on every keystroke.',
+      ],
+    },
+    {
+      q: 'What does switching between Hex and Base64 actually change?',
+      a: [
+        'Nothing about the signature itself, only how its raw bytes are displayed. Hex is longer but easy to compare character by character; Base64 is shorter and is what most APIs, Stripe and GitHub webhook headers among them, put in the header you\'re checking against.',
+      ],
+    },
+    {
+      q: 'Why do all four signatures stay blank until I fill in both fields?',
+      a: [
+        'An HMAC needs both a message and a secret to mean anything. With either one empty, the tool leaves all four results blank rather than computing a signature against an empty string, which would look valid but wouldn\'t match anything a real client sends.',
+      ],
+    },
+  ],
+
+  'unix-timestamp': [
+    {
+      q: 'How does the tool decide whether a plain number is seconds or milliseconds?',
+      a: [
+        'Anything typed as pure digits (with an optional leading minus) is compared against one cutoff: 1,000,000,000,000. Below it, the number is treated as seconds; at or above it, as milliseconds. That split holds up in practice because a seconds-based timestamp won\'t reach 13 digits until roughly the year 33,658, while a milliseconds-based timestamp for any recent date already exceeds it.',
+      ],
+    },
+    {
+      q: 'What date formats can I type besides a raw number?',
+      a: [
+        'Anything JavaScript\'s own Date constructor can parse. ISO 8601 (2026-06-11T14:32:00Z) parses reliably everywhere, and looser strings like June 11 2026 usually work too. That looser parsing isn\'t governed by a real standard, so an ambiguous format can be read differently across browsers, ISO 8601 or a raw Unix number are the only fully safe bets.',
+      ],
+    },
+    {
+      q: 'Does the "3 hours ago" relative time freeze once it\'s shown, or keep updating?',
+      a: [
+        'It keeps updating on its own: the tool re-evaluates that label every 30 seconds so a tab left open doesn\'t drift out of date, while the timestamp you entered and the other converted fields stay fixed to whatever you typed.',
+      ],
+    },
+    {
+      q: 'Why does the tool accept a negative number as input?',
+      a: [
+        'A negative Unix timestamp is a legitimate date before the epoch, January 1, 1970: -86400 is December 31, 1969. The parser accepts a leading minus sign for exactly that case instead of treating anything below zero as invalid.',
+      ],
+    },
+  ],
+
+  'number-base': [
+    {
+      q: 'What\'s the largest number this converter can handle?',
+      a: [
+        'There\'s no practical limit. Conversion runs on JavaScript\'s BigInt rather than the regular Number type, so it isn\'t capped at the usual 9,007,199,254,740,991 safe-integer boundary, a 100-digit hex value converts exactly, with no precision loss, in every base at once.',
+      ],
+    },
+    {
+      q: 'Does a negative number convert to two\'s complement binary?',
+      a: [
+        'No. The sign is kept separate from the magnitude: -10 converts to -1010 in binary, not the bit pattern two\'s complement would produce in a fixed-width CPU register. If you specifically need two\'s complement for a known bit width, this tool doesn\'t produce that, it\'s a plain sign-and-magnitude conversion.',
+      ],
+    },
+    {
+      q: 'Can I paste a number that already has separators, like 0xFF_A0 or 1 000 000?',
+      a: [
+        'Yes. Underscores and spaces are stripped from the input before it\'s parsed, so a value copied straight out of source code, which often groups digits with underscores, or written with spaced-out thousands, converts without needing to be cleaned up first.',
+      ],
+    },
+    {
+      q: 'The decimal result shows underscores between digits, will that break if I paste it into code?',
+      a: [
+        'No. The underscores are display-only, meant to make a long number easier to read at a glance. The Copy button copies the plain digits with no separators at all.',
+      ],
+    },
+  ],
+
+  'svg-optimizer': [
+    {
+      q: 'Why does an invalid SVG show an exact line and column instead of just an error message?',
+      a: [
+        'SVGO\'s own parser throws its error in a fixed shape, <input>:LINE:COL: reason, whenever it hits malformed XML. This tool reads the position straight out of that error rather than re-parsing to locate it, the same jump-to-line behavior the JSON and XML tools on this site provide from their own parsers.',
+      ],
+    },
+    {
+      q: 'Is my SVG uploaded anywhere to optimize it?',
+      a: [
+        'No. SVGO runs compiled for the browser, and both the optimization and the before/after preview happen entirely in this tab. Nothing you paste or drop here is sent to a server.',
+      ],
+    },
+    {
+      q: 'Why does the optimizer run the file through SVGO twice (multipass)?',
+      a: [
+        'Some SVGO passes create new opportunities for other passes, collapsing a group can expose an attribute another plugin would otherwise leave alone. Multipass reruns the full plugin set until a pass produces no further change, so there\'s no benefit to feeding the output back in for a second round, it\'s already been through that loop.',
+      ],
+    },
+    {
+      q: 'How does this compare to running SVGO through a build plugin like vite-plugin-svgo?',
+      a: [
+        'Same SVGO engine and default plugin set, so the result should be equivalent for identical input. The real difference is when it runs: a build plugin optimizes automatically as part of your bundler pipeline, while this tool is for a one-off file you\'re handling outside that pipeline, dropped into a CMS or design system, for example.',
+      ],
+    },
+  ],
+
+  'svg-to-jsx': [
+    {
+      q: 'Why do some elements come out self-closing (<circle ... />) and others expand across multiple lines?',
+      a: [
+        'It mirrors the source structure. An element with no children, like a typical <circle> or <path>, stays self-closing; an element that actually contains other elements gets expanded onto indented lines matching how it was nested in the original SVG.',
+      ],
+    },
+    {
+      q: 'What happens to a style="..." attribute?',
+      a: [
+        'It\'s converted into a JS object with every key and value written as a quoted string: style="opacity:0.5;fill:red" becomes style={{ "opacity": "0.5", "fill": "red" }}. Numeric-looking values stay quoted too, since React accepts numeric CSS values as strings anyway, and guessing which properties are meant to be unitless numbers isn\'t reliable enough to get right every time.',
+      ],
+    },
+    {
+      q: 'What if an attribute\'s value itself contains a double quote character?',
+      a: [
+        'The converter switches to single quotes for that one attribute instead. If the value contains both a double and a single quote, which neither quoting style can hold safely, it falls back to a JS expression with the value escaped inside, since JSX string attributes, unlike JS string literals, don\'t support backslash escaping.',
+      ],
+    },
+    {
+      q: 'What does turning off "Wrap in component" change in the output?',
+      a: [
+        'You get the bare JSX markup on its own, with no function declaration or return statement around it, meant for pasting directly into an existing component\'s return value rather than as a standalone file.',
+      ],
+    },
+  ],
+
+  color: [
+    {
+      q: 'Does the picker track color as RGB internally, or something else?',
+      a: [
+        'HSB (hue, saturation, brightness) is the source of truth, matching the picker UI directly: the square controls saturation and brightness, the rainbow strip controls hue. Every other format, HEX, RGB, HSL, is derived from that HSB state on the fly rather than stored separately, so editing any one field recalculates all four.',
+      ],
+    },
+    {
+      q: 'Why don\'t the shade swatches match my exact color\'s saturation?',
+      a: [
+        'They\'re generated from a fixed formula: your hue, held at a constant 65% saturation, stepped through HSL lightness values from 95% down to 15%. That produces a consistent, usable tonal ramp regardless of how saturated your starting color is, rather than a literal lighten or darken of your exact HSB values.',
+      ],
+    },
+    {
+      q: 'If I paste a 6-digit HEX or a 3-value RGB into a field, does it keep my current transparency?',
+      a: [
+        'No, it resets to fully opaque. Only the alpha-inclusive forms, 8-digit HEX or a 4-value RGB, HSL, or HSB, carry a transparency value; the shorter forms are read as a request for a fully opaque color.',
+      ],
+    },
+    {
+      q: 'What happens if I type something invalid into one of the format fields?',
+      a: [
+        'Nothing recalculates. An unparseable value stays in that field exactly as typed rather than being reverted or flagged, while the picker, preview, and the other three fields keep showing whatever the last valid color was until you correct it to something the tool can parse.',
+      ],
+    },
+  ],
 }

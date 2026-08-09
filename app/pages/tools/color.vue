@@ -97,15 +97,22 @@
     </div>
 
     <SeoSection :cards="cards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['color']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useClipboard } from '../../composables/useClipboard'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Color Picker & Converter: HEX, RGBA, HSL & Contrast Checker',
   'Visual color picker with alpha/transparency support and instant HEX ↔ RGBA ↔ HSLA ↔ HSBA conversion. Check WCAG contrast ratios (AA/AAA), generate color shades. Free, no signup.',
+  TOOL_FAQS['color'],
 )
 
 const {

@@ -90,6 +90,11 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['svg-optimizer']" />
+    </section>
   </div>
 </template>
 
@@ -97,10 +102,12 @@
 import { useSvgOptimizer } from '~/composables/useSvgOptimizer'
 import { fmtBytes } from '~/utils/download'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'SVG Optimizer: Compress SVG Files Online Free',
   'Optimize and compress SVG markup with SVGO, entirely in your browser. Strips comments, metadata, and redundant precision. Free, no data sent to servers.',
+  TOOL_FAQS['svg-optimizer'],
 )
 
 const { input, output, error, errorLine, errorColumn, originalSize, optimizedSize, savings, removeScripts, copied, copy, download, clear } = useSvgOptimizer()

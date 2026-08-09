@@ -49,15 +49,22 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['number-base']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useNumberBase } from '~/composables/useNumberBase'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Number Base Converter: Binary, Octal, Decimal, Hex',
   'Convert numbers between binary (base 2), octal (base 8), decimal (base 10) and hexadecimal (base 16) instantly. Supports 0x, 0b, 0o prefixes and negative numbers. Free, no data sent to servers.',
+  TOOL_FAQS['number-base'],
 )
 
 const { input, results, error, detectedBase, bitInfo, copiedKey, copy, clear } = useNumberBase()

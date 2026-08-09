@@ -45,6 +45,11 @@
     <div class="info-strip">No data sent to servers · computed via the native Web Crypto API</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['hmac']" />
+    </section>
   </div>
 </template>
 
@@ -52,10 +57,12 @@
 import { useClipboard } from '../../composables/useClipboard'
 import { computeHmacs, HMAC_ALGORITHMS } from '~/composables/useHmac'
 import type { HmacAlgorithm, HmacFormat } from '~/composables/useHmac'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'HMAC Generator: HMAC-SHA256 & SHA-512 Online',
   'Generate HMAC-SHA1, SHA-256, SHA-384 and SHA-512 signatures from a message and secret key, directly in your browser. No data is sent to any server.',
+  TOOL_FAQS['hmac'],
 )
 
 const message = ref('Hello, World!')

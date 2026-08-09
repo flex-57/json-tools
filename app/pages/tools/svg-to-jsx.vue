@@ -65,16 +65,23 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['svg-to-jsx']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useSvgToJsx } from '~/composables/useSvgToJsx'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'SVG to JSX Converter: React Component from SVG',
   'Convert SVG markup into a React component: class becomes className, kebab-case attributes become camelCase, inline style strings become JS objects. Free, 100% client-side.',
+  TOOL_FAQS['svg-to-jsx'],
 )
 
 const { input, componentName, asComponent, output, error, copied, copy, clear } = useSvgToJsx()

@@ -36,15 +36,22 @@
     </Transition>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['unix-timestamp']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useUnixTimestamp } from '~/composables/useUnixTimestamp'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Unix Timestamp Converter: Epoch to Date & Date to Epoch',
   'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds, ISO 8601, UTC, and local time. Free, no data sent to servers.',
+  TOOL_FAQS['unix-timestamp'],
 )
 
 const { input, parsed, error, unix, unixMs, iso, utc, local, relative, copied, setNow, clear, refresh, copyValue } = useUnixTimestamp()
@@ -73,7 +80,7 @@ const seoCards = [
   },
   {
     title: 'Seconds vs milliseconds',
-    text: 'This tool auto-detects: if the number is larger than 10 000 000 000 (13 digits), it\'s treated as milliseconds; otherwise as seconds.',
+    text: 'This tool auto-detects: if the number is larger than 1 000 000 000 000 (13 digits), it\'s treated as milliseconds; otherwise as seconds.',
     table: [
       { label: 'Seconds', value: 'Most Unix systems and APIs, JWT exp/iat claims' },
       { label: 'Milliseconds', value: "JavaScript's Date.now() and most browser APIs" },
