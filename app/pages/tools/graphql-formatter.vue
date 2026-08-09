@@ -48,15 +48,22 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['graphql-formatter']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useGraphqlFormatter } from '~/composables/useGraphqlFormatter'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'GraphQL Formatter: Beautify Queries, Mutations & Schemas',
   'Format GraphQL queries, mutations, fragments, and SDL type definitions instantly in your browser. Uses the reference graphql-js printer. Free, no data sent to servers.',
+  TOOL_FAQS['graphql-formatter'],
 )
 
 const { input, output, error, errorLine, errorColumn, loading, copied, copy, download, clear } = useGraphqlFormatter()

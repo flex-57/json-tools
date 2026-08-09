@@ -61,15 +61,22 @@
     <div class="info-strip">No data sent to servers · JSON / JavaScript string escaping rules</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['string-escape']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useStringEscape } from '~/composables/useStringEscape'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'String Escape / Unescape Online: JSON & Code String Tool',
   'Escape or unescape \\n, \\t, \\", \\\\ and \\uXXXX Unicode sequences for JSON or code string literals. Free, instant, no data sent to servers.',
+  TOOL_FAQS['string-escape'],
 )
 
 const { mode, escapeUnicode, input, output, error, copied, copy, clear, swap } = useStringEscape()

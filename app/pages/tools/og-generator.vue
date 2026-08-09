@@ -134,15 +134,22 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['og-generator']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useOgGenerator } from '~/composables/useOgGenerator'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Open Graph Meta Tag Generator: og: & twitter: Tags Online',
   'Generate Open Graph and Twitter Card meta tags with a live preview of the social share card. Paste existing tags to import them. Free, no data sent to servers.',
+  TOOL_FAQS['og-generator'],
 )
 
 const {

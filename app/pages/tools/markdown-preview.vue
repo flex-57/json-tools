@@ -38,6 +38,11 @@
     <div class="info-strip">Rendered client-side · No data sent to servers</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['markdown-preview']" />
+    </section>
   </div>
 </template>
 
@@ -49,10 +54,12 @@ import { EditorState, Compartment } from '@codemirror/state'
 import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 import { useColorMode } from '~/composables/useColorMode'
 import { useMarkdown } from '~/composables/useMarkdown'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Markdown Preview: Render & Preview Markdown Online Free',
   'Write or paste Markdown and see the rendered HTML preview instantly. Supports CommonMark: headings, code blocks, tables, and more. Free, client-side, no signup.',
+  TOOL_FAQS['markdown-preview'],
 )
 
 const { input, html, copied, copy, clear } = useMarkdown()

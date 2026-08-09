@@ -895,4 +895,166 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  'graphql-formatter': [
+    {
+      q: 'Do comments in my GraphQL document survive formatting?',
+      a: [
+        'No. The reference parser builds an AST from your document and the printer regenerates text from that AST alone; a # comment carries no meaning in GraphQL\'s type system, so it\'s dropped rather than preserved, the same way whitespace and blank lines are also not literally preserved between passes.',
+      ],
+    },
+    {
+      q: 'Can I format a query and a mutation pasted together in the same document?',
+      a: [
+        'Yes, as long as each operation has its own name. GraphQL documents can contain multiple named operation definitions; the formatter prints each one in turn with a blank line separating them, the same as it would if you\'d formatted them one at a time.',
+      ],
+    },
+    {
+      q: 'Why does the arrow briefly spin before the formatted output appears?',
+      a: [
+        'The GraphQL parser and printer are loaded as a separate chunk on first use rather than bundled into the page upfront, and formatting itself waits about 250ms after you stop typing. The spinner covers that brief async gap so the UI doesn\'t look frozen while it works.',
+      ],
+    },
+    {
+      q: 'Does this tool validate that my query matches a real schema, like that a field actually exists?',
+      a: [
+        'No, only syntax is checked. Validating field names, types, and arguments against a schema requires a separate validate() step with an actual GraphQLSchema object, which this tool never loads, only parse and print are used. A syntactically valid query referencing a field that doesn\'t exist anywhere in your real schema will format cleanly with no warning.',
+      ],
+    },
+  ],
+
+  'markdown-preview': [
+    {
+      q: 'When I click "Copy HTML" on a document with a code block, do I get this tool\'s own syntax-highlighted markup or plain HTML?',
+      a: [
+        'Plain, portable HTML. Copy HTML captures the raw output from the Markdown parser before code-block syntax highlighting is applied to the preview, so you get a standard pre/code block with a language- class, not this site\'s internal editor rendering, safe to paste anywhere and re-highlight with your own tooling.',
+      ],
+    },
+    {
+      q: 'What happens to a fenced code block whose language isn\'t recognized, like ```brainfuck?',
+      a: [
+        'It still renders in the code block styling, just without any syntax coloring, rather than erroring or falling back to a default language\'s rules. The recognized language list covers around twenty common languages but isn\'t exhaustive.',
+      ],
+    },
+    {
+      q: 'Why does syntax highlighting for a code block sometimes take a moment to appear right after you paste a large snippet?',
+      a: [
+        'Each language\'s highlighting rules are loaded on demand, only when that language actually shows up in your Markdown, rather than bundling twenty-plus languages into the page upfront. That keeps the initial page load lighter, at the cost of a brief delay the first time a given language appears in your document.',
+      ],
+    },
+    {
+      q: 'Do GitHub-flavored features like task lists (- [ ]) and strikethrough (~~text~~) work?',
+      a: [
+        'Yes, both out of the box. A task list renders as real, disabled checkboxes rather than plain bullet text, and ~~text~~ renders with a proper strikethrough style, matching how GitHub itself displays the same Markdown.',
+      ],
+    },
+  ],
+
+  'og-generator': [
+    {
+      q: 'If I paste my whole <head> section instead of just the meta tags, will the import still work?',
+      a: [
+        'Yes. The import scans for meta tags anywhere in whatever text you paste and ignores everything else, title, script, link tags included, so pasting an entire page source works just as well as pasting only the meta lines.',
+      ],
+    },
+    {
+      q: 'Does importing an existing set of tags clear out fields that aren\'t present in what I pasted?',
+      a: [
+        'No, it only overwrites fields it actually finds. Import a snippet missing og:site_name, for example, and whatever is already in the Site name field stays untouched rather than being cleared, so you can top up a partial set of tags without losing what you\'d already filled in.',
+      ],
+    },
+    {
+      q: 'What happens if I import a twitter:card value this tool\'s dropdown doesn\'t offer, like player or app?',
+      a: [
+        'It\'s still imported as that exact value, even though the dropdown itself only lists summary_large_image and summary. Real Twitter Cards support more types than this generator\'s form covers; importing one of those isn\'t rejected, just not selectable from the dropdown afterward.',
+      ],
+    },
+    {
+      q: 'Does the tool warn me if my title or description is too long for a specific platform?',
+      a: [
+        'No, the character count next to each field is purely informational. Actual truncation limits vary by platform, and by feature within a platform, and change over time, so there\'s no single "too long" threshold this tool could enforce accurately; treat the count as a rough guide, not a validator.',
+      ],
+    },
+  ],
+
+  'sql-formatter': [
+    {
+      q: 'Why doesn\'t the "1 tab" indent option produce an actual tab character?',
+      a: [
+        'It currently doesn\'t: selecting "1 tab" sends a width of 1 to the formatter\'s indent-width setting, which controls how many spaces represent one indent level, not whether a real tab character is used at all. A separate setting the formatter also supports for actual tab characters isn\'t wired up here yet, so "1 tab" currently just means "indent by a single space."',
+      ],
+    },
+    {
+      q: 'Why is a parse error sometimes one clean line and other times an enormous wall of text?',
+      a: [
+        'It depends on what confuses the parser. A dialect mismatch, like backtick-quoted identifiers formatted as PostgreSQL, produces a short, specific message. A structurally broken query, like an unmatched parenthesis, can produce a dump of the parser\'s internal grammar state that runs to tens of thousands of characters. Both are the parser\'s raw error text shown as-is.',
+      ],
+    },
+    {
+      q: 'Why did an obviously incomplete query like "select from where" format without any error?',
+      a: [
+        'The parser only checks that the clauses it recognizes are in a valid arrangement; it doesn\'t require there to be real content between them. select from where round-trips unchanged rather than erroring, the same permissiveness that lets a T-SQL TOP clause pass through silently even when the MySQL dialect is selected instead.',
+      ],
+    },
+    {
+      q: 'Are -- line comments and /* */ block comments preserved when formatting?',
+      a: [
+        'Yes, both are kept in roughly their original position relative to the surrounding SQL, unlike some of the other formatters on this site (GraphQL and TOML, for example) which drop comments entirely when reprinting from a parsed structure.',
+      ],
+    },
+  ],
+
+  'string-escape': [
+    {
+      q: 'Does this tool escape a forward slash / or a single quote \' the way some other JSON tools do?',
+      a: [
+        'Not on the Escape side, neither character needs escaping in JSON or JavaScript, so both pass through unchanged. Unescape does accept \\/ and \\\' if you paste text that has them, since other tools sometimes produce them, this one still reads them correctly even though it never generates them itself.',
+      ],
+    },
+    {
+      q: 'What happens if I try to unescape a JavaScript-only sequence like \\x41 (hex escape)?',
+      a: [
+        'It\'s rejected with "Unrecognized escape sequence". This tool follows JSON\'s escape set (\\n \\r \\t \\b \\f \\" \\\\ and \\uXXXX) plus the handful of extras JavaScript accepts on top of it, not the full range of escapes a JavaScript engine understands, \\xNN hex escapes and octal escapes among them.',
+      ],
+    },
+    {
+      q: 'What happens to a raw control character, like a literal NUL byte, that has no dedicated shorthand like \\n?',
+      a: [
+        'It\'s still escaped automatically, just as a \\uXXXX sequence instead of a named shorthand. Anything below the printable ASCII range gets one of the two treatments, a named escape if one exists, \\uXXXX otherwise, so no control character is ever left as an invisible raw byte in the output.',
+      ],
+    },
+    {
+      q: 'If I type my own text and then click the Escape/Unescape toggle, does my text convert automatically?',
+      a: [
+        'No, only the ⇄ swap button does that. The Escape/Unescape toggle just switches which direction typed input is interpreted in; your text stays exactly as typed and is now read under the new mode, which can produce an error or garbled output if it wasn\'t written for that direction. Use the swap button between the two panels to actually carry the current output over as new input.',
+      ],
+    },
+  ],
+
+  'text-case': [
+    {
+      q: 'Why does an acronym like HTML come out as just "Html" in PascalCase, not staying all-caps?',
+      a: [
+        'Every word is lowercased during splitting, then only its first letter is capitalized when rebuilding a case that needs it, so parseHTMLString correctly splits before and after the acronym but rejoins as ParseHtmlString, not ParseHTMLString. The split point is right, the original all-caps styling of the acronym itself isn\'t carried through to camelCase, PascalCase, or Title Case output.',
+      ],
+    },
+    {
+      q: 'Why does a Python dunder name like __init__ come out as just "init" instead of keeping the double underscores?',
+      a: [
+        'Leading, trailing, and doubled separators collapse to nothing during splitting, the parser is only trying to find word boundaries, not preserve every separator character verbatim. __init__ produces the single word "init", the same result you\'d get from converting plain "init", so the double-underscore convention itself doesn\'t survive a round trip through this tool.',
+      ],
+    },
+    {
+      q: 'Does a number stick to the word next to it, or become its own separate word?',
+      a: [
+        'It sticks to whichever letters it\'s directly adjacent to rather than splitting off on its own: version2Point0 becomes the two words "version2" and "point0", not four separate tokens. Only a lowercase-to-uppercase letter transition creates a new split point; digits don\'t trigger one by themselves.',
+      ],
+    },
+    {
+      q: 'What does "auto-detect" actually mean here, does the tool guess which case I want to convert to?',
+      a: [
+        'No, there\'s nothing to guess on the output side, all nine cases are always generated together regardless of what you paste. "Auto-detect" refers only to correctly splitting whatever mixed format you typed, camelCase, snake_case, spaces, or any combination, into individual words before converting, not to picking one target format for you.',
+      ],
+    },
+  ],
 }

@@ -32,15 +32,22 @@
     <div class="info-strip">Auto-detects camelCase, PascalCase, snake_case, kebab-case, spaces and mixed input</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['text-case']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useTextCase } from '~/composables/useTextCase'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Text Case Converter: camelCase, snake_case, kebab-case & more',
   'Convert text between camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, Title Case and more. Auto-detects input format. Free, instant, no data sent to servers.',
+  TOOL_FAQS['text-case'],
 )
 
 const { input, results, wordCount, copiedKey, copy, clear } = useTextCase()
@@ -76,7 +83,7 @@ const seoCards = [
     title: 'How auto-detection works',
     text: [
       'The converter parses any input format into a sequence of words, then re-formats them into every target case. It splits on spaces, underscores, hyphens, dots, slashes, and colons.',
-      'For camelCase and PascalCase input, it inserts a split point before each uppercase letter following a lowercase one (e.g. "myVariableName" → ["my", "variable", "name"]) and handles acronyms (e.g. "parseHTMLString" → ["parse", "HTML", "string"]). Mixed inputs like "my-Variable_name" are fully supported.',
+      'For camelCase and PascalCase input, it inserts a split point before each uppercase letter following a lowercase one (e.g. "myVariableName" → ["my", "variable", "name"]) and handles acronyms (e.g. "parseHTMLString" splits into "parse", "html", "string" — each case then re-applies its own capitalization). Mixed inputs like "my-Variable_name" are fully supported.',
     ],
   },
   {

@@ -66,15 +66,22 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['sql-formatter']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useSqlFormatter, type SqlDialect } from '~/composables/useSqlFormatter'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'SQL Formatter: Beautify MySQL, PostgreSQL, SQLite & More',
   'Format and beautify SQL queries instantly in your browser. Supports MySQL, PostgreSQL, SQLite, T-SQL (SQL Server), and standard SQL. Choose indent size and keyword case. Free, no data sent to servers.',
+  TOOL_FAQS['sql-formatter'],
 )
 
 const DIALECTS: { value: SqlDialect; label: string }[] = [
