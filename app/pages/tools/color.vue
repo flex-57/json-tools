@@ -33,7 +33,7 @@
         <div class="values-col">
           <div class="value-row">
             <span class="fmt-label">HEX</span>
-            <input v-model="hexInput" class="fmt-input" spellcheck="false" @blur="applyHex(hexInput)" @keydown.enter="applyHex(hexInput)" >
+            <input :value="hexInput" class="fmt-input" spellcheck="false" maxlength="9" @input="onHexInput" @blur="applyHex(hexInput)" @keydown.enter="applyHex(hexInput)" >
             <button class="copy-btn" :class="{ 'copy-btn--done': copied === 'hex' }" @click="doCopy(hexInput, 'hex')">{{ copied === 'hex' ? 'Copied!' : 'Copy' }}</button>
           </div>
 
@@ -75,14 +75,14 @@
           <div class="contrast-row">
             <div class="contrast-field">
               <label class="c-label">Foreground</label>
-              <div class="c-input-row"><div class="c-dot" :style="{ background: contrastFg }" /><input v-model="contrastFg" class="c-hex-input" spellcheck="false" ></div>
+              <div class="c-input-row"><div class="c-dot" :style="{ background: contrastFg }" /><input :value="contrastFg" class="c-hex-input" spellcheck="false" maxlength="9" @input="contrastFg = sanitizeHexInput(($event.target as HTMLInputElement).value)" ></div>
             </div>
             <button class="btn btn-ghost use-current-btn" title="Use current color (opaque) as foreground" @click="contrastFg = currentHex">Use current</button>
           </div>
           <div class="contrast-row">
             <div class="contrast-field">
               <label class="c-label">Background</label>
-              <div class="c-input-row"><div class="c-dot" :style="{ background: contrastBg }" /><input v-model="contrastBg" class="c-hex-input" spellcheck="false" ></div>
+              <div class="c-input-row"><div class="c-dot" :style="{ background: contrastBg }" /><input :value="contrastBg" class="c-hex-input" spellcheck="false" maxlength="9" @input="contrastBg = sanitizeHexInput(($event.target as HTMLInputElement).value)" ></div>
             </div>
             <button class="btn btn-ghost use-current-btn" title="Use current color (opaque) as background" @click="contrastBg = currentHex">Use current</button>
           </div>
@@ -113,6 +113,7 @@
 <script setup lang="ts">
 import { useClipboard } from '../../composables/useClipboard'
 import { TOOL_FAQS } from '~/data/tool-faqs'
+import { sanitizeHexInput } from '~/utils/colorInput'
 
 useToolSeo(
   'Color Picker & Converter: HEX, RGBA, HSL & Contrast Checker',
@@ -127,6 +128,10 @@ const {
   applyHex, applyRgb, applyHsl, applyHsb,
   syncAllInputs,
 } = useColorPicker()
+
+function onHexInput(e: Event) {
+  hexInput.value = sanitizeHexInput((e.target as HTMLInputElement).value)
+}
 
 const pickerEl = ref<HTMLElement | null>(null)
 let draggingPicker = false

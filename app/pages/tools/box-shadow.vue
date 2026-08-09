@@ -16,7 +16,7 @@
         <div class="control-row">
           <span class="control-label">Preview bg</span>
           <input v-model="bgColor" type="color" class="stop-color" aria-label="Preview background color" >
-          <input v-model="bgColor" type="text" class="stop-hex" spellcheck="false" aria-label="Preview background hex" >
+          <input :value="bgColor" type="text" class="stop-hex" spellcheck="false" maxlength="9" aria-label="Preview background hex" @input="bgColor = sanitizeHexInput(($event.target as HTMLInputElement).value)" >
         </div>
 
         <div class="layers-section">
@@ -81,6 +81,7 @@
 <script setup lang="ts">
 import { useBoxShadowGenerator, SHADOW_PRESETS } from '~/composables/useBoxShadowGenerator'
 import { TOOL_FAQS } from '~/data/tool-faqs'
+import { sanitizeHexInput } from '~/utils/colorInput'
 
 useToolSeo(
   'CSS Box-Shadow Generator: Layered Shadows Online',
