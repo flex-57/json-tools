@@ -723,13 +723,13 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       q: 'What happens if my JSON object has more than one top-level key?',
       a: [
-        'Each key becomes its own sibling element with no wrapping root, {"a":1,"b":2} produces <a>1</a><b>2</b> side by side. That\'s technically not well-formed XML, which requires exactly one root element, so wrap your data in a single outer key first if the system receiving it enforces that rule strictly.',
+        'It\'s wrapped in a single <root> element automatically, {"a":1,"b":2} produces <root><a>1</a><b>2</b></root>, rather than emitting each key as its own sibling element with nothing wrapping them, which would not be well-formed XML. A JSON object with exactly one key still becomes its own natural root with no extra wrapper, since that\'s already valid on its own.',
       ],
     },
     {
       q: 'What happens if I paste a top-level JSON array instead of an object?',
       a: [
-        'Each index becomes its own element named after the number itself, [1,2,3] produces <0>1</0><1>2</1><2>3</2>. Element names starting with a digit aren\'t valid XML either, so this output can fail in a strict parser downstream. Wrap the array under a key first, e.g. {"items":[1,2,3]}, to get valid, usable elements.',
+        'It\'s wrapped as <root><item>...</item>...</root>, one <item> per array entry, rather than naming each element after its numeric index, which isn\'t valid XML (an element name can\'t start with a digit). [1,2,3] produces <root><item>1</item><item>2</item><item>3</item></root>.',
       ],
     },
     {
@@ -831,7 +831,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       q: 'What happens if I set the "Name" field to something that isn\'t a valid TypeScript identifier, like one with a space?',
       a: [
-        'It\'s inserted as-is with no validation, so interface My Type { ... } comes out and fails to compile. Property names inside the generated type are checked and automatically quoted if needed, but the root name itself currently isn\'t, stick to a single word or camelCase/PascalCase name.',
+        'It\'s sanitized rather than inserted as-is: spaces and dashes become underscores, other invalid characters are stripped, and a name starting with a digit gets an underscore prefixed onto it. "My Type" becomes My_Type, "123Foo" becomes _123Foo, so the output always compiles even if the exact name isn\'t byte-for-byte what you typed.',
       ],
     },
     {
@@ -979,9 +979,9 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
 
   'sql-formatter': [
     {
-      q: 'Why doesn\'t the "1 tab" indent option produce an actual tab character?',
+      q: 'Does the "1 tab" indent option produce an actual tab character, or just one space?',
       a: [
-        'It currently doesn\'t: selecting "1 tab" sends a width of 1 to the formatter\'s indent-width setting, which controls how many spaces represent one indent level, not whether a real tab character is used at all. A separate setting the formatter also supports for actual tab characters isn\'t wired up here yet, so "1 tab" currently just means "indent by a single space."',
+        'A real tab character. Selecting "1 tab" switches on the formatter\'s separate useTabs setting rather than just sending it an indent width of 1, which alone would only mean "one space per level." Picking 2 or 4 spaces instead leaves useTabs off and uses that number of literal space characters.',
       ],
     },
     {

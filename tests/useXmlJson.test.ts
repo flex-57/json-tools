@@ -49,4 +49,47 @@ describe('jsonToXml', () => {
   it('returns empty error on empty input', () => {
     expect(jsonToXml('').error).toBe('empty')
   })
+
+  it('does not wrap when a single key already gives one natural root', () => {
+    const json = '{"person":{"name":"Alice","age":30}}'
+    const r = jsonToXml(json)
+    expect(r.error).toBeNull()
+    expect(r.output.trim().startsWith('<person>')).toBe(true)
+    expect(r.output).not.toContain('<root>')
+  })
+
+  it('wraps multiple top-level keys in a single root element', () => {
+    const json = '{"a":1,"b":2}'
+    const r = jsonToXml(json)
+    expect(r.error).toBeNull()
+    expect(r.output.trim().startsWith('<root>')).toBe(true)
+    expect(r.output.trim().endsWith('</root>')).toBe(true)
+    expect(r.output).toContain('<a>1</a>')
+    expect(r.output).toContain('<b>2</b>')
+  })
+
+  it('wraps a top-level array under root/item instead of numeric tag names', () => {
+    const json = '[1,2,3]'
+    const r = jsonToXml(json)
+    expect(r.error).toBeNull()
+    expect(r.output).not.toMatch(/<\d/)
+    expect(r.output.trim().startsWith('<root>')).toBe(true)
+    expect(r.output).toContain('<item>1</item>')
+    expect(r.output).toContain('<item>2</item>')
+    expect(r.output).toContain('<item>3</item>')
+  })
+
+  it('wraps a single-key object whose value is directly an array', () => {
+    const json = '{"tags":["a","b"]}'
+    const r = jsonToXml(json)
+    expect(r.error).toBeNull()
+    expect(r.output.trim().startsWith('<root>')).toBe(true)
+    expect(r.output.trim().endsWith('</root>')).toBe(true)
+  })
+
+  it('wraps a bare top-level primitive', () => {
+    const r = jsonToXml('"hello"')
+    expect(r.error).toBeNull()
+    expect(r.output.trim()).toBe('<root>hello</root>')
+  })
 })

@@ -60,6 +60,29 @@ describe('useJsonToTs — TypeScript mode', () => {
     expect(output.value).toContain('interface Root')
   })
 
+  it('sanitizes a root name containing spaces into a valid identifier', () => {
+    const { input, output, rootName } = useJsonToTs()
+    rootName.value = 'My Type'
+    input.value = '{"x":1}'
+    expect(output.value).toContain('interface My_Type')
+    expect(output.value).not.toContain('interface My Type')
+  })
+
+  it('prefixes a root name that starts with a digit', () => {
+    const { input, output, rootName } = useJsonToTs()
+    rootName.value = '123Foo'
+    input.value = '{"x":1}'
+    expect(output.value).toContain('interface _123Foo')
+  })
+
+  it('strips characters that are not valid in a TS identifier', () => {
+    const { input, output, rootName } = useJsonToTs()
+    rootName.value = 'User!!'
+    input.value = '{"x":1}'
+    expect(output.value).toContain('interface User')
+    expect(output.value).not.toContain('User!!')
+  })
+
   it('generates union type for mixed-type array', () => {
     const { input, output } = useJsonToTs()
     input.value = '[1,"two",true]'

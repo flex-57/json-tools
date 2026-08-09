@@ -105,6 +105,17 @@ function zodObject(obj: JsonObj, depth: number): string {
   return `z.object({\n${fields.join('\n')}\n${closePad}})`
 }
 
+// Property keys already get quoted when invalid (see safeName above), but a
+// type/interface/const name has no such escape hatch in TS syntax, so it has
+// to actually be sanitized into a valid identifier rather than quoted.
+function sanitizeTsIdentifier(name: string): string {
+  const cleaned = name
+    .replace(/[\s-]+/g, '_')
+    .replace(/[^a-zA-Z0-9_$]/g, '')
+  if (!cleaned) return 'Root'
+  return /^[a-zA-Z_$]/.test(cleaned) ? cleaned : `_${cleaned}`
+}
+
 const SAMPLE_JSON = `{
   "id": 1,
   "name": "Alice Martin",
@@ -140,7 +151,7 @@ export function useJsonToTs() {
   const output = computed((): string => {
     const val = parsed.value
     if (val === undefined) return ''
-    const name = rootName.value.trim() || 'Root'
+    const name = sanitizeTsIdentifier(rootName.value.trim())
 
     if (mode.value === 'ts') {
       const opts: TsOpts = { readonly: readonlyFields.value, useType: useType.value }
