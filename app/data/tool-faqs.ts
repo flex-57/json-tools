@@ -718,4 +718,79 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  'json-to-xml': [
+    {
+      q: 'What happens if my JSON object has more than one top-level key?',
+      a: [
+        'Each key becomes its own sibling element with no wrapping root, {"a":1,"b":2} produces <a>1</a><b>2</b> side by side. That\'s technically not well-formed XML, which requires exactly one root element, so wrap your data in a single outer key first if the system receiving it enforces that rule strictly.',
+      ],
+    },
+    {
+      q: 'What happens if I paste a top-level JSON array instead of an object?',
+      a: [
+        'Each index becomes its own element named after the number itself, [1,2,3] produces <0>1</0><1>2</1><2>3</2>. Element names starting with a digit aren\'t valid XML either, so this output can fail in a strict parser downstream. Wrap the array under a key first, e.g. {"items":[1,2,3]}, to get valid, usable elements.',
+      ],
+    },
+    {
+      q: 'How do I make a key become an XML attribute instead of a child element?',
+      a: [
+        'Prefix it with @, the same convention this site\'s XML → JSON converter uses in reverse: {"user":{"@id":1,"name":"Alice"}} produces <user id="1"><name>Alice</name></user>.',
+      ],
+    },
+    {
+      q: 'Do special characters like & or < in my JSON strings need to be escaped manually first?',
+      a: [
+        'No. Text content is escaped automatically to the XML entities a parser expects, & becomes &amp;, < becomes &lt;, and so on, so a string like "Tom & Jerry" comes out safely without you having to touch it.',
+      ],
+    },
+  ],
+
+  'yaml-to-json': [
+    {
+      q: 'Does this tool have the "Norway problem" our YAML guide describes, where a country code like NO gets misread as false?',
+      a: [
+        'No. js-yaml, the library behind this converter, only treats true and false as booleans by default, yes, no, on, and off are all left as plain strings. A country code "NO" converts to the string "NO" here, not the boolean false, unlike the older YAML 1.1 parsers the guide\'s warning is really about.',
+      ],
+    },
+    {
+      q: 'Why does the error banner give an exact line and column for badly indented YAML?',
+      a: [
+        'The parser throws a structured error carrying the exact position where it lost track of the document, rather than just a text message. This tool reads that position directly instead of guessing it from the text, the same reasoning behind the line/column reporting on the JSON and XML tools on this site.',
+      ],
+    },
+    {
+      q: 'Why does the converter error on a Kubernetes manifest or other file with multiple YAML documents separated by ---?',
+      a: [
+        'This tool parses exactly one YAML document at a time. A single leading --- at the top of a file is fine and won\'t trigger this, but two or more --- separated documents in one file raise "expected a single document in the stream" instead of converting just the first one. Split a multi-document file into individual documents and convert each one separately.',
+      ],
+    },
+    {
+      q: 'Why did an unquoted version number like 1.20 come out as 1.2 in the JSON?',
+      a: [
+        'YAML parses an unquoted 1.20 as the floating-point number 1.2, the trailing zero has no meaning to a number and is dropped, the same way it would be if you typed 1.20 into any calculator. This is a real, common gotcha with version-like values (a Docker tag, a Kubernetes minor version), quote the value in the source YAML, "1.20", if it needs to survive as text.',
+      ],
+    },
+  ],
+
+  'json-to-yaml': [
+    {
+      q: 'Why does a value like "yes" or the country code "NO" come out quoted in the YAML, even though this site\'s own YAML → JSON converter wouldn\'t misread them as booleans?',
+      a: [
+        'This direction quotes defensively for compatibility with stricter or older YAML parsers elsewhere, Python\'s PyYAML and Go\'s gopkg.in/yaml.v2 among them, which do still read yes, no, on, and off as booleans under YAML 1.1 rules. Quoting here protects your data even if it ends up read by a parser more permissive than this site\'s own.',
+      ],
+    },
+    {
+      q: 'Why does a long string value stay on one line instead of wrapping like some YAML output does?',
+      a: [
+        'Line wrapping is explicitly disabled for this conversion. By default many YAML writers fold a long string across multiple lines using a block-scalar marker once it passes about 80 characters, which is tidy to read but changes how the value looks on the page. Keeping every value on one line makes the output easier to diff and grep, at the cost of long lines not wrapping visually.',
+      ],
+    },
+    {
+      q: 'Will a value like a time, "10:30", break the YAML output since colon normally separates a key from its value?',
+      a: [
+        'No. Any string containing a colon followed by a space is automatically wrapped in quotes in the output, \'10:30\' rather than 10:30, specifically so it can\'t be misread as starting a new key. You don\'t need to pre-escape colons, or anything else, in your JSON before converting.',
+      ],
+    },
+  ],
 }

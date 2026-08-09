@@ -76,15 +76,22 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-to-yaml']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJsonToYaml } from '~/composables/useYamlJson'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 useToolSeo(
   'JSON to YAML Converter: Export JSON as YAML Config Online',
   'Convert JSON to readable YAML instantly in your browser, with proper indentation for nested objects and arrays. Free, no data sent to servers.',
+  TOOL_FAQS['json-to-yaml'],
 )
 const { input, output, error, errorTip, errorLine, errorColumn, indent, copied, copy, download, clear } = useJsonToYaml()
 useUrlInput(input)

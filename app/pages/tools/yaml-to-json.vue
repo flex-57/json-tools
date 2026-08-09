@@ -69,15 +69,22 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['yaml-to-json']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useYamlToJson } from '~/composables/useYamlJson'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 useToolSeo(
   'YAML to JSON Converter Online: Parse YAML Files Free',
   'Convert YAML to JSON instantly in your browser. Parses nested mappings, sequences, and scalars with js-yaml. Free, no data sent to servers.',
+  TOOL_FAQS['yaml-to-json'],
 )
 const { input, output, error, errorLine, errorColumn, copied, copy, download, clear } = useYamlToJson()
 useUrlInput(input)
@@ -98,7 +105,7 @@ const seoCards = [
     table: [
       { label: 'Comments', value: 'Dropped — no equivalent in JSON' },
       { label: 'Anchors & aliases', value: 'Resolved — output is fully expanded' },
-      { label: 'Booleans / null', value: 'true/false/yes/no and null/~ correctly typed' },
+      { label: 'Booleans / null', value: 'true/false and null/~ correctly typed — yes/no/on/off stay plain strings' },
     ],
   },
   {
