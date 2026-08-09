@@ -82,15 +82,22 @@
     <div class="info-strip info-strip--warn">SheetJS has known CVEs (prototype pollution, ReDoS). The Worker sandbox limits exposure but does not fix them</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['excel-to-json']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useExcelToJson } from '~/composables/useExcelJson'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'Excel to JSON Converter: Upload .xlsx & Get JSON Free',
   'Convert Excel (.xlsx, .xls) files to JSON instantly. Free online Excel to JSON converter, no data uploaded to servers.',
+  TOOL_FAQS['excel-to-json'],
 )
 
 const { file, output, error, sheets, activeSheet, hasHeader, copied, convert, switchSheet, copy, clear, download } = useExcelToJson()

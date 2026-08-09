@@ -66,16 +66,23 @@
     <div class="info-strip">Generated in an isolated Web Worker: no data is uploaded to servers</div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-to-excel']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJsonToExcel } from '~/composables/useExcelJson'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JSON to Excel Converter: Download .xlsx from JSON Free',
   'Convert JSON arrays to Excel (.xlsx) files instantly. Free online JSON to Excel converter, no data uploaded to servers.',
+  TOOL_FAQS['json-to-excel'],
 )
 
 const { input, isValid, error, errorTip, errorLine, errorColumn, loading, download, clear } = useJsonToExcel()

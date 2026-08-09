@@ -73,15 +73,22 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['csv-to-json']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useCsvToJson } from '~/composables/useCsvJson'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'CSV to JSON Converter Online: Instant, No Upload Required',
   'Convert CSV and TSV files to JSON instantly. Free online CSV to JSON converter, no data sent to servers.',
+  TOOL_FAQS['csv-to-json'],
 )
 
 const { input, output, error, errorLine, rowCount, delimiter, hasHeader, copied, copy, downloadJson, clear } = useCsvToJson()

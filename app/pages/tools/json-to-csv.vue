@@ -72,16 +72,23 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-to-csv']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJsonToCsv } from '~/composables/useCsvJson'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JSON to CSV Converter: Export JSON Arrays to CSV Free',
   'Convert JSON arrays to CSV format instantly. Free online JSON to CSV converter, no data sent to servers.',
+  TOOL_FAQS['json-to-csv'],
 )
 
 const { input, output, error, errorTip, errorLine, errorColumn, rowCount, delimiter, copied, copy, downloadCsv, clear } = useJsonToCsv()

@@ -568,4 +568,154 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  'csv-to-json': [
+    {
+      q: 'Why did a column like "00501" or "true" come out as a number or boolean instead of a string?',
+      a: [
+        'The parser inspects every cell and converts anything that looks numeric or boolean to its real type rather than leaving everything as a string. That\'s usually what you want, but it means a value like a zip code with a leading zero loses that zero, "00501" becomes the number 501, since there\'s currently no per-column toggle to keep a specific field as text.',
+      ],
+    },
+    {
+      q: 'Why is "Auto" an option for the delimiter here, but not on the JSON to CSV page?',
+      a: [
+        'Auto-detection makes sense when reading real CSV data, the parser can look at the actual characters and guess whether it\'s comma, semicolon, or tab-delimited. Going the other direction, there\'s nothing to detect: you\'re choosing which delimiter to write, not guessing one from existing text.',
+      ],
+    },
+    {
+      q: 'Why does the error banner only say "around line N" instead of giving an exact line?',
+      a: [
+        'The underlying CSV parser reports an error as a row index into the data it already parsed, not a line number in your original file. This tool adds back the header row to approximate a source line, but a blank line skipped earlier in the file can throw that estimate off, hence "around" rather than an exact claim.',
+      ],
+    },
+    {
+      q: 'What happens to a blank line in the middle of my CSV data?',
+      a: [
+        'It\'s skipped silently rather than turning into an empty row of nulls in the JSON output. This matches how most spreadsheet exports already treat stray blank lines, so a file with occasional gaps doesn\'t need to be cleaned up first.',
+      ],
+    },
+  ],
+
+  'json-to-csv': [
+    {
+      q: 'What happens if my JSON is a single object instead of an array?',
+      a: [
+        'It\'s wrapped in a one-element array automatically, so a single object still converts to a one-row CSV instead of failing. The converter is built around arrays of records, but a lone object is treated as a record count of one rather than an error.',
+      ],
+    },
+    {
+      q: 'Why do I get "Array is empty" instead of just an empty CSV file for []?',
+      a: [
+        'An empty array has no keys to derive column headers from, so there\'s nothing meaningful to write. The tool says so directly rather than silently producing a header-less, content-less file that would look like the conversion had failed for no visible reason.',
+      ],
+    },
+    {
+      q: 'Does the CSV update as I type, or do I need to press a button?',
+      a: [
+        'It updates on every keystroke, no button and no delay. Converting JSON to CSV is a single cheap pass, not something like this site\'s HMAC generator, which debounces because it\'s recomputing four cryptographic signatures at once.',
+      ],
+    },
+    {
+      q: 'Why does this converter offer a semicolon delimiter option, not just comma?',
+      a: [
+        'A plain comma-delimited file opens as a single garbled column in Excel set to a European locale, where the comma is already the decimal separator (see our CSV guide for why that happens). Picking semicolon here up front produces a file that opens correctly without a manual fix afterward.',
+      ],
+    },
+  ],
+
+  'excel-to-json': [
+    {
+      q: 'What happens if a very large or corrupted file takes too long to process?',
+      a: [
+        'Processing is capped at 30 seconds. If it runs longer than that, the worker handling the file is terminated and a timeout error is shown, rather than leaving the page hanging with no explanation.',
+      ],
+    },
+    {
+      q: 'Why does switching between sheets take a moment instead of being instant?',
+      a: [
+        'Switching sheets re-runs the conversion from scratch rather than swapping between sheets already held in memory. For most spreadsheets that\'s not noticeable, but a very large workbook with many sheets will re-parse each time you switch.',
+      ],
+    },
+    {
+      q: 'Can I drop a .csv or .ods file here too, not just .xlsx or .xls?',
+      a: [
+        'Yes. The underlying library (SheetJS) reads OpenDocument spreadsheets and CSV files the same way it reads Excel workbooks, and the file picker accepts all four extensions even though the page focuses on Excel in its name.',
+      ],
+    },
+    {
+      q: 'What happens if my browser can\'t create the Web Worker, for example because of a restrictive extension?',
+      a: [
+        'The conversion fails with a clear "Worker unavailable" message rather than hanging or silently doing nothing. Nothing partially processes; either the worker starts and handles the file, or you get an explicit error.',
+      ],
+    },
+  ],
+
+  'json-to-excel': [
+    {
+      q: 'Why does the preview table update instantly, but I still have to click Download to get the actual file?',
+      a: [
+        'The preview runs a quick parse directly in the page just to render up to five rows. Generating the real .xlsx binary happens in a separate Web Worker and only runs when you click Download, since building a full spreadsheet file on every keystroke would be wasted work almost every time.',
+      ],
+    },
+    {
+      q: 'Does the downloaded file only contain the first 5 rows shown in the preview?',
+      a: [
+        'No. The preview is capped at five rows purely to keep the table on screen readable; the actual download processes and includes every row in your JSON array, however many there are.',
+      ],
+    },
+    {
+      q: 'My JSON is valid but the download still fails. What does that mean?',
+      a: [
+        'That\'s a separate failure from a JSON syntax error, it means the worker itself hit a problem while building the spreadsheet from otherwise-valid data. The tool keeps the two apart deliberately, so a real syntax mistake in your input isn\'t confused with a generation problem on a file that was actually fine.',
+      ],
+    },
+    {
+      q: 'Why does the preview only show columns from the first object in my array, even when a later object has an extra key?',
+      a: [
+        'The preview derives its column headers only from the first item in your array, purely so the table has something to render quickly. If your data has inconsistent keys across objects, check the downloaded file directly rather than relying on the five-row preview to catch every column.',
+      ],
+    },
+  ],
+
+  'toml-to-json': [
+    {
+      q: 'Why does the error banner show a short message instead of the parser\'s more detailed explanation?',
+      a: [
+        'The underlying parser\'s full error includes a multi-line snippet of your document with a caret pointing at the problem, useful in a terminal but redundant here. This tool keeps only the first line of that message and relies on the line/column highlight in the editor to show the actual location instead.',
+      ],
+    },
+    {
+      q: 'Why did my TOML value nan or inf turn into null in the JSON output?',
+      a: [
+        'TOML has real nan, inf, and -inf float literals, but JSON has no way to represent a non-finite number at all. JSON.stringify silently converts any of them to null rather than throwing, so there\'s no error for the conversion to show you. If a value in your config might be one of these, check for it separately rather than trusting the JSON output.',
+      ],
+    },
+    {
+      q: 'Does the converter handle TOML\'s hex, octal, and binary integer literals, like 0xFF or 0b1010?',
+      a: [
+        'Yes, along with underscore-grouped numbers like 1_000_000. All of TOML\'s integer literal formats parse correctly and come out as plain decimal numbers in the JSON output, since JSON has only one number type regardless of how the original value was written.',
+      ],
+    },
+  ],
+
+  'json-to-toml': [
+    {
+      q: 'The TOML to JSON direction turns a native TOML date into an ISO string. Does converting back turn that string into a real TOML date again?',
+      a: [
+        'No. This direction has no way to tell an ISO-8601-looking string apart from any other string, so it\'s written out as a quoted TOML string, "2024-01-15T09:00:00Z", not the unquoted native date-time type TOML also supports. Both read back as the same value in most tools, but it isn\'t a byte-for-byte round trip of an original TOML file.',
+      ],
+    },
+    {
+      q: 'What happens to a JSON key that isn\'t a valid bare TOML key, like one containing a space?',
+      a: [
+        'It gets wrapped in double quotes automatically: {"first name": "Alice"} becomes "first name" = "Alice". A key using only letters, digits, underscores, and dashes needs no quoting and is left bare, even one starting with a digit, TOML\'s bare-key rule allows that.',
+      ],
+    },
+    {
+      q: 'I need a value to come out as a TOML float, like price = 5.0, not an integer. Why does it come out as 5 instead?',
+      a: [
+        'JSON and JavaScript don\'t distinguish 5.0 from 5, they\'re the exact same number. That distinction is already gone by the time your JSON reaches this converter, so there\'s no way to recover whether you originally meant a float or an integer. If a downstream TOML consumer requires the float form specifically, edit the output by hand after converting.',
+      ],
+    },
+  ],
 }
