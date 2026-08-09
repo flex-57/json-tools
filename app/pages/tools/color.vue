@@ -72,15 +72,20 @@
       </div>
       <div class="contrast-body">
         <div class="contrast-inputs">
-          <div class="contrast-field">
-            <label class="c-label">Foreground</label>
-            <div class="c-input-row"><div class="c-dot" :style="{ background: contrastFg }" /><input v-model="contrastFg" class="c-hex-input" spellcheck="false" ></div>
+          <div class="contrast-row">
+            <div class="contrast-field">
+              <label class="c-label">Foreground</label>
+              <div class="c-input-row"><div class="c-dot" :style="{ background: contrastFg }" /><input v-model="contrastFg" class="c-hex-input" spellcheck="false" ></div>
+            </div>
+            <button class="btn btn-ghost use-current-btn" title="Use current color (opaque) as foreground" @click="contrastFg = currentHex">Use current</button>
           </div>
-          <div class="contrast-field">
-            <label class="c-label">Background</label>
-            <div class="c-input-row"><div class="c-dot" :style="{ background: contrastBg }" /><input v-model="contrastBg" class="c-hex-input" spellcheck="false" ></div>
+          <div class="contrast-row">
+            <div class="contrast-field">
+              <label class="c-label">Background</label>
+              <div class="c-input-row"><div class="c-dot" :style="{ background: contrastBg }" /><input v-model="contrastBg" class="c-hex-input" spellcheck="false" ></div>
+            </div>
+            <button class="btn btn-ghost use-current-btn" title="Use current color (opaque) as background" @click="contrastBg = currentHex">Use current</button>
           </div>
-          <button class="btn btn-ghost use-current-btn" title="Use current color (opaque) as background" @click="contrastBg = currentHex">Use current</button>
         </div>
 
         <div class="contrast-result" aria-live="polite">
@@ -237,7 +242,7 @@ const cards = [
     title: 'How to use the color picker',
     text: [
       'Drag inside the square to adjust saturation (left-right) and brightness (top-bottom). Drag the rainbow strip to change hue. Drag the checkerboard strip below it to set opacity: fully right is 100% opaque, fully left is fully transparent.',
-      'All format fields (HEX, RGB, HSL, HSB) update instantly and are editable; type a value with or without an alpha component and press Enter to apply. Click any shade swatch to jump to that tone. In the contrast checker, "Use current" loads the opaque version of your color as background.',
+      'All format fields (HEX, RGB, HSL, HSB) update instantly and are editable; type a value with or without an alpha component and press Enter to apply. Click any shade swatch to jump to that tone. In the contrast checker, each "Use current" button loads the opaque version of your picked color into that field, foreground or background.',
     ],
   },
 ]
@@ -278,7 +283,8 @@ const cards = [
 .shade:hover { transform: scaleY(1.15); box-shadow: 0 2px 6px rgba(0,0,0,0.18); }
 
 .contrast-body { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
-.contrast-inputs { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.contrast-inputs { display: flex; flex-direction: column; gap: 12px; }
+.contrast-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
 .contrast-field { display: flex; flex-direction: column; gap: 6px; }
 .c-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--c-t4); letter-spacing: 0.04em; }
 .c-input-row { display: flex; align-items: center; gap: 8px; }
