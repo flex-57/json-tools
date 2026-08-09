@@ -70,15 +70,22 @@
     </div>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['box-shadow']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useBoxShadowGenerator, SHADOW_PRESETS } from '~/composables/useBoxShadowGenerator'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'CSS Box-Shadow Generator: Layered Shadows Online',
   'Build single or layered CSS box-shadow values visually with a live preview. Import an existing value, stack multiple shadows, and copy the generated CSS. Free, 100% client-side.',
+  TOOL_FAQS['box-shadow'],
 )
 
 const { layers, bgColor, css, declaration, addLayer, removeLayer, applyPreset, importError, importCss, copied, copy } = useBoxShadowGenerator()

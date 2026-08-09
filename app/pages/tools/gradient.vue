@@ -79,16 +79,23 @@
     </div>
 
     <SeoSection :cards="cards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['gradient']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useGradientGenerator, buildGradientCss, GRADIENT_PRESETS, POSITIONS, type GradientType } from '~/composables/useGradientGenerator'
 import { useClipboard } from '~/composables/useClipboard'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'CSS Gradient Generator: Linear, Radial & Conic Gradients Online',
   'Build linear, radial, and conic CSS gradients visually with a live preview. Add color stops, presets, and copy the generated CSS. Free, no signup, 100% client-side.',
+  TOOL_FAQS['gradient'],
 )
 
 const { type, angle, shape, position, stops, css, backgroundCss, addStop, removeStop, applyPreset } = useGradientGenerator()

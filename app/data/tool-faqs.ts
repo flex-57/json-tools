@@ -847,4 +847,52 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  'box-shadow': [
+    {
+      q: 'Can I import a shadow value that uses a CSS variable for its color, like var(--shadow-color)?',
+      a: [
+        'Yes. The importer looks for an rgba/hsla function or a hex code first, and falls back to whatever single token in the value isn\'t a plain number, which a var(...) reference matches just as well as a named color like tomato. It\'s carried through unchanged rather than being rejected as unparseable.',
+      ],
+    },
+    {
+      q: 'What happens if I paste a shadow value with no color at all, like 10px 10px?',
+      a: [
+        'It\'s accepted, and the color defaults to #000000 (solid black) rather than being rejected. Only the two offset numbers are actually required, blur and spread default to 0 and color defaults to black if you don\'t specify them.',
+      ],
+    },
+    {
+      q: 'Why doesn\'t importing two layers with rgba(...) colors get cut apart at the commas inside those colors?',
+      a: [
+        'The importer only splits on a comma when it\'s outside any parentheses, tracking paren depth as it scans, so 0 4px 12px rgba(0,0,0,.15), inset 0 0 2px rgba(255,255,255,.5) correctly becomes two layers, not five fragments cut at every rgba() argument.',
+      ],
+    },
+    {
+      q: 'Do I need to specify all four length values, offset-x, offset-y, blur, and spread, for an import to work?',
+      a: [
+        'No, just the first two. offsetX and offsetY are the only required numbers; blur and spread are both assumed to be 0 if you leave them out. Fewer than two numeric values in the pasted text is what actually makes the importer give up.',
+      ],
+    },
+  ],
+
+  gradient: [
+    {
+      q: 'What happens if I keep clicking "+ Add stop" instead of dragging any sliders?',
+      a: [
+        'Each new stop is placed 10 percentage points past the current furthest stop, capped at 100%. Once a stop is already at 100%, every stop you add after that also lands at exactly 100%, stacking several stops on top of each other at the same position instead of spreading out automatically.',
+      ],
+    },
+    {
+      q: 'Can I set a radial or conic gradient\'s center to a custom position, like 25% 75%, instead of one of the preset positions?',
+      a: [
+        'Not through this tool\'s Position dropdown, it\'s limited to nine fixed keywords, center plus the four sides and corners. CSS itself accepts an arbitrary percentage or length for a gradient\'s center position; edit the at center part of the copied CSS by hand if you need one of those.',
+      ],
+    },
+    {
+      q: 'What happens if I type a stop position below 0% or above 100% directly into the number field?',
+      a: [
+        'It\'s passed straight through to the generated CSS with no clamping, the slider\'s 0-100 range is a UI convenience, not an enforced limit. A color stop outside 0-100% is valid CSS; it shifts where that color reaches full strength relative to the other stops rather than being ignored or capped.',
+      ],
+    },
+  ],
 }
