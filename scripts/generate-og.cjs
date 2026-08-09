@@ -72,6 +72,18 @@ const TOOLS = [
     window: J([['rows', 'n', '3'], ['format', 's', 'xlsx'], ['preview', 's', 'first 5 rows']]),
   },
   {
+    slug: 'toml-to-json', tag: 'Converter', title: 'TOML to JSON\nConverter', size: 68,
+    subtitle: 'Convert TOML to JSON. Paste text or drop a .toml file.',
+    window: J([['name', 's', 'Alice'], ['active', 'b', 'true'], ['tags', 's', '["api","auth"]']]),
+  },
+  {
+    slug: 'json-to-toml', tag: 'Converter', title: 'JSON to TOML\nConverter', size: 68,
+    subtitle: 'Convert JSON to TOML. Paste or drop a .json file.',
+    window: `<span class="k">name</span> <span class="p">=</span> <span class="s">"Alice"</span>
+<span class="k">active</span> <span class="p">=</span> <span class="b">true</span>
+<span class="k">tags</span> <span class="p">=</span> [<span class="s">"api"</span>, <span class="s">"auth"</span>]`,
+  },
+  {
     slug: 'json-diff', tag: 'JSON Tool', title: 'JSON Diff', size: 80,
     subtitle: 'Compare two JSON objects side by side.\nHighlights added, removed, and changed.',
     window: J([['added', 'n', '2'], ['removed', 'n', '1'], ['changed', 'n', '3']]),
@@ -115,6 +127,11 @@ const TOOLS = [
     window: J([['input', 's', 'hello world'], ['sha256', 's', '2cf24dba5fb0a3e2...'], ['md5', 's', '5eb63bbbe01eeed0...']]),
   },
   {
+    slug: 'hmac', tag: 'Security', title: 'HMAC Generator', size: 80,
+    subtitle: 'Compute HMAC-SHA1, SHA-256, SHA-384 and SHA-512 signatures with a secret key.',
+    window: J([['alg', 's', 'HMAC-SHA256'], ['message', 's', 'Hello, World!'], ['signature', 's', '9f86d081884c...'], ['format', 's', 'hex']]),
+  },
+  {
     slug: 'regex-tester', tag: 'Dev Util', title: 'Regex Tester', size: 80,
     subtitle: 'Test regular expressions with live match highlighting.',
     window: J([['pattern', 's', '\\\\d{3}-\\\\d{4}'], ['flags', 's', 'g'], ['matches', 'n', '4']]),
@@ -135,6 +152,11 @@ const TOOLS = [
     slug: 'unix-timestamp', tag: 'Dev Util', title: 'Unix Timestamp\nConverter', size: 68,
     subtitle: 'Convert between Unix timestamps and human-readable dates.',
     window: J([['unix', 'n', '1749649920'], ['iso', 's', '2025-06-11T14:32:00Z'], ['relative', 's', '3 hours ago']]),
+  },
+  {
+    slug: 'gpt-token-counter', tag: 'Dev Util', title: 'GPT Token\nCounter', size: 72,
+    subtitle: 'Count tokens for GPT-4o, o1 and o3 (o200k_base encoding) instantly.',
+    window: J([['model', 's', 'gpt-4o'], ['encoding', 's', 'o200k_base'], ['tokens', 'n', '42'], ['chars', 'n', '218']]),
   },
   {
     slug: 'uuid', tag: 'Dev Util', title: 'UUID Generator', size: 72,
@@ -164,6 +186,26 @@ const TOOLS = [
 <span class="k">WHERE</span> active <span class="p">=</span> <span class="n">1</span>`,
   },
   {
+    slug: 'graphql-formatter', tag: 'Dev Util', title: 'GraphQL\nFormatter', size: 76,
+    subtitle: 'Format GraphQL queries, mutations, fragments and schema definitions instantly.',
+    window: `<span class="k">query</span> GetUser($id: ID!) {
+  user(id: $id) {
+    name
+  }
+}`,
+  },
+  {
+    slug: 'svg-optimizer', tag: 'Dev Util', title: 'SVG Optimizer', size: 76,
+    subtitle: 'Compress SVG markup with SVGO, entirely in your browser.',
+    window: J([['before', 's', '4.2 KB'], ['after', 's', '1.8 KB'], ['saved', 's', '57%']]),
+  },
+  {
+    slug: 'svg-to-jsx', tag: 'Dev Util', title: 'SVG to JSX', size: 84,
+    subtitle: 'Turn an SVG file into a React component.',
+    window: `<span class="p">&lt;circle</span> cx={12} cy={12} r={9}
+  stroke=<span class="s">"#FF3D8F"</span><span class="p"> /&gt;</span>`,
+  },
+  {
     slug: 'password-generator', tag: 'Security', title: 'Password Generator', size: 64,
     subtitle: 'Generate strong, random passwords.\nCustom length, symbols, bulk export.',
     window: J([['length', 'n', '20'], ['entropy', 's', '131 bits'], ['strength', 's', 'strong']]),
@@ -172,6 +214,11 @@ const TOOLS = [
     slug: 'text-case', tag: 'Text & Code', title: 'Text Case\nConverter', size: 68,
     subtitle: 'Convert between camelCase, snake_case,\nPascalCase, kebab-case, and more.',
     window: J([['camelCase', 's', 'helloWorld'], ['snake_case', 's', 'hello_world'], ['kebab-case', 's', 'hello-world']]),
+  },
+  {
+    slug: 'string-escape', tag: 'Text & Code', title: 'String Escape\n& Unescape', size: 64,
+    subtitle: 'Escape or unescape control characters and Unicode sequences for JSON or code strings.',
+    window: J([['mode', 's', 'escape'], ['input', 's', 'She said "hi"'], ['output', 's', 'She said \\"hi\\"']]),
   },
   {
     slug: 'number-base', tag: 'Dev Util', title: 'Number Base\nConverter', size: 68,
@@ -189,9 +236,19 @@ const TOOLS = [
     window: J([['type', 's', 'linear'], ['angle', 'n', '135'], ['stops', 'n', '2']]),
   },
   {
+    slug: 'box-shadow', tag: 'Dev Util', title: 'CSS Box-Shadow\nGenerator', size: 64,
+    subtitle: 'Build single or layered box-shadow values visually, then copy the CSS.',
+    window: J([['layers', 'n', '2'], ['blur', 'n', '12'], ['inset', 'b', 'false'], ['color', 's', 'rgba(0,0,0,.15)']]),
+  },
+  {
     slug: 'jwt-generator', tag: 'Security', title: 'JWT Generator', size: 80,
     subtitle: 'Generate signed JWT tokens with custom\npayloads, headers, and algorithms.',
     window: J([['alg', 's', 'HS256'], ['sub', 's', '123'], ['signed', 'b', 'true']]),
+  },
+  {
+    slug: 'og-generator', tag: 'Dev Util', title: 'Open Graph\nGenerator', size: 72,
+    subtitle: 'Build og: and twitter: meta tags with a live preview.',
+    window: J([['og:title', 's', 'My Page'], ['og:image', 's', '1200x630'], ['twitter:card', 's', 'summary_large_image']]),
   },
   { slug: 'faq', tag: 'JSON Tools', title: 'FAQ', subtitle: 'Answers about privacy, features, and how\nJSON Tools works.', size: 88 },
 
