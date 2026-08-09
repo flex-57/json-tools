@@ -109,7 +109,7 @@ function makeLayer(l: Omit<ShadowLayer, 'id'>): ShadowLayer {
 
 export function useBoxShadowGenerator() {
   const layers = ref<ShadowLayer[]>([makeLayer(SHADOW_PRESETS[0]!.layers[0]!)])
-  const bgColor = ref('#1c1830')
+  const bgColor = ref('#EAEAEF')
 
   const css = computed(() => buildBoxShadowCss(layers.value))
   const declaration = computed(() => `box-shadow: ${css.value};`)
