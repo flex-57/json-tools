@@ -793,4 +793,58 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
+
+  'json-schema': [
+    {
+      q: 'If my array has objects with different shapes, does the generator produce a separate schema for each one?',
+      a: [
+        'No, it merges them into a single object schema instead of using oneOf. A key present in every item is marked required; a key missing from at least one item is still included in properties but left out of required, so the merged schema accepts the full range of shapes your array actually contains.',
+      ],
+    },
+    {
+      q: 'When does the generator actually use oneOf?',
+      a: [
+        'Only when array items are genuinely different value types, not just differently-shaped objects, a mix of strings, numbers, and objects, for example. Differently-shaped objects get merged into one combined schema instead; oneOf is reserved for cases a single object schema truly can\'t represent.',
+      ],
+    },
+    {
+      q: 'Why did an empty array produce {"type":"array","items":{}} instead of something more specific?',
+      a: [
+        'There\'s nothing in an empty array to infer a shape from, so items is left as an empty schema, which matches anything, rather than guessing a type it has no evidence for. Fill in a real example and regenerate once you have at least one item to base it on.',
+      ],
+    },
+    {
+      q: 'Why did a field come out typed "integer" when I know it can sometimes hold a decimal?',
+      a: [
+        'The generator infers each field\'s type from the one example value in your pasted JSON; if that value happens to be whole, like 5, it\'s typed integer. A schema built from a single sample only reflects what that sample looked like, so it\'s worth loosening a type by hand afterward for any field you know can vary in ways your example didn\'t show.',
+      ],
+    },
+  ],
+
+  'json-to-ts': [
+    {
+      q: 'Why does a numeric value always come out as "number" here, when the JSON Schema Generator on this site distinguishes integer from number?',
+      a: [
+        'TypeScript itself only has one numeric type; there\'s no separate integer type to generate even for a whole number like 5. That\'s different from JSON Schema, which does define integer and number as distinct keywords, so the schema generator keeps that distinction where this one has nothing to keep it in.',
+      ],
+    },
+    {
+      q: 'What happens if I set the "Name" field to something that isn\'t a valid TypeScript identifier, like one with a space?',
+      a: [
+        'It\'s inserted as-is with no validation, so interface My Type { ... } comes out and fails to compile. Property names inside the generated type are checked and automatically quoted if needed, but the root name itself currently isn\'t, stick to a single word or camelCase/PascalCase name.',
+      ],
+    },
+    {
+      q: 'Does the .strict() toggle in Zod mode apply to nested objects too, or just the top-level one?',
+      a: [
+        'Just the top-level object. .strict() is appended once, to the outermost z.object(...) only, so a nested object several levels deep will still silently allow unknown keys even with the toggle on. Add .strict() to a nested object by hand in the generated code if you need that enforced deeper in the structure.',
+      ],
+    },
+    {
+      q: 'When an array merges objects and a key holds a nested object with different shapes across items, does that nested key get merged into one type too?',
+      a: [
+        'No, only the outer array level gets the smart merge. A key whose value is itself an object with two different shapes across array items comes out as a union of both full object literals, "user: { a: string } | { a: string; b: number }", rather than one combined type for that key. Simplify that field by hand if you want a single merged shape instead of a union.',
+      ],
+    },
+  ],
 }

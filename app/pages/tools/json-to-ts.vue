@@ -103,16 +103,23 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-to-ts']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJsonToTs } from '~/composables/useJsonToTs'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JSON to TypeScript Generator: Interfaces & Zod Schemas Online',
   'Generate TypeScript interfaces and Zod schemas from JSON automatically. Free, no data sent to servers. Supports nested objects, arrays, unions, and optional fields.',
+  TOOL_FAQS['json-to-ts'],
 )
 
 const { input, mode, rootName, output, error, errorTip, errorLine, errorColumn, copied, copy, clear, readonlyFields, useType, zodStrict, download } = useJsonToTs()

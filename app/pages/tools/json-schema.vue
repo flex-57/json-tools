@@ -78,16 +78,23 @@
     </StatusBar>
 
     <SeoSection :cards="seoCards" />
+
+    <section id="faq" class="tool-faq">
+      <h2>Frequently asked questions</h2>
+      <FaqAccordion :items="TOOL_FAQS['json-schema']" />
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useJsonSchema } from '~/composables/useJsonSchema'
 import JsonEditor from '~/components/JsonEditor.vue'
+import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
   'JSON Schema Generator: Auto-Infer Draft-07 & 2020-12',
   'Generate a JSON Schema from any JSON value instantly. Infers types, required fields, and nested structures. Supports Draft-07 and Draft 2020-12. Free, no data sent to servers.',
+  TOOL_FAQS['json-schema'],
 )
 
 const { input, draft, required, output, error, errorTip, errorLine, errorColumn, copied, copy, clear, download } = useJsonSchema()
