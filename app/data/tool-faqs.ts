@@ -7,7 +7,7 @@ export type ToolFaq = GuideFaq
 // only. Theory, comparisons, and other-language code stay in the guides
 // (see AUTO_RELATED in components/SeoSection.vue for which guide each tool
 // links to, and that guide's own `faqs` for what's already covered there).
-export const TOOL_FAQS: Record<string, ToolFaq[]> = {
+export const TOOL_FAQS = {
   'json-formatter': [
     {
       q: 'Is my JSON sent to a server to be formatted?',
@@ -1057,4 +1057,4 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       ],
     },
   ],
-}
+} satisfies Record<string, ToolFaq[]>

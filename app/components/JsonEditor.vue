@@ -34,7 +34,7 @@ const langConfig = new Compartment()
 const errorLineConfig = new Compartment()
 
 class ErrorGutterMarker extends GutterMarker {
-  elementClass = 'cm-error-gutter'
+  override elementClass = 'cm-error-gutter'
 }
 const errorGutterMarker = new ErrorGutterMarker()
 

@@ -1,4 +1,4 @@
-import { optimize } from 'svgo/browser'
+import { optimize, type PluginConfig } from 'svgo/browser'
 import { triggerDownload } from '../utils/download'
 import { useClipboard } from './useClipboard'
 
@@ -42,7 +42,7 @@ export function optimizeSvg(input: string, removeScripts = true): SvgOptimizeRes
   if (!trimmed) return empty()
 
   try {
-    const plugins = removeScripts ? ['preset-default', 'removeScripts'] : ['preset-default']
+    const plugins: PluginConfig[] = removeScripts ? ['preset-default', 'removeScripts'] : ['preset-default']
     const result = optimize(trimmed, { multipass: true, plugins })
     return { output: result.data, error: null, line: null, column: null, ...stats(trimmed, result.data) }
   } catch (e) {

@@ -8,7 +8,7 @@
       </svg>
     </button>
     <div class="recent-collapse" :aria-hidden="!open">
-      <div class="recent-clip" :inert="!open || null">
+      <div class="recent-clip" :inert="!open || undefined">
         <div class="recent-row">
           <NuxtLink v-for="t in tools" :key="t.slug" :to="`/tools/${t.slug}`" class="recent-pill">
             <span class="recent-pill-icon" v-html="toolIcon(t.slug)"/>

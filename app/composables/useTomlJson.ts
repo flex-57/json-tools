@@ -35,7 +35,7 @@ export function tomlToJson(input: string): ConvertResult {
     return { output: JSON.stringify(parsed, null, 2), error: null }
   } catch (e) {
     if (e instanceof TomlError) {
-      return { output: '', error: e.message.split('\n')[0], line: e.line ?? null, column: e.column ?? null }
+      return { output: '', error: e.message.split('\n')[0]!, line: e.line ?? null, column: e.column ?? null }
     }
     return { output: '', error: (e as Error).message }
   }
