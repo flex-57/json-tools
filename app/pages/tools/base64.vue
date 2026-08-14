@@ -74,8 +74,8 @@ import { useBase64 } from '~/composables/useBase64'
 import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
-  'Base64 Encode & Decode Online: Text & File Converter',
-  'Encode text to Base64 or decode Base64 strings instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
+  'Base64 Encode & Decode Online: Text, JSON & File Converter',
+  'Encode text or JSON to Base64, or decode Base64 strings back instantly. Supports standard and URL-safe (JWT) variants. Free, no data sent to servers.',
   TOOL_FAQS['base64'],
 )
 
