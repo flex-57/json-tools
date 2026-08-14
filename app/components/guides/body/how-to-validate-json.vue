@@ -60,55 +60,43 @@
       <p>Every major language has a built-in JSON parser. Wrap the parse call in a try/catch to validate:</p>
 
       <h3>JavaScript / Node.js</h3>
-      <div class="code-block">
-        <span class="code-header">javascript</span>
-        <code>try {
-  const data = JSON.parse(str)
-  console.log('Valid JSON', data)
-} catch (e) {
-  console.error('Invalid JSON:', e.message)
-}</code>
-      </div>
+      <pre class="code-block" data-lang="js"><span class="code-header">javascript</span><code class="shiki-code"><span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">try</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> {</span></span>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">  const</span><span style="color:#005CC5;--shiki-dark:#F8F8F2"> data</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> =</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> JSON</span><span style="color:#24292E;--shiki-dark:#F8F8F2">.</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">parse</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(str)</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  console.</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">log</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Valid JSON</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, data)</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">} </span><span style="color:#D73A49;--shiki-dark:#FF79C6">catch</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> (e) {</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  console.</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">error</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Invalid JSON:</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, e.message)</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></pre>
 
       <h3>Python</h3>
-      <div class="code-block">
-        <span class="code-header">python</span>
-        <code>import json
-
-try:
-    data = json.loads(s)
-    print('Valid JSON', data)
-except json.JSONDecodeError as e:
-    print('Invalid JSON:', e)</code>
-      </div>
+      <pre class="code-block" data-lang="python"><span class="code-header">python</span><code class="shiki-code"><span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">import</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> json</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">try</span><span style="color:#24292E;--shiki-dark:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">    data </span><span style="color:#D73A49;--shiki-dark:#FF79C6">=</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> json.loads(s)</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FD">    print</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Valid JSON</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, data)</span></span>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">except</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> json.JSONDecodeError </span><span style="color:#D73A49;--shiki-dark:#FF79C6">as</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> e:</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FD">    print</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Invalid JSON:</span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, e)</span></span></code></pre>
 
       <h3>PHP</h3>
-      <div class="code-block">
-        <span class="code-header">php</span>
-        <code>$data = json_decode($str, true);
-if (json_last_error() !== JSON_ERROR_NONE) {
-    echo 'Invalid JSON: ' . json_last_error_msg();
-}</code>
-      </div>
+      <pre class="code-block" data-lang="php"><span class="code-header">php</span><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">$data </span><span style="color:#D73A49;--shiki-dark:#FF79C6">=</span><span style="color:#005CC5;--shiki-dark:#8BE9FD"> json_decode</span><span style="color:#24292E;--shiki-dark:#F8F8F2">($str,</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> true</span><span style="color:#24292E;--shiki-dark:#F8F8F2">);</span></span>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">if</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> (</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">json_last_error</span><span style="color:#24292E;--shiki-dark:#F8F8F2">() </span><span style="color:#D73A49;--shiki-dark:#FF79C6">!==</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> JSON_ERROR_NONE</span><span style="color:#24292E;--shiki-dark:#F8F8F2">) {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FD">    echo</span><span style="color:#032F62;--shiki-dark:#E9F284"> '</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Invalid JSON: </span><span style="color:#032F62;--shiki-dark:#E9F284">'</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> .</span><span style="color:#005CC5;--shiki-dark:#8BE9FD"> json_last_error_msg</span><span style="color:#24292E;--shiki-dark:#F8F8F2">();</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></pre>
     </section>
 
     <section class="guide-section">
       <h2>Go further with JSON Schema</h2>
       <p>Syntax validation only checks that the JSON is parseable. <strong>JSON Schema</strong> lets you validate the <em>content</em> — required fields, value types, formats, and ranges.</p>
 
-      <div class="code-block">
-        <span class="code-header">example JSON Schema</span>
-        <code>{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "required": ["name", "age", "email"],
-  "properties": {
-    "name":  { "type": "string", "minLength": 1 },
-    "age":   { "type": "integer", "minimum": 0, "maximum": 150 },
-    "email": { "type": "string", "format": "email" }
-  }
-}</code>
-      </div>
+      <pre class="code-block" data-lang="json"><span class="code-header">example JSON Schema</span><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">$schema</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">https://json-schema.org/draft/2020-12/schema</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">type</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">object</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">required</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">name</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">age</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">email</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">properties</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">    "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">name</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2">  { </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">type</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">string</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">minLength</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 1</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> },</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">    "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">age</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2">   { </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">type</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">integer</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">minimum</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 0</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">maximum</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 150</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> },</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">    "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">email</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> { </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">type</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">string</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">format</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">email</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></pre>
 
       <p>With this schema, <code>{"name": "Jane", "age": -5, "email": "jane@example.com"}</code> would fail validation because <code>age</code> is below the minimum of 0 — even though it's perfectly valid JSON syntax.</p>
 

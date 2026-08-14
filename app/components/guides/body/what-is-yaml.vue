@@ -17,28 +17,28 @@
       <div class="two-col">
         <div>
           <p class="col-label">YAML</p>
-          <pre class="code-block"><code>name: Alice Martin
-age: 28
-active: true
-roles:
-  - admin
-  - editor
-address:
-  city: Paris
-  country: France</code></pre>
+          <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">name</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> Alice Martin</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">age</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 28</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">active</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> true</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">roles</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">  -</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> admin</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">  -</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> editor</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">address</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  city</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> Paris</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  country</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> France</span></span></code></pre>
         </div>
         <div>
           <p class="col-label">JSON</p>
-          <pre class="code-block"><code>{
-  "name": "Alice Martin",
-  "age": 28,
-  "active": true,
-  "roles": ["admin", "editor"],
-  "address": {
-    "city": "Paris",
-    "country": "France"
-  }
-}</code></pre>
+          <pre class="code-block" data-lang="json"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">name</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Alice Martin</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">age</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 28</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">active</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> true</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">roles</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">admin</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">editor</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">address</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">    "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">city</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Paris</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">    "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">country</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">France</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></pre>
         </div>
       </div>
       <p>
@@ -51,50 +51,50 @@ address:
     <section class="guide-section">
       <h2>YAML syntax essentials</h2>
       <h3>Scalars</h3>
-      <pre class="code-block"><code>string_bare: hello world          # no quotes needed for simple strings
-string_quoted: "must quote: this" # quotes needed when value contains : or #
-number: 42
-float: 3.14
-boolean_true: true                # also: yes, on, True, TRUE (be careful!)
-boolean_false: false              # also: no, off, False, FALSE
-null_value: null                  # also: ~
-date: 2026-01-15                  # bare dates are parsed as dates, not strings</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">string_bare</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> hello world</span><span style="color:#6A737D;--shiki-dark:#6272A4">          # no quotes needed for simple strings</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">string_quoted</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">must quote: this</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#6A737D;--shiki-dark:#6272A4"> # quotes needed when value contains : or #</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">number</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 42</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">float</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 3.14</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">boolean_true</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> true</span><span style="color:#6A737D;--shiki-dark:#6272A4">                # also: yes, on, True, TRUE (be careful!)</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">boolean_false</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> false</span><span style="color:#6A737D;--shiki-dark:#6272A4">              # also: no, off, False, FALSE</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">null_value</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> null</span><span style="color:#6A737D;--shiki-dark:#6272A4">                  # also: ~</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">date</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#FFB86C"> 2026-01-15</span><span style="color:#6A737D;--shiki-dark:#6272A4">                  # bare dates are parsed as dates, not strings</span></span></code></pre>
 
       <h3>Sequences (lists)</h3>
-      <pre class="code-block"><code># Block style (most common in config files)
-fruits:
-  - apple
-  - banana
-  - cherry
-
-# Flow style (looks like JSON)
-fruits: [apple, banana, cherry]</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Block style (most common in config files)</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">fruits</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">  -</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> apple</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">  -</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> banana</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">  -</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> cherry</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Flow style (looks like JSON)</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">fruits</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#F1FA8C">apple</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#F1FA8C">banana</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#F1FA8C">cherry</span><span style="color:#24292E;--shiki-dark:#F8F8F2">]</span></span></code></pre>
 
       <h3>Mappings (objects)</h3>
-      <pre class="code-block"><code># Block style
-server:
-  host: localhost
-  port: 8080
-
-# Flow style
-server: { host: localhost, port: 8080 }</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Block style</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">server</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  host</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> localhost</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  port</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 8080</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Flow style</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">server</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> { </span><span style="color:#22863A;--shiki-dark:#8BE9FD">host</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> localhost</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#22863A;--shiki-dark:#8BE9FD">port</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 8080</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> }</span></span></code></pre>
 
       <h3>Multi-line strings</h3>
-      <pre class="code-block"><code># Literal block (|) — preserves newlines
-message: |
-  Line one.
-  Line two.
-  Line three.
-
-# Folded block (>) — newlines become spaces, blank lines become newlines
-description: >
-  This long sentence is split across
-  multiple lines for readability but
-  will be joined into one line.</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Literal block (|) — preserves newlines</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">message</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> |</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  Line one.</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  Line two.</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  Line three.</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Folded block (>) — newlines become spaces, blank lines become newlines</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">description</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> ></span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  This long sentence is split across</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  multiple lines for readability but</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  will be joined into one line.</span></span></code></pre>
 
       <h3>Comments</h3>
-      <pre class="code-block"><code># This is a comment — JSON does not support comments, YAML does
-port: 8080  # inline comment</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># This is a comment — JSON does not support comments, YAML does</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">port</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 8080</span><span style="color:#6A737D;--shiki-dark:#6272A4">  # inline comment</span></span></code></pre>
     </section>
 
     <section class="guide-section">
@@ -102,17 +102,17 @@ port: 8080  # inline comment</code></pre>
       <p>
         YAML lets you define a value once and reuse it, which is useful in large config files:
       </p>
-      <pre class="code-block"><code>defaults: &amp;defaults
-  timeout: 30
-  retries: 3
-
-production:
-  &lt;&lt;: *defaults   # merge anchor — inherits timeout and retries
-  host: prod.example.com
-
-staging:
-  &lt;&lt;: *defaults
-  host: staging.example.com</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">defaults</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> &#x26;</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic">defaults</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  timeout</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 30</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  retries</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 3</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">production</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#BD93F9">  &#x3C;&#x3C;</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> *</span><span style="color:#24292E;--shiki-light-font-style:inherit;--shiki-light-text-decoration:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic;--shiki-dark-text-decoration:underline">defaults</span><span style="color:#6A737D;--shiki-dark:#6272A4">   # merge anchor — inherits timeout and retries</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  host</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> prod.example.com</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">staging</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#BD93F9">  &#x3C;&#x3C;</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> *</span><span style="color:#24292E;--shiki-light-font-style:inherit;--shiki-light-text-decoration:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic;--shiki-dark-text-decoration:underline">defaults</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  host</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> staging.example.com</span></span></code></pre>
     </section>
 
     <section class="guide-section">
@@ -123,11 +123,11 @@ staging:
         and <code>off</code> are parsed as booleans. Norway's ISO code <code>NO</code> silently becomes
         <code>false</code>, which breaks country lists. Always quote these values:
       </p>
-      <pre class="code-block"><code># Wrong — NO becomes false in YAML 1.1
-countries: [GB, FR, NO, DE]
-
-# Correct — quote the ambiguous value
-countries: [GB, FR, "NO", DE]</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Wrong — NO becomes false in YAML 1.1</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">countries</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#F1FA8C">GB</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#F1FA8C">FR</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#BD93F9">NO</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#F1FA8C">DE</span><span style="color:#24292E;--shiki-dark:#F8F8F2">]</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Correct — quote the ambiguous value</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">countries</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#F1FA8C">GB</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#F1FA8C">FR</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">NO</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#F1FA8C">DE</span><span style="color:#24292E;--shiki-dark:#F8F8F2">]</span></span></code></pre>
       <p>YAML 1.2 (the current standard) fixes this — only <code>true</code> and <code>false</code> are booleans.</p>
 
       <h3>Tabs are forbidden</h3>
@@ -142,8 +142,8 @@ countries: [GB, FR, "NO", DE]</code></pre>
         becomes an integer (26), <code>1_000</code> becomes 1000, and ISO dates become date objects.
         Quote values you want treated as strings:
       </p>
-      <pre class="code-block"><code>version: "1.0"     # string, not float
-zip: "01234"       # string, not integer (leading zero stripped otherwise)</code></pre>
+      <pre class="code-block" data-lang="yaml"><code class="shiki-code"><span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">version</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">1.0</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#6A737D;--shiki-dark:#6272A4">     # string, not float</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">zip</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">01234</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#6A737D;--shiki-dark:#6272A4">       # string, not integer (leading zero stripped otherwise)</span></span></code></pre>
     </section>
 
     <section class="guide-section">

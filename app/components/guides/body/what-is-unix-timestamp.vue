@@ -57,8 +57,8 @@
         not produce July 2025 — it produces a date about 20 days after the epoch, in January 1970, because the
         engine reads the value as milliseconds, not seconds:
       </p>
-      <pre class="code-block"><code>new Date(1751932800)         // ✗ Wed Jan 21 1970 — treated as ms
-new Date(1751932800 * 1000)  // ✓ Tue Jul 08 2025 — converted to ms first</code></pre>
+      <pre class="code-block" data-lang="js"><code class="shiki-code"><span class="line"><span style="color:#D73A49;--shiki-light-font-weight:inherit;--shiki-dark:#FF79C6;--shiki-dark-font-weight:bold">new</span><span style="color:#6F42C1;--shiki-dark:#50FA7B"> Date</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#005CC5;--shiki-dark:#BD93F9">1751932800</span><span style="color:#24292E;--shiki-dark:#F8F8F2">)         </span><span style="color:#6A737D;--shiki-dark:#6272A4">// ✗ Wed Jan 21 1970 — treated as ms</span></span>
+<span class="line"><span style="color:#D73A49;--shiki-light-font-weight:inherit;--shiki-dark:#FF79C6;--shiki-dark-font-weight:bold">new</span><span style="color:#6F42C1;--shiki-dark:#50FA7B"> Date</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#005CC5;--shiki-dark:#BD93F9">1751932800</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> *</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 1000</span><span style="color:#24292E;--shiki-dark:#F8F8F2">)  </span><span style="color:#6A737D;--shiki-dark:#6272A4">// ✓ Tue Jul 08 2025 — converted to ms first</span></span></code></pre>
       <h3>The Year 2038 problem</h3>
       <p>
         Systems that store a Unix timestamp as a signed 32-bit integer run out of room at

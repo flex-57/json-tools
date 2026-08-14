@@ -74,10 +74,10 @@
     <section class="guide-section">
       <h2>Reading number literals in code</h2>
       <p>Most C-family languages (JavaScript, Python, Rust, Go) recognize the same prefixes for non-decimal literals:</p>
-      <pre class="code-block"><code>0xFF        // hexadecimal — 255
-0b11111111  // binary — 255
-0o377       // octal — 255
-1_000_000   // underscore as a digit separator (readability only)</code></pre>
+      <pre class="code-block" data-lang="js"><code class="shiki-code"><span class="line"><span style="color:#005CC5;--shiki-dark:#BD93F9">0xFF</span><span style="color:#6A737D;--shiki-dark:#6272A4">        // hexadecimal — 255</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#BD93F9">0b11111111</span><span style="color:#6A737D;--shiki-dark:#6272A4">  // binary — 255</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#BD93F9">0o377</span><span style="color:#6A737D;--shiki-dark:#6272A4">       // octal — 255</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#BD93F9">1_000_000</span><span style="color:#6A737D;--shiki-dark:#6272A4">   // underscore as a digit separator (readability only)</span></span></code></pre>
       <p>
         C and C++ are the outliers: a bare leading zero means octal (<code>0755</code>, not <code>0o755</code>),
         a frequent source of bugs when a decimal number is accidentally zero-padded and silently reinterpreted.

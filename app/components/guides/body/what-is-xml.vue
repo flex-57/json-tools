@@ -13,16 +13,16 @@
     <section class="guide-section">
       <h2>Basic structure</h2>
       <p>An XML document has a simple, consistent structure:</p>
-      <pre class="code-block"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;user id="42"&gt;
-  &lt;name&gt;Alice Martin&lt;/name&gt;
-  &lt;email&gt;alice@example.com&lt;/email&gt;
-  &lt;roles&gt;
-    &lt;role&gt;admin&lt;/role&gt;
-    &lt;role&gt;editor&lt;/role&gt;
-  &lt;/roles&gt;
-  &lt;active&gt;true&lt;/active&gt;
-&lt;/user&gt;</code></pre>
+      <pre class="code-block" data-lang="xml"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">&#x3C;?</span><span style="color:#22863A;--shiki-dark:#FF79C6">xml</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic"> version</span><span style="color:#24292E;--shiki-dark:#F8F8F2">=</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">1.0</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic"> encoding</span><span style="color:#24292E;--shiki-dark:#F8F8F2">=</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">UTF-8</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">?></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">&#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">user</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic"> id</span><span style="color:#24292E;--shiki-dark:#F8F8F2">=</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">42</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">name</span><span style="color:#24292E;--shiki-dark:#F8F8F2">>Alice Martin&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">name</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">email</span><span style="color:#24292E;--shiki-dark:#F8F8F2">>alice@example.com&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">email</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">roles</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">role</span><span style="color:#24292E;--shiki-dark:#F8F8F2">>admin&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">role</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">role</span><span style="color:#24292E;--shiki-dark:#F8F8F2">>editor&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">role</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  &#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">roles</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">active</span><span style="color:#24292E;--shiki-dark:#F8F8F2">>true&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">active</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">user</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span></code></pre>
       <table class="cheat-table">
         <thead><tr><th>Concept</th><th>Description</th><th>Example</th></tr></thead>
         <tbody>
@@ -98,12 +98,12 @@
         When combining XML vocabularies from different sources, element names can clash.
         XML namespaces solve this by prefixing elements with a URI:
       </p>
-      <pre class="code-block"><code>&lt;root
-  xmlns:html="http://www.w3.org/1999/xhtml"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;
-  &lt;html:p&gt;A paragraph&lt;/html:p&gt;
-  &lt;dc:title&gt;A Dublin Core title&lt;/dc:title&gt;
-&lt;/root&gt;</code></pre>
+      <pre class="code-block" data-lang="xml"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">&#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">root</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic">  xmlns</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#FF79C6;--shiki-dark-font-style:italic">:</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic">html</span><span style="color:#24292E;--shiki-dark:#F8F8F2">=</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">http://www.w3.org/1999/xhtml</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic">  xmlns</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#FF79C6;--shiki-dark-font-style:italic">:</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic">dc</span><span style="color:#24292E;--shiki-dark:#F8F8F2">=</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">http://purl.org/dc/elements/1.1/</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">html:p</span><span style="color:#24292E;--shiki-dark:#F8F8F2">>A paragraph&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">html:p</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#FF79C6">dc:title</span><span style="color:#24292E;--shiki-dark:#F8F8F2">>A Dublin Core title&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">dc:title</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">&#x3C;/</span><span style="color:#22863A;--shiki-dark:#FF79C6">root</span><span style="color:#24292E;--shiki-dark:#F8F8F2">></span></span></code></pre>
       <p>
         Namespaces are common in enterprise XML (SOAP envelopes, XSLT stylesheets) but rarely needed
         in simple XML documents.

@@ -24,10 +24,9 @@
 
       <h3>Header</h3>
       <p>The header declares the token type (<code>JWT</code>) and the signing algorithm (<code>alg</code>). After base64url decoding:</p>
-      <div class="code-block">
+      <div class="code-block" data-lang="json">
         <span class="code-header">decoded header</span>
-        <code>{"alg": "HS256", "typ": "JWT"}</code>
-      </div>
+        <code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">{</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">alg</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">HS256</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">typ</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">JWT</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></div>
 
       <h3>Payload</h3>
       <p>The payload contains <strong>claims</strong> — statements about the user or additional data. Standard claims include:</p>
@@ -38,10 +37,9 @@
         <li><code>iss</code> — issuer (who created the token)</li>
         <li><code>aud</code> — audience (who the token is intended for)</li>
       </ul>
-      <div class="code-block">
+      <div class="code-block" data-lang="json">
         <span class="code-header">decoded payload</span>
-        <code>{"sub": "1234567890", "name": "Jane Doe", "iat": 1716239022, "exp": 1716242622}</code>
-      </div>
+        <code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">{</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">sub</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">1234567890</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">name</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Jane Doe</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">iat</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 1716239022</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">exp</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 1716242622</span><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></div>
       <div class="guide-callout guide-callout--warn">
         <strong>Important:</strong> The payload is base64url-encoded, not encrypted. Anyone who has the token can decode and read the payload. Never store sensitive data (passwords, secrets) in a JWT payload.
       </div>

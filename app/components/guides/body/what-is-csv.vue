@@ -18,10 +18,10 @@
     <section class="guide-section">
       <h2>Anatomy of a CSV file</h2>
       <p>The first line is usually a header row naming each column. Every line after it is one record:</p>
-      <pre class="code-block"><code>name,age,city
-Alice,30,Paris
-Bob,25,Lyon
-Chloé,41,Marseille</code></pre>
+      <pre class="code-block" data-lang="csv"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">name,</span><span style="color:#D73A49;--shiki-dark:#FF79C6">age,</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">city</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">Alice,</span><span style="color:#D73A49;--shiki-dark:#FF79C6">30,</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">Paris</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">Bob,</span><span style="color:#D73A49;--shiki-dark:#FF79C6">25,</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">Lyon</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">Chloé,</span><span style="color:#D73A49;--shiki-dark:#FF79C6">41,</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">Marseille</span></span></code></pre>
       <p>
         Fields are separated by the delimiter, records by a line break. There is no type system: every value
         is text until something downstream decides otherwise. <code>30</code> is not a number in the CSV
@@ -36,14 +36,14 @@ Chloé,41,Marseille</code></pre>
         Plain fields need no quotes. A field only needs double quotes when it contains the delimiter itself,
         a double quote, or a line break — otherwise the parser cannot tell where the field ends:
       </p>
-      <pre class="code-block"><code>name,address,age
-Alice,"12 Rue de Paris, 3rd floor",30</code></pre>
+      <pre class="code-block" data-lang="csv"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">name,</span><span style="color:#D73A49;--shiki-dark:#FF79C6">address,</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">age</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">Alice,</span><span style="color:#D73A49;--shiki-dark:#FF79C6">"12 Rue de Paris, 3rd floor",</span><span style="color:#6F42C1;--shiki-dark:#50FA7B">30</span></span></code></pre>
       <p>
         Without the quotes, the comma inside the address would look like a third field and shift every
         column after it. To put a literal double quote inside a quoted field, double it:
       </p>
-      <pre class="code-block"><code>quote,speaker
-"She said ""hello"" and left.",Alice</code></pre>
+      <pre class="code-block" data-lang="csv"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">quote,</span><span style="color:#D73A49;--shiki-dark:#FF79C6">speaker</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">"She said ""hello"" and left.",</span><span style="color:#D73A49;--shiki-dark:#FF79C6">Alice</span></span></code></pre>
       <p>
         That field decodes to <code>She said "hello" and left.</code> — RFC 4180's rule is simple but easy to
         get wrong when writing CSV by hand: forgetting to double an embedded quote produces a file that looks

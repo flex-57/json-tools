@@ -18,9 +18,9 @@
         255 (one byte, 256 possible values per channel). Mixing all three at full strength produces white;
         all three at zero produces black:
       </p>
-      <pre class="code-block"><code>rgb(255, 0, 0)     /* pure red */
-rgb(255, 255, 255) /* white — all channels maxed */
-rgb(0, 0, 0)       /* black — all channels off */</code></pre>
+      <pre class="code-block" data-lang="css"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">rgb(255</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 0</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 0</span><span style="color:#24292E;--shiki-dark:#F8F8F2">)     </span><span style="color:#6A737D;--shiki-dark:#6272A4">/* pure red */</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">rgb(255</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 255</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 255</span><span style="color:#24292E;--shiki-dark:#F8F8F2">) </span><span style="color:#6A737D;--shiki-dark:#6272A4">/* white — all channels maxed */</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">rgb(0</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 0</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 0</span><span style="color:#24292E;--shiki-dark:#F8F8F2">)       </span><span style="color:#6A737D;--shiki-dark:#6272A4">/* black — all channels off */</span></span></code></pre>
     </section>
 
     <section class="guide-section">
@@ -70,9 +70,9 @@ rgb(0, 0, 0)       /* black — all channels off */</code></pre>
         Every format has a variant with a fourth alpha channel controlling opacity, from 0 (fully transparent)
         to 1 for RGBA/HSLA, or an extra hex byte (00 to FF) for 8-digit hex:
       </p>
-      <pre class="code-block"><code>rgba(255, 61, 143, 0.5)   /* 50% opaque brand pink */
-hsla(335, 100%, 62%, 0.5)
-#FF3D8F80                 /* 80 in hex ≈ 50% (128/255) */</code></pre>
+      <pre class="code-block" data-lang="css"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">rgba(255</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 61</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 143</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 0</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic">.5</span><span style="color:#24292E;--shiki-dark:#F8F8F2">)   </span><span style="color:#6A737D;--shiki-dark:#6272A4">/* 50% opaque brand pink */</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">hsla(335</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 100%</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 62%</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span><span style="color:#24292E;--shiki-dark:#FF79C6"> 0</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic">.5</span><span style="color:#24292E;--shiki-dark:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic">#FF3D8F80</span><span style="color:#6A737D;--shiki-dark:#6272A4">                 /* 80 in hex ≈ 50% (128/255) */</span></span></code></pre>
     </section>
 
     <section class="guide-section">

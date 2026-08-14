@@ -23,16 +23,16 @@
         (over-fetching), and a screen needing a user's posts and their comments needs multiple round trips or a
         bespoke endpoint built just for that screen (under-fetching).
       </p>
-      <pre class="code-block"><code>query GetUserWithPosts($id: ID!) {
-  user(id: $id) {
-    name
-    avatarUrl
-    posts(first: 5) {
-      title
-      publishedAt
-    }
-  }
-}</code></pre>
+      <pre class="code-block" data-lang="graphql"><code class="shiki-code"><span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">query</span><span style="color:#6F42C1;--shiki-dark:#50FA7B"> GetUserWithPosts</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#E36209;--shiki-light-font-style:inherit;--shiki-dark:#FFB86C;--shiki-dark-font-style:italic">$id</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> ID</span><span style="color:#D73A49;--shiki-dark:#FF79C6">!</span><span style="color:#24292E;--shiki-dark:#F8F8F2">) {</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F1FA8C">  user</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#E36209;--shiki-light-font-style:inherit;--shiki-dark:#FFB86C;--shiki-dark-font-style:italic">id</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#E36209;--shiki-dark:#F1FA8C"> $id</span><span style="color:#24292E;--shiki-dark:#F8F8F2">) {</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F1FA8C">    name</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F1FA8C">    avatarUrl</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F1FA8C">    posts</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#E36209;--shiki-light-font-style:inherit;--shiki-dark:#FFB86C;--shiki-dark-font-style:italic">first</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 5</span><span style="color:#24292E;--shiki-dark:#F8F8F2">) {</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F1FA8C">      title</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F1FA8C">      publishedAt</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">    }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></pre>
       <p>
         One request, exactly the fields asked for, however deep the nesting. The tradeoff moves complexity to
         the server: a naive resolver for <code>posts</code> that runs one query per user is the classic N+1
@@ -63,16 +63,16 @@
         The Schema Definition Language is how a GraphQL API declares its own shape, every type, field, and
         argument the server exposes:
       </p>
-      <pre class="code-block"><code>type User {
-  id: ID!
-  name: String!
-  posts(first: Int): [Post!]!
-}
-
-type Post {
-  title: String!
-  publishedAt: String
-}</code></pre>
+      <pre class="code-block" data-lang="graphql"><code class="shiki-code"><span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">type</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> User</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> {</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F8F8F2">  id</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> ID</span><span style="color:#D73A49;--shiki-dark:#FF79C6">!</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F8F8F2">  name</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> String</span><span style="color:#D73A49;--shiki-dark:#FF79C6">!</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F8F8F2">  posts</span><span style="color:#24292E;--shiki-dark:#F8F8F2">(</span><span style="color:#E36209;--shiki-light-font-style:inherit;--shiki-dark:#FFB86C;--shiki-dark-font-style:italic">first</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> Int</span><span style="color:#24292E;--shiki-dark:#F8F8F2">)</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic">Post</span><span style="color:#D73A49;--shiki-dark:#FF79C6">!</span><span style="color:#24292E;--shiki-dark:#F8F8F2">]</span><span style="color:#D73A49;--shiki-dark:#FF79C6">!</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF79C6">type</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> Post</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> {</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F8F8F2">  title</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> String</span><span style="color:#D73A49;--shiki-dark:#FF79C6">!</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#F8F8F2">  publishedAt</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic"> String</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></pre>
       <p>
         A trailing <code>!</code> marks a field non-nullable. SDL and queries share the same underlying grammar,
         which is why a single parser, <a href="https://github.com/graphql/graphql-js" target="_blank" rel="noopener">graphql-js</a>,

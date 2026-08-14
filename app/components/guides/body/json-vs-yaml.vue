@@ -15,15 +15,28 @@
       <div class="split-compare">
         <div class="split-col">
           <div class="split-header split-header--json">JSON</div>
-          <div class="code-block" style="margin:0; border-radius:0; border-top:none; border-right:none;">
-            <code>{{ JSON_EXAMPLE }}</code>
-          </div>
+          <pre class="code-block" style="margin:0; border-radius:0; border-top:none; border-right:none;"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">name</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Jane Doe</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">age</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 32</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">active</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> true</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">roles</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">admin</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">editor</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">  "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">address</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">    "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">city</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Paris</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#8BE9FE">    "</span><span style="color:#005CC5;--shiki-dark:#8BE9FD">country</span><span style="color:#005CC5;--shiki-dark:#8BE9FE">"</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">France</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#F8F8F2">}</span></span></code></pre>
         </div>
         <div class="split-col">
           <div class="split-header split-header--yaml">YAML</div>
-          <div class="code-block" style="margin:0; border-radius:0; border-top:none; border-left:none;">
-            <code>{{ YAML_EXAMPLE }}</code>
-          </div>
+          <pre class="code-block" style="margin:0; border-radius:0; border-top:none; border-left:none;"><code class="shiki-code"><span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">name</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> Jane Doe</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">age</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 32</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">active</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> true</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">roles</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">  -</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> admin</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">  -</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> editor</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">address</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  city</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> Paris</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  country</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> France</span></span></code></pre>
         </div>
       </div>
 
@@ -51,33 +64,30 @@
       <h2>YAML-only features</h2>
 
       <h3>Comments</h3>
-      <div class="code-block">
-        <span class="code-header">YAML supports comments — JSON does not</span>
-        <code># Database configuration
-database:
-  host: localhost   # or use an env var
-  port: 5432
-  name: myapp_prod</code>
-      </div>
+      <pre class="code-block" data-lang="yaml"><span class="code-header">YAML supports comments — JSON does not</span><code class="shiki-code"><span class="line"><span style="color:#6A737D;--shiki-dark:#6272A4"># Database configuration</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">database</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  host</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> localhost</span><span style="color:#6A737D;--shiki-dark:#6272A4">   # or use an env var</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  port</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 5432</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  name</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#032F62;--shiki-dark:#F1FA8C"> myapp_prod</span></span></code></pre>
 
       <h3>Multi-line strings</h3>
-      <div class="code-block">
-        <span class="code-header">YAML literal block ( | ) and folded block ( > )</span>
-        <code>description: |
-  This is a multi-line string.
-  Each line is preserved as-is.
-  Great for scripts or SQL queries.
-
-summary: >
-  This text will be folded into
-  a single line when parsed.</code>
-      </div>
+      <pre class="code-block" data-lang="yaml"><span class="code-header">YAML literal block ( | ) and folded block ( > )</span><code class="shiki-code"><span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">description</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> |</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  This is a multi-line string.</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  Each line is preserved as-is.</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  Great for scripts or SQL queries.</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">summary</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> ></span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  This text will be folded into</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#F1FA8C">  a single line when parsed.</span></span></code></pre>
 
       <h3>Anchors and aliases</h3>
-      <div class="code-block">
-        <span class="code-header">YAML anchors (&) reuse values — avoids repetition</span>
-        <code>{{ YAML_ANCHORS }}</code>
-      </div>
+      <pre class="code-block"><span class="code-header">YAML anchors (&) reuse values — avoids repetition</span><code class="shiki-code"><span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">defaults</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> &#x26;</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#8BE9FD;--shiki-dark-font-style:italic">defaults</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  retries</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 3</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  timeout</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 30</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">production</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#BD93F9">  &#x3C;&#x3C;</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#D73A49;--shiki-dark:#FF79C6"> *</span><span style="color:#24292E;--shiki-light-font-style:inherit;--shiki-light-text-decoration:inherit;--shiki-dark:#50FA7B;--shiki-dark-font-style:italic;--shiki-dark-text-decoration:underline">defaults</span><span style="color:#6A737D;--shiki-dark:#6272A4">   # inherits retries and timeout</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#8BE9FD">  timeout</span><span style="color:#24292E;--shiki-dark:#FF79C6">:</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 60</span><span style="color:#6A737D;--shiki-dark:#6272A4">     # overrides just this value</span></span></code></pre>
     </section>
 
     <section class="guide-section">
@@ -110,35 +120,6 @@ summary: >
 </template>
 
 <script setup lang="ts">
-const JSON_EXAMPLE = `{
-  "name": "Jane Doe",
-  "age": 32,
-  "active": true,
-  "roles": ["admin", "editor"],
-  "address": {
-    "city": "Paris",
-    "country": "France"
-  }
-}`
-
-const YAML_EXAMPLE = `name: Jane Doe
-age: 32
-active: true
-roles:
-  - admin
-  - editor
-address:
-  city: Paris
-  country: France`
-
-const YAML_ANCHORS = `defaults: &defaults
-  retries: 3
-  timeout: 30
-
-production:
-  <<: *defaults   # inherits retries and timeout
-  timeout: 60     # overrides just this value`
-
 const DIFF_ROWS = [
   { feature: 'Syntax',       json: 'Braces, quotes, commas',      yaml: 'Indentation, minimal punctuation' },
   { feature: 'Comments',     json: 'Not supported',                yaml: '# single-line comments' },

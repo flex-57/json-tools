@@ -18,17 +18,17 @@
     <section class="guide-section">
       <h2>Anatomy of a TOML file</h2>
       <p>Flat key-value pairs at the top, grouped into named tables below:</p>
-      <pre class="code-block"><code>name = "my-app"
-version = "1.2.0"
-authors = ["Alice", "Bob"]
-
-[dependencies]
-serde = "1.0"
-tokio = { version = "1", features = ["full"] }
-
-[[bin]]
-name = "server"
-path = "src/main.rs"</code></pre>
+      <pre class="code-block" data-lang="toml"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">name</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">my-app</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">version</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">1.2.0</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">authors</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Alice</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">Bob</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">]</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">[</span><span style="color:#6F42C1;--shiki-dark:#8BE9FD">dependencies</span><span style="color:#24292E;--shiki-dark:#FF79C6">]</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">serde</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">1.0</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">tokio</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> { </span><span style="color:#24292E;--shiki-dark:#8BE9FD">version</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">1</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#24292E;--shiki-dark:#8BE9FD">features</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">full</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">] }</span></span>
+<span class="line"/>
+<span class="line"><span style="color:#24292E;--shiki-dark:#FF79C6">[[</span><span style="color:#6F42C1;--shiki-dark:#8BE9FD">bin</span><span style="color:#24292E;--shiki-dark:#FF79C6">]]</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">name</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">server</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">path</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#032F62;--shiki-dark:#E9F284"> "</span><span style="color:#032F62;--shiki-dark:#F1FA8C">src/main.rs</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span></span></code></pre>
       <p>
         A <code>[table]</code> header groups the keys under it, equivalent to a nested JSON object. A
         <code>[[array-of-tables]]</code> header (double brackets) starts a new entry in an array every time it
@@ -43,12 +43,12 @@ path = "src/main.rs"</code></pre>
         TOML's type system is deliberately small: strings, integers, floats, booleans, arrays, tables, and one
         type most config formats leave out entirely: a first-class date-time.
       </p>
-      <pre class="code-block"><code>created_at = 2024-01-15T09:00:00Z   # offset date-time, no quotes needed
-release_date = 2024-01-15           # local date
-port = 8080
-timeout = 30_000                    # underscores allowed as digit separators
-debug = false
-tags = ["api", "auth"]</code></pre>
+      <pre class="code-block" data-lang="toml"><code class="shiki-code"><span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">created_at</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#005CC5;--shiki-dark:#FFB86C"> 2024-01-15T09:00:00Z</span><span style="color:#6A737D;--shiki-dark:#6272A4">   # offset date-time, no quotes needed</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">release_date</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#005CC5;--shiki-dark:#FFB86C"> 2024-01-15</span><span style="color:#6A737D;--shiki-dark:#6272A4">           # local date</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">port</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 8080</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">timeout</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> 30_000</span><span style="color:#6A737D;--shiki-dark:#6272A4">                    # underscores allowed as digit separators</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">debug</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#005CC5;--shiki-dark:#BD93F9"> false</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#8BE9FD">tags</span><span style="color:#24292E;--shiki-dark:#FF79C6"> =</span><span style="color:#24292E;--shiki-dark:#F8F8F2"> [</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">api</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">, </span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#032F62;--shiki-dark:#F1FA8C">auth</span><span style="color:#032F62;--shiki-dark:#E9F284">"</span><span style="color:#24292E;--shiki-dark:#F8F8F2">]</span></span></code></pre>
       <p>
         Because <code>2024-01-15T09:00:00Z</code> is a real typed value and not a string, a TOML parser can
         validate it's a well-formed date at parse time. Converted to JSON, it becomes an ISO 8601 string, since
