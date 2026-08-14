@@ -116,11 +116,12 @@ export default defineNuxtConfig({
             gtagScript.async=true;
             gtagScript.src='https://www.googletagmanager.com/gtag/js?id=G-2YDLBQ1QSH';
             document.head.appendChild(gtagScript);
-            var adsScript=document.createElement('script');
-            adsScript.async=true;
-            adsScript.crossOrigin='anonymous';
-            adsScript.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010651564611690';
-            document.head.appendChild(adsScript);
+            // AdSense temporairement désactivé pour tester l'impact sur le référencement Google (2026-08-14) — décommenter pour réactiver.
+            // var adsScript=document.createElement('script');
+            // adsScript.async=true;
+            // adsScript.crossOrigin='anonymous';
+            // adsScript.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010651564611690';
+            // document.head.appendChild(adsScript);
           `,
         },
       ],

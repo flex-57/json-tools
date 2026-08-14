@@ -97,9 +97,11 @@
     <main class="app-main">
       <slot />
     </main>
+    <!-- AdSense temporairement désactivé pour tester l'impact sur le référencement Google (2026-08-14) — décommenter pour réactiver.
     <div class="ad-footer-wrap">
       <AdSlot slot-id="6882001481" />
     </div>
+    -->
     <AppFooter />
   </div>
 </template>
