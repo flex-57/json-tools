@@ -9,3 +9,15 @@ export function sanitizeHexInput(raw: string): string {
   const digits = raw.replace(/[^0-9a-fA-F]/g, '').slice(0, 8)
   return (hadHash ? '#' : '') + digits
 }
+
+// Native <input type="color"> only ever accepts/returns a plain 6-digit
+// #RRGGBB — no 3-digit shorthand, no 8-digit alpha. Binding it directly to a
+// value that can hold either (as the hex text field's sanitizeHexInput does)
+// makes the swatch render black on anything the picker itself can't represent.
+// Derives a value the native picker can always safely display.
+export function toSixDigitHex(hex: string): string {
+  const digits = hex.replace('#', '')
+  if (digits.length === 3) return '#' + digits.split('').map(d => d + d).join('')
+  if (digits.length >= 6) return '#' + digits.slice(0, 6)
+  return '#000000'
+}
