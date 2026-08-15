@@ -60,7 +60,7 @@
       <div class="editor-card-header">
         <span class="editor-label">Bulk generate</span>
         <div class="bulk-header-controls">
-          <input v-model.number="bulkCount" type="number" min="2" max="20" class="bulk-count-input" >
+          <input v-model.number="bulkCount" type="number" min="2" max="20" class="bulk-count-input" @blur="clampBulkCount" >
           <button class="btn btn-primary" :disabled="!charset" @click="generateBulk">Generate {{ bulkCount }}</button>
         </div>
       </div>
@@ -120,9 +120,18 @@ function clampLength() {
   length.value = Math.max(4, Math.min(64, length.value || 4))
 }
 
+function clampBulkCount() {
+  bulkCount.value = Math.max(2, Math.min(20, bulkCount.value || 2))
+}
+
 function makePassword(len: number, cs: string): string {
   if (!cs) return ''
-  const arr = new Uint32Array(len)
+  // Defensive clamp at the point of use: length is only clamped on the input's
+  // @blur, so a transient typed value (e.g. mid-keystroke) could otherwise reach
+  // here uncapped — crypto.getRandomValues throws QuotaExceededError past 65536
+  // bytes (16384 Uint32 elements), well below what's easy to type by accident.
+  const safeLen = Math.max(4, Math.min(64, len))
+  const arr = new Uint32Array(safeLen)
   crypto.getRandomValues(arr)
   return Array.from(arr, v => cs[v % cs.length]).join('')
 }

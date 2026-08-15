@@ -23,7 +23,7 @@
           <label class="control-label">Count</label>
           <div class="count-wrap">
             <button class="count-btn" @click="count = Math.max(1, count - 1)">−</button>
-            <input v-model.number="count" type="number" min="1" max="100" class="count-input" >
+            <input v-model.number="count" type="number" min="1" max="100" class="count-input" @blur="clampCount" >
             <button class="count-btn" @click="count = Math.min(100, count + 1)">+</button>
           </div>
         </div>
@@ -112,7 +112,14 @@ const versionIndex = computed(() => VERSIONS.findIndex(v => v.id === version.val
 useToolShortcut(generate)
 
 function generate() {
-  uuids.value = generateBatch(version.value, count.value)
+  // Defensive clamp: the count input only clamps on @blur, so the Ctrl+Enter
+  // shortcut (useToolShortcut) can still fire generate() while count is 0 or
+  // unbounded (still focused, not yet blurred).
+  uuids.value = generateBatch(version.value, Math.max(1, Math.min(100, count.value || 1)))
+}
+
+function clampCount() {
+  count.value = Math.max(1, Math.min(100, count.value || 1))
 }
 
 function formatUuid(uuid: string): string {
