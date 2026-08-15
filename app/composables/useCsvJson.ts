@@ -57,7 +57,10 @@ export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): Con
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', rowCount: 0 }
 
-  const { data: parsed, error, line, column, tip } = safeJsonParse(trimmed)
+  // Parses the untrimmed input on purpose: JsonEditor highlights errorLine against the
+  // full v-model content, so a trimmed parse would desync the highlighted line from the
+  // real error whenever the input has leading blank lines.
+  const { data: parsed, error, line, column, tip } = safeJsonParse(input)
   if (error) return { output: '', error, rowCount: 0, line, column, tip }
   const arr = Array.isArray(parsed) ? parsed : [parsed]
   if (arr.length === 0) return { output: '', error: 'Array is empty', rowCount: 0 }

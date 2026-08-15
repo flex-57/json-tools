@@ -56,7 +56,10 @@ export function yamlToJson(input: string): ConvertResult {
 export function jsonToYaml(input: string, indent = 2): ConvertResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty' }
-  const { data, error, line, column, tip } = safeJsonParse(trimmed)
+  // Parses the untrimmed input on purpose: JsonEditor highlights errorLine against the
+  // full v-model content, so a trimmed parse would desync the highlighted line from the
+  // real error whenever the input has leading blank lines.
+  const { data, error, line, column, tip } = safeJsonParse(input)
   if (error) return { output: '', error, line, column, tip }
   try {
     return { output: yaml.dump(data, { indent, lineWidth: -1 }), error: null }

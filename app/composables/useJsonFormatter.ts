@@ -56,7 +56,10 @@ export function useJsonFormatter() {
 
   // Live: no click/shortcut needed to (re)validate — see project todo notes
   // on why json-formatter used to be the odd one out among JSON tools here.
-  const parsed = computed(() => safeJsonParse(input.value.trim()))
+  // Parses the untrimmed value on purpose: JsonEditor highlights errorLine against
+  // the full v-model content, so a trimmed parse would desync the highlighted line
+  // from the real error whenever the input has leading blank lines.
+  const parsed = computed(() => safeJsonParse(input.value))
   const isValid = computed(() => input.value.trim() !== '' && parsed.value.error == null)
   const error = computed(() => (input.value.trim() && parsed.value.error) || null)
   const errorTip = computed(() => parsed.value.tip ?? null)

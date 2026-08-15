@@ -63,11 +63,14 @@ export function diffJson(left: string, right: string): DiffResult {
   // Parsed separately (rather than one try/catch around both) so a failure
   // can be attributed to a specific side — the banner needs to say which
   // editor to highlight, not just that "something" is invalid.
-  const leftParsed = leftTrim ? safeJsonParse(leftTrim) : null
+  // Parses the untrimmed value on purpose: JsonEditor highlights errorLine against
+  // the full v-model content, so a trimmed parse would desync the highlighted line
+  // from the real error whenever a side has leading blank lines.
+  const leftParsed = leftTrim ? safeJsonParse(left) : null
   if (leftParsed?.error) {
     return { lines: [], additions: 0, deletions: 0, same: false, error: leftParsed.error, errorSide: 'left', errorLine: leftParsed.line, errorColumn: leftParsed.column, errorTip: leftParsed.tip }
   }
-  const rightParsed = rightTrim ? safeJsonParse(rightTrim) : null
+  const rightParsed = rightTrim ? safeJsonParse(right) : null
   if (rightParsed?.error) {
     return { lines: [], additions: 0, deletions: 0, same: false, error: rightParsed.error, errorSide: 'right', errorLine: rightParsed.line, errorColumn: rightParsed.column, errorTip: rightParsed.tip }
   }
