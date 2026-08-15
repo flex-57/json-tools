@@ -60,7 +60,7 @@
         <div v-for="(uuid, i) in uuids" :key="i" class="uuid-row">
           <span class="uuid-index">{{ String(i + 1).padStart(2, '0') }}</span>
           <span class="uuid-value">{{ formatUuid(uuid) }}</span>
-          <button class="uuid-copy" :class="{ 'uuid-copy--done': copiedIndex === i }" @click="copyOne(uuid, i)">{{ copiedIndex === i ? 'Copied!' : 'Copy' }}</button>
+          <button class="uuid-copy" :class="{ 'uuid-copy--done': isCopied('uuid-' + i) }" @click="copyOne(uuid, i)">{{ isCopied('uuid-' + i) ? 'Copied!' : 'Copy' }}</button>
         </div>
       </div>
     </div>
@@ -104,10 +104,6 @@ const version     = ref<UuidVersion>('v4')
 const format      = ref<Format>('standard')
 const uuids       = ref<string[]>([])
 const { isCopied, copy: copyKeyed } = useClipboard()
-const copiedIndex = computed<number | null>(() => {
-  const idx = uuids.value.findIndex((_, i) => isCopied('uuid-' + i))
-  return idx === -1 ? null : idx
-})
 const copiedAll   = computed(() => isCopied('all'))
 
 const formatIndex  = computed(() => FORMATS.findIndex(f => f.id === format.value))

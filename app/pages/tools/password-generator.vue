@@ -68,7 +68,7 @@
       <div v-if="bulkPasswords.length" class="bulk-list" aria-live="polite">
         <div v-for="(pw, i) in bulkPasswords" :key="i" class="bulk-item">
           <code class="bulk-pw">{{ pw }}</code>
-          <button class="copy-btn" :class="{ 'copy-btn--done': copiedBulk === i }" @click="copyBulkItem(pw, i)">{{ copiedBulk === i ? 'Copied!' : 'Copy' }}</button>
+          <button class="copy-btn" :class="{ 'copy-btn--done': isCopied('bulk-' + i) }" @click="copyBulkItem(pw, i)">{{ isCopied('bulk-' + i) ? 'Copied!' : 'Copy' }}</button>
         </div>
       </div>
       <p v-else class="bulk-hint">Click "Generate" to create multiple passwords at once.</p>
@@ -130,11 +130,16 @@ function makePassword(len: number, cs: string): string {
 const password  = ref('')
 const regenKey  = ref(0)
 
-watchEffect(() => {
-  const _ = regenKey.value
-  const cs  = charset.value
-  const len = length.value
-  password.value = makePassword(len, cs)
+// Generation must stay client-only (crypto.getRandomValues would otherwise also run
+// during SSR/prerender and bake a fixed password into the static HTML — same fix
+// shape as uuid.vue's onMounted(generate)).
+onMounted(() => {
+  watchEffect(() => {
+    const _ = regenKey.value
+    const cs  = charset.value
+    const len = length.value
+    password.value = makePassword(len, cs)
+  })
 })
 
 function regen() { regenKey.value++ }
@@ -165,10 +170,6 @@ function doCopy() {
 
 const bulkCount     = ref(5)
 const bulkPasswords = ref<string[]>([])
-const copiedBulk    = computed<number | null>(() => {
-  const idx = bulkPasswords.value.findIndex((_, i) => isCopied('bulk-' + i))
-  return idx === -1 ? null : idx
-})
 
 function generateBulk() {
   if (!charset.value) return
