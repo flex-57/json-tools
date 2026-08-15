@@ -126,6 +126,11 @@ export function useExcelToJson() {
   async function convert(f?: File) {
     const target = f ?? file.value
     if (!target) return
+    // `f` set means a genuinely new file (from the file input / drop), as opposed to a
+    // same-file resheet call from switchSheet() — a sheet name kept from the previous
+    // file wouldn't exist in this one, and would be sent to the worker as an explicit
+    // (and wrong) sheet request instead of falling back to the new file's first sheet.
+    if (f) activeSheet.value = ''
     file.value = target
     loading.value = true
     const result = await excelToJson(target, activeSheet.value || undefined, hasHeader.value)
@@ -169,6 +174,10 @@ export function useJsonToExcel() {
   // highlight UI doesn't have to wait on a worker round-trip to appear.
   const parsed = computed(() => (input.value.trim() ? safeJsonParse(input.value) : null))
   const isValid = computed(() => input.value.trim() !== '' && !parsed.value?.error)
+  // downloadError belongs to whatever input produced it — any further edit invalidates it,
+  // otherwise a stale worker-failure message can outlive the input that caused it (e.g.
+  // survive the user clearing the field entirely).
+  watch(input, () => { downloadError.value = null })
   const error       = computed(() => parsed.value?.error ?? downloadError.value)
   const errorTip    = computed(() => parsed.value?.tip ?? null)
   const errorLine   = computed(() => parsed.value?.line ?? null)
