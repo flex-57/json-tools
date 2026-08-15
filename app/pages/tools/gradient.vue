@@ -45,7 +45,7 @@
           </div>
           <div class="stops-list">
             <div v-for="stop in stops" :key="stop.id" class="stop-row">
-              <input v-model="stop.color" type="color" class="stop-color" :aria-label="`Stop color`" >
+              <input :value="toSixDigitHex(stop.color)" type="color" class="stop-color" :aria-label="`Stop color`" @input="stop.color = ($event.target as HTMLInputElement).value">
               <input :value="stop.color" type="text" class="stop-hex" spellcheck="false" maxlength="9" aria-label="Stop color hex" @input="stop.color = sanitizeHexInput(($event.target as HTMLInputElement).value)" >
               <input v-model.number="stop.position" type="range" min="0" max="100" class="grad-slider" aria-label="Stop position" >
               <input v-model.number="stop.position" type="number" min="0" max="100" class="stop-pos-num" aria-label="Stop position percent" >
@@ -91,7 +91,7 @@
 import { useGradientGenerator, buildGradientCss, GRADIENT_PRESETS, POSITIONS, type GradientType } from '~/composables/useGradientGenerator'
 import { useClipboard } from '~/composables/useClipboard'
 import { TOOL_FAQS } from '~/data/tool-faqs'
-import { sanitizeHexInput } from '~/utils/colorInput'
+import { sanitizeHexInput, toSixDigitHex } from '~/utils/colorInput'
 
 useToolSeo(
   'CSS Gradient Generator: Linear, Radial & Conic Gradients Online',

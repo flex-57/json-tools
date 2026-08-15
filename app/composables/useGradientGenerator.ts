@@ -33,7 +33,11 @@ export function buildGradientCss(
   position: GradientPosition,
   stops: { color: string; position: number }[],
 ): string {
-  const stopsCss = stops.map(s => `${s.color} ${s.position}%`).join(', ')
+  // Sorted by position: CSS gradients don't reorder out-of-order stops, they clamp
+  // each one to the previous stop's position instead — authoring them out of order
+  // (e.g. after dragging one past a neighbor) would otherwise render a visually
+  // broken gradient even though the stop data itself is fine.
+  const stopsCss = [...stops].sort((a, b) => a.position - b.position).map(s => `${s.color} ${s.position}%`).join(', ')
   if (type === 'linear') return `linear-gradient(${angle}deg, ${stopsCss})`
   if (type === 'radial') return `radial-gradient(${shape} at ${position}, ${stopsCss})`
   return `conic-gradient(from ${angle}deg at ${position}, ${stopsCss})`
@@ -55,8 +59,24 @@ export function useGradientGenerator() {
   const backgroundCss = computed(() => `background: ${css.value};`)
 
   function addStop() {
-    const positions = stops.value.map(s => s.position)
-    const newPos = positions.length ? Math.min(100, Math.max(...positions) + 10) : 50
+    const positions = [...stops.value.map(s => s.position)].sort((a, b) => a - b)
+    let newPos: number
+    if (positions.length === 0) {
+      newPos = 50
+    } else if (positions[positions.length - 1]! < 100) {
+      newPos = Math.min(100, positions[positions.length - 1]! + 10)
+    } else {
+      // The "append after the highest stop" spot is already taken (max is 100,
+      // as it is by default) — landing a new stop there would be indistinguishable
+      // from the existing one. Insert into the largest gap instead.
+      let bestGapStart = 0
+      let bestGapSize = -1
+      for (let i = 1; i < positions.length; i++) {
+        const gap = positions[i]! - positions[i - 1]!
+        if (gap > bestGapSize) { bestGapSize = gap; bestGapStart = positions[i - 1]! }
+      }
+      newPos = Math.round(bestGapStart + bestGapSize / 2)
+    }
     stops.value = [...stops.value, makeStop('#888888', newPos)]
   }
 
@@ -68,6 +88,12 @@ export function useGradientGenerator() {
   function applyPreset(preset: GradientPreset) {
     type.value = preset.type
     angle.value = preset.angle
+    // Preset swatches are always previewed at the default shape/position (see
+    // gradient.vue's preset-chip style) — match that on click, otherwise a
+    // previously-changed shape/position silently survives the preset and the
+    // applied gradient no longer matches what the swatch showed.
+    shape.value = 'ellipse'
+    position.value = 'center'
     stops.value = preset.stops.map(s => makeStop(s.color, s.position))
   }
 
