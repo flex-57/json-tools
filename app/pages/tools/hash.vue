@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Hash <span class="title-amp">Generator</span></h1>
-        <p class="page-subtitle">Compute MD5, SHA-1, SHA-256 and SHA-512 hashes instantly in your browser. Nothing is sent to any server.</p>
+        <p class="page-subtitle">Compute MD5, SHA-1, SHA-256, SHA-384 and SHA-512 hashes instantly in your browser. Nothing is sent to any server.</p>
         <NuxtLink to="/guides/what-is-hash" class="guide-link">What is a hash function? Read our guide →</NuxtLink>
       </div>
     </div>
@@ -45,8 +45,8 @@ import type { HashAlgorithm } from '~/composables/useHash'
 import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
-  'Hash Generator: MD5, SHA-1, SHA-256, SHA-512 Online',
-  'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
+  'Hash Generator: MD5, SHA-1, SHA-256, SHA-384, SHA-512 Online',
+  'Generate MD5, SHA-1, SHA-256, SHA-384 and SHA-512 hashes from any text, directly in your browser. No data is sent to any server.',
   TOOL_FAQS['hash'],
 )
 
@@ -96,12 +96,13 @@ const seoCards = [
     ],
   },
   {
-    title: 'MD5, SHA-1, SHA-256 and SHA-512',
-    text: 'Four algorithms cover almost every use case, from legacy checksums to modern security.',
+    title: 'MD5, SHA-1, SHA-256, SHA-384 and SHA-512',
+    text: 'Five algorithms cover almost every use case, from legacy checksums to modern security.',
     table: [
       { label: 'MD5', value: '128-bit · 32 hex chars — checksums, non-security IDs' },
       { label: 'SHA-1', value: '160-bit · 40 hex chars — deprecated for security' },
       { label: 'SHA-256', value: '256-bit · 64 hex chars — current security standard' },
+      { label: 'SHA-384', value: '384-bit · 96 hex chars — SHA-512 variant, truncated output' },
       { label: 'SHA-512', value: '512-bit · 128 hex chars — maximum collision resistance' },
     ],
   },

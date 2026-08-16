@@ -106,7 +106,7 @@ import JsonEditor from '~/components/JsonEditor.vue'
 import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
-  'JSON Formatter & Validator: Beautify & Validate JSON Online',
+  'JSON Formatter & Validator: Beautify JSON Online',
   'Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting. No data sent to servers.',
   TOOL_FAQS['json-formatter'],
 )

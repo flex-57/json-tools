@@ -27,7 +27,7 @@
         </tbody>
       </table>
       <p>
-        Going from lowercase-only to the full printable set roughly adds one more bit per character — going
+        Going from lowercase-only to the full printable set roughly adds two more bits per character — going
         from 8 characters to 16 characters adds 8 more characters' worth of bits entirely. Length wins.
       </p>
     </section>
@@ -44,10 +44,12 @@
         </tbody>
       </table>
       <p class="footnote">
-        * Illustrative only. "Guesses per second" varies by orders of magnitude depending on how the password
-        is stored: a modern GPU can try billions of guesses per second against an unsalted, fast hash like raw
-        MD5 or SHA-256, but only a few hundred per second against a properly configured bcrypt or Argon2 hash.
-        Entropy tells you the size of the search space — it says nothing about how fast an attacker can search it.
+        * Illustrative only. "Guesses per second" varies by orders of magnitude depending on the hashing
+        algorithm, not whether the password is salted: a modern GPU can try billions of guesses per second
+        against a fast hash like raw MD5 or SHA-256, but only a few hundred per second against a properly
+        configured bcrypt or Argon2 hash. Salting stops one precomputed table from cracking every account at
+        once — it has no effect on how fast a single already-captured hash can be attacked. Entropy tells you
+        the size of the search space — it says nothing about how fast an attacker can search it.
       </p>
     </section>
 
