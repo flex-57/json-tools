@@ -82,7 +82,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="output && !error ? 'valid' : 'error'"/>
+        <span class="led" :class="output && !error ? 'valid' : (error ? 'error' : 'neutral')"/>
         <template v-if="output && !error && originalSize > 0">{{ fmtBytes(originalSize) }} → {{ fmtBytes(optimizedSize) }} · <strong style="color: var(--c-valid);">{{ savings }}% saved</strong></template>
         <template v-else>{{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input' }}</template>
       </span>

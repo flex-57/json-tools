@@ -85,7 +85,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="isValid ? 'valid' : 'error'"/>
+        <span class="led" :class="isValid ? 'valid' : (error ? 'error' : 'neutral')"/>
         {{ isValid ? 'Valid' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-formatter</span>

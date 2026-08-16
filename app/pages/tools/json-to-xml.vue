@@ -61,7 +61,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="output && !error ? 'valid' : 'error'"/>
+        <span class="led" :class="output && !error ? 'valid' : (error ? 'error' : 'neutral')"/>
         {{ output && !error ? 'Converted' : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
       </span>
       <span>json-to-xml</span>

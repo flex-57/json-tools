@@ -96,8 +96,8 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="error ? 'error' : 'valid'"/>
-        {{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Valid' }} · {{ lineCount }} lines · {{ charCount }} chars
+        <span class="led" :class="error ? 'error' : (input.trim() ? 'valid' : 'neutral')"/>
+        {{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : (input.trim() ? 'Valid' : 'Waiting for input') }} · {{ lineCount }} lines · {{ charCount }} chars
       </span>
       <span>json-to-ts</span>
     </StatusBar>

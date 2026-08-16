@@ -71,7 +71,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="output && !error ? 'valid' : 'error'"/>
+        <span class="led" :class="output && !error ? 'valid' : (error ? 'error' : 'neutral')"/>
         {{ error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : (output ? 'Ready' : 'Waiting for input') }}
       </span>
       <span>json-schema</span>

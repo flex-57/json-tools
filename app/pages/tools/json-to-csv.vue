@@ -65,7 +65,7 @@
 
     <StatusBar>
       <span>
-        <span class="led" :class="rowCount > 0 ? 'valid' : 'error'"/>
+        <span class="led" :class="rowCount > 0 ? 'valid' : (error ? 'error' : 'neutral')"/>
         {{ rowCount > 0 ? `${rowCount} row${rowCount > 1 ? 's' : ''} converted` : (error ? `Invalid${errorLine ? ` · Line ${errorLine}, Column ${errorColumn}` : ''}` : 'Waiting for input') }}
       </span>
       <span>json-to-csv</span>
