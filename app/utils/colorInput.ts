@@ -21,3 +21,23 @@ export function toSixDigitHex(hex: string): string {
   if (digits.length >= 6) return '#' + digits.slice(0, 6)
   return '#000000'
 }
+
+// box-shadow.vue's shadow-layer color field accepts any CSS color string
+// (rgba() by default from presets, or anything typed in), not just hex — but
+// the native color picker can only ever display a plain #RRGGBB. Parses hex
+// and rgb()/rgba() (the formats presets and most typed input actually use)
+// with plain string matching, not the DOM (e.g. getComputedStyle) — a
+// DOM-based approach only resolves client-side and would desync from the
+// server-rendered value, causing a hydration mismatch. Anything else
+// unparseable (hsl(), named colors) falls back to a neutral default for the
+// swatch only; the stored color value itself is never touched by this.
+export function cssColorToSixDigitHex(color: string): string {
+  const trimmed = color.trim()
+  if (trimmed.startsWith('#')) return toSixDigitHex(trimmed)
+  const rgbMatch = trimmed.match(/rgba?\(\s*(-?\d+)\s*,\s*(-?\d+)\s*,\s*(-?\d+)/i)
+  if (rgbMatch) {
+    const [r, g, b] = [rgbMatch[1]!, rgbMatch[2]!, rgbMatch[3]!].map(n => Math.max(0, Math.min(255, Number(n))))
+    return '#' + [r, g, b].map(n => n.toString(16).padStart(2, '0')).join('')
+  }
+  return '#000000'
+}

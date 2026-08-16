@@ -31,7 +31,7 @@
               <div class="field-group"><label>Y</label><input v-model.number="layer.offsetY" type="number" class="shadow-num" ></div>
               <div class="field-group"><label>Blur</label><input v-model.number="layer.blur" type="number" min="0" class="shadow-num" ></div>
               <div class="field-group"><label>Spread</label><input v-model.number="layer.spread" type="number" class="shadow-num" ></div>
-              <input v-model="layer.color" type="color" class="stop-color" aria-label="Shadow color" >
+              <input :value="cssColorToSixDigitHex(layer.color)" type="color" class="stop-color" aria-label="Shadow color" @input="layer.color = ($event.target as HTMLInputElement).value">
               <input v-model="layer.color" type="text" class="stop-hex" spellcheck="false" aria-label="Shadow color value" >
               <button class="stop-remove" :disabled="layers.length <= 1" aria-label="Remove shadow layer" @click="removeLayer(layer.id)">
                 <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -81,7 +81,7 @@
 <script setup lang="ts">
 import { useBoxShadowGenerator, SHADOW_PRESETS } from '~/composables/useBoxShadowGenerator'
 import { TOOL_FAQS } from '~/data/tool-faqs'
-import { sanitizeHexInput, toSixDigitHex } from '~/utils/colorInput'
+import { sanitizeHexInput, toSixDigitHex, cssColorToSixDigitHex } from '~/utils/colorInput'
 
 useToolSeo(
   'CSS Box-Shadow Generator: Layered Shadows Online',
