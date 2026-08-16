@@ -302,7 +302,7 @@ body {
 .nav-dropdown-divider { height: 1px; width: 48px; background: var(--c-border-m); margin: 6px 8px; }
 .nav-dropdown-item.router-link-active { background: rgb(var(--c-accent-rgb) / 0.12); color: var(--c-accent); }
 
-.header-badge { font-size: 11.5px; font-family: var(--font-body); color: var(--c-t5); flex-shrink: 0; letter-spacing: 0.01em; }
+.header-badge { font-size: 11.5px; font-family: var(--font-body); color: var(--c-t4); flex-shrink: 0; letter-spacing: 0.01em; }
 
 .theme-toggle {
   display: flex; align-items: center; justify-content: center;
@@ -350,7 +350,7 @@ body {
 .breadcrumb { display: flex; align-items: center; gap: 6px; }
 .bc-home { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); text-decoration: none; transition: color 0.15s; }
 .bc-home:hover { color: var(--c-accent); }
-.bc-sep { font-size: 12px; color: var(--c-t5); line-height: 1; }
+.bc-sep { font-size: 12px; color: var(--c-t4); line-height: 1; }
 .bc-current { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px; }
 
 @media (max-width: 1100px) {

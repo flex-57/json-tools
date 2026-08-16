@@ -31,13 +31,13 @@ const open = ref(props.defaultOpen)
 <style scoped>
 .recent-section { padding: 24px 0 32px; }
 .recent-toggle { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; cursor: pointer; padding: 0; }
-.recent-toggle-icon { display: flex; color: var(--c-t5); transition: color 0.15s; }
-.recent-toggle:hover .recent-toggle-icon { color: var(--c-t3); }
-.recent-label { font-family: var(--font-display); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-t5); transition: color 0.15s; }
-.recent-toggle:hover .recent-label { color: var(--c-t3); }
-.recent-chevron { flex-shrink: 0; color: var(--c-t5); transition: transform 0.2s ease, color 0.15s; }
+.recent-toggle-icon { display: flex; color: var(--c-t4); transition: color 0.15s; }
+.recent-toggle:hover .recent-toggle-icon { color: var(--c-t2); }
+.recent-label { font-family: var(--font-display); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-t4); transition: color 0.15s; }
+.recent-toggle:hover .recent-label { color: var(--c-t2); }
+.recent-chevron { flex-shrink: 0; color: var(--c-t4); transition: transform 0.2s ease, color 0.15s; }
 .recent-chevron--open { transform: rotate(180deg); }
-.recent-toggle:hover .recent-chevron { color: var(--c-t3); }
+.recent-toggle:hover .recent-chevron { color: var(--c-t2); }
 /* min-height:0 on the grid item (.recent-clip) lets it shrink to 0 content height,
    but its own padding would still count toward its box height regardless — so the
    12px gap lives on .recent-row, nested one level deeper, where overflow:hidden

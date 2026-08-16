@@ -243,8 +243,8 @@ useHead(() => {
 .guide-breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; }
 .bc-link { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); text-decoration: none; transition: color 0.15s; }
 .bc-link:hover { color: var(--c-accent); }
-.bc-sep { font-size: 12px; color: var(--c-t5); }
-.bc-current { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t3); }
+.bc-sep { font-size: 12px; color: var(--c-t4); }
+.bc-current { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t2); }
 
 .guide-meta { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
 .guide-meta-item { font-family: var(--font-body); font-size: 12.5px; color: var(--c-t4); }
