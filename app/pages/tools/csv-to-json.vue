@@ -18,6 +18,7 @@
         <div class="pane-header">
           <span id="csv-input-label" class="pane-label">CSV Input</span>
           <div class="card-actions">
+            <span class="hint">paste or type · or drop a .csv / .tsv file</span>
             <div class="option-wrap">
               <label for="csv-sep-select" class="option-label">Sep</label>
               <select id="csv-sep-select" v-model="delimiter" class="option-select">
