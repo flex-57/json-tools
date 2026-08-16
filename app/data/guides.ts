@@ -1014,7 +1014,7 @@ export const GUIDES: Record<string, GuideConfig> = {
     readTime: '4 min read',
     datePublished: '2026-07-09',
     dateModified: '2026-07-09',
-    description: 'Learn how password entropy is calculated (length × log2 of charset size), what it means for brute-force resistance, why length beats character-class complexity, and why humans are bad at generating truly random passwords.',
+    description: 'Password entropy explained: how it\'s calculated, why length beats character variety, and why humans can\'t fake randomness the way a generator can.',
     tools: [
       { name: 'Password Generator', desc: 'Generate cryptographically secure random passwords with the browser\'s crypto API, so the entropy math actually applies.', href: '/tools/password-generator', icon: ICONS.pwdGen },
     ],
