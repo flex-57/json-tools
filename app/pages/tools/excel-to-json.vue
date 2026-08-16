@@ -14,7 +14,7 @@
             </select>
           </div>
         </template>
-        <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" :min-width="230" />
+        <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" />
       </div>
     </div>
 

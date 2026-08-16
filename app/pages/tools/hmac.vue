@@ -6,7 +6,7 @@
         <p class="page-subtitle">Compute HMAC-SHA1, SHA-256, SHA-384 and SHA-512 signatures with a secret key, instantly in your browser.</p>
         <NuxtLink to="/guides/what-is-hmac" class="guide-link">What is HMAC? Read our guide →</NuxtLink>
       </div>
-      <div class="mode-toggle" style="min-width: 150px;">
+      <div class="mode-toggle">
         <div class="mode-indicator" :class="{ 'mode-indicator--right': format === 'base64' }"/>
         <button class="mode-btn" :class="{ 'mode-btn--active': format === 'hex' }" @click="format = 'hex'">Hex</button>
         <button class="mode-btn" :class="{ 'mode-btn--active': format === 'base64' }" @click="format = 'base64'">Base64</button>

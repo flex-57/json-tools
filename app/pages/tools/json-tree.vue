@@ -5,7 +5,7 @@
         <h1 class="page-title">JSON <span class="title-amp">{{ viewMode === 'tree' ? 'Tree Viewer' : 'Graph Viewer' }}</span></h1>
         <p class="page-subtitle">Explore JSON structure as an interactive collapsible tree or graph. Click nodes to expand, hover to copy the full path.</p>
       </div>
-      <div class="mode-toggle" style="min-width: 150px;">
+      <div class="mode-toggle">
         <div class="mode-indicator" :class="{ 'mode-indicator--right': viewMode === 'graph' }"/>
         <button class="mode-btn" :class="{ 'mode-btn--active': viewMode === 'tree' }" @click="viewMode = 'tree'">Tree</button>
         <button class="mode-btn" :class="{ 'mode-btn--active': viewMode === 'graph' }" @click="switchToGraph">Graph</button>

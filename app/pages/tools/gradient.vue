@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <div class="mode-toggle" style="min-width: 250px;">
+    <div class="mode-toggle">
       <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 3)', transform: indicatorTransform }"/>
       <button v-for="t in TYPES" :key="t.value" class="mode-btn" :class="{ 'mode-btn--active': type === t.value }" @click="type = t.value">{{ t.label }}</button>
     </div>

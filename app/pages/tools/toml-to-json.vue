@@ -6,7 +6,7 @@
         <p class="page-subtitle">Convert TOML to JSON. Paste text or drop a .toml file.</p>
         <NuxtLink to="/guides/what-is-toml" class="guide-link">New to TOML? Read our guide →</NuxtLink>
       </div>
-      <ToolSwitch from-path="/tools/toml-to-json" to-path="/tools/json-to-toml" from-label="TOML → JSON" to-label="JSON → TOML" :min-width="235" />
+      <ToolSwitch from-path="/tools/toml-to-json" to-path="/tools/json-to-toml" from-label="TOML → JSON" to-label="JSON → TOML" />
     </div>
 
     <Transition name="fade">

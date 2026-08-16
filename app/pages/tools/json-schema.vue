@@ -6,7 +6,7 @@
         <p class="page-subtitle">Generate a JSON Schema (Draft-07 or 2020-12) from any JSON value, automatically and client-side.</p>
         <NuxtLink to="/guides/how-to-validate-json" class="guide-link">Learn how JSON validation works →</NuxtLink>
       </div>
-      <div class="mode-toggle" style="min-width: 200px;">
+      <div class="mode-toggle">
         <div class="mode-indicator" :class="{ 'mode-indicator--right': draft === '2020-12' }"/>
         <button class="mode-btn" :class="{ 'mode-btn--active': draft === 'draft-07' }" @click="draft = 'draft-07'">Draft-07</button>
         <button class="mode-btn" :class="{ 'mode-btn--active': draft === '2020-12' }" @click="draft = '2020-12'">2020-12</button>

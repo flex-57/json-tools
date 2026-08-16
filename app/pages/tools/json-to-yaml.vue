@@ -6,7 +6,7 @@
         <p class="page-subtitle">Convert JSON to YAML. Paste or drop a .json file.</p>
         <NuxtLink to="/guides/json-vs-yaml" class="guide-link">JSON vs YAML: what's the difference? →</NuxtLink>
       </div>
-      <ToolSwitch from-path="/tools/yaml-to-json" to-path="/tools/json-to-yaml" from-label="YAML → JSON" to-label="JSON → YAML" :min-width="235" />
+      <ToolSwitch from-path="/tools/yaml-to-json" to-path="/tools/json-to-yaml" from-label="YAML → JSON" to-label="JSON → YAML" />
     </div>
 
     <Transition name="fade">

@@ -7,7 +7,7 @@
         <NuxtLink to="/guides/sql-cheatsheet" class="guide-link">SQL syntax cheatsheet →</NuxtLink>
       </div>
       <div style="display:flex; flex-direction: column; gap: 10px; align-items: flex-end;">
-        <div class="mode-toggle" style="min-width: 570px;">
+        <div class="mode-toggle">
           <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 5)', transform: indicatorTransform }"/>
           <button v-for="d in DIALECTS" :key="d.value" class="mode-btn" :class="{ 'mode-btn--active': dialect === d.value }" @click="dialect = d.value">{{ d.label }}</button>
         </div>

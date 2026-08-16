@@ -10,7 +10,7 @@
           <label class="option-label">Name</label>
           <input v-model="rootName" class="root-input" placeholder="Root" spellcheck="false" >
         </div>
-        <div class="mode-toggle" style="min-width: 230px;">
+        <div class="mode-toggle">
           <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'zod' }"/>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'ts' }" @click="mode = 'ts'">TypeScript</button>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'zod' }" @click="mode = 'zod'">Zod</button>

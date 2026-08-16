@@ -6,7 +6,7 @@
         <p class="page-subtitle">Percent-encode or decode URL components, instantly and client-side.</p>
       </div>
       <div style="display:flex; gap: 8px; align-items:center; flex-wrap: wrap;">
-        <div class="mode-toggle" style="min-width: 170px;">
+        <div class="mode-toggle">
           <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'decode' }"/>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'encode' }" @click="mode = 'encode'">Encode</button>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'decode' }" @click="mode = 'decode'">Decode</button>

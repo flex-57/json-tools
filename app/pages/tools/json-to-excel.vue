@@ -5,7 +5,7 @@
         <h1 class="page-title">JSON <span class="title-arrow">→</span> Excel</h1>
         <p class="page-subtitle">Convert a JSON array to an .xlsx file. Paste or drop a .json file.</p>
       </div>
-      <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" :min-width="230" />
+      <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" />
     </div>
 
     <Transition name="fade">

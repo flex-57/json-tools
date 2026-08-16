@@ -173,11 +173,15 @@ html.dark {
 }
 .guide-link:hover { background: rgb(var(--c-accent-rgb) / 0.14); border-color: rgb(var(--c-accent-rgb) / 0.4); }
 
-/* mode toggle — persistent state, header-level (TS/Zod, Tree/Graph, Encode/Decode…) */
+/* mode toggle — persistent state, header-level (TS/Zod, Tree/Graph, Encode/Decode…)
+   Grid, not flex: with N equal 1fr auto-columns, each column self-sizes to the
+   widest button's content and the container grows to fit, so no per-instance
+   min-width needs computing or maintaining. */
 .mode-toggle {
   position: relative;
-  display: flex;
-  gap: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   background: var(--c-subtle);
   border: 1px solid var(--c-border);
   border-radius: 8px;
@@ -198,7 +202,6 @@ html.dark {
 .mode-indicator--right { transform: translateX(100%); } /* unchanged — still works, --mode-count defaults to 2 */
 .mode-btn {
   position: relative; z-index: 1;
-  flex: 1; min-width: 0;
   border: none; background: transparent;
   font-family: var(--font-body); font-size: 12px; font-weight: 600;
   padding: 6px 16px; border-radius: 6px; cursor: pointer;

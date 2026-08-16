@@ -6,7 +6,7 @@
         <p class="page-subtitle">Create signed JSON Web Tokens in your browser. The secret never leaves your device.</p>
         <NuxtLink to="/guides/what-is-jwt" class="guide-link">New to JWTs? Read our guide →</NuxtLink>
       </div>
-      <div class="mode-toggle" style="min-width: 225px;">
+      <div class="mode-toggle">
         <div class="mode-indicator" :style="{ width: 'calc((100% - 6px) / 3)', transform: indicatorTransform }"/>
         <button v-for="a in ALGOS" :key="a" class="mode-btn" :class="{ 'mode-btn--active': algorithm === a }" @click="algorithm = a">{{ a }}</button>
       </div>
@@ -155,5 +155,5 @@ const seoCards = [
 
 .error-line { padding: 8px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--c-error); border-top: 1px solid rgb(var(--c-error-rgb) / 0.3); background: rgb(var(--c-error-rgb) / 0.06); }
 
-@media (max-width: 768px) { .mode-toggle { min-width: 190px; } .mode-btn { padding: 5px 10px; } }
+@media (max-width: 768px) { .mode-btn { padding: 5px 10px; } }
 </style>

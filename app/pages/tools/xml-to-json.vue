@@ -5,7 +5,7 @@
         <h1 class="page-title">XML <span class="title-arrow">→</span> JSON</h1>
         <p class="page-subtitle">Parse XML and convert it to JSON. Paste text or drop a .xml file.</p>
       </div>
-      <ToolSwitch from-path="/tools/xml-to-json" to-path="/tools/json-to-xml" from-label="XML → JSON" to-label="JSON → XML" :min-width="220" />
+      <ToolSwitch from-path="/tools/xml-to-json" to-path="/tools/json-to-xml" from-label="XML → JSON" to-label="JSON → XML" />
     </div>
 
     <Transition name="fade">

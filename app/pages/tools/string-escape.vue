@@ -6,7 +6,7 @@
         <p class="page-subtitle">Escape or unescape \n, \t, \", \\ and Unicode sequences for JSON or code string literals.</p>
       </div>
       <div style="display:flex; gap: 8px; align-items:center; flex-wrap: wrap;">
-        <div class="mode-toggle" style="min-width: 170px;">
+        <div class="mode-toggle">
           <div class="mode-indicator" :class="{ 'mode-indicator--right': mode === 'unescape' }"/>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'escape' }" @click="mode = 'escape'">Escape</button>
           <button class="mode-btn" :class="{ 'mode-btn--active': mode === 'unescape' }" @click="mode = 'unescape'">Unescape</button>
