@@ -59,6 +59,15 @@ key' = key, hashed down or zero-padded to exactly one block</code></pre>
         <code>X-Hub-Signature-256</code>). The receiving server recomputes the HMAC with its copy of the shared
         secret and compares, no request is trusted unless the signature matches.
       </p>
+      <div class="guide-callout guide-callout--warn">
+        <strong>Important:</strong> Never compare signatures with <code>===</code>, <code>==</code>, or <code>strcmp</code>.
+        Those bail out at the first mismatched byte, so the comparison takes measurably longer the more leading
+        bytes match, an attacker who can time enough requests can recover a valid signature one byte at a time.
+        Use a constant-time function instead: <code>crypto.timingSafeEqual()</code> in Node, <code>hmac.compare_digest()</code>
+        in Python, <code>hash_equals()</code> in PHP, <code>hmac.Equal()</code> in Go. Node's version throws if the
+        two inputs aren't the same byte length, so check that first, the digest's length is fixed by the algorithm
+        and isn't a secret worth protecting.
+      </div>
       <p>
         <strong>AWS SigV4</strong> chains HMAC-SHA256 through several derivation steps to sign API requests
         without ever putting the raw secret key on the wire. <strong>JWTs</strong> signed with the HS256, HS384,

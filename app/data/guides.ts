@@ -874,9 +874,9 @@ export const GUIDES: Record<string, GuideConfig> = {
     category: 'security',
     title: 'What is HMAC?',
     subtitle: 'HMAC explained: why a keyed hash beats a plain one, the ipad/opad construction, and where HS256 shows up in JWTs and webhooks.',
-    readTime: '5 min read',
+    readTime: '6 min read',
     datePublished: '2026-08-07',
-    dateModified: '2026-08-07',
+    dateModified: '2026-08-16',
     description: 'Learn what HMAC (Hash-based Message Authentication Code) is, how its keyed double-hash construction works, why it resists length-extension attacks that break naive secret+message hashing, and where HMAC-SHA256 is used in webhooks, AWS SigV4, and JWTs.',
     tools: [
       { name: 'HMAC Generator', desc: 'Compute HMAC-SHA1, SHA-256, SHA-384 or SHA-512 signatures from a message and secret key, entirely in your browser.', href: '/tools/hmac', icon: ICONS.hmac },
