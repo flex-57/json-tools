@@ -190,8 +190,8 @@ const GUIDE_LINKS = Object.values(GUIDES).map(g => ({
 
 .footer-sep { color: var(--c-t4); }
 
-.footer-bottom-link { color: var(--c-t4); text-decoration: none; border-bottom: 1px solid rgb(var(--c-accent-rgb) / 0.3); padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; }
-.footer-bottom-link:hover { color: var(--c-accent); border-bottom-color: var(--c-accent); }
+.footer-bottom-link { color: var(--c-t4); text-decoration: none; transition: color 0.15s; }
+.footer-bottom-link:hover { color: var(--c-accent); }
 
 @media (max-width: 768px) {
   .footer-nav-desktop    { display: none; }
