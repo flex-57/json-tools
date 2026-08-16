@@ -54,6 +54,24 @@
     </section>
 
     <section class="guide-section">
+      <h2>How many bits is enough?</h2>
+      <table class="cheat-table">
+        <thead><tr><th>Entropy</th><th>Rating</th></tr></thead>
+        <tbody>
+          <tr><td>Under 40 bits</td><td>Weak</td></tr>
+          <tr><td>40–59 bits</td><td>Fair</td></tr>
+          <tr><td>60–79 bits</td><td>Good</td></tr>
+          <tr><td>80+ bits</td><td>Strong</td></tr>
+        </tbody>
+      </table>
+      <p>
+        These are the same cutoffs this site's
+        <NuxtLink to="/tools/password-generator" class="guide-inline-link">password generator</NuxtLink>
+        uses for its live strength meter, so the label it shows you maps directly back to the entropy math above.
+      </p>
+    </section>
+
+    <section class="guide-section">
       <h2>Where the math breaks down: humans aren't random</h2>
       <p>
         The entropy formula assumes every character is chosen independently and uniformly at random. A
