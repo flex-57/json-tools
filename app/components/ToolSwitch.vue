@@ -1,6 +1,6 @@
 <template>
   <div class="tool-switch-row">
-    <div class="mode-toggle">
+    <div class="mode-toggle" :style="{ minWidth: minWidth + 'px' }">
       <div class="mode-indicator" :class="{ 'mode-indicator--right': !isFrom }" />
       <NuxtLink :to="fromPath" class="mode-btn" :class="{ 'mode-btn--active': isFrom }">{{ fromLabel }}</NuxtLink>
       <NuxtLink :to="toPath" class="mode-btn" :class="{ 'mode-btn--active': !isFrom }">{{ toLabel }}</NuxtLink>
@@ -19,7 +19,12 @@ const props = defineProps<{
   toPath: string
   fromLabel: string
   toLabel: string
+  minWidth?: number
 }>()
+
+// Both buttons share flex:1, so each must be wide enough for the longer label — a
+// container without an explicit min-width lets the widest label overflow its half.
+const minWidth = computed(() => props.minWidth ?? 200)
 
 const route = useRoute()
 const router = useRouter()
