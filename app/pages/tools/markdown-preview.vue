@@ -12,9 +12,15 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--focus': inputFocused, 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
-          <span class="pane-label">Markdown</span>
-          <div class="card-actions">
+          <div class="pane-label-group">
+            <span class="pane-label">Markdown</span>
             <span class="hint">paste or type · or drop a .md file</span>
+          </div>
+          <div class="card-actions">
+            <label class="btn-xs" for="markdown-preview-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="markdown-preview-file-input" type="file" accept=".md,text/markdown" class="file-input" @change="onFileInput" >
             <button class="btn-xs" @click="clear"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -278,13 +284,23 @@ onUnmounted(() => {
   inputView?.destroy()
 })
 
-function onDrop(e: DragEvent) {
-  isDragging.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFile(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
+}
+
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const seoCards = [
@@ -313,6 +329,7 @@ const seoCards = [
 </script>
 
 <style scoped>
+.file-input { display: none; }
 .pane--focus { box-shadow: inset 0 0 0 2px rgb(var(--c-accent-rgb) / 0.2); }
 
 .markdown-body {

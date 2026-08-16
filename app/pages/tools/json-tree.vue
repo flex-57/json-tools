@@ -25,9 +25,15 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
-          <span class="pane-label">JSON Input</span>
-          <div class="card-actions">
+          <div class="pane-label-group">
+            <span class="pane-label">JSON Input</span>
             <span class="hint">paste or type · or drop a .json file</span>
+          </div>
+          <div class="card-actions">
+            <label class="btn-xs" for="json-tree-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="json-tree-file-input" type="file" accept=".json,application/json" class="file-input" @change="onFileInput" >
             <button class="btn-xs" @click="clear"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -283,14 +289,24 @@ async function exportGraphAsPdf() {
   }
 }
 
+function loadFile(file: File) {
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
+
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
   isDragging.value = false
   const file = e.dataTransfer?.files[0]
-  if (!file) return
-  const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string }
-  reader.readAsText(file)
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const seoCards = [
@@ -326,6 +342,7 @@ const seoCards = [
 </style>
 
 <style scoped>
+.file-input { display: none; }
 .status-warn { color: var(--c-error); }
 .tree-toolbar { display: flex; align-items: center; gap: 8px; flex: 1; flex-wrap: wrap; }
 .tree-search-wrap { position: relative; display: flex; align-items: center; flex: 1; min-width: 120px; max-width: 200px; }

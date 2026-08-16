@@ -16,9 +16,16 @@
     <div class="hmac-layout">
       <div class="editor-card" :class="{ 'editor-card--focus': messageFocused, 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="editor-card-header">
-          <span class="editor-label">Message</span>
+          <div class="pane-label-group">
+            <span class="editor-label">Message</span>
+            <span class="hint">or drop a .txt file</span>
+          </div>
           <div class="card-actions">
-            <span class="hint">{{ byteCount }} bytes · or drop a .txt file</span>
+            <label class="btn-xs" for="hmac-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="hmac-file-input" type="file" accept=".txt,text/plain" class="file-input" @change="onFileInput" >
+            <span class="hint">{{ byteCount }} bytes</span>
             <button class="btn-xs" @click="clear">Clear</button>
           </div>
         </div>
@@ -75,13 +82,23 @@ const showSecret     = ref(false)
 const hmacs = ref<Record<HmacAlgorithm, string>>({ 'SHA-1': '', 'SHA-256': '', 'SHA-384': '', 'SHA-512': '' })
 
 const isDragging = ref(false)
-function onDrop(e: DragEvent) {
-  isDragging.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFile(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { message.value = ev.target?.result as string }
   reader.readAsText(file)
+}
+
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const byteCount = computed(() => new TextEncoder().encode(message.value).length)
@@ -132,6 +149,7 @@ const seoCards = [
 </script>
 
 <style scoped>
+.file-input { display: none; }
 .hmac-layout { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
 .editor-card--focus { box-shadow: inset 0 0 0 2px rgb(var(--c-accent-rgb) / 0.2); }
 

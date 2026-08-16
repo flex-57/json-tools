@@ -9,9 +9,15 @@
 
     <div class="input-card" :class="{ 'input-card--focused': focused, 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="input-header">
-        <span class="editor-label">Input</span>
-        <div class="input-header-right">
+        <div class="pane-label-group">
+          <span class="editor-label">Input</span>
           <span class="hint">paste or type · or drop a .txt file</span>
+        </div>
+        <div class="input-header-right">
+          <label class="btn-xs" for="text-case-file-input">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+          </label>
+          <input id="text-case-file-input" type="file" accept=".txt,text/plain" class="file-input" @change="onFileInput" >
           <Transition name="fade">
             <span v-if="input" class="word-count">{{ wordCount }} word{{ wordCount !== 1 ? 's' : '' }}</span>
           </Transition>
@@ -56,13 +62,23 @@ useUrlInput(input)
 const focused = ref(false)
 
 const isDragging = ref(false)
-function onDrop(e: DragEvent) {
-  isDragging.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFile(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
+}
+
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const seoCards = [
@@ -102,6 +118,7 @@ const seoCards = [
 </script>
 
 <style scoped>
+.file-input { display: none; }
 .word-count { font-family: var(--font-mono); font-size: 11.5px; color: var(--c-t5); }
 
 .input-textarea { width: 100%; border: none; outline: none; resize: none; padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; background: transparent; color: var(--c-t1); line-height: 1.7; display: block; }

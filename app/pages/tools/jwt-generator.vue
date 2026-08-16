@@ -14,9 +14,15 @@
 
     <div class="section-card" :class="{ 'section-card--error': !!error && !payloadValid, 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="section-header">
-        <span class="editor-label">Payload <span class="editor-label-sub">(JSON)</span></span>
-        <div class="section-header-right">
+        <div class="pane-label-group">
+          <span class="editor-label">Payload <span class="editor-label-sub">(JSON)</span></span>
           <span class="hint">or drop a .json file</span>
+        </div>
+        <div class="section-header-right">
+          <label class="btn-xs" for="jwt-generator-file-input">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+          </label>
+          <input id="jwt-generator-file-input" type="file" accept=".json,application/json" class="file-input" @change="onFileInput" >
           <button class="btn-hint" :disabled="!payloadValid" title="Set iat to current timestamp" @click="setIatNow">iat = now</button>
           <button class="btn-hint" :disabled="!payloadValid" title="Add exp claim: iat + 1 hour" @click="addExp(1)">+ exp 1h</button>
           <button class="btn-xs" @click="clear">Clear</button>
@@ -79,13 +85,23 @@ const { algorithm, payload, secret, token, parts, error, copied, payloadValid, c
 const ALGOS = ['HS256', 'HS384', 'HS512'] as const
 
 const isDragging = ref(false)
-function onDrop(e: DragEvent) {
-  isDragging.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFile(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { payload.value = ev.target?.result as string }
   reader.readAsText(file)
+}
+
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const indicatorTransform = computed(() => {
@@ -130,6 +146,7 @@ const seoCards = [
 .section-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; transition: border-color 0.2s; }
 .section-card--error { border-color: rgb(var(--c-error-rgb) / 0.4); }
 .section-header { padding: 11px 16px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; min-height: 42px; flex-wrap: wrap; gap: 6px; }
+.file-input { display: none; }
 .section-header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .section-header-right .hint { white-space: nowrap; }
 .editor-label-sub { font-family: var(--font-body); font-size: 11px; color: var(--c-t5); font-weight: 400; text-transform: none; letter-spacing: 0; }

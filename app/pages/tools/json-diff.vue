@@ -26,10 +26,16 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDraggingLeft, 'pane--invalid': result?.errorSide === 'left' }" @dragover.prevent="isDraggingLeft = true" @dragleave="isDraggingLeft = false" @drop.prevent="onDropLeft">
         <div class="pane-header">
-          <span class="pane-label"><span class="side-dot side-dot--left"/>Original</span>
-          <div class="card-actions">
-            <span v-if="result && !result.error" class="diff-stat diff-stat--removed">-{{ result.deletions }}</span>
+          <div class="pane-label-group">
+            <span class="pane-label"><span class="side-dot side-dot--left"/>Original</span>
             <span class="hint">drop a .json file</span>
+          </div>
+          <div class="card-actions">
+            <label class="btn-xs" for="json-diff-left-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="json-diff-left-file-input" type="file" accept=".json,application/json" class="file-input" @change="onFileInputLeft" >
+            <span v-if="result && !result.error" class="diff-stat diff-stat--removed">-{{ result.deletions }}</span>
             <button class="btn-xs" @click="left = ''"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -49,10 +55,16 @@
 
       <div class="pane pane--alt" :class="{ 'pane--drag': isDraggingRight, 'pane--invalid': result?.errorSide === 'right' }" @dragover.prevent="isDraggingRight = true" @dragleave="isDraggingRight = false" @drop.prevent="onDropRight">
         <div class="pane-header">
-          <span class="pane-label"><span class="side-dot side-dot--right"/>Modified</span>
-          <div class="card-actions">
-            <span v-if="result && !result.error" class="diff-stat diff-stat--added">+{{ result.additions }}</span>
+          <div class="pane-label-group">
+            <span class="pane-label"><span class="side-dot side-dot--right"/>Modified</span>
             <span class="hint">drop a .json file</span>
+          </div>
+          <div class="card-actions">
+            <label class="btn-xs" for="json-diff-right-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="json-diff-right-file-input" type="file" accept=".json,application/json" class="file-input" @change="onFileInputRight" >
+            <span v-if="result && !result.error" class="diff-stat diff-stat--added">+{{ result.additions }}</span>
             <button class="btn-xs" @click="right = ''"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -120,21 +132,39 @@ function onJump() {
 const isDraggingLeft = ref(false)
 const isDraggingRight = ref(false)
 
-function onDropLeft(e: DragEvent) {
-  isDraggingLeft.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFileLeft(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { left.value = ev.target?.result as string }
   reader.readAsText(file)
 }
-function onDropRight(e: DragEvent) {
-  isDraggingRight.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFileRight(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { right.value = ev.target?.result as string }
   reader.readAsText(file)
+}
+
+function onDropLeft(e: DragEvent) {
+  isDraggingLeft.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFileLeft(file)
+}
+function onDropRight(e: DragEvent) {
+  isDraggingRight.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFileRight(file)
+}
+
+function onFileInputLeft(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFileLeft(file)
+  target.value = ''
+}
+function onFileInputRight(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFileRight(file)
+  target.value = ''
 }
 
 const seoCards = [
@@ -165,6 +195,8 @@ const seoCards = [
 </script>
 
 <style scoped>
+.file-input { display: none; }
+
 .side-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 6px; }
 .side-dot--left { background: var(--c-error); }
 .side-dot--right { background: var(--c-valid); }

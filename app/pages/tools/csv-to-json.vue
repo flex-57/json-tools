@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">CSV <span class="title-arrow">→</span> JSON</h1>
-        <p class="page-subtitle">Convert CSV or TSV data to JSON. Paste text or drop a file.</p>
+        <p class="page-subtitle">Convert CSV or TSV data to JSON.</p>
         <NuxtLink to="/guides/what-is-csv" class="guide-link">New to CSV? Read our guide →</NuxtLink>
       </div>
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
@@ -16,9 +16,11 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
-          <span id="csv-input-label" class="pane-label">CSV Input</span>
-          <div class="card-actions">
+          <div class="pane-label-group">
+            <span id="csv-input-label" class="pane-label">CSV Input</span>
             <span class="hint">paste or type · or drop a .csv / .tsv file</span>
+          </div>
+          <div class="card-actions">
             <div class="option-wrap">
               <label for="csv-sep-select" class="option-label">Sep</label>
               <select id="csv-sep-select" v-model="delimiter" class="option-select">

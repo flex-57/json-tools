@@ -10,9 +10,15 @@
 
     <div class="token-card" :class="{ 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="token-card-header">
-        <span class="editor-label">Token</span>
-        <div class="card-actions">
+        <div class="pane-label-group">
+          <span class="editor-label">Token</span>
           <span class="hint">paste or type · or drop a .txt file</span>
+        </div>
+        <div class="card-actions">
+          <label class="btn-xs" for="jwt-decoder-file-input">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+          </label>
+          <input id="jwt-decoder-file-input" type="file" accept=".txt,text/plain" class="file-input" @change="onFileInput" >
           <button v-if="token" class="btn-xs" @click="clear">Clear</button>
         </div>
       </div>
@@ -105,13 +111,23 @@ const { token, result, copiedHeader, copiedPayload, copyHeader, copyPayload, cle
 useUrlInput(token)
 
 const isDragging = ref(false)
-function onDrop(e: DragEvent) {
-  isDragging.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFile(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { token.value = ev.target?.result as string }
   reader.readAsText(file)
+}
+
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const seoCards = [
@@ -168,6 +184,7 @@ function formatDate(d: Date): string {
 </script>
 
 <style scoped>
+.file-input { display: none; }
 .token-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); overflow: hidden; }
 .token-card-header { padding: 12px 16px 10px; border-bottom: 1px solid var(--c-border-s); display: flex; align-items: center; justify-content: space-between; }
 

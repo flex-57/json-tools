@@ -327,6 +327,10 @@ html.dark .toggle-thumb { background: #fff; }
   font-family: var(--font-body); font-size: 11px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-t3);
 }
+/* Groups .pane-label with its .hint so .pane-header's justify-content:space-between
+   still only sees two children (this group, .card-actions) -- the hint moves with
+   the label instead of competing for room with Sep/Headers/Browse/Clear on the right. */
+.pane-label-group { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .card-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
 .hint { font-family: var(--font-body); font-size: 11px; color: var(--c-t4); }
 

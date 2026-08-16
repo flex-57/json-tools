@@ -22,9 +22,15 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--focus': inputFocused, 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
-          <span class="pane-label">{{ mode === 'encode' ? 'Plain text' : 'Base64 input' }}</span>
-          <div class="card-actions">
+          <div class="pane-label-group">
+            <span class="pane-label">{{ mode === 'encode' ? 'Plain text' : 'Base64 input' }}</span>
             <span class="hint">paste or type · or drop a .txt file</span>
+          </div>
+          <div class="card-actions">
+            <label class="btn-xs" for="base64-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="base64-file-input" type="file" accept=".txt,text/plain" class="file-input" @change="onFileInput" >
             <button class="btn-xs" @click="clear"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -85,14 +91,24 @@ useUrlInput(input)
 const inputFocused = ref(false)
 const swapping = ref(false)
 
+function loadFile(file: File) {
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
+
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
   isDragging.value = false
   const file = e.dataTransfer?.files[0]
-  if (!file) return
-  const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string }
-  reader.readAsText(file)
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 function handleSwap() {
@@ -126,3 +142,7 @@ const seoCards = [
   },
 ]
 </script>
+
+<style scoped>
+.file-input { display: none; }
+</style>

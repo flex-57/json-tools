@@ -26,9 +26,15 @@
 
     <div class="editor-card" :class="{ 'drop-target--active': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
       <div class="editor-card-header">
-        <span class="editor-label">Test string</span>
-        <div class="card-actions">
+        <div class="pane-label-group">
+          <span class="editor-label">Test string</span>
           <span class="hint">paste or type · or drop a .txt file</span>
+        </div>
+        <div class="card-actions">
+          <label class="btn-xs" for="regex-tester-file-input">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+          </label>
+          <input id="regex-tester-file-input" type="file" accept=".txt,text/plain" class="file-input" @change="onFileInput" >
           <button class="btn-xs" @click="clear">Clear</button>
         </div>
       </div>
@@ -103,13 +109,23 @@ const FLAGS = [
 ]
 
 const isDragging = ref(false)
-function onDrop(e: DragEvent) {
-  isDragging.value = false
-  const file = e.dataTransfer?.files[0]
-  if (!file) return
+function loadFile(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { input.value = ev.target?.result as string }
   reader.readAsText(file)
+}
+
+function onDrop(e: DragEvent) {
+  isDragging.value = false
+  const file = e.dataTransfer?.files[0]
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const activeFlags = ref(new Set(['g']))
@@ -160,6 +176,7 @@ const seoCards = [
 </script>
 
 <style scoped>
+.file-input { display: none; }
 .pattern-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-card); padding: 14px 18px; transition: border-color 0.2s; }
 .pattern-card--error { border-color: rgb(var(--c-error-rgb) / 0.4); }
 .pattern-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }

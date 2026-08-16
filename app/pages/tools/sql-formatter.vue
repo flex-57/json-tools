@@ -26,9 +26,15 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
-          <span class="pane-label">Raw SQL</span>
-          <div class="card-actions">
+          <div class="pane-label-group">
+            <span class="pane-label">Raw SQL</span>
             <span class="hint">paste or type · or drop a .sql file</span>
+          </div>
+          <div class="card-actions">
+            <label class="btn-xs" for="sql-formatter-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="sql-formatter-file-input" type="file" accept=".sql" class="file-input" @change="onFileInput" >
             <button class="btn-xs" @click="clear"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -95,14 +101,24 @@ const DIALECTS: { value: SqlDialect; label: string }[] = [
 const { input, dialect, uppercase, indentSize, output, error, loading, copied, copy, download, clear } = useSqlFormatter()
 useUrlInput(input)
 
+function loadFile(file: File) {
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
+
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
   isDragging.value = false
   const file = e.dataTransfer?.files[0]
-  if (!file) return
-  const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string }
-  reader.readAsText(file)
+  if (file) loadFile(file)
+}
+
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = ''
 }
 
 const indentSizeNum = computed({
@@ -147,6 +163,7 @@ const seoCards = [
 </script>
 
 <style scoped>
+.file-input { display: none; }
 .dialect-badge {
   font-family: var(--font-mono); font-size: 11px; font-weight: 700;
   padding: 2px 7px; border-radius: 20px;
