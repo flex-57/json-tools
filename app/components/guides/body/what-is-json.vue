@@ -10,8 +10,11 @@
         practically everything that passes data between systems.
       </p>
       <p>
-        JSON was derived from JavaScript object literal syntax in the early 2000s, but it is
-        completely language-agnostic — every major programming language can read and write it natively.
+        JSON was created by <a href="https://www.crockford.com/about.html" target="_blank" rel="noopener">Douglas Crockford</a> in 2001, who described the format at
+        <a href="https://www.json.org/json-en.html" target="_blank" rel="noopener">json.org</a> after using it with Chip Morningstar at State Software.
+        It was later formalised independently by Ecma International
+        (<a href="https://ecma-international.org/publications-and-standards/standards/ecma-404/" target="_blank" rel="noopener">ECMA-404</a>) and the IETF (RFC 8259, linked above), which is why you'll see both cited as the JSON spec.
+        Despite its JavaScript origins, JSON is completely language-agnostic: every major programming language can read and write it natively.
       </p>
     </section>
 
@@ -29,6 +32,34 @@
           <p class="type-note">{{ t.note }}</p>
         </div>
       </div>
+
+      <p>
+        Numbers are unbounded in the spec, but most parsers store them as IEEE 754 double-precision
+        floats, including JavaScript's <code>Number</code> type. That's exact for integers only up to
+        2<sup>53</sup>. See <NuxtLink to="/guides/json-best-practices" class="guide-inline-link">JSON best practices</NuxtLink>
+        for how to handle IDs larger than that.
+      </p>
+    </section>
+
+    <!-- Nesting -->
+    <section class="guide-section">
+      <h2>Nesting objects and arrays</h2>
+      <p>
+        Any JSON value can contain any other JSON value, so objects and arrays nest freely to
+        whatever depth you need — the only real limit is your parser's call stack. A typical API
+        response combines several layers: an object holding a nested object, plus an array of objects.
+      </p>
+      <pre class="compare-code"><span class="jk">{</span>
+  <span class="jkey">"id"</span><span class="jp">:</span> <span class="jn">1024</span><span class="jp">,</span>
+  <span class="jkey">"customer"</span><span class="jp">:</span> <span class="jk">{</span>
+    <span class="jkey">"name"</span><span class="jp">:</span> <span class="js">"Alice"</span><span class="jp">,</span>
+    <span class="jkey">"vip"</span><span class="jp">:</span> <span class="jb">true</span>
+  <span class="jk">}</span><span class="jp">,</span>
+  <span class="jkey">"items"</span><span class="jp">:</span> <span class="jk">[</span>
+    <span class="jk">{</span> <span class="jkey">"sku"</span><span class="jp">:</span> <span class="js">"A1"</span><span class="jp">,</span> <span class="jkey">"qty"</span><span class="jp">:</span> <span class="jn">2</span> <span class="jk">}</span><span class="jp">,</span>
+    <span class="jk">{</span> <span class="jkey">"sku"</span><span class="jp">:</span> <span class="js">"B7"</span><span class="jp">,</span> <span class="jkey">"qty"</span><span class="jp">:</span> <span class="jn">1</span> <span class="jk">}</span>
+  <span class="jk">]</span>
+<span class="jk">}</span></pre>
     </section>
 
     <!-- Syntax rules -->
@@ -129,7 +160,7 @@ const TYPES = [
     name: 'number',
     color: '#60A5FA', bg: 'rgba(96,165,250,0.08)', border: 'rgba(96,165,250,0.25)',
     examples: ['42', '3.14', '-7', '1.5e10'],
-    note: 'Integer or float. No NaN, no Infinity, no hex.',
+    note: 'Integer or float, IEEE 754 double. No NaN, no Infinity, no hex.',
   },
   {
     name: 'boolean',

@@ -39,10 +39,10 @@ export const GUIDES: Record<string, GuideConfig> = {
     category: 'json',
     title: 'What is JSON?',
     subtitle: 'JSON explained: data types, syntax rules, and why it became the universal data format for APIs and config files.',
-    readTime: '6 min read',
+    readTime: '7 min read',
     datePublished: '2026-06-19',
-    dateModified: '2026-06-19',
-    description: 'Learn what JSON is, its 6 data types, syntax rules, how it compares to XML, and why it became the standard format for REST APIs, configuration files, and databases.',
+    dateModified: '2026-08-16',
+    description: 'Learn what JSON is, its 6 data types, syntax rules and nesting, how it compares to XML, and why it became the standard data format for APIs and config files.',
     tools: [
       { name: 'JSON Formatter & Validator', desc: 'Paste any JSON to instantly validate and format it: errors are highlighted with the exact line and reason.', href: '/tools/json-formatter', icon: ICONS.formatter },
       { name: 'JSON Tree Viewer', desc: 'Visualize any JSON structure as an interactive, collapsible tree.', href: '/tools/json-tree', icon: ICONS.tree },
