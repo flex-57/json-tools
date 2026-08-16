@@ -1,5 +1,5 @@
 <template>
-  <div class="error-banner">
+  <div class="error-banner" role="alert">
     <div class="error-banner-icon">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5 15 14H1L8 1.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6.3v3.4M8 11.7v.1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
     </div>

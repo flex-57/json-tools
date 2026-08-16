@@ -15,7 +15,7 @@
           <label class="control-label">Version</label>
           <div class="format-toggle">
             <div class="format-indicator" :style="{ transform: 'translateX(' + versionIndex * 100 + '%)' }" />
-            <button v-for="v in VERSIONS" :key="v.id" :class="['format-btn', version === v.id ? 'format-btn--active' : '']" @click="version = v.id">{{ v.label }}</button>
+            <button v-for="v in VERSIONS" :key="v.id" :class="['format-btn', version === v.id ? 'format-btn--active' : '']" :aria-pressed="version === v.id" @click="version = v.id">{{ v.label }}</button>
           </div>
         </div>
 
@@ -32,7 +32,7 @@
           <label class="control-label">Format</label>
           <div class="format-toggle">
             <div class="format-indicator" :style="{ transform: 'translateX(' + formatIndex * 100 + '%)' }" />
-            <button v-for="f in FORMATS" :key="f.id" :class="['format-btn', format === f.id ? 'format-btn--active' : '']" @click="format = f.id">{{ f.label }}</button>
+            <button v-for="f in FORMATS" :key="f.id" :class="['format-btn', format === f.id ? 'format-btn--active' : '']" :aria-pressed="format === f.id" @click="format = f.id">{{ f.label }}</button>
           </div>
         </div>
         <span v-else class="hint">ULID format is fixed — 26 uppercase Crockford-base32 characters, no dashes</span>
@@ -60,7 +60,7 @@
         <div v-for="(uuid, i) in uuids" :key="i" class="uuid-row">
           <span class="uuid-index">{{ String(i + 1).padStart(2, '0') }}</span>
           <span class="uuid-value">{{ formatUuid(uuid) }}</span>
-          <button class="uuid-copy" :class="{ 'uuid-copy--done': isCopied('uuid-' + i) }" @click="copyOne(uuid, i)">{{ isCopied('uuid-' + i) ? 'Copied!' : 'Copy' }}</button>
+          <button class="uuid-copy" :class="{ 'uuid-copy--done': isCopied('uuid-' + i) }" :aria-label="(isCopied('uuid-' + i) ? 'Copied UUID ' : 'Copy UUID ') + (i + 1)" @click="copyOne(uuid, i)">{{ isCopied('uuid-' + i) ? 'Copied!' : 'Copy' }}</button>
         </div>
       </div>
     </div>
@@ -206,5 +206,12 @@ const seoCards = [
 .uuid-copy:hover { background: var(--c-subtle); color: var(--c-t2); }
 .uuid-copy--done { background: rgb(var(--c-valid-rgb) / 0.12); border-color: rgb(var(--c-valid-rgb) / 0.35); color: var(--c-valid); }
 
-@media (max-width: 640px) { .controls-body { gap: 16px; } .control-actions { margin-left: 0; } .uuid-value { font-size: 11px; } }
+@media (max-width: 640px) {
+  .controls-body { gap: 16px; }
+  .control-actions { margin-left: 0; }
+  /* Full ID over truncated: nowrap+ellipsis hid part of the UUID at this width. */
+  .uuid-value { font-size: 11px; white-space: normal; word-break: break-all; overflow: visible; text-overflow: clip; }
+  .uuid-row { align-items: flex-start; }
+  .uuid-copy { margin-top: 1px; }
+}
 </style>

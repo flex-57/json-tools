@@ -10,7 +10,7 @@
 
     <div class="editor-card pw-card">
       <div class="pw-display">
-        <code class="pw-output" :class="{ 'pw-output--empty': !password }" aria-live="polite">{{ password || 'Select at least one character type' }}</code>
+        <code class="pw-output" :class="{ 'pw-output--empty': !password }">{{ password || 'Select at least one character type' }}</code>
         <div class="pw-action-btns">
           <button class="icon-btn" title="Regenerate" @click="regen">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M13.5 8A5.5 5.5 0 112.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2.5 2v3.5H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -20,8 +20,8 @@
       </div>
 
       <div class="strength-row">
-        <div class="strength-track"><div class="strength-fill" :class="'s' + strength.level" :style="{ width: (strength.level / 4 * 100) + '%' }" /></div>
-        <span class="strength-label" :class="'s' + strength.level">{{ strength.label }}</span>
+        <div class="strength-track" aria-hidden="true"><div class="strength-fill" :class="'s' + strength.level" :style="{ width: (strength.level / 4 * 100) + '%' }" /></div>
+        <span class="strength-label" :class="'s' + strength.level" aria-live="polite" aria-atomic="true">{{ strength.label }}</span>
         <span v-if="password" class="entropy-label">· {{ entropy }} bits</span>
       </div>
 
@@ -29,10 +29,10 @@
 
       <div class="pw-config">
         <div class="cfg-row">
-          <span class="cfg-label">Length</span>
+          <span id="pw-length-label" class="cfg-label">Length</span>
           <div class="length-controls">
-            <input v-model.number="length" type="range" min="4" max="64" class="pw-slider" >
-            <input v-model.number="length" type="number" min="4" max="64" class="len-num" @blur="clampLength" >
+            <input v-model.number="length" type="range" min="4" max="64" class="pw-slider" aria-labelledby="pw-length-label" >
+            <input v-model.number="length" type="number" min="4" max="64" class="len-num" aria-labelledby="pw-length-label" @blur="clampLength" >
           </div>
         </div>
 
@@ -60,7 +60,7 @@
       <div class="editor-card-header">
         <span class="editor-label">Bulk generate</span>
         <div class="bulk-header-controls">
-          <input v-model.number="bulkCount" type="number" min="2" max="20" class="bulk-count-input" @blur="clampBulkCount" >
+          <input v-model.number="bulkCount" type="number" min="2" max="20" class="bulk-count-input" aria-label="Number of passwords to generate" @blur="clampBulkCount" >
           <button class="btn btn-primary" :disabled="!charset" @click="generateBulk">Generate {{ bulkCount }}</button>
         </div>
       </div>
@@ -271,7 +271,8 @@ const cards = [
 .opt-cb { accent-color: var(--c-accent); width: 14px; height: 14px; cursor: pointer; flex-shrink: 0; }
 
 .bulk-header-controls { display: flex; align-items: center; gap: 8px; }
-.bulk-count-input { width: 60px; height: 30px; padding: 0 8px; border: 1px solid var(--c-border); border-radius: 7px; background: var(--c-subtle); font-family: var(--font-mono); font-size: 13px; color: var(--c-t1); text-align: center; outline: none; }
+.bulk-count-input { width: 60px; height: 30px; padding: 0 8px; border: 1px solid var(--c-border); border-radius: 7px; background: var(--c-subtle); font-family: var(--font-mono); font-size: 13px; color: var(--c-t1); text-align: center; outline: none; transition: border-color 0.15s; }
+.bulk-count-input:focus { border-color: var(--c-accent); }
 
 .bulk-list { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 6px; }
 .bulk-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--c-subtle); border: 1px solid var(--c-border); border-radius: 8px; }

@@ -369,7 +369,7 @@ html.dark .toggle-thumb { background: #fff; }
 .pane .n { color: var(--type-num); }
 .pane .b { color: var(--type-bool); }
 
-.pane--drag { border-color: var(--c-accent); }
+.pane--drag { box-shadow: inset 0 0 0 2px var(--c-accent); }
 .pane--drag .pane-body { outline: 1px dashed rgb(var(--c-accent-rgb) / 0.5); outline-offset: -8px; }
 
 /* Generic drag-over highlight for input containers that aren't a .pane (single-card layouts). */

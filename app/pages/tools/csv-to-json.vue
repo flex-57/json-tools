@@ -16,11 +16,11 @@
     <div class="dualpane no-mid">
       <div class="pane" :class="{ 'pane--drag': isDragging, 'pane--invalid': error }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false" @drop.prevent="onDrop">
         <div class="pane-header">
-          <span class="pane-label">CSV Input</span>
+          <span id="csv-input-label" class="pane-label">CSV Input</span>
           <div class="card-actions">
             <div class="option-wrap">
-              <label class="option-label">Sep</label>
-              <select v-model="delimiter" class="option-select">
+              <label for="csv-sep-select" class="option-label">Sep</label>
+              <select id="csv-sep-select" v-model="delimiter" class="option-select">
                 <option value="auto">Auto</option>
                 <option value=",">Comma</option>
                 <option value=";">Semicolon</option>
@@ -32,11 +32,15 @@
               <span class="toggle-track"><span class="toggle-thumb" /></span>
               <span class="toggle-label">Headers</span>
             </label>
+            <label class="btn-xs" for="csv-file-input">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
+            </label>
+            <input id="csv-file-input" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" class="file-input" @change="onFileInput" >
             <button class="btn-xs" @click="clear"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
         <div class="pane-body" style="padding: 0;">
-          <textarea v-model="input" placeholder="name,age,city&#10;Alice,30,Paris&#10;Bob,25,Lyon" class="pane-textarea" style="padding: 14px 16px;" spellcheck="false" />
+          <textarea v-model="input" placeholder="name,age,city&#10;Alice,30,Paris&#10;Bob,25,Lyon" class="pane-textarea" style="padding: 14px 16px;" spellcheck="false" aria-labelledby="csv-input-label" />
         </div>
       </div>
 
@@ -99,14 +103,27 @@ useUrlInput(input)
 // useCsvJson.ts) is folded into the banner text instead of a clickable action.
 const errorMessage = computed(() => error.value ? `${error.value}${errorLine.value ? ` (around line ${errorLine.value})` : ''}` : '')
 
+function loadFile(file: File) {
+  const reader = new FileReader()
+  reader.onload = (ev) => { input.value = ev.target?.result as string }
+  reader.readAsText(file)
+}
+
 const isDragging = ref(false)
 function onDrop(e: DragEvent) {
   isDragging.value = false
   const file = e.dataTransfer?.files[0]
-  if (!file) return
-  const reader = new FileReader()
-  reader.onload = (ev) => { input.value = ev.target?.result as string }
-  reader.readAsText(file)
+  if (file) loadFile(file)
+}
+
+// Keyboard/screen-reader alternative to drag-and-drop: the "Browse" label
+// above is natively focusable and associated with this hidden input via
+// for/id, so no click-proxy ref or custom key handling is needed.
+function onFileInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) loadFile(file)
+  target.value = '' // allow re-picking the same file later
 }
 
 const seoCards = [
@@ -133,3 +150,7 @@ const seoCards = [
   },
 ]
 </script>
+
+<style scoped>
+.file-input { display: none; }
+</style>
