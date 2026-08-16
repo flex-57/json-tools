@@ -397,6 +397,7 @@ html.dark .toggle-thumb { background: #fff; }
 .led { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 7px; }
 .led.valid { background: var(--c-valid); box-shadow: 0 0 6px rgb(var(--c-valid-rgb) / 0.6); }
 .led.error { background: var(--c-error); box-shadow: 0 0 6px rgb(var(--c-error-rgb) / 0.6); }
+.led.neutral { background: var(--c-t4); }
 
 /* ── Swap button (base64, url-encode, json-diff) ───────────────────── */
 .swap-btn {
