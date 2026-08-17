@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">GraphQL <span class="title-amp">Formatter</span></h1>
-        <p class="page-subtitle">Format GraphQL queries, mutations, fragments and schema definitions instantly.</p>
+        <p class="page-subtitle">Format GraphQL queries, mutations, fragments and schema definitions instantly, entirely in your browser.</p>
         <NuxtLink to="/guides/what-is-graphql" class="guide-link">What is GraphQL? Read our guide →</NuxtLink>
       </div>
     </div>
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="pane-body" style="padding: 0;">
-          <textarea v-model="input" class="pane-textarea" placeholder="query GetUser($id: ID!) { user(id: $id) { name email } }" spellcheck="false" />
+          <textarea v-model="input" class="pane-textarea" style="padding: 14px 16px;" placeholder="query GetUser($id: ID!) { user(id: $id) { name email } }" spellcheck="false" />
         </div>
       </div>
 
@@ -47,8 +47,8 @@
           </div>
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
-          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see formatted output' : 'Paste a GraphQL query, mutation, fragment or schema to see formatted output' }}</template>
-          <textarea v-else :value="output" class="pane-textarea" readonly spellcheck="false" />
+          <template v-if="!output">{{ input.trim() ? 'Fix the error in your input to see formatted output' : 'Formatted output will appear here…' }}</template>
+          <textarea v-else :value="output" class="pane-textarea" style="padding: 14px 16px;" readonly spellcheck="false" />
         </div>
       </div>
     </div>

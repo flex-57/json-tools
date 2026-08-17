@@ -63,7 +63,7 @@
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
           <Transition name="reveal" mode="out-in">
-            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see the schema' : 'Paste JSON to see the schema' }}</p>
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see the schema' : 'Schema will appear here…' }}</p>
             <div v-else key="output" class="pane-body-editor-wrap">
               <ClientOnly>
                 <JsonEditor v-model="output" :readonly="true" />

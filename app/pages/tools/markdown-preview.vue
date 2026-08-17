@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Markdown <span class="title-amp">Preview</span></h1>
-        <p class="page-subtitle">Write or paste Markdown on the left and see the rendered result instantly. Client-side, nothing sent to a server.</p>
+        <p class="page-subtitle">Render Markdown to HTML instantly with a live split-pane preview.</p>
         <NuxtLink to="/guides/markdown-cheatsheet" class="guide-link">Markdown syntax cheatsheet →</NuxtLink>
         <NuxtLink to="/guides/what-is-markdown" class="guide-link">New to Markdown? Read the guide →</NuxtLink>
       </div>

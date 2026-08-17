@@ -33,15 +33,30 @@ function lcsMatrix(a: string[], b: string[]): number[][] {
   return dp
 }
 
+// JSON.stringify only appends a trailing comma to a property/item line when something
+// follows it — so appending or removing the last key of an object (or last item of an
+// array) shifts the comma on the *previous* line even though its value never changed.
+// Compared as raw text, that line would look "different" and get reported as a spurious
+// removed+added pair. Stripping the trailing comma before comparing treats it as the
+// unchanged line it actually is, while the trailing comma itself carries no semantic
+// meaning to diff on.
+function stripTrailingComma(line: string): string {
+  return line.replace(/,\s*$/, '')
+}
+
 function computeDiffLines(a: string[], b: string[]): DiffLine[] {
-  const dp = lcsMatrix(a, b)
+  const an = a.map(stripTrailingComma)
+  const bn = b.map(stripTrailingComma)
+  const dp = lcsMatrix(an, bn)
   const result: DiffLine[] = []
   let i = a.length
   let j = b.length
 
   while (i > 0 || j > 0) {
-    if (i > 0 && j > 0 && a[i - 1]! === b[j - 1]!) {
-      result.unshift({ type: 'unchanged', line: a[i - 1]!, lineLeft: i, lineRight: j })
+    if (i > 0 && j > 0 && an[i - 1]! === bn[j - 1]!) {
+      // Prefer the right-hand line for display: when the two sides only differ by the
+      // trailing comma, the right side's comma reflects its actual (current) position.
+      result.unshift({ type: 'unchanged', line: b[j - 1]!, lineLeft: i, lineRight: j })
       i--; j--
     } else if (j > 0 && (i === 0 || dp[i]![j - 1]! >= dp[i - 1]![j]!)) {
       result.unshift({ type: 'added', line: b[j - 1]!, lineLeft: null, lineRight: j })

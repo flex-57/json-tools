@@ -3,12 +3,8 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-amp">Diff</span></h1>
-        <p class="page-subtitle">Compare two JSON objects and highlight every addition and deletion.</p>
+        <p class="page-subtitle">Compare two JSON objects and highlight every addition and deletion, entirely in your browser.</p>
       </div>
-      <button class="btn btn-ghost" title="Swap left and right" @click="swap">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 4h9M7 1l3 3-3 3M13 10H4M7 7l-3 3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Swap
-      </button>
     </div>
 
     <Transition name="fade">
@@ -28,14 +24,13 @@
         <div class="pane-header">
           <div class="pane-label-group">
             <span class="pane-label"><span class="side-dot side-dot--left"/>Original</span>
-            <span class="hint">drop a .json file</span>
+            <span class="hint">paste or type · or drop a .json file</span>
           </div>
           <div class="card-actions">
             <label class="btn-xs" for="json-diff-left-file-input">
               <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
             </label>
             <input id="json-diff-left-file-input" type="file" accept=".json,application/json" class="file-input" @change="onFileInputLeft" >
-            <span v-if="result && !result.error" class="diff-stat diff-stat--removed">-{{ result.deletions }}</span>
             <button class="btn-xs" @click="left = ''"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -57,14 +52,13 @@
         <div class="pane-header">
           <div class="pane-label-group">
             <span class="pane-label"><span class="side-dot side-dot--right"/>Modified</span>
-            <span class="hint">drop a .json file</span>
+            <span class="hint">paste or type · or drop a .json file</span>
           </div>
           <div class="card-actions">
             <label class="btn-xs" for="json-diff-right-file-input">
               <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Browse
             </label>
             <input id="json-diff-right-file-input" type="file" accept=".json,application/json" class="file-input" @change="onFileInputRight" >
-            <span v-if="result && !result.error" class="diff-stat diff-stat--added">+{{ result.additions }}</span>
             <button class="btn-xs" @click="right = ''"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Clear</button>
           </div>
         </div>
@@ -177,7 +171,7 @@ const seoCards = [
   },
   {
     title: 'Reading the diff output',
-    text: 'The counters in each panel header tell you at a glance how many additions and removals there are. Paste the two JSON documents and the diff updates immediately.',
+    text: 'The +/− counters above the diff view tell you at a glance how many additions and removals there are. Paste the two JSON documents and the diff updates immediately.',
     table: [
       { label: 'Removed', value: 'Error tone — appears only in the left document' },
       { label: 'Added', value: 'Valid tone — appears only in the right document' },

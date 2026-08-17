@@ -13,7 +13,7 @@
         <div class="editor-card-header">
           <div class="pane-label-group">
             <span class="editor-label">Input</span>
-            <span class="hint">or drop a .txt file</span>
+            <span class="hint">paste or type · or drop a .txt file</span>
           </div>
           <div class="card-actions">
             <label class="btn-xs" for="hash-file-input">

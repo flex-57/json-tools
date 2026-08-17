@@ -16,7 +16,7 @@
       <div class="section-header">
         <div class="pane-label-group">
           <span class="editor-label">Payload <span class="editor-label-sub">(JSON)</span></span>
-          <span class="hint">or drop a .json file</span>
+          <span class="hint">paste or type · or drop a .json file</span>
         </div>
         <div class="section-header-right">
           <label class="btn-xs" for="jwt-generator-file-input">

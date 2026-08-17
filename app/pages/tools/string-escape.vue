@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">String <span class="title-amp">{{ mode === 'escape' ? 'Escaper' : 'Unescaper' }}</span></h1>
-        <p class="page-subtitle">Escape or unescape \n, \t, \", \\ and Unicode sequences for JSON or code string literals.</p>
+        <p class="page-subtitle">Escape or unescape \n, \t, \", \\ and Unicode sequences for JSON or code string literals. Runs entirely in your browser.</p>
       </div>
       <div style="display:flex; gap: 8px; align-items:center; flex-wrap: wrap;">
         <div class="mode-toggle">

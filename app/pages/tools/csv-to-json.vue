@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">CSV <span class="title-arrow">→</span> JSON</h1>
-        <p class="page-subtitle">Convert CSV or TSV data to JSON.</p>
+        <p class="page-subtitle">Convert CSV or TSV data to JSON, entirely in your browser.</p>
         <NuxtLink to="/guides/what-is-csv" class="guide-link">New to CSV? Read our guide →</NuxtLink>
       </div>
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="midcol"><SwapButton from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" /></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -59,7 +59,7 @@
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
           <Transition name="reveal" mode="out-in">
-            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see JSON output' : 'Paste CSV to see JSON output' }}</p>
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see JSON output' : 'JSON output will appear here…' }}</p>
             <div v-else key="output" class="pane-body-editor-wrap">
               <ClientOnly>
                 <JsonEditor v-model="output" :readonly="true" />

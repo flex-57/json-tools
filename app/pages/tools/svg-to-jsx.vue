@@ -46,7 +46,7 @@
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
           <Transition name="reveal" mode="out-in">
-            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see JSX output' : 'Paste an SVG to see JSX output' }}</p>
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see JSX output' : 'JSX output will appear here…' }}</p>
             <div v-else key="output" class="pane-body-editor-wrap">
               <ClientOnly>
                 <JsonEditor :model-value="output" lang="jsx" :readonly="true" :line-wrap="true" />

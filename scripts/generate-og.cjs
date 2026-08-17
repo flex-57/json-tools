@@ -90,8 +90,13 @@ const TOOLS = [
   },
   {
     slug: 'json-tree', tag: 'JSON Tool', title: 'JSON Tree\nViewer', size: 72,
-    subtitle: 'Visualize JSON as an interactive tree or node graph.',
+    subtitle: 'Explore JSON as an interactive collapsible tree.',
     window: J([['nodes', 'n', '428'], ['depth', 'n', '6'], ['search', 's', 'email']]),
+  },
+  {
+    slug: 'json-graph', tag: 'JSON Tool', title: 'JSON Graph\nViewer', size: 72,
+    subtitle: 'Visualize JSON as an interactive node graph.',
+    window: J([['nodes', 'n', '24'], ['edges', 'n', '23'], ['layout', 's', 'auto']]),
   },
   {
     slug: 'json-schema', tag: 'JSON Tool', title: 'JSON Schema\nGenerator', size: 68,

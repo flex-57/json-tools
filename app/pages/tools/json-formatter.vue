@@ -77,7 +77,7 @@
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !isValid }" :style="isValid ? 'padding: 0;' : ''" aria-live="polite">
           <Transition name="reveal" mode="out-in">
-            <p v-if="!isValid" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see formatted output' : 'Paste JSON to see formatted output' }}</p>
+            <p v-if="!isValid" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see formatted output' : 'Formatted output will appear here…' }}</p>
             <div v-else key="output" class="pane-body-editor-wrap">
               <ClientOnly>
                 <JsonEditor v-model="output" :readonly="true" :line-wrap="true" />

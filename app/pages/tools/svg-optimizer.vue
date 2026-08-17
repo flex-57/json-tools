@@ -54,7 +54,7 @@
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
           <Transition name="reveal" mode="out-in">
-            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see optimized output' : 'Paste an SVG to see optimized output' }}</p>
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see optimized output' : 'Optimized output will appear here…' }}</p>
             <div v-else key="output" class="pane-body-editor-wrap">
               <ClientOnly>
                 <JsonEditor :model-value="output" lang="xml" :readonly="true" :line-wrap="true" />

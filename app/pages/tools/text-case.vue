@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Text <span class="title-amp">Case</span> Converter</h1>
-        <p class="page-subtitle">Convert text between camelCase, PascalCase, snake_case, kebab-case and more, instantly.</p>
+        <p class="page-subtitle">Convert text between camelCase, PascalCase, snake_case, kebab-case and more, instantly and entirely client-side.</p>
       </div>
     </div>
 

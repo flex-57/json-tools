@@ -344,6 +344,27 @@ export const TOOL_FAQS = {
     },
   ],
 
+  'json-graph': [
+    {
+      q: 'Why does a large JSON file produce a cluttered or very wide graph?',
+      a: [
+        'The layout is computed automatically by the Dagre algorithm, which lays every branch out left-to-right without overlap — but a wide or deeply nested payload still produces a large canvas. Zoom out to see the full shape, or narrow your input down to just the branch you care about before pasting it here.',
+      ],
+    },
+    {
+      q: 'What do the different node shapes represent?',
+      a: [
+        'A header node is an object or array\'s name and type. The body node underneath it lists that object\'s own key-value pairs, with nested objects and arrays shown as a count (e.g. {3} or [5]) rather than expanded inline. A leaf node is a single primitive value inside an array.',
+      ],
+    },
+    {
+      q: 'Can I export the graph as an image or PDF?',
+      a: [
+        'Not currently. Export is disabled on this view for now due to layout issues in the exported file — use your browser\'s built-in screenshot tool in the meantime.',
+      ],
+    },
+  ],
+
   'jwt-generator': [
     {
       q: 'Is my secret key sent anywhere when I generate a token?',

@@ -45,7 +45,7 @@ const open = ref(props.defaultOpen)
 .recent-collapse { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-reveal) var(--ease-out); }
 .recent-toggle[aria-expanded="true"] ~ .recent-collapse { grid-template-rows: 1fr; }
 .recent-clip { overflow: hidden; min-height: 0; }
-.recent-row { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px; }
+.recent-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 0 0 4px; }
 .recent-pill {
   display: flex; align-items: center; gap: 8px; padding: 8px 14px;
   background: var(--c-card); border: 1px solid var(--c-border); border-radius: 20px;

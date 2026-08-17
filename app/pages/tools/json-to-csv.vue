@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> CSV</h1>
-        <p class="page-subtitle">Convert a JSON array to CSV format.</p>
+        <p class="page-subtitle">Convert a JSON array to CSV format, entirely in your browser.</p>
         <NuxtLink to="/guides/what-is-csv" class="guide-link">New to CSV? Read our guide →</NuxtLink>
       </div>
       <ToolSwitch from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" from-label="CSV → JSON" to-label="JSON → CSV" />
@@ -24,7 +24,7 @@
         <div class="pane-header">
           <div class="pane-label-group">
             <span class="pane-label">JSON Input</span>
-            <span class="hint">array of objects · or drop a .json file</span>
+            <span class="hint">paste or type · or drop a .json file</span>
           </div>
           <div class="card-actions">
             <label class="btn-xs" for="json-to-csv-file-input">
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="midcol"><SwapButton from-path="/tools/csv-to-json" to-path="/tools/json-to-csv" /></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -62,7 +62,7 @@
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" aria-live="polite">
           <Transition name="reveal" mode="out-in">
-            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ error ? 'Fix the error in your input to see CSV output' : 'Paste JSON to see CSV output' }}</p>
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ error ? 'Fix the error in your input to see CSV output' : 'CSV output will appear here…' }}</p>
             <textarea v-else key="output" v-model="output" readonly class="pane-textarea" spellcheck="false" />
           </Transition>
         </div>

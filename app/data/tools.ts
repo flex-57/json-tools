@@ -30,7 +30,8 @@ export const TOOLS: ToolMeta[] = [
   // JSON
   { slug: 'json-formatter', name: 'JSON Formatter', short: 'Beautify & validate', category: 'json', variant: 'transform', updatedAt: '2026-08-08' },
   { slug: 'json-diff', name: 'JSON Diff', short: 'Compare two documents', category: 'json', variant: 'compare', updatedAt: '2026-08-08' },
-  { slug: 'json-tree', name: 'JSON Tree Viewer', short: 'Collapsible tree / graph', category: 'json', variant: 'explorer', updatedAt: '2026-08-08' },
+  { slug: 'json-tree', name: 'JSON Tree Viewer', short: 'Collapsible node explorer', category: 'json', variant: 'explorer', updatedAt: '2026-08-17' },
+  { slug: 'json-graph', name: 'JSON Graph Viewer', short: 'Interactive node diagram', category: 'json', variant: 'explorer', updatedAt: '2026-08-17' },
 
   // Converters
   { slug: 'csv-to-json', name: 'CSV → JSON', short: 'Convert either direction', category: 'converters', variant: 'transform', navLabel: 'CSV ↔ JSON', updatedAt: '2026-07-10' },

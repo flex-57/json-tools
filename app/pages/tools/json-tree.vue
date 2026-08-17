@@ -2,13 +2,8 @@
   <div class="page">
     <div class="page-header">
       <div>
-        <h1 class="page-title">JSON <span class="title-amp">{{ viewMode === 'tree' ? 'Tree Viewer' : 'Graph Viewer' }}</span></h1>
-        <p class="page-subtitle">Explore JSON structure as an interactive collapsible tree or graph. Click nodes to expand, hover to copy the full path.</p>
-      </div>
-      <div class="mode-toggle">
-        <div class="mode-indicator" :class="{ 'mode-indicator--right': viewMode === 'graph' }"/>
-        <button class="mode-btn" :class="{ 'mode-btn--active': viewMode === 'tree' }" @click="viewMode = 'tree'">Tree</button>
-        <button class="mode-btn" :class="{ 'mode-btn--active': viewMode === 'graph' }" @click="switchToGraph">Graph</button>
+        <h1 class="page-title">JSON <span class="title-amp">Tree Viewer</span></h1>
+        <p class="page-subtitle">Explore JSON structure as an interactive collapsible tree. Click nodes to expand, hover to copy the full path — all client-side.</p>
       </div>
     </div>
 
@@ -49,7 +44,7 @@
 
       <div class="pane pane--alt">
         <div class="pane-header">
-          <template v-if="viewMode === 'tree' && root">
+          <template v-if="root">
             <div class="tree-toolbar">
               <span class="tree-search-wrap">
                 <svg width="11" height="11" viewBox="0 0 14 14" fill="none" class="tree-search-icon"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -63,46 +58,17 @@
               <button class="btn-xs" @click="exportAsPdf">PDF</button>
             </div>
           </template>
-          <template v-else-if="viewMode === 'graph' && graphNodes.length">
-            <span class="pane-label">Graph</span>
-            <!-- Graph PDF export disabled — persistent UX issues, revisit later.
-                 exportGraphAsPdf() below is left intact to re-enable quickly. -->
-          </template>
           <template v-else>
             <span class="pane-label">Output</span>
           </template>
         </div>
 
-        <div v-if="viewMode === 'tree'" class="pane-body" aria-live="polite">
+        <div class="pane-body" :class="{ 'pane-body--empty': !!error || !input.trim() }" aria-live="polite">
           <div v-if="error" class="tree-message">Fix the error in your input to see the tree</div>
-          <div v-else-if="!input.trim()" class="tree-message">Paste JSON to see the tree</div>
+          <div v-else-if="!input.trim()" class="tree-message">Tree will appear here…</div>
           <div v-else-if="root" class="tree-wrap">
             <JsonTreeNode :node="root" :depth="0" />
           </div>
-        </div>
-
-        <div v-else class="pane-body pane-body--graph" aria-live="polite">
-          <div v-if="error" class="tree-message">Fix the error in your input to see the graph</div>
-          <div v-else-if="!input.trim()" class="tree-message">Paste JSON to see the graph</div>
-          <div v-else-if="graphLoading" class="tree-message">Building graph…</div>
-          <ClientOnly v-else-if="graphNodes.length">
-            <VueFlow
-              :nodes="graphNodes"
-              :edges="graphEdges"
-              :node-types="nodeTypes"
-              fit-view-on-init
-              :nodes-draggable="false"
-              :nodes-connectable="false"
-              :elements-selectable="false"
-              :min-zoom="0.2"
-              :max-zoom="2"
-              class="vf-instance"
-            >
-              <Background pattern-color="#26213D" :gap="20" :size="1" />
-              <Controls position="bottom-right" />
-            </VueFlow>
-            <template #fallback><div class="tree-message">Loading graph…</div></template>
-          </ClientOnly>
         </div>
       </div>
     </div>
@@ -125,17 +91,14 @@
 
 <script setup lang="ts">
 import { parseJsonTree, collectDeepIds, collectAllExpandableIds } from '~/composables/useJsonTree'
-import { buildGraph } from '~/composables/useJsonGraph'
 import { useColorMode } from '~/composables/useColorMode'
 import JsonEditor from '~/components/JsonEditor.vue'
 import type { TreeNode } from '~/composables/useJsonTree'
-import type { VfNode, VfEdge } from '~/composables/useJsonGraph'
-import type { NodeComponent, NodeTypesObject } from '@vue-flow/core'
 import { TOOL_FAQS } from '~/data/tool-faqs'
 
 useToolSeo(
-  'JSON Tree Viewer: Interactive Collapsible Tree & Graph',
-  'Visualize any JSON as an interactive collapsible tree or node graph. Expand/collapse nodes, copy paths with one click, search keys and values.',
+  'JSON Tree Viewer: Interactive Collapsible Tree Explorer',
+  'Visualize any JSON as an interactive collapsible tree. Expand/collapse nodes, copy paths with one click, search keys and values.',
   TOOL_FAQS['json-tree'],
 )
 
@@ -168,19 +131,6 @@ const errorLine   = ref<number | null>(null)
 const errorColumn = ref<number | null>(null)
 const truncated   = ref(false)
 const inputEditorRef = ref<InstanceType<typeof JsonEditor> | null>(null)
-const viewMode    = ref<'tree' | 'graph'>('tree')
-const graphNodes  = ref<VfNode[]>([])
-const graphEdges  = ref<VfEdge[]>([])
-const graphLoading = ref(false)
-
-const VueFlow    = defineAsyncComponent(() => import('@vue-flow/core').then(m => m.VueFlow))
-const Background = defineAsyncComponent(() => import('@vue-flow/background').then(m => m.Background))
-const Controls   = defineAsyncComponent(() => import('@vue-flow/controls').then(m => m.Controls))
-
-// JsonGraphNode only declares the `data` prop it actually uses, not Vue Flow's full NodeProps
-// shape, so resolveComponent()'s return type can't structurally satisfy NodeComponent — assert
-// this one value rather than widen nodeTypes itself.
-const nodeTypes: NodeTypesObject = { jsonNode: resolveComponent('JsonGraphNode') as NodeComponent }
 
 provide('tree:collapsed', collapsed)
 provide('tree:toggle', (id: string) => {
@@ -194,7 +144,7 @@ provide('tree:search', search)
 watch(input, (val) => {
   if (!val.trim()) {
     root.value = null; error.value = ''; errorTip.value = null; errorLine.value = null; errorColumn.value = null
-    truncated.value = false; graphNodes.value = []; graphEdges.value = []
+    truncated.value = false
     return
   }
   const { root: r, error: e, line, column, tip, truncated: t } = parseJsonTree(val)
@@ -204,38 +154,8 @@ watch(input, (val) => {
   errorLine.value = line
   errorColumn.value = column
   truncated.value = t
-  graphNodes.value = []
-  graphEdges.value = []
   if (r) collapsed.value = new Set(collectDeepIds(r, 2))
 }, { immediate: true })
-
-async function switchToGraph() {
-  viewMode.value = 'graph'
-  if (!root.value || graphNodes.value.length) return
-  graphLoading.value = true
-  try {
-    const { nodes, edges } = await buildGraph(root.value)
-    graphNodes.value = nodes
-    graphEdges.value = edges
-  } finally {
-    graphLoading.value = false
-  }
-}
-
-watch(root, async (r) => {
-  if (viewMode.value === 'graph' && r) {
-    graphNodes.value = []
-    graphEdges.value = []
-    graphLoading.value = true
-    try {
-      const { nodes, edges } = await buildGraph(r)
-      graphNodes.value = nodes
-      graphEdges.value = edges
-    } finally {
-      graphLoading.value = false
-    }
-  }
-})
 
 function expandAll()  { collapsed.value = new Set() }
 function collapseAll() { if (root.value) collapsed.value = new Set(collectAllExpandableIds(root.value)) }
@@ -276,19 +196,6 @@ async function exportAsPdf() {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function exportGraphAsPdf() {
-  const el = document.querySelector('.vf-instance') as HTMLElement
-  if (!el) return
-  const controls = el.querySelector('.vue-flow__controls') as HTMLElement | null
-  if (controls) controls.style.visibility = 'hidden'
-  try {
-    await captureToPdf(el, isDark.value ? '#0A0912' : '#F5F3FA', 'json-graph.pdf')
-  } finally {
-    if (controls) controls.style.visibility = ''
-  }
-}
-
 function loadFile(file: File) {
   const reader = new FileReader()
   reader.onload = (ev) => { input.value = ev.target?.result as string }
@@ -318,28 +225,21 @@ const seoCards = [
     ],
   },
   {
-    title: 'Tree view: navigate and search',
+    title: 'Navigate and search',
     text: [
       'The tree view renders each key-value pair as an indented row with color-coded types: strings, numbers, booleans and null each get a distinct color. Objects and arrays show a count of their children and can be collapsed to a single line.',
       'Hover any node to reveal a copy icon that captures the full dot/bracket path (e.g. features[0].name), ready to paste directly into your code. Use the search box to instantly highlight matching keys and values across the entire tree.',
     ],
   },
   {
-    title: 'Graph view: visualise the full structure',
+    title: 'Common use cases',
     text: [
-      'The graph view renders JSON as an interactive node diagram laid out left-to-right. The root object appears as a content node; each nested object or array becomes a header node connected by arrows to its children.',
-      'Primitive values inside arrays appear as individual leaf nodes; objects inside arrays show their key-value content inline. Zoom and pan with the mouse or trackpad to explore large payloads — the layout is computed automatically using the Dagre algorithm.',
+      'Developers exploring an unfamiliar API response collapse everything but the branch they care about, instead of scrolling through a wall of minified text. QA engineers compare the shape of a payload against documentation without writing a parser.',
+      'Because rendering happens entirely in your browser, it is safe to paste real API responses or config files containing internal field names — nothing is sent to a server.',
     ],
   },
 ]
 </script>
-
-<style>
-.vue-flow__controls { background: var(--c-subtle) !important; border: 1px solid var(--c-border) !important; border-radius: 8px !important; overflow: hidden; }
-.vue-flow__controls-button { background: var(--c-subtle) !important; border-color: var(--c-border) !important; color: var(--c-t4) !important; }
-.vue-flow__controls-button:hover { background: var(--c-faint) !important; color: var(--c-t1) !important; }
-.vue-flow__edge-path { stroke: var(--c-border-m) !important; }
-</style>
 
 <style scoped>
 .file-input { display: none; }
@@ -355,9 +255,6 @@ const seoCards = [
 .tree-search:focus { border-color: var(--c-accent); }
 .tree-search-clear { position: absolute; right: 6px; background: none; border: none; cursor: pointer; color: var(--c-t4); font-size: 14px; line-height: 1; padding: 0 2px; }
 .tree-search-clear:hover { color: var(--c-t1); }
-
-.pane-body--graph { padding: 0; position: relative; }
-.vf-instance { width: 100%; height: 100%; min-height: 480px; }
 
 .tree-message {
   display: flex; align-items: center; gap: 8px;

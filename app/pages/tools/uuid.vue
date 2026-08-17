@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">UUID <span class="title-amp">Generator</span></h1>
-        <p class="page-subtitle">Generate random UUID v4, time-sortable UUID v7 or ULID identifiers instantly. Choose format, bulk-generate up to 100, copy individually or all at once.</p>
+        <p class="page-subtitle">Generate random UUID v4, time-sortable UUID v7 or ULID identifiers instantly, client-side. Choose format, bulk-generate up to 100, copy individually or all at once.</p>
         <NuxtLink to="/guides/what-is-uuid" class="guide-link">UUID v4 vs v7 vs ULID: which one to use? →</NuxtLink>
       </div>
     </div>

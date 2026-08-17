@@ -10,6 +10,7 @@ export const ICONS = {
   formatter: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 2C3.5 2 3 2.7 3 3.7v1.2c0 .9-.6 1.4-1.2 1.6.6.2 1.2.7 1.2 1.6v1.2C3 10.3 3.5 11 4.5 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M11.5 2c1 0 1.5.7 1.5 1.7v1.2c0 .9.6 1.4 1.2 1.6-.6.2-1.2.7-1.2 1.6v1.2c0 1-.5 1.7-1.5 1.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M5 13h6M6.5 14.5h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   diff:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="6.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="8.5" y="5.5" width="6.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 6.5h2M4.5 5.5v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10.5 10h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   tree:      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="3" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="13" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="13" cy="13" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 4.5V7c0 .8.7 1.5 1.5 1.5H8M3 4.5V11c0 .8.7 1.5 1.5 1.5H8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 8.5H11.5M8 13H11.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+  graph:     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1.6" stroke="currentColor" stroke-width="1.2"/><circle cx="3" cy="12.5" r="1.6" stroke="currentColor" stroke-width="1.2"/><circle cx="13" cy="12.5" r="1.6" stroke="currentColor" stroke-width="1.2"/><path d="M7.2 4.4L4 10.8M8.8 4.4l3.2 6.4M4.6 12.5h6.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
   ts:        `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3C1 3 .5 3.7.5 4.7v1.2c0 .9-.5 1.4-1.1 1.6.6.2 1.1.7 1.1 1.6v1.2c0 1 .5 1.7 1.5 1.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M9 4h6M12 4v7M10 11h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
   schema:    `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 5.5h13M1.5 10h13M6 1.5v13" stroke="currentColor" stroke-width="1.3"/></svg>`,
   csvIn:     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h3.5M2 7.5h4.5M2 11h3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 8h5M12.5 5.5L15 8l-2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -55,7 +56,7 @@ export const ICONS = {
 }
 
 const TOOL_ICONS: Record<string, string> = {
-  'json-formatter': ICONS.formatter, 'json-diff': ICONS.diff, 'json-tree': ICONS.tree,
+  'json-formatter': ICONS.formatter, 'json-diff': ICONS.diff, 'json-tree': ICONS.tree, 'json-graph': ICONS.graph,
   'csv-to-json': ICONS.csvIn, 'json-to-csv': ICONS.csvOut,
   'xml-to-json': ICONS.xmlIn, 'json-to-xml': ICONS.xmlOut,
   'yaml-to-json': ICONS.yamlIn, 'json-to-yaml': ICONS.yamlOut,

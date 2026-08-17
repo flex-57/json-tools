@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> XML</h1>
-        <p class="page-subtitle">Convert a JSON object to XML.</p>
+        <p class="page-subtitle">Convert a JSON object to XML, entirely in your browser.</p>
       </div>
       <ToolSwitch from-path="/tools/xml-to-json" to-path="/tools/json-to-xml" from-label="XML → JSON" to-label="JSON → XML" />
     </div>
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="midcol"><SwapButton from-path="/tools/xml-to-json" to-path="/tools/json-to-xml" /></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -53,7 +53,7 @@
         </div>
         <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
           <Transition name="reveal" mode="out-in">
-            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see XML output' : 'Paste JSON to see XML output' }}</p>
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ input.trim() ? 'Fix the error in your input to see XML output' : 'XML output will appear here…' }}</p>
             <div v-else key="output" class="pane-body-editor-wrap">
               <ClientOnly>
                 <JsonEditor v-model="output" :readonly="true" lang="xml" />

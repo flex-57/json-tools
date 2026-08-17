@@ -81,4 +81,20 @@ describe('diffJson', () => {
       expect(l.lineRight).not.toBeNull()
     })
   })
+
+  it('does not flag an unchanged trailing property as removed+added just because a new key was appended after it', () => {
+    const left = JSON.stringify({ role: 'admin', active: true }, null, 2)
+    const right = JSON.stringify({ role: 'editor', active: true, age: 30 }, null, 2)
+    const r = diffJson(left, right)
+
+    // role's value genuinely changed (1 removal + 1 addition), age is a genuinely new
+    // key (1 addition) — active's value is identical on both sides and must not appear
+    // in the diff at all, even though appending "age" shifted its trailing comma.
+    expect(r.deletions).toBe(1)
+    expect(r.additions).toBe(2)
+
+    const activeLines = r.lines.filter(l => l.line.includes('"active"'))
+    expect(activeLines).toHaveLength(1)
+    expect(activeLines[0]!.type).toBe('unchanged')
+  })
 })

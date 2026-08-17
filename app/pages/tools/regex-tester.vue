@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Regex <span class="title-amp">Tester</span></h1>
-        <p class="page-subtitle">Test regular expressions with live match highlighting and capture group inspection.</p>
+        <p class="page-subtitle">Test regular expressions with live match highlighting and capture group inspection, entirely in your browser.</p>
         <NuxtLink to="/guides/what-is-regex" class="guide-link">New to regex? Read our guide →</NuxtLink>
       </div>
     </div>

@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Excel <span class="title-arrow">→</span> JSON</h1>
-        <p class="page-subtitle">Convert .xlsx or .xls files to JSON. Drop your file below.</p>
+        <p class="page-subtitle">Convert .xlsx or .xls files to JSON, entirely in your browser.</p>
       </div>
       <div style="display:flex; align-items:center; gap: 14px; flex-wrap: wrap;">
         <template v-if="sheets.length > 1">
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="midcol"><SwapButton from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" /></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -64,11 +64,16 @@
             <button class="btn-copy" :class="{ 'btn-copy--done': copied }" :disabled="!output" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
           </div>
         </div>
-        <div class="pane-body" style="padding: 0;" aria-live="polite">
-          <ClientOnly>
-            <JsonEditor v-model="output" :readonly="true" />
-            <template #fallback><EditorSkeleton /></template>
-          </ClientOnly>
+        <div class="pane-body" :class="{ 'pane-body--empty': !output }" :style="output ? 'padding: 0;' : ''" aria-live="polite">
+          <Transition name="reveal" mode="out-in">
+            <p v-if="!output" key="empty" class="pane-body-placeholder">{{ error ? 'Fix the error to see JSON output' : 'JSON output will appear here…' }}</p>
+            <div v-else key="output" class="pane-body-editor-wrap">
+              <ClientOnly>
+                <JsonEditor v-model="output" :readonly="true" />
+                <template #fallback><EditorSkeleton /></template>
+              </ClientOnly>
+            </div>
+          </Transition>
         </div>
       </div>
     </div>

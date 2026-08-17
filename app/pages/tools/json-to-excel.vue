@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">JSON <span class="title-arrow">→</span> Excel</h1>
-        <p class="page-subtitle">Convert a JSON array to an .xlsx file.</p>
+        <p class="page-subtitle">Convert a JSON array to an .xlsx file, entirely in your browser.</p>
       </div>
       <ToolSwitch from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" from-label="Excel → JSON" to-label="JSON → Excel" />
     </div>
@@ -23,7 +23,7 @@
         <div class="pane-header">
           <div class="pane-label-group">
             <span class="pane-label">JSON Input</span>
-            <span class="hint">array of objects · or drop a .json file</span>
+            <span class="hint">paste or type · or drop a .json file</span>
           </div>
           <div class="card-actions">
             <label class="btn-xs" for="json-to-excel-file-input">
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="midcol"><span class="mid-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="midcol"><SwapButton from-path="/tools/excel-to-json" to-path="/tools/json-to-excel" /></div>
 
       <div class="pane pane--alt">
         <div class="pane-header">
@@ -63,7 +63,7 @@
                 </tbody>
               </table>
             </div>
-            <p v-else key="empty" class="pane-body-placeholder">{{ error ? 'Fix the error in your input to see a preview' : 'Paste JSON to see a preview' }}</p>
+            <p v-else key="empty" class="pane-body-placeholder">{{ error ? 'Fix the error in your input to see a preview' : 'Preview will appear here…' }}</p>
           </Transition>
         </div>
       </div>
