@@ -1,6 +1,7 @@
 import { triggerDownload } from '../utils/download'
 import { safeJsonParse } from '../utils/json'
-import { useClipboard } from './useClipboard'
+import type { ConvertResult } from '../utils/json'
+import { useConverter } from './useConverter'
 import yaml from 'js-yaml'
 
 const SAMPLE_YAML = `name: Alice Martin
@@ -21,14 +22,6 @@ const SAMPLE_JSON = `{
   "tags": ["api", "auth"],
   "created_at": "2024-01-15T09:00:00Z"
 }`
-
-interface ConvertResult {
-  output: string
-  error: string | null
-  line?: number | null
-  column?: number | null
-  tip?: string | null
-}
 
 export function yamlToJson(input: string): ConvertResult {
   const trimmed = input.trim()
@@ -69,45 +62,24 @@ export function jsonToYaml(input: string, indent = 2): ConvertResult {
 }
 
 export function useYamlToJson() {
-  const input = ref(SAMPLE_YAML)
-
-  const result = computed(() => yamlToJson(input.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const errorColumn = computed(() => result.value.column ?? null)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, output, error, errorLine, errorColumn, copied, copy, clear } = useConverter(SAMPLE_YAML, yamlToJson)
 
   function download() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() { input.value = '' }
-
   return { input, output, error, errorLine, errorColumn, copied, copy, download, clear }
 }
 
 export function useJsonToYaml() {
-  const input = ref(SAMPLE_JSON)
   const indent = ref(2)
-
-  const result = computed(() => jsonToYaml(input.value, indent.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorTip    = computed(() => result.value.tip ?? null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const errorColumn = computed(() => result.value.column ?? null)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, output, error, errorTip, errorLine, errorColumn, copied, copy, clear } = useConverter(SAMPLE_JSON, s => jsonToYaml(s, indent.value))
 
   function download() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'text/yaml' }), 'converted.yaml')
   }
-
-  function clear() { input.value = '' }
 
   return { input, output, error, errorTip, errorLine, errorColumn, indent, copied, copy, download, clear }
 }

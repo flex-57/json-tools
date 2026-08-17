@@ -1,6 +1,7 @@
 import { safeJsonParse } from '../utils/json'
+import type { ConvertResult } from '../utils/json'
 import { triggerDownload } from '../utils/download'
-import { useClipboard } from './useClipboard'
+import { useConverter } from './useConverter'
 import Papa from 'papaparse'
 
 const SAMPLE_CSV = `id,name,email,role,active
@@ -16,16 +17,11 @@ const SAMPLE_JSON_ARRAY = `[
 
 export type Delimiter = ',' | ';' | '\t' | 'auto'
 
-interface ConvertResult {
-  output: string
-  error: string | null
+interface CsvConvertResult extends ConvertResult {
   rowCount: number
-  line?: number | null
-  column?: number | null
-  tip?: string | null
 }
 
-export function csvToJson(input: string, delimiter: Delimiter = 'auto', hasHeader = true): ConvertResult {
+export function csvToJson(input: string, delimiter: Delimiter = 'auto', hasHeader = true): CsvConvertResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', rowCount: 0 }
 
@@ -53,7 +49,7 @@ export function csvToJson(input: string, delimiter: Delimiter = 'auto', hasHeade
   }
 }
 
-export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): ConvertResult {
+export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): CsvConvertResult {
   const trimmed = input.trim()
   if (!trimmed) return { output: '', error: 'empty', rowCount: 0 }
 
@@ -69,52 +65,33 @@ export function jsonToCsv(input: string, delimiter: ',' | ';' | '\t' = ','): Con
 }
 
 export function useCsvToJson() {
-  const input = ref(SAMPLE_CSV)
   const delimiter = ref<Delimiter>('auto')
   const hasHeader = ref(true)
-
-  const result = computed(() => csvToJson(input.value, delimiter.value, hasHeader.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const rowCount    = computed(() => result.value.rowCount)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, result, output, error, errorLine, copied, copy, clear } = useConverter(SAMPLE_CSV, s => csvToJson(s, delimiter.value, hasHeader.value))
+  const rowCount = computed(() => result.value.rowCount)
 
   function downloadJson() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() { input.value = '' }
-
   return { input, output, error, errorLine, rowCount, delimiter, hasHeader, copied, copy, downloadJson, clear }
 }
 
 export function useJsonToCsv() {
-  const input = ref(SAMPLE_JSON_ARRAY)
   const delimiter = ref<',' | ';' | '\t'>(',')
 
   // Live: no click/shortcut needed — same reasoning as json-formatter's move
   // away from a manual trigger. Unlike json-formatter there's no output-mode
   // choice here (only one transform), so unlike FMT/MIN there's no button to
   // keep at all once this is live.
-  const result = computed(() => jsonToCsv(input.value, delimiter.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorTip    = computed(() => result.value.tip ?? null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const errorColumn = computed(() => result.value.column ?? null)
-  const rowCount    = computed(() => result.value.rowCount)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, result, output, error, errorTip, errorLine, errorColumn, copied, copy, clear } = useConverter(SAMPLE_JSON_ARRAY, s => jsonToCsv(s, delimiter.value))
+  const rowCount = computed(() => result.value.rowCount)
 
   function downloadCsv() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'text/csv' }), 'converted.csv')
   }
-
-  function clear() { input.value = '' }
 
   return { input, output, error, errorTip, errorLine, errorColumn, rowCount, delimiter, copied, copy, downloadCsv, clear }
 }

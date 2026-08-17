@@ -1,6 +1,7 @@
 import { triggerDownload } from '../utils/download'
 import { safeJsonParse } from '../utils/json'
-import { useClipboard } from './useClipboard'
+import type { ConvertResult } from '../utils/json'
+import { useConverter } from './useConverter'
 import { XMLParser, XMLBuilder, XMLValidator } from 'fast-xml-parser'
 
 const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
@@ -26,14 +27,6 @@ const SAMPLE_JSON = `{
   "tags": ["api", "auth"],
   "created_at": "2024-01-15T09:00:00Z"
 }`
-
-interface ConvertResult {
-  output: string
-  error: string | null
-  line?: number | null
-  column?: number | null
-  tip?: string | null
-}
 
 export function xmlToJson(input: string): ConvertResult {
   const trimmed = input.trim()
@@ -95,44 +88,23 @@ export function jsonToXml(input: string): ConvertResult {
 }
 
 export function useXmlToJson() {
-  const input = ref(SAMPLE_XML)
-
-  const result = computed(() => xmlToJson(input.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const errorColumn = computed(() => result.value.column ?? null)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, output, error, errorLine, errorColumn, copied, copy, clear } = useConverter(SAMPLE_XML, xmlToJson)
 
   function download() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() { input.value = '' }
-
   return { input, output, error, errorLine, errorColumn, copied, copy, download, clear }
 }
 
 export function useJsonToXml() {
-  const input = ref(SAMPLE_JSON)
-
-  const result = computed(() => jsonToXml(input.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorTip    = computed(() => result.value.tip ?? null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const errorColumn = computed(() => result.value.column ?? null)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, output, error, errorTip, errorLine, errorColumn, copied, copy, clear } = useConverter(SAMPLE_JSON, jsonToXml)
 
   function download() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'application/xml' }), 'converted.xml')
   }
-
-  function clear() { input.value = '' }
 
   return { input, output, error, errorTip, errorLine, errorColumn, copied, copy, download, clear }
 }

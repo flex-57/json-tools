@@ -1,7 +1,8 @@
 import { parse, stringify, TomlError } from 'smol-toml'
 import { safeJsonParse } from '../utils/json'
+import type { ConvertResult } from '../utils/json'
 import { triggerDownload } from '../utils/download'
-import { useClipboard } from './useClipboard'
+import { useConverter } from './useConverter'
 
 const SAMPLE_TOML = `name = "Alice Martin"
 email = "alice@example.com"
@@ -19,13 +20,6 @@ const SAMPLE_JSON = `{
   "tags": ["api", "auth"],
   "created_at": "2024-01-15T09:00:00Z"
 }`
-
-interface ConvertResult {
-  output: string
-  error: string | null
-  line?: number | null
-  column?: number | null
-}
 
 export function tomlToJson(input: string): ConvertResult {
   const trimmed = input.trim()
@@ -95,43 +89,23 @@ export function jsonToToml(input: string): ConvertResult {
 }
 
 export function useTomlToJson() {
-  const input = ref(SAMPLE_TOML)
-
-  const result = computed(() => tomlToJson(input.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const errorColumn = computed(() => result.value.column ?? null)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, output, error, errorLine, errorColumn, copied, copy, clear } = useConverter(SAMPLE_TOML, tomlToJson)
 
   function download() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'application/json' }), 'converted.json')
   }
 
-  function clear() { input.value = '' }
-
   return { input, output, error, errorLine, errorColumn, copied, copy, download, clear }
 }
 
 export function useJsonToToml() {
-  const input = ref(SAMPLE_JSON)
-
-  const result = computed(() => jsonToToml(input.value))
-  const output      = computed(() => result.value.output)
-  const error       = computed(() => (result.value.error && result.value.error !== 'empty') ? result.value.error : null)
-  const errorLine   = computed(() => result.value.line ?? null)
-  const errorColumn = computed(() => result.value.column ?? null)
-
-  const { copied, copy } = useClipboard(() => output.value)
+  const { input, output, error, errorLine, errorColumn, copied, copy, clear } = useConverter(SAMPLE_JSON, jsonToToml)
 
   function download() {
     if (!output.value) return
     triggerDownload(new Blob([output.value], { type: 'application/toml' }), 'converted.toml')
   }
-
-  function clear() { input.value = '' }
 
   return { input, output, error, errorLine, errorColumn, copied, copy, download, clear }
 }

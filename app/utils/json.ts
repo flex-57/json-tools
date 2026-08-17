@@ -58,6 +58,14 @@ function buildTip(str: string, offset: number | null, message: string): string |
   return null
 }
 
+export interface ConvertResult {
+  output: string
+  error: string | null
+  line?: number | null
+  column?: number | null
+  tip?: string | null
+}
+
 export function safeJsonParse<T = unknown>(str: string):
   | { data: T; error: null; line?: undefined; column?: undefined; tip?: undefined }
   | { data: null; error: string; line: number | null; column: number | null; tip: string | null } {
